@@ -1,0 +1,18 @@
+{
+  "protocol": "Protocol H5",
+  "gate": "G24",
+  "evidence_id": "E-WS15-002",
+  "timestamp": "2026-11-17T18:00:30Z",
+  "status": "PASS",
+  "description": "Canary mutation verification: verified that intentionally inverting an assertion in test_dr_drill.py causes pytest failure, and reverting restores clean pass",
+  "target_test": "tests/test_dr_drill.py::test_compute_sha256",
+  "mutation_details": {
+    "original": "assert compute_sha256(test_file) == expected_sha",
+    "mutated": "assert compute_sha256(test_file) != expected_sha",
+    "mutation_pytest_exit_code": 1,
+    "mutation_result": "FAILED (AssertionError)",
+    "revert_pytest_exit_code": 0,
+    "revert_result": "PASSED"
+  },
+  "sensitivity_confirmed": true
+}

@@ -210,6 +210,7 @@ def test_reviewer_dashboard_and_review_endpoints_rbac(client: TestClient, monkey
 
     # 4. In production, unauthenticated /reviewer -> 403
     monkeypatch.setattr("scheme_navigator.core.config.settings.app_env", "production")
+    monkeypatch.setenv("SCHEME_NAVIGATOR_AUTH_SECRET", "test_auth_secret_minimum_32_characters_for_prod")
     res_prod_anon = client.get("/reviewer")
     assert res_prod_anon.status_code == 403
 

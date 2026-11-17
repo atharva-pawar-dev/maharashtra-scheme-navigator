@@ -50,3 +50,6 @@
 | C-043 | User-facing templates free of Lorem Ipsum and mock placeholder tokens | E-WS13-001 | CONFIRMED | Verified in `test_zero_lorem_ipsum_or_forbidden_mock_tokens`. |
 | C-044 | Citizen issue reporting active with ticket generation and trilingual acknowledgement | E-WS13-001 | CONFIRMED | Verified in `test_trust_issue_reporting_integration`. |
 | C-045 | Operations runbooks cover deployments, CERT-In incidents, secret rotations, and RACI matrix | E-WS14-001 | CONFIRMED | Authored and committed in `docs/production/operations_runbook.md`. |
+| C-046 | AST test inventory strictly non-weakening (2,147 assertions vs 1,902 baseline; +245 assertions) | E-WS15-001 | CONFIRMED | Verified in `release/evidence/ws15/E-WS15-001_ast_inventory_check.json`. |
+| C-047 | Protocol H5 canary mutation check confirms test harness detects failures | E-WS15-002 | CONFIRMED | Verified in `release/evidence/ws15/E-WS15-002_canary_mutation.json`. |
+| C-048 | Mechanically computed release state is INTERNAL_DEMO_READY with Gate G4 honestly BLOCKED | E-WS4-001 | CONFIRMED | Documented and verified in `docs/production/release_gates_and_decision.md`. |

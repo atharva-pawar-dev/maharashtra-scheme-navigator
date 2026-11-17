@@ -21,3 +21,6 @@ artifacts/uploads/
 backup-*/
 data/temp_uploads/
 .DS_Store
+data/citizen_reports.jsonl
+data/ingested/
+data/security_audit.log

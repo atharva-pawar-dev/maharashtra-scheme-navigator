@@ -70,3 +70,7 @@
 | LEDGER-061 | 2026-11-17 | RUNBOOK | WS14 | Authored comprehensive operations runbooks at `docs/production/operations_runbook.md`. | APPROVED |
 | LEDGER-062 | 2026-11-17 | RACI | WS14 | Documented RACI responsibility matrix for operational handoff. | APPROVED |
 | LEDGER-063 | 2026-11-17 | EVIDENCE | WS14 | Recorded `release/evidence/ws14/E-WS14-001_operations_handover.json`. | APPROVED |
+| LEDGER-064 | 2026-11-17 | AST_INVENTORY | WS15 | Evaluated Gate G23: 468 tests (+70), 2,147 assertions (+245) vs 1,902 baseline. | PASS |
+| LEDGER-065 | 2026-11-17 | CANARY | WS15 | Executed Protocol H5 Canary mutation check: sensitivity verified; revert passes clean. | PASS |
+| LEDGER-066 | 2026-11-17 | SCORECARD | WS15 | Evaluated Gates G1-G24: 23 PASS, G4 BLOCKED (honest port scan). Derived state: `INTERNAL_DEMO_READY`. | APPROVED |
+| LEDGER-067 | 2026-11-17 | EVIDENCE | WS15 | Recorded `release/evidence/ws15/E-WS15-001_ast_inventory_check.json` and `E-WS15-002_canary_mutation.json`. | APPROVED |
