@@ -24,3 +24,6 @@
 | C-017 | Complete PostgreSQL 16+ DDL with JSONB and TIMESTAMPTZ verified in dry-run | E-WS4-001 | CONFIRMED | Verified in `test_postgres_ddl_completeness`. |
 | C-018 | Live PostgreSQL cluster running and accessible locally | E-WS4-001 | REFUTED | Port 5432 unreachable; Docker not present. Gate G4 honestly recorded as BLOCKED. |
 | C-019 | Private object storage enforces magic-byte headers and 15-minute signed URL ceiling | E-WS4-001 | CONFIRMED | Verified across 6 storage tests in `tests/test_data_layer_and_storage.py`. |
+| C-020 | Session tokens cryptographically signed and free of citizen PII | E-WS5-001 | CONFIRMED | Verified in `test_session_token_entropy_and_cookie_attributes`. |
+| C-021 | RBAC enforces role boundaries; public role escalation strictly rejected | E-WS5-001 | CONFIRMED | Verified in `test_public_session_endpoint_rejects_privileged_role` and `test_analyst_cannot_sign_catalogue_release`. |
+| C-022 | Insecure Direct Object Reference (IDOR) on interview threads blocked | E-WS5-001 | CONFIRMED | Verified in `test_citizen_cannot_answer_another_citizens_interview_thread`. |

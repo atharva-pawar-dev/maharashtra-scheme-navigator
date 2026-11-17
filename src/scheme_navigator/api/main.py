@@ -1576,6 +1576,7 @@ class AdminProvisionRequest(BaseModel):
 )
 def create_authenticated_session(
     request: Request,
+    response: Response,
     role: str | None = None,
     user_id: str | None = None,
     client_ip: str | None = None,
@@ -1597,6 +1598,28 @@ def create_authenticated_session(
         resource=session.session_id,
         client_ip=ip,
     )
+    is_prod = settings.app_env.casefold() in {"production", "prod"}
+    cookie_name = "__Host-sn_session" if is_prod else "sn_session"
+    response.set_cookie(
+        key=cookie_name,
+        value=token,
+        httponly=True,
+        secure=is_prod,
+        samesite="lax",
+        max_age=24 * 3600,
+        path="/",
+    )
+    if is_prod:
+        # Also set sn_session for non-Host environments if needed
+        response.set_cookie(
+            key="sn_session",
+            value=token,
+            httponly=True,
+            secure=True,
+            samesite="lax",
+            max_age=24 * 3600,
+            path="/",
+        )
     return {
         "session_id": session.session_id,
         "user_id": session.user_id,

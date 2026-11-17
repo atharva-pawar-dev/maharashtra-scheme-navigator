@@ -25,3 +25,7 @@
 | LEDGER-016 | 2026-11-17 | TEST | WS4 | Implemented `tests/test_data_layer_and_storage.py` with 8 passing unit tests. | APPROVED |
 | LEDGER-017 | 2026-11-17 | DIAGNOSTIC | WS4 | Port 5432 scan confirmed no local PostgreSQL or Docker daemon; Gate G4 honestly recorded as BLOCKED per Invariant B1/B10. | APPROVED |
 | LEDGER-018 | 2026-11-17 | EVIDENCE | WS4 | Recorded `release/evidence/ws4/E-WS4-001_data_layer.json` verifying data layer readiness and storage controls. | APPROVED |
+| LEDGER-019 | 2026-11-17 | IMPLEMENTATION | WS5 | Enhanced `create_authenticated_session` to automatically issue hardened HttpOnly cookie (`__Host-sn_session` in prod). | APPROVED |
+| LEDGER-020 | 2026-11-17 | TEST | WS5 | Implemented `tests/test_auth_and_sessions_hardening.py` with 7 passing tests covering cookies, RBAC, IDOR, and token revocation. | APPROVED |
+| LEDGER-021 | 2026-11-17 | DOCUMENTATION | WS5 | Authored `docs/production/auth_and_sessions.md` covering RBAC matrix, IDOR protections, and administrative bootstrapping. | APPROVED |
+| LEDGER-022 | 2026-11-17 | EVIDENCE | WS5 | Recorded `release/evidence/ws5/E-WS5-001_auth_sessions.json` verifying all identity and session controls pass. | APPROVED |

@@ -1,17 +1,18 @@
 ---
-current_workstream: WS5
+current_workstream: WS6
 completed_workstreams:
   - WS0
   - WS1
   - WS2
   - WS3
   - WS4
+  - WS5
 open_blockers:
   - gate: G4
     reason: "No local PostgreSQL 16+ daemon running on 127.0.0.1:5432 and Docker engine not installed on host"
     unblock_action: "Provide DATABASE_URL to a live PostgreSQL 16+ instance and run scripts/migrate_sqlite_to_postgres.py"
-last_commit: 5f50a33
-utc_timestamp: 2026-11-17T17:14:00Z
+last_commit: 798e4ba
+utc_timestamp: 2026-11-17T17:20:00Z
 ---
 
 # Release State & Execution Handoff Note
@@ -63,4 +64,16 @@ utc_timestamp: 2026-11-17T17:14:00Z
   - Evidence recorded in `release/evidence/ws4/E-WS4-001_data_layer.json`.
   - Production data layer documentation committed at `docs/production/data_layer.md`.
 
-- **Next Workstream:** WS5 — Identity, Sessions, and Authorisation.
+- **WS5 Identity, Sessions, and Authorisation Complete:**
+  - Citizen anonymous session tokens hardened with HMAC-SHA256, `HttpOnly`, `SameSite=Lax`, and `__Host-` cookie prefixes in production.
+  - Zero PII stored in client tokens or cookies.
+  - Role hierarchy enforced across CITIZEN, ANALYST, LEGAL_REVIEWER, and CATALOGUE_ADMIN.
+  - Public role escalation blocked (`POST /auth/session` rejects privileged role requests with 403).
+  - RBAC verified: ANALYST role forbidden from signing catalogue releases (`POST /admin/catalogue/sign-release`).
+  - IDOR protection verified: Citizen B strictly forbidden from answering or accessing Citizen A's interview thread.
+  - Session revocation and expiry validation verified.
+  - 7 automated tests passing in `tests/test_auth_and_sessions_hardening.py`.
+  - Production identity manual authored in `docs/production/auth_and_sessions.md`.
+  - Evidence recorded in `release/evidence/ws5/E-WS5-001_auth_sessions.json`.
+
+- **Next Workstream:** WS6 — Security Engineering and Verification (ASVS Level 2, Startup Guard, VAPT Readiness).

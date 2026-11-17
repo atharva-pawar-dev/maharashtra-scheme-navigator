@@ -1,0 +1,25 @@
+{
+  "workstream": "WS5",
+  "evidence_id": "E-WS5-001",
+  "timestamp_utc": "2026-11-17T17:18:24.131597+00:00",
+  "title": "Identity, Sessions, and Authorisation Verification",
+  "pytest_exit_code": 0,
+  "pytest_summary": {
+    "passed": 7,
+    "failed": 0,
+    "xml": "release\\evidence\\ws5\\pytest_ws5.xml"
+  },
+  "controls_verified": {
+    "session_token_entropy_and_hmac": true,
+    "httponly_samesite_secure_cookie": true,
+    "zero_pii_in_client_tokens": true,
+    "anonymous_session_minting_fallback": true,
+    "role_escalation_blocked": true,
+    "rbac_analyst_cannot_sign_catalogue": true,
+    "idor_thread_ownership_enforced": true,
+    "session_revocation_effective": true,
+    "expired_tokens_rejected": true
+  },
+  "documentation_path": "docs/production/auth_and_sessions.md",
+  "verdict": "PASS"
+}

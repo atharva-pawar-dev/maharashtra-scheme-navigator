@@ -315,8 +315,8 @@ def get_current_session(
             token = parts[0]
 
     if not token:
-        # Check cookie
-        token = request.cookies.get("sn_session")
+        # Check cookie (__Host- prefix in production, standard in dev)
+        token = request.cookies.get("__Host-sn_session") or request.cookies.get("sn_session")
 
     session = session_manager.validate_token(token) if token else None
 
@@ -350,7 +350,7 @@ def require_authenticated_session(
             token = parts[0]
 
     if not token:
-        token = request.cookies.get("sn_session")
+        token = request.cookies.get("__Host-sn_session") or request.cookies.get("sn_session")
 
     if not token:
         raise HTTPException(
