@@ -27,3 +27,7 @@
 | C-020 | Session tokens cryptographically signed and free of citizen PII | E-WS5-001 | CONFIRMED | Verified in `test_session_token_entropy_and_cookie_attributes`. |
 | C-021 | RBAC enforces role boundaries; public role escalation strictly rejected | E-WS5-001 | CONFIRMED | Verified in `test_public_session_endpoint_rejects_privileged_role` and `test_analyst_cannot_sign_catalogue_release`. |
 | C-022 | Insecure Direct Object Reference (IDOR) on interview threads blocked | E-WS5-001 | CONFIRMED | Verified in `test_citizen_cannot_answer_another_citizens_interview_thread`. |
+| C-023 | Protocol C8 startup guard refuses production execution if debug, reload, weak secrets, or SQLite are configured | E-WS6-001 | CONFIRMED | Verified across 5 test scenarios in `test_c8_guard_*`. |
+| C-024 | OWASP security headers enforced across all HTTP responses | E-WS6-001 | CONFIRMED | Verified in `test_security_headers_present_on_responses`. |
+| C-025 | Static code security scan passes with zero high/critical vulnerabilities | E-WS6-002 | CONFIRMED | 51 files scanned, 0 secrets, 0 dangerous calls. |
+| C-026 | Full VAPT readiness pack prepared for independent certified assessors | E-WS6-001 | CONFIRMED | Committed at `docs/production/vapt_pack/`. |

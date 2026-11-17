@@ -18,6 +18,8 @@ class Settings(BaseSettings):
     app_name: str = "Scheme Navigator"
     app_env: str = "local"
     log_level: str = "INFO"
+    debug: bool = False
+    reload: bool = False
     database_url: str | None = None
     data_retention_hours: int = 24
     scheme_catalog_path: str | None = None
@@ -75,6 +77,19 @@ class Settings(BaseSettings):
                     "CRITICAL SECURITY CONFIGURATION ERROR: Default sample signing keys from repository "
                     "are strictly forbidden in production."
                 )
+
+    def validate_production_startup(self) -> None:
+        """Protocol C8: Production-Profile Startup Guard."""
+        if self.app_env.casefold() in {"production", "prod"}:
+            if self.debug:
+                raise RuntimeError("CRITICAL C8 GUARD: Debug mode must be disabled in production.")
+            if self.reload:
+                raise RuntimeError("CRITICAL C8 GUARD: Auto-reload must be disabled in production.")
+            if self.demo_fixtures_enabled:
+                raise RuntimeError("CRITICAL C8 GUARD: Demo fixtures must be disabled in production.")
+            self.validate_production_secrets()
+            if not self.database_url or self.database_url.startswith("sqlite"):
+                raise RuntimeError("CRITICAL C8 GUARD: Production profile mandates PostgreSQL DATABASE_URL.")
 
     @property
     def demo_fixtures_enabled(self) -> bool:

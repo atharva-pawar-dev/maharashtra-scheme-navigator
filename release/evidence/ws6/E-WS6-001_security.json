@@ -1,0 +1,32 @@
+{
+  "workstream": "WS6",
+  "evidence_id": "E-WS6-001",
+  "timestamp_utc": "2026-11-17T17:25:57.375597+00:00",
+  "title": "Security Engineering and Verification",
+  "pytest_exit_code": 0,
+  "pytest_summary": {
+    "passed": 7,
+    "failed": 0,
+    "xml": "release\\evidence\\ws6\\pytest_ws6.xml"
+  },
+  "c8_startup_guard": {
+    "refuses_debug_in_prod": true,
+    "refuses_reload_in_prod": true,
+    "refuses_weak_secrets_in_prod": true,
+    "refuses_sqlite_in_prod": true,
+    "passes_hardened_config": true
+  },
+  "security_headers": {
+    "nosniff": true,
+    "frame_options_deny": true,
+    "csp_frame_ancestors_none": true,
+    "referrer_policy": true,
+    "permissions_policy": true
+  },
+  "rate_limiting_enforced": true,
+  "asvs_matrix_file": "docs/production/asvs_matrix.csv",
+  "static_code_scan_file": "release/evidence/ws6/E-WS6-002_security_scan.json",
+  "vapt_pack_dir": "docs/production/vapt_pack/",
+  "documentation_path": "docs/production/security.md",
+  "verdict": "PASS"
+}

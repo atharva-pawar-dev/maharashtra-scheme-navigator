@@ -1,5 +1,5 @@
 ---
-current_workstream: WS6
+current_workstream: WS7
 completed_workstreams:
   - WS0
   - WS1
@@ -7,12 +7,13 @@ completed_workstreams:
   - WS3
   - WS4
   - WS5
+  - WS6
 open_blockers:
   - gate: G4
     reason: "No local PostgreSQL 16+ daemon running on 127.0.0.1:5432 and Docker engine not installed on host"
     unblock_action: "Provide DATABASE_URL to a live PostgreSQL 16+ instance and run scripts/migrate_sqlite_to_postgres.py"
-last_commit: 798e4ba
-utc_timestamp: 2026-11-17T17:20:00Z
+last_commit: ddccb13
+utc_timestamp: 2026-11-17T17:27:00Z
 ---
 
 # Release State & Execution Handoff Note
@@ -76,4 +77,15 @@ utc_timestamp: 2026-11-17T17:20:00Z
   - Production identity manual authored in `docs/production/auth_and_sessions.md`.
   - Evidence recorded in `release/evidence/ws5/E-WS5-001_auth_sessions.json`.
 
-- **Next Workstream:** WS6 — Security Engineering and Verification (ASVS Level 2, Startup Guard, VAPT Readiness).
+- **WS6 Security Engineering and Verification Complete:**
+  - Protocol C8 Production-Profile Startup Guard implemented in `src/scheme_navigator/core/config.py` and enforced in `lifespan`: strictly fails closed on `debug=True`, `reload=True`, `demo_fixtures_enabled=True`, weak secrets, or SQLite in production.
+  - HTTP security headers middleware implemented on FastAPI `app`: `nosniff`, `X-Frame-Options: DENY`, `X-XSS-Protection: 0`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`, and strict `Content-Security-Policy`.
+  - Rate limiting active and verified across sensitive endpoints (`HTTP 429`).
+  - OWASP ASVS 5.0.0 Level 2 verification matrix generated at `docs/production/asvs_matrix.csv` (35 controls verified PASS).
+  - AST static security scan executed across 51 source files (`scripts/security_audit_scanner.py`): 0 secrets, 0 eval/exec, 0 shell injection (`release/evidence/ws6/E-WS6-002_security_scan.json`).
+  - External VAPT Readiness Pack committed in `docs/production/vapt_pack/` (`scope.md`, `architecture_and_data_flow.md`, `credentials_and_test_accounts.md`, `threat_model.md`, `roe.md`).
+  - Production security manual authored in `docs/production/security.md`.
+  - 7 automated tests passing in `tests/test_production_security_hardening.py`.
+  - Evidence recorded in `release/evidence/ws6/E-WS6-001_security.json`.
+
+- **Next Workstream:** WS7 — Privacy Engineering and Indian Legal Readiness (DPDP Rules 2025, CERT-In directions, consent notices, data retention).

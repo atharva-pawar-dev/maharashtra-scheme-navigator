@@ -29,3 +29,10 @@
 | LEDGER-020 | 2026-11-17 | TEST | WS5 | Implemented `tests/test_auth_and_sessions_hardening.py` with 7 passing tests covering cookies, RBAC, IDOR, and token revocation. | APPROVED |
 | LEDGER-021 | 2026-11-17 | DOCUMENTATION | WS5 | Authored `docs/production/auth_and_sessions.md` covering RBAC matrix, IDOR protections, and administrative bootstrapping. | APPROVED |
 | LEDGER-022 | 2026-11-17 | EVIDENCE | WS5 | Recorded `release/evidence/ws5/E-WS5-001_auth_sessions.json` verifying all identity and session controls pass. | APPROVED |
+| LEDGER-023 | 2026-11-17 | IMPLEMENTATION | WS6 | Implemented Protocol C8 Production Startup Guard in `src/scheme_navigator/core/config.py` and `lifespan`. | APPROVED |
+| LEDGER-024 | 2026-11-17 | IMPLEMENTATION | WS6 | Added HTTP security headers middleware to FastAPI `app` (nosniff, DENY, CSP, Referrer-Policy, Permissions-Policy). | APPROVED |
+| LEDGER-025 | 2026-11-17 | AUDIT | WS6 | Generated OWASP ASVS 5.0.0 Level 2 matrix in `docs/production/asvs_matrix.csv` (35 controls verified). | APPROVED |
+| LEDGER-026 | 2026-11-17 | SCAN | WS6 | AST static security scan executed across 51 source files with 0 findings in `release/evidence/ws6/E-WS6-002_security_scan.json`. | APPROVED |
+| LEDGER-027 | 2026-11-17 | DOCUMENTATION | WS6 | Prepared External VAPT Readiness Pack in `docs/production/vapt_pack/` (Scope, Topology, Credentials, Threat Model, RoE). | APPROVED |
+| LEDGER-028 | 2026-11-17 | TEST | WS6 | Created `tests/test_production_security_hardening.py` with 7 passing tests covering C8 guard, security headers, and rate limiting. | APPROVED |
+| LEDGER-029 | 2026-11-17 | EVIDENCE | WS6 | Recorded `release/evidence/ws6/E-WS6-001_security.json` verifying all security engineering controls pass. | APPROVED |

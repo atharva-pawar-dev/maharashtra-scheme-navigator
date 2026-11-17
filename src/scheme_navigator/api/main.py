@@ -140,8 +140,8 @@ async def lifespan(_app: FastAPI):
     """Manage persistent interview storage, secret validation, and retention scheduling."""
     global interview_store, interviewer
 
-    # Priority 7: Validate production secrets on startup (fails closed if missing or default)
-    settings.validate_production_secrets()
+    # Protocol C8: Validate production profile on startup (fails closed)
+    settings.validate_production_startup()
 
     # Automatic schema migration check across persistent SQLite databases
     from scheme_navigator.core.migrations import run_all_migrations
@@ -199,6 +199,28 @@ app = FastAPI(
     ),
     lifespan=lifespan,
 )
+
+
+@app.middleware("http")
+async def security_headers_middleware(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "0"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "geolocation=(), camera=(), microphone=(self), payment=()"
+    response.headers["Content-Security-Policy"] = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline'; "
+        "style-src 'self' 'unsafe-inline'; "
+        "img-src 'self' data: https:; "
+        "font-src 'self' data:; "
+        "connect-src 'self'; "
+        "frame-ancestors 'none';"
+    )
+    if settings.app_env.casefold() in {"production", "prod"}:
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    return response
 
 app.include_router(reviewer_ui_router)
 app.include_router(ingestion_router)
