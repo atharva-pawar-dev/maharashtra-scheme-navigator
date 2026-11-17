@@ -1,0 +1,766 @@
+{
+  "id": "E-WS1-001",
+  "claim": "WS1 Audit and Truth Inventory across routes, schemes, document requirements, and integrations",
+  "total_api_routes": 71,
+  "routes": [
+    {
+      "path": "/ingestion/sources",
+      "method": "GET",
+      "summary": "List Ingested Sources",
+      "tags": [
+        "ingestion"
+      ],
+      "operation_id": "list_ingested_sources_ingestion_sources_get"
+    },
+    {
+      "path": "/ingestion/changes",
+      "method": "GET",
+      "summary": "List Document Changes",
+      "tags": [
+        "ingestion"
+      ],
+      "operation_id": "list_document_changes_ingestion_changes_get"
+    },
+    {
+      "path": "/ingestion/queue",
+      "method": "GET",
+      "summary": "List Review Queue",
+      "tags": [
+        "ingestion"
+      ],
+      "operation_id": "list_review_queue_ingestion_queue_get"
+    },
+    {
+      "path": "/ingestion/queue/{item_id}",
+      "method": "GET",
+      "summary": "Get Review Item",
+      "tags": [
+        "ingestion"
+      ],
+      "operation_id": "get_review_item_ingestion_queue__item_id__get"
+    },
+    {
+      "path": "/ingestion/queue/{item_id}/review",
+      "method": "POST",
+      "summary": "Update Review Item",
+      "tags": [
+        "ingestion"
+      ],
+      "operation_id": "update_review_item_ingestion_queue__item_id__review_post"
+    },
+    {
+      "path": "/ingestion/detect-duplicates",
+      "method": "POST",
+      "summary": "Check Scheme Duplicates",
+      "tags": [
+        "ingestion"
+      ],
+      "operation_id": "check_scheme_duplicates_ingestion_detect_duplicates_post"
+    },
+    {
+      "path": "/ingestion/lineage/{scheme_id}",
+      "method": "GET",
+      "summary": "View Scheme Lineage",
+      "tags": [
+        "ingestion"
+      ],
+      "operation_id": "view_scheme_lineage_ingestion_lineage__scheme_id__get"
+    },
+    {
+      "path": "/ingestion/lineages",
+      "method": "GET",
+      "summary": "List All Lineages",
+      "tags": [
+        "ingestion"
+      ],
+      "operation_id": "list_all_lineages_ingestion_lineages_get"
+    },
+    {
+      "path": "/ingestion/upload-source",
+      "method": "POST",
+      "summary": "Upload Source Document",
+      "tags": [
+        "ingestion",
+        "ingestion"
+      ],
+      "operation_id": "upload_source_document_ingestion_upload_source_post"
+    },
+    {
+      "path": "/ingestion/compare",
+      "method": "GET",
+      "summary": "Compare Source Snapshots",
+      "tags": [
+        "ingestion",
+        "ingestion"
+      ],
+      "operation_id": "compare_source_snapshots_ingestion_compare_get"
+    },
+    {
+      "path": "/healthz",
+      "method": "GET",
+      "summary": "Health Check",
+      "tags": [
+        "monitoring"
+      ],
+      "operation_id": "health_check_healthz_get"
+    },
+    {
+      "path": "/schemes",
+      "method": "GET",
+      "summary": "List Schemes",
+      "tags": [
+        "schemes"
+      ],
+      "operation_id": "list_schemes_schemes_get"
+    },
+    {
+      "path": "/profile",
+      "method": "GET",
+      "summary": "Get Citizen Profile",
+      "tags": [
+        "citizen_profile"
+      ],
+      "operation_id": "get_citizen_profile_profile_get"
+    },
+    {
+      "path": "/profile",
+      "method": "POST",
+      "summary": "Update Citizen Profile",
+      "tags": [
+        "citizen_profile"
+      ],
+      "operation_id": "update_citizen_profile_profile_post"
+    },
+    {
+      "path": "/profile/reset",
+      "method": "POST",
+      "summary": "Reset Citizen Profile",
+      "tags": [
+        "citizen_profile"
+      ],
+      "operation_id": "reset_citizen_profile_profile_reset_post"
+    },
+    {
+      "path": "/progress",
+      "method": "GET",
+      "summary": "Get Citizen Progress",
+      "tags": [
+        "citizen_progress"
+      ],
+      "operation_id": "get_citizen_progress_progress_get"
+    },
+    {
+      "path": "/progress/activate",
+      "method": "POST",
+      "summary": "Activate Citizen Progress",
+      "tags": [
+        "citizen_progress"
+      ],
+      "operation_id": "activate_citizen_progress_progress_activate_post"
+    },
+    {
+      "path": "/progress/dismiss",
+      "method": "POST",
+      "summary": "Dismiss Citizen Scheme",
+      "tags": [
+        "citizen_progress"
+      ],
+      "operation_id": "dismiss_citizen_scheme_progress_dismiss_post"
+    },
+    {
+      "path": "/eligibility/evaluate",
+      "method": "POST",
+      "summary": "Evaluate Eligibility",
+      "tags": [
+        "schemes"
+      ],
+      "operation_id": "evaluate_eligibility_eligibility_evaluate_post"
+    },
+    {
+      "path": "/schemes/{scheme_id}/explain",
+      "method": "POST",
+      "summary": "Explain Scheme Eligibility",
+      "tags": [
+        "schemes"
+      ],
+      "operation_id": "explain_scheme_eligibility_schemes__scheme_id__explain_post"
+    },
+    {
+      "path": "/schemes/trust/all",
+      "method": "GET",
+      "summary": "List All Schemes Trust",
+      "tags": [
+        "schemes"
+      ],
+      "operation_id": "list_all_schemes_trust_schemes_trust_all_get"
+    },
+    {
+      "path": "/schemes/{scheme_id}/trust",
+      "method": "GET",
+      "summary": "Get Scheme Trust",
+      "tags": [
+        "schemes"
+      ],
+      "operation_id": "get_scheme_trust_schemes__scheme_id__trust_get"
+    },
+    {
+      "path": "/interview/start",
+      "method": "POST",
+      "summary": "Start Interview",
+      "tags": [
+        "interview"
+      ],
+      "operation_id": "start_interview_interview_start_post"
+    },
+    {
+      "path": "/interview/answer",
+      "method": "POST",
+      "summary": "Answer Interview",
+      "tags": [
+        "interview"
+      ],
+      "operation_id": "answer_interview_interview_answer_post"
+    },
+    {
+      "path": "/interview/{thread_id}/results",
+      "method": "GET",
+      "summary": "Get Interview Results",
+      "tags": [
+        "interview"
+      ],
+      "operation_id": "get_interview_results_interview__thread_id__results_get"
+    },
+    {
+      "path": "/interview/{thread_id}",
+      "method": "GET",
+      "summary": "Get Interview State",
+      "tags": [
+        "interview"
+      ],
+      "operation_id": "get_interview_state_interview__thread_id__get"
+    },
+    {
+      "path": "/voice/transcribe",
+      "method": "POST",
+      "summary": "Transcribe Voice",
+      "tags": [
+        "voice"
+      ],
+      "operation_id": "transcribe_voice_voice_transcribe_post"
+    },
+    {
+      "path": "/documents/audit",
+      "method": "POST",
+      "summary": "Audit Documents",
+      "tags": [
+        "documents"
+      ],
+      "operation_id": "audit_documents_documents_audit_post"
+    },
+    {
+      "path": "/documents/audit-upload",
+      "method": "POST",
+      "summary": "Audit Document Upload",
+      "tags": [
+        "documents"
+      ],
+      "operation_id": "audit_document_upload_documents_audit_upload_post"
+    },
+    {
+      "path": "/documents/reviews/{review_id}",
+      "method": "GET",
+      "summary": "Get Document Review",
+      "tags": [
+        "documents",
+        "human-review"
+      ],
+      "operation_id": "get_document_review_documents_reviews__review_id__get"
+    },
+    {
+      "path": "/documents/reviews/{review_id}",
+      "method": "DELETE",
+      "summary": "Delete Document Review",
+      "tags": [
+        "documents",
+        "human-review"
+      ],
+      "operation_id": "delete_document_review_documents_reviews__review_id__delete"
+    },
+    {
+      "path": "/documents/reviews/{review_id}/documents/{document_id}",
+      "method": "PATCH",
+      "summary": "Correct Document Review Fields",
+      "tags": [
+        "documents",
+        "human-review"
+      ],
+      "operation_id": "correct_document_review_fields_documents_reviews__review_id__documents__document_id__patch"
+    },
+    {
+      "path": "/documents/reviews/{review_id}/complete",
+      "method": "POST",
+      "summary": "Complete Document Review",
+      "tags": [
+        "documents",
+        "human-review"
+      ],
+      "operation_id": "complete_document_review_documents_reviews__review_id__complete_post"
+    },
+    {
+      "path": "/assessment/{scheme_id}",
+      "method": "POST",
+      "summary": "Get Applicant Assessment",
+      "tags": [
+        "assessment"
+      ],
+      "operation_id": "get_applicant_assessment_assessment__scheme_id__post"
+    },
+    {
+      "path": "/plans/{scheme_id}",
+      "method": "POST",
+      "summary": "Get Application Plan",
+      "tags": [
+        "planner"
+      ],
+      "operation_id": "get_application_plan_plans__scheme_id__post"
+    },
+    {
+      "path": "/assistance/documents/audit-and-prepare",
+      "method": "POST",
+      "summary": "Audit And Prepare Documents",
+      "tags": [
+        "assistance"
+      ],
+      "operation_id": "audit_and_prepare_documents_assistance_documents_audit_and_prepare_post"
+    },
+    {
+      "path": "/assistance/portal/guidance",
+      "method": "POST",
+      "summary": "Get Portal Guidance",
+      "tags": [
+        "assistance"
+      ],
+      "operation_id": "get_portal_guidance_assistance_portal_guidance_post"
+    },
+    {
+      "path": "/readyz",
+      "method": "GET",
+      "summary": "Readiness Check",
+      "tags": [
+        "monitoring"
+      ],
+      "operation_id": "readiness_check_readyz_get"
+    },
+    {
+      "path": "/auth/session",
+      "method": "POST",
+      "summary": "Create Authenticated Session",
+      "tags": [
+        "security"
+      ],
+      "operation_id": "create_authenticated_session_auth_session_post"
+    },
+    {
+      "path": "/admin/auth/provision",
+      "method": "POST",
+      "summary": "Provision Admin Session",
+      "tags": [
+        "admin"
+      ],
+      "operation_id": "provision_admin_session_admin_auth_provision_post"
+    },
+    {
+      "path": "/admin/auth/provision-user",
+      "method": "POST",
+      "summary": "Provision User Account",
+      "tags": [
+        "admin"
+      ],
+      "operation_id": "provision_user_account_admin_auth_provision_user_post"
+    },
+    {
+      "path": "/admin/auth/revoke",
+      "method": "POST",
+      "summary": "Revoke User Session",
+      "tags": [
+        "admin"
+      ],
+      "operation_id": "revoke_user_session_admin_auth_revoke_post"
+    },
+    {
+      "path": "/auth/me",
+      "method": "GET",
+      "summary": "Get Current User Info",
+      "tags": [
+        "security"
+      ],
+      "operation_id": "get_current_user_info_auth_me_get"
+    },
+    {
+      "path": "/admin/catalogue/sign-release",
+      "method": "POST",
+      "summary": "Sign Catalogue Release",
+      "tags": [
+        "admin"
+      ],
+      "operation_id": "sign_catalogue_release_admin_catalogue_sign_release_post"
+    },
+    {
+      "path": "/admin/retention/purge",
+      "method": "POST",
+      "summary": "Run Retention Purge",
+      "tags": [
+        "admin"
+      ],
+      "operation_id": "run_retention_purge_admin_retention_purge_post"
+    },
+    {
+      "path": "/admin/audit-logs",
+      "method": "GET",
+      "summary": "Get Recent Audit Logs",
+      "tags": [
+        "admin"
+      ],
+      "operation_id": "get_recent_audit_logs_admin_audit_logs_get"
+    },
+    {
+      "path": "/admin/db/status",
+      "method": "GET",
+      "summary": "Get Database Status",
+      "tags": [
+        "admin"
+      ],
+      "operation_id": "get_database_status_admin_db_status_get"
+    },
+    {
+      "path": "/admin/db/migrate",
+      "method": "POST",
+      "summary": "Run Database Migrations",
+      "tags": [
+        "admin"
+      ],
+      "operation_id": "run_database_migrations_admin_db_migrate_post"
+    },
+    {
+      "path": "/admin/db/backup",
+      "method": "POST",
+      "summary": "Create Database Backup",
+      "tags": [
+        "admin"
+      ],
+      "operation_id": "create_database_backup_admin_db_backup_post"
+    },
+    {
+      "path": "/source-registry/sources",
+      "method": "GET",
+      "summary": "Get Registered Sources",
+      "tags": [
+        "source_registry"
+      ],
+      "operation_id": "get_registered_sources_source_registry_sources_get"
+    },
+    {
+      "path": "/source-registry/coverage",
+      "method": "GET",
+      "summary": "Get Source Coverage Matrix",
+      "tags": [
+        "source_registry"
+      ],
+      "operation_id": "get_source_coverage_matrix_source_registry_coverage_get"
+    },
+    {
+      "path": "/public-services",
+      "method": "GET",
+      "summary": "Get Notified Public Services",
+      "tags": [
+        "source_registry"
+      ],
+      "operation_id": "get_notified_public_services_public_services_get"
+    },
+    {
+      "path": "/channels",
+      "method": "GET",
+      "summary": "List Application Channels",
+      "tags": [
+        "application_channels"
+      ],
+      "operation_id": "list_application_channels_channels_get"
+    },
+    {
+      "path": "/channels/{scheme_id}",
+      "method": "GET",
+      "summary": "Get Scheme Application Channel",
+      "tags": [
+        "application_channels"
+      ],
+      "operation_id": "get_scheme_application_channel_channels__scheme_id__get"
+    },
+    {
+      "path": "/canonical-schemes",
+      "method": "GET",
+      "summary": "List Canonical Schemes",
+      "tags": [
+        "canonical_schemes"
+      ],
+      "operation_id": "list_canonical_schemes_canonical_schemes_get"
+    },
+    {
+      "path": "/local-governments/corporations",
+      "method": "GET",
+      "summary": "List Municipal Corporations",
+      "tags": [
+        "local_governments"
+      ],
+      "operation_id": "list_municipal_corporations_local_governments_corporations_get"
+    },
+    {
+      "path": "/local-governments/corporations/{corp_id}",
+      "method": "GET",
+      "summary": "Get Municipal Corporation",
+      "tags": [
+        "local_governments"
+      ],
+      "operation_id": "get_municipal_corporation_local_governments_corporations__corp_id__get"
+    },
+    {
+      "path": "/local-governments/corporations/{corp_id}/wards",
+      "method": "GET",
+      "summary": "Get Corporation Wards",
+      "tags": [
+        "local_governments"
+      ],
+      "operation_id": "get_corporation_wards_local_governments_corporations__corp_id__wards_get"
+    },
+    {
+      "path": "/local-governments/corporations/{corp_id}/schemes",
+      "method": "GET",
+      "summary": "List Corporation Schemes",
+      "tags": [
+        "local_governments"
+      ],
+      "operation_id": "list_corporation_schemes_local_governments_corporations__corp_id__schemes_get"
+    },
+    {
+      "path": "/local-governments/ulbs",
+      "method": "GET",
+      "summary": "Get Urban Local Bodies",
+      "tags": [
+        "local_governments"
+      ],
+      "operation_id": "get_urban_local_bodies_local_governments_ulbs_get"
+    },
+    {
+      "path": "/local-governments/resolve-location",
+      "method": "POST",
+      "summary": "Resolve Citizen Location",
+      "tags": [
+        "local_governments"
+      ],
+      "operation_id": "resolve_citizen_location_local_governments_resolve_location_post"
+    },
+    {
+      "path": "/canonical-schemes/categories",
+      "method": "GET",
+      "summary": "Get Canonical Scheme Categories",
+      "tags": [
+        "canonical_schemes"
+      ],
+      "operation_id": "get_canonical_scheme_categories_canonical_schemes_categories_get"
+    },
+    {
+      "path": "/canonical-schemes/{scheme_id}",
+      "method": "GET",
+      "summary": "Get Canonical Scheme",
+      "tags": [
+        "canonical_schemes"
+      ],
+      "operation_id": "get_canonical_scheme_canonical_schemes__scheme_id__get"
+    },
+    {
+      "path": "/canonical-schemes/{scheme_id}/documents",
+      "method": "GET",
+      "summary": "Get Canonical Scheme Documents",
+      "tags": [
+        "canonical_schemes"
+      ],
+      "operation_id": "get_canonical_scheme_documents_canonical_schemes__scheme_id__documents_get"
+    },
+    {
+      "path": "/canonical-schemes/{scheme_id}/documents/audit",
+      "method": "POST",
+      "summary": "Audit Canonical Scheme Documents",
+      "tags": [
+        "canonical_schemes"
+      ],
+      "operation_id": "audit_canonical_scheme_documents_canonical_schemes__scheme_id__documents_audit_post"
+    },
+    {
+      "path": "/canonical-schemes/{scheme_id}/factsheet",
+      "method": "GET",
+      "summary": "Get Canonical Scheme Factsheet",
+      "tags": [
+        "canonical_schemes"
+      ],
+      "operation_id": "get_canonical_scheme_factsheet_canonical_schemes__scheme_id__factsheet_get"
+    },
+    {
+      "path": "/admin/scheme-coverage",
+      "method": "GET",
+      "summary": "Get Scheme Coverage Report",
+      "tags": [
+        "admin"
+      ],
+      "operation_id": "get_scheme_coverage_report_admin_scheme_coverage_get"
+    },
+    {
+      "path": "/application/track",
+      "method": "POST",
+      "summary": "Track Citizen Application",
+      "tags": [
+        "application_tracking"
+      ],
+      "operation_id": "track_citizen_application_application_track_post"
+    },
+    {
+      "path": "/application/track/{thread_id}",
+      "method": "GET",
+      "summary": "Get Citizen Application Tracking",
+      "tags": [
+        "application_tracking"
+      ],
+      "operation_id": "get_citizen_application_tracking_application_track__thread_id__get"
+    },
+    {
+      "path": "/source-registry/monitor/status",
+      "method": "GET",
+      "summary": "Get Source Monitor Status",
+      "tags": [
+        "source_registry"
+      ],
+      "operation_id": "get_source_monitor_status_source_registry_monitor_status_get"
+    },
+    {
+      "path": "/demo-form",
+      "method": "GET",
+      "summary": "Demo Form",
+      "tags": [
+        "sandbox"
+      ],
+      "operation_id": "demo_form_demo_form_get"
+    }
+  ],
+  "canonical_schemes_count": 75,
+  "schemes_by_status": {
+    "ACTIVE_DEMO_FIXTURE": 2,
+    "REVIEW_REQUIRED": 5,
+    "POLICY_UNRESOLVED": 2,
+    "VERIFIED_FOR_INFORMATION": 51,
+    "PUBLISHED": 15
+  },
+  "schemes_by_scope": {
+    "MAHARASHTRA_STATE": 55,
+    "CENTRAL": 5,
+    "MUNICIPAL_CORPORATION": 13,
+    "GRAM_PANCHAYAT": 1,
+    "MUNICIPAL_COUNCIL": 1
+  },
+  "total_document_requirements": 319,
+  "mandatory_requirements": 273,
+  "conditional_requirements": 31,
+  "optional_requirements": 15,
+  "orphaned_requirements_count": 0,
+  "demo_paths_detected_count": 81,
+  "demo_paths_sample": [
+    {
+      "file": "src/scheme_navigator/api/main.py",
+      "line": 108,
+      "text": "demo_fixtures_enabled=settings.demo_fixtures_enabled,"
+    },
+    {
+      "file": "src/scheme_navigator/api/main.py",
+      "line": 287,
+      "text": "\"demo_fixtures_enabled\": str(settings.demo_fixtures_enabled).lower(),"
+    },
+    {
+      "file": "src/scheme_navigator/api/main.py",
+      "line": 1467,
+      "text": "\"demo_fixtures_enabled\": settings.demo_fixtures_enabled,"
+    },
+    {
+      "file": "src/scheme_navigator/core/config.py",
+      "line": 80,
+      "text": "def demo_fixtures_enabled(self) -> bool:"
+    },
+    {
+      "file": "src/scheme_navigator/services/catalog.py",
+      "line": 70,
+      "text": "demo_fixtures_enabled: bool,"
+    },
+    {
+      "file": "src/scheme_navigator/services/catalog.py",
+      "line": 77,
+      "text": "if demo_fixtures_enabled:"
+    },
+    {
+      "file": "backup-before-field-conflict-update/src/scheme_navigator/api/main.py",
+      "line": 47,
+      "text": "demo_fixtures_enabled=settings.demo_fixtures_enabled,"
+    },
+    {
+      "file": "backup-before-field-conflict-update/src/scheme_navigator/api/main.py",
+      "line": 57,
+      "text": "\"demo_fixtures_enabled\": str(settings.demo_fixtures_enabled).lower(),"
+    },
+    {
+      "file": "backup-before-human-review/src/scheme_navigator/api/main.py",
+      "line": 49,
+      "text": "catalog = SchemeCatalog.from_json() if settings.demo_fixtures_enabled else SchemeCatalog([])"
+    },
+    {
+      "file": "backup-before-human-review/src/scheme_navigator/api/main.py",
+      "line": 58,
+      "text": "\"demo_fixtures_enabled\": str(settings.demo_fixtures_enabled).lower(),"
+    }
+  ],
+  "integrations_register": [
+    {
+      "dependency": "Google Gemini API (via langchain/langgraph / google-generativeai)",
+      "purpose": "Experimental NLU question extraction & draft document OCR assistance",
+      "credentials_needed": "GEMINI_API_KEY",
+      "data_sent": "User interview responses, uploaded document image/text snippets",
+      "retention_training_terms": "Depends on Google Cloud vs Google AI Studio terms (Standard AI Studio may train; Vertex does not)",
+      "region": "Global / US default (not restricted to India)",
+      "cost_quota": "Free tier / Pay-per-token",
+      "rate_limits": "15 RPM free tier",
+      "fallback_behaviour": "Degrades gracefully to deterministic rule engine & local template guidance when LLM_MODE=off",
+      "status": "CONFIGURED_WITH_FALLBACK",
+      "is_operational": true
+    },
+    {
+      "dependency": "Bhashini (National Language Translation Mission)",
+      "purpose": "Indic voice & translation services",
+      "credentials_needed": "BHASHINI_API_KEY / BHASHINI_USER_ID",
+      "data_sent": "Audio voice recordings, translated citizen queries",
+      "retention_training_terms": "Govt of India digital mission policy",
+      "region": "India",
+      "cost_quota": "Govt allotted",
+      "rate_limits": "Varies by API gateway",
+      "fallback_behaviour": "Browser Web Speech API / static client translations",
+      "status": "OPTIONAL_CONFIGURED",
+      "is_operational": false
+    },
+    {
+      "dependency": "Aaple Sarkar / MahaDBT / Nari Shakti Doot Portals",
+      "purpose": "Official government scheme application and grievance submission",
+      "credentials_needed": "None (External Handoff)",
+      "data_sent": "None (Citizen navigated directly to official URL with zero data transfer)",
+      "retention_training_terms": "Not applicable (External handoff only)",
+      "region": "Maharashtra, India",
+      "cost_quota": "Free public portals",
+      "rate_limits": "N/A",
+      "fallback_behaviour": "Displays offline office guidelines (Tahsildar / Setu Kendra / Ward Office)",
+      "status": "OPERATIONAL_HANDOFF",
+      "is_operational": true
+    }
+  ]
+}
