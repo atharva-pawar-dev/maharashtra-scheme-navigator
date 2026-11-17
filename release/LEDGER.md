@@ -20,3 +20,8 @@
 | LEDGER-011 | 2026-11-17 | TEST | WS3 | Created `tests/test_content_governance.py` with 11 tests covering Invariant B3, demo segregation, SSRF protection, and citizen feedback loop. | APPROVED |
 | LEDGER-012 | 2026-11-17 | DOCUMENTATION | WS3 | Authored `docs/production/content_governance.md` covering lifecycle state machine, primary-source citations, and citizen reporting SLA. | APPROVED |
 | LEDGER-013 | 2026-11-17 | EVIDENCE | WS3 | Recorded `release/evidence/ws3/E-WS3-001_content_governance.json` verifying all 11 content governance tests pass. | APPROVED |
+| LEDGER-014 | 2026-11-17 | IMPLEMENTATION | WS4 | Authored `scripts/migrate_sqlite_to_postgres.py` and canonical DDL `docs/production/postgres_schema.sql` with JSONB and TIMESTAMPTZ support. | APPROVED |
+| LEDGER-015 | 2026-11-17 | IMPLEMENTATION | WS4 | Implemented `src/scheme_navigator/security/storage.py` private object storage service with 15-min signed URLs and magic-byte checks. | APPROVED |
+| LEDGER-016 | 2026-11-17 | TEST | WS4 | Implemented `tests/test_data_layer_and_storage.py` with 8 passing unit tests. | APPROVED |
+| LEDGER-017 | 2026-11-17 | DIAGNOSTIC | WS4 | Port 5432 scan confirmed no local PostgreSQL or Docker daemon; Gate G4 honestly recorded as BLOCKED per Invariant B1/B10. | APPROVED |
+| LEDGER-018 | 2026-11-17 | EVIDENCE | WS4 | Recorded `release/evidence/ws4/E-WS4-001_data_layer.json` verifying data layer readiness and storage controls. | APPROVED |

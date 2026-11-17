@@ -21,3 +21,6 @@
 | C-014 | Demo fixtures disabled in production profile | E-WS3-001 | CONFIRMED | Verified in `test_demo_fixtures_segregated_in_production`. |
 | C-015 | SSRF protection rejects private IPs, loopback, metadata, userinfo, and non-HTTPS | E-WS3-001 | CONFIRMED | Verified across 4 SSRF security tests. |
 | C-016 | Citizen issue reporting active with ticket tracking and structured audit logging | E-WS3-001 | CONFIRMED | Verified via `POST /trust/report-issue` in `test_citizen_report_issue_success`. |
+| C-017 | Complete PostgreSQL 16+ DDL with JSONB and TIMESTAMPTZ verified in dry-run | E-WS4-001 | CONFIRMED | Verified in `test_postgres_ddl_completeness`. |
+| C-018 | Live PostgreSQL cluster running and accessible locally | E-WS4-001 | REFUTED | Port 5432 unreachable; Docker not present. Gate G4 honestly recorded as BLOCKED. |
+| C-019 | Private object storage enforces magic-byte headers and 15-minute signed URL ceiling | E-WS4-001 | CONFIRMED | Verified across 6 storage tests in `tests/test_data_layer_and_storage.py`. |

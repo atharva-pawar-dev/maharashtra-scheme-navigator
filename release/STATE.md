@@ -1,13 +1,17 @@
 ---
-current_workstream: WS4
+current_workstream: WS5
 completed_workstreams:
   - WS0
   - WS1
   - WS2
   - WS3
-open_blockers: []
-last_commit: feb37b8
-utc_timestamp: 2026-11-17T17:08:00Z
+  - WS4
+open_blockers:
+  - gate: G4
+    reason: "No local PostgreSQL 16+ daemon running on 127.0.0.1:5432 and Docker engine not installed on host"
+    unblock_action: "Provide DATABASE_URL to a live PostgreSQL 16+ instance and run scripts/migrate_sqlite_to_postgres.py"
+last_commit: 5f50a33
+utc_timestamp: 2026-11-17T17:14:00Z
 ---
 
 # Release State & Execution Handoff Note
@@ -50,4 +54,13 @@ utc_timestamp: 2026-11-17T17:08:00Z
   - Production governance manual authored in `docs/production/content_governance.md`.
   - Evidence record saved at `release/evidence/ws3/E-WS3-001_content_governance.json`.
 
-- **Next Workstream:** WS4 — Production Data Layer (PostgreSQL readiness, migrations, and S3-compatible private storage).
+- **WS4 Production Data Layer Complete (Gate G4 Honestly Marked BLOCKED):**
+  - Canonical PostgreSQL 16+ DDL written to `docs/production/postgres_schema.sql` covering 10 tables, indices, foreign keys, `JSONB`, and `TIMESTAMPTZ`.
+  - SQLite to PostgreSQL migration script implemented in `scripts/migrate_sqlite_to_postgres.py` with type conversion, dry-run, and row counting across existing SQLite databases.
+  - S3-compatible private object storage abstraction implemented in `src/scheme_navigator/security/storage.py` with magic-byte validation, 15-minute max signed URL expiry, and AES256 server-side encryption.
+  - 8 automated tests passing in `tests/test_data_layer_and_storage.py`.
+  - Port 5432 diagnostic check confirmed no local PostgreSQL or Docker daemon; Gate G4 honestly recorded as `BLOCKED` per Invariant B1/B10.
+  - Evidence recorded in `release/evidence/ws4/E-WS4-001_data_layer.json`.
+  - Production data layer documentation committed at `docs/production/data_layer.md`.
+
+- **Next Workstream:** WS5 — Identity, Sessions, and Authorisation.

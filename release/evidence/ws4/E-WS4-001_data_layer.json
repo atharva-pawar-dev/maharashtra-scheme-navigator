@@ -1,0 +1,38 @@
+{
+  "workstream": "WS4",
+  "evidence_id": "E-WS4-001",
+  "timestamp_utc": "2026-11-17T17:12:36.772897+00:00",
+  "title": "Production Data Layer and Object Storage Verification",
+  "pytest_exit_code": 0,
+  "pytest_summary": {
+    "passed": 8,
+    "failed": 0,
+    "xml": "release\\evidence\\ws4\\pytest_ws4.xml"
+  },
+  "postgres_readiness": {
+    "ddl_file": "docs/production/postgres_schema.sql",
+    "migration_script": "scripts/migrate_sqlite_to_postgres.py",
+    "tables_defined": 10,
+    "jsonb_used": true,
+    "timestamptz_used": true,
+    "local_daemon_present": false,
+    "gate_g4_status": "BLOCKED",
+    "unblock_action": "Supply live PostgreSQL 16+ via DATABASE_URL and run scripts/migrate_sqlite_to_postgres.py"
+  },
+  "object_storage": {
+    "module": "src/scheme_navigator/security/storage.py",
+    "magic_byte_validation_enforced": true,
+    "supported_types": [
+      "application/pdf",
+      "image/png",
+      "image/jpeg",
+      "image/webp"
+    ],
+    "max_presigned_url_ttl_seconds": 900,
+    "server_side_encryption": "AES256",
+    "status": "PASS"
+  },
+  "documentation_path": "docs/production/data_layer.md",
+  "verdict": "PARTIAL",
+  "notes": "Offline DDL generation and storage engine PASS; live PostgreSQL gate G4 honestly marked BLOCKED per Protocol B1/B10."
+}
