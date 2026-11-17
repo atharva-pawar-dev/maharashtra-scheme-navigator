@@ -19,11 +19,33 @@ completed_workstreams:
   - WS14
   - WS15
 open_blockers:
-  - gate: G4
+  - gate: G6
+    name: "Production database"
     reason: "No local PostgreSQL 16+ daemon running on 127.0.0.1:5432 and Docker engine not installed on host"
     unblock_action: "Provide DATABASE_URL to a live PostgreSQL 16+ instance and run scripts/migrate_sqlite_to_postgres.py"
-last_commit: afe4451
-utc_timestamp: 2026-11-17T17:38:00Z
+  - gate: G10
+    name: "External VAPT"
+    reason: "Independent certified penetration testing firm not yet engaged under local A0 authorization"
+    unblock_action: "Transmit docs/production/vapt_pack/ to CERT-In empanelled auditing firm"
+  - gate: G12
+    name: "Legal review"
+    reason: "Qualified Indian legal counsel review and sign-off pending"
+    unblock_action: "Submit docs/production/privacy_and_legal.md and data/legal/ to counsel"
+  - gate: G19
+    name: "Staging acceptance"
+    reason: "No external staging server provisioned under local A0 authorization"
+    unblock_action: "Deploy container to staging cluster and execute scripts/verify_deployment.py"
+  - gate: G20
+    name: "Domain and HTTPS"
+    reason: "No public state government domain registered or DNS/TLS provisioned"
+    unblock_action: "Register official domain, publish DNS CAA records, install TLS certificates"
+reconciled_scorecard:
+  pass: 8
+  partial: 11
+  blocked: 5
+  not_applicable: 0
+last_commit: 2a45fb8
+utc_timestamp: 2026-11-18T00:25:00Z
 ---
 
 # Release State & Execution Handoff Note

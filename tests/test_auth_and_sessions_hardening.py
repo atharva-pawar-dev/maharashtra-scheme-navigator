@@ -44,6 +44,17 @@ def test_session_token_entropy_and_cookie_attributes(client):
     assert cookies["sn_session"] == token
 
 
+def test_production_session_cookie_has_secure_flag(client, monkeypatch):
+    """Canary 7 verification: In production, session cookie MUST enforce the Secure attribute."""
+    from scheme_navigator.core.config import settings
+    monkeypatch.setenv("SCHEME_NAVIGATOR_AUTH_SECRET", "prod_secret_must_be_at_least_32_chars_long!")
+    monkeypatch.setattr(settings, "scheme_navigator_auth_secret", "prod_secret_must_be_at_least_32_chars_long!")
+    monkeypatch.setattr(settings, "app_env", "production")
+    resp = client.post("/auth/session")
+    set_cookie = resp.headers.get("set-cookie", "").lower()
+    assert "secure" in set_cookie
+
+
 def test_anonymous_session_minting_fallback(client):
     """Verify unauthenticated requests safely mint an isolated anonymous session."""
     resp = client.get("/auth/me")
@@ -115,6 +126,33 @@ def test_citizen_cannot_answer_another_citizens_interview_thread(client):
 # -------------------------------------------------------------------------
 # 4. Session Revocation and Expiry
 # -------------------------------------------------------------------------
+
+def test_cross_session_profile_isolation(client):
+    """Canary 12: Ensure profile caching is strictly isolated per session and never shared."""
+    resp_a = client.post("/auth/session")
+    token_a = resp_a.json()["token"]
+    headers_a = {"Authorization": f"Bearer {token_a}"}
+
+    update_payload = {
+        "profile": {
+            "age_years": 45,
+            "gender": "female",
+            "annual_family_income": 85000,
+        }
+    }
+    save_resp = client.post("/profile", json=update_payload, headers=headers_a)
+    assert save_resp.status_code == 200
+
+    resp_b = client.post("/auth/session")
+    token_b = resp_b.json()["token"]
+    headers_b = {"Authorization": f"Bearer {token_b}"}
+
+    get_resp_b = client.get("/profile", headers=headers_b)
+    assert get_resp_b.status_code == 200
+    b_profile = get_resp_b.json()["profile"]
+    assert b_profile.get("age_years") is None
+    assert b_profile.get("annual_family_income") is None
+
 
 def test_session_revocation_invalidates_token(client):
     """Verify revoking a session immediately rejects the token."""

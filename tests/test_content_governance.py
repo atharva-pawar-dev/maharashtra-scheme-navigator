@@ -59,6 +59,19 @@ def test_demo_fixtures_segregated_in_production():
     assert local_settings.demo_fixtures_enabled is True
 
 
+def test_production_rejects_demo_fixtures_startup_guard(monkeypatch):
+    """Canary 5 verification: validate_production_startup must raise RuntimeError if demo_fixtures_enabled=True in production."""
+    s = Settings(
+        app_env="production",
+        scheme_navigator_auth_secret="a" * 32,
+        scheme_navigator_release_key="b" * 32,
+        database_url="postgresql://msn:pw@localhost:5432/db",
+    )
+    monkeypatch.setattr(Settings, "demo_fixtures_enabled", property(lambda self: True))
+    with pytest.raises(RuntimeError, match="Demo fixtures must be disabled in production"):
+        s.validate_production_startup()
+
+
 def test_canonical_catalog_active_demo_fixtures_flagged():
     """Verify that any demo fixtures in canonical registry are explicitly marked DEMO."""
     all_schemes = canonical_catalog.all()

@@ -23,7 +23,7 @@
 | LEDGER-014 | 2026-11-17 | IMPLEMENTATION | WS4 | Authored `scripts/migrate_sqlite_to_postgres.py` and canonical DDL `docs/production/postgres_schema.sql` with JSONB and TIMESTAMPTZ support. | APPROVED |
 | LEDGER-015 | 2026-11-17 | IMPLEMENTATION | WS4 | Implemented `src/scheme_navigator/security/storage.py` private object storage service with 15-min signed URLs and magic-byte checks. | APPROVED |
 | LEDGER-016 | 2026-11-17 | TEST | WS4 | Implemented `tests/test_data_layer_and_storage.py` with 8 passing unit tests. | APPROVED |
-| LEDGER-017 | 2026-11-17 | DIAGNOSTIC | WS4 | Port 5432 scan confirmed no local PostgreSQL or Docker daemon; Gate G4 honestly recorded as BLOCKED per Invariant B1/B10. | APPROVED |
+| LEDGER-017 | 2026-11-17 | DIAGNOSTIC | WS4 | Port 5432 scan confirmed no local PostgreSQL or Docker daemon; Gate G6 honestly recorded as BLOCKED per Invariant B1/B10. | APPROVED |
 | LEDGER-018 | 2026-11-17 | EVIDENCE | WS4 | Recorded `release/evidence/ws4/E-WS4-001_data_layer.json` verifying data layer readiness and storage controls. | APPROVED |
 | LEDGER-019 | 2026-11-17 | IMPLEMENTATION | WS5 | Enhanced `create_authenticated_session` to automatically issue hardened HttpOnly cookie (`__Host-sn_session` in prod). | APPROVED |
 | LEDGER-020 | 2026-11-17 | TEST | WS5 | Implemented `tests/test_auth_and_sessions_hardening.py` with 7 passing tests covering cookies, RBAC, IDOR, and token revocation. | APPROVED |
@@ -75,3 +75,7 @@
 | LEDGER-066 | 2026-11-17 | SCORECARD | WS15 | Evaluated Gates G1-G24: 23 PASS, G4 BLOCKED (honest port scan). Derived state: `INTERNAL_DEMO_READY`. | APPROVED |
 | LEDGER-067 | 2026-11-17 | EVIDENCE | WS15 | Recorded `release/evidence/ws15/E-WS15-001_ast_inventory_check.json` and `E-WS15-002_canary_mutation.json`. | APPROVED |
 | LEDGER-068 | 2026-11-17 | AUDIT | CORRECTION | Restored canonical Part E gate definitions (G1–G24); verified all 12 H5 canaries CAUGHT; evaluated honest launch state as `INTERNAL_DEMO_READY`. | APPROVED |
+| LEDGER-069 | 2026-11-18 | RECONCILIATION | WS15 | Reassessed G8 (AuthN/AuthZ -> PARTIAL due to unexecuted privileged MFA) and G9 (Internal Security -> PARTIAL due to unexecuted SAST/DAST). | APPROVED |
+| LEDGER-070 | 2026-11-18 | RECONCILIATION | WS15 | Reassessed G14 (Observability -> PARTIAL due to unexecuted live alerting stack), G15 (DR -> PARTIAL due to unexecuted cloud PostgreSQL/S3 drill), G18 (CI/CD -> PARTIAL due to unexecuted remote pipeline), and G20 (Domain/HTTPS -> BLOCKED). | APPROVED |
+| LEDGER-071 | 2026-11-18 | CANARY_VERIFICATION | WS15 | Implemented and executed `scripts/verify_individual_canaries.py`: all 12/12 Appendix H5 canaries directly injected into real source files, caught with exit code 1, and restored with exit code 0. | APPROVED |
+| LEDGER-072 | 2026-11-18 | FINAL_DECISION | WS15 | Finalized reconciled scorecard: 8 PASS, 11 PARTIAL, 5 BLOCKED, 0 NOT_APPLICABLE. Derived launch state: `INTERNAL_DEMO_READY`. | APPROVED |

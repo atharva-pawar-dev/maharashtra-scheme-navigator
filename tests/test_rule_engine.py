@@ -14,6 +14,20 @@ def test_missing_field_is_unknown_not_false():
     assert result.missing_fields == ("annual_family_income",)
 
 
+def test_conjunction_with_unknown_evaluates_unknown_not_false():
+    """Canary 2 verification: Under Kleene logic, TRUE and UNKNOWN in conjunction must evaluate to UNKNOWN (None), never FALSE."""
+    rule = RuleNode.model_validate({
+        "op": "all",
+        "children": [
+            {"op": "eq", "field": "resident_state", "value": "maharashtra"},
+            {"op": "lte", "field": "annual_family_income", "value": 250000},
+        ],
+    })
+    result = evaluate_node(rule, CitizenProfile(resident_state="maharashtra"))
+    assert result.value is None
+    assert result.missing_fields == ("annual_family_income",)
+
+
 def test_all_short_circuits_false_even_when_another_field_missing():
     rule = RuleNode.model_validate({"op": "all", "children": [
         {"op": "eq", "field": "resident_state", "value": "maharashtra"},

@@ -9,12 +9,12 @@
   },
   "current": {
     "total_files": 56,
-    "total_tests": 468,
-    "total_asserts": 2147
+    "total_tests": 472,
+    "total_asserts": 2154
   },
   "delta": {
     "files": 12,
-    "tests": 70,
-    "asserts": 245
+    "tests": 74,
+    "asserts": 252
   }
 }
