@@ -1574,12 +1574,21 @@ def health_check() -> dict:
 
 
 @app.get("/readyz", tags=["monitoring"])
-def readiness_check() -> dict:
-    """Readiness probe checking catalogue, configuration, and security readiness."""
-    schemes_count = len(catalog.all())
+def readiness_check(response: Response) -> dict:
+    """Readiness probe checking catalogue, storage, and persistence readiness."""
+    schemes_count = len(catalog.all()) or len(canonical_catalog.all())
+    from scheme_navigator.security.storage import get_storage_service
+    storage = get_storage_service()
+    storage_ok = storage is not None
+
+    is_ready = schemes_count > 0 and storage_ok
+    if not is_ready:
+        response.status_code = 503
+
     return {
-        "status": "ready" if schemes_count > 0 else "degraded",
+        "status": "ready" if is_ready else "degraded",
         "schemes_loaded": schemes_count,
+        "storage_ready": storage_ok,
         "environment": settings.app_env,
         "demo_fixtures_enabled": settings.demo_fixtures_enabled,
         "data_retention_hours": settings.data_retention_hours,

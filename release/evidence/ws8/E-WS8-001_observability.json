@@ -1,0 +1,22 @@
+{
+  "workstream": "WS8",
+  "evidence_id": "E-WS8-001",
+  "timestamp_utc": "2026-11-17T17:37:08.917194+00:00",
+  "title": "Observability, Health Probes, and Incident Response Verification",
+  "pytest_exit_code": 0,
+  "pytest_summary": {
+    "passed": 3,
+    "failed": 0,
+    "xml": "release\\evidence\\ws8\\pytest_ws8.xml"
+  },
+  "observability_controls": {
+    "liveness_probe_healthz": true,
+    "readiness_probe_readyz": true,
+    "redaction_canaries_pii_and_secrets": true,
+    "cert_in_log_retention_180_days": true,
+    "cert_in_6_hour_incident_runbook": true,
+    "tabletop_simulation_scenario": true
+  },
+  "documentation_path": "docs/production/observability_and_incident_response.md",
+  "verdict": "PASS"
+}

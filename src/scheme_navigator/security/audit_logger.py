@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
+import re
 from threading import Lock
 from typing import Any
 
@@ -35,10 +36,14 @@ class SecurityAuditLogger:
         """Record a structured security audit event."""
         # Sanitize details: strictly filter out any potential secrets or PII
         sanitized_details = {}
+        aadhaar_pattern = re.compile(r"\b\d{4}[ -]?\d{4}[ -]?\d{4}\b")
         for k, v in (details or {}).items():
             k_lower = k.lower()
-            if any(s in k_lower for s in ("password", "secret", "token", "otp", "aadhaar", "key")):
+            v_str = str(v)
+            if any(s in k_lower for s in ("password", "secret", "token", "otp", "aadhaar", "key", "cvv", "auth")):
                 sanitized_details[k] = "[REDACTED]"
+            elif aadhaar_pattern.search(v_str):
+                sanitized_details[k] = "[REDACTED_AADHAAR]"
             else:
                 sanitized_details[k] = v
 

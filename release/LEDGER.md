@@ -41,3 +41,8 @@
 | LEDGER-032 | 2026-11-17 | TEST | WS7 | Created `tests/test_privacy_and_legal.py` with 4 passing tests covering retention, consent, and legal artifacts. | APPROVED |
 | LEDGER-033 | 2026-11-17 | DOCUMENTATION | WS7 | Authored `docs/production/privacy_and_legal.md` covering DPDP Act 2023, CERT-In, and Maharashtra RTS Act 2015. | APPROVED |
 | LEDGER-034 | 2026-11-17 | EVIDENCE | WS7 | Recorded `release/evidence/ws7/E-WS7-001_privacy_legal.json` verifying privacy and legal readiness. | APPROVED |
+| LEDGER-035 | 2026-11-17 | IMPLEMENTATION | WS8 | Enhanced `/readyz` probe to check scheme catalog and storage service readiness. | APPROVED |
+| LEDGER-036 | 2026-11-17 | IMPLEMENTATION | WS8 | Enhanced `audit_logger.py` with value-level regex redaction for 12-digit Indian Aadhaar patterns. | APPROVED |
+| LEDGER-037 | 2026-11-17 | DOCUMENTATION | WS8 | Authored `docs/production/observability_and_incident_response.md` with CERT-In 6-hour reporting runbook and tabletop simulation. | APPROVED |
+| LEDGER-038 | 2026-11-17 | TEST | WS8 | Created `tests/test_observability_and_incident_response.py` with 3 passing tests covering health probes and redaction canaries. | APPROVED |
+| LEDGER-039 | 2026-11-17 | EVIDENCE | WS8 | Recorded `release/evidence/ws8/E-WS8-001_observability.json` verifying health probes and redaction canaries. | APPROVED |

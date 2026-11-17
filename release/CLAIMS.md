@@ -34,3 +34,6 @@
 | C-027 | DPDP Act 2023 & CERT-In primary-source readiness ledger documented | E-WS7-001 | CONFIRMED | Authored in `docs/production/privacy_and_legal.md`. |
 | C-028 | Automated data retention purges expired sessions, temp uploads, and profiles | E-WS7-001 | CONFIRMED | Verified in `test_automated_retention_purge_execution`. |
 | C-029 | Multilingual user-facing privacy and terms notices available with translation provenance | E-WS7-001 | CONFIRMED | 6 JSON documents verified in `data/legal/`. |
+| C-030 | Decoupled /healthz (liveness) and /readyz (readiness) operational | E-WS8-001 | CONFIRMED | Verified in `test_liveness_probe_healthz` and `test_readiness_probe_readyz`. |
+| C-031 | Audit logger sanitizes secrets and Indian Aadhaar patterns | E-WS8-001 | CONFIRMED | Verified in `test_audit_logger_redaction_canaries`. |
+| C-032 | CERT-In 6-hour mandatory cyber incident response runbook documented | E-WS8-001 | CONFIRMED | Authored in `docs/production/observability_and_incident_response.md`. |

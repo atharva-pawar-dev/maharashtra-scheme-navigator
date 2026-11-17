@@ -1,5 +1,5 @@
 ---
-current_workstream: WS8
+current_workstream: WS9
 completed_workstreams:
   - WS0
   - WS1
@@ -9,12 +9,13 @@ completed_workstreams:
   - WS5
   - WS6
   - WS7
+  - WS8
 open_blockers:
   - gate: G4
     reason: "No local PostgreSQL 16+ daemon running on 127.0.0.1:5432 and Docker engine not installed on host"
     unblock_action: "Provide DATABASE_URL to a live PostgreSQL 16+ instance and run scripts/migrate_sqlite_to_postgres.py"
-last_commit: 0a37f03
-utc_timestamp: 2026-11-17T17:33:00Z
+last_commit: afe4451
+utc_timestamp: 2026-11-17T17:38:00Z
 ---
 
 # Release State & Execution Handoff Note
@@ -98,4 +99,14 @@ utc_timestamp: 2026-11-17T17:33:00Z
   - Production privacy manual authored in `docs/production/privacy_and_legal.md`.
   - Evidence recorded in `release/evidence/ws7/E-WS7-001_privacy_legal.json`.
 
-- **Next Workstream:** WS8 — Observability, Health Probes, and Incident Response.
+- **WS8 Observability, Health Probes, and Incident Response Complete:**
+  - Decoupled liveness probe (`/healthz`) and readiness probe (`/readyz`) implemented and verified.
+  - `/readyz` checks both canonical scheme catalogue and storage subsystem readiness.
+  - Redaction canaries verified in `src/scheme_navigator/security/audit_logger.py`: sensitive secrets and 12-digit Aadhaar patterns are scrubbed from logs.
+  - CERT-In 6-hour mandatory cyber incident response runbook and reporting template authored.
+  - Tabletop simulation scenario documented ("Malicious Candidate Injection / Scheme Defacement") showing zero exposure due to Invariant B3 fail-closed gating.
+  - 3 automated tests passing in `tests/test_observability_and_incident_response.py`.
+  - Production observability manual authored in `docs/production/observability_and_incident_response.md`.
+  - Evidence recorded in `release/evidence/ws8/E-WS8-001_observability.json`.
+
+- **Next Workstream:** WS9 — Containers, Infrastructure-as-Code, and Deployment Verification.
