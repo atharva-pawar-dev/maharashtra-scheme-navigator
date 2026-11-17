@@ -11,7 +11,7 @@
 | C-004 | Full Playwright browser baseline suite passes with zero failures | E-WS0-004 | CONFIRMED | `release/evidence/baseline/pytest_browser_baseline.xml` records 30 passed in 83.81s. |
 | C-005 | Reported 75 canonical schemes catalogued in source registry | E-WS1-001 | CONFIRMED | 75 schemes verified across canonical dataset with exact lifecycle states. |
 | C-006 | Reported 319 document requirements catalogued | E-WS1-001 | CONFIRMED | 319 requirements (273 mandatory, 31 conditional, 15 optional) verified across 75 schemes with 0 orphaned entries. |
-| C-007 | Native PostgreSQL support across entire test suite | PENDING_WS4 | UNVERIFIED | To be evaluated and verified in WS4. |
+| C-007 | Native PostgreSQL support across entire test suite | E-WS4-001 | REFUTED | No local PostgreSQL daemon running on port 5432. Suite executed and verified against SQLite. |
 | C-008 | Real production deployment live on public domain | NONE | REFUTED | No public cloud domain authorized or deployed (A0 local only). |
 | C-009 | All 5 core citizen journeys functional and dead-end free | E-WS2-001 | CONFIRMED | Journeys A, B, C, D, E verified via automated tests in `tests/test_journeys_and_product_integrity.py`. |
 | C-010 | Deterministic evaluation functions identically with `LLM_MODE=off` (Protocol B4) | E-WS2-001 | CONFIRMED | Verified in `test_llm_off_deterministic_invariance`. |
@@ -22,8 +22,8 @@
 | C-015 | SSRF protection rejects private IPs, loopback, metadata, userinfo, and non-HTTPS | E-WS3-001 | CONFIRMED | Verified across 4 SSRF security tests. |
 | C-016 | Citizen issue reporting active with ticket tracking and structured audit logging | E-WS3-001 | CONFIRMED | Verified via `POST /trust/report-issue` in `test_citizen_report_issue_success`. |
 | C-017 | Complete PostgreSQL 16+ DDL with JSONB and TIMESTAMPTZ verified in dry-run | E-WS4-001 | CONFIRMED | Verified in `test_postgres_ddl_completeness`. |
-| C-018 | Live PostgreSQL cluster running and accessible locally | E-WS4-001 | REFUTED | Port 5432 unreachable; Docker not present. Gate G4 honestly recorded as BLOCKED. |
-| C-019 | Private object storage enforces magic-byte headers and 15-minute signed URL ceiling | E-WS4-001 | CONFIRMED | Verified across 6 storage tests in `tests/test_data_layer_and_storage.py`. |
+| C-018 | Live PostgreSQL cluster running and accessible locally | E-WS4-001 | REFUTED | Port 5432 unreachable; Docker not present. Gate G6 honestly recorded as BLOCKED. |
+| C-019 | Private object storage enforces magic-byte headers and 15-minute signed URL ceiling | E-WS4-001 | CONFIRMED | Verified across 6 storage tests in `tests/test_data_layer_and_storage.py` using LocalStorageService. |
 | C-020 | Session tokens cryptographically signed and free of citizen PII | E-WS5-001 | CONFIRMED | Verified in `test_session_token_entropy_and_cookie_attributes`. |
 | C-021 | RBAC enforces role boundaries; public role escalation strictly rejected | E-WS5-001 | CONFIRMED | Verified in `test_public_session_endpoint_rejects_privileged_role` and `test_analyst_cannot_sign_catalogue_release`. |
 | C-022 | Insecure Direct Object Reference (IDOR) on interview threads blocked | E-WS5-001 | CONFIRMED | Verified in `test_citizen_cannot_answer_another_citizens_interview_thread`. |
@@ -51,5 +51,5 @@
 | C-044 | Citizen issue reporting active with ticket generation and trilingual acknowledgement | E-WS13-001 | CONFIRMED | Verified in `test_trust_issue_reporting_integration`. |
 | C-045 | Operations runbooks cover deployments, CERT-In incidents, secret rotations, and RACI matrix | E-WS14-001 | CONFIRMED | Authored and committed in `docs/production/operations_runbook.md`. |
 | C-046 | AST test inventory strictly non-weakening (2,147 assertions vs 1,902 baseline; +245 assertions) | E-WS15-001 | CONFIRMED | Verified in `release/evidence/ws15/E-WS15-001_ast_inventory_check.json`. |
-| C-047 | Protocol H5 canary mutation check confirms test harness detects failures | E-WS15-002 | CONFIRMED | Verified in `release/evidence/ws15/E-WS15-002_canary_mutation.json`. |
-| C-048 | Mechanically computed release state is INTERNAL_DEMO_READY with Gate G4 honestly BLOCKED | E-WS4-001 | CONFIRMED | Documented and verified in `docs/production/release_gates_and_decision.md`. |
+| C-047 | All 12/12 Protocol H5 canary mutations evaluated and caught by test harness | E-WS15-002 | CONFIRMED | Verified in `scripts/canary_mutation_harness.py` and `release/evidence/ws15/E-WS15-002_canary_mutations_full.json`. |
+| C-048 | Mechanically computed release state is INTERNAL_DEMO_READY under canonical Part E rules | E-WS15-003 | CONFIRMED | Documented in `docs/production/release_gates_and_decision.md` (G1, G2, G3, G5, G23 PASS; G6, G10, G12, G19 BLOCKED). |

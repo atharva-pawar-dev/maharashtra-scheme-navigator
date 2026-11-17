@@ -74,3 +74,4 @@
 | LEDGER-065 | 2026-11-17 | CANARY | WS15 | Executed Protocol H5 Canary mutation check: sensitivity verified; revert passes clean. | PASS |
 | LEDGER-066 | 2026-11-17 | SCORECARD | WS15 | Evaluated Gates G1-G24: 23 PASS, G4 BLOCKED (honest port scan). Derived state: `INTERNAL_DEMO_READY`. | APPROVED |
 | LEDGER-067 | 2026-11-17 | EVIDENCE | WS15 | Recorded `release/evidence/ws15/E-WS15-001_ast_inventory_check.json` and `E-WS15-002_canary_mutation.json`. | APPROVED |
+| LEDGER-068 | 2026-11-17 | AUDIT | CORRECTION | Restored canonical Part E gate definitions (G1–G24); verified all 12 H5 canaries CAUGHT; evaluated honest launch state as `INTERNAL_DEMO_READY`. | APPROVED |

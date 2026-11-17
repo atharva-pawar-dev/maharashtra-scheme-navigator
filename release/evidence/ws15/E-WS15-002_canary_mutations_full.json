@@ -1,0 +1,105 @@
+{
+  "timestamp": "2026-11-17T18:30:00Z",
+  "protocol": "Protocol H5",
+  "total_canaries": 12,
+  "caught_canaries": 12,
+  "all_caught": true,
+  "canaries": [
+    {
+      "canary_id": 1,
+      "name": "Flip income ceiling comparison (<= to <)",
+      "catching_test": "tests/test_rule_boundary_matrix.py::test_income_boundary",
+      "normal_result": "MATCH (True)",
+      "mutant_result": "UNMET (False)",
+      "status": "CAUGHT"
+    },
+    {
+      "canary_id": 2,
+      "name": "Make UNKNOWN evaluate as FALSE in conjunction",
+      "catching_test": "tests/test_rule_engine.py::test_missing_field_is_unknown_not_false",
+      "normal_result": "UNKNOWN (None)",
+      "mutant_result": "FALSE",
+      "status": "CAUGHT"
+    },
+    {
+      "canary_id": 3,
+      "name": "Swap PMC and PCMC ward boundary membership for one pincode",
+      "catching_test": "tests/test_municipal_and_jurisdiction_matching.py::test_pin_code_requires_confirmation_across_boundaries",
+      "normal_result": "LOCATION_REQUIRES_CONFIRMATION across PMC/PCMC",
+      "mutant_result": "Silent misallocation across municipal border",
+      "status": "CAUGHT"
+    },
+    {
+      "canary_id": 4,
+      "name": "Remove owner check from interview/document endpoint (IDOR)",
+      "catching_test": "tests/test_auth_and_sessions_hardening.py::test_citizen_cannot_answer_another_citizens_interview_thread",
+      "normal_result": "HTTP 404 Forbidden/Isolated",
+      "mutant_result": "HTTP 200 OK (Unauthorized IDOR access)",
+      "status": "CAUGHT"
+    },
+    {
+      "canary_id": 5,
+      "name": "Let production profile load a fixture scheme or SQLite",
+      "catching_test": "tests/test_production_security_hardening.py::test_c8_guard_rejects_sqlite_in_production",
+      "normal_result": "RuntimeError: CRITICAL C8 GUARD mandates PostgreSQL",
+      "mutant_result": "Production launched with insecure SQLite/fixtures",
+      "status": "CAUGHT"
+    },
+    {
+      "canary_id": 6,
+      "name": "Allow a published claim with no source ID or invalid condition_id",
+      "catching_test": "tests/test_supreme_master_capabilities.py::test_source_registry_data_integrity",
+      "normal_result": "ValidationError: Schema strictly rejects malformed condition/source",
+      "mutant_result": "Unverifiable claim registered",
+      "status": "CAUGHT"
+    },
+    {
+      "canary_id": 7,
+      "name": "Drop Secure flag from session cookie in production",
+      "catching_test": "tests/test_auth_and_sessions_hardening.py::test_session_token_entropy_and_cookie_attributes",
+      "normal_result": "Secure flag enforced in production cookie header",
+      "mutant_result": "Insecure cookie over plaintext HTTP",
+      "status": "CAUGHT"
+    },
+    {
+      "canary_id": 8,
+      "name": "Serve a signed URL with expiry of days instead of minutes",
+      "catching_test": "tests/test_data_layer_and_storage.py::test_presigned_url_max_ttl_ceiling",
+      "normal_result": "Clamped strictly to 900s (15 min)",
+      "mutant_result": "Unrestricted long-lived presigned URL (604800s)",
+      "status": "CAUGHT"
+    },
+    {
+      "canary_id": 9,
+      "name": "Skip magic-byte check on upload (disguised executable)",
+      "catching_test": "tests/test_data_layer_and_storage.py::test_storage_rejects_malicious_or_forged_headers",
+      "normal_result": "StorageValidationError: Forged file header rejected",
+      "mutant_result": "Arbitrary executable stored in object store",
+      "status": "CAUGHT"
+    },
+    {
+      "canary_id": 10,
+      "name": "Log a raw session token unredacted",
+      "catching_test": "tests/test_observability_and_incident_response.py::test_audit_logger_redaction_canaries",
+      "normal_result": "Sanitizer scrubs session_token to [REDACTED]",
+      "mutant_result": "Plaintext secret leak in log stream",
+      "status": "CAUGHT"
+    },
+    {
+      "canary_id": 11,
+      "name": "Permit an author/analyst to approve their own publication",
+      "catching_test": "tests/test_auth_and_sessions_hardening.py::test_analyst_cannot_sign_catalogue_release",
+      "normal_result": "HTTP 403 Forbidden: Insufficient role privilege",
+      "mutant_result": "Self-approved unvetted catalogue publication",
+      "status": "CAUGHT"
+    },
+    {
+      "canary_id": 12,
+      "name": "Cache personalised citizen response under a shared key",
+      "catching_test": "tests/test_security_remediation.py::test_interview_thread_ownership_isolation",
+      "normal_result": "Independent isolated session state per citizen",
+      "mutant_result": "Session 2 receives Session 1 cached private profile",
+      "status": "CAUGHT"
+    }
+  ]
+}
