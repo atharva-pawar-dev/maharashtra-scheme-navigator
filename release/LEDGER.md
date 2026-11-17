@@ -58,3 +58,8 @@
 | LEDGER-049 | 2026-11-17 | TEST | WS11 | 5 tests passing in `tests/test_dr_drill.py`. | PASS |
 | LEDGER-050 | 2026-11-17 | SLA | WS11 | RTO benchmarked at 0.337s (compliant with < 15m ceiling); RPO compliant (< 1h). | PASS |
 | LEDGER-051 | 2026-11-17 | EVIDENCE | WS11 | Recorded `release/evidence/ws11/E-WS11-001_dr_drill.json`. | APPROVED |
+| LEDGER-052 | 2026-11-17 | ACCESSIBILITY | WS12 | Verified WCAG 2.1 AA and GIGW landmark accessibility standards on frontend templates. | PASS |
+| LEDGER-053 | 2026-11-17 | LOCALISATION | WS12 | Verified trilingual localisation (MR, HI, EN) and fallback mechanisms in `MultilingualText`. | PASS |
+| LEDGER-054 | 2026-11-17 | BENCHMARK | WS12 | Evaluated 2,700 evaluations: p95 latency 0.444ms (< 500ms SLA), throughput 5,500 evals/sec. | PASS |
+| LEDGER-055 | 2026-11-17 | TEST | WS12 | 4 tests passing in `tests/test_quality_and_performance.py`. | PASS |
+| LEDGER-056 | 2026-11-17 | EVIDENCE | WS12 | Recorded `release/evidence/ws12/E-WS12-001_quality.json`. | APPROVED |

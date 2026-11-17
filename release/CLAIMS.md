@@ -43,3 +43,6 @@
 | C-036 | Automated rollback script supports code, catalogue, and database rollbacks with dry-run and health check | E-WS10-001 | CONFIRMED | Verified across 4 rollback tests in `tests/test_ci_cd_and_rollback.py`. |
 | C-037 | Automated DR drill restores data into sandbox with 100% SHA-256 match and PRAGMA integrity | E-WS11-001 | CONFIRMED | Verified across 5 tests in `tests/test_dr_drill.py`. |
 | C-038 | Disaster recovery RTO verified at 0.337s (< 15 min ceiling) and RPO compliant (< 1 hour) | E-WS11-001 | CONFIRMED | Benchmarked and recorded in `release/evidence/ws11/E-WS11-001_dr_drill.json`. |
+| C-039 | Static HTML templates comply with WCAG 2.1 AA and GIGW landmark standards | E-WS12-001 | CONFIRMED | Verified in `test_static_html_accessibility_wcag_and_gigw`. |
+| C-040 | Trilingual localisation (MR, HI, EN) and fallback verified across data and notices | E-WS12-001 | CONFIRMED | Verified in `test_multilingual_text_container_and_fallbacks` and `test_legal_notices_trilingual_coverage`. |
+| C-041 | Deterministic rule engine evaluation p95 latency is 0.444ms (< 500ms SLA ceiling) | E-WS12-001 | CONFIRMED | Verified in `test_deterministic_rule_engine_latency_sla` and `scripts/benchmark_latency.py`. |

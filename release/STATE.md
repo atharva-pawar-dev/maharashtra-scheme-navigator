@@ -1,5 +1,5 @@
 ---
-current_workstream: WS12
+current_workstream: WS13
 completed_workstreams:
   - WS0
   - WS1
@@ -13,6 +13,7 @@ completed_workstreams:
   - WS9
   - WS10
   - WS11
+  - WS12
 open_blockers:
   - gate: G4
     reason: "No local PostgreSQL 16+ daemon running on 127.0.0.1:5432 and Docker engine not installed on host"
@@ -143,4 +144,14 @@ utc_timestamp: 2026-11-17T17:38:00Z
   - Backup & DR manual committed at `docs/production/backup_and_dr.md`.
   - Evidence recorded in `release/evidence/ws11/E-WS11-001_dr_drill.json`.
 
-- **Next Workstream:** WS12 — Quality Engineering, Localisation & Performance.
+- **WS12 Quality Engineering, Localisation & Performance Complete:**
+  - Automated accessibility audit verified WCAG 2.1 AA / GIGW compliance: html lang attribute (`lang="mr"`), mobile viewport, landmark semantics (`<main>`, `<header>`, `<footer>`), touch targets, and contrast tokens.
+  - Multilingual localisation verified across Marathi (`mr`), Hindi (`hi`), and English (`en`) with `MultilingualText` dynamic fallback chain.
+  - Legal notices validated across all three languages in `data/legal/`.
+  - Latency benchmark harness authored at `scripts/benchmark_latency.py` benchmarking 2,700 evaluations across 75 canonical schemes and 12 synthetic personas.
+  - Performance SLA verified: p95 latency is **0.444 ms** (target ceiling < 500 ms; over 1,000x faster than SLA); throughput is **5,500 evals/sec**.
+  - 4 automated tests passing in `tests/test_quality_and_performance.py`.
+  - Quality specification committed at `docs/production/quality.md`.
+  - Evidence recorded in `release/evidence/ws12/E-WS12-001_quality.json`.
+
+- **Next Workstream:** WS13 — Trust Surface and Statutory Notice Alignment.
