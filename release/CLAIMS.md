@@ -31,3 +31,6 @@
 | C-024 | OWASP security headers enforced across all HTTP responses | E-WS6-001 | CONFIRMED | Verified in `test_security_headers_present_on_responses`. |
 | C-025 | Static code security scan passes with zero high/critical vulnerabilities | E-WS6-002 | CONFIRMED | 51 files scanned, 0 secrets, 0 dangerous calls. |
 | C-026 | Full VAPT readiness pack prepared for independent certified assessors | E-WS6-001 | CONFIRMED | Committed at `docs/production/vapt_pack/`. |
+| C-027 | DPDP Act 2023 & CERT-In primary-source readiness ledger documented | E-WS7-001 | CONFIRMED | Authored in `docs/production/privacy_and_legal.md`. |
+| C-028 | Automated data retention purges expired sessions, temp uploads, and profiles | E-WS7-001 | CONFIRMED | Verified in `test_automated_retention_purge_execution`. |
+| C-029 | Multilingual user-facing privacy and terms notices available with translation provenance | E-WS7-001 | CONFIRMED | 6 JSON documents verified in `data/legal/`. |

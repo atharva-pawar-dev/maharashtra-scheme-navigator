@@ -36,3 +36,8 @@
 | LEDGER-027 | 2026-11-17 | DOCUMENTATION | WS6 | Prepared External VAPT Readiness Pack in `docs/production/vapt_pack/` (Scope, Topology, Credentials, Threat Model, RoE). | APPROVED |
 | LEDGER-028 | 2026-11-17 | TEST | WS6 | Created `tests/test_production_security_hardening.py` with 7 passing tests covering C8 guard, security headers, and rate limiting. | APPROVED |
 | LEDGER-029 | 2026-11-17 | EVIDENCE | WS6 | Recorded `release/evidence/ws6/E-WS6-001_security.json` verifying all security engineering controls pass. | APPROVED |
+| LEDGER-030 | 2026-11-17 | IMPLEMENTATION | WS7 | Added multilingual user-facing privacy notices and terms of service in `data/legal/` (EN, MR, HI). | APPROVED |
+| LEDGER-031 | 2026-11-17 | IMPLEMENTATION | WS7 | Enhanced `purge_expired_data` return structure with `purged_citizen_records` count. | APPROVED |
+| LEDGER-032 | 2026-11-17 | TEST | WS7 | Created `tests/test_privacy_and_legal.py` with 4 passing tests covering retention, consent, and legal artifacts. | APPROVED |
+| LEDGER-033 | 2026-11-17 | DOCUMENTATION | WS7 | Authored `docs/production/privacy_and_legal.md` covering DPDP Act 2023, CERT-In, and Maharashtra RTS Act 2015. | APPROVED |
+| LEDGER-034 | 2026-11-17 | EVIDENCE | WS7 | Recorded `release/evidence/ws7/E-WS7-001_privacy_legal.json` verifying privacy and legal readiness. | APPROVED |

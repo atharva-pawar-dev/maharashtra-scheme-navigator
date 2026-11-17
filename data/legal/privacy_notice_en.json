@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "effective_date": "2026-11-17",
+  "language": "en",
+  "title": "Privacy Notice — Maharashtra Scheme Navigator",
+  "data_fiduciary": {
+    "entity_name": "Department of Information Technology, Government of Maharashtra",
+    "portal": "https://maharashtra.gov.in",
+    "contact_email": "privacy.msn@maharashtra.gov.in"
+  },
+  "legal_framework": [
+    "Digital Personal Data Protection Act (DPDP Act), 2023",
+    "Information Technology Act, 2000 (Section 43A)",
+    "CERT-In Cyber Security Directions, 2022"
+  ],
+  "purpose_of_processing": [
+    "Preliminary assessment of eligibility for public welfare schemes and grants",
+    "Pre-audit and verification of applicant eligibility documents",
+    "Guidance on official government application channels"
+  ],
+  "data_minimization_and_categories": {
+    "profile_attributes": ["age_range", "gender", "income_range", "caste_category", "residence_location"],
+    "document_types": ["Aadhaar (last 4 digits/masked only)", "Income Certificate", "Ration Card", "Disability Certificate"],
+    "prohibited_collection": ["Biometric templates", "Full bank passwords", "Unmasked Aadhaar numbers"]
+  },
+  "retention_policy": {
+    "standard_retention_hours": 24,
+    "automatic_deletion": "Hourly automated purge job deletes temporary profiles, uploaded files, and session states.",
+    "audit_logs": "Security audit logs retained for 180 days per CERT-In regulatory mandate."
+  },
+  "citizen_rights": [
+    "Right to access summary of processed personal data",
+    "Right to correction and erasure of incomplete or inaccurate data",
+    "Right of grievance redressal via POST /trust/report-issue",
+    "Right to nominate in case of death or incapacity"
+  ],
+  "needs_human_translation_review": false
+}

@@ -117,5 +117,6 @@ def purge_expired_data(
         "purged_files": purged_files,
         "purged_interviews": purged_interviews,
         "purged_reviews": purged_reviews,
+        "purged_citizen_records": purged_citizen_records,
         "purged_at": datetime.now(timezone.utc).isoformat(),
     }

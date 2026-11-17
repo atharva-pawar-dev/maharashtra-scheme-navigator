@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "effective_date": "2026-11-17",
+  "language": "mr",
+  "title": "गोपनीयता सूचना — महाराष्ट्र स्कीम नेव्हिगेटर",
+  "data_fiduciary": {
+    "entity_name": "माहिती तंत्रज्ञान विभाग, महाराष्ट्र शासन",
+    "portal": "https://maharashtra.gov.in",
+    "contact_email": "privacy.msn@maharashtra.gov.in"
+  },
+  "legal_framework": [
+    "डिजिटल वैयक्तिक डेटा संरक्षण कायदा (DPDP Act), २०२३",
+    "माहिती तंत्रज्ञान कायदा, २००० (कलम ४३-अ)",
+    "सर्ट-इन (CERT-In) सायबर सुरक्षा निर्देश, २०२२"
+  ],
+  "purpose_of_processing": [
+    "शासकीय कल्याणकारी योजनांच्या पात्रतेची प्राथमिक पडताळणी",
+    "कागदपत्रांची पूर्व-तपासणी आणि मार्गदर्शन",
+    "अधिकृत शासकीय पोर्टलवर अर्ज करण्यासाठी मदत"
+  ],
+  "retention_policy": {
+    "standard_retention_hours": 24,
+    "automatic_deletion": "ताशी चालणाऱ्या स्वयंचलित प्रक्रियेद्वारे २४ तासांनंतर तात्पुरता डेटा नष्ट केला जातो."
+  },
+  "needs_human_translation_review": true
+}

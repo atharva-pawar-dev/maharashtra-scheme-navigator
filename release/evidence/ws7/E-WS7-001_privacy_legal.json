@@ -1,0 +1,32 @@
+{
+  "workstream": "WS7",
+  "evidence_id": "E-WS7-001",
+  "timestamp_utc": "2026-11-17T17:31:50.886085+00:00",
+  "title": "Privacy Engineering and Indian Legal Readiness Verification",
+  "pytest_exit_code": 0,
+  "pytest_summary": {
+    "passed": 4,
+    "failed": 0,
+    "xml": "release\\evidence\\ws7\\pytest_ws7.xml"
+  },
+  "privacy_and_legal_controls": {
+    "automated_retention_purge": true,
+    "retention_period_hours": 24,
+    "cloud_consent_architecture_enforced": true,
+    "multilingual_privacy_notices_en_mr_hi": true,
+    "multilingual_terms_of_service_en_mr_hi": true,
+    "translation_review_flags_present": true,
+    "minor_guardian_flow_protected": true,
+    "cert_in_log_retention_180_days": true
+  },
+  "legal_artifacts": [
+    "data/legal/privacy_notice_en.json",
+    "data/legal/privacy_notice_mr.json",
+    "data/legal/privacy_notice_hi.json",
+    "data/legal/terms_of_service_en.json",
+    "data/legal/terms_of_service_mr.json",
+    "data/legal/terms_of_service_hi.json"
+  ],
+  "documentation_path": "docs/production/privacy_and_legal.md",
+  "verdict": "PASS"
+}

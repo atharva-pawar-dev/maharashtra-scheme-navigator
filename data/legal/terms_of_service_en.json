@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "effective_date": "2026-11-17",
+  "language": "en",
+  "title": "Terms of Service & Statutory Disclaimers — Maharashtra Scheme Navigator",
+  "statutory_role": {
+    "disclaimer": "Maharashtra Scheme Navigator is an informational and decision-support tool. It is NOT an official government benefits approval authority and does NOT guarantee scheme sanction.",
+    "final_authority": "Sanction or rejection of applications rests exclusively with the competent statutory authority as notified under the Maharashtra Right to Services (RTS) Act, 2015."
+  },
+  "acceptable_use": [
+    "Users must provide accurate information to receive reliable scheme eligibility guidance.",
+    "Automated scraping, denial-of-service, or submitting malicious code/malware is strictly prohibited under the IT Act, 2000."
+  ],
+  "disclaimer_of_warranties": "While eligibility rules are calibrated against official Government Resolutions (GRs), administrative guidelines may change without notice. Users are advised to verify latest notifications on Aaple Sarkar or Mantralaya portals.",
+  "governing_law": "Laws of India and the jurisdiction of the High Court of Judicature at Bombay.",
+  "needs_human_translation_review": false
+}

@@ -1,5 +1,5 @@
 ---
-current_workstream: WS7
+current_workstream: WS8
 completed_workstreams:
   - WS0
   - WS1
@@ -8,12 +8,13 @@ completed_workstreams:
   - WS4
   - WS5
   - WS6
+  - WS7
 open_blockers:
   - gate: G4
     reason: "No local PostgreSQL 16+ daemon running on 127.0.0.1:5432 and Docker engine not installed on host"
     unblock_action: "Provide DATABASE_URL to a live PostgreSQL 16+ instance and run scripts/migrate_sqlite_to_postgres.py"
-last_commit: ddccb13
-utc_timestamp: 2026-11-17T17:27:00Z
+last_commit: 0a37f03
+utc_timestamp: 2026-11-17T17:33:00Z
 ---
 
 # Release State & Execution Handoff Note
@@ -88,4 +89,13 @@ utc_timestamp: 2026-11-17T17:27:00Z
   - 7 automated tests passing in `tests/test_production_security_hardening.py`.
   - Evidence recorded in `release/evidence/ws6/E-WS6-001_security.json`.
 
-- **Next Workstream:** WS7 — Privacy Engineering and Indian Legal Readiness (DPDP Rules 2025, CERT-In directions, consent notices, data retention).
+- **WS7 Privacy Engineering and Indian Legal Readiness Complete:**
+  - Indian legal readiness ledger documented covering DPDP Act 2023, Draft DPDP Rules 2025, CERT-In Directions 2022, and Maharashtra RTS Act 2015.
+  - Data inventory and minimization verified: 24-hour retention ceiling with automated hourly purge worker (`purge_expired_data`).
+  - Cloud AI consent architecture verified: Bhashini rejects unconsented requests with HTTP 400.
+  - Multilingual user-facing legal notices created in `data/legal/` (EN authoritative; MR & HI with `needs_human_translation_review: true`).
+  - 4 automated tests passing in `tests/test_privacy_and_legal.py`.
+  - Production privacy manual authored in `docs/production/privacy_and_legal.md`.
+  - Evidence recorded in `release/evidence/ws7/E-WS7-001_privacy_legal.json`.
+
+- **Next Workstream:** WS8 — Observability, Health Probes, and Incident Response.
