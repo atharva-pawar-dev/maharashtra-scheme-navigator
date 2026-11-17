@@ -1,5 +1,5 @@
 ---
-current_workstream: WS11
+current_workstream: WS12
 completed_workstreams:
   - WS0
   - WS1
@@ -12,6 +12,7 @@ completed_workstreams:
   - WS8
   - WS9
   - WS10
+  - WS11
 open_blockers:
   - gate: G4
     reason: "No local PostgreSQL 16+ daemon running on 127.0.0.1:5432 and Docker engine not installed on host"
@@ -131,4 +132,15 @@ utc_timestamp: 2026-11-17T17:38:00Z
   - Strategy document committed at `docs/production/ci_cd_and_rollback.md`.
   - Evidence recorded in `release/evidence/ws10/E-WS10-001_ci_cd.json`.
 
-- **Next Workstream:** WS11 — Backup and Disaster Recovery Drill.
+- **WS11 Backup and Disaster Recovery Drill Complete:**
+  - Automated disaster recovery drill harness authored at `scripts/dr_drill.py`.
+  - Point-in-time backup generation with SHA-256 cryptographic manifest verified across all databases and source registry.
+  - Sandbox restoration drill verified: 100% checksum matches, zero corrupt databases, all 4 databases pass SQLite `PRAGMA integrity_check`.
+  - Recovery Time Objective (RTO) measured at **0.337 seconds** (production target < 15 minutes / 900s).
+  - Recovery Point Objective (RPO) compliant with hourly incremental and 24h point-in-time recovery target.
+  - Fail-closed tampering detection verified when backup files are corrupted.
+  - 5 automated tests passing in `tests/test_dr_drill.py`.
+  - Backup & DR manual committed at `docs/production/backup_and_dr.md`.
+  - Evidence recorded in `release/evidence/ws11/E-WS11-001_dr_drill.json`.
+
+- **Next Workstream:** WS12 — Quality Engineering, Localisation & Performance.

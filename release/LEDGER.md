@@ -54,3 +54,7 @@
 | LEDGER-045 | 2026-11-17 | SCRIPT | WS10 | Implemented `scripts/rollback.py` with code, catalogue, and database rollback support. | APPROVED |
 | LEDGER-046 | 2026-11-17 | TEST | WS10 | 5 tests passing in `tests/test_ci_cd_and_rollback.py`. | PASS |
 | LEDGER-047 | 2026-11-17 | EVIDENCE | WS10 | Recorded `release/evidence/ws10/E-WS10-001_ci_cd.json`. | APPROVED |
+| LEDGER-048 | 2026-11-17 | SCRIPT | WS11 | Authored automated DR drill harness at `scripts/dr_drill.py`. | APPROVED |
+| LEDGER-049 | 2026-11-17 | TEST | WS11 | 5 tests passing in `tests/test_dr_drill.py`. | PASS |
+| LEDGER-050 | 2026-11-17 | SLA | WS11 | RTO benchmarked at 0.337s (compliant with < 15m ceiling); RPO compliant (< 1h). | PASS |
+| LEDGER-051 | 2026-11-17 | EVIDENCE | WS11 | Recorded `release/evidence/ws11/E-WS11-001_dr_drill.json`. | APPROVED |

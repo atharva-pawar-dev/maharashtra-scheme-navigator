@@ -41,3 +41,5 @@
 | C-034 | Automated deployment verification script confirms /healthz, /readyz, security headers, catalogue, and sessions | E-WS9-001 | CONFIRMED | Verified in `test_in_process_deployment_verification` and `scripts/verify_deployment.py`. |
 | C-035 | CI/CD pipeline enforces Gate G23 test baseline preservation and static security scan | E-WS10-001 | CONFIRMED | Verified in `test_ci_workflow_specification`. |
 | C-036 | Automated rollback script supports code, catalogue, and database rollbacks with dry-run and health check | E-WS10-001 | CONFIRMED | Verified across 4 rollback tests in `tests/test_ci_cd_and_rollback.py`. |
+| C-037 | Automated DR drill restores data into sandbox with 100% SHA-256 match and PRAGMA integrity | E-WS11-001 | CONFIRMED | Verified across 5 tests in `tests/test_dr_drill.py`. |
+| C-038 | Disaster recovery RTO verified at 0.337s (< 15 min ceiling) and RPO compliant (< 1 hour) | E-WS11-001 | CONFIRMED | Benchmarked and recorded in `release/evidence/ws11/E-WS11-001_dr_drill.json`. |
