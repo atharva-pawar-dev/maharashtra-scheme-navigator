@@ -1045,6 +1045,8 @@
         </div>
       </div>
 
+      <div id="results-resume-banner" style="display:none; margin: 16px 0;"></div>
+
       <div id="results-cards-container" class="schemes-grid"></div>
 
       <!-- Collapsed Accordion for Not Eligible Schemes -->
@@ -1111,6 +1113,7 @@
             <span class="scheme-badge badge-active" id="doc-scheme-badge">योजना कागदपत्र पडताळणी</span>
             <h3 id="doc-scheme-name" style="font-size:1.35rem; color:var(--deep-heritage-maroon); margin-top:4px;">-</h3>
             <p id="doc-scheme-dept" style="font-size:0.86rem; color:var(--slate-muted); margin-top:2px;">🏛️ -</p>
+            <div id="doc-scheme-warning" style="margin-top:6px;"></div>
           </div>
           <div style="display:flex; gap:8px; flex-wrap:wrap;">
             <button class="btn btn-secondary btn-sm" onclick="showView('results')">पात्र योजना पहा</button>
@@ -1963,6 +1966,11 @@
     };
     try {
       sessionStorage.setItem('scheme_nav_session', JSON.stringify(snapshot));
+      if (Array.isArray(state.uploadedDocuments) && state.uploadedDocuments.length > 0) {
+        sessionStorage.setItem('scheme_nav_doc_audit_session', JSON.stringify(state.uploadedDocuments));
+      } else {
+        sessionStorage.removeItem('scheme_nav_doc_audit_session');
+      }
     } catch (e) {
       console.warn('Could not save session', e);
     }
@@ -1978,6 +1986,12 @@
         if (saved.language) setLanguage(saved.language);
         if (saved.reviewId) state.reviewId = saved.reviewId;
         if (saved.interviewComplete) state.interviewComplete = saved.interviewComplete;
+        if (saved.financialYear) state.financialYear = saved.financialYear;
+      }
+      const docRaw = sessionStorage.getItem('scheme_nav_doc_audit_session');
+      if (docRaw) {
+        const docs = JSON.parse(docRaw);
+        if (Array.isArray(docs)) state.uploadedDocuments = docs;
       }
     } catch (e) {
       console.warn('Could not restore session', e);
@@ -3705,6 +3719,7 @@
     }
 
     let actionBtns = '';
+    const isCaseworker = st === 'caseworker_review' || st === 'needs_review';
     if (isEligible) {
       actionBtns = `
         <button class="btn btn-primary" onclick="openDocumentAuditor('${escapeHtml(r.scheme_id)}')">📄 ${isMr ? 'कागदपत्रे तपासा' : (isHi ? 'दस्तावेज़ जांचें' : 'Check My Documents')}</button>
@@ -3713,8 +3728,16 @@
       `;
     } else if (st === 'partial' || st === 'unknown' || st === 'needs_information' || st === 'needs_info') {
       actionBtns = `
-        <button class="btn btn-primary" onclick="openDocumentAuditor('${escapeHtml(r.scheme_id)}')">📄 ${isMr ? 'कागदपत्रे तपासा' : (isHi ? 'दस्तावेज़ जांचें' : 'Check My Documents')}</button>
+        <button class="btn btn-primary" onclick="openDocumentAuditor('${escapeHtml(r.scheme_id)}')">📄 ${isMr ? 'कागदपत्रे तयार करा' : (isHi ? 'दस्तावेज़ तैयार करें' : 'Prepare Documents')}</button>
         <button class="btn btn-secondary" onclick="startFocusedAssessment('${escapeHtml(r.scheme_id)}')">${lblAnswerMore}</button>
+        <button class="btn btn-secondary" onclick="openSchemeDetail('${escapeHtml(r.scheme_id)}')">${lblDetails}</button>
+      `;
+    } else if (isCaseworker) {
+      actionBtns = `
+        <div style="width:100%; margin-bottom:8px; font-size:0.82rem; color:var(--paithani-teal); background:var(--paithani-teal-subtle); padding:6px 12px; border-radius:6px; border:1px solid var(--paithani-teal);">
+          ⚖️ <strong>${isMr ? 'वैधानिक सूचना:' : (isHi ? 'वैधानिक सूचना:' : 'Statutory Notice:')}</strong> ${lblRtsNotice} ${isMr ? 'कागदपत्र यादी पूर्वतयारी मार्गदर्शनासाठी उपलब्ध आहे.' : (isHi ? 'दस्तावेज़ सूची तैयारी मार्गदर्शन हेतु उपलब्ध है।' : 'Document checklist is available for preparation guidance.')}
+        </div>
+        <button class="btn btn-primary" onclick="openDocumentAuditor('${escapeHtml(r.scheme_id)}')">📄 ${isMr ? 'कागदपत्रे तपासा / पूर्वतयारी' : (isHi ? 'दस्तावेज़ जांचें / तैयारी' : 'Review Available Documents')}</button>
         <button class="btn btn-secondary" onclick="openSchemeDetail('${escapeHtml(r.scheme_id)}')">${lblDetails}</button>
       `;
     } else {
@@ -3796,6 +3819,31 @@
       mainDesc.textContent = isMr ? 'आपण पुरवलेल्या माहितीनुसार प्राथमिक पात्रता निकाल खालीलप्रमाणे आहेत.' : (isHi ? 'आपकी जानकारी के आधार पर प्रारंभिक परिणाम निम्नलिखित हैं।' : 'Preliminary eligibility evaluation across verified government schemes based on your profile.');
     }
 
+    const resumeBannerEl = document.getElementById('results-resume-banner');
+    if (resumeBannerEl) {
+      if (state.selectedSchemeId && state.uploadedDocuments && state.uploadedDocuments.length > 0) {
+        const activeScheme = (state.schemes || []).find(s => s.scheme_id === state.selectedSchemeId);
+        const activeSchemeName = activeScheme ? activeScheme.name : state.selectedSchemeId;
+        resumeBannerEl.style.display = 'block';
+        resumeBannerEl.innerHTML = `
+          <div class="info-strip" style="background:#ECFDF5; border:1px solid #A7F3D0; padding:12px 16px; border-radius:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+              <div>
+                <strong style="color:#065F46;">📂 ${isMr ? 'चालू पूर्वतयारी सत्र जतन केलेले आहे:' : (isHi ? 'सक्रिय पूर्व तैयारी सत्र सहेजा गया है:' : 'Active Preparation Session Saved:')}</strong>
+                <span style="color:#047857; margin-left:6px;">${escapeHtml(activeSchemeName)} (${state.uploadedDocuments.length} ${isMr ? 'कागदपत्रे तपासलेली' : (isHi ? 'दस्तावेज़ सत्यापित' : 'verified documents')})</span>
+              </div>
+              <button class="btn btn-primary btn-sm btn-resume-doc-audit" onclick="openDocumentAuditor('${escapeHtml(state.selectedSchemeId)}')">
+                ${isMr ? 'कागदपत्र पूर्वतयारी सुरू ठेवा →' : (isHi ? 'दस्तावेज़ तैयारी जारी रखें →' : 'Resume Preparation →')}
+              </button>
+            </div>
+          </div>
+        `;
+      } else {
+        resumeBannerEl.style.display = 'none';
+        resumeBannerEl.innerHTML = '';
+      }
+    }
+
     const lblEligible = isMr ? 'प्राथमिक पात्र' : (isHi ? 'प्रारंभिक पात्र' : 'Eligible');
     const lblPartial = isMr ? 'अंशतः पात्र' : (isHi ? 'आंशिक पात्र' : 'Partial Match');
     const lblMoreInfo = isMr ? 'अधिक माहिती आवश्यक' : (isHi ? 'अधिक जानकारी आवश्यक' : 'Needs Information');
@@ -3806,6 +3854,7 @@
     const lblSeeHow = isMr ? 'पात्र कसे व्हावे ते पहा' : (isHi ? 'पात्र होने के नियम देखें' : 'See how to qualify');
     const lblAnswerMore = isMr ? 'पात्रतेसाठी उत्तर द्या' : (isHi ? 'पात्रता के लिए उत्तर दें' : 'Answer questions to check eligibility');
     const lblRtsNotice = isMr ? 'लोकसेवा हमी कायद्यानुसार (RTS 2015) अधिकृत पडताळणी आवश्यक.' : (isHi ? 'लोकसेवा अधिकार अधिनियम (RTS 2015) के तहत समीक्षा आवश्यक।' : 'Caseworker verification required under Maharashtra RTS Act 2015.');
+    const lblExploreOther = isMr ? 'इतर योजना शोधा' : (isHi ? 'अन्य योजनाएं खोजें' : 'Find Other Schemes');
 
     const createCard = (r, statusBadge, actionBtnHtml) => {
       const card = document.createElement('article');
@@ -3836,6 +3885,15 @@
         geoBadge = `<span class="scheme-badge" style="background:#fff7ed; color:#9a3412; border:1px solid #ffedd5; font-size:0.72rem;">${lbl}</span>`;
       }
 
+      let demoBadge = '';
+      let demoNotice = '';
+      if (r.scheme_id && r.scheme_id.startsWith('demo-')) {
+        const demoLbl = isMr ? '⚠️ डेमो नमुना' : (isHi ? '⚠️ डेमो नमूना' : '⚠️ DEMO FIXTURE');
+        demoBadge = `<span class="scheme-badge" style="background:#FEF2F2; color:#DC2626; border:1px solid #FECACA; font-size:0.72rem; font-weight:700;">${demoLbl}</span>`;
+        const demoWarn = isMr ? 'डेमो नमुना - केवळ चाचणी कागदपत्रे वापरा. वैयक्तिक ओळखपत्रे अपलोड करू नका.' : (isHi ? 'डेमो नमूना - केवल परीक्षण दस्तावेज़ उपयोग करें। व्यक्तिगत पहचान पत्र अपलोड न करें।' : 'Demo fixture - use synthetic test documents only. Do not upload personal identity documents.');
+        demoNotice = `<div style="font-size:0.78rem; color:#991B1B; background:#FEF2F2; border-left:3px solid #DC2626; padding:6px 10px; border-radius:4px; margin:8px 0;">⚠️ ${demoWarn}</div>`;
+      }
+
       let matchedPills = (r.matched_conditions || []).map(c => `<span class="condition-pill cond-matched">✓ ${escapeHtml(c)}</span>`).join('');
       let failedPills = (r.failed_conditions || []).map(c => `<span class="condition-pill cond-failed">✗ ${escapeHtml(c)}</span>`).join('');
       let unknownPills = (r.unknown_conditions || []).map(c => `<span class="condition-pill cond-unknown">? ${escapeHtml(c)}</span>`).join('');
@@ -3845,11 +3903,13 @@
           <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
             ${geoBadge}
             ${statusBadge}
+            ${demoBadge}
           </div>
           <small style="color:var(--slate-muted);">${escapeHtml(r.scheme_id)}</small>
         </div>
         <h4>${escapeHtml(r.scheme_name || r.scheme_id)}</h4>
         <p style="font-size:0.88rem; color:var(--deep-charcoal); margin:8px 0;"><strong>${lblRemarks}</strong> ${escapeHtml(r.reason || (isMr ? 'तपशील उपलब्ध नाही' : (isHi ? 'विवरण उपलब्ध नहीं' : 'No details available')))}</p>
+        ${demoNotice}
         
         <div style="margin: 8px 0 14px;">
           ${matchedPills}
@@ -3885,7 +3945,7 @@
         const badge = `<span class="scheme-badge badge-active">${lblEligible}</span>`;
         const btn = `
           <div style="display:flex; gap:6px; flex-wrap:wrap;">
-            <button class="btn btn-primary btn-sm" onclick="openDocumentAuditor('${escapeHtml(r.scheme_id)}')">📄 ${isMr ? 'कागदपत्रे तपासा' : (isHi ? 'दस्तावेज़ जांचें' : 'Check My Documents')}</button>
+            <button class="btn btn-primary btn-sm btn-doc-audit" onclick="openDocumentAuditor('${escapeHtml(r.scheme_id)}')">📄 ${isMr ? 'कागदपत्रे तपासा' : (isHi ? 'दस्तावेज़ जांचें' : 'Check My Documents')}</button>
             <button class="btn btn-secondary btn-sm" onclick="openSchemeDetail('${escapeHtml(r.scheme_id)}')">${isMr ? 'योजना तपशील' : (isHi ? 'विवरण' : 'Details')}</button>
             <button class="btn btn-secondary btn-sm" onclick="selectSchemeForApplication('${escapeHtml(r.scheme_id)}')">${lblStartPrep}</button>
           </div>
@@ -3899,8 +3959,12 @@
       partialList.forEach(r => {
         const badge = `<span class="scheme-badge" style="background:#FEF3C7; color:#B45309; border:1px solid #FDE68A;">${lblPartial}</span>`;
         const btn = `
+          <div style="margin-bottom:8px; font-size:0.78rem; color:#92400E; background:#FEF3C7; padding:4px 8px; border-radius:4px;">
+            ⚠️ ${isMr ? 'काही अटी अद्याप पडताळलेल्या नाहीत. कागदपत्रे तयार ठेवा.' : (isHi ? 'कुछ शर्तें अभी असत्यापित हैं। दस्तावेज़ तैयार रखें।' : 'Some criteria require verification. Prepare your documents in advance.')}
+          </div>
           <div style="display:flex; gap:6px; flex-wrap:wrap;">
-            <button class="btn btn-primary btn-sm" onclick="openDocumentAuditor('${escapeHtml(r.scheme_id)}')">📄 ${isMr ? 'कागदपत्रे तपासा' : (isHi ? 'दस्तावेज़ जांचें' : 'Check My Documents')}</button>
+            <button class="btn btn-primary btn-sm btn-doc-audit" onclick="openDocumentAuditor('${escapeHtml(r.scheme_id)}')">📄 ${isMr ? 'कागदपत्रे तयार करा' : (isHi ? 'दस्तावेज़ तैयार करें' : 'Prepare Documents')}</button>
+            <button class="btn btn-secondary btn-sm" onclick="startFocusedAssessment('${escapeHtml(r.scheme_id)}')">${lblAnswerMore}</button>
             <button class="btn btn-secondary btn-sm" onclick="openSchemeDetail('${escapeHtml(r.scheme_id)}')">${lblSeeHow}</button>
           </div>
         `;
@@ -3912,7 +3976,16 @@
     if (filterGroup === 'all' || filterGroup === 'moreinfo') {
       moreinfoList.forEach(r => {
         const badge = `<span class="scheme-badge" style="background:#FFFBEB; color:#D97706; border:1px solid #FCD34D;">${lblMoreInfo}</span>`;
-        const btn = `<button class="btn btn-secondary btn-sm" onclick="startFocusedAssessment('${escapeHtml(r.scheme_id)}')">${lblAnswerMore}</button>`;
+        const btn = `
+          <div style="margin-bottom:8px; font-size:0.78rem; color:#B45309; background:#FFFBEB; padding:4px 8px; border-radius:4px;">
+            ℹ️ ${isMr ? 'अपूर्ण माहितीमुळे पात्रता निश्चित नाही. कागदपत्रे तपासून माहिती भरा.' : (isHi ? 'अपूर्ण जानकारी के कारण पात्रता अनिश्चित है। दस्तावेज़ जांचें या उत्तर दें।' : 'Eligibility unconfirmed due to missing info. Prepare documents or answer questions.')}
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button class="btn btn-primary btn-sm btn-doc-audit" onclick="openDocumentAuditor('${escapeHtml(r.scheme_id)}')">📄 ${isMr ? 'कागदपत्रे तयार करा' : (isHi ? 'दस्तावेज़ तैयार करें' : 'Prepare Documents')}</button>
+            <button class="btn btn-secondary btn-sm" onclick="startFocusedAssessment('${escapeHtml(r.scheme_id)}')">${lblAnswerMore}</button>
+            <button class="btn btn-secondary btn-sm" onclick="openSchemeDetail('${escapeHtml(r.scheme_id)}')">${isMr ? 'योजना तपशील' : (isHi ? 'विवरण' : 'Details')}</button>
+          </div>
+        `;
         container.appendChild(createCard(r, badge, btn));
       });
     }
@@ -3921,7 +3994,15 @@
     if (filterGroup === 'all' || filterGroup === 'review') {
       reviewList.forEach(r => {
         const badge = `<span class="scheme-badge" style="background:var(--paithani-teal-subtle); color:var(--paithani-teal); border:1px solid var(--paithani-teal);">${lblReview}</span>`;
-        const btn = `<div style="font-size:0.8rem; color:var(--slate-muted);">${lblRtsNotice}</div>`;
+        const btn = `
+          <div style="margin-bottom:8px; font-size:0.78rem; color:var(--paithani-teal); background:var(--paithani-teal-subtle); padding:6px 10px; border-radius:4px; border:1px solid var(--paithani-teal);">
+            ⚖️ <strong>${isMr ? 'वैधानिक सूचना:' : (isHi ? 'वैधानिक सूचना:' : 'Statutory Notice:')}</strong> ${lblRtsNotice} ${isMr ? 'कागदपत्र यादी पूर्वतयारी मार्गदर्शनासाठी उपलब्ध आहे.' : (isHi ? 'दस्तावेज़ सूची तैयारी मार्गदर्शन हेतु उपलब्ध है।' : 'Document checklist is available for preparation guidance.')}
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button class="btn btn-primary btn-sm btn-doc-audit" onclick="openDocumentAuditor('${escapeHtml(r.scheme_id)}')">📄 ${isMr ? 'कागदपत्रे तपासा / पूर्वतयारी' : (isHi ? 'दस्तावेज़ जांचें / तैयारी' : 'Review Available Documents')}</button>
+            <button class="btn btn-secondary btn-sm" onclick="openSchemeDetail('${escapeHtml(r.scheme_id)}')">${isMr ? 'योजना तपशील' : (isHi ? 'विवरण' : 'Details')}</button>
+          </div>
+        `;
         container.appendChild(createCard(r, badge, btn));
       });
     }
@@ -3936,7 +4017,12 @@
       }
       rejectedList.forEach(r => {
         const badge = `<span class="scheme-badge badge-draft" style="background:#FEE2E2; color:#991B1B;">${lblIneligible}</span>`;
-        const btn = `<button class="btn btn-secondary btn-sm" onclick="openSchemeDetail('${escapeHtml(r.scheme_id)}')">${isMr ? 'तपशील' : (isHi ? 'विवरण' : 'Details')}</button>`;
+        const btn = `
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button class="btn btn-secondary btn-sm" onclick="openSchemeDetail('${escapeHtml(r.scheme_id)}')">${isMr ? 'तपशील' : (isHi ? 'विवरण' : 'Details')}</button>
+            <button class="btn btn-secondary btn-sm" onclick="startFindSchemesJourney()">${lblExploreOther}</button>
+          </div>
+        `;
         rejectedContainer.appendChild(createCard(r, badge, btn));
       });
     }
@@ -4137,6 +4223,23 @@
     if (nameEl) nameEl.textContent = schemeObj ? schemeObj.name : targetId;
     if (deptEl) deptEl.textContent = schemeObj && schemeObj.department ? `🏛️ ${schemeObj.department}` : '🏛️ Government of Maharashtra';
 
+    const warnEl = document.getElementById('doc-scheme-warning');
+    if (warnEl) {
+      if (targetId.startsWith('demo-')) {
+        warnEl.innerHTML = `
+          <div style="background:#FEF2F2; border-left:3px solid #DC2626; color:#991B1B; padding:8px 12px; border-radius:4px; font-size:0.84rem;">
+            ⚠️ <strong>${isMr ? 'डेमो नमुना चेतावणी:' : (isHi ? 'डेमो नमूना सूचना:' : 'Demo Fixture Notice:')}</strong> ${isMr ? 'हा केवळ चाचणी नमुना आहे. केवळ synthetic/डेमो कागदपत्रे वापरा. मूळ वैयक्तिक ओळखपत्रे किंवा संवेदनशील माहिती अपलोड करू नका.' : 'This is a demo fixture. Use synthetic/demo test documents only. Do not upload personal identity documents.'}
+          </div>
+        `;
+      } else {
+        warnEl.innerHTML = `
+          <div style="background:var(--paithani-teal-subtle); border-left:3px solid var(--paithani-teal); color:var(--paithani-teal); padding:6px 12px; border-radius:4px; font-size:0.82rem;">
+            ⚖️ <strong>${isMr ? 'वैधानिक पडताळणी सूचना:' : 'Statutory Verification Notice:'}</strong> ${isMr ? 'महाराष्ट्र लोकसेवा हमी कायदा (RTS) २०१५ नुसार ही कागदपत्र पूर्वतयारी यादी आहे. अंतिम मंजुरी शासकीय विभागामार्फतच दिली जाते.' : 'Document preparation checklist under Maharashtra RTS Act 2015. Official verification and approval remains with competent government authority.'}
+          </div>
+        `;
+      }
+    }
+
     if (reqListEl) {
       reqListEl.innerHTML = `<p style="color:var(--slate-muted); font-size:0.9rem;">${isMr ? 'अधिकृत कागदपत्र नियम व पडताळणी लोड होत आहे...' : (isHi ? 'नियम व सत्यापन लोड हो रहा है...' : 'Loading statutory requirements & audit...')}</p>`;
     }
@@ -4245,20 +4348,58 @@
           uploadedListEl.innerHTML = state.uploadedDocuments.map((ud, idx) => {
             const docName = ud.field_evidence && ud.field_evidence.document_title ? ud.field_evidence.document_title : (ud.document_type || 'दाखला');
             const pName = ud.person_name || '-';
-            const fyStr = ud.valid_financial_year ? ` | FY: ${ud.valid_financial_year}` : '';
+            const fyStr = ud.valid_financial_year ? ` | FY: ${escapeHtml(ud.valid_financial_year)}` : '';
             const incStr = ud.annual_family_income ? ` | ₹${toLocalizedDigits(ud.annual_family_income)}` : '';
             const conf = ud.confidence ? (ud.confidence * 100).toFixed(0) + '%' : '95%';
+            const docId = ud.document_id || ('doc_' + idx);
             return `
-              <div class="uploaded-doc-card">
-                <div>
-                  <strong style="color:var(--deep-heritage-maroon); font-size:0.92rem;">📄 ${escapeHtml(docName)}</strong>
-                  <div style="font-size:0.8rem; color:var(--slate-muted); margin-top:2px;">
-                    👤 ${escapeHtml(pName)}${fyStr}${incStr} | <span style="color:#059669; font-weight:600;">विश्वासार्हता: ${conf}</span>
+              <div class="uploaded-doc-card" style="display:flex; flex-direction:column; gap:8px; border:1px solid var(--border-crisp); padding:14px; border-radius:8px; background:var(--warm-ivory); margin-bottom:10px;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <strong style="color:var(--deep-heritage-maroon); font-size:0.96rem;">📄 ${escapeHtml(docName)}</strong>
+                    <div style="font-size:0.82rem; color:var(--slate-muted); margin-top:3px;">
+                      👤 ${escapeHtml(pName)}${fyStr}${incStr} | <span style="color:#059669; font-weight:600;">विश्वासार्हता: ${conf}</span>
+                    </div>
+                  </div>
+                  <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                    <button class="btn btn-secondary btn-sm btn-edit-doc" onclick="toggleEditDocument('${escapeHtml(docId)}')">
+                      ✏️ ${isMr ? 'माहिती दुरुस्त करा' : (isHi ? 'संशोधन करें' : 'Edit Fields')}
+                    </button>
+                    <button class="btn btn-secondary btn-sm" onclick="removeUploadedDocument('${escapeHtml(docId)}')" style="color:#DC2626; border-color:#FECACA;">
+                      🗑️ ${isMr ? 'हटवा' : (isHi ? 'हटाएं' : 'Remove')}
+                    </button>
                   </div>
                 </div>
-                <button class="btn btn-secondary btn-sm" onclick="removeUploadedDocument('${escapeHtml(ud.document_id)}')" style="color:#DC2626; border-color:#FECACA; padding:4px 8px; font-size:0.78rem;">
-                  🗑️ ${isMr ? 'हटवा' : 'Remove'}
-                </button>
+
+                <div id="edit-doc-${escapeHtml(docId)}" style="display:none; margin-top:8px; padding:12px; background:#fff; border-radius:6px; border:1px dashed var(--paithani-teal);">
+                  <h6 style="color:var(--paithani-teal); margin-bottom:8px; font-size:0.88rem;">✏️ ${isMr ? 'निष्कर्षित माहिती दुरुस्ती / पडताळणी' : (isHi ? 'निष्कर्षित जानकारी सुधार / सत्यापन' : 'Inspect & Correct Extracted Fields')}</h6>
+                  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px; margin-bottom:10px;">
+                    <div>
+                      <label style="font-size:0.75rem; color:var(--slate-muted); display:block; margin-bottom:2px;">${isMr ? 'अर्जदाराचे नाव' : (isHi ? 'आवेदक का नाम' : 'Applicant Name')}</label>
+                      <input type="text" id="edit-name-${escapeHtml(docId)}" class="form-input" style="width:100%; font-size:0.85rem; padding:6px 8px;" value="${escapeHtml(ud.person_name || '')}">
+                    </div>
+                    <div>
+                      <label style="font-size:0.75rem; color:var(--slate-muted); display:block; margin-bottom:2px;">${isMr ? 'वार्षिक उत्पन्न (₹)' : (isHi ? 'वार्षिक आय (₹)' : 'Annual Income (₹)')}</label>
+                      <input type="number" id="edit-income-${escapeHtml(docId)}" class="form-input" style="width:100%; font-size:0.85rem; padding:6px 8px;" value="${ud.annual_family_income || ''}">
+                    </div>
+                    <div>
+                      <label style="font-size:0.75rem; color:var(--slate-muted); display:block; margin-bottom:2px;">${isMr ? 'आर्थिक वर्ष' : (isHi ? 'वित्तीय वर्ष' : 'Financial Year')}</label>
+                      <input type="text" id="edit-fy-${escapeHtml(docId)}" class="form-input" style="width:100%; font-size:0.85rem; padding:6px 8px;" value="${escapeHtml(ud.valid_financial_year || '')}" placeholder="2025-26">
+                    </div>
+                    <div>
+                      <label style="font-size:0.75rem; color:var(--slate-muted); display:block; margin-bottom:2px;">${isMr ? 'कागदपत्र क्रमांक' : (isHi ? 'दस्तावेज़ क्रमांक' : 'Certificate / ID No.')}</label>
+                      <input type="text" id="edit-no-${escapeHtml(docId)}" class="form-input" style="width:100%; font-size:0.85rem; padding:6px 8px;" value="${escapeHtml(ud.certificate_number_masked || '')}">
+                    </div>
+                  </div>
+                  <div style="display:flex; gap:8px;">
+                    <button class="btn btn-primary btn-sm btn-save-corrections" onclick="saveDocumentCorrections('${escapeHtml(docId)}')">
+                      💾 ${isMr ? 'बदल जतन करा' : (isHi ? 'बदलाव सहेजें' : 'Save Corrections')}
+                    </button>
+                    <button class="btn btn-secondary btn-sm" onclick="toggleEditDocument('${escapeHtml(docId)}')">
+                      ${isMr ? 'रद्द करा' : (isHi ? 'रद्द करें' : 'Cancel')}
+                    </button>
+                  </div>
+                </div>
               </div>
             `;
           }).join('');
@@ -4334,6 +4475,35 @@
     state.uploadedDocuments = state.uploadedDocuments.filter(d => d.document_id !== docId);
     saveSession();
     renderDocumentAuditorView(state.selectedSchemeId);
+  }
+
+  function toggleEditDocument(docId) {
+    const el = document.getElementById('edit-doc-' + docId);
+    if (el) {
+      el.style.display = (el.style.display === 'none' || !el.style.display) ? 'block' : 'none';
+    }
+  }
+
+  async function saveDocumentCorrections(docId) {
+    if (!state.uploadedDocuments) return;
+    const doc = state.uploadedDocuments.find(d => (d.document_id === docId) || ('doc_' + state.uploadedDocuments.indexOf(d) === docId));
+    if (!doc) return;
+
+    const nameInput = document.getElementById('edit-name-' + docId);
+    const incInput = document.getElementById('edit-income-' + docId);
+    const fyInput = document.getElementById('edit-fy-' + docId);
+    const noInput = document.getElementById('edit-no-' + docId);
+
+    if (nameInput) doc.person_name = nameInput.value.trim() || doc.person_name;
+    if (incInput) {
+      const val = parseInt(incInput.value, 10);
+      if (!isNaN(val)) doc.annual_family_income = val;
+    }
+    if (fyInput) doc.valid_financial_year = fyInput.value.trim() || doc.valid_financial_year;
+    if (noInput) doc.certificate_number_masked = noInput.value.trim() || doc.certificate_number_masked;
+
+    saveSession();
+    await renderDocumentAuditorView(state.selectedSchemeId);
   }
 
   function openOfficialPortalForSelectedScheme() {
@@ -4614,6 +4784,9 @@
   window.triggerEvaluationFromProfile = triggerEvaluationFromProfile;
   window.evaluateAndShowResults = triggerEvaluationFromProfile;
   window.startFocusedAssessment = startFocusedAssessment;
+  window.openDocumentAuditor = openDocumentAuditor;
+  window.toggleEditDocument = toggleEditDocument;
+  window.saveDocumentCorrections = saveDocumentCorrections;
 
   if (typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported) {}
   if (typeof navigator !== 'undefined' && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {}
