@@ -46,3 +46,7 @@
 | LEDGER-037 | 2026-11-17 | DOCUMENTATION | WS8 | Authored `docs/production/observability_and_incident_response.md` with CERT-In 6-hour reporting runbook and tabletop simulation. | APPROVED |
 | LEDGER-038 | 2026-11-17 | TEST | WS8 | Created `tests/test_observability_and_incident_response.py` with 3 passing tests covering health probes and redaction canaries. | APPROVED |
 | LEDGER-039 | 2026-11-17 | EVIDENCE | WS8 | Recorded `release/evidence/ws8/E-WS8-001_observability.json` verifying health probes and redaction canaries. | APPROVED |
+| LEDGER-040 | 2026-11-17 | GATE | G9 | Hardened multi-stage Dockerfile and non-root UID 10001 verified via static linting and tests. | PASS |
+| LEDGER-041 | 2026-11-17 | SCRIPT | WS9 | Deployment verification harness implemented at `scripts/verify_deployment.py`. | APPROVED |
+| LEDGER-042 | 2026-11-17 | TEST | WS9 | 4 container and deployment tests passing in `tests/test_deployment_and_containers.py`. | PASS |
+| LEDGER-043 | 2026-11-17 | EVIDENCE | WS9 | Recorded `release/evidence/ws9/E-WS9-001_containers_deployment.json`. | APPROVED |

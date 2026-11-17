@@ -1,32 +1,72 @@
 services:
-  api:
-    build: .
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: msn-app:latest
     ports:
       - "127.0.0.1:8000:8000"
     environment:
-      APP_ENV: ${APP_ENV:-local}
+      APP_ENV: ${APP_ENV:-staging}
       DATA_RETENTION_HOURS: "${DATA_RETENTION_HOURS:-24}"
       PRIVILEGED_SESSION_TTL_HOURS: "${PRIVILEGED_SESSION_TTL_HOURS:-1}"
-      SCHEME_NAVIGATOR_AUTH_SECRET: ${SCHEME_NAVIGATOR_AUTH_SECRET:-}
+      DATABASE_URL: postgresql://msn_user:msn_secure_pass_123@postgres:5432/scheme_navigator
+      S3_ENDPOINT_URL: http://minio:9000
+      AWS_ACCESS_KEY_ID: minio_admin_msn
+      AWS_SECRET_ACCESS_KEY: minio_secret_msn_pass_123
+      SCHEME_NAVIGATOR_AUTH_SECRET: ${SCHEME_NAVIGATOR_AUTH_SECRET:-default_dev_secret_must_be_32_chars_minimum}
+      SCHEME_NAVIGATOR_RELEASE_KEY: ${SCHEME_NAVIGATOR_RELEASE_KEY:-distinct_dev_release_key_must_be_32_chars_min}
       ADMIN_BOOTSTRAP_KEY: ${ADMIN_BOOTSTRAP_KEY:-}
-      CATALOGUE_RELEASE_SIGNING_KEY: ${CATALOGUE_RELEASE_SIGNING_KEY:-}
-      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
-      OLLAMA_BASE_URL: http://host.docker.internal:11434
-      QDRANT_URL: http://qdrant:6333
-    command: ["uvicorn", "scheme_navigator.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
     depends_on:
-      - qdrant
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
     volumes:
-      - ./data:/app/data
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - app_data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
 
-  qdrant:
-    image: qdrant/qdrant:v1.12.5
-    ports:
-      - "127.0.0.1:6333:6333"
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: msn_user
+      POSTGRES_PASSWORD: msn_secure_pass_123
+      POSTGRES_DB: scheme_navigator
     volumes:
-      - qdrant_data:/qdrant/storage
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U msn_user -d scheme_navigator"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minio_admin_msn
+      MINIO_ROOT_PASSWORD: minio_secret_msn_pass_123
+    volumes:
+      - minio_data:/data
+    ports:
+      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
 volumes:
-  qdrant_data:
+  app_data:
+  postgres_data:
+  minio_data:

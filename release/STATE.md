@@ -1,5 +1,5 @@
 ---
-current_workstream: WS9
+current_workstream: WS10
 completed_workstreams:
   - WS0
   - WS1
@@ -10,6 +10,7 @@ completed_workstreams:
   - WS6
   - WS7
   - WS8
+  - WS9
 open_blockers:
   - gate: G4
     reason: "No local PostgreSQL 16+ daemon running on 127.0.0.1:5432 and Docker engine not installed on host"
@@ -109,4 +110,15 @@ utc_timestamp: 2026-11-17T17:38:00Z
   - Production observability manual authored in `docs/production/observability_and_incident_response.md`.
   - Evidence recorded in `release/evidence/ws8/E-WS8-001_observability.json`.
 
-- **Next Workstream:** WS9 — Containers, Infrastructure-as-Code, and Deployment Verification.
+- **WS9 Containers, Infrastructure-as-Code, and Deployment Verification Complete:**
+  - Hardened multi-stage Dockerfile authored with separate `builder` and `runner` stages, stripping dev dependencies and package caches.
+  - Non-root user `msnuser` with UID `10001` enforced (`USER 10001:10001`).
+  - Native container `HEALTHCHECK` probe defined via `curl -f http://localhost:8000/healthz`.
+  - `.dockerignore` authored excluding `.git`, `_backups`, `.venv`, test caches, and temporary files.
+  - Multi-container `docker-compose.yml` authored defining `app`, `postgres:16-alpine`, and `minio/minio` with persistent volumes and healthchecks.
+  - Automated deployment verification harness implemented in `scripts/verify_deployment.py` verifying `/healthz`, `/readyz`, security headers, scheme catalogue count, and anonymous session minting.
+  - 4 automated tests passing in `tests/test_deployment_and_containers.py`.
+  - Deployment specification committed at `docs/production/deployment_and_release.md`.
+  - Evidence recorded in `release/evidence/ws9/E-WS9-001_containers_deployment.json`.
+
+- **Next Workstream:** WS10 — CI/CD Pipeline and Rollback Strategy.

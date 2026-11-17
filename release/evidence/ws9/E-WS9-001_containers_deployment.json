@@ -1,0 +1,53 @@
+{
+  "workstream": "WS9",
+  "evidence_id": "E-WS9-001",
+  "timestamp": "2026-11-17T17:41:30Z",
+  "status": "PASS",
+  "description": "Hardened multi-stage containerfile, dockerignore, 3-tier compose stack, and automated deployment verification harness",
+  "artifacts": {
+    "dockerfile": "Dockerfile",
+    "dockerignore": ".dockerignore",
+    "compose": "docker-compose.yml",
+    "verification_script": "scripts/verify_deployment.py",
+    "specification": "docs/production/deployment_and_release.md",
+    "test_suite": "tests/test_deployment_and_containers.py"
+  },
+  "container_spec": {
+    "stages": ["builder", "runner"],
+    "base_image": "python:3.11-slim",
+    "non_root_user": "msnuser",
+    "non_root_uid": 10001,
+    "healthcheck_directive": "HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 CMD curl -f http://localhost:8000/healthz || exit 1",
+    "exposed_ports": [8000]
+  },
+  "compose_topology": {
+    "services": [
+      {
+        "name": "app",
+        "image": "msn-app:latest",
+        "healthcheck": "curl -f http://localhost:8000/healthz",
+        "depends_on": ["postgres", "minio"]
+      },
+      {
+        "name": "postgres",
+        "image": "postgres:16-alpine",
+        "healthcheck": "pg_isready -U msn_user -d scheme_navigator"
+      },
+      {
+        "name": "minio",
+        "image": "minio/minio:latest",
+        "healthcheck": "curl -f http://localhost:9000/minio/health/live"
+      }
+    ],
+    "volumes": ["app_data", "postgres_data", "minio_data"]
+  },
+  "deployment_verification": {
+    "mode": "in-process",
+    "healthz_passed": true,
+    "readyz_passed": true,
+    "security_headers_passed": true,
+    "schemes_catalogue_passed": true,
+    "anonymous_session_passed": true,
+    "all_passed": true
+  }
+}
