@@ -1,0 +1,62 @@
+{
+  "workstream": "WS2",
+  "evidence_id": "E-WS2-001",
+  "timestamp_utc": "2026-11-17T16:59:24.017881+00:00",
+  "title": "Journeys and Product Integrity Verification",
+  "pytest_exit_code": 0,
+  "pytest_summary": {
+    "passed": 21,
+    "failed": 0,
+    "xml": "release\\evidence\\ws2\\pytest_ws2.xml"
+  },
+  "journeys_verified": [
+    {
+      "journey": "Journey A",
+      "name": "General Citizen Interview & Recommendation",
+      "status": "VERIFIED"
+    },
+    {
+      "journey": "Journey B",
+      "name": "Focused Scheme Assessment",
+      "status": "VERIFIED"
+    },
+    {
+      "journey": "Journey C",
+      "name": "Document Readiness and Preparation",
+      "status": "VERIFIED"
+    },
+    {
+      "journey": "Journey D",
+      "name": "Reviewer UI & Content Governance",
+      "status": "VERIFIED"
+    },
+    {
+      "journey": "Journey E",
+      "name": "Offline Packet / Document Kit Generation",
+      "status": "VERIFIED"
+    }
+  ],
+  "personas_count": 12,
+  "personas_verified": [
+    "persona_01_student_sc",
+    "persona_02_farmer_smallholder",
+    "persona_03_woman_ladki_bahin",
+    "persona_04_senior_bpl",
+    "persona_05_divyang_person",
+    "persona_06_unemployed_vjnt",
+    "persona_07_street_vendor_mumbai",
+    "persona_08_bocw_worker",
+    "persona_09_pcmc_divyang",
+    "persona_10_pmc_backward_class",
+    "persona_11_guardian_minor_scholarship",
+    "persona_12_tribal_marginal_farmer"
+  ],
+  "features_verified": {
+    "ui_dead_end_elimination": true,
+    "kleene_3_valued_logic": true,
+    "indian_numbering_devanagari": true,
+    "minor_guardian_flow": true,
+    "llm_mode_off_invariance": true
+  },
+  "verdict": "PASS"
+}

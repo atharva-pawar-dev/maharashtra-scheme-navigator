@@ -13,3 +13,6 @@
 | LEDGER-004 | 2026-11-17 | ASSUMPTION | WS0 | Authorisation level set to A0 (local only) in `ops/OPERATOR_INPUTS.yaml`. | RECORDED |
 | LEDGER-005 | 2026-11-17 | AUDIT | WS1 | 71 API routes, 75 canonical schemes, and 319 document requirements audited and verified in `release/evidence/ws1/E-WS1-001_truth_inventory.json`. | APPROVED |
 | LEDGER-006 | 2026-11-17 | DECISION | WS1 | Ranked defect list established in `docs/production/architecture.md`; C8 startup guard identified as Rank 1 priority. | APPROVED |
+| LEDGER-007 | 2026-11-17 | IMPLEMENTATION | WS2 | Implemented 12 synthetic deterministic personas fixture in `data/fixtures/synthetic_personas.json`. | APPROVED |
+| LEDGER-008 | 2026-11-17 | TEST | WS2 | Created `tests/test_journeys_and_product_integrity.py` with 21 tests covering dead-ends, Kleene logic, Devanagari numerals, guardian flows, personas, and `LLM_MODE=off`. | APPROVED |
+| LEDGER-009 | 2026-11-17 | EVIDENCE | WS2 | Generated `release/evidence/ws2/E-WS2-001_journeys_integrity.json` verifying all 5 citizen journeys and core invariants pass. | APPROVED |

@@ -1,0 +1,200 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "12 Deterministic Synthetic Citizen Personas for Boundary and Journey Testing",
+  "personas": [
+    {
+      "persona_id": "persona_01_student_sc",
+      "name": "Amit Jadhav",
+      "is_guardian_application": false,
+      "profile": {
+        "applicant_name": "Amit Jadhav",
+        "age_years": 19,
+        "gender": "male",
+        "resident_state": "maharashtra",
+        "annual_family_income": 120000,
+        "caste_category": "SC",
+        "is_student": true,
+        "district": "Pune"
+      },
+      "expected_eligible_schemes": ["canonical-post-matric-scholarship-sc", "canonical-swadhar-yojana"]
+    },
+    {
+      "persona_id": "persona_02_farmer_smallholder",
+      "name": "Ramesh Patil",
+      "is_guardian_application": false,
+      "profile": {
+        "applicant_name": "Ramesh Patil",
+        "age_years": 45,
+        "gender": "male",
+        "resident_state": "maharashtra",
+        "occupation": "farmer",
+        "has_land": true,
+        "landholding_hectares": 1.5,
+        "annual_family_income": 95000,
+        "district": "Yavatmal"
+      },
+      "expected_eligible_schemes": ["candidate-namo-shetkari-mahasanman", "canonical-pm-kisan"]
+    },
+    {
+      "persona_id": "persona_03_woman_ladki_bahin",
+      "name": "Sunita Shinde",
+      "is_guardian_application": false,
+      "profile": {
+        "applicant_name": "Sunita Shinde",
+        "age_years": 32,
+        "gender": "female",
+        "resident_state": "maharashtra",
+        "marital_status": "married",
+        "annual_family_income": 140000,
+        "district": "Satara"
+      },
+      "expected_eligible_schemes": ["candidate-majhi-ladki-bahin"]
+    },
+    {
+      "persona_id": "persona_04_senior_bpl",
+      "name": "Dattatraya Kulkarni",
+      "is_guardian_application": false,
+      "profile": {
+        "applicant_name": "Dattatraya Kulkarni",
+        "age_years": 68,
+        "gender": "male",
+        "resident_state": "maharashtra",
+        "annual_family_income": 20000,
+        "bpl_card_holder": true,
+        "district": "Solapur"
+      },
+      "expected_eligible_schemes": ["canonical-shravanbal-seva-state-pension", "demo-indira-gandhi-old-age-pension"]
+    },
+    {
+      "persona_id": "persona_05_divyang_person",
+      "name": "Sanjay Gaikwad",
+      "is_guardian_application": false,
+      "profile": {
+        "applicant_name": "Sanjay Gaikwad",
+        "age_years": 38,
+        "gender": "male",
+        "resident_state": "maharashtra",
+        "disability_percentage": 50,
+        "annual_family_income": 35000,
+        "district": "Kolhapur"
+      },
+      "expected_eligible_schemes": ["candidate-sanjay-gandhi-niradhar-anudan", "canonical-divyang-bus-concession"]
+    },
+    {
+      "persona_id": "persona_06_unemployed_vjnt",
+      "name": "Vijay Rathod",
+      "is_guardian_application": false,
+      "profile": {
+        "applicant_name": "Vijay Rathod",
+        "age_years": 24,
+        "gender": "male",
+        "resident_state": "maharashtra",
+        "caste_category": "VJNT",
+        "annual_family_income": 110000,
+        "district": "Nanded"
+      },
+      "expected_eligible_schemes": ["canonical-obc-mahamandal-loan", "canonical-post-matric-scholarship-vjnt"]
+    },
+    {
+      "persona_id": "persona_07_street_vendor_mumbai",
+      "name": "Mohammad Ansari",
+      "is_guardian_application": false,
+      "profile": {
+        "applicant_name": "Mohammad Ansari",
+        "age_years": 40,
+        "gender": "male",
+        "resident_state": "maharashtra",
+        "occupation": "street_vendor",
+        "annual_family_income": 180000,
+        "district": "Mumbai City"
+      },
+      "expected_eligible_schemes": ["canonical-pm-svanidhi-street-vendor"]
+    },
+    {
+      "persona_id": "persona_08_bocw_worker",
+      "name": "Santosh Kamble",
+      "is_guardian_application": false,
+      "profile": {
+        "applicant_name": "Santosh Kamble",
+        "age_years": 35,
+        "gender": "male",
+        "resident_state": "maharashtra",
+        "is_construction_worker": true,
+        "bocw_registered": true,
+        "annual_family_income": 150000,
+        "district": "Thane"
+      },
+      "expected_eligible_schemes": ["canonical-bocw-construction-welfare"]
+    },
+    {
+      "persona_id": "persona_09_pcmc_divyang",
+      "name": "Pooja More",
+      "is_guardian_application": false,
+      "profile": {
+        "applicant_name": "Pooja More",
+        "age_years": 29,
+        "gender": "female",
+        "resident_state": "maharashtra",
+        "municipal_corporation": "mc-pcmc",
+        "disability_percentage": 45,
+        "annual_family_income": 90000,
+        "district": "Pune"
+      },
+      "expected_eligible_schemes": ["canonical-pcmc-divyang-arthik-sahayya"]
+    },
+    {
+      "persona_id": "persona_10_pmc_backward_class",
+      "name": "Rahul Mane",
+      "is_guardian_application": false,
+      "profile": {
+        "applicant_name": "Rahul Mane",
+        "age_years": 42,
+        "gender": "male",
+        "resident_state": "maharashtra",
+        "municipal_corporation": "mc-pmc",
+        "caste_category": "SC",
+        "annual_family_income": 160000,
+        "district": "Pune"
+      },
+      "expected_eligible_schemes": ["canonical-pmc-magasvargiya-arthik-sahayya"]
+    },
+    {
+      "persona_id": "persona_11_guardian_minor_scholarship",
+      "name": "Mangal Waghmare",
+      "is_guardian_application": true,
+      "beneficiary": {
+        "relationship": "daughter",
+        "beneficiary_name": "Priya Waghmare",
+        "beneficiary_age": 10,
+        "beneficiary_gender": "female",
+        "is_school_student": true
+      },
+      "profile": {
+        "guardian_name": "Mangal Waghmare",
+        "resident_state": "maharashtra",
+        "annual_family_income": 80000,
+        "caste_category": "SC",
+        "district": "Beed"
+      },
+      "expected_eligible_schemes": ["canonical-savtribai-phule-dattak-palak", "canonical-dr-ambedkar-medhavi-chhatravritti"]
+    },
+    {
+      "persona_id": "persona_12_tribal_marginal_farmer",
+      "name": "Devram Madavi",
+      "is_guardian_application": false,
+      "profile": {
+        "applicant_name": "Devram Madavi",
+        "age_years": 48,
+        "gender": "male",
+        "resident_state": "maharashtra",
+        "caste_category": "ST",
+        "occupation": "farmer",
+        "has_land": true,
+        "landholding_hectares": 1.0,
+        "annual_family_income": 60000,
+        "district": "Gadchiroli"
+      },
+      "expected_eligible_schemes": ["canonical-birsa-munda-krishi", "canonical-shabari-gharkul", "canonical-khavti-anudan"]
+    }
+  ]
+}

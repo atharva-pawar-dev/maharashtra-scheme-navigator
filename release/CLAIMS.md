@@ -13,3 +13,7 @@
 | C-006 | Reported 319 document requirements catalogued | E-WS1-001 | CONFIRMED | 319 requirements (273 mandatory, 31 conditional, 15 optional) verified across 75 schemes with 0 orphaned entries. |
 | C-007 | Native PostgreSQL support across entire test suite | PENDING_WS4 | UNVERIFIED | To be evaluated and verified in WS4. |
 | C-008 | Real production deployment live on public domain | NONE | REFUTED | No public cloud domain authorized or deployed (A0 local only). |
+| C-009 | All 5 core citizen journeys functional and dead-end free | E-WS2-001 | CONFIRMED | Journeys A, B, C, D, E verified via automated tests in `tests/test_journeys_and_product_integrity.py`. |
+| C-010 | Deterministic evaluation functions identically with `LLM_MODE=off` (Protocol B4) | E-WS2-001 | CONFIRMED | Verified in `test_llm_off_deterministic_invariance`. |
+| C-011 | Input parsing supports Devanagari numerals and Indian number grouping (lakh, crore) | E-WS2-001 | CONFIRMED | 10 distinct number/currency variations verified in `test_input_robustness_income`. |
+| C-012 | 12 synthetic deterministic personas evaluate successfully | E-WS2-001 | CONFIRMED | Verified in `test_twelve_synthetic_personas_evaluation`. |
