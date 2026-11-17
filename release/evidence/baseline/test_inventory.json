@@ -1,0 +1,2443 @@
+{
+  "files": {
+    "test_actionable_document_report.py": {
+      "test_count": 7,
+      "assert_count": 30,
+      "tests": [
+        {
+          "name": "test_duplicate_financial_year_findings_merge_document_and_page_references",
+          "line": 47,
+          "assert_count": 7
+        },
+        {
+          "name": "test_missing_income_is_classified_as_extraction_quality_with_action",
+          "line": 72,
+          "assert_count": 3
+        },
+        {
+          "name": "test_identity_conflict_is_classified_as_document_consistency",
+          "line": 87,
+          "assert_count": 2
+        },
+        {
+          "name": "test_expiry_finding_is_classified_as_document_validity",
+          "line": 100,
+          "assert_count": 2
+        },
+        {
+          "name": "test_document_report_explicitly_does_not_determine_scheme_eligibility",
+          "line": 109,
+          "assert_count": 3
+        },
+        {
+          "name": "test_pdf_income_conflict_contains_page_references_and_recommended_action",
+          "line": 117,
+          "assert_count": 6
+        },
+        {
+          "name": "test_page_conflict_and_duplicate_financial_year_warning_are_reported_once",
+          "line": 151,
+          "assert_count": 7
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_api_smoke.py": {
+      "test_count": 3,
+      "assert_count": 11,
+      "tests": [
+        {
+          "name": "test_health_schemes_and_plan",
+          "line": 10,
+          "assert_count": 4
+        },
+        {
+          "name": "test_interview_returns_one_question_then_updates_profile",
+          "line": 19,
+          "assert_count": 5
+        },
+        {
+          "name": "test_bhashini_requires_explicit_cloud_consent",
+          "line": 43,
+          "assert_count": 2
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_application_assistance.py": {
+      "test_count": 6,
+      "assert_count": 35,
+      "tests": [
+        {
+          "name": "test_document_preparation_alternatives_and_matching",
+          "line": 69,
+          "assert_count": 10
+        },
+        {
+          "name": "test_document_preparation_expiry_and_fy_mismatch",
+          "line": 123,
+          "assert_count": 2
+        },
+        {
+          "name": "test_document_preparation_duplicate_detection",
+          "line": 148,
+          "assert_count": 2
+        },
+        {
+          "name": "test_safe_portal_assistance_invariants",
+          "line": 172,
+          "assert_count": 9
+        },
+        {
+          "name": "test_applicant_assessment_integration_with_phase5",
+          "line": 206,
+          "assert_count": 5
+        },
+        {
+          "name": "test_assistance_api_routes",
+          "line": 240,
+          "assert_count": 7
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_assessment.py": {
+      "test_count": 16,
+      "assert_count": 46,
+      "tests": [
+        {
+          "name": "test_assessment_flags_profile_document_income_mismatch",
+          "line": 47,
+          "assert_count": 7
+        },
+        {
+          "name": "test_assessment_does_not_flag_matching_income_values",
+          "line": 88,
+          "assert_count": 1
+        },
+        {
+          "name": "test_assessment_uses_pending_human_review_record",
+          "line": 112,
+          "assert_count": 4
+        },
+        {
+          "name": "test_assessment_uses_completed_human_review_record",
+          "line": 149,
+          "assert_count": 4
+        },
+        {
+          "name": "test_assessment_does_not_flag_matching_dob",
+          "line": 184,
+          "assert_count": 1
+        },
+        {
+          "name": "test_assessment_flags_different_dob",
+          "line": 213,
+          "assert_count": 6
+        },
+        {
+          "name": "test_assessment_flags_age_dob_mismatch",
+          "line": 253,
+          "assert_count": 5
+        },
+        {
+          "name": "test_assessment_does_not_flag_missing_dob",
+          "line": 297,
+          "assert_count": 1
+        },
+        {
+          "name": "test_assessment_does_not_flag_matching_profile_document_name",
+          "line": 326,
+          "assert_count": 1
+        },
+        {
+          "name": "test_assessment_flags_profile_document_name_mismatch",
+          "line": 350,
+          "assert_count": 6
+        },
+        {
+          "name": "test_assessment_flags_profile_document_cross_script_name",
+          "line": 378,
+          "assert_count": 2
+        },
+        {
+          "name": "test_assessment_does_not_flag_missing_profile_or_document_name",
+          "line": 399,
+          "assert_count": 1
+        },
+        {
+          "name": "test_uploaded_income_certificate_in_review_record_is_counted_for_planning",
+          "line": 422,
+          "assert_count": 4
+        },
+        {
+          "name": "test_uploaded_income_certificate_is_counted_as_available_for_planning",
+          "line": 478,
+          "assert_count": 1
+        },
+        {
+          "name": "test_unknown_document_type_does_not_satisfy_income_certificate_requirement",
+          "line": 506,
+          "assert_count": 1
+        },
+        {
+          "name": "test_applicant_declared_income_certificate_remains_available_for_planning",
+          "line": 536,
+          "assert_count": 1
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_assessment_api.py": {
+      "test_count": 4,
+      "assert_count": 15,
+      "tests": [
+        {
+          "name": "test_assessment_api_loads_pending_review",
+          "line": 59,
+          "assert_count": 6
+        },
+        {
+          "name": "test_assessment_api_loads_completed_review",
+          "line": 98,
+          "assert_count": 5
+        },
+        {
+          "name": "test_assessment_api_returns_404_for_missing_review",
+          "line": 136,
+          "assert_count": 2
+        },
+        {
+          "name": "test_assessment_api_rejects_documents_with_review_id",
+          "line": 160,
+          "assert_count": 2
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 8,
+      "monkeypatch_count": 8
+    },
+    "test_browser_citizen_experience.py": {
+      "test_count": 21,
+      "assert_count": 35,
+      "tests": [
+        {
+          "name": "test_01_explore_catalogue_rendering_and_department_filtering",
+          "line": 47,
+          "assert_count": 2
+        },
+        {
+          "name": "test_02_silent_demo_fallback_removed_shows_error_card_on_failure",
+          "line": 61,
+          "assert_count": 2
+        },
+        {
+          "name": "test_03_catalogue_freshness_indicator",
+          "line": 72,
+          "assert_count": 1
+        },
+        {
+          "name": "test_04_scoped_interview_launch_from_explore",
+          "line": 79,
+          "assert_count": 1
+        },
+        {
+          "name": "test_04b_focused_interview_ign_demo_journey",
+          "line": 85,
+          "assert_count": 7
+        },
+        {
+          "name": "test_05_profile_sidebar_live_fields",
+          "line": 123,
+          "assert_count": 1
+        },
+        {
+          "name": "test_06_results_page_five_outcome_scoreboards",
+          "line": 134,
+          "assert_count": 1
+        },
+        {
+          "name": "test_07_primary_cta_restricted_to_eligible",
+          "line": 141,
+          "assert_count": 1
+        },
+        {
+          "name": "test_08_partial_match_scoreboard_card",
+          "line": 148,
+          "assert_count": 1
+        },
+        {
+          "name": "test_09_needs_info_scoreboard_card",
+          "line": 154,
+          "assert_count": 1
+        },
+        {
+          "name": "test_10_collapsed_not_eligible_accordion",
+          "line": 160,
+          "assert_count": 2
+        },
+        {
+          "name": "test_11_single_active_scheme_progress_view",
+          "line": 173,
+          "assert_count": 1
+        },
+        {
+          "name": "test_12_dismissal_confirmation_modal_text",
+          "line": 179,
+          "assert_count": 2
+        },
+        {
+          "name": "test_13_empty_progress_view_exact_text",
+          "line": 186,
+          "assert_count": 2
+        },
+        {
+          "name": "test_14_document_preparation_completion_card",
+          "line": 194,
+          "assert_count": 2
+        },
+        {
+          "name": "test_15_history_api_routing",
+          "line": 205,
+          "assert_count": 2
+        },
+        {
+          "name": "test_16_reusable_back_navigation",
+          "line": 215,
+          "assert_count": 1
+        },
+        {
+          "name": "test_17_fixed_floating_reviewer_portal_button",
+          "line": 221,
+          "assert_count": 2
+        },
+        {
+          "name": "test_18_citizen_profile_reset_modal_and_data_clearance",
+          "line": 228,
+          "assert_count": 1
+        },
+        {
+          "name": "test_19_english_mode_purity",
+          "line": 239,
+          "assert_count": 1
+        },
+        {
+          "name": "test_20_marathi_mode_purity",
+          "line": 254,
+          "assert_count": 1
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_browser_document_auditor_journey.py": {
+      "test_count": 4,
+      "assert_count": 14,
+      "tests": [
+        {
+          "name": "test_01_scheme_details_modal_has_auditor_and_factsheet_buttons",
+          "line": 58,
+          "assert_count": 4
+        },
+        {
+          "name": "test_02_document_auditor_direct_entry_and_requirements_checklist",
+          "line": 89,
+          "assert_count": 5
+        },
+        {
+          "name": "test_03_results_page_has_check_my_documents_action",
+          "line": 120,
+          "assert_count": 2
+        },
+        {
+          "name": "test_04_document_auditor_multilingual_consistency",
+          "line": 154,
+          "assert_count": 3
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_browser_municipal_citizen_journey.py": {
+      "test_count": 5,
+      "assert_count": 19,
+      "tests": [
+        {
+          "name": "test_01_explore_jurisdiction_filtering_and_badges",
+          "line": 59,
+          "assert_count": 5
+        },
+        {
+          "name": "test_02_explore_switching_to_pcmc_recalculates",
+          "line": 93,
+          "assert_count": 2
+        },
+        {
+          "name": "test_03_explore_rural_and_council_jurisdiction_levels",
+          "line": 117,
+          "assert_count": 5
+        },
+        {
+          "name": "test_04_results_page_pmc_vs_pcmc_isolation_and_badges",
+          "line": 143,
+          "assert_count": 4
+        },
+        {
+          "name": "test_05_focused_eligibility_preserves_jurisdiction",
+          "line": 192,
+          "assert_count": 3
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_catalog_runtime.py": {
+      "test_count": 12,
+      "assert_count": 21,
+      "tests": [
+        {
+          "name": "test_settings_reads_scheme_catalog_path_from_environment",
+          "line": 30,
+          "assert_count": 1
+        },
+        {
+          "name": "test_configured_catalog_takes_precedence_over_demo",
+          "line": 39,
+          "assert_count": 1
+        },
+        {
+          "name": "test_demo_catalog_loads_when_enabled_without_custom_path",
+          "line": 51,
+          "assert_count": 1
+        },
+        {
+          "name": "test_catalog_is_empty_when_demo_disabled_without_custom_path",
+          "line": 60,
+          "assert_count": 1
+        },
+        {
+          "name": "test_malformed_catalog_fails_closed",
+          "line": 69,
+          "assert_count": 0
+        },
+        {
+          "name": "test_invalid_scheme_record_fails_closed",
+          "line": 80,
+          "assert_count": 0
+        },
+        {
+          "name": "test_duplicate_scheme_ids_are_rejected",
+          "line": 94,
+          "assert_count": 0
+        },
+        {
+          "name": "test_api_handler_uses_configured_catalog_in_local_mode",
+          "line": 106,
+          "assert_count": 1
+        },
+        {
+          "name": "test_api_handlers_use_configured_catalog_in_production",
+          "line": 122,
+          "assert_count": 2
+        },
+        {
+          "name": "test_api_handler_production_without_catalog_is_empty_and_blocks_interviews",
+          "line": 146,
+          "assert_count": 2
+        },
+        {
+          "name": "test_api_handler_uses_demo_catalog_by_default_in_local_mode",
+          "line": 163,
+          "assert_count": 1
+        },
+        {
+          "name": "test_canonical_catalog_cross_journey_consistency",
+          "line": 175,
+          "assert_count": 11
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 8,
+      "monkeypatch_count": 8
+    },
+    "test_comprehensive_scheme_integration.py": {
+      "test_count": 4,
+      "assert_count": 60,
+      "tests": [
+        {
+          "name": "test_comprehensive_schemes_inventory_coverage",
+          "line": 21,
+          "assert_count": 20
+        },
+        {
+          "name": "test_canonical_schemes_api_endpoints_and_filtering",
+          "line": 56,
+          "assert_count": 25
+        },
+        {
+          "name": "test_application_channel_coverage_and_hand_off",
+          "line": 112,
+          "assert_count": 6
+        },
+        {
+          "name": "test_strict_monolingual_separation_invariants_in_html",
+          "line": 134,
+          "assert_count": 9
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_discovery_api.py": {
+      "test_count": 12,
+      "assert_count": 52,
+      "tests": [
+        {
+          "name": "test_empty_profile_evaluates_all_catalogue_schemes_as_unknown",
+          "line": 22,
+          "assert_count": 6
+        },
+        {
+          "name": "test_three_valued_boolean_handling",
+          "line": 37,
+          "assert_count": 9
+        },
+        {
+          "name": "test_explicit_residency_handling",
+          "line": 72,
+          "assert_count": 7
+        },
+        {
+          "name": "test_gender_prefer_not_to_say_normalizes_to_none_and_does_not_fail",
+          "line": 99,
+          "assert_count": 4
+        },
+        {
+          "name": "test_interview_start_scopes_to_selected_scheme",
+          "line": 117,
+          "assert_count": 3
+        },
+        {
+          "name": "test_interview_start_returns_404_for_invalid_scheme_id",
+          "line": 141,
+          "assert_count": 2
+        },
+        {
+          "name": "test_interview_start_falls_back_to_catalog_wide_when_scheme_id_omitted",
+          "line": 154,
+          "assert_count": 2
+        },
+        {
+          "name": "test_interview_get_state_returns_active_question_without_profile_leak",
+          "line": 167,
+          "assert_count": 6
+        },
+        {
+          "name": "test_interview_get_state_enforces_environment_restriction",
+          "line": 194,
+          "assert_count": 2
+        },
+        {
+          "name": "test_assessment_reconstructs_profile_from_server_thread_id",
+          "line": 201,
+          "assert_count": 5
+        },
+        {
+          "name": "test_demo_schemes_never_return_confirmed_eligibility",
+          "line": 239,
+          "assert_count": 3
+        },
+        {
+          "name": "test_catalogue_sources_strictly_use_https_and_valid_hashes",
+          "line": 255,
+          "assert_count": 3
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 1,
+      "monkeypatch_count": 1
+    },
+    "test_document_audit.py": {
+      "test_count": 8,
+      "assert_count": 26,
+      "tests": [
+        {
+          "name": "test_financial_year_mismatch_is_warning_for_explicit_fy",
+          "line": 25,
+          "assert_count": 2
+        },
+        {
+          "name": "test_dob_mismatch_is_error",
+          "line": 31,
+          "assert_count": 3
+        },
+        {
+          "name": "test_domicile_is_not_expired_just_because_fy_absent",
+          "line": 39,
+          "assert_count": 1
+        },
+        {
+          "name": "test_expired_certificate_flagged",
+          "line": 44,
+          "assert_count": 1
+        },
+        {
+          "name": "test_cross_script_names_require_review_not_automatic_mismatch",
+          "line": 49,
+          "assert_count": 2
+        },
+        {
+          "name": "test_matching_names_and_dates_of_birth_pass_cross_document_checks",
+          "line": 60,
+          "assert_count": 4
+        },
+        {
+          "name": "test_name_and_dob_mismatches_are_flagged_for_manual_review",
+          "line": 83,
+          "assert_count": 6
+        },
+        {
+          "name": "test_missing_income_fields_are_not_invented_and_require_review",
+          "line": 106,
+          "assert_count": 7
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_document_requirements_api.py": {
+      "test_count": 11,
+      "assert_count": 49,
+      "tests": [
+        {
+          "name": "test_scheme_document_requirements_loaded",
+          "line": 24,
+          "assert_count": 5
+        },
+        {
+          "name": "test_scheme_document_requirements_not_found",
+          "line": 38,
+          "assert_count": 1
+        },
+        {
+          "name": "test_api_get_scheme_documents_success",
+          "line": 48,
+          "assert_count": 10
+        },
+        {
+          "name": "test_api_get_scheme_documents_404",
+          "line": 67,
+          "assert_count": 2
+        },
+        {
+          "name": "test_api_audit_missing_all_documents",
+          "line": 78,
+          "assert_count": 7
+        },
+        {
+          "name": "test_api_audit_with_matching_valid_documents",
+          "line": 104,
+          "assert_count": 5
+        },
+        {
+          "name": "test_api_audit_expired_document_detection",
+          "line": 167,
+          "assert_count": 3
+        },
+        {
+          "name": "test_api_audit_unreadable_document_handling",
+          "line": 195,
+          "assert_count": 3
+        },
+        {
+          "name": "test_api_get_scheme_factsheet_success",
+          "line": 226,
+          "assert_count": 6
+        },
+        {
+          "name": "test_api_get_scheme_factsheet_404",
+          "line": 240,
+          "assert_count": 1
+        },
+        {
+          "name": "test_api_admin_scheme_coverage_report",
+          "line": 250,
+          "assert_count": 6
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_document_review.py": {
+      "test_count": 4,
+      "assert_count": 30,
+      "tests": [
+        {
+          "name": "test_pdf_review_correction_preserves_original_and_resolves_conflict",
+          "line": 72,
+          "assert_count": 19
+        },
+        {
+          "name": "test_image_review_can_be_completed_and_then_becomes_read_only",
+          "line": 126,
+          "assert_count": 6
+        },
+        {
+          "name": "test_review_delete_removes_case_and_event_history",
+          "line": 172,
+          "assert_count": 4
+        },
+        {
+          "name": "test_review_correction_rejects_unknown_or_sensitive_fields",
+          "line": 192,
+          "assert_count": 1
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 9,
+      "monkeypatch_count": 6
+    },
+    "test_document_upload.py": {
+      "test_count": 5,
+      "assert_count": 46,
+      "tests": [
+        {
+          "name": "test_multi_page_pdf_is_rendered_and_each_page_is_sent_to_mocked_gemini",
+          "line": 48,
+          "assert_count": 12
+        },
+        {
+          "name": "test_image_upload_uses_mocked_gemini_and_returns_audit",
+          "line": 86,
+          "assert_count": 5
+        },
+        {
+          "name": "test_upload_rejects_unsupported_file_type_without_calling_gemini",
+          "line": 111,
+          "assert_count": 2
+        },
+        {
+          "name": "test_same_certificate_pdf_pages_are_grouped_and_page_outputs_are_preserved",
+          "line": 156,
+          "assert_count": 14
+        },
+        {
+          "name": "test_conflicting_pdf_page_values_are_not_merged_and_are_reported_with_page_evidence",
+          "line": 228,
+          "assert_count": 13
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 5,
+      "monkeypatch_count": 5
+    },
+    "test_end_to_end_citizen_journeys.py": {
+      "test_count": 6,
+      "assert_count": 66,
+      "tests": [
+        {
+          "name": "test_journey_a_discovery_trust_and_multilingual_explanation",
+          "line": 78,
+          "assert_count": 22
+        },
+        {
+          "name": "test_journey_b_interview_lifecycle_and_session_ownership",
+          "line": 166,
+          "assert_count": 11
+        },
+        {
+          "name": "test_journey_c_document_upload_and_session_bound_assessment",
+          "line": 228,
+          "assert_count": 8
+        },
+        {
+          "name": "test_journey_d_prerequisite_planner_and_portal_guidance",
+          "line": 292,
+          "assert_count": 11
+        },
+        {
+          "name": "test_journey_e_reviewer_correction_and_role_boundaries",
+          "line": 338,
+          "assert_count": 7
+        },
+        {
+          "name": "test_journey_f_adversarial_security_validation",
+          "line": 409,
+          "assert_count": 7
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 10,
+      "monkeypatch_count": 6
+    },
+    "test_explanation.py": {
+      "test_count": 13,
+      "assert_count": 102,
+      "tests": [
+        {
+          "name": "test_english_explanation",
+          "line": 54,
+          "assert_count": 10
+        },
+        {
+          "name": "test_marathi_explanation",
+          "line": 81,
+          "assert_count": 10
+        },
+        {
+          "name": "test_hindi_explanation",
+          "line": 109,
+          "assert_count": 10
+        },
+        {
+          "name": "test_missing_translation_fallback",
+          "line": 137,
+          "assert_count": 4
+        },
+        {
+          "name": "test_true_false_and_unknown_conditions",
+          "line": 147,
+          "assert_count": 13
+        },
+        {
+          "name": "test_and_or_short_circuit_explanation_consistency",
+          "line": 187,
+          "assert_count": 14
+        },
+        {
+          "name": "test_source_reference_preservation",
+          "line": 272,
+          "assert_count": 10
+        },
+        {
+          "name": "test_citizen_reported_versus_document_verified_values",
+          "line": 291,
+          "assert_count": 6
+        },
+        {
+          "name": "test_unverified_scheme_status_wording",
+          "line": 355,
+          "assert_count": 5
+        },
+        {
+          "name": "test_no_raw_ast_terms_in_citizen_facing_output",
+          "line": 366,
+          "assert_count": 1
+        },
+        {
+          "name": "test_no_claim_of_government_approval",
+          "line": 390,
+          "assert_count": 2
+        },
+        {
+          "name": "test_all_seven_candidate_schemes_remain_under_review",
+          "line": 406,
+          "assert_count": 7
+        },
+        {
+          "name": "test_api_explain_endpoint",
+          "line": 444,
+          "assert_count": 10
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_fail_closed_activation.py": {
+      "test_count": 17,
+      "assert_count": 20,
+      "tests": [
+        {
+          "name": "test_active_scheme_with_empty_evidence_raises",
+          "line": 70,
+          "assert_count": 0
+        },
+        {
+          "name": "test_active_scheme_with_missing_condition_ids_raises",
+          "line": 88,
+          "assert_count": 0
+        },
+        {
+          "name": "test_active_scheme_with_orphan_evidence_raises",
+          "line": 107,
+          "assert_count": 0
+        },
+        {
+          "name": "test_active_scheme_with_duplicate_ast_condition_ids_raises",
+          "line": 127,
+          "assert_count": 0
+        },
+        {
+          "name": "test_active_scheme_with_extracted_unverified_evidence_raises",
+          "line": 152,
+          "assert_count": 0
+        },
+        {
+          "name": "test_active_scheme_with_analyst_reviewed_evidence_raises",
+          "line": 181,
+          "assert_count": 0
+        },
+        {
+          "name": "test_active_scheme_with_invalid_effective_dates_raises",
+          "line": 212,
+          "assert_count": 0
+        },
+        {
+          "name": "test_active_scheme_rejects_placeholder_approval_metadata",
+          "line": 222,
+          "assert_count": 0
+        },
+        {
+          "name": "test_legal_approved_evidence_without_trusted_publication_returns_needs_review",
+          "line": 245,
+          "assert_count": 2
+        },
+        {
+          "name": "test_scheme_with_expired_effective_dates_returns_needs_review",
+          "line": 268,
+          "assert_count": 2
+        },
+        {
+          "name": "test_scheme_with_future_effective_date_returns_needs_review",
+          "line": 296,
+          "assert_count": 2
+        },
+        {
+          "name": "test_authorized_scheme_with_complete_evidence_returns_eligible",
+          "line": 323,
+          "assert_count": 2
+        },
+        {
+          "name": "test_external_json_claiming_active_without_evidence_rejected_on_load",
+          "line": 357,
+          "assert_count": 0
+        },
+        {
+          "name": "test_external_json_with_evidence_cannot_self_authorize_publication",
+          "line": 379,
+          "assert_count": 5
+        },
+        {
+          "name": "test_external_json_overriding_demo_scheme_fails_closed",
+          "line": 413,
+          "assert_count": 3
+        },
+        {
+          "name": "test_ineligible_profile_under_gate_returns_ineligible",
+          "line": 448,
+          "assert_count": 2
+        },
+        {
+          "name": "test_missing_fields_under_gate_returns_needs_information",
+          "line": 471,
+          "assert_count": 2
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_final_security_hardening.py": {
+      "test_count": 11,
+      "assert_count": 52,
+      "tests": [
+        {
+          "name": "test_admin_bootstrap_one_time_only",
+          "line": 44,
+          "assert_count": 8
+        },
+        {
+          "name": "test_admin_provision_user_and_revocation",
+          "line": 89,
+          "assert_count": 10
+        },
+        {
+          "name": "test_secret_rotation_invalidates_all_prior_tokens",
+          "line": 147,
+          "assert_count": 2
+        },
+        {
+          "name": "test_ssrf_sync_backend_blocks_dns_rebinding_to_loopback_and_private",
+          "line": 165,
+          "assert_count": 0
+        },
+        {
+          "name": "test_ssrf_transport_integration_with_httpx",
+          "line": 203,
+          "assert_count": 0
+        },
+        {
+          "name": "test_retention_purge_protects_sqlite_wal_and_shm_files",
+          "line": 219,
+          "assert_count": 6
+        },
+        {
+          "name": "test_document_review_cascading_purge_and_retrieval",
+          "line": 259,
+          "assert_count": 6
+        },
+        {
+          "name": "test_interview_store_purge_on_restart",
+          "line": 318,
+          "assert_count": 3
+        },
+        {
+          "name": "test_citizen_cannot_access_reviewer_endpoints",
+          "line": 346,
+          "assert_count": 8
+        },
+        {
+          "name": "test_production_unauthenticated_reviewer_access_rejected",
+          "line": 380,
+          "assert_count": 4
+        },
+        {
+          "name": "test_rate_limiter_sensitive_routes_trigger_429",
+          "line": 403,
+          "assert_count": 5
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 14,
+      "monkeypatch_count": 7
+    },
+    "test_focused_assessment_and_progress.py": {
+      "test_count": 5,
+      "assert_count": 32,
+      "tests": [
+        {
+          "name": "test_scoped_assessment_generates_fresh_session_run",
+          "line": 20,
+          "assert_count": 6
+        },
+        {
+          "name": "test_scoped_assessment_focuses_on_target_scheme",
+          "line": 57,
+          "assert_count": 3
+        },
+        {
+          "name": "test_single_active_scheme_enforcement",
+          "line": 70,
+          "assert_count": 9
+        },
+        {
+          "name": "test_permanent_dismissal_removes_from_progress_and_recommendations",
+          "line": 114,
+          "assert_count": 5
+        },
+        {
+          "name": "test_profile_persistence_and_reset",
+          "line": 138,
+          "assert_count": 9
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_gemini_extractor.py": {
+      "test_count": 16,
+      "assert_count": 55,
+      "tests": [
+        {
+          "name": "test_gemini_extractor_normalizes_dates_and_preserves_evidence",
+          "line": 34,
+          "assert_count": 12
+        },
+        {
+          "name": "test_gemini_extractor_suppresses_full_aadhaar_from_fields_and_evidence",
+          "line": 76,
+          "assert_count": 3
+        },
+        {
+          "name": "test_missing_fields_remain_null_and_trigger_income_review_findings",
+          "line": 98,
+          "assert_count": 8
+        },
+        {
+          "name": "test_gemini_extractor_rejects_non_image_input",
+          "line": 124,
+          "assert_count": 1
+        },
+        {
+          "name": "test_gemini_extractor_missing_configuration",
+          "line": 141,
+          "assert_count": 1
+        },
+        {
+          "name": "test_gemini_extractor_sdk_unavailable",
+          "line": 155,
+          "assert_count": 1
+        },
+        {
+          "name": "test_gemini_extractor_reads_settings_and_default_model",
+          "line": 169,
+          "assert_count": 5
+        },
+        {
+          "name": "test_gemini_extractor_api_request_failure",
+          "line": 198,
+          "assert_count": 2
+        },
+        {
+          "name": "test_gemini_extractor_client_init_failure",
+          "line": 218,
+          "assert_count": 1
+        },
+        {
+          "name": "test_audit_upload_endpoint_handles_missing_configuration_safely",
+          "line": 236,
+          "assert_count": 4
+        },
+        {
+          "name": "test_audit_upload_endpoint_handles_api_failure_without_persisting_records",
+          "line": 262,
+          "assert_count": 4
+        },
+        {
+          "name": "test_gemini_extractor_ipv4_configuration_applied_to_gemini_client",
+          "line": 294,
+          "assert_count": 6
+        },
+        {
+          "name": "test_gemini_extractor_allows_disabling_force_ipv4",
+          "line": 310,
+          "assert_count": 1
+        },
+        {
+          "name": "test_gemini_extractor_other_application_networking_unaffected",
+          "line": 318,
+          "assert_count": 2
+        },
+        {
+          "name": "test_gemini_extractor_context_manager_closes_client",
+          "line": 336,
+          "assert_count": 3
+        },
+        {
+          "name": "test_gemini_extractor_custom_client_bypasses_custom_transport",
+          "line": 343,
+          "assert_count": 1
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 16,
+      "monkeypatch_count": 12
+    },
+    "test_golden_citizen_profiles.py": {
+      "test_count": 8,
+      "assert_count": 30,
+      "tests": [
+        {
+          "name": "test_all_10_golden_profiles_evaluate_deterministically",
+          "line": 152,
+          "assert_count": 6
+        },
+        {
+          "name": "test_student_golden_profile_matches_educational_schemes",
+          "line": 166,
+          "assert_count": 2
+        },
+        {
+          "name": "test_farmer_golden_profile_matches_agricultural_schemes",
+          "line": 182,
+          "assert_count": 2
+        },
+        {
+          "name": "test_woman_welfare_golden_profile_matches_ladki_bahin",
+          "line": 197,
+          "assert_count": 4
+        },
+        {
+          "name": "test_incomplete_profile_produces_needs_info",
+          "line": 210,
+          "assert_count": 3
+        },
+        {
+          "name": "test_income_boundary_strictly_disqualifies_over_threshold",
+          "line": 227,
+          "assert_count": 6
+        },
+        {
+          "name": "test_age_boundary_at_statutory_thresholds",
+          "line": 258,
+          "assert_count": 4
+        },
+        {
+          "name": "test_non_maharashtra_domicile_fail_closed",
+          "line": 287,
+          "assert_count": 3
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_ingestion_architecture.py": {
+      "test_count": 7,
+      "assert_count": 57,
+      "tests": [
+        {
+          "name": "test_allowlist_and_url_validation",
+          "line": 33,
+          "assert_count": 0
+        },
+        {
+          "name": "test_classify_source_kind",
+          "line": 49,
+          "assert_count": 5
+        },
+        {
+          "name": "test_store_snapshot_and_change_detection",
+          "line": 62,
+          "assert_count": 10
+        },
+        {
+          "name": "test_human_review_queue_lifecycle",
+          "line": 111,
+          "assert_count": 8
+        },
+        {
+          "name": "test_duplicate_scheme_and_alias_detection",
+          "line": 148,
+          "assert_count": 8
+        },
+        {
+          "name": "test_scheme_lineage_and_superseded_rules",
+          "line": 175,
+          "assert_count": 11
+        },
+        {
+          "name": "test_ingestion_api_endpoints",
+          "line": 197,
+          "assert_count": 15
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_interview_context_and_focused_assessment.py": {
+      "test_count": 11,
+      "assert_count": 68,
+      "tests": [
+        {
+          "name": "test_1_full_discovery_journey",
+          "line": 30,
+          "assert_count": 10
+        },
+        {
+          "name": "test_2_focused_scheme_eligibility",
+          "line": 102,
+          "assert_count": 10
+        },
+        {
+          "name": "test_3_stale_results_prevention",
+          "line": 156,
+          "assert_count": 11
+        },
+        {
+          "name": "test_4_new_discovery_interview_lifecycle",
+          "line": 228,
+          "assert_count": 6
+        },
+        {
+          "name": "test_5_new_focused_interview_preserves_target",
+          "line": 266,
+          "assert_count": 5
+        },
+        {
+          "name": "test_6_prepopulated_profile_evaluates_immediately",
+          "line": 305,
+          "assert_count": 6
+        },
+        {
+          "name": "test_7_missing_mandatory_field_results_in_needs_info",
+          "line": 339,
+          "assert_count": 4
+        },
+        {
+          "name": "test_8_nonexistent_or_cross_tenant_run_isolation",
+          "line": 366,
+          "assert_count": 3
+        },
+        {
+          "name": "test_9_run_isolation_under_concurrency",
+          "line": 404,
+          "assert_count": 6
+        },
+        {
+          "name": "test_10_multilingual_interview_flow",
+          "line": 445,
+          "assert_count": 5
+        },
+        {
+          "name": "test_11_invalid_scheme_rejection",
+          "line": 470,
+          "assert_count": 2
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_interview_parsing.py": {
+      "test_count": 7,
+      "assert_count": 27,
+      "tests": [
+        {
+          "name": "test_income_parser_supports_lakh_and_commas",
+          "line": 5,
+          "assert_count": 3
+        },
+        {
+          "name": "test_devanagari_and_indian_number_formatting_regression",
+          "line": 11,
+          "assert_count": 5
+        },
+        {
+          "name": "test_yes_no_parser_supports_marathi_and_hindi",
+          "line": 25,
+          "assert_count": 6
+        },
+        {
+          "name": "test_gender_and_residence_marathi_hindi",
+          "line": 34,
+          "assert_count": 6
+        },
+        {
+          "name": "test_multilingual_validation_error_messages",
+          "line": 43,
+          "assert_count": 0
+        },
+        {
+          "name": "test_question_picker_skips_ruled_out_scheme_fields",
+          "line": 53,
+          "assert_count": 5
+        },
+        {
+          "name": "test_question_picker_keeps_demo_scheme_when_known_condition_fails",
+          "line": 110,
+          "assert_count": 2
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_interview_persistence.py": {
+      "test_count": 2,
+      "assert_count": 8,
+      "tests": [
+        {
+          "name": "test_interview_checkpoint_survives_store_recreation",
+          "line": 30,
+          "assert_count": 5
+        },
+        {
+          "name": "test_expired_interview_session_purges_its_checkpoints",
+          "line": 62,
+          "assert_count": 3
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_interview_start_sanitization.py": {
+      "test_count": 5,
+      "assert_count": 19,
+      "tests": [
+        {
+          "name": "test_citizen_profile_strips_metadata_envelope",
+          "line": 10,
+          "assert_count": 5
+        },
+        {
+          "name": "test_citizen_profile_maps_age_to_age_years",
+          "line": 30,
+          "assert_count": 2
+        },
+        {
+          "name": "test_interview_start_sanitizes_nested_and_extra_fields",
+          "line": 36,
+          "assert_count": 3
+        },
+        {
+          "name": "test_api_interview_start_with_profile_envelope_returns_200",
+          "line": 64,
+          "assert_count": 5
+        },
+        {
+          "name": "test_api_anonymous_interview_flow_start_and_answer",
+          "line": 86,
+          "assert_count": 4
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_interview_store_persistence.py": {
+      "test_count": 1,
+      "assert_count": 2,
+      "tests": [
+        {
+          "name": "test_sqlite_checkpoints_survive_store_reopen",
+          "line": 22,
+          "assert_count": 2
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_migrations_and_manual_ingestion.py": {
+      "test_count": 5,
+      "assert_count": 41,
+      "tests": [
+        {
+          "name": "test_sqlite_migration_runner_and_idempotency",
+          "line": 74,
+          "assert_count": 7
+        },
+        {
+          "name": "test_sqlite_backup_and_restore",
+          "line": 102,
+          "assert_count": 6
+        },
+        {
+          "name": "test_admin_db_status_and_migration_api",
+          "line": 142,
+          "assert_count": 12
+        },
+        {
+          "name": "test_air_gapped_manual_source_upload",
+          "line": 182,
+          "assert_count": 6
+        },
+        {
+          "name": "test_ingestion_compare_api",
+          "line": 215,
+          "assert_count": 10
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 2,
+      "monkeypatch_count": 2
+    },
+    "test_multilingual_voice.py": {
+      "test_count": 14,
+      "assert_count": 104,
+      "tests": [
+        {
+          "name": "test_devanagari_numeral_and_lakh_crore_conversions",
+          "line": 25,
+          "assert_count": 10
+        },
+        {
+          "name": "test_multilingual_yes_no_and_gender_and_residence",
+          "line": 46,
+          "assert_count": 18
+        },
+        {
+          "name": "test_voice_transcribe_mime_validation",
+          "line": 80,
+          "assert_count": 3
+        },
+        {
+          "name": "test_voice_transcribe_max_upload_size",
+          "line": 97,
+          "assert_count": 2
+        },
+        {
+          "name": "test_voice_transcribe_provider_and_language_validation",
+          "line": 108,
+          "assert_count": 4
+        },
+        {
+          "name": "test_bhashini_cloud_consent_enforcement",
+          "line": 127,
+          "assert_count": 7
+        },
+        {
+          "name": "test_whisper_local_transcription_mocked",
+          "line": 158,
+          "assert_count": 6
+        },
+        {
+          "name": "test_transcription_does_not_mutate_interview_without_answer_submission",
+          "line": 184,
+          "assert_count": 9
+        },
+        {
+          "name": "test_typed_answer_fallback_remains_functional",
+          "line": 227,
+          "assert_count": 2
+        },
+        {
+          "name": "test_multilingual_question_specs_and_choices",
+          "line": 246,
+          "assert_count": 9
+        },
+        {
+          "name": "test_interview_start_returns_localized_question_and_choices",
+          "line": 261,
+          "assert_count": 6
+        },
+        {
+          "name": "test_ui_translation_dictionary_completeness",
+          "line": 288,
+          "assert_count": 10
+        },
+        {
+          "name": "test_ui_contains_voice_recording_and_confirmation_elements",
+          "line": 310,
+          "assert_count": 11
+        },
+        {
+          "name": "test_no_sensitive_browser_storage_in_ui",
+          "line": 332,
+          "assert_count": 7
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 6,
+      "monkeypatch_count": 0
+    },
+    "test_municipal_and_jurisdiction_matching.py": {
+      "test_count": 26,
+      "assert_count": 211,
+      "tests": [
+        {
+          "name": "test_scenario_01_pune_municipal_corporation_matching_and_isolation",
+          "line": 36,
+          "assert_count": 14
+        },
+        {
+          "name": "test_scenario_02_pcmc_citizen_matching_and_isolation",
+          "line": 109,
+          "assert_count": 6
+        },
+        {
+          "name": "test_scenario_03_bmc_citizen_matching_and_isolation",
+          "line": 149,
+          "assert_count": 5
+        },
+        {
+          "name": "test_scenario_04_thane_citizen_matching_and_isolation",
+          "line": 186,
+          "assert_count": 5
+        },
+        {
+          "name": "test_scenario_05_navi_mumbai_citizen_matching_and_isolation",
+          "line": 221,
+          "assert_count": 5
+        },
+        {
+          "name": "test_scenario_06_municipal_council_citizen_matching_and_isolation",
+          "line": 255,
+          "assert_count": 7
+        },
+        {
+          "name": "test_scenario_07_rural_gram_panchayat_citizen_matching_and_isolation",
+          "line": 304,
+          "assert_count": 5
+        },
+        {
+          "name": "test_scenario_08_locality_and_pin_boundary_ambiguity",
+          "line": 340,
+          "assert_count": 11
+        },
+        {
+          "name": "test_scenario_09_municipality_change_invalidates_and_recalculates",
+          "line": 373,
+          "assert_count": 7
+        },
+        {
+          "name": "test_scenario_10_centrally_sponsored_scheme_with_local_authority",
+          "line": 421,
+          "assert_count": 9
+        },
+        {
+          "name": "test_all_29_municipal_corporations_live_directory",
+          "line": 462,
+          "assert_count": 9
+        },
+        {
+          "name": "test_corporation_wards_and_schemes_endpoints",
+          "line": 493,
+          "assert_count": 9
+        },
+        {
+          "name": "test_424_urban_local_bodies_complete_coverage",
+          "line": 514,
+          "assert_count": 9
+        },
+        {
+          "name": "test_residency_duration_statutory_evaluation",
+          "line": 541,
+          "assert_count": 5
+        },
+        {
+          "name": "test_division_scope_evaluation",
+          "line": 578,
+          "assert_count": 4
+        },
+        {
+          "name": "test_ward_scope_evaluation",
+          "line": 598,
+          "assert_count": 6
+        },
+        {
+          "name": "test_nagar_panchayat_scope_evaluation",
+          "line": 640,
+          "assert_count": 3
+        },
+        {
+          "name": "test_zilla_parishad_scope_evaluation",
+          "line": 667,
+          "assert_count": 3
+        },
+        {
+          "name": "test_special_area_scope_evaluation",
+          "line": 694,
+          "assert_count": 8
+        },
+        {
+          "name": "test_bmc_vs_neighbouring_corporations_isolation",
+          "line": 746,
+          "assert_count": 9
+        },
+        {
+          "name": "test_relocation_preserves_application_progress_and_unrelated_profile",
+          "line": 795,
+          "assert_count": 13
+        },
+        {
+          "name": "test_cantonment_board_isolation_and_matching",
+          "line": 867,
+          "assert_count": 18
+        },
+        {
+          "name": "test_tmc_vs_mira_bhayander_isolation",
+          "line": 943,
+          "assert_count": 6
+        },
+        {
+          "name": "test_nmmc_vs_panvel_isolation",
+          "line": 976,
+          "assert_count": 5
+        },
+        {
+          "name": "test_cantonment_and_zp_roster_integrity",
+          "line": 1006,
+          "assert_count": 13
+        },
+        {
+          "name": "test_parameterized_all_29_municipal_corporations",
+          "line": 1034,
+          "assert_count": 17
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_nlu.py": {
+      "test_count": 19,
+      "assert_count": 92,
+      "tests": [
+        {
+          "name": "test_natural_english_yes_recognition",
+          "line": 20,
+          "assert_count": 3
+        },
+        {
+          "name": "test_natural_marathi_yes_recognition",
+          "line": 40,
+          "assert_count": 3
+        },
+        {
+          "name": "test_natural_hindi_yes_recognition",
+          "line": 58,
+          "assert_count": 3
+        },
+        {
+          "name": "test_natural_english_no_recognition",
+          "line": 80,
+          "assert_count": 3
+        },
+        {
+          "name": "test_natural_marathi_no_recognition",
+          "line": 101,
+          "assert_count": 3
+        },
+        {
+          "name": "test_natural_hindi_no_recognition",
+          "line": 118,
+          "assert_count": 3
+        },
+        {
+          "name": "test_resident_state_contextual_negation_and_affirmation",
+          "line": 139,
+          "assert_count": 9
+        },
+        {
+          "name": "test_uncertainty_preservation_and_clarification",
+          "line": 158,
+          "assert_count": 2
+        },
+        {
+          "name": "test_contradiction_detection",
+          "line": 180,
+          "assert_count": 2
+        },
+        {
+          "name": "test_indian_fractional_lakh_amounts",
+          "line": 199,
+          "assert_count": 9
+        },
+        {
+          "name": "test_spoken_age_and_income_expressions",
+          "line": 216,
+          "assert_count": 6
+        },
+        {
+          "name": "test_male_gender_recognition_english",
+          "line": 229,
+          "assert_count": 3
+        },
+        {
+          "name": "test_male_gender_recognition_marathi_and_hindi",
+          "line": 249,
+          "assert_count": 6
+        },
+        {
+          "name": "test_female_gender_recognition_multilingual",
+          "line": 280,
+          "assert_count": 9
+        },
+        {
+          "name": "test_male_female_strict_distinction",
+          "line": 331,
+          "assert_count": 8
+        },
+        {
+          "name": "test_other_gender_recognition",
+          "line": 344,
+          "assert_count": 3
+        },
+        {
+          "name": "test_prefer_not_to_say_preservation",
+          "line": 361,
+          "assert_count": 5
+        },
+        {
+          "name": "test_ambiguous_and_uncertain_gender_responses",
+          "line": 384,
+          "assert_count": 2
+        },
+        {
+          "name": "test_successful_transition_to_next_question_after_gender",
+          "line": 403,
+          "assert_count": 10
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_pdf_conflicts.py": {
+      "test_count": 9,
+      "assert_count": 35,
+      "tests": [
+        {
+          "name": "test_conflicting_income_is_reported_with_page_evidence_and_pages_stay_separate",
+          "line": 53,
+          "assert_count": 10
+        },
+        {
+          "name": "test_conflicting_financial_year_is_reported",
+          "line": 75,
+          "assert_count": 4
+        },
+        {
+          "name": "test_conflicting_name_and_dob_are_reported_as_identity_conflicts",
+          "line": 90,
+          "assert_count": 4
+        },
+        {
+          "name": "test_conflicting_masked_certificate_numbers_are_reported_without_echoing_identifier",
+          "line": 106,
+          "assert_count": 4
+        },
+        {
+          "name": "test_full_twelve_digit_id_is_redacted_from_page_evidence",
+          "line": 121,
+          "assert_count": 2
+        },
+        {
+          "name": "test_fields_are_not_compared_across_different_document_types_unless_identity_fields",
+          "line": 134,
+          "assert_count": 2
+        },
+        {
+          "name": "test_matching_page_extractions_do_not_create_conflict_findings",
+          "line": 147,
+          "assert_count": 1
+        },
+        {
+          "name": "test_page_conflicts_are_added_to_audit_and_duplicate_identity_findings_are_replaced",
+          "line": 156,
+          "assert_count": 7
+        },
+        {
+          "name": "test_empty_page_list_does_not_change_existing_audit",
+          "line": 179,
+          "assert_count": 1
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_pdf_grouping.py": {
+      "test_count": 8,
+      "assert_count": 17,
+      "tests": [
+        {
+          "name": "test_matching_consecutive_pages_group_into_one_logical_document",
+          "line": 36,
+          "assert_count": 7
+        },
+        {
+          "name": "test_fields_split_across_matching_pages_are_combined",
+          "line": 51,
+          "assert_count": 3
+        },
+        {
+          "name": "test_conflicting_financial_years_remain_separate_documents",
+          "line": 65,
+          "assert_count": 2
+        },
+        {
+          "name": "test_conflicting_identity_fields_remain_separate_documents",
+          "line": 78,
+          "assert_count": 1
+        },
+        {
+          "name": "test_different_document_types_remain_separate_documents",
+          "line": 90,
+          "assert_count": 1
+        },
+        {
+          "name": "test_pages_without_a_shared_identity_anchor_remain_separate",
+          "line": 102,
+          "assert_count": 1
+        },
+        {
+          "name": "test_nonconsecutive_pages_are_not_grouped",
+          "line": 114,
+          "assert_count": 1
+        },
+        {
+          "name": "test_grouping_rejects_empty_input",
+          "line": 126,
+          "assert_count": 1
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_pdf_preprocess.py": {
+      "test_count": 1,
+      "assert_count": 2,
+      "tests": [
+        {
+          "name": "test_pdf_pages_render_in_memory",
+          "line": 8,
+          "assert_count": 2
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_planner_retrieval_ingestion.py": {
+      "test_count": 8,
+      "assert_count": 13,
+      "tests": [
+        {
+          "name": "test_plan_uses_rts_timelines_and_does_not_sum_parallel_requests",
+          "line": 12,
+          "assert_count": 4
+        },
+        {
+          "name": "test_known_documents_are_not_recreated",
+          "line": 23,
+          "assert_count": 1
+        },
+        {
+          "name": "test_bm25_search_returns_source_grounded_hit",
+          "line": 29,
+          "assert_count": 1
+        },
+        {
+          "name": "test_ingestion_rejects_non_allowlisted_and_http_urls",
+          "line": 38,
+          "assert_count": 0
+        },
+        {
+          "name": "test_plan_missing_service_time_does_not_invent_one",
+          "line": 45,
+          "assert_count": 2
+        },
+        {
+          "name": "test_verified_dependency_is_topologically_ordered_and_timeline_is_chain_sum",
+          "line": 54,
+          "assert_count": 3
+        },
+        {
+          "name": "test_unknown_timeline_coverage_is_explicit",
+          "line": 67,
+          "assert_count": 2
+        },
+        {
+          "name": "test_verified_dependency_cycle_is_rejected",
+          "line": 73,
+          "assert_count": 0
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_production_security.py": {
+      "test_count": 7,
+      "assert_count": 37,
+      "tests": [
+        {
+          "name": "test_session_manager_hmac_and_tamper_resistance",
+          "line": 28,
+          "assert_count": 7
+        },
+        {
+          "name": "test_rbac_endpoint_access_control",
+          "line": 53,
+          "assert_count": 9
+        },
+        {
+          "name": "test_ssrf_protection_and_allowlist",
+          "line": 88,
+          "assert_count": 2
+        },
+        {
+          "name": "test_upload_security_and_magic_bytes",
+          "line": 123,
+          "assert_count": 5
+        },
+        {
+          "name": "test_rate_limiter_throttling",
+          "line": 151,
+          "assert_count": 5
+        },
+        {
+          "name": "test_audit_logging_and_sensitive_data_redaction",
+          "line": 166,
+          "assert_count": 3
+        },
+        {
+          "name": "test_monitoring_probes",
+          "line": 187,
+          "assert_count": 6
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_reviewer_ui.py": {
+      "test_count": 1,
+      "assert_count": 5,
+      "tests": [
+        {
+          "name": "test_reviewer_dashboard_route_serves_html",
+          "line": 7,
+          "assert_count": 5
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_rule_boundary_matrix.py": {
+      "test_count": 28,
+      "assert_count": 48,
+      "tests": [
+        {
+          "name": "test_age_exact_minimum_boundary_eligible",
+          "line": 33,
+          "assert_count": 1
+        },
+        {
+          "name": "test_age_below_minimum_boundary_ineligible",
+          "line": 39,
+          "assert_count": 1
+        },
+        {
+          "name": "test_age_exact_maximum_boundary_eligible",
+          "line": 45,
+          "assert_count": 1
+        },
+        {
+          "name": "test_age_above_maximum_boundary_ineligible",
+          "line": 51,
+          "assert_count": 1
+        },
+        {
+          "name": "test_age_composite_range_matrix",
+          "line": 57,
+          "assert_count": 5
+        },
+        {
+          "name": "test_income_exact_threshold_eligible",
+          "line": 76,
+          "assert_count": 1
+        },
+        {
+          "name": "test_income_threshold_plus_one_ineligible",
+          "line": 82,
+          "assert_count": 1
+        },
+        {
+          "name": "test_income_threshold_minus_one_eligible",
+          "line": 88,
+          "assert_count": 1
+        },
+        {
+          "name": "test_income_zero_eligible",
+          "line": 94,
+          "assert_count": 1
+        },
+        {
+          "name": "test_income_negative_rejected_by_model",
+          "line": 100,
+          "assert_count": 0
+        },
+        {
+          "name": "test_three_valued_condition_outcomes",
+          "line": 117,
+          "assert_count": 2
+        },
+        {
+          "name": "test_three_valued_all_short_circuit_false_with_unknown",
+          "line": 125,
+          "assert_count": 1
+        },
+        {
+          "name": "test_three_valued_all_with_true_and_unknown",
+          "line": 140,
+          "assert_count": 2
+        },
+        {
+          "name": "test_three_valued_any_short_circuit_true_with_unknown",
+          "line": 156,
+          "assert_count": 2
+        },
+        {
+          "name": "test_three_valued_any_all_unknown",
+          "line": 172,
+          "assert_count": 2
+        },
+        {
+          "name": "test_three_valued_not_operator",
+          "line": 187,
+          "assert_count": 4
+        },
+        {
+          "name": "test_temporal_dob_boundary_on_cut_off_date",
+          "line": 203,
+          "assert_count": 2
+        },
+        {
+          "name": "test_temporal_dob_evaluated_on_different_reference_dates",
+          "line": 222,
+          "assert_count": 2
+        },
+        {
+          "name": "test_temporal_requires_dob_when_cutoff_date_used_and_only_age_years_provided",
+          "line": 240,
+          "assert_count": 2
+        },
+        {
+          "name": "test_scheme_level_eligibility_reference_date_inheritance",
+          "line": 256,
+          "assert_count": 1
+        },
+        {
+          "name": "test_evidence_coverage_100_percent",
+          "line": 279,
+          "assert_count": 4
+        },
+        {
+          "name": "test_evidence_coverage_missing_evidence",
+          "line": 322,
+          "assert_count": 3
+        },
+        {
+          "name": "test_evidence_coverage_duplicate_ast_condition_ids",
+          "line": 348,
+          "assert_count": 2
+        },
+        {
+          "name": "test_evidence_coverage_orphan_evidence",
+          "line": 373,
+          "assert_count": 2
+        },
+        {
+          "name": "test_active_scheme_with_incomplete_evidence_raises",
+          "line": 404,
+          "assert_count": 0
+        },
+        {
+          "name": "test_legal_approval_metadata_rejects_placeholder_approvers",
+          "line": 441,
+          "assert_count": 0
+        },
+        {
+          "name": "test_rule_evidence_rejects_placeholder_reviewer",
+          "line": 453,
+          "assert_count": 0
+        },
+        {
+          "name": "test_demo_schemes_always_return_needs_review",
+          "line": 473,
+          "assert_count": 4
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_rule_engine.py": {
+      "test_count": 14,
+      "assert_count": 30,
+      "tests": [
+        {
+          "name": "test_missing_field_is_unknown_not_false",
+          "line": 10,
+          "assert_count": 2
+        },
+        {
+          "name": "test_all_short_circuits_false_even_when_another_field_missing",
+          "line": 17,
+          "assert_count": 1
+        },
+        {
+          "name": "test_catalog_fixtures_have_hash_valid_sources",
+          "line": 26,
+          "assert_count": 3
+        },
+        {
+          "name": "test_active_rule_requires_audit_trail",
+          "line": 34,
+          "assert_count": 0
+        },
+        {
+          "name": "test_approved_rule_decision_uses_deterministic_rules",
+          "line": 46,
+          "assert_count": 1
+        },
+        {
+          "name": "test_missing_field_results_in_needs_information",
+          "line": 72,
+          "assert_count": 3
+        },
+        {
+          "name": "test_rule_schema_rejects_unapproved_fields",
+          "line": 95,
+          "assert_count": 0
+        },
+        {
+          "name": "test_demo_fixtures_cannot_claim_confirmed_eligibility",
+          "line": 99,
+          "assert_count": 3
+        },
+        {
+          "name": "test_condition_breakdown_identifies_matched_failed_and_unknown",
+          "line": 126,
+          "assert_count": 4
+        },
+        {
+          "name": "test_any_passes_when_one_alternative_matches",
+          "line": 162,
+          "assert_count": 1
+        },
+        {
+          "name": "test_not_reverses_a_condition",
+          "line": 178,
+          "assert_count": 1
+        },
+        {
+          "name": "test_not_does_not_convert_missing_information_to_true",
+          "line": 193,
+          "assert_count": 2
+        },
+        {
+          "name": "test_condition_tree_preserves_any_group_result",
+          "line": 206,
+          "assert_count": 5
+        },
+        {
+          "name": "test_condition_tree_preserves_not_group_result",
+          "line": 234,
+          "assert_count": 4
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_security_remediation.py": {
+      "test_count": 12,
+      "assert_count": 81,
+      "tests": [
+        {
+          "name": "test_public_session_creation_rejects_privileged_roles",
+          "line": 36,
+          "assert_count": 8
+        },
+        {
+          "name": "test_admin_auth_provisioning_requires_valid_bootstrap_key",
+          "line": 57,
+          "assert_count": 6
+        },
+        {
+          "name": "test_admin_auth_provisioning_fails_closed_when_unconfigured",
+          "line": 90,
+          "assert_count": 2
+        },
+        {
+          "name": "test_interview_thread_ownership_isolation",
+          "line": 108,
+          "assert_count": 11
+        },
+        {
+          "name": "test_reviewer_dashboard_and_review_endpoints_rbac",
+          "line": 182,
+          "assert_count": 6
+        },
+        {
+          "name": "test_rate_limiting_enforcement",
+          "line": 221,
+          "assert_count": 3
+        },
+        {
+          "name": "test_retention_purge_cleans_sqlite_stores",
+          "line": 238,
+          "assert_count": 5
+        },
+        {
+          "name": "test_ssrf_and_dns_rebinding_protection",
+          "line": 300,
+          "assert_count": 0
+        },
+        {
+          "name": "test_audio_magic_byte_validation",
+          "line": 333,
+          "assert_count": 6
+        },
+        {
+          "name": "test_production_secrets_validation_fails_closed",
+          "line": 368,
+          "assert_count": 0
+        },
+        {
+          "name": "test_sgnay_policy_disability_tier_distinction",
+          "line": 403,
+          "assert_count": 13
+        },
+        {
+          "name": "test_sgnay_disability_boundary_and_missing_information",
+          "line": 488,
+          "assert_count": 21
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 4,
+      "monkeypatch_count": 4
+    },
+    "test_supreme_master_capabilities.py": {
+      "test_count": 8,
+      "assert_count": 88,
+      "tests": [
+        {
+          "name": "test_source_registry_data_integrity",
+          "line": 20,
+          "assert_count": 13
+        },
+        {
+          "name": "test_public_services_registry_integrity",
+          "line": 45,
+          "assert_count": 10
+        },
+        {
+          "name": "test_application_channels_registry_integrity",
+          "line": 64,
+          "assert_count": 8
+        },
+        {
+          "name": "test_api_source_registry_endpoints",
+          "line": 83,
+          "assert_count": 17
+        },
+        {
+          "name": "test_api_application_tracking_lifecycle_and_invariants",
+          "line": 125,
+          "assert_count": 14
+        },
+        {
+          "name": "test_lifecycle_monitor_and_publication_suspension",
+          "line": 172,
+          "assert_count": 10
+        },
+        {
+          "name": "test_canonical_schemes_inventory_integrity",
+          "line": 211,
+          "assert_count": 10
+        },
+        {
+          "name": "test_api_canonical_schemes_endpoints",
+          "line": 236,
+          "assert_count": 6
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_three_citizen_journeys.py": {
+      "test_count": 3,
+      "assert_count": 33,
+      "tests": [
+        {
+          "name": "test_journey_find_schemes_for_me_lifecycle",
+          "line": 20,
+          "assert_count": 14
+        },
+        {
+          "name": "test_journey_explore_schemes_catalogue_and_focused_assessment",
+          "line": 81,
+          "assert_count": 11
+        },
+        {
+          "name": "test_journey_prepare_my_application_resume_and_empty_state",
+          "line": 127,
+          "assert_count": 8
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    },
+    "test_trust_verification_ui.py": {
+      "test_count": 4,
+      "assert_count": 38,
+      "tests": [
+        {
+          "name": "test_determine_trust_status_lifecycle",
+          "line": 69,
+          "assert_count": 5
+        },
+        {
+          "name": "test_candidate_schemes_trust_status_strictly_unauthorized",
+          "line": 101,
+          "assert_count": 6
+        },
+        {
+          "name": "test_generate_trust_report_multilingual",
+          "line": 127,
+          "assert_count": 15
+        },
+        {
+          "name": "test_trust_api_endpoints",
+          "line": 159,
+          "assert_count": 12
+        }
+      ],
+      "skips": [],
+      "xfails": [],
+      "mocks_count": 0,
+      "monkeypatch_count": 0
+    }
+  },
+  "summary": {
+    "total_files": 44,
+    "total_tests": 398,
+    "total_asserts": 1902,
+    "total_skips": 0,
+    "total_xfails": 0,
+    "total_mocks": 83,
+    "total_monkeypatches": 59
+  }
+}

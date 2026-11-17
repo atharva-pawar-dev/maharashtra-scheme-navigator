@@ -1,0 +1,35 @@
+schema_version: 1
+authorization_level: A0            # A0 local | A1 free-tier staging | A2 paid up to budget | A3 public production
+monthly_budget_inr: 0
+cloud:
+  provider: ""                     # aws | gcp | azure | oci | other | none
+  region: ""                       # India region unless counsel approves otherwise
+  credentials_source: ""           # name of the already-configured CLI profile / secret store. NEVER the secret itself.
+domain:
+  production_host: ""
+  staging_host: ""
+  dns_controlled_by: ""
+operator:
+  legal_entity_name: ""
+  registered_address: ""
+  support_email: ""
+  privacy_contact_email: ""
+  security_contact_email: ""
+  grievance_officer: { name: "", email: "", phone: "" }
+owners:
+  infrastructure: ""
+  security: ""
+  privacy: ""
+  scheme_content: ""
+  citizen_support: ""
+  incident_commander: ""
+approved_external_providers: []    # each: {name, purpose, data_classes_allowed, region, terms_reviewed_on, approved_by}
+legal:
+  counsel_review_completed: false
+  counsel_review_ref: ""
+security:
+  external_vapt: { status: none, vendor: "", report_ref: "", criticals_open: null, highs_open: null }
+launch:
+  public_launch_approved: false
+  approved_by: ""
+  declared_peak: { concurrent_sessions: 150, requests_per_second: 40, concurrent_uploads: 10 }
