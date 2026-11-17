@@ -46,3 +46,7 @@
 | C-039 | Static HTML templates comply with WCAG 2.1 AA and GIGW landmark standards | E-WS12-001 | CONFIRMED | Verified in `test_static_html_accessibility_wcag_and_gigw`. |
 | C-040 | Trilingual localisation (MR, HI, EN) and fallback verified across data and notices | E-WS12-001 | CONFIRMED | Verified in `test_multilingual_text_container_and_fallbacks` and `test_legal_notices_trilingual_coverage`. |
 | C-041 | Deterministic rule engine evaluation p95 latency is 0.444ms (< 500ms SLA ceiling) | E-WS12-001 | CONFIRMED | Verified in `test_deterministic_rule_engine_latency_sla` and `scripts/benchmark_latency.py`. |
+| C-042 | Non-sanctioning advisory disclaimer prominently anchored across top banner, pre-assessment, and footer | E-WS13-001 | CONFIRMED | Verified in `test_top_banner_disclaimer_present` and `test_footer_independent_platform_notice`. |
+| C-043 | User-facing templates free of Lorem Ipsum and mock placeholder tokens | E-WS13-001 | CONFIRMED | Verified in `test_zero_lorem_ipsum_or_forbidden_mock_tokens`. |
+| C-044 | Citizen issue reporting active with ticket generation and trilingual acknowledgement | E-WS13-001 | CONFIRMED | Verified in `test_trust_issue_reporting_integration`. |
+| C-045 | Operations runbooks cover deployments, CERT-In incidents, secret rotations, and RACI matrix | E-WS14-001 | CONFIRMED | Authored and committed in `docs/production/operations_runbook.md`. |

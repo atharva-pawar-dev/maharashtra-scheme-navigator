@@ -63,3 +63,10 @@
 | LEDGER-054 | 2026-11-17 | BENCHMARK | WS12 | Evaluated 2,700 evaluations: p95 latency 0.444ms (< 500ms SLA), throughput 5,500 evals/sec. | PASS |
 | LEDGER-055 | 2026-11-17 | TEST | WS12 | 4 tests passing in `tests/test_quality_and_performance.py`. | PASS |
 | LEDGER-056 | 2026-11-17 | EVIDENCE | WS12 | Recorded `release/evidence/ws12/E-WS12-001_quality.json`. | APPROVED |
+| LEDGER-057 | 2026-11-17 | TRUST | WS13 | Verified prominent advisory disclaimers and non-sanctioning body status on all public views. | PASS |
+| LEDGER-058 | 2026-11-17 | CONTENT | WS13 | Zero-placeholder audit confirmed 0 occurrences of Lorem Ipsum or mock data. | PASS |
+| LEDGER-059 | 2026-11-17 | TEST | WS13 | 5 tests passing in `tests/test_trust_surface_and_notices.py`. | PASS |
+| LEDGER-060 | 2026-11-17 | EVIDENCE | WS13 | Recorded `release/evidence/ws13/E-WS13-001_trust_surface.json`. | APPROVED |
+| LEDGER-061 | 2026-11-17 | RUNBOOK | WS14 | Authored comprehensive operations runbooks at `docs/production/operations_runbook.md`. | APPROVED |
+| LEDGER-062 | 2026-11-17 | RACI | WS14 | Documented RACI responsibility matrix for operational handoff. | APPROVED |
+| LEDGER-063 | 2026-11-17 | EVIDENCE | WS14 | Recorded `release/evidence/ws14/E-WS14-001_operations_handover.json`. | APPROVED |

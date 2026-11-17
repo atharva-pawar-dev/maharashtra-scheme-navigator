@@ -1,5 +1,5 @@
 ---
-current_workstream: WS13
+current_workstream: WS15
 completed_workstreams:
   - WS0
   - WS1
@@ -14,6 +14,8 @@ completed_workstreams:
   - WS10
   - WS11
   - WS12
+  - WS13
+  - WS14
 open_blockers:
   - gate: G4
     reason: "No local PostgreSQL 16+ daemon running on 127.0.0.1:5432 and Docker engine not installed on host"
@@ -154,4 +156,24 @@ utc_timestamp: 2026-11-17T17:38:00Z
   - Quality specification committed at `docs/production/quality.md`.
   - Evidence recorded in `release/evidence/ws12/E-WS12-001_quality.json`.
 
-- **Next Workstream:** WS13 — Trust Surface and Statutory Notice Alignment.
+- **WS13 Trust Surface and Statutory Notice Alignment Complete:**
+  - Citizen trust surface audited: prominent top banner with ARIA `role="note"`, pre-assessment cards, and footer advisory disclaimers.
+  - Statutory disclosures explicitly state Maharashtra Scheme Navigator is an independent advisory tool and NOT an official government sanctioning authority.
+  - Trilingual parity verified across English, Marathi, and Hindi statutory notices.
+  - Zero placeholder text: 0 occurrences of `Lorem ipsum` or mock data across user-facing HTML templates.
+  - Official grievance redressal and government portals linked (Aaple Sarkar, MahaDBT, Maharashtra State Portal).
+  - Issue reporting endpoint `POST /trust/report-issue` active with ticket tracking.
+  - 5 automated tests passing in `tests/test_trust_surface_and_notices.py`.
+  - Specification committed at `docs/production/trust_surface.md`.
+  - Evidence recorded in `release/evidence/ws13/E-WS13-001_trust_surface.json`.
+
+- **WS14 Operations Runbooks and Handover Complete:**
+  - Comprehensive operations manual committed at `docs/production/operations_runbook.md`.
+  - Authored routine deployment runbook with zero downtime rolling update protocol.
+  - Authored monitoring and alerting runbook with `/healthz` and `/readyz` SLAs.
+  - Authored cryptographic secret and key rotation runbook (90d auth secret, 180d signing key).
+  - Authored CERT-In 6-hour mandatory cyber incident response and escalation runbook (Sev-1 to Sev-4).
+  - Authored RACI operations ownership matrix across 5 organizational roles.
+  - Evidence recorded in `release/evidence/ws14/E-WS14-001_operations_handover.json`.
+
+- **Next Workstream:** WS15 — Full Acceptance, Canary Mutation Check & Mechanically Computed Release Decision.

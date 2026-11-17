@@ -1,0 +1,28 @@
+{
+  "workstream": "WS13",
+  "evidence_id": "E-WS13-001",
+  "timestamp": "2026-11-17T17:55:00Z",
+  "status": "PASS",
+  "description": "Citizen trust surface verification, statutory advisory disclaimers, zero-placeholder audit, and grievance reporting integration",
+  "artifacts": {
+    "specification": "docs/production/trust_surface.md",
+    "test_suite": "tests/test_trust_surface_and_notices.py"
+  },
+  "disclaimer_audit": {
+    "non_government_sanctioning_authority": true,
+    "top_banner_role_note": true,
+    "pre_assessment_warning": true,
+    "footer_advisory_anchor": true,
+    "trilingual_coverage": ["en", "mr", "hi"]
+  },
+  "content_hygiene": {
+    "lorem_ipsum_occurrences": 0,
+    "mock_placeholders_occurrences": 0,
+    "clean_templates": ["static/index.html", "static/reviewer.html"]
+  },
+  "grievance_and_reporting": {
+    "official_portals_linked": ["Aaple Sarkar", "MahaDBT", "Maharashtra State Portal"],
+    "issue_reporting_endpoint": "POST /trust/report-issue",
+    "ticket_generation": true
+  }
+}
