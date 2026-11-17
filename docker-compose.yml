@@ -1,0 +1,32 @@
+services:
+  api:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      APP_ENV: ${APP_ENV:-local}
+      DATA_RETENTION_HOURS: "${DATA_RETENTION_HOURS:-24}"
+      PRIVILEGED_SESSION_TTL_HOURS: "${PRIVILEGED_SESSION_TTL_HOURS:-1}"
+      SCHEME_NAVIGATOR_AUTH_SECRET: ${SCHEME_NAVIGATOR_AUTH_SECRET:-}
+      ADMIN_BOOTSTRAP_KEY: ${ADMIN_BOOTSTRAP_KEY:-}
+      CATALOGUE_RELEASE_SIGNING_KEY: ${CATALOGUE_RELEASE_SIGNING_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      QDRANT_URL: http://qdrant:6333
+    command: ["uvicorn", "scheme_navigator.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
+    depends_on:
+      - qdrant
+    volumes:
+      - ./data:/app/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  qdrant:
+    image: qdrant/qdrant:v1.12.5
+    ports:
+      - "127.0.0.1:6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+volumes:
+  qdrant_data:

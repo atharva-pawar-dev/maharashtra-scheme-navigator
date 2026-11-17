@@ -1,0 +1,2440 @@
+SCHEME NAVIGATOR DIAGNOSTICS
+
+
+========== .\src\scheme_navigator\agents\interviewer.py ==========
+from __future__ import annotations
+
+import math
+import os
+import re
+from typing import Any, TypedDict
+
+# Restrict deserialization of persisted checkpoint payloads.
+os.environ.setdefault("LANGGRAPH_STRICT_MSGPACK", "true")
+
+try:
+    from langgraph.checkpoint.memory import MemorySaver
+    from langgraph.graph import END, START, StateGraph
+    from langgraph.types import Command as _LangGraphCommand, interrupt
+    Command = _LangGraphCommand
+    HAS_LANGGRAPH = True
+except ImportError:  # deterministic local fallback for environments where dependencies cannot be installed
+    HAS_LANGGRAPH = False
+
+    class Command:
+        def __init__(self, resume: str | None = None):
+            self.resume = resume
+
+    class _FakeInterrupt:
+        def __init__(self, value: dict[str, Any]):
+            self.value = value
+
+
+from scheme_navigator.domain.models import CitizenProfile, Language, Scheme
+from scheme_navigator.services.rule_engine import (
+    evaluate_node,
+    has_non_demo_approval_metadata,
+)
+
+
+class InterviewState(TypedDict, total=False):
+    thread_id: str
+    language: str
+    profile: dict[str, Any]
+    candidate_schemes: list[dict[str, Any]]
+    pending_answer: str | None
+    next_question: dict[str, Any] | None
+    asked_fields: list[str]
+    events: list[dict[str, Any]]
+    is_complete: bool
+    result_summary: list[dict[str, Any]]
+
+
+QUESTION_SPECS: dict[str, dict[str, Any]] = {
+    "resident_state": {
+        "kind": "text", "choices": ["Maharashtra", "Other state"],
+        "labels": {"en": "Do you currently reside in Maharashtra?", "mr": "तुम्ही सध्या महाराष्ट्रात राहता का?", "hi": "क्या आप वर्तमान में महाराष्ट्र में रहते हैं?"},
+    },
+    "gender": {
+        "kind": "enum", "choices": ["female", "male", "other", "prefer_not_to_say"],
+        "labels": {"en": "What is your gender?", "mr": "तुमचे लिंग काय आहे?", "hi": "आपका लिंग क्या है?"},
+    },
+    "age_years": {
+        "kind": "integer", "choices": [],
+        "labels": {"en": "How old are you (in completed years)?", "mr": "तुमचे पूर्ण वय किती वर्षे आहे?", "hi": "आपकी पूरी उम्र कितने वर्ष है?"},
+    },
+    "annual_family_income": {
+        "kind": "integer", "choices": [],
+        "labels": {"en": "What is your family's approximate annual income in INR?", "mr": "तुमच्या कुटुंबाचे अंदाजे वार्षिक उत्पन्न किती रुपये आहे?", "hi": "आपके परिवार की अनुमानित वार्षिक आय कितनी रुपये है?"},
+    },
+    "aadhaar_linked_bank_account": {
+        "kind": "bool", "choices": ["yes", "no"],
+        "labels": {"en": "Is your bank account Aadhaar-linked? Do not share your Aadhaar number.", "mr": "तुमचे बँक खाते आधारशी जोडलेले आहे का? आधार क्रमांक सांगू नका.", "hi": "क्या आपका बैंक खाता आधार से जुड़ा है? आधार नंबर साझा न करें।"},
+    },
+    "bpl": {
+        "kind": "bool", "choices": ["yes", "no"],
+        "labels": {"en": "Is your family officially listed as Below Poverty Line (BPL)?", "mr": "तुमचे कुटुंब अधिकृतपणे दारिद्र्यरेषेखाली (BPL) नोंदलेले आहे का?", "hi": "क्या आपका परिवार आधिकारिक रूप से गरीबी रेखा से नीचे (BPL) सूचीबद्ध है?"},
+    },
+    "receiving_other_pension": {
+        "kind": "bool", "choices": ["yes", "no"],
+        "labels": {"en": "Are you receiving a pension from another social-security scheme?", "mr": "तुम्हाला दुसऱ्या सामाजिक सुरक्षा योजनेतून पेन्शन मिळते का?", "hi": "क्या आपको किसी अन्य सामाजिक सुरक्षा योजना से पेंशन मिलती है?"},
+    },
+    "caste_category": {
+        "kind": "text", "choices": ["SC", "ST", "OBC", "VJNT", "SBC", "Open", "Other", "Prefer not to say"],
+        "labels": {"en": "Which caste category applies to you (or prefer not to say)?", "mr": "तुमच्यासाठी कोणता जात प्रवर्ग लागू होतो (किंवा सांगू इच्छित नाही)?", "hi": "आप पर कौन-सी जात श्रेणी लागू होती है (या बताना नहीं चाहते)?"},
+    },
+    "is_student": {
+        "kind": "bool", "choices": ["yes", "no"],
+        "labels": {"en": "Are you currently a student?", "mr": "तुम्ही सध्या विद्यार्थी आहात का?", "hi": "क्या आप वर्तमान में विद्यार्थी हैं?"},
+    },
+    "has_disability": {
+        "kind": "bool", "choices": ["yes", "no"],
+        "labels": {"en": "Do you have a disability certificate or officially recognized disability?", "mr": "तुमच्याकडे दिव्यांग प्रमाणपत्र किंवा अधिकृत दिव्यांगत्व मान्यता आहे का?", "hi": "क्या आपके पास दिव्यांगता प्रमाणपत्र या आधिकारिक मान्यता है?"},
+    },
+}
+
+
+def _walk_rules(node: dict[str, Any], out: list[tuple[str, str, Any]]) -> None:
+    if node.get("field"):
+        out.append((node["field"], node["op"], node.get("value")))
+    for child in node.get("children", []):
+        _walk_rules(child, out)
+
+
+def _entropy(counts: list[int]) -> float:
+    total = sum(counts)
+    if total <= 0:
+        return 0.0
+    return -sum((count / total) * math.log2(count / total) for count in counts if count > 0)
+
+
+def _slot_rule_field(slot: str) -> str:
+    return "age" if slot == "age_years" else slot
+
+
+def _hypotheses(slot: str, candidate_schemes: list[Scheme]) -> list[Any]:
+    if slot in {"aadhaar_linked_bank_account", "bpl", "receiving_other_pension", "is_student", "has_disability"}:
+        return [True, False]
+    if slot == "gender":
+        return ["female", "male", "other"]
+    if slot == "resident_state":
+        return ["maharashtra", "other state"]
+    if slot == "caste_category":
+        values = {"SC", "ST", "OBC", "VJNT", "SBC", "Open", "Other"}
+        for scheme in candidate_schemes:
+            for field, op, value in _collect_predicates(scheme):
+                if field == slot and op == "eq" and isinstance(value, str):
+                    values.add(value)
+                if field == slot and op == "in" and isinstance(value, list):
+                    values.update(str(item) for item in value)
+        return list(values)
+    if slot in {"age_years", "annual_family_income"}:
+        rule_field = _slot_rule_field(slot)
+        threshold_values: set[float] = {0, 18, 21, 30, 60, 65} if slot == "age_years" else {0, 100000, 250000, 500000, 800000, 1000000}
+        for scheme in candidate_schemes:
+            for field, op, value in _collect_predicates(scheme):
+                if field == rule_field and op in {"gt", "gte", "lt", "lte", "eq"} and isinstance(value, (int, float)):
+                    threshold_values.update({max(0, value - 1), value, value + 1})
+        return sorted(int(v) for v in threshold_values if 0 <= v <= (120 if slot == "age_years" else 100_000_000))
+    return []
+
+
+def _collect_predicates(scheme: Scheme) -> list[tuple[str, str, Any]]:
+    out: list[tuple[str, str, Any]] = []
+    _walk_rules(scheme.eligibility_rule.model_dump(mode="json"), out)
+    return out
+
+
+def information_gain(slot: str, profile: CitizenProfile, schemes: list[Scheme]) -> float:
+    """Expected reduction in uncertainty over candidate schemes for a question slot."""
+    if profile.value_for_rule(_slot_rule_field(slot)) is not None:
+        return 0.0
+    applicable = [s for s in schemes if any(field == _slot_rule_field(slot) for field, _, _ in _collect_predicates(s))]
+    if len(applicable) < 2:
+        # A single scheme can still benefit from a required criterion, but ask it after broader discriminators.
+        if len(applicable) == 1 and schemes:
+            applicable = schemes
+        else:
+            return 0.0
+    prior_entropy = math.log2(max(1, len(schemes)))
+    values = _hypotheses(slot, schemes)
+    if len(values) < 2:
+        return 0.0
+    remaining_entropies: list[float] = []
+    for value in values:
+        update_field = slot
+        updated = profile.model_copy(update={update_field: value})
+        if slot == "resident_state":
+            updated = profile.model_copy(update={"resident_state": "maharashtra" if str(value).casefold() == "maharashtra" else "other state"})
+        survivors = []
+        for scheme in schemes:
+            result = evaluate_node(scheme.eligibility_rule, updated)
+
+            # Unapproved/demo schemes remain provisional candidates.
+            # Only rules with non-demo approval metadata can eliminate them.
+            if (
+                result.value is not False
+                or not has_non_demo_approval_metadata(scheme)
+            ):
+                survivors.append(scheme.scheme_id)
+        remaining_entropies.append(math.log2(max(1, len(survivors))))
+    expected = sum(remaining_entropies) / len(remaining_entropies)
+    return max(0.0, prior_entropy - expected)
+
+
+def _parse_answer(slot: str, answer: str) -> tuple[str, Any]:
+    cleaned = answer.strip()
+    normalized = cleaned.casefold()
+    yes = {"yes", "y", "हो", "होय", "हाँ", "हां", "जी", "true", "1"}
+    no = {"no", "n", "नाही", "नहीं", "false", "0"}
+    if slot in {"aadhaar_linked_bank_account", "bpl", "receiving_other_pension", "is_student", "has_disability"}:
+        if normalized in yes:
+            return slot, True
+        if normalized in no:
+            return slot, False
+        raise ValueError("Please answer yes or no (हो/नाही, हाँ/नहीं).")
+    if slot in {"age_years", "annual_family_income"}:
+        if slot == "annual_family_income":
+            amount = cleaned.casefold().replace(",", "").replace("₹", "").replace("rs.", "").replace("inr", "").strip()
+            lakh_match = re.search(r"([0-9]+(?:\.[0-9]+)?)\s*(?:lakh|lac|lakhs|lacs|लाख|लाख़)(?:\s|$)", amount)
+            crore_match = re.search(r"([0-9]+(?:\.[0-9]+)?)\s*(?:crore|crores|करोड़|करोड)(?:\s|$)", amount)
+            try:
+                if lakh_match:
+                    return slot, int(float(lakh_match.group(1)) * 100_000)
+                if crore_match:
+                    return slot, int(float(crore_match.group(1)) * 10_000_000)
+            except ValueError as exc:
+                raise ValueError("Please provide a valid annual income amount.") from exc
+        digits = re.sub(r"[^0-9]", "", cleaned)
+        if not digits:
+            raise ValueError("Please provide a number.")
+        return slot, int(digits)
+    if slot == "resident_state":
+        return slot, "maharashtra" if normalized in {"maharashtra", "mh", "महाराष्ट्र", "yes", "हो", "होय", "हाँ", "हां"} else cleaned.casefold()
+    if slot == "gender":
+        aliases = {"महिला": "female", "स्त्री": "female", "औरत": "female", "पुरुष": "male", "महिला/स्त्री": "female", "female": "female", "male": "male", "other": "other"}
+        if normalized in aliases:
+            normalized = aliases[normalized]
+        if normalized not in {"female", "male", "other", "prefer_not_to_say"}:
+            raise ValueError("Please answer female, male, other, or prefer not to say.")
+        return slot, normalized
+    return slot, cleaned
+
+
+def _apply_answer(state: InterviewState) -> dict[str, Any]:
+    answer = state.get("pending_answer")
+    question = state.get("next_question")
+    profile = CitizenProfile.model_validate(state.get("profile", {}))
+    asked = list(state.get("asked_fields", []))
+    events = list(state.get("events", []))
+    if not answer or not question:
+        return {"profile": profile.model_dump(mode="json"), "pending_answer": None}
+    field = question["field"]
+    try:
+        key, value = _parse_answer(field, answer)
+        updated = profile.model_dump(mode="python")
+        updated[key] = value
+        validated = CitizenProfile.model_validate(updated)
+        events.append({"type": "slot_filled", "field": key, "ok": True})
+        profile = validated
+        if key not in asked:
+            asked.append(key)
+    except (ValueError, TypeError) as exc:
+        events.append({"type": "slot_filled", "field": field, "ok": False, "message": str(exc)})
+        # Re-ask the same slot with the validation feedback; the answer is cleared to avoid replay.
+        question = {**question, "validation_error": str(exc)}
+    return {
+        "profile": profile.model_dump(mode="json"),
+        "asked_fields": asked,
+        "events": events[-100:],
+        "pending_answer": None,
+        "next_question": question,
+    }
+
+
+def _rank_schemes(state: InterviewState) -> dict[str, Any]:
+    profile = CitizenProfile.model_validate(state.get("profile", {}))
+    schemes = [Scheme.model_validate(item) for item in state.get("candidate_schemes", [])]
+    from scheme_navigator.services.rule_engine import evaluate_scheme
+
+    results = [evaluate_scheme(scheme, profile).model_dump(mode="json") for scheme in schemes]
+    return {"result_summary": results}
+
+
+
+def _choose_question(state: InterviewState) -> dict[str, Any]:
+    """Choose a useful question for schemes not yet ruled out."""
+    profile = CitizenProfile.model_validate(
+        state.get("profile", {})
+    )
+    schemes = [
+        Scheme.model_validate(item)
+        for item in state.get("candidate_schemes", [])
+    ]
+    language = state.get("language", Language.EN.value)
+    asked = set(state.get("asked_fields", []))
+
+    # Exclude schemes that are definitively ineligible.
+    viable_schemes = []
+    unresolved_fields = set()
+
+    for scheme in schemes:
+        evaluation = evaluate_node(
+            scheme.eligibility_rule,
+            profile,
+        )
+
+        # Never eliminate a scheme using an unapproved/demo rule.
+        if (
+            evaluation.value is False
+            and has_non_demo_approval_metadata(scheme)
+        ):
+            continue
+
+        viable_schemes.append(scheme)
+        unresolved_fields.update(evaluation.missing_fields)
+
+    if not viable_schemes:
+        return {
+            "next_question": None,
+            "is_complete": True,
+        }
+
+    # Ask only for fields that remain necessary to evaluate
+    # schemes that have not already been ruled out.
+    slots = set()
+
+    for rule_field in unresolved_fields:
+        slot = (
+            "age_years"
+            if rule_field == "age"
+            else rule_field
+        )
+
+        if slot in QUESTION_SPECS:
+            slots.add(slot)
+
+    candidates = []
+
+    for slot in slots:
+        rule_field = _slot_rule_field(slot)
+
+        if slot in asked:
+            continue
+
+        if profile.value_for_rule(rule_field) is not None:
+            continue
+
+        gain = information_gain(
+            slot,
+            profile,
+            viable_schemes,
+        )
+
+        coverage = sum(
+            any(
+                field == rule_field
+                for field, _, _ in _collect_predicates(scheme)
+            )
+            for scheme in viable_schemes
+        ) / len(viable_schemes)
+
+        # Keep the displayed score between 0 and 1.
+        score = min(1.0, gain + 0.05 * coverage)
+        candidates.append((score, slot))
+
+    if not candidates:
+        return {
+            "next_question": None,
+            "is_complete": True,
+        }
+
+    # Highest information gain first; deterministic tie-break.
+    candidates.sort(
+        key=lambda item: (item[0], item[1]),
+        reverse=True,
+    )
+
+    score, slot = candidates[0]
+    spec = QUESTION_SPECS[slot]
+
+    question = {
+        "field": slot,
+        "text": spec["labels"].get(
+            language,
+            spec["labels"]["en"],
+        ),
+        "choices": spec["choices"],
+        "kind": spec["kind"],
+        "information_gain": round(score, 4),
+        "validation_error": None,
+    }
+
+    return {
+        "next_question": question,
+        "is_complete": False,
+    }
+
+
+
+def _ask_user(state: InterviewState) -> dict[str, Any]:
+    question = state.get("next_question")
+    if question is None:
+        return {"is_complete": True}
+    answer = interrupt({
+        "type": "clarifying_question",
+        "thread_id": state.get("thread_id"),
+        "question": question,
+        "candidate_scheme_count": len(state.get("candidate_schemes", [])),
+        "privacy_note": "Share only what is needed; never share a full Aadhaar number or OTP.",
+    })
+    return {"pending_answer": str(answer), "is_complete": False}
+
+
+def _route_after_question(state: InterviewState) -> str:
+    return "ask_user" if state.get("next_question") is not None else "end"
+
+
+class _FallbackInterviewGraph:
+    """Small in-memory compatible runner for local smoke tests; use LangGraph in deployed environments."""
+
+    def __init__(self):
+        self._states: dict[str, dict[str, Any]] = {}
+
+    def get_state(self, config):
+        class Snapshot:
+            def __init__(self, values):
+                self.values = values
+        thread_id = config.get("configurable", {}).get("thread_id", "")
+        return Snapshot(self._states.get(thread_id, {}))
+
+    def invoke(self, input_state, config):
+        thread_id = config.get("configurable", {}).get("thread_id", "")
+        if hasattr(input_state, "resume"):
+            if thread_id not in self._states:
+                raise ValueError("Unknown interview thread")
+            state = dict(self._states[thread_id])
+            state["pending_answer"] = input_state.resume
+        else:
+            state = dict(input_state)
+        state.update(_apply_answer(state))
+        state.update(_rank_schemes(state))
+        state.update(_choose_question(state))
+        self._states[thread_id] = state
+        question = state.get("next_question")
+        if question is None:
+            state["is_complete"] = True
+            self._states[thread_id] = state
+            return state
+        interrupt_value = {
+            "type": "clarifying_question",
+            "thread_id": thread_id,
+            "question": question,
+            "candidate_scheme_count": len(state.get("candidate_schemes", [])),
+            "privacy_note": "Share only what is needed; never share a full Aadhaar number or OTP.",
+        }
+        return {**state, "__interrupt__": [_FakeInterrupt(interrupt_value)]}
+
+
+def build_interviewer_graph(checkpointer: Any | None = None):
+    if not HAS_LANGGRAPH:
+        return _FallbackInterviewGraph()
+    builder = StateGraph(InterviewState)
+    builder.add_node("apply_answer", _apply_answer)
+    builder.add_node("rank_schemes", _rank_schemes)
+    builder.add_node("choose_question", _choose_question)
+    builder.add_node("ask_user", _ask_user)
+    builder.add_edge(START, "apply_answer")
+    builder.add_edge("apply_answer", "rank_schemes")
+    builder.add_edge("rank_schemes", "choose_question")
+    builder.add_conditional_edges("choose_question", _route_after_question, {"ask_user": "ask_user", "end": END})
+    builder.add_edge("ask_user", "apply_answer")  # cyclic loop: ask -> update profile -> re-rank -> next best question
+    saver = checkpointer if checkpointer is not None else MemorySaver()
+    return builder.compile(checkpointer=saver)
+
+
+========== .\src\scheme_navigator\agents\interview_store.py ==========
+from __future__ import annotations
+
+import logging
+import os
+import sqlite3
+import threading
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+
+# Use the restricted MessagePack deserializer for persisted LangGraph checkpoints.
+os.environ.setdefault("LANGGRAPH_STRICT_MSGPACK", "true")
+
+from langgraph.checkpoint.sqlite import SqliteSaver  # noqa: E402
+
+logger = logging.getLogger(__name__)
+
+
+class InterviewSessionStore:
+    """Persist LangGraph checkpoints and enforce a configurable session TTL.
+
+    The checkpointer and session metadata share one SQLite file but use separate
+    connections. This is intended for local development and lightweight use,
+    not high-concurrency production deployments.
+    """
+
+    def __init__(
+        self,
+        db_path: str | Path | None = None,
+        retention_hours: int = 24,
+    ) -> None:
+        configured_path = db_path or os.getenv(
+            "INTERVIEW_DB_PATH", "data/interviews.sqlite3"
+        )
+        self.db_path = Path(configured_path).expanduser().resolve()
+        self.db_path.parent.mkdir(parents=True, exist_ok=True)
+        self.retention_hours = max(1, int(retention_hours))
+        self._lock = threading.RLock()
+        self._closed = False
+
+        self._checkpoint_connection = sqlite3.connect(
+            str(self.db_path),
+            timeout=10.0,
+            check_same_thread=False,
+        )
+        self._checkpoint_connection.execute("PRAGMA busy_timeout = 10000")
+        self.checkpointer = SqliteSaver(self._checkpoint_connection)
+
+        self._metadata_connection = sqlite3.connect(
+            str(self.db_path),
+            timeout=10.0,
+            check_same_thread=False,
+        )
+        self._metadata_connection.row_factory = sqlite3.Row
+        self._metadata_connection.execute("PRAGMA busy_timeout = 10000")
+        self._initialize_metadata()
+        self.purge_expired()
+
+    @staticmethod
+    def _now() -> datetime:
+        return datetime.now(timezone.utc)
+
+    def _initialize_metadata(self) -> None:
+        with self._metadata_connection:
+            self._metadata_connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS interview_sessions (
+                    thread_id TEXT PRIMARY KEY,
+                    created_at TEXT NOT NULL,
+                    last_activity_at TEXT NOT NULL,
+                    expires_at TEXT NOT NULL
+                )
+                """
+            )
+            self._metadata_connection.execute(
+                "CREATE INDEX IF NOT EXISTS idx_interview_sessions_expiry "
+                "ON interview_sessions(expires_at)"
+            )
+
+    def create_session(self, thread_id: str) -> None:
+        """Register a new interview thread with a sliding inactivity expiry."""
+        if not thread_id or not thread_id.strip():
+            raise ValueError("thread_id must not be empty")
+
+        self.purge_expired()
+        now = self._now()
+        now_text = now.isoformat()
+        expires_text = (now + timedelta(hours=self.retention_hours)).isoformat()
+
+        with self._lock, self._metadata_connection:
+            # A reused thread ID must never inherit checkpoints from an older run.
+            self.checkpointer.delete_thread(thread_id)
+            self._metadata_connection.execute(
+                """
+                INSERT INTO interview_sessions (
+                    thread_id, created_at, last_activity_at, expires_at
+                ) VALUES (?, ?, ?, ?)
+                ON CONFLICT(thread_id) DO UPDATE SET
+                    created_at = excluded.created_at,
+                    last_activity_at = excluded.last_activity_at,
+                    expires_at = excluded.expires_at
+                """,
+                (thread_id, now_text, now_text, expires_text),
+            )
+
+    def is_active(self, thread_id: str) -> bool:
+        """Return whether the thread is registered and has not expired."""
+        self.purge_expired()
+        now_text = self._now().isoformat()
+        with self._lock:
+            row = self._metadata_connection.execute(
+                "SELECT 1 FROM interview_sessions "
+                "WHERE thread_id = ? AND expires_at > ?",
+                (thread_id, now_text),
+            ).fetchone()
+        return row is not None
+
+    def touch_session(self, thread_id: str) -> bool:
+        """Extend the inactivity TTL after a successfully processed answer."""
+        now = self._now()
+        now_text = now.isoformat()
+        expires_text = (now + timedelta(hours=self.retention_hours)).isoformat()
+        with self._lock, self._metadata_connection:
+            cursor = self._metadata_connection.execute(
+                """
+                UPDATE interview_sessions
+                SET last_activity_at = ?, expires_at = ?
+                WHERE thread_id = ? AND expires_at > ?
+                """,
+                (now_text, expires_text, thread_id, now_text),
+            )
+            return cursor.rowcount == 1
+
+    def delete_session(self, thread_id: str) -> bool:
+        """Delete both session metadata and all LangGraph checkpoints."""
+        with self._lock:
+            self.checkpointer.delete_thread(thread_id)
+            with self._metadata_connection:
+                cursor = self._metadata_connection.execute(
+                    "DELETE FROM interview_sessions WHERE thread_id = ?",
+                    (thread_id,),
+                )
+            return cursor.rowcount == 1
+
+    def purge_expired(self) -> int:
+        """Delete expired metadata and the matching LangGraph checkpoints."""
+        now_text = self._now().isoformat()
+        with self._lock:
+            rows = self._metadata_connection.execute(
+                "SELECT thread_id FROM interview_sessions WHERE expires_at <= ?",
+                (now_text,),
+            ).fetchall()
+
+            deleted_ids: list[str] = []
+            for row in rows:
+                thread_id = str(row["thread_id"])
+                try:
+                    self.checkpointer.delete_thread(thread_id)
+                except sqlite3.Error:
+                    logger.exception(
+                        "Unable to purge expired interview checkpoint thread_id=%s",
+                        thread_id,
+                    )
+                    continue
+                deleted_ids.append(thread_id)
+
+            if not deleted_ids:
+                return 0
+
+            placeholders = ",".join("?" for _ in deleted_ids)
+            with self._metadata_connection:
+                cursor = self._metadata_connection.execute(
+                    f"DELETE FROM interview_sessions WHERE thread_id IN ({placeholders})",
+                    deleted_ids,
+                )
+            return int(cursor.rowcount)
+
+        @property
+    def is_closed(self) -> bool:
+        """Report whether the SQLite connections have been closed."""
+        with self._lock:
+            return self._closed
+
+    def close(self) -> None:
+        """Close SQLite connections during application shutdown."""
+        with self._lock:
+            if self._closed:
+                return
+            self._metadata_connection.close()
+            self._checkpoint_connection.close()
+            self._closed = True
+
+
+========== .\src\scheme_navigator\api\main.py ==========
+from __future__ import annotations
+
+import hashlib
+import logging
+from pathlib import Path
+from typing import Annotated
+from contextlib import asynccontextmanager
+from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.responses import FileResponse
+from pydantic import ValidationError
+from starlette.concurrency import run_in_threadpool
+
+from scheme_navigator.agents.interviewer import Command, build_interviewer_graph
+from scheme_navigator.agents.voice import MAX_AUDIO_BYTES, get_transcriber
+from scheme_navigator.core.config import settings
+from scheme_navigator.documents.audit import (
+    GeminiVisionExtractor,
+    add_pdf_page_conflict_findings,
+    audit_extracted_documents,
+)
+from scheme_navigator.documents.grouping import group_pdf_page_extractions
+from scheme_navigator.documents.preprocess import render_pdf_pages
+from scheme_navigator.documents.review_store import DocumentReviewStore
+from scheme_navigator.agents.interview_store import InterviewSessionStore
+from scheme_navigator.domain.models import (
+    ApplicationPlan,
+    CitizenProfile,
+    DocumentAuditRequest,
+    DocumentAuditResponse,
+    DocumentReviewCompletionRequest,
+    DocumentReviewCorrectionRequest,
+    ExtractedDocument,
+    EligibilityResult,
+    InterviewAnswer,
+    InterviewStart,
+    Language,
+    Scheme,
+    ApplicantAssessmentRequest,
+    ApplicantAssessmentResponse,
+)
+from scheme_navigator.planner.dag import build_application_plan
+from scheme_navigator.services.catalog import SchemeCatalog
+from scheme_navigator.services.rule_engine import evaluate_scheme
+from scheme_navigator.services.assessment import build_applicant_assessment
+
+from scheme_navigator.api.reviewer_ui import router as reviewer_ui_router
+
+logging.basicConfig(level=settings.log_level)
+logger = logging.getLogger("scheme_navigator")
+
+catalog = (
+    SchemeCatalog.from_json()
+    if settings.demo_fixtures_enabled
+    else SchemeCatalog([])
+)
+
+interview_store = InterviewSessionStore(
+    retention_hours=settings.data_retention_hours
+)
+
+interviewer = build_interviewer_graph(
+    checkpointer=interview_store.checkpointer
+)
+
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    """Manage persistent interview storage during application lifecycle."""
+    global interview_store, interviewer
+
+    # TestClient and repeated application lifecycles can close the
+    # previous store. Recreate it before starting the next lifecycle.
+    if interview_store.is_closed:
+        interview_store = InterviewSessionStore(
+            retention_hours=settings.data_retention_hours
+        )
+        interviewer = build_interviewer_graph(
+            checkpointer=interview_store.checkpointer
+        )
+
+    try:
+        interview_store.purge_expired()
+        yield
+    finally:
+        interview_store.close()
+
+
+app = FastAPI(
+    title=settings.app_name,
+    version="0.1.0",
+    description=(
+        "Source-grounded scheme discovery and pre-audit. "
+        "Government applications are never submitted by this API."
+    ),
+    lifespan=lifespan,
+)
+
+app.include_router(reviewer_ui_router)
+
+def _document_review_store() -> DocumentReviewStore:
+    return DocumentReviewStore(retention_hours=settings.data_retention_hours)
+
+
+def _ensure_local_review_api() -> None:
+    """Human-review endpoints are a local prototype until authentication is added."""
+    if settings.app_env.casefold() in {"production", "prod"}:
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "Human document review is disabled in production until authenticated "
+                "reviewer access and authorization are configured."
+            ),
+        )
+
+
+def _review_response(record: dict) -> dict:
+    return {
+        "review_id": record["review_id"],
+        "status": record["status"],
+        "created_at": record["created_at"],
+        "updated_at": record["updated_at"],
+        "expires_at": record["expires_at"],
+        "target_financial_year": record["target_financial_year"],
+        "original_extracted_documents": record["original_extracted_documents"],
+        "extracted_documents": record["extracted_documents"],
+        "page_extractions": record["page_extractions"],
+        "current_page_extractions": record["current_page_extractions"],
+        "original_document_groups": record["original_document_groups"],
+        "document_groups": record["document_groups"],
+        "original_audit": record["original_audit"],
+        "audit": record["audit"],
+        "events": record["events"],
+        "storage_notice": (
+            "Only extracted fields and review metadata are stored locally; uploaded image/PDF "
+            "bytes are not persisted. Records are deleted after the configured retention "
+            "period. reviewer_id is caller-supplied and is not authenticated in this local "
+            "prototype. Do not expose these endpoints to a public network."
+        ),
+    }
+
+
+def _review_page_mapping(record: dict, document_id: str) -> list[int]:
+    for group in record["document_groups"]:
+        if group["document_id"] == document_id:
+            return [int(number) for number in group["page_numbers"]]
+    return []
+
+
+def _json_scalar(value):
+    if hasattr(value, "isoformat"):
+        return value.isoformat()
+    return value
+
+
+@app.get("/healthz", tags=["system"])
+def healthz() -> dict[str, str]:
+    return {
+        "status": "ok",
+        "environment": settings.app_env,
+        "demo_fixtures_enabled": str(settings.demo_fixtures_enabled).lower(),
+    }
+
+
+@app.get("/schemes", response_model=list[Scheme], tags=["schemes"])
+def list_schemes() -> list[Scheme]:
+    return catalog.all()
+
+
+@app.post("/eligibility/evaluate", response_model=list[EligibilityResult], tags=["schemes"])
+def evaluate_eligibility(profile: CitizenProfile) -> list[EligibilityResult]:
+    # Do not log the profile. Only approved active rules may return eligible/ineligible.
+    return [evaluate_scheme(scheme, profile) for scheme in catalog.all()]
+
+
+def _current_question(result: dict) -> dict | None:
+    interrupts = result.get("__interrupt__") or []
+    if not interrupts:
+        return None
+    item = interrupts[0]
+    value = getattr(item, "value", item if isinstance(item, dict) else None)
+    return value if isinstance(value, dict) else None
+
+
+def _interview_response(result: dict, graph, thread_id: str) -> dict:
+    config = {"configurable": {"thread_id": thread_id}}
+    snapshot = graph.get_state(config)
+    values = snapshot.values or {}
+    interrupt_payload = _current_question(result)
+    return {
+        "thread_id": thread_id,
+        "question": interrupt_payload.get("question") if interrupt_payload else None,
+        "complete": bool(values.get("is_complete", False) or not interrupt_payload),
+        "profile": values.get("profile", {}),
+        "scheme_evaluations": values.get("result_summary", []),
+        "privacy_note": (
+            "Never share an OTP or full Aadhaar number. "
+            "Use estimates where the exact value is not necessary."
+        ),
+    }
+
+
+@app.post("/interview/start", tags=["interview"])
+def start_interview(payload: InterviewStart) -> dict:
+    if not catalog.all():
+        raise HTTPException(
+            status_code=503,
+            detail="No verified scheme catalog is configured for this environment.",
+        )
+    config = {"configurable": {"thread_id": payload.thread_id}}
+    initial_state = {
+        "thread_id": payload.thread_id,
+        "language": payload.language.value,
+        "profile": payload.profile.model_dump(mode="json"),
+        "candidate_schemes": [s.model_dump(mode="json") for s in catalog.all()],
+        "pending_answer": None,
+        "asked_fields": [],
+        "events": [],
+        "is_complete": False,
+        "result_summary": [],
+    }
+    session_created = False
+    try:
+        interview_store.create_session(payload.thread_id)
+        session_created = True
+        result = interviewer.invoke(initial_state, config=config)
+    except Exception as exc:
+        if session_created:
+            try:
+                interview_store.delete_session(payload.thread_id)
+            except Exception:
+                logger.exception("interview_start_cleanup_failed")
+        logger.exception("interview_start_failed")
+        raise HTTPException(status_code=500, detail="Unable to start interview.") from exc
+    return _interview_response(result, interviewer, payload.thread_id)
+
+
+@app.post("/interview/answer", tags=["interview"])
+def answer_interview(payload: InterviewAnswer) -> dict:
+    config = {"configurable": {"thread_id": payload.thread_id}}
+    if not interview_store.is_active(payload.thread_id):
+        raise HTTPException(
+            status_code=404,
+            detail="Interview session not found or expired. Start a new interview.",
+        )
+    snapshot = interviewer.get_state(config)
+    if not snapshot.values:
+        raise HTTPException(
+            status_code=404,
+            detail="Interview thread not found; start the interview first.",
+        )
+    try:
+        result = interviewer.invoke(Command(resume=payload.answer), config=config)
+    except Exception as exc:
+        logger.exception("interview_answer_failed")
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to process interview answer.",
+        ) from exc
+    if not interview_store.touch_session(payload.thread_id):
+        interview_store.delete_session(payload.thread_id)
+        raise HTTPException(
+            status_code=410,
+            detail="Interview session expired while processing the answer. Start a new interview.",
+        )
+    return _interview_response(result, interviewer, payload.thread_id)
+
+
+@app.post("/voice/transcribe", tags=["voice"])
+async def transcribe_voice(
+    file: Annotated[UploadFile, File()],
+    provider: str = "whisper",
+    language: str = "auto",
+    consent_to_cloud_processing: bool = False,
+) -> dict:
+    """Transcribe speech only; does not mutate an interview/profile."""
+    if provider not in {"whisper", "bhashini"}:
+        raise HTTPException(status_code=400, detail="provider must be 'whisper' or 'bhashini'.")
+    if language not in {"auto", Language.EN.value, Language.MR.value, Language.HI.value}:
+        raise HTTPException(status_code=400, detail="language must be auto, en, mr, or hi.")
+    if provider == "bhashini" and not consent_to_cloud_processing:
+        raise HTTPException(
+            status_code=400,
+            detail="Explicit consent_to_cloud_processing=true is required for Bhashini cloud ASR.",
+        )
+    if not file.content_type or not file.content_type.startswith("audio/"):
+        raise HTTPException(
+            status_code=415,
+            detail="Upload an audio file such as WAV, MP3, FLAC, OGG, or WebM.",
+        )
+
+    try:
+        raw = await file.read(MAX_AUDIO_BYTES + 1)
+        if len(raw) > MAX_AUDIO_BYTES:
+            raise HTTPException(status_code=413, detail="Audio file exceeds 15 MiB.")
+        result = await run_in_threadpool(
+            get_transcriber(provider).transcribe,
+            raw,
+            file.filename or "audio.wav",
+            language,
+        )
+    except (ValueError, RuntimeError) as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except HTTPException:
+        raise
+    except Exception as exc:
+        logger.exception("voice_transcription_failed")
+        raise HTTPException(
+            status_code=503,
+            detail="Transcription provider unavailable or transcription failed.",
+        ) from exc
+    finally:
+        await file.close()
+
+    return {
+        "transcript": result.text,
+        "detected_language": result.language,
+        "confidence": result.confidence,
+        "provider": result.provider,
+        "profile_modified": False,
+        "next_step": (
+            "Show this transcript to the citizen for editing/confirmation, then submit "
+            "the confirmed text to /interview/answer."
+        ),
+    }
+
+
+@app.post("/documents/audit", response_model=DocumentAuditResponse, tags=["documents"])
+def audit_documents(payload: DocumentAuditRequest) -> DocumentAuditResponse:
+    return audit_extracted_documents(payload.documents, payload.target_financial_year)
+
+
+@app.post("/documents/audit-upload", tags=["documents"])
+async def audit_document_upload(
+    file: UploadFile = File(...),
+    target_financial_year: str = "2026-27",
+) -> dict:
+    """Extract and pre-audit a document; group compatible consecutive PDF pages."""
+    filename = file.filename or "upload"
+    suffix = Path(filename).suffix.casefold()
+    content_type = (file.content_type or "").casefold()
+
+    is_pdf = content_type == "application/pdf" or suffix == ".pdf"
+    supported_image_types = {"image/png", "image/jpeg", "image/webp"}
+    supported_image_suffixes = {".png", ".jpg", ".jpeg", ".webp"}
+    is_image = (
+        content_type in supported_image_types
+        or suffix in supported_image_suffixes
+    )
+
+    if not (is_pdf or is_image):
+        raise HTTPException(
+            status_code=415,
+            detail="Upload a PNG, JPEG, WEBP image or a PDF certificate.",
+        )
+
+    max_bytes = 15 * 1024 * 1024 if is_pdf else 12 * 1024 * 1024
+
+    try:
+        raw = await file.read(max_bytes + 1)
+        if len(raw) > max_bytes:
+            raise HTTPException(
+                status_code=413,
+                detail=f"File exceeds the {max_bytes // (1024 * 1024)} MiB upload limit.",
+            )
+        if not raw:
+            raise HTTPException(status_code=400, detail="The uploaded file is empty.")
+
+        # Created per request so a missing key does not prevent the API starting.
+        extractor = GeminiVisionExtractor()
+        source_hash = hashlib.sha256(raw).hexdigest()
+        page_extractions = []
+        document_groups = []
+
+        if is_pdf:
+            page_images = await run_in_threadpool(render_pdf_pages, raw, max_pages=10)
+            if not page_images:
+                raise ValueError("No readable pages were found in the uploaded PDF.")
+
+            page_documents: list[tuple[int, ExtractedDocument]] = []
+            for page_number, page_bytes in enumerate(page_images, start=1):
+                page_doc = await run_in_threadpool(
+                    extractor.extract,
+                    page_bytes,
+                    f"certificate-page-{page_number}.png",
+                )
+                page_doc = page_doc.model_copy(
+                    update={
+                        "document_id": hashlib.sha256(
+                            f"{source_hash}:{page_number}".encode("utf-8")
+                        ).hexdigest()[:16],
+                        "source_file_sha256": source_hash,
+                    }
+                )
+                page_documents.append((page_number, page_doc))
+
+            page_extractions = [
+                page_doc.model_dump(mode="json")
+                for _, page_doc in page_documents
+            ]
+            groups = group_pdf_page_extractions(page_documents, source_hash)
+            extracted_documents = [group.document for group in groups]
+            document_groups = [
+                {
+                    "document_id": group.document.document_id,
+                    "page_numbers": list(group.page_numbers),
+                    "page_count": len(group.page_numbers),
+                }
+                for group in groups
+            ]
+        else:
+            image_document = await run_in_threadpool(extractor.extract, raw, filename)
+            image_document = image_document.model_copy(
+                update={"source_file_sha256": source_hash}
+            )
+            extracted_documents = [image_document]
+
+        audit = audit_extracted_documents(
+            extracted_documents,
+            target_financial_year,
+        )
+        if is_pdf:
+            # Audit original page extractions as well as logical groups. A page
+            # conflict can cause grouping to split pages into separate documents.
+            audit = add_pdf_page_conflict_findings(audit, page_documents)
+
+    except HTTPException:
+        raise
+    except ValidationError as exc:
+        logger.exception("gemini_extraction_schema_validation_failed")
+        raise HTTPException(
+            status_code=503,
+            detail="Gemini returned document data that did not match the expected schema. Please retry.",
+        ) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except RuntimeError as exc:
+        logger.exception("gemini_document_extractor_not_configured")
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "Gemini document extraction is not configured or unavailable. "
+                "Check GEMINI_API_KEY and the Gemini SDK installation. No file was persisted."
+            ),
+        ) from exc
+    except Exception as exc:
+        logger.exception("gemini_document_audit_failed")
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "Gemini document extraction failed or the provider is unavailable. "
+                "Please retry later. No file was persisted."
+            ),
+        ) from exc
+    finally:
+        await file.close()
+
+    extracted_payload = [item.model_dump(mode="json") for item in extracted_documents]
+    audit_payload = audit.model_dump(mode="json")
+    review_metadata = None
+    # Do not persist citizen fields in production until authenticated reviewer access exists.
+    if settings.app_env.casefold() not in {"production", "prod"}:
+        review_record = _document_review_store().create_review(
+            is_pdf=is_pdf,
+            source_file_sha256=source_hash,
+            target_financial_year=target_financial_year,
+            extracted_documents=extracted_payload,
+            page_extractions=page_extractions,
+            document_groups=document_groups,
+            audit=audit_payload,
+        )
+        review_metadata = {
+            "review_id": review_record["review_id"],
+            "status": review_record["status"],
+            "expires_at": review_record["expires_at"],
+        }
+
+    return {
+        # Logical documents are the units audited. PDF pages may be grouped when
+        # their type, identity anchors and overlapping certificate fields agree.
+        "extracted_documents": extracted_payload,
+        # Keep original Gemini page outputs so page-level provenance is inspectable.
+        "page_extractions": page_extractions,
+        "document_groups": document_groups,
+        "audit": audit_payload,
+        "review": review_metadata,
+        "notice": (
+            "Gemini extraction is untrusted. For PDFs, consecutive pages may be grouped "
+            "when their document type, identity evidence and overlapping fields are "
+            "consistent. Review page_extractions and document_groups to confirm grouping. "
+            "A local human-review case was created when review is enabled; only extracted "
+            "fields and audit metadata are retained temporarily, not the uploaded file. "
+            "Inspect and correct each field, then verify the certificate through an official "
+            "channel. This is not an official verification."
+        ),
+    }
+
+
+@app.get("/documents/reviews/{review_id}", tags=["documents", "human-review"])
+def get_document_review(review_id: str) -> dict:
+    _ensure_local_review_api()
+    record = _document_review_store().get_review(review_id)
+    if record is None:
+        raise HTTPException(status_code=404, detail="Document review not found or expired.")
+    return _review_response(record)
+
+
+@app.patch("/documents/reviews/{review_id}/documents/{document_id}", tags=["documents", "human-review"])
+def correct_document_review_fields(
+    review_id: str,
+    document_id: str,
+    payload: DocumentReviewCorrectionRequest,
+) -> dict:
+    _ensure_local_review_api()
+    store = _document_review_store()
+    record = store.get_review(review_id)
+    if record is None:
+        raise HTTPException(status_code=404, detail="Document review not found or expired.")
+    if record["status"] != "pending_review":
+        raise HTTPException(status_code=409, detail="This review has already been completed and is read-only.")
+
+    corrections = payload.corrections.model_dump(mode="json", exclude_unset=True)
+    current_documents = [ExtractedDocument.model_validate(item) for item in record["extracted_documents"]]
+    target_index = next(
+        (index for index, item in enumerate(current_documents) if item.document_id == document_id),
+        None,
+    )
+    if target_index is None:
+        raise HTTPException(status_code=404, detail="Document ID was not found in this review.")
+
+    target_document = current_documents[target_index]
+    page_numbers = _review_page_mapping(record, document_id) if record["is_pdf"] else []
+    if record["is_pdf"] and not page_numbers:
+        raise HTTPException(status_code=409, detail="PDF page mapping is unavailable for this document.")
+
+    events = []
+    for field_name, new_value in corrections.items():
+        previous_value = _json_scalar(getattr(target_document, field_name))
+        original_field_values = (
+            [
+                {
+                    "page_number": page_number,
+                    "value": record["page_extractions"][page_number - 1].get(field_name),
+                }
+                for page_number in page_numbers
+                if 1 <= page_number <= len(record["page_extractions"])
+            ]
+            if record["is_pdf"]
+            else [{
+                "page_number": None,
+                "value": next(
+                    (item.get(field_name) for item in record["original_extracted_documents"]
+                     if item["document_id"] == document_id),
+                    None,
+                ),
+            }]
+        )
+        events.append({
+            "action": "field_confirmed" if previous_value == new_value else "field_corrected",
+            "reviewer_id": payload.reviewer_id,
+            "document_id": document_id,
+            "field_name": field_name,
+            "original_value": original_field_values,
+            "previous_value": previous_value,
+            "new_value": new_value,
+            "note": payload.note,
+            "page_numbers": page_numbers,
+        })
+
+    if record["is_pdf"]:
+        current_pages = [ExtractedDocument.model_validate(item) for item in record["current_page_extractions"]]
+        page_map = {number: doc for number, doc in enumerate(current_pages, start=1)}
+        for page_number in page_numbers:
+            page_doc = page_map.get(page_number)
+            if page_doc is None:
+                raise HTTPException(status_code=409, detail=f"Page {page_number} is missing from the review record.")
+            updated_data = page_doc.model_dump(mode="python")
+            updated_data.update(corrections)
+            page_map[page_number] = ExtractedDocument.model_validate(updated_data)
+
+        current_page_tuples = [(number, doc) for number, doc in sorted(page_map.items())]
+        groups = group_pdf_page_extractions(current_page_tuples, record["source_file_sha256"])
+        current_documents = [group.document for group in groups]
+        current_page_extractions = [doc.model_dump(mode="json") for _, doc in current_page_tuples]
+        current_document_groups = [
+            {
+                "document_id": group.document.document_id,
+                "page_numbers": list(group.page_numbers),
+                "page_count": len(group.page_numbers),
+            }
+            for group in groups
+        ]
+        audit = audit_extracted_documents(current_documents, record["target_financial_year"])
+        audit = add_pdf_page_conflict_findings(audit, current_page_tuples)
+    else:
+        updated_data = target_document.model_dump(mode="python")
+        updated_data.update(corrections)
+        current_documents[target_index] = ExtractedDocument.model_validate(updated_data)
+        current_page_extractions = record["current_page_extractions"]
+        current_document_groups = record["document_groups"]
+        audit = audit_extracted_documents(current_documents, record["target_financial_year"])
+
+    saved = store.save_correction(
+        review_id,
+        extracted_documents=[item.model_dump(mode="json") for item in current_documents],
+        page_extractions=current_page_extractions,
+        document_groups=current_document_groups,
+        audit=audit.model_dump(mode="json"),
+        events=events,
+    )
+    if not saved:
+        raise HTTPException(status_code=409, detail="Review could not be updated; it may have expired or been completed.")
+    updated_record = store.get_review(review_id)
+    if updated_record is None:
+        raise HTTPException(status_code=404, detail="Document review expired during the update.")
+    return _review_response(updated_record)
+
+
+@app.post("/documents/reviews/{review_id}/complete", tags=["documents", "human-review"])
+def complete_document_review(
+    review_id: str,
+    payload: DocumentReviewCompletionRequest,
+) -> dict:
+    _ensure_local_review_api()
+    if not payload.confirm_review_complete:
+        raise HTTPException(
+            status_code=400,
+            detail="Set confirm_review_complete=true after inspecting the original document and all outstanding findings.",
+        )
+    store = _document_review_store()
+    record = store.get_review(review_id)
+    if record is None:
+        raise HTTPException(status_code=404, detail="Document review not found or expired.")
+    completed = store.complete_review(
+        review_id, reviewer_id=payload.reviewer_id, note=payload.note
+    )
+    if not completed:
+        raise HTTPException(status_code=409, detail="Review could not be completed; it may have expired or already been completed.")
+    updated_record = store.get_review(review_id)
+    if updated_record is None:
+        raise HTTPException(status_code=404, detail="Document review not found or expired.")
+    return _review_response(updated_record)
+
+
+@app.delete("/documents/reviews/{review_id}", tags=["documents", "human-review"])
+def delete_document_review(review_id: str) -> dict:
+    _ensure_local_review_api()
+    deleted = _document_review_store().delete_review(review_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Document review not found or expired.")
+    return {"review_id": review_id, "deleted": True, "message": "Local review data and its event history were deleted."}
+
+@app.post(
+    "/assessment/{scheme_id}",
+    response_model=ApplicantAssessmentResponse,
+    tags=["assessment"],
+)
+def get_applicant_assessment(
+    scheme_id: str,
+    payload: ApplicantAssessmentRequest,
+) -> ApplicantAssessmentResponse:
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated assessment with optional human-review linkage."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    review_record = None
+
+    if payload.review_id:
+        # Local review records are not authenticated, so keep this
+        # integration disabled in production.
+        _ensure_local_review_api()
+
+        if payload.documents:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "When review_id is supplied, do not send documents "
+                    "again. The linked review record provides the current "
+                    "corrected documents and audit."
+                ),
+            )
+
+        review_record = _document_review_store().get_review(
+            payload.review_id
+        )
+
+        if review_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Document review not found or expired.",
+            )
+
+    return build_applicant_assessment(
+        scheme,
+        payload,
+        review_record=review_record,
+    )
+    """Generate a consolidated preliminary assessment for one scheme."""
+
+    scheme = catalog.get(scheme_id)
+
+    if not scheme:
+    
+        raise HTTPException(
+            status_code=404,
+            detail="Scheme not found.",
+        )
+
+    return build_applicant_assessment(scheme, payload)
+
+@app.post("/plans/{scheme_id}", response_model=ApplicationPlan, tags=["planner"])
+def get_application_plan(
+    scheme_id: str,
+    available_documents: list[str] | None = None,
+) -> ApplicationPlan:
+    scheme = catalog.get(scheme_id)
+    if not scheme:
+        raise HTTPException(status_code=404, detail="Scheme not found.")
+    return build_application_plan(scheme, available_documents=available_documents)
+
+
+@app.get("/demo-form", tags=["sandbox"])
+def demo_form() -> FileResponse:
+    path = Path(__file__).resolve().parents[3] / "data" / "demo" / "mock_mahadbt_form.html"
+    return FileResponse(
+        path,
+        media_type="text/html",
+        headers={"Cache-Control": "no-store"},
+    )
+
+@app.get("/", include_in_schema=False)
+def citizen_portal() -> FileResponse:
+    """Serve the citizen-facing Scheme Navigator portal."""
+
+    portal_path = (
+        Path(__file__).resolve().parents[3]
+        / "static"
+        / "index.html"
+    )
+
+    if not portal_path.is_file():
+        raise HTTPException(
+            status_code=404,
+            detail="Citizen portal not found. Check static/index.html.",
+        )
+
+    return FileResponse(
+        portal_path,
+        media_type="text/html",
+        headers={"Cache-Control": "no-store"},
+    )
+
+
+========== .\pyproject.toml ==========
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "scheme-navigator"
+version = "0.1.0"
+description = "Source-grounded scheme discovery, eligibility audit, document pre-audit, and mock application planner for Maharashtra residents."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary - replace before distribution" }
+authors = [{ name = "Scheme Navigator contributors" }]
+dependencies = [
+  "fastapi>=0.115,<1.0",
+  "uvicorn[standard]>=0.30,<1.0",
+  "pydantic>=2.8,<3.0",
+  "pydantic-settings>=2.4,<3.0",
+  "httpx>=0.27,<1.0",
+  "beautifulsoup4>=4.12,<5.0",
+  "pypdf>=5.0,<6.0",
+  "pymupdf>=1.24,<2.0",
+  "PyYAML>=6.0,<7.0",
+  "python-multipart>=0.0.9,<1.0",
+  "networkx>=3.3,<4.0",
+  "rapidfuzz>=3.9,<4.0",
+  "jellyfish>=1.0,<2.0",
+  "rank-bm25>=0.2.2,<1.0",
+  "langgraph>=0.2.50,<2.0",
+  "langgraph-checkpoint-sqlite==3.1.3",
+  "langchain-core>=0.3,<2.0",
+  "qdrant-client>=1.11,<2.0",
+  "opencv-python-headless>=4.10,<5.0",
+  "Pillow>=10.4,<13.0",
+  "numpy>=1.26,<3.0",
+  "playwright>=1.48,<2.0",
+  "python-json-logger>=2.0,<4.0",
+]
+
+[project.optional-dependencies]
+voice = ["faster-whisper>=1.1,<2.0"]
+dev = [
+  "pytest>=8.3,<9.0",
+  "pytest-asyncio>=0.24,<2.0",
+  "ruff>=0.7,<1.0",
+  "mypy>=1.13,<2.0",
+  "coverage>=7.6,<8.0",
+]
+
+[project.scripts]
+scheme-navigator = "scheme_navigator.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/scheme_navigator"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]

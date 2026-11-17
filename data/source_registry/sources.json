@@ -1,0 +1,2097 @@
+[
+  {
+    "source_id": "SRC-PORTAL-01",
+    "name": "MahaDBT 2.0 (Direct Benefit Transfer)",
+    "authority": "Government of Maharashtra",
+    "department": "Directorate of Information Technology",
+    "domain": "mahadbt2.maharashtra.gov.in",
+    "url": "https://mahadbt2.maharashtra.gov.in/",
+    "source_type": "PORTAL",
+    "categories": [
+      "MahaDBT",
+      "State Departments",
+      "Scholarships",
+      "Farmer Schemes"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "90e36a2275047c4c811544b5bdac7e38fed43a8266c2ce8affb36b1572587556",
+    "parser_version": "2.1.0",
+    "records_found": 38,
+    "known_gaps": "Requires applicant login for live application status.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-PORTAL-02",
+    "name": "MahaDBT 1.0 (Legacy Portal & Continuing Students)",
+    "authority": "Government of Maharashtra",
+    "department": "Directorate of Information Technology",
+    "domain": "mahadbt.maharashtra.gov.in",
+    "url": "https://mahadbt.maharashtra.gov.in/",
+    "source_type": "PORTAL",
+    "categories": [
+      "MahaDBT",
+      "Scholarships",
+      "Social Justice",
+      "Tribal Welfare"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "c84bb41d4bd55574aacef5f0456e7d09f5ed762cb0fc2ce8fea7f1b66d361d05",
+    "parser_version": "2.0.0",
+    "records_found": 84,
+    "known_gaps": "Legacy renewals tied to previous application accounts.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-PORTAL-03",
+    "name": "MahaSarathi Unified Citizen Portal",
+    "authority": "Government of Maharashtra",
+    "department": "General Administration Department (GAD)",
+    "domain": "mahasarathi.maharashtra.gov.in",
+    "url": "https://mahasarathi.maharashtra.gov.in/",
+    "source_type": "PORTAL",
+    "categories": [
+      "MahaSarathi",
+      "Unified Services",
+      "Citizen Identity",
+      "MahaID",
+      "SSO"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "INTEROPERABILITY_EVALUATED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "8cdf3c9fceeddb5db48e8c4e183202f09a51edd62e070ff8daef7aed23a2da1e",
+    "parser_version": "1.0.0",
+    "records_found": 150,
+    "known_gaps": "MahaID / MahaONE API requires bilateral departmental authorization.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-PORTAL-04",
+    "name": "myScheme National Platform - Maharashtra Universe",
+    "authority": "National e-Governance Division (NeGD) & Digital India",
+    "department": "Ministry of Electronics and Information Technology (MeitY)",
+    "domain": "myscheme.gov.in",
+    "url": "https://www.myscheme.gov.in/search/state/Maharashtra",
+    "source_type": "NATIONAL_AGGREGATOR",
+    "categories": [
+      "myScheme",
+      "Central Schemes in Maharashtra",
+      "State Departments"
+    ],
+    "languages": [
+      "en",
+      "mr",
+      "hi"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "74c024207de1fc4a7bd7d1421fe64c23c3bb29771d473d73fb8d9bdf80f96af1",
+    "parser_version": "2.2.0",
+    "records_found": 112,
+    "known_gaps": "Aggregator summaries require GR verification.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-PORTAL-05",
+    "name": "Maharashtra Government Resolutions (शासन निर्णय)",
+    "authority": "Government of Maharashtra",
+    "department": "General Administration Department (GAD)",
+    "domain": "gr.maharashtra.gov.in",
+    "url": "https://gr.maharashtra.gov.in/1145/Government-Resolutions",
+    "source_type": "STATUTORY_GAZETTE",
+    "categories": [
+      "Government Resolutions",
+      "Statutory Lineage",
+      "Policy Amendments"
+    ],
+    "languages": [
+      "mr"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "04150f4afe4df9e28625ee4ec97bee2a9c87e2d2e78e3cc8884e8473fd253bfb",
+    "parser_version": "3.0.0",
+    "records_found": 420,
+    "known_gaps": "Historical scanned PDF GRs require human OCR review.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-PORTAL-06",
+    "name": "Aaple Sarkar Right to Services (RTS) Portal",
+    "authority": "Maharashtra State Right to Services Commission",
+    "department": "General Administration & Revenue Departments",
+    "domain": "aaplesarkar.mahaonline.gov.in",
+    "url": "https://aaplesarkar.mahaonline.gov.in/en/CommonForm/CitizenServices_RTS",
+    "source_type": "PUBLIC_SERVICE_PORTAL",
+    "categories": [
+      "Aaple Sarkar",
+      "Public Services",
+      "Prerequisites",
+      "Certificates",
+      "RTS Standards"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "c6c5cb004fc790cba846d65e66ebc03d51e0d204f4b047d4c74255c0c03826b7",
+    "parser_version": "2.0.0",
+    "records_found": 504,
+    "known_gaps": "Timelines represent statutory maximums.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-PORTAL-07",
+    "name": "MahaScheme State Plan Information System",
+    "authority": "Government of Maharashtra",
+    "department": "Planning Department",
+    "domain": "mahaschemes.maharashtra.gov.in",
+    "url": "https://mahaschemes.maharashtra.gov.in/",
+    "source_type": "PORTAL",
+    "categories": [
+      "MahaScheme",
+      "Planning Department",
+      "State Plan Schemes"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "f7df1ee8f6bf2af34a7f7a0c95c072522f6e271f4b29eb83f1a0074be9819f22",
+    "parser_version": "1.2.0",
+    "records_found": 95,
+    "known_gaps": "Links redirect to departmental homepages.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-PORTAL-08",
+    "name": "India Government Directory (iGOD) - Maharashtra Registry",
+    "authority": "National Informatics Centre (NIC)",
+    "department": "Ministry of Electronics and Information Technology (MeitY)",
+    "domain": "igod.gov.in",
+    "url": "https://igod.gov.in/sg/MH/categories",
+    "source_type": "DIRECTORY",
+    "categories": [
+      "State Departments",
+      "Attached Offices",
+      "State Corporations"
+    ],
+    "languages": [
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "6b8da73e73a3dd78cfa2b8007216f793d1006a0eb29c0532da4f188eb68be2a7",
+    "parser_version": "1.5.0",
+    "records_found": 64,
+    "known_gaps": "Organizational tree only.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-01",
+    "name": "Agriculture Department (कृषी विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Agriculture Department",
+    "domain": "krishi.maharashtra.gov.in",
+    "url": "https://krishi.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Farmer Schemes",
+      "Crop Insurance",
+      "Machinery",
+      "KUSUM Solar"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "a0f65eda59f55f8cec49433831c406ef3756632a67d64284c05db55e017b4723",
+    "parser_version": "1.4.0",
+    "records_found": 42,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-02",
+    "name": "Animal Husbandry Department (पशुसंवर्धन विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Animal Husbandry Department",
+    "domain": "ahd.maharashtra.gov.in",
+    "url": "https://ahd.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Livestock",
+      "Dairy Subsidy",
+      "Fodder Assistance"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "8164a674ae3db51764a555df6b0ea733b2a424b04e37ab128b5791da9707b234",
+    "parser_version": "1.4.0",
+    "records_found": 14,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-03",
+    "name": "Dairy Development Department (दुग्धव्यवसाय विकास विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Dairy Development Department",
+    "domain": "dairy.maharashtra.gov.in",
+    "url": "https://dairy.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Dairy Cooperatives",
+      "Milk Producers Subsidy"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "44d040c3de72d5a0688c8d44251b2d68255fa00170aea84b820c01f179557942",
+    "parser_version": "1.4.0",
+    "records_found": 11,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-04",
+    "name": "Fisheries Department (मत्स्यव्यवसाय विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Fisheries Department",
+    "domain": "fisheries.maharashtra.gov.in",
+    "url": "https://fisheries.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Fishermen Welfare",
+      "Boat Subsidy",
+      "Diesel Reimbursement"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "eef639bc71f6783e386903962aa047bdfeeaef7ddea86b334146fb344b3bd29b",
+    "parser_version": "1.4.0",
+    "records_found": 12,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-05",
+    "name": "Cooperation, Marketing & Textiles (सहकार, पणन व वस्त्रोद्योग विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Cooperation, Marketing & Textiles",
+    "domain": "cooperation.maharashtra.gov.in",
+    "url": "https://cooperation.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Weavers Welfare",
+      "Cooperative Credit Subsidy"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "a4cad50fe3eefbaf77b32490dce9bfca7df114132bae620b2415df79e4cfa42e",
+    "parser_version": "1.4.0",
+    "records_found": 15,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-06",
+    "name": "Revenue and Forest Department (महसूल व वन विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Revenue and Forest Department",
+    "domain": "revenue.maharashtra.gov.in",
+    "url": "https://revenue.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Calamity Compensation",
+      "Land Records",
+      "Public Services"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "2764bae5833809a29e29821dd2305ea54f7055cec1e6b77f017d48465d9f7fcc",
+    "parser_version": "1.4.0",
+    "records_found": 18,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-07",
+    "name": "Rural Development and Panchayat Raj (ग्रामविकास व पंचायत राज विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Rural Development and Panchayat Raj",
+    "domain": "rdd.maharashtra.gov.in",
+    "url": "https://rdd.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Rural Housing",
+      "Panchayat Grants",
+      "Rural Livelihood"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "01f64b73ddf683baf1fbbc30aab02c6437b287fe23d55473c188da3a68d7cfdc",
+    "parser_version": "1.4.0",
+    "records_found": 28,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-08",
+    "name": "Urban Development Department (नगर विकास विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Urban Development Department",
+    "domain": "urban.maharashtra.gov.in",
+    "url": "https://urban.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Urban Poor Welfare",
+      "PMAY-U",
+      "Sanitation"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "e11c96995aa9d0edd63a512aa5ad82c17dad720650f22d8cc64a411ba911669e",
+    "parser_version": "1.4.0",
+    "records_found": 16,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-09",
+    "name": "School Education and Sports (शालेय शिक्षण व क्रीडा विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "School Education and Sports",
+    "domain": "education.maharashtra.gov.in",
+    "url": "https://education.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Pre-Matric Scholarships",
+      "Free Textbooks",
+      "Sports Awards"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "5a807f5723503026a349e65dfa7fc2a148fd9b3dc163bb5461d0098cbbe36e31",
+    "parser_version": "1.4.0",
+    "records_found": 24,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-10",
+    "name": "Higher and Technical Education (उच्च व तंत्र शिक्षण विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Higher and Technical Education",
+    "domain": "hted.maharashtra.gov.in",
+    "url": "https://hted.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "EBC Fee Waiver",
+      "Girls Professional Waiver",
+      "Hostel Allowance"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "38092d7bb9171bbce7fc25ab7aadc9e77b678a43bbdb6ae532d4a23c3f1b1f5c",
+    "parser_version": "1.4.0",
+    "records_found": 25,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-11",
+    "name": "Medical Education and Drugs (वैद्यकीय शिक्षण व औषधी द्रव्ये विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Medical Education and Drugs",
+    "domain": "med-edu.maharashtra.gov.in",
+    "url": "https://med-edu.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Medical College Fee Concessions",
+      "Nursing Stipends"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "760d92c3c301b2ac430267e51fd93bc8e65cb7753583290f5e693d1563063c66",
+    "parser_version": "1.4.0",
+    "records_found": 13,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-12",
+    "name": "Public Health Department (सार्वजनिक आरोग्य विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Public Health Department",
+    "domain": "arogya.maharashtra.gov.in",
+    "url": "https://arogya.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "MJPJAY",
+      "Janani Suraksha",
+      "Free Dialysis"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "aa3b894245a5d45ffe1b114db8914ceda60f958e5004b032016c9665ff080da1",
+    "parser_version": "1.4.0",
+    "records_found": 19,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-13",
+    "name": "Women and Child Development (महिला व बालविकास विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Women and Child Development",
+    "domain": "womenchild.maharashtra.gov.in",
+    "url": "https://womenchild.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Majhi Ladki Bahin",
+      "Kanya Bhagyashree",
+      "Anganwadi Nutrition"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "014daba6f321325181732ce2a10829ccf32eda5746d03a6198220fd1101ec7c3",
+    "parser_version": "1.4.0",
+    "records_found": 22,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-14",
+    "name": "Social Justice and Special Assistance (सामाजिक न्याय व विशेष सहाय्य विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Social Justice and Special Assistance",
+    "domain": "socialwelfare.maharashtra.gov.in",
+    "url": "https://socialwelfare.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "SGNAY",
+      "Shravanbal",
+      "SC Post-Matric",
+      "Swadhar"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "5ff9aafc837139a4dc05d51b6459b82acffcacac8e707ae979a79a47369d8a4b",
+    "parser_version": "1.4.0",
+    "records_found": 48,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-15",
+    "name": "Tribal Development Department (आदिवासी विकास विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Tribal Development Department",
+    "domain": "tribal.maharashtra.gov.in",
+    "url": "https://tribal.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "ST Post-Matric",
+      "Swayam Hostel DBT",
+      "Ashram Shala"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "79a74d7217b73560e65573b437103f14a138923631cf08e1d86aa7ef3463fbcf",
+    "parser_version": "1.4.0",
+    "records_found": 34,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-16",
+    "name": "OBC, VJNT, SBC & SEBC Welfare (इतर मागास बहुजन कल्याण विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "OBC, VJNT, SBC & SEBC Welfare",
+    "domain": "mahagov.in/obc-welfare",
+    "url": "https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "OBC Scholarships",
+      "Tuition Reimbursement",
+      "Hostels"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "599f2da816312b2c697b1b7fdf08f0bb9db05950b4008b3a9772e4410f4674e4",
+    "parser_version": "1.4.0",
+    "records_found": 18,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-17",
+    "name": "Minority Development Department (अल्पसंख्याक विकास विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Minority Development Department",
+    "domain": "minority.maharashtra.gov.in",
+    "url": "https://minority.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Minority Post-Matric",
+      "Scholarships for Higher Education"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "a0d16faf602bc0d2f1bb86c24fc64b5790e799513aa53c5ee9455987ff06519a",
+    "parser_version": "1.4.0",
+    "records_found": 15,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-18",
+    "name": "Skill Development, Employment & Ent. (कौशल्य विकास, रोजगार व उद्योजकता विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Skill Development, Employment & Ent.",
+    "domain": "mahaswayam.gov.in",
+    "url": "https://www.mahaswayam.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Pramod Mahajan Kaushalya",
+      "Apprenticeship Incentive"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "d6cadf332fd2fe683e5d8d43348d327d3cb7bce32bf882d729e678337242b146",
+    "parser_version": "1.4.0",
+    "records_found": 31,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-19",
+    "name": "Labour Department (कामगार विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Labour Department",
+    "domain": "labour.maharashtra.gov.in",
+    "url": "https://labour.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "BOCWW Construction Workers",
+      "Domestic Workers Welfare"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "169387d934f907df1ea94a001f9e050eab193ae84bec6b2d45c6b4e0dd9683e9",
+    "parser_version": "1.4.0",
+    "records_found": 24,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-20",
+    "name": "Industries and MSME Directorate (उद्योग संचालनालय)",
+    "authority": "Government of Maharashtra",
+    "department": "Industries and MSME Directorate",
+    "domain": "msme.maharashtra.gov.in",
+    "url": "https://msme.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "CMEGP",
+      "Seed Money Scheme",
+      "District Industries Grants"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "6f48cb74cef8afcabe437c9501d5e074addf2d44049e4088c5cf103ffbf56383",
+    "parser_version": "1.4.0",
+    "records_found": 21,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-21",
+    "name": "Housing Department (गृहनिर्माण विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Housing Department",
+    "domain": "housing.maharashtra.gov.in",
+    "url": "https://housing.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "MHADA Housing Lottery",
+      "SRA Slum Rehabilitation"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "b18fc2c6580cc0b7749199c4d3d59e585386f79694964013eee46ab1cdde6be8",
+    "parser_version": "1.4.0",
+    "records_found": 14,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-22",
+    "name": "Water Resources Department (जलसंपदा विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Water Resources Department",
+    "domain": "wrd.maharashtra.gov.in",
+    "url": "https://wrd.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Irrigation Water User Associations Subsidy"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "5a02e24c0784c12b2b1a1685b228e8b55288f6e33af83dc9b7e031f391fa1211",
+    "parser_version": "1.4.0",
+    "records_found": 9,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-23",
+    "name": "Water Supply and Sanitation (पाणीपुरवठा व स्वच्छता विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Water Supply and Sanitation",
+    "domain": "wsd.maharashtra.gov.in",
+    "url": "https://wsd.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Jal Jeevan Mission Rural",
+      "Swachh Bharat Gramin"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "636acf195fea07485dcc137dbf0078eb747c10b01365c62a982620a7403fd009",
+    "parser_version": "1.4.0",
+    "records_found": 12,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-24",
+    "name": "Energy Department (ऊर्जा विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Energy Department",
+    "domain": "energy.maharashtra.gov.in",
+    "url": "https://energy.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Krushi Vahini",
+      "Solar Rooftop PM Surya Ghar"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "9f038f02375066e7574da4ce6dc4c49c133d47f38f738f3338b4505c20d4bd3c",
+    "parser_version": "1.4.0",
+    "records_found": 15,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-25",
+    "name": "Environment and Climate Change (पर्यावरण व वातावरणीय बदल विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Environment and Climate Change",
+    "domain": "environment.maharashtra.gov.in",
+    "url": "https://environment.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Majhi Vasundhara Grants"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "f48b10a779af891e8d2d43df36742cdc80153dad916543dfd2c231a01c47fadd",
+    "parser_version": "1.4.0",
+    "records_found": 7,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-26",
+    "name": "Tourism and Cultural Affairs (पर्यटन व सांस्कृतिक कार्य विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Tourism and Cultural Affairs",
+    "domain": "cultural.maharashtra.gov.in",
+    "url": "https://cultural.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Elderly Folk Artists Pension",
+      "Pilgrimage Support"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "c094391a3e46917cb10ec436c8cb8724b6896e7aa26db2f254d62968e5535ef1",
+    "parser_version": "1.4.0",
+    "records_found": 10,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-27",
+    "name": "Divyang Welfare Department (दिव्यांग कल्याण विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Divyang Welfare Department",
+    "domain": "divyang.maharashtra.gov.in",
+    "url": "https://divyang.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Motorized Tricycles",
+      "Braille Kits",
+      "Disability Marriage"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "267ed965cf889fa157d8c0a627beaae304bfdc392513fff64a538216b9feab10",
+    "parser_version": "1.4.0",
+    "records_found": 15,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-28",
+    "name": "Home Department (Citizen Programs) (गृह विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Home Department (Citizen Programs)",
+    "domain": "home.maharashtra.gov.in",
+    "url": "https://home.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Police Martyrs Family Assistance",
+      "Civil Defence Volunteers"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "37c27c6aa112a3fc71df62a2f9310e4b0e02b14b7ebbc2b5682eb2361f576be7",
+    "parser_version": "1.4.0",
+    "records_found": 8,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-29",
+    "name": "Transport Department (परिवहन विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Transport Department",
+    "domain": "transport.maharashtra.gov.in",
+    "url": "https://transport.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Electric Vehicle EV Subsidy",
+      "Driver Welfare"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "ea5074a6a7090079419754c9bad9760b8f716ec4a7c3cf299bcc37d6729b7d48",
+    "parser_version": "1.4.0",
+    "records_found": 11,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-30",
+    "name": "Food, Civil Supplies & Consumer Prot. (अन्न, नागरी पुरवठा व ग्राहक संरक्षण विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Food, Civil Supplies & Consumer Prot.",
+    "domain": "mahafood.gov.in",
+    "url": "https://mahafood.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Antyodaya Foodgrain",
+      "Subsidized Ration Cards"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "e26885cef0dad0fc62f3daeafd8d647a86ef59a60d2f2a11121c3b74600a2980",
+    "parser_version": "1.4.0",
+    "records_found": 14,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-31",
+    "name": "Planning Department (नियोजन विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Planning Department",
+    "domain": "plan.maharashtra.gov.in",
+    "url": "https://plan.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "District Annual Plan Grants",
+      "MPLADS/MLALADS"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "ecfae955d896c49b7ad2c598571ba454b57340fdf8571a17c4991d3393d44871",
+    "parser_version": "1.4.0",
+    "records_found": 26,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-32",
+    "name": "Finance Department (वित्त विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "Finance Department",
+    "domain": "finance.maharashtra.gov.in",
+    "url": "https://finance.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Civil Pensioners Medical Relief"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "04a422923c948912556cb68bd10e2fe4b1555ae4872a8a6de7579004881030b0",
+    "parser_version": "1.4.0",
+    "records_found": 9,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-33",
+    "name": "Sports and Youth Affairs (क्रीडा व युवक सेवा संचालनालय)",
+    "authority": "Government of Maharashtra",
+    "department": "Sports and Youth Affairs",
+    "domain": "sports.maharashtra.gov.in",
+    "url": "https://sports.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Shiv Chhatrapati Awards",
+      "National Medalist Cash Grants"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "e6d99b504613101c502557a696fd38517ff34a6bbec0bf561a200e422aad190d",
+    "parser_version": "1.4.0",
+    "records_found": 16,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-34",
+    "name": "Disaster Management & Relief (आपत्ती व्यवस्थापन व मदत पुनर्वसन)",
+    "authority": "Government of Maharashtra",
+    "department": "Disaster Management & Relief",
+    "domain": "disaster.maharashtra.gov.in",
+    "url": "https://disaster.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "SDRF Flood/Drought Compensation",
+      "Ex-gratia Grants"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "66f7ae0f41602dda872ae974d5f2af46761bd722237b428f3c32a770204e55a7",
+    "parser_version": "1.4.0",
+    "records_found": 12,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DEPT-35",
+    "name": "General Administration Department (सामान्य प्रशासन विभाग)",
+    "authority": "Government of Maharashtra",
+    "department": "General Administration Department",
+    "domain": "gad.maharashtra.gov.in",
+    "url": "https://gad.maharashtra.gov.in/",
+    "source_type": "DEPARTMENT_PORTAL",
+    "categories": [
+      "State Departments",
+      "Freedom Fighters Pension",
+      "Right to Services Oversight"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "14c7e8060dab44c540a5b10d12a8e1b66d43b1a36ce6dbaca6154146ec48bda7",
+    "parser_version": "1.4.0",
+    "records_found": 17,
+    "known_gaps": "Scheme-specific guidelines subject to periodic departmental circulars.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CORP-01",
+    "name": "Mahatma Phule Backward Class Dev Corp (MPBCDC)",
+    "authority": "State Government Corporation / Statutory Board",
+    "department": "Social Justice",
+    "domain": "mpbcdc.maharashtra.gov.in",
+    "url": "https://mpbcdc.maharashtra.gov.in/",
+    "source_type": "STATE_CORPORATION",
+    "categories": [
+      "State Corporations/Boards",
+      "Welfare Loans",
+      "Fellowships"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "d20443a90c49846ebc52270364892617ce1bf05cfc39a7dafba621e289999c05",
+    "parser_version": "1.3.0",
+    "records_found": 12,
+    "known_gaps": "Physical application counters or bank-tied loan documentation required.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CORP-02",
+    "name": "Annasaheb Patil Arthik-Magas Vikas Mahamandal (AMVDC)",
+    "authority": "State Government Corporation / Statutory Board",
+    "department": "Skill Development",
+    "domain": "amvdc.maharashtra.gov.in",
+    "url": "https://amvdc.maharashtra.gov.in/",
+    "source_type": "STATE_CORPORATION",
+    "categories": [
+      "State Corporations/Boards",
+      "Welfare Loans",
+      "Fellowships"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "f0f5240790a4642dae259a579188bf0ff2dbffdae7a896a58a3aa3119448705b",
+    "parser_version": "1.3.0",
+    "records_found": 8,
+    "known_gaps": "Physical application counters or bank-tied loan documentation required.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CORP-03",
+    "name": "Vasantrao Naik VJNT Development Corporation",
+    "authority": "State Government Corporation / Statutory Board",
+    "department": "OBC & VJNT Welfare",
+    "domain": "vjnt.maharashtra.gov.in",
+    "url": "https://vjnt.maharashtra.gov.in/",
+    "source_type": "STATE_CORPORATION",
+    "categories": [
+      "State Corporations/Boards",
+      "Welfare Loans",
+      "Fellowships"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "03ce65f797794ef5bb5430f9b68602625219f7b3009349efd098c6da000a92a7",
+    "parser_version": "1.3.0",
+    "records_found": 9,
+    "known_gaps": "Physical application counters or bank-tied loan documentation required.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CORP-04",
+    "name": "Shabari Adivasi Vitta Va Vikas Mahamandal",
+    "authority": "State Government Corporation / Statutory Board",
+    "department": "Tribal Development",
+    "domain": "shabari.maharashtra.gov.in",
+    "url": "https://shabari.maharashtra.gov.in/",
+    "source_type": "STATE_CORPORATION",
+    "categories": [
+      "State Corporations/Boards",
+      "Welfare Loans",
+      "Fellowships"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "2431ef0e749739cef7f03355694ae816c1748844754df62b15a744a2f6494b23",
+    "parser_version": "1.3.0",
+    "records_found": 7,
+    "known_gaps": "Physical application counters or bank-tied loan documentation required.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CORP-05",
+    "name": "Maulana Azad Minorities Financial Dev Corp (MAMFDC)",
+    "authority": "State Government Corporation / Statutory Board",
+    "department": "Minority Development",
+    "domain": "mamfdc.maharashtra.gov.in",
+    "url": "https://mamfdc.maharashtra.gov.in/",
+    "source_type": "STATE_CORPORATION",
+    "categories": [
+      "State Corporations/Boards",
+      "Welfare Loans",
+      "Fellowships"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "73224052be5f628c2c7b3bcfb3a9ea7d08d7a816c1e958e635be901a41ab244f",
+    "parser_version": "1.3.0",
+    "records_found": 11,
+    "known_gaps": "Physical application counters or bank-tied loan documentation required.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CORP-06",
+    "name": "Lokshahir Annabhau Sathe Vikas Mahamandal",
+    "authority": "State Government Corporation / Statutory Board",
+    "department": "Social Justice",
+    "domain": "lasvm.maharashtra.gov.in",
+    "url": "https://lasvm.maharashtra.gov.in/",
+    "source_type": "STATE_CORPORATION",
+    "categories": [
+      "State Corporations/Boards",
+      "Welfare Loans",
+      "Fellowships"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "4b3a734697912d0868ddd807f48c8348bc9dc347a5262ea5416df57b8f122409",
+    "parser_version": "1.3.0",
+    "records_found": 6,
+    "known_gaps": "Physical application counters or bank-tied loan documentation required.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CORP-07",
+    "name": "Sant Rohidas Charmodyog & Charmakar Dev Corp",
+    "authority": "State Government Corporation / Statutory Board",
+    "department": "Social Justice",
+    "domain": "srdc.maharashtra.gov.in",
+    "url": "https://srdc.maharashtra.gov.in/",
+    "source_type": "STATE_CORPORATION",
+    "categories": [
+      "State Corporations/Boards",
+      "Welfare Loans",
+      "Fellowships"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "28b107f90a79e0dd822f2cc9c48c5005a14550f499a2ef7c8154ca406f5bb81f",
+    "parser_version": "1.3.0",
+    "records_found": 5,
+    "known_gaps": "Physical application counters or bank-tied loan documentation required.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CORP-08",
+    "name": "MahaJyoti (Mahatma Phule Research & Training)",
+    "authority": "State Government Corporation / Statutory Board",
+    "department": "OBC & VJNT Welfare",
+    "domain": "mahajyoti.org.in",
+    "url": "https://mahajyoti.org.in/",
+    "source_type": "STATE_CORPORATION",
+    "categories": [
+      "State Corporations/Boards",
+      "Welfare Loans",
+      "Fellowships"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "671355c2174558ae489f7a2160aa56101a514006ea2d7cf3c1ad3e20a51e4859",
+    "parser_version": "1.3.0",
+    "records_found": 14,
+    "known_gaps": "Physical application counters or bank-tied loan documentation required.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CORP-09",
+    "name": "BARTI (Dr. Babasaheb Ambedkar Research & Training)",
+    "authority": "State Government Corporation / Statutory Board",
+    "department": "Social Justice",
+    "domain": "barti.maharashtra.gov.in",
+    "url": "https://barti.maharashtra.gov.in/",
+    "source_type": "STATE_CORPORATION",
+    "categories": [
+      "State Corporations/Boards",
+      "Welfare Loans",
+      "Fellowships"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "bd8a0be63760a7ab418131519324d9bd6a8b6f98fd99bfe0118716623e1379ed",
+    "parser_version": "1.3.0",
+    "records_found": 16,
+    "known_gaps": "Physical application counters or bank-tied loan documentation required.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CORP-10",
+    "name": "TRTI (Tribal Research and Training Institute)",
+    "authority": "State Government Corporation / Statutory Board",
+    "department": "Tribal Development",
+    "domain": "trti.maharashtra.gov.in",
+    "url": "https://trti.maharashtra.gov.in/",
+    "source_type": "STATE_CORPORATION",
+    "categories": [
+      "State Corporations/Boards",
+      "Welfare Loans",
+      "Fellowships"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "9bd7fbe7ee8a3338cde9b6afa88b8071a433db84711f696fa331f96d800591e7",
+    "parser_version": "1.3.0",
+    "records_found": 12,
+    "known_gaps": "Physical application counters or bank-tied loan documentation required.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CORP-11",
+    "name": "Maharashtra Building & Other Construction Workers Board (BOCWW)",
+    "authority": "State Government Corporation / Statutory Board",
+    "department": "Labour Department",
+    "domain": "mahabocw.in",
+    "url": "https://mahabocw.in/",
+    "source_type": "STATE_CORPORATION",
+    "categories": [
+      "State Corporations/Boards",
+      "Welfare Loans",
+      "Fellowships"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "dc9243f61f1481053709b3612886ae9e778045b4b9037b7d4c291090ea12898b",
+    "parser_version": "1.3.0",
+    "records_found": 32,
+    "known_gaps": "Physical application counters or bank-tied loan documentation required.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CENTRAL-01",
+    "name": "PM-KISAN (Pradhan Mantri Kisan Samman Nidhi)",
+    "authority": "Government of India / State Implementing Agency",
+    "department": "Agriculture",
+    "domain": "pmkisan.gov.in",
+    "url": "https://pmkisan.gov.in/",
+    "source_type": "CENTRAL_SECTOR",
+    "categories": [
+      "Central Schemes in Maharashtra",
+      "Joint Central-State schemes"
+    ],
+    "languages": [
+      "en",
+      "mr",
+      "hi"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "d22d44d7c85556cdf92baf2d55a372224933150b1a14880605950d2cbfa889e1",
+    "parser_version": "2.0.0",
+    "records_found": 1,
+    "known_gaps": "State share top-up and Aadhaar seeding mandatory.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CENTRAL-02",
+    "name": "Ayushman Bharat PM-JAY & MJPJAY Health Insurance",
+    "authority": "Government of India / State Implementing Agency",
+    "department": "Public Health",
+    "domain": "jeevandayee.gov.in",
+    "url": "https://www.jeevandayee.gov.in/",
+    "source_type": "CENTRAL_SECTOR",
+    "categories": [
+      "Central Schemes in Maharashtra",
+      "Joint Central-State schemes"
+    ],
+    "languages": [
+      "en",
+      "mr",
+      "hi"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "060ef24b8aa6f689be6e0a4c67173d94278175ea9045049ab2720992963dc03b",
+    "parser_version": "2.0.0",
+    "records_found": 2,
+    "known_gaps": "State share top-up and Aadhaar seeding mandatory.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CENTRAL-03",
+    "name": "Pradhan Mantri Awas Yojana - Gramin (PMAY-G)",
+    "authority": "Government of India / State Implementing Agency",
+    "department": "Rural Development",
+    "domain": "pmayg.nic.in",
+    "url": "https://pmayg.nic.in/",
+    "source_type": "CENTRAL_SECTOR",
+    "categories": [
+      "Central Schemes in Maharashtra",
+      "Joint Central-State schemes"
+    ],
+    "languages": [
+      "en",
+      "mr",
+      "hi"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "80361cbefd0614aac8619494a9ef2bfabebfcb31e4e906a0e3ef1086f0058f61",
+    "parser_version": "2.0.0",
+    "records_found": 2,
+    "known_gaps": "State share top-up and Aadhaar seeding mandatory.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CENTRAL-04",
+    "name": "Pradhan Mantri Awas Yojana - Urban (PMAY-U)",
+    "authority": "Government of India / State Implementing Agency",
+    "department": "Urban Development",
+    "domain": "pmaymis.gov.in",
+    "url": "https://pmaymis.gov.in/",
+    "source_type": "CENTRAL_SECTOR",
+    "categories": [
+      "Central Schemes in Maharashtra",
+      "Joint Central-State schemes"
+    ],
+    "languages": [
+      "en",
+      "mr",
+      "hi"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "02e218ad7f29b2e4cbdc57ee0cdaf80b3f23a71f3de2e7e6fffe85504082abc4",
+    "parser_version": "2.0.0",
+    "records_found": 2,
+    "known_gaps": "State share top-up and Aadhaar seeding mandatory.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CENTRAL-05",
+    "name": "National Social Assistance Programme (NSAP IGNOAPS/Widow)",
+    "authority": "Government of India / State Implementing Agency",
+    "department": "Social Justice",
+    "domain": "nsap.nic.in",
+    "url": "https://nsap.nic.in/",
+    "source_type": "CENTRAL_SECTOR",
+    "categories": [
+      "Central Schemes in Maharashtra",
+      "Joint Central-State schemes"
+    ],
+    "languages": [
+      "en",
+      "mr",
+      "hi"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "1e506812d859927847f65d82761a334a17984bc9105542ccf4fb543295f5e8d3",
+    "parser_version": "2.0.0",
+    "records_found": 5,
+    "known_gaps": "State share top-up and Aadhaar seeding mandatory.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-CENTRAL-06",
+    "name": "National Scholarship Portal (Central Scholarships)",
+    "authority": "Government of India / State Implementing Agency",
+    "department": "Higher Education",
+    "domain": "scholarships.gov.in",
+    "url": "https://scholarships.gov.in/",
+    "source_type": "CENTRAL_SECTOR",
+    "categories": [
+      "Central Schemes in Maharashtra",
+      "Joint Central-State schemes"
+    ],
+    "languages": [
+      "en",
+      "mr",
+      "hi"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "2ab1257212324a889f05ac409e44269ebbe573ea1a2d1826d4be3f311641da9f",
+    "parser_version": "2.0.0",
+    "records_found": 6,
+    "known_gaps": "State share top-up and Aadhaar seeding mandatory.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DIST-01",
+    "name": "Pune District Collectorate (जिल्हाधिकारी कार्यालय पुणे)",
+    "authority": "Revenue & Forest Department, Maharashtra",
+    "department": "Revenue Department",
+    "domain": "pune.gov.in",
+    "url": "https://pune.gov.in/",
+    "source_type": "DISTRICT_PORTAL",
+    "categories": [
+      "District schemes",
+      "Revenue Services"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "8354294bf125b8ba91f092bb144ebda4c19718a85128d000fa45912a1aa7cbbc",
+    "parser_version": "1.2.0",
+    "records_found": 12,
+    "known_gaps": "Taluka Sanjay Gandhi Yojana meeting schedules published locally.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DIST-02",
+    "name": "Mumbai City District Collectorate",
+    "authority": "Revenue & Forest Department, Maharashtra",
+    "department": "Revenue Department",
+    "domain": "mumbaicity.gov.in",
+    "url": "https://mumbaicity.gov.in/",
+    "source_type": "DISTRICT_PORTAL",
+    "categories": [
+      "District schemes",
+      "Revenue Services"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "b4d772fdfcf1c1c155625c5054df0ceb40bef27797ce59c6dd75afc883363b06",
+    "parser_version": "1.2.0",
+    "records_found": 8,
+    "known_gaps": "Taluka Sanjay Gandhi Yojana meeting schedules published locally.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DIST-03",
+    "name": "Mumbai Suburban District Collectorate",
+    "authority": "Revenue & Forest Department, Maharashtra",
+    "department": "Revenue Department",
+    "domain": "mumbaisuburban.gov.in",
+    "url": "https://mumbaisuburban.gov.in/",
+    "source_type": "DISTRICT_PORTAL",
+    "categories": [
+      "District schemes",
+      "Revenue Services"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "ab7855b3b7d24bee555a9ce8333ffa780ef9c956cd848cd1afeb24785bec2aa0",
+    "parser_version": "1.2.0",
+    "records_found": 9,
+    "known_gaps": "Taluka Sanjay Gandhi Yojana meeting schedules published locally.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DIST-04",
+    "name": "Thane District Collectorate",
+    "authority": "Revenue & Forest Department, Maharashtra",
+    "department": "Revenue Department",
+    "domain": "thane.nic.in",
+    "url": "https://thane.nic.in/",
+    "source_type": "DISTRICT_PORTAL",
+    "categories": [
+      "District schemes",
+      "Revenue Services"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "022545353f668fa45ba4a9305996b75541e267d86ce0a1e43739845df3de49c5",
+    "parser_version": "1.2.0",
+    "records_found": 11,
+    "known_gaps": "Taluka Sanjay Gandhi Yojana meeting schedules published locally.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DIST-05",
+    "name": "Nagpur District Collectorate",
+    "authority": "Revenue & Forest Department, Maharashtra",
+    "department": "Revenue Department",
+    "domain": "nagpur.gov.in",
+    "url": "https://nagpur.gov.in/",
+    "source_type": "DISTRICT_PORTAL",
+    "categories": [
+      "District schemes",
+      "Revenue Services"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "80cc32219e0a58db821a0c2dce80ff353fd8267805bf9bdefe3ae872c4e07b62",
+    "parser_version": "1.2.0",
+    "records_found": 10,
+    "known_gaps": "Taluka Sanjay Gandhi Yojana meeting schedules published locally.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-DIST-06",
+    "name": "Chhatrapati Sambhajinagar Collectorate",
+    "authority": "Revenue & Forest Department, Maharashtra",
+    "department": "Revenue Department",
+    "domain": "aurangabad.gov.in",
+    "url": "https://aurangabad.gov.in/",
+    "source_type": "DISTRICT_PORTAL",
+    "categories": [
+      "District schemes",
+      "Revenue Services"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "16c4610c5d190f67fb67e5fb4ec8672a54e9e719e3d1188d60962a8e161c757d",
+    "parser_version": "1.2.0",
+    "records_found": 9,
+    "known_gaps": "Taluka Sanjay Gandhi Yojana meeting schedules published locally.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-MUNI-01",
+    "name": "Brihanmumbai Municipal Corporation (BMC)",
+    "authority": "Urban Development Department / Urban Local Body",
+    "department": "Urban Development Department",
+    "domain": "mcgm.gov.in",
+    "url": "https://www.mcgm.gov.in/",
+    "source_type": "MUNICIPAL_PORTAL",
+    "categories": [
+      "Municipal/local schemes",
+      "Urban Welfare"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "de5e42dd63e66c5c74536c965f1be1ed448d17080620e3185a5b91efe80a86e2",
+    "parser_version": "1.2.0",
+    "records_found": 15,
+    "known_gaps": "Restricted to citizens residing in municipal corporation limits.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-MUNI-02",
+    "name": "Pune Municipal Corporation (PMC)",
+    "authority": "Urban Development Department / Urban Local Body",
+    "department": "Urban Development Department",
+    "domain": "pmc.gov.in",
+    "url": "https://www.pmc.gov.in/",
+    "source_type": "MUNICIPAL_PORTAL",
+    "categories": [
+      "Municipal/local schemes",
+      "Urban Welfare"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "bcc04002f0dd0e5ddaad3874e0952e7c2191d9a3e8ee55643c1a6845f8a59cda",
+    "parser_version": "1.2.0",
+    "records_found": 14,
+    "known_gaps": "Restricted to citizens residing in municipal corporation limits.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-MUNI-03",
+    "name": "Pimpri Chinchwad Municipal Corporation (PCMC)",
+    "authority": "Urban Development Department / Urban Local Body",
+    "department": "Urban Development Department",
+    "domain": "pcmcindia.gov.in",
+    "url": "https://www.pcmcindia.gov.in/",
+    "source_type": "MUNICIPAL_PORTAL",
+    "categories": [
+      "Municipal/local schemes",
+      "Urban Welfare"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "c77eabdfae698625821714e1789e3c4244acd4435b92f347402fe015add5adf3",
+    "parser_version": "1.2.0",
+    "records_found": 10,
+    "known_gaps": "Restricted to citizens residing in municipal corporation limits.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-MUNI-04",
+    "name": "Navi Mumbai Municipal Corporation (NMMC)",
+    "authority": "Urban Development Department / Urban Local Body",
+    "department": "Urban Development Department",
+    "domain": "nmmc.gov.in",
+    "url": "https://www.nmmc.gov.in/",
+    "source_type": "MUNICIPAL_PORTAL",
+    "categories": [
+      "Municipal/local schemes",
+      "Urban Welfare"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "db7c0c8dc51bb26620e113342a8390d639f3a7421946d6ebfef8e5597dd51e00",
+    "parser_version": "1.2.0",
+    "records_found": 8,
+    "known_gaps": "Restricted to citizens residing in municipal corporation limits.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-MUNI-05",
+    "name": "Nagpur Municipal Corporation (NMC)",
+    "authority": "Urban Development Department / Urban Local Body",
+    "department": "Urban Development Department",
+    "domain": "nmcnagpur.gov.in",
+    "url": "https://www.nmcnagpur.gov.in/",
+    "source_type": "MUNICIPAL_PORTAL",
+    "categories": [
+      "Municipal/local schemes",
+      "Urban Welfare"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "db256846a2fbf40197149c00c59d75afb5a5c23f2915e89bdc805c2e20007f25",
+    "parser_version": "1.2.0",
+    "records_found": 9,
+    "known_gaps": "Restricted to citizens residing in municipal corporation limits.",
+    "failure_reason": null
+  },
+  {
+    "source_id": "SRC-MUNI-06",
+    "name": "Nashik Municipal Corporation (NMC)",
+    "authority": "Urban Development Department / Urban Local Body",
+    "department": "Urban Development Department",
+    "domain": "nashikcorporation.in",
+    "url": "https://nashikcorporation.in/",
+    "source_type": "MUNICIPAL_PORTAL",
+    "categories": [
+      "Municipal/local schemes",
+      "Urban Welfare"
+    ],
+    "languages": [
+      "mr",
+      "en"
+    ],
+    "access_method": "PUBLIC_WEB",
+    "auth_required": false,
+    "robots_allowed": true,
+    "discovery_status": "ACTIVE_VERIFIED",
+    "last_checked_iso": "2026-11-12T21:17:14.782615+00:00",
+    "last_retrieval_iso": "2026-11-12T21:17:14.782615+00:00",
+    "content_hash": "27239cf9c593cdf059984c8f1421dc12461b1d229df2138ad42dab3c959e83b1",
+    "parser_version": "1.2.0",
+    "records_found": 7,
+    "known_gaps": "Restricted to citizens residing in municipal corporation limits.",
+    "failure_reason": null
+  }
+]

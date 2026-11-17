@@ -1,0 +1,23 @@
+# Start from exact URLs, not crawler discovery. Confirm current terms, copyright, robots.txt,
+# access terms and rate limits for each target before ingestion. No login/CAPTCHA bypass.
+sources:
+  - name: MahaDBT 2.0
+    base_url: https://mahadbt2.maharashtra.gov.in/
+    purpose: scheme listing and current application guidance
+    status: review_before_ingestion
+  - name: MahaDBT public scheme catalogue
+    base_url: https://mahadbt.maharashtra.gov.in/
+    purpose: legacy catalogue; 2026-27 application path needs source-specific check
+    status: review_before_ingestion
+  - name: Aaple Sarkar RTS notified services
+    base_url: https://aaplesarkar.mahaonline.gov.in/en/CommonForm/CitizenServices_RTS
+    purpose: authoritative service limits and escalation information
+    status: source_checked_2026-10-27
+  - name: myScheme Maharashtra catalogue
+    base_url: https://www.myscheme.gov.in/search/state/Maharashtra
+    purpose: scheme metadata and eligibility summaries
+    status: source_checked_2026-10-27
+  - name: Maharashtra Government Resolutions
+    base_url: https://gr.maharashtra.gov.in/
+    purpose: primary source for GR-backed rules
+    status: review_before_ingestion

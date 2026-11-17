@@ -1,0 +1,69 @@
+[
+  {
+    "source_id": "src_mc_solapur_main",
+    "corporation_id": "mc-solapur",
+    "department": "Commissioner & Administration",
+    "official_domain": "solapurcorporation.gov.in",
+    "page_document_url": "https://solapurcorporation.gov.in",
+    "source_type": "MUNICIPAL_OFFICIAL_PORTAL",
+    "scheme_categories": [
+      "Civic Services",
+      "Administration",
+      "Citizen Facilitation"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "46b1d71980c3bf5edd8f7f9716d65cc37ec0edc66d160318f3d0612737532fda",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  },
+  {
+    "source_id": "src_mc_solapur_welfare",
+    "corporation_id": "mc-solapur",
+    "department": "Social Welfare & Slum Rehabilitation",
+    "official_domain": "solapurcorporation.gov.in",
+    "page_document_url": "https://solapurcorporation.gov.in/welfare",
+    "source_type": "MUNICIPAL_SCHEME_DIRECTORY",
+    "scheme_categories": [
+      "Social Welfare",
+      "Disability Welfare",
+      "Women and Child Development",
+      "Education Grants"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "efa27c7c43d286e30a9b1c1cc7a6937bec0998e0128cdd95327e661f80f84924",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "Budget continuation orders verified annually"
+  },
+  {
+    "source_id": "src_mc_solapur_budget",
+    "corporation_id": "mc-solapur",
+    "department": "Finance & Accounts",
+    "official_domain": "solapurcorporation.gov.in",
+    "page_document_url": "https://solapurcorporation.gov.in/budget",
+    "source_type": "ANNUAL_BUDGET_RESOLUTION",
+    "scheme_categories": [
+      "Budget Allocation",
+      "Welfare Head 5% Divyang",
+      "Welfare Head 5% Women Child"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "f78e0c01033467751fd96ac9bf073add36bd191a45d7e3446c2fa9bdf806d7d4",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "RULES_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  }
+]

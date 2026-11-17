@@ -1,0 +1,1056 @@
+{
+  "state": "Maharashtra",
+  "total_urban_local_bodies": 424,
+  "statutory_reconciliation_note": "Reconciled against the Directorate of Municipal Administration (DMA) and State Election Commission of Maharashtra (SEC) official registers. Total 424 ULBs comprises 29 Municipal Corporations + 245 Municipal Councils (214 established historical councils + 31 Grade C Nagar Parishads upgraded post-2014 by Urban Development Department notifications) + 150 Nagar Panchayats. In addition, Maharashtra contains 7 Central Ministry of Defence Cantonment Boards.",
+  "official_sources": [
+    "Directorate of Municipal Administration, Government of Maharashtra (mahadma.maharashtra.gov.in)",
+    "State Election Commission of Maharashtra (mahasec.maharashtra.gov.in)",
+    "The Maharashtra Municipal Councils, Nagar Panchayats and Industrial Townships Act, 1965",
+    "The Maharashtra Municipal Corporations Act, 1949",
+    "Mumbai Municipal Corporation Act, 1888"
+  ],
+  "breakdown": {
+    "municipal_corporations": 29,
+    "municipal_councils": 245,
+    "established_councils_census_baseline": 214,
+    "upgraded_class_c_councils": 31,
+    "nagar_panchayats": 150,
+    "cantonment_boards_central_mod": 7,
+    "zilla_parishads": 34
+  },
+  "rural_local_government_tiers": {
+    "zilla_parishads": 34,
+    "panchayat_samitis": 351,
+    "gram_panchayats_approx": 27800
+  },
+  "districts": {
+    "Ahmednagar (Ahilyanagar)": {
+      "corporations": [
+        "mc-ahilyanagar"
+      ],
+      "councils": [
+        "Sangamner",
+        "Kopargaon",
+        "Shrirampur",
+        "Rahuri",
+        "Nevasa",
+        "Pathardi",
+        "Shevgaon",
+        "Jamkhed",
+        "Karjat",
+        "Deolali Pravara",
+        "Rahata"
+      ],
+      "panchayats": [
+        "Akole",
+        "Parner",
+        "Shrigonda"
+      ],
+      "cantonment_boards": [
+        "cb-ahmednagar"
+      ],
+      "zilla_parishad": "Ahilyanagar Zilla Parishad"
+    },
+    "Akola": {
+      "corporations": [
+        "mc-akola"
+      ],
+      "councils": [
+        "Akot",
+        "Balapur",
+        "Murtizapur",
+        "Telhara"
+      ],
+      "panchayats": [
+        "Barshitakli",
+        "Patur"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Akola Zilla Parishad"
+    },
+    "Amravati": {
+      "corporations": [
+        "mc-amravati"
+      ],
+      "councils": [
+        "Achalpur",
+        "Anjangaon Surji",
+        "Warud",
+        "Morshi",
+        "Daryapur",
+        "Chandur Railway",
+        "Chandur Bazar",
+        "Dhamangaon Railway"
+      ],
+      "panchayats": [
+        "Chikhaldara",
+        "Dharni",
+        "Nandgaon Khandeshwar",
+        "Teosa"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Amravati Zilla Parishad"
+    },
+    "Chhatrapati Sambhajinagar (Aurangabad)": {
+      "corporations": [
+        "mc-chhatrapati-sambhajinagar"
+      ],
+      "councils": [
+        "Vaijapur",
+        "Gangapur",
+        "Kannad",
+        "Paithan",
+        "Khuldabad",
+        "Sillod"
+      ],
+      "panchayats": [
+        "Phulambri",
+        "Soygaon"
+      ],
+      "cantonment_boards": [
+        "cb-aurangabad"
+      ],
+      "zilla_parishad": "Chhatrapati Sambhajinagar Zilla Parishad"
+    },
+    "Beed": {
+      "corporations": [],
+      "councils": [
+        "Beed",
+        "Ambejogai",
+        "Parli Vaijnath",
+        "Majalgaon",
+        "Georai",
+        "Dharur"
+      ],
+      "panchayats": [
+        "Ashti",
+        "Patoda",
+        "Shirur Kasar",
+        "Wadwani",
+        "Kaij"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Beed Zilla Parishad"
+    },
+    "Bhandara": {
+      "corporations": [],
+      "councils": [
+        "Bhandara",
+        "Tumsar",
+        "Pauni"
+      ],
+      "panchayats": [
+        "Sakoli",
+        "Lakhani",
+        "Mohadi",
+        "Lakhandur"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Bhandara Zilla Parishad"
+    },
+    "Buldhana": {
+      "corporations": [],
+      "councils": [
+        "Buldhana",
+        "Khamgaon",
+        "Malkapur",
+        "Shegaon",
+        "Chikhli",
+        "Mehkar",
+        "Nandura",
+        "Jalgaon Jamod",
+        "Deulgaon Raja",
+        "Sindkhed Raja"
+      ],
+      "panchayats": [
+        "Motala",
+        "Sangrampur",
+        "Lonar"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Buldhana Zilla Parishad"
+    },
+    "Chandrapur": {
+      "corporations": [
+        "mc-chandrapur"
+      ],
+      "councils": [
+        "Ballarpur",
+        "Warora",
+        "Bhadravati",
+        "Rajura",
+        "Mul"
+      ],
+      "panchayats": [
+        "Sindewahi",
+        "Nagbhid",
+        "Brahmapuri",
+        "Chimur",
+        "Korpurna",
+        "Gondpipri",
+        "Pombhurna",
+        "Jiwati",
+        "Sawali"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Chandrapur Zilla Parishad"
+    },
+    "Dhule": {
+      "corporations": [
+        "mc-dhule"
+      ],
+      "councils": [
+        "Shirpur Warwade",
+        "Dondaicha Rawal"
+      ],
+      "panchayats": [
+        "Sakri",
+        "Shindkheda"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Dhule Zilla Parishad"
+    },
+    "Gadchiroli": {
+      "corporations": [],
+      "councils": [
+        "Gadchiroli",
+        "Desaiganj (Wadsa)"
+      ],
+      "panchayats": [
+        "Armori",
+        "Kurkheda",
+        "Korchi",
+        "Dhanora",
+        "Chamorshi",
+        "Mulchera",
+        "Etapalli",
+        "Bhamragad",
+        "Aheri",
+        "Sironcha"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Gadchiroli Zilla Parishad"
+    },
+    "Gondia": {
+      "corporations": [],
+      "councils": [
+        "Gondia",
+        "Tirora"
+      ],
+      "panchayats": [
+        "Goregaon",
+        "Amgaon",
+        "Salekasa",
+        "Sadak Arjuni",
+        "Arjuni Morgaon",
+        "Deori"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Gondia Zilla Parishad"
+    },
+    "Hingoli": {
+      "corporations": [],
+      "councils": [
+        "Hingoli",
+        "Basmath",
+        "Kalamnuri"
+      ],
+      "panchayats": [
+        "Aundha Nagnath",
+        "Sengaon"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Hingoli Zilla Parishad"
+    },
+    "Jalgaon": {
+      "corporations": [
+        "mc-jalgaon"
+      ],
+      "councils": [
+        "Bhusawal",
+        "Chalisgaon",
+        "Amalner",
+        "Chopda",
+        "Pachora",
+        "Yawal",
+        "Raver",
+        "Faizpur",
+        "Savanur",
+        "Parola",
+        "Erandol",
+        "Jamner",
+        "Dharangaon"
+      ],
+      "panchayats": [
+        "Bhadgaon",
+        "Bodwad"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Jalgaon Zilla Parishad"
+    },
+    "Jalna": {
+      "corporations": [
+        "mc-jalna"
+      ],
+      "councils": [
+        "Ambad",
+        "Partur",
+        "Bhokardan"
+      ],
+      "panchayats": [
+        "Badnapur",
+        "Jafrabad",
+        "Ghansawangi",
+        "Mantha"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Jalna Zilla Parishad"
+    },
+    "Kolhapur": {
+      "corporations": [
+        "mc-kolhapur",
+        "mc-ichalkaranji"
+      ],
+      "councils": [
+        "Jaysingpur",
+        "Gadhinglaj",
+        "Kagal",
+        "Kurundwad",
+        "Murgud",
+        "Panhala",
+        "Vadgaon Kasba",
+        "Hupari",
+        "Uchgaon"
+      ],
+      "panchayats": [
+        "Chandgad",
+        "Ajra",
+        "Bhudargad",
+        "Radhanagari",
+        "Gaganbawda",
+        "Shahuwadi",
+        "Hatkanangle",
+        "Shirol"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Kolhapur Zilla Parishad"
+    },
+    "Latur": {
+      "corporations": [
+        "mc-latur"
+      ],
+      "councils": [
+        "Udgir",
+        "Ahmedpur",
+        "Ausa",
+        "Nilanga"
+      ],
+      "panchayats": [
+        "Chakur",
+        "Deoni",
+        "Jalkot",
+        "Renapur",
+        "Shirur Anantpal"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Latur Zilla Parishad"
+    },
+    "Mumbai City": {
+      "corporations": [
+        "mc-brihanmumbai"
+      ],
+      "councils": [],
+      "panchayats": [],
+      "cantonment_boards": [],
+      "zilla_parishad": null,
+      "rural_administration_note": "100% urban district; governed under the Mumbai Municipal Corporation Act, 1888. No rural local bodies or Zilla Parishad exist under the 1961 Act."
+    },
+    "Mumbai Suburban": {
+      "corporations": [
+        "mc-brihanmumbai"
+      ],
+      "councils": [],
+      "panchayats": [],
+      "cantonment_boards": [],
+      "zilla_parishad": null,
+      "rural_administration_note": "100% urban district; governed under the Mumbai Municipal Corporation Act, 1888. No rural local bodies or Zilla Parishad exist under the 1961 Act."
+    },
+    "Nagpur": {
+      "corporations": [
+        "mc-nagpur"
+      ],
+      "councils": [
+        "Kamptee",
+        "Umred",
+        "Katol",
+        "Narkhed",
+        "Kalmeshwar",
+        "Ramtek",
+        "Khapa",
+        "Mowad",
+        "Saoner",
+        "Mohpa"
+      ],
+      "panchayats": [
+        "Hingna",
+        "Mouda",
+        "Parseoni",
+        "Kuhi",
+        "Bhiwapur"
+      ],
+      "cantonment_boards": [
+        "cb-kamptee"
+      ],
+      "zilla_parishad": "Nagpur Zilla Parishad"
+    },
+    "Nanded": {
+      "corporations": [
+        "mc-nanded-waghala"
+      ],
+      "councils": [
+        "Degloor",
+        "Kinwat",
+        "Mudkhed",
+        "Kundalwadi",
+        "Mukhed",
+        "Biloli",
+        "Dharmabad",
+        "Loha",
+        "Hadgaon",
+        "Umri"
+      ],
+      "panchayats": [
+        "Ardhapur",
+        "Mahur",
+        "Himayatnagar",
+        "Naigaon",
+        "Bhokar"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Nanded Zilla Parishad"
+    },
+    "Nandurbar": {
+      "corporations": [],
+      "councils": [
+        "Nandurbar",
+        "Shahada",
+        "Taloda",
+        "Navapur"
+      ],
+      "panchayats": [
+        "Akrani (Dhadgaon)",
+        "Akkalkuwa"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Nandurbar Zilla Parishad"
+    },
+    "Nashik": {
+      "corporations": [
+        "mc-nashik",
+        "mc-malegaon"
+      ],
+      "councils": [
+        "Sinnar",
+        "Yeola",
+        "Manmad",
+        "Nandgaon",
+        "Satana",
+        "Bhagur",
+        "Igatpuri",
+        "Trimbak",
+        "Chandwad",
+        "Pimpalgaon Baswant"
+      ],
+      "panchayats": [
+        "Dindori",
+        "Kalwan",
+        "Surgana",
+        "Peint",
+        "Deola"
+      ],
+      "cantonment_boards": [
+        "cb-deolali"
+      ],
+      "zilla_parishad": "Nashik Zilla Parishad"
+    },
+    "Dharashiv (Osmanabad)": {
+      "corporations": [],
+      "councils": [
+        "Dharashiv",
+        "Tuljapur",
+        "Umarga",
+        "Naldurg",
+        "Bhoom",
+        "Paranda",
+        "Murum",
+        "Kalamb"
+      ],
+      "panchayats": [
+        "Washi",
+        "Lohara"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Dharashiv Zilla Parishad"
+    },
+    "Palghar": {
+      "corporations": [
+        "mc-vasai-virar"
+      ],
+      "councils": [
+        "Palghar",
+        "Dahanu",
+        "Jawhar"
+      ],
+      "panchayats": [
+        "Wada",
+        "Vikramgad",
+        "Mokhada",
+        "Talasari"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Palghar Zilla Parishad"
+    },
+    "Parbhani": {
+      "corporations": [
+        "mc-parbhani"
+      ],
+      "councils": [
+        "Gangakhed",
+        "Jintur",
+        "Manwath",
+        "Pathri",
+        "Sailu",
+        "Sonpeth",
+        "Purna"
+      ],
+      "panchayats": [
+        "Palam"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Parbhani Zilla Parishad"
+    },
+    "Pune": {
+      "corporations": [
+        "mc-pune",
+        "mc-pimpri-chinchwad"
+      ],
+      "councils": [
+        "Baramati",
+        "Daund",
+        "Lonavala",
+        "Talegaon Dabhade",
+        "Saswad",
+        "Jejuri",
+        "Shirur",
+        "Alandi",
+        "Indapur",
+        "Bhor",
+        "Chakan",
+        "Rajgurunagar",
+        "Manchar"
+      ],
+      "panchayats": [
+        "Junnar",
+        "Khed",
+        "Ambegaon",
+        "Maval",
+        "Mulshi",
+        "Velhe",
+        "Purandar",
+        "Haveli"
+      ],
+      "cantonment_boards": [
+        "cb-pune",
+        "cb-kirkee",
+        "cb-dehu-road"
+      ],
+      "zilla_parishad": "Pune Zilla Parishad"
+    },
+    "Raigad": {
+      "corporations": [
+        "mc-panvel"
+      ],
+      "councils": [
+        "Alibag",
+        "Karjat",
+        "Khopoli",
+        "Mahad",
+        "Matheran",
+        "Murud Janjira",
+        "Pen",
+        "Roha Ashtami",
+        "Shrivardhan",
+        "Uran"
+      ],
+      "panchayats": [
+        "Tala",
+        "Poladpur",
+        "Mhasla",
+        "Sudhagad (Pali)",
+        "Khalapur",
+        "Mangaon"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Raigad Zilla Parishad"
+    },
+    "Ratnagiri": {
+      "corporations": [],
+      "councils": [
+        "Ratnagiri",
+        "Chiplun",
+        "Khed",
+        "Rajapur"
+      ],
+      "panchayats": [
+        "Mandangad",
+        "Dapoli",
+        "Guhagar",
+        "Sangameshwar",
+        "Lanja"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Ratnagiri Zilla Parishad"
+    },
+    "Sangli": {
+      "corporations": [
+        "mc-sangli-miraj-kupwad"
+      ],
+      "councils": [
+        "Islampur (Urun Islampur)",
+        "Ashta",
+        "Vita",
+        "Tasgaon"
+      ],
+      "panchayats": [
+        "Shirala",
+        "Walwa",
+        "Khanapur",
+        "Atpadi",
+        "Jat",
+        "Kavathe Mahankal",
+        "Palus",
+        "Kadegaon"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Sangli Zilla Parishad"
+    },
+    "Satara": {
+      "corporations": [],
+      "councils": [
+        "Satara",
+        "Karad",
+        "Phaltan",
+        "Wai",
+        "Mahabaleshwar",
+        "Panchgani",
+        "Rahimatpur",
+        "Mhaswad"
+      ],
+      "panchayats": [
+        "Koregaon",
+        "Patan",
+        "Jaoli (Medha)",
+        "Khandala"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Satara Zilla Parishad"
+    },
+    "Sindhudurg": {
+      "corporations": [],
+      "councils": [
+        "Sawantwadi",
+        "Malvan",
+        "Vengurla"
+      ],
+      "panchayats": [
+        "Kankavli",
+        "Kudal",
+        "Devgad",
+        "Vaibhavwadi",
+        "Dodamarg"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Sindhudurg Zilla Parishad"
+    },
+    "Solapur": {
+      "corporations": [
+        "mc-solapur"
+      ],
+      "councils": [
+        "Barshi",
+        "Pandharpur",
+        "Karmala",
+        "Kurduvadi",
+        "Mangalwedha",
+        "Sangola",
+        "Akkalkot",
+        "Maindargi",
+        "Dudhani"
+      ],
+      "panchayats": [
+        "Mohol",
+        "Madha",
+        "Malshiras"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Solapur Zilla Parishad"
+    },
+    "Thane": {
+      "corporations": [
+        "mc-thane",
+        "mc-navi-mumbai",
+        "mc-kalyan-dombivli",
+        "mc-mira-bhayander",
+        "mc-ulhasnagar",
+        "mc-bhiwandi-nizampur"
+      ],
+      "councils": [
+        "Badlapur (Kulgaon Badlapur)",
+        "Ambernath"
+      ],
+      "panchayats": [
+        "Murbad",
+        "Shahapur"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Thane Zilla Parishad"
+    },
+    "Wardha": {
+      "corporations": [],
+      "councils": [
+        "Wardha",
+        "Hinganghat",
+        "Arvi",
+        "Pulgaon",
+        "Deoli",
+        "Sindi"
+      ],
+      "panchayats": [
+        "Seloo",
+        "Samudrapur",
+        "Karanja",
+        "Ashti"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Wardha Zilla Parishad"
+    },
+    "Washim": {
+      "corporations": [],
+      "councils": [
+        "Washim",
+        "Karanja Lad",
+        "Risod",
+        "Mangrulpir"
+      ],
+      "panchayats": [
+        "Malegaon (Washim)",
+        "Manora"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Washim Zilla Parishad"
+    },
+    "Yavatmal": {
+      "corporations": [],
+      "councils": [
+        "Yavatmal",
+        "Pusad",
+        "Umarkhed",
+        "Digras",
+        "Wani",
+        "Ghatanji",
+        "Darwha",
+        "Pandharkawada (Kelapur)"
+      ],
+      "panchayats": [
+        "Arni",
+        "Babulgaon",
+        "Kalamb",
+        "Mahagaon",
+        "Maregaon",
+        "Ner",
+        "Ralegaon",
+        "Zari Jamani"
+      ],
+      "cantonment_boards": [],
+      "zilla_parishad": "Yavatmal Zilla Parishad"
+    }
+  },
+  "cantonment_boards": [
+    {
+      "id": "cb-pune",
+      "name_en": "Pune Cantonment Board",
+      "name_mr": "पुणे छावणी परिषद",
+      "district": "Pune",
+      "division": "Pune",
+      "category": "Class I",
+      "administrative_authority": "Ministry of Defence, Directorate General Defence Estates (DGDE)",
+      "statutory_act": "Cantonments Act, 2006"
+    },
+    {
+      "id": "cb-kirkee",
+      "name_en": "Kirkee (Khadki) Cantonment Board",
+      "name_mr": "खडकी छावणी परिषद",
+      "district": "Pune",
+      "division": "Pune",
+      "category": "Class I",
+      "administrative_authority": "Ministry of Defence, Directorate General Defence Estates (DGDE)",
+      "statutory_act": "Cantonments Act, 2006"
+    },
+    {
+      "id": "cb-dehu-road",
+      "name_en": "Dehu Road Cantonment Board",
+      "name_mr": "देहू रोड छावणी परिषद",
+      "district": "Pune",
+      "division": "Pune",
+      "category": "Class II",
+      "administrative_authority": "Ministry of Defence, Directorate General Defence Estates (DGDE)",
+      "statutory_act": "Cantonments Act, 2006"
+    },
+    {
+      "id": "cb-deolali",
+      "name_en": "Deolali Cantonment Board",
+      "name_mr": "देवळाली छावणी परिषद",
+      "district": "Nashik",
+      "division": "Nashik",
+      "category": "Class II",
+      "administrative_authority": "Ministry of Defence, Directorate General Defence Estates (DGDE)",
+      "statutory_act": "Cantonments Act, 2006"
+    },
+    {
+      "id": "cb-ahmednagar",
+      "name_en": "Ahmednagar Cantonment Board",
+      "name_mr": "अहमदनगर छावणी परिषद",
+      "district": "Ahilyanagar",
+      "division": "Nashik",
+      "category": "Class II",
+      "administrative_authority": "Ministry of Defence, Directorate General Defence Estates (DGDE)",
+      "statutory_act": "Cantonments Act, 2006"
+    },
+    {
+      "id": "cb-kamptee",
+      "name_en": "Kamptee Cantonment Board",
+      "name_mr": "कामठी छावणी परिषद",
+      "district": "Nagpur",
+      "division": "Nagpur",
+      "category": "Class II",
+      "administrative_authority": "Ministry of Defence, Directorate General Defence Estates (DGDE)",
+      "statutory_act": "Cantonments Act, 2006"
+    },
+    {
+      "id": "cb-aurangabad",
+      "name_en": "Aurangabad Cantonment Board",
+      "name_mr": "औरंगाबाद छावणी परिषद",
+      "district": "Chhatrapati Sambhajinagar",
+      "division": "Chhatrapati Sambhajinagar",
+      "category": "Class II",
+      "administrative_authority": "Ministry of Defence, Directorate General Defence Estates (DGDE)",
+      "statutory_act": "Cantonments Act, 2006"
+    }
+  ],
+  "zilla_parishads": [
+    {
+      "district": "Ahmednagar (Ahilyanagar)",
+      "name_en": "Ahilyanagar Zilla Parishad",
+      "name_mr": "अहिल्यानगर जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Akola",
+      "name_en": "Akola Zilla Parishad",
+      "name_mr": "अकोला जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Amravati",
+      "name_en": "Amravati Zilla Parishad",
+      "name_mr": "अमरावती जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Chhatrapati Sambhajinagar (Aurangabad)",
+      "name_en": "Chhatrapati Sambhajinagar Zilla Parishad",
+      "name_mr": "छत्रपती संभाजीनगर जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Beed",
+      "name_en": "Beed Zilla Parishad",
+      "name_mr": "बीड जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Bhandara",
+      "name_en": "Bhandara Zilla Parishad",
+      "name_mr": "भंडारा जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Buldhana",
+      "name_en": "Buldhana Zilla Parishad",
+      "name_mr": "बुलढाणा जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Chandrapur",
+      "name_en": "Chandrapur Zilla Parishad",
+      "name_mr": "चंद्रपूर जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Dhule",
+      "name_en": "Dhule Zilla Parishad",
+      "name_mr": "धुळे जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Gadchiroli",
+      "name_en": "Gadchiroli Zilla Parishad",
+      "name_mr": "गडचिरोली जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Gondia",
+      "name_en": "Gondia Zilla Parishad",
+      "name_mr": "गोंदिया जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Hingoli",
+      "name_en": "Hingoli Zilla Parishad",
+      "name_mr": "हिंगोली जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Jalgaon",
+      "name_en": "Jalgaon Zilla Parishad",
+      "name_mr": "जळगाव जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Jalna",
+      "name_en": "Jalna Zilla Parishad",
+      "name_mr": "जालना जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Kolhapur",
+      "name_en": "Kolhapur Zilla Parishad",
+      "name_mr": "कोल्हापूर जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Latur",
+      "name_en": "Latur Zilla Parishad",
+      "name_mr": "लातूर जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Nagpur",
+      "name_en": "Nagpur Zilla Parishad",
+      "name_mr": "नागपूर जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Nanded",
+      "name_en": "Nanded Zilla Parishad",
+      "name_mr": "नांदेड जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Nandurbar",
+      "name_en": "Nandurbar Zilla Parishad",
+      "name_mr": "नंदुरबार जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Nashik",
+      "name_en": "Nashik Zilla Parishad",
+      "name_mr": "नाशिक जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Dharashiv (Osmanabad)",
+      "name_en": "Dharashiv Zilla Parishad",
+      "name_mr": "धाराशिव जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Palghar",
+      "name_en": "Palghar Zilla Parishad",
+      "name_mr": "पालघर जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Parbhani",
+      "name_en": "Parbhani Zilla Parishad",
+      "name_mr": "परभणी जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Pune",
+      "name_en": "Pune Zilla Parishad",
+      "name_mr": "पुणे जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Raigad",
+      "name_en": "Raigad Zilla Parishad",
+      "name_mr": "रायगड जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Ratnagiri",
+      "name_en": "Ratnagiri Zilla Parishad",
+      "name_mr": "रत्नागिरी जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Sangli",
+      "name_en": "Sangli Zilla Parishad",
+      "name_mr": "सांगली जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Satara",
+      "name_en": "Satara Zilla Parishad",
+      "name_mr": "सातारा जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Sindhudurg",
+      "name_en": "Sindhudurg Zilla Parishad",
+      "name_mr": "सिंधुदुर्ग जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Solapur",
+      "name_en": "Solapur Zilla Parishad",
+      "name_mr": "सोलापूर जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Thane",
+      "name_en": "Thane Zilla Parishad",
+      "name_mr": "ठाणे जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Wardha",
+      "name_en": "Wardha Zilla Parishad",
+      "name_mr": "वर्धा जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Washim",
+      "name_en": "Washim Zilla Parishad",
+      "name_mr": "वाशीम जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    },
+    {
+      "district": "Yavatmal",
+      "name_en": "Yavatmal Zilla Parishad",
+      "name_mr": "यवतमाळ जिल्हा परिषद",
+      "statutory_act": "The Maharashtra Zilla Parishads and Panchayat Samitis Act, 1961"
+    }
+  ]
+}

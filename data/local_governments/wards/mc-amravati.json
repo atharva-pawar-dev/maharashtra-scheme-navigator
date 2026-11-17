@@ -1,0 +1,23 @@
+{
+  "corporation_id": "mc-amravati",
+  "corporation_name_en": "Amravati Municipal Corporation",
+  "corporation_name_mr": "अमरावती महानगरपालिका",
+  "total_wards": 22,
+  "boundary_reference": "Urban Development Dept Notification No. UDD-AMC-2022",
+  "representative_wards": [
+    "Zone 1 (Rajapeth)",
+    "Zone 2 (Gadge Nagar)",
+    "Zone 3 (Badnera)",
+    "Zone 4 (Camp)",
+    "Zone 5 (Sabnis Plot)"
+  ],
+  "localities": [
+    "Rajapeth",
+    "Gadge Nagar",
+    "Badnera",
+    "Camp",
+    "Rukmini Nagar",
+    "Navathe",
+    "Dastur Nagar"
+  ]
+}

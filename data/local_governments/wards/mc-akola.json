@@ -1,0 +1,22 @@
+{
+  "corporation_id": "mc-akola",
+  "corporation_name_en": "Akola Municipal Corporation",
+  "corporation_name_mr": "अकोला महानगरपालिका",
+  "total_wards": 20,
+  "boundary_reference": "Official Akola MC Ward Delimitation 2022",
+  "representative_wards": [
+    "Zone 1 (North)",
+    "Zone 2 (East)",
+    "Zone 3 (South)",
+    "Zone 4 (West)"
+  ],
+  "localities": [
+    "Civil Lines",
+    "Kaulkhed",
+    "Malkapur Road",
+    "Old City",
+    "Tajnapeth",
+    "Ratanlal Plot",
+    "Jatharpeth"
+  ]
+}

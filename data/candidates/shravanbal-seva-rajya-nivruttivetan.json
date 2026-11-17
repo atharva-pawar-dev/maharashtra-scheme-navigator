@@ -1,0 +1,256 @@
+{
+  "scheme_id": "candidate-shravanbal-nivruttivetan",
+  "name": "Shravanbal Seva Rajya Nivruttivetan Yojana (श्रावणबाळ सेवा राज्य निवृत्तीवेतन योजना)",
+  "department": "Social Justice and Special Assistance Department, Government of Maharashtra",
+  "summary": "Provides Rs. 1,500 monthly state/joint pension to destitute senior citizens aged 65 and above in Maharashtra under Group A (Central BPL) or Group B (Non-BPL, income <= Rs. 21,000). (DRAFT CANDIDATE - NON-PRODUCTION)",
+  "benefits": [
+    "Consolidated monthly pension of Rs. 1,500 per month deposited via DBT",
+    "Group A: Joint central (IGNOAPS Rs. 200/500) + state top-up (Rs. 1,300/1,000)",
+    "Group B: 100% state-funded pension of Rs. 1,500 per month",
+    "Enhanced assistance of Rs. 2,500 per month for severe disability (>= 80%) under September 2025 amendment"
+  ],
+  "required_documents": [
+    "Age proof verifying 65+ years (Birth Certificate, School Board Certificate, Civil Surgeon Age Certificate, Voter ID extract)",
+    "15-year Maharashtra Residence / Domicile Certificate",
+    "Group A: Certified copy of family inclusion in Central BPL list (issued by Gram Sevak / BDO / Chief Officer)",
+    "Group B: Tahsildar Income Certificate showing annual family income <= Rs. 21,000",
+    "Aadhaar-linked bank account passbook"
+  ],
+  "eligibility_rule": {
+    "op": "all",
+    "children": [
+      {
+        "op": "eq",
+        "children": [],
+        "field": "resident_state",
+        "value": "maharashtra",
+        "condition_id": "c_shravanbal_residence",
+        "as_of_date": null
+      },
+      {
+        "op": "gte",
+        "children": [],
+        "field": "age",
+        "value": 65,
+        "condition_id": "c_shravanbal_age_gte_65",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "receiving_other_pension",
+        "value": false,
+        "condition_id": "c_shravanbal_no_other_pension",
+        "as_of_date": null
+      },
+      {
+        "op": "any",
+        "children": [
+          {
+            "op": "eq",
+            "children": [],
+            "field": "bpl",
+            "value": true,
+            "condition_id": "c_shravanbal_group_a_bpl",
+            "as_of_date": null
+          },
+          {
+            "op": "all",
+            "children": [
+              {
+                "op": "eq",
+                "children": [],
+                "field": "bpl",
+                "value": false,
+                "condition_id": "c_shravanbal_group_b_non_bpl",
+                "as_of_date": null
+              },
+              {
+                "op": "lte",
+                "children": [],
+                "field": "annual_family_income",
+                "value": 21000,
+                "condition_id": "c_shravanbal_group_b_income",
+                "as_of_date": null
+              }
+            ],
+            "field": null,
+            "value": null,
+            "condition_id": null,
+            "as_of_date": null
+          }
+        ],
+        "field": null,
+        "value": null,
+        "condition_id": null,
+        "as_of_date": null
+      }
+    ],
+    "field": null,
+    "value": null,
+    "condition_id": null,
+    "as_of_date": null
+  },
+  "sources": [
+    {
+      "source_name": "Maharashtra GR No. Visayo-2018/CR62/Visayo (Base GR)",
+      "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+      "source_kind": "government_resolution",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "शासन निर्णय क्र. विसयो-२०१८/प्र.क्र.६२/विसयो दिनांक २० ऑगस्ट २०१९: ६५ वर्षे व त्यावरील ज्येष्ठ नागरिकांसाठी निवृत्तीवेतन. गट (अ): केंद्र शासनाच्या BPL यादीत नाव असणे. गट (ब): BPL नसलेले मात्र कौटुंबिक वार्षिक उत्पन्न रु. २१,००० पेक्षा जास्त नसलेले ज्येष्ठ नागरिक.",
+      "evidence_sha256": "85ebc9241b4a3f3962ee5261898adb183854873aa719b33a349fb05626704153",
+      "page_or_section": "Part II (Group A & B)"
+    },
+    {
+      "source_name": "Maharashtra GR No. Visayo-2023/CR30/Visayo (Assistance Revision)",
+      "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202307061137387522.pdf",
+      "source_kind": "government_resolution",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "शासन निर्णय क्र. विसयो-२०२३/प्र.क्र.३०/विसयो दिनांक ०५ जुलै २०२३: श्रावणबाळ योजनेच्या अनुदानात वाढ करून दरमहा एकत्रित रु. १,५००/- करण्यात येत आहे.",
+      "evidence_sha256": "e442859d35c7936cd2d201fba6faa5f3eebacadafcdaa0fb20c05d3e96d005fa",
+      "page_or_section": "Clauses 1-2"
+    },
+    {
+      "source_name": "Divyang Kalyan Dept GR No. Diayo-2025/CR48/Visayo",
+      "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202509151520117822.pdf",
+      "source_kind": "government_resolution",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "शासन निर्णय क्र. दिअयो-२०२५/प्र.क्र.४८/विसयो दिनांक १५ सप्टेंबर २०२५: तीव्र दिव्यांगत्व (८०% वरील) असलेल्या वृद्ध लाभार्थ्यांना दरमहा रु. २,५००/- एकत्रित निवृत्तीवेतन देय राहील.",
+      "evidence_sha256": "64916b3c03e13c96b309159db76d41c0b72c757a603c4f765c6d0f0595892a31",
+      "page_or_section": "Para 2"
+    }
+  ],
+  "rule_version": "0.2.2-candidate-draft",
+  "rule_status": "draft",
+  "approved_by": null,
+  "approval_reference": null,
+  "last_verified_at": null,
+  "languages": [
+    "en"
+  ],
+  "evidence": [
+    {
+      "condition_id": "c_shravanbal_residence",
+      "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+      "official_reference": "201908201732007222",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2019-08-20",
+      "effective_from": "2019-09-01",
+      "effective_until": null,
+      "page_or_section": "Para 2",
+      "verbatim_excerpt": "अर्जदार हा महाराष्ट्र राज्याचा १५ वर्षे सततचा रहिवासी असणे आवश्यक आहे.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Applicant must be a continuous resident of Maharashtra state for at least 15 years.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "8864572c07c465ffde56f1dc38cfe897f22a4e6e7e27ea563ed4adf7607bfeb6",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_shravanbal_age_gte_65",
+      "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+      "official_reference": "201908201732007222",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2019-08-20",
+      "effective_from": "2019-09-01",
+      "effective_until": null,
+      "page_or_section": "Part II",
+      "verbatim_excerpt": "अर्जदाराचे वय ६५ वर्षे किंवा त्याहून अधिक असणे आवश्यक आहे.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Applicant's age must be 65 years or above.",
+      "translation_provenance": "Direct translation",
+      "source_document_sha256": "add7cdd140fb46a260fc72ffc04f30bdd14551f2b707b859e5c07a23281eb086",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_shravanbal_no_other_pension",
+      "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+      "official_reference": "201908201732007222",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2019-08-20",
+      "effective_from": "2019-09-01",
+      "effective_until": null,
+      "page_or_section": "Para 4",
+      "verbatim_excerpt": "अर्जदारास इतर कोणत्याही शासकीय योजनेतून निवृत्तीवेतन मिळत नसावे.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Applicant must not be receiving pension from any other government scheme.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "d2a5cc666c830a032c5c80da67cf32ebfa821db2c8de5bdb1e0491710611260f",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": "UNRESOLVED POLICY CONFLICT (POL-SHRAVANBAL-01): Apparent statutory conflict between the no-other-pension exclusion clause ('अर्जदारास इतर कोणत्याही शासकीय योजनेतून निवृत्तीवेतन मिळत नसावे') and the Group A funding structure, which co-funds the Central Indira Gandhi National Old Age Pension Scheme (IGNOAPS). GR 20-08-2019 (Para 4) does not textually specify whether an existing IGNOAPS beneficiary is barred from receiving the state top-up under this exclusion clause or whether Group A acts as an automatic co-sanctioning vehicle. In accordance with strict governance principles, no unwritten exception is invented, and the condition remains marked UNRESOLVED pending formal written clarification from the Social Justice and Special Assistance Department."
+    },
+    {
+      "condition_id": "c_shravanbal_group_a_bpl",
+      "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+      "official_reference": "201908201732007222",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2019-08-20",
+      "effective_from": "2019-09-01",
+      "effective_until": null,
+      "page_or_section": "Part II (Group A)",
+      "verbatim_excerpt": "गट (अ): अर्जदाराचे अथवा त्याच्या कुटुंबाचे नाव केंद्र शासनाच्या दारिद्र्यरेषेखालील (BPL) यादीत समाविष्ट असावे.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Group A: Applicant or family name must be included in Central Government BPL list.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "e60e28e094f08d637e0d932ec0f95cd7e3c90b4f2d9a32cfb263f8ac7d06c8d3",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_shravanbal_group_b_non_bpl",
+      "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+      "official_reference": "201908201732007222",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2019-08-20",
+      "effective_from": "2019-09-01",
+      "effective_until": null,
+      "page_or_section": "Part II (Group B)",
+      "verbatim_excerpt": "गट (ब): अर्जदाराचे नाव दारिद्र्यरेषेखालील (BPL) यादीत नसावे.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Group B: Applicant name must not be in the BPL list.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "cf10feb659090caa1ec2578c41cba1e9aa7d36d52aef8adfdf5cacdb2bddd127",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_shravanbal_group_b_income",
+      "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+      "official_reference": "201908201732007222",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2019-08-20",
+      "effective_from": "2019-09-01",
+      "effective_until": null,
+      "page_or_section": "Part II (Group B)",
+      "verbatim_excerpt": "कुटुंबाचे एकूण वार्षिक उत्पन्न रु. २१,०००/- पेक्षा जास्त नसावे.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Total annual family income must not exceed Rs. 21,000.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "f3f5b1dd53ada9970e99ee57288e14c21512d71b51252c7c5a280acb8496d9a2",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    }
+  ],
+  "document_requirements": [],
+  "eligibility_reference_date": null,
+  "publication_authorized": false
+}

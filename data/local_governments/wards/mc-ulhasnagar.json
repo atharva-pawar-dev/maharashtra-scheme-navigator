@@ -1,0 +1,21 @@
+{
+  "corporation_id": "mc-ulhasnagar",
+  "corporation_name_en": "Ulhasnagar Municipal Corporation",
+  "corporation_name_mr": "उल्हासनगर महानगरपालिका",
+  "total_wards": 4,
+  "boundary_reference": "UMC 4 Prabhag Samiti Order 2022",
+  "representative_wards": [
+    "Prabhag Samiti 1 (Camp 1 & 2)",
+    "Prabhag Samiti 2 (Camp 3)",
+    "Prabhag Samiti 3 (Camp 4)",
+    "Prabhag Samiti 4 (Camp 5)"
+  ],
+  "localities": [
+    "Ulhasnagar Camp 1",
+    "Ulhasnagar Camp 2",
+    "Ulhasnagar Camp 3",
+    "Ulhasnagar Camp 4",
+    "Ulhasnagar Camp 5",
+    "Shahad"
+  ]
+}

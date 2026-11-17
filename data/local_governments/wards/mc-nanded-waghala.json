@@ -1,0 +1,21 @@
+{
+  "corporation_id": "mc-nanded-waghala",
+  "corporation_name_en": "Nanded Waghala Municipal Corporation",
+  "corporation_name_mr": "नांदेड वाघाळा शहर महानगरपालिका",
+  "total_wards": 20,
+  "boundary_reference": "NWCMC Delimitation Gazette 2022",
+  "representative_wards": [
+    "Zone 1 (Vazirabad)",
+    "Zone 2 (Shivaji Nagar)",
+    "Zone 3 (CIDCO Nanded)",
+    "Zone 4 (Old Nanded)"
+  ],
+  "localities": [
+    "Vazirabad",
+    "Shivaji Nagar",
+    "CIDCO Nanded",
+    "Taroda Naka",
+    "Degloor Naka",
+    "Anand Nagar"
+  ]
+}

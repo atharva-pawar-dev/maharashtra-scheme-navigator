@@ -1,0 +1,22 @@
+{
+  "corporation_id": "mc-ahilyanagar",
+  "corporation_name_en": "Ahilyanagar Municipal Corporation",
+  "corporation_name_mr": "अहिल्यानगर महानगरपालिका",
+  "total_wards": 17,
+  "boundary_reference": "Official Gazette Notification No. AMC/ELEC/2022/412",
+  "representative_wards": [
+    "Ward 1 (Savedi)",
+    "Ward 2 (Kotwali)",
+    "Ward 3 (Bhingar Gate)",
+    "Ward 4 (Nalegaon)"
+  ],
+  "localities": [
+    "Savedi",
+    "Nalegaon",
+    "Burudgaon",
+    "Kedgaon",
+    "Bhingar Road",
+    "Tophkhana",
+    "Kotwali"
+  ]
+}

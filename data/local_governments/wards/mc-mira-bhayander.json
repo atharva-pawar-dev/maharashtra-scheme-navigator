@@ -1,0 +1,25 @@
+{
+  "corporation_id": "mc-mira-bhayander",
+  "corporation_name_en": "Mira Bhayander Municipal Corporation",
+  "corporation_name_mr": "मीरा भाईंदर महानगरपालिका",
+  "total_wards": 6,
+  "boundary_reference": "MBMC Administrative Delimitation 2022",
+  "representative_wards": [
+    "Prabhag Samiti 1 (Bhayander West)",
+    "Prabhag Samiti 2 (Bhayander East)",
+    "Prabhag Samiti 3 (Mira Road West)",
+    "Prabhag Samiti 4 (Mira Road East)",
+    "Prabhag Samiti 5 (Kashimira)",
+    "Prabhag Samiti 6 (Uttan)"
+  ],
+  "localities": [
+    "Mira Road East",
+    "Mira Road West",
+    "Bhayander East",
+    "Bhayander West",
+    "Kashimira",
+    "Uttan",
+    "Pleasant Park",
+    "Beverly Park"
+  ]
+}

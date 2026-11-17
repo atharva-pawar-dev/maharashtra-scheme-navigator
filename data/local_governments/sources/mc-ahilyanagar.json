@@ -1,0 +1,69 @@
+[
+  {
+    "source_id": "src_mc_ahilyanagar_main",
+    "corporation_id": "mc-ahilyanagar",
+    "department": "Commissioner & Administration",
+    "official_domain": "ahilyanagarmc.gov.in",
+    "page_document_url": "https://ahilyanagarmc.gov.in",
+    "source_type": "MUNICIPAL_OFFICIAL_PORTAL",
+    "scheme_categories": [
+      "Civic Services",
+      "Administration",
+      "Citizen Facilitation"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "bf88046041642d7f91f4c18a2e40c7708176e60b30af235b532c1d64da2fd86c",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  },
+  {
+    "source_id": "src_mc_ahilyanagar_welfare",
+    "corporation_id": "mc-ahilyanagar",
+    "department": "Social Welfare Department",
+    "official_domain": "ahilyanagarmc.gov.in",
+    "page_document_url": "https://ahilyanagarmc.gov.in/welfare",
+    "source_type": "MUNICIPAL_SCHEME_DIRECTORY",
+    "scheme_categories": [
+      "Social Welfare",
+      "Disability Welfare",
+      "Women and Child Development",
+      "Education Grants"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "a92570bd0a8912813001ec614347f8acab155ef27351ae51dde69c64dec75bf0",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "Budget continuation orders verified annually"
+  },
+  {
+    "source_id": "src_mc_ahilyanagar_budget",
+    "corporation_id": "mc-ahilyanagar",
+    "department": "Finance & Accounts",
+    "official_domain": "ahilyanagarmc.gov.in",
+    "page_document_url": "https://ahilyanagarmc.gov.in/budget",
+    "source_type": "ANNUAL_BUDGET_RESOLUTION",
+    "scheme_categories": [
+      "Budget Allocation",
+      "Welfare Head 5% Divyang",
+      "Welfare Head 5% Women Child"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "92babffec754255d47690eda5f314ddeca1af1d3c3d4fb3f8b93637b7947e56c",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "RULES_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  }
+]

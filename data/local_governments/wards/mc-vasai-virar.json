@@ -1,0 +1,30 @@
+{
+  "corporation_id": "mc-vasai-virar",
+  "corporation_name_en": "Vasai Virar Municipal Corporation",
+  "corporation_name_mr": "वसई विरार शहर महानगरपालिका",
+  "total_wards": 9,
+  "boundary_reference": "VVCMC 9 Prabhag Samiti Delimitation 2022",
+  "representative_wards": [
+    "Ward A (Virar)",
+    "Ward B (Bolinj)",
+    "Ward C (Chandan Naka)",
+    "Ward D (Nalasopara West)",
+    "Ward E (Nalasopara East)",
+    "Ward F (Pelhar)",
+    "Ward G (Navghar Manikpur)",
+    "Ward H (Vasai)",
+    "Ward I (Valiv)"
+  ],
+  "localities": [
+    "Virar West",
+    "Virar East",
+    "Nalasopara West",
+    "Nalasopara East",
+    "Vasai West",
+    "Vasai East",
+    "Navghar Manikpur",
+    "Bolinj",
+    "Pelhar",
+    "Valiv"
+  ]
+}

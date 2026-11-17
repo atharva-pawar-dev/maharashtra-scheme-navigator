@@ -1,0 +1,22 @@
+{
+  "corporation_id": "mc-panvel",
+  "corporation_name_en": "Panvel Municipal Corporation",
+  "corporation_name_mr": "पनवेल महानगरपालिका",
+  "total_wards": 4,
+  "boundary_reference": "PMC Panvel Ward Structure Order 2022",
+  "representative_wards": [
+    "Ward Committee 1 (Panvel City)",
+    "Ward Committee 2 (New Panvel/Khanda Colony)",
+    "Ward Committee 3 (Kamothe)",
+    "Ward Committee 4 (Kharghar/Kalamboli)"
+  ],
+  "localities": [
+    "Old Panvel",
+    "New Panvel",
+    "Khanda Colony",
+    "Kamothe",
+    "Kharghar",
+    "Kalamboli",
+    "Taloja Phase 1"
+  ]
+}

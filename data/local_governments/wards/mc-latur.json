@@ -1,0 +1,21 @@
+{
+  "corporation_id": "mc-latur",
+  "corporation_name_en": "Latur Municipal Corporation",
+  "corporation_name_mr": "लातूर शहर महानगरपालिका",
+  "total_wards": 18,
+  "boundary_reference": "LMC Delimitation Notification 2022",
+  "representative_wards": [
+    "Zone 1 (Gandhi Chowk)",
+    "Zone 2 (Ausa Road)",
+    "Zone 3 (MIDC)",
+    "Zone 4 (Khadgaon Road)"
+  ],
+  "localities": [
+    "Ausa Road",
+    "Gandhi Chowk",
+    "Khadgaon Road",
+    "MIDC Latur",
+    "Barshi Road",
+    "Prakash Nagar"
+  ]
+}

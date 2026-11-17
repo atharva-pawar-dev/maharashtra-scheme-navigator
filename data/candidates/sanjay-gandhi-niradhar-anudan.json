@@ -1,0 +1,310 @@
+{
+  "scheme_id": "candidate-sanjay-gandhi-niradhar",
+  "name": "Sanjay Gandhi Niradhar Anudan Yojana (संजय गांधी निराधार अनुदान योजना)",
+  "department": "Social Justice and Special Assistance Department, Government of Maharashtra",
+  "summary": "Provides monthly financial assistance of Rs. 1,500 (enhanced to Rs. 2,500 for severely disabled persons with >= 80% disability) to destitute adults (18-65), orphan children (< 18), and disabled persons (>= 40% disability, < 65) in Maharashtra. (DRAFT CANDIDATE - NON-PRODUCTION)",
+  "benefits": [
+    "Monthly assistance of Rs. 1,500 for single destitute beneficiary, orphan child, or disabled person with 40% to 79% certified disability",
+    "Enhanced monthly assistance of Rs. 2,500 specifically for beneficiaries with severe disability (>= 80% certified disability / UDID)",
+    "Assistance of Rs. 2,500 per month for family with two or more eligible beneficiaries"
+  ],
+  "required_documents": [
+    "15-year Maharashtra Residence / Domicile Certificate",
+    "Income Certificate issued by Tahsildar (<= Rs. 21,000 for general/orphan; <= Rs. 50,000 for disabled)",
+    "Disability Certificate / UDID (minimum 40% disability for eligibility; >= 80% for severe disability enhanced benefit)",
+    "Orphan Certificate / Death Certificate of parents for orphan category",
+    "Age proof (Birth Certificate, School Leaving Certificate, Medical Board Certificate)",
+    "Aadhaar-linked bank account passbook"
+  ],
+  "eligibility_rule": {
+    "op": "all",
+    "children": [
+      {
+        "op": "eq",
+        "children": [],
+        "field": "resident_state",
+        "value": "maharashtra",
+        "condition_id": "c_sgnay_residence",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "receiving_other_pension",
+        "value": false,
+        "condition_id": "c_sgnay_no_other_pension",
+        "as_of_date": null
+      },
+      {
+        "op": "lt",
+        "children": [],
+        "field": "age",
+        "value": 65,
+        "condition_id": "c_sgnay_age_lt_65",
+        "as_of_date": null
+      },
+      {
+        "op": "any",
+        "children": [
+          {
+            "op": "all",
+            "children": [
+              {
+                "op": "gte",
+                "children": [],
+                "field": "disability_percentage",
+                "value": 80,
+                "condition_id": "c_sgnay_severe_disability_80",
+                "as_of_date": null
+              },
+              {
+                "op": "lte",
+                "children": [],
+                "field": "annual_family_income",
+                "value": 50000,
+                "condition_id": "c_sgnay_income_disabled",
+                "as_of_date": null
+              }
+            ],
+            "field": null,
+            "value": null,
+            "condition_id": null,
+            "as_of_date": null
+          },
+          {
+            "op": "all",
+            "children": [
+              {
+                "op": "gte",
+                "children": [],
+                "field": "disability_percentage",
+                "value": 40,
+                "condition_id": "c_sgnay_disability_min_40",
+                "as_of_date": null
+              },
+              {
+                "op": "lte",
+                "children": [],
+                "field": "annual_family_income",
+                "value": 50000,
+                "condition_id": "c_sgnay_income_disabled",
+                "as_of_date": null
+              }
+            ],
+            "field": null,
+            "value": null,
+            "condition_id": null,
+            "as_of_date": null
+          },
+          {
+            "op": "all",
+            "children": [
+              {
+                "op": "lte",
+                "children": [],
+                "field": "annual_family_income",
+                "value": 21000,
+                "condition_id": "c_sgnay_income_general",
+                "as_of_date": null
+              }
+            ],
+            "field": null,
+            "value": null,
+            "condition_id": null,
+            "as_of_date": null
+          }
+        ],
+        "field": null,
+        "value": null,
+        "condition_id": null,
+        "as_of_date": null
+      }
+    ],
+    "field": null,
+    "value": null,
+    "condition_id": null,
+    "as_of_date": null
+  },
+  "sources": [
+    {
+      "source_name": "Maharashtra GR No. Visayo-2018/CR62/Visayo (Base GR)",
+      "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+      "source_kind": "government_resolution",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "शासन निर्णय क्र. विसयो-२०१८/प्र.क्र.६२/विसयो दिनांक २० ऑगस्ट २०१९: निराधार व्यक्ती, अंध, अपंग, अनाथ मुले, गंभीर आजारी व्यक्तींसाठी आर्थिक सहाय्य. सर्वसाधारण उत्पन्न मर्यादा रु. २१,००० व दिव्यांग प्रवर्गासाठी रु. ५०,००० राहील. ६५ वर्षे वयापर्यंत लागू.",
+      "evidence_sha256": "2a1f27f6d66b5b32c46bb57e29e44b8311e13ef60c064fcc12d9ab5d1abc016a",
+      "page_or_section": "Clauses 1-8"
+    },
+    {
+      "source_name": "Maharashtra GR No. Visayo-2023/CR30/Visayo (Assistance Revision)",
+      "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202307061137387522.pdf",
+      "source_kind": "government_resolution",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "शासन निर्णय क्र. विसयो-२०२३/प्र.क्र.३०/विसयो दिनांक ०५ जुलै २०२३: संजय गांधी निराधार अनुदान योजनेच्या अनुदानात वाढ करून दरमहा रु. १,५००/- करण्यात येत आहे. एकापेक्षा अधिक लाभार्थी असलेल्या कुटुंबास दरमहा रु. २,५००/- सहाय्य.",
+      "evidence_sha256": "85f619e9d67dc219bb0247b23bd7a7abf1020153fa1d854dbb5528ceac67491c",
+      "page_or_section": "Clauses 1-2"
+    },
+    {
+      "source_name": "Divyang Kalyan Dept GR No. Diayo-2025/CR48/Visayo",
+      "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202509151520117822.pdf",
+      "source_kind": "government_resolution",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "शासन निर्णय क्र. दिअयो-२०२५/प्र.क्र.४८/विसयो दिनांक १५ सप्टेंबर २०२५: किमान ४०% दिव्यांगत्व असलेल्या पात्र दिव्यांग लाभार्थ्यांना दरमहा रु. २,५००/- विशेष सहाय्य मंजूर.",
+      "evidence_sha256": "b86f64465a7439806d7ecb3d41170a0e8026adb77a713db591f2df7bfef7a065",
+      "page_or_section": "Para 1-3"
+    }
+  ],
+  "rule_version": "0.2.2-candidate-draft",
+  "rule_status": "draft",
+  "approved_by": null,
+  "approval_reference": null,
+  "last_verified_at": null,
+  "languages": [
+    "en"
+  ],
+  "evidence": [
+    {
+      "condition_id": "c_sgnay_residence",
+      "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+      "official_reference": "201908201732007222",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2019-08-20",
+      "effective_from": "2019-09-01",
+      "effective_until": null,
+      "page_or_section": "Para 2",
+      "verbatim_excerpt": "अर्जदार हा महाराष्ट्र राज्याचा १५ वर्षे सततचा रहिवासी असणे आवश्यक आहे.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Applicant must be a continuous resident of Maharashtra state for at least 15 years.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "8864572c07c465ffde56f1dc38cfe897f22a4e6e7e27ea563ed4adf7607bfeb6",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_sgnay_no_other_pension",
+      "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+      "official_reference": "201908201732007222",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2019-08-20",
+      "effective_from": "2019-09-01",
+      "effective_until": null,
+      "page_or_section": "Para 4",
+      "verbatim_excerpt": "अर्जदार इतर कोणत्याही योजनेतून निवृत्तीवेतन किंवा नियमित शासकीय सहाय्य घेत नसावा.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Applicant must not be receiving pension or regular government assistance from another scheme.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "1584eae847f36a2a9a66b234901cda516f2b884e15ed5e86da7d92fe7e94cae3",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_sgnay_age_lt_65",
+      "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+      "official_reference": "201908201732007222",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2019-08-20",
+      "effective_from": "2019-09-01",
+      "effective_until": null,
+      "page_or_section": "Para 2",
+      "verbatim_excerpt": "६५ वर्षांखालील निराधार व्यक्ती. ६५ वर्षे पूर्ण झालेल्या व्यक्ती श्रावणबाळ निवृत्तीवेतन योजनेस पात्र ठरतील.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Destitute persons under 65; persons completing 65 transition to Shravanbal scheme.",
+      "translation_provenance": "Direct translation",
+      "source_document_sha256": "250bf671d2863ff8e9b0c13452bd8cf0d8f2694353bbd4acffb50f440b1c2ee8",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": "Applies across all SGNAY branches (disabled, general destitute, and minor orphans). At age 65, beneficiaries migrate to Shravanbal."
+    },
+    {
+      "condition_id": "c_sgnay_disability_min_40",
+      "source_title": "Divyang Kalyan Dept GR No. Diayo-2025/CR48/Visayo",
+      "official_reference": "202509151520117822",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202509151520117822.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2025-09-15",
+      "effective_from": "2025-09-15",
+      "effective_until": null,
+      "page_or_section": "Cl. 1-2",
+      "verbatim_excerpt": "पात्र दिव्यांग लाभार्थ्यांना किमान ४० टक्के दिव्यांगत्वाचे प्रमाणपत्र (UDID) असणे अनिवार्य राहील.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Eligible disabled beneficiaries must possess at least 40% certified disability (UDID) to enter the disabled assistance track.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "526f1f198af9e913ed0edf383a1ba9a96481ccdfbcc0612d5890fb5ebe5f8801",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": "Statutory benchmark disability threshold (>= 40%) for entering the destitute disability pension track (Rs. 1,500/month baseline)."
+    },
+    {
+      "condition_id": "c_sgnay_severe_disability_80",
+      "source_title": "Divyang Kalyan Dept GR No. Diayo-2025/CR48/Visayo",
+      "official_reference": "202509151520117822",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202509151520117822.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2025-09-15",
+      "effective_from": "2025-09-15",
+      "effective_until": null,
+      "page_or_section": "Para 1-3",
+      "verbatim_excerpt": "८० टक्के किंवा त्याहून अधिक तीव्र दिव्यांगत्व असलेल्या लाभार्थ्यांना दरमहा रु. २,५००/- वाढीव विशेष सहाय्य अनुज्ञेय राहील.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Beneficiaries with severe disability of 80% or above (or IGNDPS benchmark) are entitled to enhanced financial assistance of Rs. 2,500 per month.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "2cbfe308ac8c25ea9ca701e03de924573a62ab5a75d217ae9bd92a827a27f533",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": "Enhanced benefit tier of Rs. 2,500/month specifically restricted to severe disability (>= 80%) or multi-beneficiary families under GR 15-09-2025."
+    },
+    {
+      "condition_id": "c_sgnay_income_disabled",
+      "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+      "official_reference": "201908201732007222",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2019-08-20",
+      "effective_from": "2019-09-01",
+      "effective_until": null,
+      "page_or_section": "Para 3",
+      "verbatim_excerpt": "दिव्यांग (अंध, अपंग) व्यक्तींसाठी कुटुंबाची वार्षिक उत्पन्न मर्यादा रु. ५०,०००/- राहील.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Annual family income limit for disabled individuals is Rs. 50,000.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "706f28d7b598f1428c35b93fd6a1d9274c4fe5fcd1a6f28dfcf22e419629b92c",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_sgnay_income_general",
+      "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+      "official_reference": "201908201732007222",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2019-08-20",
+      "effective_from": "2019-09-01",
+      "effective_until": null,
+      "page_or_section": "Para 3",
+      "verbatim_excerpt": "सर्वसाधारण प्रवर्गातील निराधार व्यक्तींसाठी कुटुंबाचे वार्षिक उत्पन्न मर्यादा रु. २१,०००/- राहील.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Annual family income limit for general destitute persons and orphan children is Rs. 21,000.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "e345ffc23f5d8808c91a09293ca244330fb5c320b79bf5b2541ba041a0539851",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": "General destitute adults (18-65) and orphan children (< 18) must meet the Rs. 21,000 ceiling. Minor orphans are statutorily recognized under Category 3 of GR 20-08-2019."
+    }
+  ],
+  "document_requirements": [],
+  "eligibility_reference_date": null,
+  "publication_authorized": false
+}

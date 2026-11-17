@@ -1,0 +1,25 @@
+{
+  "corporation_id": "mc-nashik",
+  "corporation_name_en": "Nashik Municipal Corporation",
+  "corporation_name_mr": "नाशिक महानगरपालिका",
+  "total_wards": 6,
+  "boundary_reference": "NMC 6 Divisional Offices Notification 2022",
+  "representative_wards": [
+    "Nashik East (नाशिक पूर्व)",
+    "Nashik West (नाशिक पश्चिम)",
+    "Nashik Road (नाशिक रोड)",
+    "Panchavati (पंचवटी)",
+    "CIDCO (सिडको)",
+    "Satpur (सातपूर)"
+  ],
+  "localities": [
+    "Panchavati",
+    "CIDCO Nashik",
+    "Nashik Road",
+    "Satpur",
+    "College Road",
+    "Gangapur Road",
+    "Indira Nagar",
+    "Ambad"
+  ]
+}

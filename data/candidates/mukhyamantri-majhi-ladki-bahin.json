@@ -1,0 +1,273 @@
+{
+  "scheme_id": "candidate-majhi-ladki-bahin",
+  "name": "Mukhyamantri Majhi Ladki Bahin Yojana (मुख्यमंत्री - माझी लाडकी बहीण योजना)",
+  "department": "Women and Child Development Department, Government of Maharashtra",
+  "summary": "Provides Rs. 1,500 monthly DBT financial assistance to eligible women aged 21-65 years in Maharashtra with family income up to Rs. 2.5 Lakh. (DRAFT CANDIDATE - NON-PRODUCTION)",
+  "benefits": [
+    "Direct Benefit Transfer (DBT) of Rs. 1,500 per month deposited directly into Aadhaar-linked bank account",
+    "Economic empowerment and nutritional support for underprivileged women"
+  ],
+  "required_documents": [
+    "Aadhaar Card",
+    "Maharashtra Domicile Certificate / 15-year Ration Card / Voter ID / Birth Certificate",
+    "Income Certificate (<= Rs. 2.50 Lakh) or Yellow/Orange Ration Card",
+    "Bank Passbook of active Aadhaar-seeded bank account",
+    "Hamipatra (Self-declaration form)"
+  ],
+  "eligibility_rule": {
+    "op": "all",
+    "children": [
+      {
+        "op": "eq",
+        "children": [],
+        "field": "gender",
+        "value": "female",
+        "condition_id": "c_mmlby_gender_female",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "resident_state",
+        "value": "maharashtra",
+        "condition_id": "c_mmlby_resident_maharashtra",
+        "as_of_date": null
+      },
+      {
+        "op": "gte",
+        "children": [],
+        "field": "age",
+        "value": 21,
+        "condition_id": "c_mmlby_age_gte_21",
+        "as_of_date": null
+      },
+      {
+        "op": "lte",
+        "children": [],
+        "field": "age",
+        "value": 65,
+        "condition_id": "c_mmlby_age_lte_65",
+        "as_of_date": null
+      },
+      {
+        "op": "lte",
+        "children": [],
+        "field": "annual_family_income",
+        "value": 250000,
+        "condition_id": "c_mmlby_income_lte_250k",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "aadhaar_linked_bank_account",
+        "value": true,
+        "condition_id": "c_mmlby_aadhaar_linked_bank",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "receiving_other_pension",
+        "value": false,
+        "condition_id": "c_mmlby_no_other_pension",
+        "as_of_date": null
+      }
+    ],
+    "field": null,
+    "value": null,
+    "condition_id": null,
+    "as_of_date": null
+  },
+  "sources": [
+    {
+      "source_name": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02 (Base GR)",
+      "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202406281814018230.pdf",
+      "source_kind": "government_resolution",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "शासन निर्णय: राज्यातील २१ ते ६५ वर्षे वयोगटातील पात्र महिलांना दरमहा रु. १५००/- थेट बँक खात्यात (DBT) आर्थिक लाभ देण्यात येईल. कुटुंब वार्षिक उत्पन्न मर्यादा रु. २.५० लाख राहील.",
+      "evidence_sha256": "4c82a8b88a21b06042f46382b23d1327c8fa37a1eacefadbc9ca66778f0093fd",
+      "page_or_section": "Para 1-3"
+    },
+    {
+      "source_name": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02 (Shuddhipatra)",
+      "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407031335114330.pdf",
+      "source_kind": "government_resolution",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "शुद्धीपत्रक दिनांक ०३ जुलै २०२४: वयोमर्यादा २१ ते ६० ऐवजी २१ ते ६५ वर्षे करण्यात येत आहे. अधिवास प्रमाणपत्राऐवजी १५ वर्षांपूर्वीचे रेशन कार्ड, मतदार ओळखपत्र, शाळा सोडल्याचा दाखला किंवा जन्म दाखला ग्राह्य राहील.",
+      "evidence_sha256": "69f6b4dc283f7721c2e4adc1d62262df21213e7413fb739406d1470ccc08df40",
+      "page_or_section": "Para 1-4"
+    },
+    {
+      "source_name": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02 (Clarification GR)",
+      "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407121401594230.pdf",
+      "source_kind": "government_resolution",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "शासन निर्णय दिनांक १२ जुलै २०२४: पिवळे अथवा केशरी रेशनकार्डधारक कुटुंबांना स्वतंत्र उत्पन्नाच्या दाखल्याची आवश्यकता असणार नाही. परराज्यात जन्मलेल्या मात्र महाराष्ट्रातील अधिवास असलेल्या पुरुषाशी विवाह झालेल्या महिला पात्र राहतील.",
+      "evidence_sha256": "f39fcfbbe8ff299d4cb7752860fe22e8564a235c939b4c21111880744df134cd",
+      "page_or_section": "Clauses 1-4"
+    },
+    {
+      "source_name": "Official Ladki Bahin Portal (WCD Maharashtra)",
+      "source_url": "https://ladakibahin.maharashtra.gov.in/",
+      "source_kind": "official_portal",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "मुख्यमंत्री - माझी लाडकी बहीण योजना अधिकृत संकेतस्थळ (ladakibahin.maharashtra.gov.in): अर्जदाराचे आधार लिंक बँक खाते असणे अनिवार्य आहे. इतर शासकीय योजनेतून रु. १५०० किंवा अधिक लाभ घेणाऱ्या महिला अपात्र राहतील.",
+      "evidence_sha256": "ed8d389579fccc0ef31cb0029fe6ba42836f844cab3bb239dd495bc690e7e608",
+      "page_or_section": "Guidelines & FAQ"
+    }
+  ],
+  "rule_version": "0.2.2-candidate-draft",
+  "rule_status": "draft",
+  "approved_by": null,
+  "approval_reference": null,
+  "last_verified_at": null,
+  "languages": [
+    "en"
+  ],
+  "evidence": [
+    {
+      "condition_id": "c_mmlby_gender_female",
+      "source_title": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02",
+      "official_reference": "202406281814018230",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202406281814018230.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2024-06-28",
+      "effective_from": "2024-07-01",
+      "effective_until": null,
+      "page_or_section": "Para 2.1",
+      "verbatim_excerpt": "राज्यातील २१ ते ६० वयोगटातील विवाहित, विधवा, घटस्फोटीत, परित्यक्ता आणि निराधार महिला.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Married, widowed, divorced, deserted and destitute women in the state.",
+      "translation_provenance": "Official department guideline translation",
+      "source_document_sha256": "78e24c2eea353f5e5201f5244a8ed064b217fae6fade595124eff8a24d38bbb2",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": "Operative benefit baseline: Rs. 1,500/month. Proposed Rs. 2,100 rate has no gazetted GR."
+    },
+    {
+      "condition_id": "c_mmlby_resident_maharashtra",
+      "source_title": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02 (Shuddhipatra)",
+      "official_reference": "202407031335114330",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407031335114330.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2024-07-03",
+      "effective_from": "2024-07-01",
+      "effective_until": null,
+      "page_or_section": "Para 2.2",
+      "verbatim_excerpt": "लाभार्थी महिला ही महाराष्ट्र राज्याची रहिवासी असणे आवश्यक आहे. अधिवास प्रमाणपत्र उपलब्ध नसल्यास १५ वर्षांपूर्वीचे रेशन कार्ड, मतदार ओळखपत्र ग्राह्य धरण्यात येईल.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Beneficiary woman must be a resident of Maharashtra state.",
+      "translation_provenance": "Official department guideline translation",
+      "source_document_sha256": "5b799ab82911ce8f1ca74b66b436d8b1acb4e226573b15b9dc8e66680eff6330",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_mmlby_age_gte_21",
+      "source_title": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02",
+      "official_reference": "202406281814018230",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202406281814018230.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2024-06-28",
+      "effective_from": "2024-07-01",
+      "effective_until": null,
+      "page_or_section": "Para 2.1",
+      "verbatim_excerpt": "२१ वर्षे पूर्ण असणे आवश्यक आहे.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Must have completed 21 years of age.",
+      "translation_provenance": "Direct translation",
+      "source_document_sha256": "586de0174082b600e53837e8a6c143233b1e275fca772acfe6d97efa87066fcc",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_mmlby_age_lte_65",
+      "source_title": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02 (Shuddhipatra)",
+      "official_reference": "202407031335114330",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407031335114330.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2024-07-03",
+      "effective_from": "2024-07-01",
+      "effective_until": null,
+      "page_or_section": "Para 2.1",
+      "verbatim_excerpt": "वयोमर्यादा २१ ते ६० वर्षे ऐवजी २१ ते ६५ वर्षे अशी सुधारित करण्यात येत आहे.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Age limit is amended from 21-60 years to 21-65 years.",
+      "translation_provenance": "Official department translation",
+      "source_document_sha256": "8907c799aa5a08de08f884e58fc441fcc8a208afaa841e0d482bd3d26abe5146",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_mmlby_income_lte_250k",
+      "source_title": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02 (Clarification)",
+      "official_reference": "202407121401594230",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407121401594230.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2024-07-12",
+      "effective_from": "2024-07-01",
+      "effective_until": null,
+      "page_or_section": "Clause 1",
+      "verbatim_excerpt": "लाभार्थी कुटुंबाचे वार्षिक उत्पन्न रु. २,५०,०००/- पेक्षा जास्त नसावे. पिवळे अथवा केशरी रेशनकार्डधारक कुटुंबांना उत्पन्नाच्या दाखल्याची आवश्यकता नाही.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Annual family income must not exceed Rs. 2,50,000. Yellow/Orange ration card holders deemed compliant.",
+      "translation_provenance": "Official department translation",
+      "source_document_sha256": "04e1508a8ce760d00f075e7ca730a3e79b28d6f0df43460dfb35c8e249299e69",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_mmlby_aadhaar_linked_bank",
+      "source_title": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02",
+      "official_reference": "202406281814018230",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202406281814018230.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2024-06-28",
+      "effective_from": "2024-07-01",
+      "effective_until": null,
+      "page_or_section": "Para 2.4",
+      "verbatim_excerpt": "लाभार्थ्याचे स्वतःचे आधार लिंक असलेले बँक खाते असणे आवश्यक आहे.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Beneficiary must possess an individual bank account seeded with Aadhaar.",
+      "translation_provenance": "Direct translation",
+      "source_document_sha256": "46fcdba2d2dbf3bb74e537b1bb25371b141e8717955cf6f94ec916e019d49fe5",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_mmlby_no_other_pension",
+      "source_title": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02",
+      "official_reference": "202406281814018230",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202406281814018230.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2024-06-28",
+      "effective_from": "2024-07-01",
+      "effective_until": null,
+      "page_or_section": "Para 3.4",
+      "verbatim_excerpt": "ज्या महिला शासनाच्या इतर विभागांमार्फत राबविण्यात येणाऱ्या आर्थिक लाभाच्या योजनेद्वारे दरमहा रु. १५००/- किंवा त्यापेक्षा जास्त लाभ घेत असतील त्या अपात्र ठरतील.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Women receiving Rs. 1,500/month or more from other government DBT schemes are ineligible.",
+      "translation_provenance": "Direct translation",
+      "source_document_sha256": "5cfd93751edd92eecb2db1956fdd1405827ef0c12d2e64c160a9bd2209b7843a",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    }
+  ],
+  "document_requirements": [],
+  "eligibility_reference_date": null,
+  "publication_authorized": false
+}

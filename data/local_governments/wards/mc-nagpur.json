@@ -1,0 +1,31 @@
+{
+  "corporation_id": "mc-nagpur",
+  "corporation_name_en": "Nagpur Municipal Corporation",
+  "corporation_name_mr": "नागपूर महानगरपालिका",
+  "total_wards": 10,
+  "boundary_reference": "NMC 10 Administrative Zones Order 2022",
+  "representative_wards": [
+    "Zone 1 (Laxmi Nagar)",
+    "Zone 2 (Dharampeth)",
+    "Zone 3 (Hanuman Nagar)",
+    "Zone 4 (Dhantoli)",
+    "Zone 5 (Nehru Nagar)",
+    "Zone 6 (Gandhibagh)",
+    "Zone 7 (Satranjipura)",
+    "Zone 8 (Lakadganj)",
+    "Zone 9 (Ashi Nagar)",
+    "Zone 10 (Mangalwari)"
+  ],
+  "localities": [
+    "Dharampeth",
+    "Laxmi Nagar",
+    "Dhantoli",
+    "Ramdaspeth",
+    "Sadar",
+    "Sitabuldi",
+    "Manish Nagar",
+    "Pratap Nagar",
+    "Ashi Nagar",
+    "Gandhibagh"
+  ]
+}

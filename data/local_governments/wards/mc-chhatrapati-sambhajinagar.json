@@ -1,0 +1,29 @@
+{
+  "corporation_id": "mc-chhatrapati-sambhajinagar",
+  "corporation_name_en": "Chhatrapati Sambhajinagar Municipal Corporation",
+  "corporation_name_mr": "छत्रपती संभाजीनगर महानगरपालिका",
+  "total_wards": 9,
+  "boundary_reference": "CSMC Administrative Zone Structure 2022",
+  "representative_wards": [
+    "Zone 1 (Cidco)",
+    "Zone 2 (Garkheda)",
+    "Zone 3 (Kotwali)",
+    "Zone 4 (Kranti Chowk)",
+    "Zone 5 (Begumpura)",
+    "Zone 6 (Harsul)",
+    "Zone 7 (Satara Parisar)",
+    "Zone 8 (Chikalthana)",
+    "Zone 9 (Mukundwadi)"
+  ],
+  "localities": [
+    "CIDCO",
+    "Garkheda",
+    "Kranti Chowk",
+    "Mukundwadi",
+    "Chikalthana",
+    "Begumpura",
+    "Harsul",
+    "Satara Parisar",
+    "Osmanpura"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Demo Citizen",
+  "age_years": 24,
+  "gender": "female",
+  "resident_state": "maharashtra",
+  "district": "Pune",
+  "annual_family_income": 180000,
+  "aadhaar_linked_bank_account": true,
+  "documents_available": ["identity proof"]
+}

@@ -1,0 +1,193 @@
+{
+  "scheme_id": "candidate-post-matric-obc-girls-professional",
+  "name": "Post Matric Scholarship to the Girls Belonging to OBC taking admission in Professional Courses (व्यावसायिक अभ्यासक्रमास प्रवेश घेणाऱ्या इतर मागास प्रवर्गातील मुलींना मॅट्रिकोत्तर शिष्यवृत्ती)",
+  "department": "Other Backward Bahujan Welfare Department, Government of Maharashtra",
+  "summary": "Provides 100% scholarship covering tuition fees, examination fees, and monthly maintenance allowance to female OBC students in professional courses with parental annual income up to Rs. 2.5 Lakh. (DRAFT CANDIDATE - NON-PRODUCTION)",
+  "benefits": [
+    "100% Tuition Fee and Examination Fee reimbursement",
+    "Monthly maintenance allowance to support academic and living expenses",
+    "Hosteller allowance (1/3rd of standard rate if residing in a government hostel)"
+  ],
+  "required_documents": [
+    "OBC Caste Certificate issued by competent revenue authority",
+    "Valid Non-Creamy Layer (NCL) Certificate",
+    "Income Certificate (<= Rs. 2,50,000) issued by Tahsildar",
+    "Maharashtra Domicile Certificate",
+    "College admission receipt and Bonafide Certificate in a recognized professional course",
+    "Previous year marksheet",
+    "Aadhaar-linked bank account passbook"
+  ],
+  "eligibility_rule": {
+    "op": "all",
+    "children": [
+      {
+        "op": "eq",
+        "children": [],
+        "field": "resident_state",
+        "value": "maharashtra",
+        "condition_id": "c_pms_obc_gp_residence",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "caste_category",
+        "value": "obc",
+        "condition_id": "c_pms_obc_gp_caste",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "gender",
+        "value": "female",
+        "condition_id": "c_pms_obc_gp_gender",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "is_student",
+        "value": true,
+        "condition_id": "c_pms_obc_gp_is_student",
+        "as_of_date": null
+      },
+      {
+        "op": "lte",
+        "children": [],
+        "field": "annual_family_income",
+        "value": 250000,
+        "condition_id": "c_pms_obc_gp_income",
+        "as_of_date": null
+      }
+    ],
+    "field": null,
+    "value": null,
+    "condition_id": null,
+    "as_of_date": null
+  },
+  "sources": [
+    {
+      "source_name": "MahaDBT Official Portal - Girls Professional Post-Matric Scheme",
+      "source_url": "https://mahadbt2.maharashtra.gov.in/",
+      "source_kind": "official_portal",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "MahaDBT Scheme Details - Post Matric Scholarship to the Girls Belonging to Other Backward Classes taking admission in Professional Courses: Female OBC students enrolled in recognized professional courses with parental annual income up to Rs. 2.50 Lakh. Provides 100% scholarship covering tuition fees, exam fees, and monthly maintenance allowance (1/3rd for govt hostel inmates).",
+      "evidence_sha256": "fe67a6e74f1fd0f4c80a765abfe7d8980dc565dfeb2e83f4b0a973a712c85109",
+      "page_or_section": "OBC Girls Professional Scheme Guidelines"
+    }
+  ],
+  "rule_version": "0.2.2-candidate-draft",
+  "rule_status": "draft",
+  "approved_by": null,
+  "approval_reference": null,
+  "last_verified_at": null,
+  "languages": [
+    "en"
+  ],
+  "evidence": [
+    {
+      "condition_id": "c_pms_obc_gp_residence",
+      "source_title": "MahaDBT Girls Professional Post-Matric Guidelines",
+      "official_reference": "MahaDBT-OBC-GP-2026",
+      "official_source_url": "https://mahadbt2.maharashtra.gov.in/",
+      "source_type": "official_portal",
+      "publication_date": "2024-07-01",
+      "effective_from": "2024-07-01",
+      "effective_until": null,
+      "page_or_section": "Domicile Criteria",
+      "verbatim_excerpt": "The applicant must be a resident and domicile of Maharashtra State.",
+      "excerpt_language": "en",
+      "translated_excerpt": null,
+      "translation_provenance": null,
+      "source_document_sha256": "de8d5f43a1a5e680af073efdbecfca20a14f0a0fc1bee6976789bbe7687aff9a",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_pms_obc_gp_caste",
+      "source_title": "MahaDBT Girls Professional Post-Matric Guidelines",
+      "official_reference": "MahaDBT-OBC-GP-2026",
+      "official_source_url": "https://mahadbt2.maharashtra.gov.in/",
+      "source_type": "official_portal",
+      "publication_date": "2024-07-01",
+      "effective_from": "2024-07-01",
+      "effective_until": null,
+      "page_or_section": "Caste Verification",
+      "verbatim_excerpt": "Applicant must belong to Other Backward Classes category with valid Non-Creamy Layer certificate.",
+      "excerpt_language": "en",
+      "translated_excerpt": null,
+      "translation_provenance": null,
+      "source_document_sha256": "4e316d0bb25985893a7ab18cdd455ee10a3c8f808e35de42c5c89d9fd068ced9",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_pms_obc_gp_gender",
+      "source_title": "MahaDBT Girls Professional Post-Matric Guidelines",
+      "official_reference": "MahaDBT-OBC-GP-2026",
+      "official_source_url": "https://mahadbt2.maharashtra.gov.in/",
+      "source_type": "official_portal",
+      "publication_date": "2024-07-01",
+      "effective_from": "2024-07-01",
+      "effective_until": null,
+      "page_or_section": "Gender Eligibility",
+      "verbatim_excerpt": "Scheme is strictly restricted to female students belonging to Other Backward Classes.",
+      "excerpt_language": "en",
+      "translated_excerpt": null,
+      "translation_provenance": null,
+      "source_document_sha256": "2cf1ec114c482ea3e628ddeb5bde052becea76d0c3a48e750b079a79c3a683e1",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_pms_obc_gp_is_student",
+      "source_title": "MahaDBT Girls Professional Post-Matric Guidelines",
+      "official_reference": "MahaDBT-OBC-GP-2026",
+      "official_source_url": "https://mahadbt2.maharashtra.gov.in/",
+      "source_type": "official_portal",
+      "publication_date": "2024-07-01",
+      "effective_from": "2024-07-01",
+      "effective_until": null,
+      "page_or_section": "Enrollment Status",
+      "verbatim_excerpt": "Student must be enrolled and pursuing studies in an approved post-matric institution.",
+      "excerpt_language": "en",
+      "translated_excerpt": null,
+      "translation_provenance": null,
+      "source_document_sha256": "aefd04ad80c13b497cc3790fbee0e739893a838cd4cbdf3de6eed287cd011b8f",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": "Restricted to professional degree/diploma courses verified via college bonafide and admission letter."
+    },
+    {
+      "condition_id": "c_pms_obc_gp_income",
+      "source_title": "MahaDBT Girls Professional Post-Matric Guidelines",
+      "official_reference": "MahaDBT-OBC-GP-2026",
+      "official_source_url": "https://mahadbt2.maharashtra.gov.in/",
+      "source_type": "official_portal",
+      "publication_date": "2024-07-01",
+      "effective_from": "2024-07-01",
+      "effective_until": null,
+      "page_or_section": "Income Threshold",
+      "verbatim_excerpt": "Parental annual income must be less than or equal to Rs. 2,50,000/- for full scholarship and maintenance benefits.",
+      "excerpt_language": "en",
+      "translated_excerpt": null,
+      "translation_provenance": null,
+      "source_document_sha256": "acfd4ec8dc8ca73073dcdd8032a2ddd2e26f5e0ddb7f5b70bd1bfb4a1c0d503b",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": "MahaDBT explicit threshold for this girls professional track is Rs. 2.50 Lakh. Includes maintenance allowance."
+    }
+  ],
+  "document_requirements": [],
+  "eligibility_reference_date": null,
+  "publication_authorized": false
+}

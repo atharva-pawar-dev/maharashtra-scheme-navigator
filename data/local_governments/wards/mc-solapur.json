@@ -1,0 +1,26 @@
+{
+  "corporation_id": "mc-solapur",
+  "corporation_name_en": "Solapur Municipal Corporation",
+  "corporation_name_mr": "सोलापूर महानगरपालिका",
+  "total_wards": 8,
+  "boundary_reference": "SMC 8 Zonal Offices Order 2022",
+  "representative_wards": [
+    "Zone 1 (Kasba)",
+    "Zone 2 (Bhavani Peth)",
+    "Zone 3 (Jule Solapur)",
+    "Zone 4 (New Paccha Peth)",
+    "Zone 5 (Ashok Chowk)",
+    "Zone 6 (Hotgi Road)",
+    "Zone 7 (MIDC Solapur)",
+    "Zone 8 (Kumatha Naka)"
+  ],
+  "localities": [
+    "Jule Solapur",
+    "Bhavani Peth",
+    "Ashok Chowk",
+    "Hotgi Road",
+    "Saat Rasta",
+    "Civil Lines",
+    "Kumatha Naka"
+  ]
+}

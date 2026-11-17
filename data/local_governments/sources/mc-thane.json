@@ -1,0 +1,69 @@
+[
+  {
+    "source_id": "src_mc_thane_main",
+    "corporation_id": "mc-thane",
+    "department": "Commissioner & Administration",
+    "official_domain": "thanecity.gov.in",
+    "page_document_url": "https://thanecity.gov.in",
+    "source_type": "MUNICIPAL_OFFICIAL_PORTAL",
+    "scheme_categories": [
+      "Civic Services",
+      "Administration",
+      "Citizen Facilitation"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "401c379b785f178b19afebf5deb2b0c4176238b1c3e79fc72a751795e5faa7d3",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  },
+  {
+    "source_id": "src_mc_thane_welfare",
+    "corporation_id": "mc-thane",
+    "department": "Social Development Department",
+    "official_domain": "thanecity.gov.in",
+    "page_document_url": "https://thanecity.gov.in/social-development",
+    "source_type": "MUNICIPAL_SCHEME_DIRECTORY",
+    "scheme_categories": [
+      "Social Welfare",
+      "Disability Welfare",
+      "Women and Child Development",
+      "Education Grants"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "291e2039220fdc83bf0c4b107a3247c99f322b29151567ee68c7dd3035c4c447",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "Budget continuation orders verified annually"
+  },
+  {
+    "source_id": "src_mc_thane_budget",
+    "corporation_id": "mc-thane",
+    "department": "Finance & Accounts",
+    "official_domain": "thanecity.gov.in",
+    "page_document_url": "https://thanecity.gov.in/budget",
+    "source_type": "ANNUAL_BUDGET_RESOLUTION",
+    "scheme_categories": [
+      "Budget Allocation",
+      "Welfare Head 5% Divyang",
+      "Welfare Head 5% Women Child"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "31ccb46fcdce595df7f0f1557f11f4fe7bd7c5cdc0ec12d316e53b1f7704a8e6",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "RULES_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  }
+]

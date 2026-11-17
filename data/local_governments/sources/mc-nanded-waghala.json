@@ -1,0 +1,69 @@
+[
+  {
+    "source_id": "src_mc_nanded_waghala_main",
+    "corporation_id": "mc-nanded-waghala",
+    "department": "Commissioner & Administration",
+    "official_domain": "nwcmc.gov.in",
+    "page_document_url": "https://nwcmc.gov.in",
+    "source_type": "MUNICIPAL_OFFICIAL_PORTAL",
+    "scheme_categories": [
+      "Civic Services",
+      "Administration",
+      "Citizen Facilitation"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "c69424fd493ca265321bcb7f434419ba1bbd35c962019dd97f2ae13e89007a1a",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  },
+  {
+    "source_id": "src_mc_nanded_waghala_welfare",
+    "corporation_id": "mc-nanded-waghala",
+    "department": "Social Development & Welfare Section",
+    "official_domain": "nwcmc.gov.in",
+    "page_document_url": "https://nwcmc.gov.in/welfare",
+    "source_type": "MUNICIPAL_SCHEME_DIRECTORY",
+    "scheme_categories": [
+      "Social Welfare",
+      "Disability Welfare",
+      "Women and Child Development",
+      "Education Grants"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "797f6f65e4c2d43c5bd1445577491b59f80fa1a5ae9aa2cc0364fd76fe1ae0e5",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "Budget continuation orders verified annually"
+  },
+  {
+    "source_id": "src_mc_nanded_waghala_budget",
+    "corporation_id": "mc-nanded-waghala",
+    "department": "Finance & Accounts",
+    "official_domain": "nwcmc.gov.in",
+    "page_document_url": "https://nwcmc.gov.in/budget",
+    "source_type": "ANNUAL_BUDGET_RESOLUTION",
+    "scheme_categories": [
+      "Budget Allocation",
+      "Welfare Head 5% Divyang",
+      "Welfare Head 5% Women Child"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "4939300e9e520d3389c369fbc727f955619cc0fe3089945df924cfe9afea17e4",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "RULES_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  }
+]

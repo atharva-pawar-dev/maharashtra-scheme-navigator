@@ -1,0 +1,3092 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102b46">
+  <title>Scheme Navigator — Citizen Portal</title>
+  <style>
+    :root{--navy:#102b46;--blue:#1d5b83;--teal:#0f766e;--ink:#172b3a;--muted:#607284;--line:#dce5eb;--paper:#f4f7f9;--white:#fff;--amber:#fff5df;--red:#fff0ed;--green:#eaf7f0;--shadow:0 12px 34px rgba(16,43,70,.08)}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.topbar{background:var(--navy);color:#fff;padding:17px 24px}.top-inner{max-width:1160px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;gap:12px;align-items:center}.brandmark{width:42px;height:42px;border-radius:12px;background:#d9f0ed;color:var(--navy);display:grid;place-items:center;font-weight:900;font-size:19px}.brandname{font-weight:750;letter-spacing:.2px}.brandtag{font-size:12px;color:#c7d6e2}.top-actions{display:flex;align-items:center;gap:14px}.top-actions a{color:#e7f1f7;text-decoration:none;font-size:13px}.top-actions select{background:#fff;color:var(--ink);border:0;border-radius:8px;padding:8px 10px}.wrap{max-width:1160px;margin:30px auto;padding:0 20px 60px}.hero{background:linear-gradient(115deg,#102b46,#1c5c79);color:#fff;border-radius:22px;padding:34px 36px;display:grid;grid-template-columns:1.5fr .8fr;gap:25px;box-shadow:var(--shadow)}.eyebrow{text-transform:uppercase;letter-spacing:1.7px;font-size:11px;font-weight:750;color:#a9ded7}.hero h1{font-size:clamp(28px,4vw,43px);line-height:1.12;margin:10px 0 12px;max-width:700px}.hero p{color:#d7e5ec;max-width:680px;margin:0}.hero-note{align-self:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:15px;padding:17px;color:#e8f2f6;font-size:13px}.hero-note strong{display:block;color:#fff;margin-bottom:5px}.progress{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:22px 0}.progress-item{padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:12px;display:flex;gap:8px;align-items:center}.progress-item .num{width:23px;height:23px;border-radius:50%;display:grid;place-items:center;background:#eaf0f4;color:var(--navy);font-weight:750;flex:none}.progress-item.active{border-color:#8fc9c0;color:var(--navy);background:#f0faf8}.progress-item.active .num{background:var(--teal);color:#fff}.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}.maincol{min-width:0}.sidecol{position:sticky;top:18px}.panel{background:var(--white);border:1px solid var(--line);border-radius:17px;padding:23px;margin-bottom:17px;box-shadow:0 3px 15px rgba(16,43,70,.035)}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}.step-kicker{font-size:11px;text-transform:uppercase;letter-spacing:1.1px;color:var(--teal);font-weight:800}.panel h2{font-size:21px;margin:3px 0 5px;color:var(--navy)}.sub{color:var(--muted);font-size:13px;margin:0}.pill{display:inline-flex;align-items:center;border-radius:100px;padding:5px 10px;background:#edf3f6;color:#3c5c70;font-size:11px;font-weight:750;white-space:nowrap}.pill-matched{background:#eaf7f0;color:#236044;border:1px solid #c3e6d3}.pill-failed{background:#fff0ed;color:#8d392d;border:1px solid #f8cbc3}.pill-unknown{background:#fff5df;color:#75551b;border:1px solid #f6dfad}.scheme-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.scheme-card{border:1px solid var(--line);border-radius:13px;padding:16px;display:flex;flex-direction:column;gap:8px;min-height:180px}.scheme-card.selected{border:2px solid var(--teal);background:#f5fbfa;padding:15px}.scheme-card h3{font-size:16px;line-height:1.3;margin:0;color:var(--navy)}.scheme-card p{font-size:12px;color:var(--muted);margin:0}.scheme-card .card-bottom{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:700;color:#385265}.field input,.field select,.answer-input{width:100%;padding:11px 12px;border:1px solid #cfdbe3;border-radius:9px;background:#fff;color:var(--ink);outline:none}.field input:focus,.field select:focus,.answer-input:focus{border-color:#378e87;box-shadow:0 0 0 3px rgba(15,118,110,.1)}.hint{font-size:11px;color:var(--muted)}.btn{border:0;border-radius:9px;padding:11px 16px;font-weight:750;font-size:13px;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn-primary{background:var(--teal);color:#fff}.btn-primary:hover{background:#0b625c}.btn-secondary{background:#eaf0f4;color:var(--navy)}.btn-outline{background:#fff;border:1px solid var(--line);color:var(--navy)}.btn:disabled{opacity:.55;cursor:not-allowed}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:17px}.question-box{background:#f3f8fa;border:1px solid #dce9ed;border-radius:13px;padding:18px}.question-box h3{margin:5px 0 13px;font-size:18px;color:var(--navy)}.question-error{color:#a33b2b;font-size:12px;margin-top:9px}.answer-row{display:flex;gap:9px;align-items:stretch}.answer-row>*:first-child{flex:1}.mic-btn{padding:11px 15px;background:#edf5fa;border:1px solid #c9dae5;color:var(--navy);flex:none}.mic-btn:hover{background:#e1eff7}.mic-btn.recording{background:#fee2e2;border-color:#fca5a5;color:#991b1b}.statusline{font-size:12px;color:var(--muted);margin-top:10px}.notice{border-radius:11px;padding:12px 14px;font-size:12px;margin:12px 0}.notice.info{background:#edf5fa;color:#35576d}.notice.warn{background:var(--amber);color:#75551b}.notice.error{background:var(--red);color:#8d392d}.notice.success{background:var(--green);color:#236044}.hidden{display:none!important}.side-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px;margin-bottom:14px}.side-card h3{margin:0 0 10px;color:var(--navy);font-size:15px}.side-card p,.side-card li{color:var(--muted);font-size:12px}.side-card ul{padding-left:17px;margin:7px 0}.metric{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #edf1f4;font-size:12px}.metric:last-child{border:0}.metric strong{color:var(--navy)}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.result-tile{border:1px solid var(--line);border-radius:12px;padding:13px}.result-tile small{display:block;color:var(--muted);font-size:11px}.result-tile strong{display:block;color:var(--navy);font-size:16px;margin-top:4px;overflow-wrap:anywhere}.finding,.plan-step,.next-action{border:1px solid var(--line);border-radius:11px;padding:13px;margin-top:9px}.finding h4,.plan-step h4{margin:0 0 4px;font-size:13px;color:var(--navy)}.finding p,.plan-step p,.next-action p{margin:0;color:var(--muted);font-size:12px}.finding .code{font-size:10px;color:#6c8291;font-family:ui-monospace,monospace}.plan-step{display:grid;grid-template-columns:28px 1fr;gap:10px}.step-dot{width:27px;height:27px;border-radius:50%;background:#e7f3f1;color:var(--teal);font-weight:800;display:grid;place-items:center;font-size:12px}.muted{color:var(--muted)}.tiny{font-size:11px}.footer{border-top:1px solid var(--line);padding:18px 0;color:#738696;font-size:11px;text-align:center}.loading{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+    .discovery-toolbar{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+    .trust-amber{background:#fff5df;color:#75551b;border:1px solid #f6dfad}
+    .trust-blue{background:#edf5fa;color:#1d5b83;border:1px solid #c9dae5}
+    .trust-purple{background:#f5f0fb;color:#5e2ca5;border:1px solid #decbf6}
+    .trust-teal{background:#eafaf7;color:#0f766e;border:1px solid #b2e4dc}
+    .trust-green{background:#eaf7f0;color:#236044;border:1px solid #c3e6d3}
+    .trust-slate{background:#f1f5f9;color:#475569;border:1px solid #cbd5e1}
+    .criteria-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+    .criteria-chip{display:inline-flex;align-items:center;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:600;line-height:1.4}
+    .source-link{color:var(--teal);text-decoration:none;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:4px;margin-top:6px}
+    .source-link:hover{text-decoration:underline}
+    .meta-heading{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:750;margin:6px 0 2px}
+    
+    /* Phase 3: Voice recording styles */
+    .voice-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;background:#fef2f2;border:1.5px solid #fecaca;border-radius:10px;margin-bottom:12px}
+    .recording-indicator{display:flex;align-items:center;gap:10px}
+    .recording-pulse{width:12px;height:12px;border-radius:50%;background:#dc2626;box-shadow:0 0 0 0 rgba(220,38,38,.7);animation:pulse-red 1.5s infinite}
+    @keyframes pulse-red{0%{transform:scale(.95);box-shadow:0 0 0 0 rgba(220,38,38,.7)}70%{transform:scale(1);box-shadow:0 0 0 8px rgba(220,38,38,0)}100%{transform:scale(.95);box-shadow:0 0 0 0 rgba(220,38,38,0)}}
+    @keyframes pulse-teal{0%{box-shadow:0 0 0 0 rgba(15,118,110,.6)}70%{box-shadow:0 0 0 16px rgba(15,118,110,0)}100%{box-shadow:0 0 0 0 rgba(15,118,110,0)}}
+    @keyframes pulse-blue{0%{box-shadow:0 0 0 0 rgba(37,99,235,.6)}70%{box-shadow:0 0 0 16px rgba(37,99,235,0)}100%{box-shadow:0 0 0 0 rgba(37,99,235,0)}}
+    .recording-text{font-weight:750;font-size:13px;color:#991b1b}
+    .recording-timer{font-family:ui-monospace,monospace;font-size:12px;font-weight:700;background:#fee2e2;color:#7f1d1d;padding:3px 7px;border-radius:5px}
+    .recording-actions{display:flex;gap:7px}
+    .btn-sm{padding:6px 12px;font-size:12px}
+    .btn-lg{padding:14px 24px;font-size:16px;border-radius:12px}
+    .transcript-box{background:#f0faf8;border:1.5px solid #8fc9c0;border-radius:12px;padding:14px;margin-top:12px}
+    .transcript-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+    .voice-options{margin-top:10px;padding-top:10px;border-top:1px dashed #dce9ed}
+    .voice-consent-row{display:flex;align-items:center;gap:8px}
+
+    /* Continuous conversational voice styles */
+    .interview-mode-bar{display:inline-flex;gap:4px;background:#e9f0f4;padding:4px;border-radius:10px;margin-bottom:16px}
+    .mode-tab{border:0;background:transparent;padding:7px 14px;border-radius:7px;font-size:12px;font-weight:750;color:var(--navy);cursor:pointer;transition:all .15s}
+    .mode-tab.active{background:#fff;box-shadow:0 2px 6px rgba(16,43,70,.08);color:var(--teal)}
+    .continuous-voice-stage{background:#f3f9f8;border:2px solid #b6e2db;border-radius:15px;padding:24px 20px;text-align:center;margin:16px 0}
+    .voice-radar-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;margin:12px 0}
+    .voice-radar{width:72px;height:72px;border-radius:50%;background:#0f766e;color:#fff;display:grid;place-items:center;font-size:30px;box-shadow:0 0 0 0 rgba(15,118,110,.4);transition:all .2s;margin:0 auto}
+    .voice-radar.listening{background:#0f766e;animation:pulse-teal 1.6s infinite}
+    .voice-radar.recording{background:#dc2626;animation:pulse-red 1.2s infinite}
+    .voice-radar.transcribing{background:#2563eb;animation:pulse-blue 1.4s infinite}
+    .voice-radar.accepted{background:#16a34a;box-shadow:0 0 0 8px rgba(22,163,74,.2)}
+    .voice-radar.paused{background:#d97706}
+    .voice-stage-title{font-size:17px;font-weight:800;color:var(--navy);margin:14px 0 6px}
+    .voice-stage-sub{font-size:13px;color:var(--muted);margin:0 auto 12px;max-width:520px}
+    .voice-visualizer-canvas{display:block;margin:10px auto;border-radius:6px;background:rgba(255,255,255,.6);border:1px solid #dce9ed}
+    .voice-controls{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .voice-accepted-pill{display:inline-flex;align-items:center;gap:6px;background:#eaf7f0;color:#1e6244;border:1.5px solid #a7dfc0;padding:6px 14px;border-radius:20px;font-weight:750;font-size:14px;margin:8px 0}
+    .voice-clarification-card{background:#fff;border:1.5px solid #f6dfad;border-radius:12px;padding:16px;text-align:left;margin-top:14px}
+
+    @media(max-width:850px){.layout{grid-template-columns:1fr}.sidecol{position:static;display:grid;grid-template-columns:1fr 1fr;gap:12px}.hero{grid-template-columns:1fr}.hero-note{max-width:600px}.progress{grid-template-columns:repeat(5,minmax(0,1fr))}.progress-item{justify-content:center}.progress-item .label{display:none}.discovery-toolbar{grid-template-columns:1fr}}
+    @media(max-width:560px){.topbar{padding:13px 15px}.top-inner{align-items:flex-start}.top-actions{gap:7px;flex-direction:column;align-items:flex-end}.wrap{padding:0 12px 40px;margin:16px auto}.hero{padding:24px 20px;border-radius:16px}.progress{gap:5px}.progress-item{padding:8px 4px}.panel{padding:17px}.scheme-grid,.field-grid,.result-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.sidecol{display:block}.answer-row{flex-direction:column}.brandtag{display:none}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="top-inner">
+      <div class="brand"><div class="brandmark">SN</div><div><div class="brandname" data-i18n="brand_name">Scheme Navigator</div><div class="brandtag" data-i18n="brand_tag">Maharashtra public services • Citizen portal</div></div></div>
+      <div class="top-actions"><a href="/reviewer" target="_blank" rel="noopener" data-i18n="reviewer_link">Reviewer dashboard ↗</a><select id="language" aria-label="Interview language"><option value="en">English</option><option value="mr">मराठी</option><option value="hi">हिन्दी</option></select></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div><div class="eyebrow" data-i18n="hero_eyebrow">A guided way to prepare</div><h1 data-i18n="hero_title">Find schemes. Understand requirements. Prepare with confidence.</h1><p data-i18n="hero_desc">Explore available scheme information, answer a few questions, and prepare the documents and steps you may need.</p></div>
+      <div class="hero-note"><strong data-i18n="hero_note_strong">Important: preliminary assistance</strong> <span data-i18n="hero_note_body">This local prototype uses demo scheme rules. It does not make government decisions, verify certificate authenticity, or submit applications. Always confirm current requirements with the official department.</span></div>
+    </section>
+
+    <div class="progress" aria-label="Application journey">
+      <div class="progress-item active" data-progress="1"><span class="num">1</span><span class="label" data-i18n="progress_step1">Your details</span></div>
+      <div class="progress-item" data-progress="2"><span class="num">2</span><span class="label" data-i18n="progress_step2">Discover schemes</span></div>
+      <div class="progress-item" data-progress="3"><span class="num">3</span><span class="label" data-i18n="progress_step3">AI interview</span></div>
+      <div class="progress-item" data-progress="4"><span class="num">4</span><span class="label" data-i18n="progress_step4">Documents</span></div>
+      <div class="progress-item" data-progress="5"><span class="num">5</span><span class="label" data-i18n="progress_step5">Assessment</span></div>
+    </div>
+
+    <div class="layout">
+      <div class="maincol">
+        <section class="panel" id="profile-panel">
+          <div class="panel-head"><div><div class="step-kicker" data-i18n="step1_kicker">Step 1</div><h2 data-i18n="step1_title">Your details for scheme discovery</h2><p class="sub" data-i18n="step1_sub">Provide minimal information to check preliminary eligibility. All fields are optional.</p></div><span class="pill" data-i18n="step1_pill">Anonymous discovery</span></div>
+          <div class="field-grid">
+            <div class="field"><label for="discovery-age" data-i18n="label_age">Age (completed years)</label><input id="discovery-age" type="number" min="0" max="120" placeholder="e.g. 24"><span class="hint" data-i18n="hint_age">Leave blank if unknown</span></div>
+            <div class="field"><label for="discovery-gender" data-i18n="label_gender">Gender</label><select id="discovery-gender"><option value="" selected data-i18n="gender_opt_empty">Don't know / Prefer not to say</option><option value="female" data-i18n="gender_opt_female">Female</option><option value="male" data-i18n="gender_opt_male">Male</option><option value="other" data-i18n="gender_opt_other">Other</option></select></div>
+            <div class="field"><label for="discovery-state" data-i18n="label_state">State of residence</label><select id="discovery-state"><option value="" selected data-i18n="state_opt_empty">Don't know / Select state</option><option value="maharashtra" data-i18n="state_opt_mh">Maharashtra</option><option value="other" data-i18n="state_opt_other">Other state</option></select><span class="hint" data-i18n="hint_state">Schemes require Maharashtra residence</span></div>
+            <div class="field"><label for="discovery-income" data-i18n="label_income">Approximate annual family income (₹)</label><input id="discovery-income" type="number" min="0" placeholder="e.g. 180000"><span class="hint" data-i18n="hint_income">Estimate in INR</span></div>
+            <div class="field"><label for="discovery-aadhaar-bank" data-i18n="label_bank">Bank account linked to Aadhaar?</label><select id="discovery-aadhaar-bank"><option value="" selected data-i18n="bank_opt_empty">Don't know / Skip</option><option value="yes" data-i18n="opt_yes">Yes</option><option value="no" data-i18n="opt_no">No</option></select></div>
+            <div class="field"><label for="discovery-bpl" data-i18n="label_bpl">Family listed as BPL (Below Poverty Line)?</label><select id="discovery-bpl"><option value="" selected data-i18n="bank_opt_empty">Don't know / Skip</option><option value="yes" data-i18n="opt_yes">Yes</option><option value="no" data-i18n="opt_no">No</option></select></div>
+            <div class="field"><label for="discovery-pension" data-i18n="label_pension">Receiving another social-security pension?</label><select id="discovery-pension"><option value="" selected data-i18n="bank_opt_empty">Don't know / Skip</option><option value="yes" data-i18n="opt_yes">Yes</option><option value="no" data-i18n="opt_no">No</option></select></div>
+            <div class="field"><label for="financial-year" data-i18n="label_fin_year">Target financial year</label><select id="financial-year"><option value="2026-27" selected>2026–27</option><option value="2025-26">2025–26</option></select></div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" id="btn-discover-schemes" data-i18n="btn_discover">Find eligible schemes</button>
+            <button class="btn btn-outline" id="btn-browse-all" data-i18n="btn_browse_all">Browse all schemes without profile</button>
+          </div>
+          <div id="profile-message" class="statusline" aria-live="polite"></div>
+        </section>
+
+        <section class="panel" id="scheme-panel">
+          <div class="panel-head"><div><div class="step-kicker" data-i18n="step2_kicker">Step 2</div><h2 data-i18n="step2_title">Discovered schemes</h2><p class="sub" data-i18n="step2_sub">Evaluation results based on your profile. Choose a scheme to begin guided interview preparation.</p></div><span class="pill" id="scheme-count">Loading…</span></div>
+          <div class="discovery-toolbar">
+            <input id="scheme-search-input" type="search" placeholder="Search by scheme name or keywords…">
+            <select id="scheme-dept-filter"><option value="" data-i18n="dept_all">All departments</option></select>
+            <select id="scheme-status-filter">
+              <option value="" data-i18n="status_all">All statuses</option>
+              <option value="needs_review" data-i18n="status_needs_review">Needs independent review (Demo)</option>
+              <option value="eligible" data-i18n="status_eligible">Eligible (Preliminary)</option>
+              <option value="needs_information" data-i18n="status_needs_info">More information required</option>
+              <option value="ineligible" data-i18n="status_ineligible">Ineligible</option>
+            </select>
+            <select id="scheme-trust-filter">
+              <option value="" data-i18n="trust_filter_all">All verification states</option>
+              <option value="draft_candidate" data-i18n="trust_filter_draft">Draft candidates</option>
+              <option value="under_review" data-i18n="trust_filter_review">Under review</option>
+              <option value="source_verified" data-i18n="trust_filter_source_verified">Source verified</option>
+              <option value="internally_reviewed" data-i18n="trust_filter_internally_reviewed">Internally reviewed</option>
+              <option value="publication_authorized" data-i18n="trust_filter_pub_auth">Publication authorised</option>
+              <option value="active" data-i18n="trust_filter_active">Active for evaluation</option>
+              <option value="expired_or_superseded" data-i18n="trust_filter_expired">Expired / superseded</option>
+            </select>
+          </div>
+          <div id="discovery-summary-banner" class="statusline"></div>
+          <div id="scheme-list" class="scheme-grid"><p class="muted" data-i18n="loading_catalog">Loading scheme catalogue…</p></div>
+          <div id="scheme-message" class="statusline" aria-live="polite"></div>
+        </section>
+
+        <section class="panel hidden" id="interview-panel">
+          <div class="panel-head"><div><div class="step-kicker" data-i18n="step3_kicker">Step 3</div><h2 data-i18n="step3_title">Guided citizen interview</h2><p class="sub" data-i18n="step3_sub">Answer one question at a time. You can use typed input or voice recording.</p></div><span class="pill" id="interview-state" data-i18n="interview_in_progress">In progress</span></div>
+          <div class="interview-mode-bar" id="interview-mode-bar">
+            <button type="button" class="mode-tab active" id="tab-voice-mode">🎤 <span data-i18n="tab_voice_interview">Voice Interview</span></button>
+            <button type="button" class="mode-tab" id="tab-typed-mode">⌨️ <span data-i18n="tab_type_answer">Type Answer</span></button>
+          </div>
+          <div id="interview-message" class="statusline" aria-live="polite"></div>
+          <div id="question-area"></div>
+          <div id="interview-summary" class="hidden"></div>
+        </section>
+
+        <section class="panel hidden" id="document-panel">
+          <div class="panel-head"><div><div class="step-kicker" data-i18n="step4_kicker">Step 4</div><h2 data-i18n="step4_title">Upload supporting documents</h2><p class="sub" data-i18n="step4_sub">Upload one PDF containing relevant documents (up to 10 pages), or one PNG, JPEG or WEBP image.</p></div><span class="pill" data-i18n="step4_pill">Pre-audit only</span></div>
+          <div class="notice warn" data-i18n="doc_notice">Do not upload real Aadhaar numbers, bank account numbers, OTPs or sensitive documents to an unapproved environment. This prototype sends the file to the configured Gemini extraction provider. Use synthetic test documents unless you have authorization and an approved data-processing arrangement.</div>
+          <div class="field-grid">
+            <div class="field full"><label for="citizen-name" data-i18n="label_citizen_name">Full name on documents (optional)</label><input id="citizen-name" maxlength="120" placeholder="Name as printed on certificate"><span class="hint" data-i18n="hint_citizen_name">Used to check name consistency across uploaded certificates.</span></div>
+            <div class="field full"><label for="document-file" data-i18n="label_choose_doc">Choose a document</label><input id="document-file" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/png,image/jpeg,image/webp"><span class="hint" data-i18n="hint_choose_doc">PDF maximum 15MiB; image maximum 12 MiB. For several certificates, combine them into one PDF for this prototype.</span></div>
+          </div>
+          <div class="actions"><button class="btn btn-primary" id="upload-document" data-i18n="btn_upload_doc">Upload and pre-audit</button><button class="btn btn-outline" id="skip-document" data-i18n="btn_skip_doc">Continue without a document</button></div>
+          <div id="upload-message" aria-live="polite"></div>
+          <div id="upload-summary"></div>
+        </section>
+
+        <section class="panel hidden" id="assessment-panel">
+          <div class="panel-head"><div><div class="step-kicker" data-i18n="step5_kicker">Step 5</div><h2 data-i18n="step5_title">Your preliminary assessment</h2><p class="sub" data-i18n="step5_sub">A consolidated view of rule checks, document findings and preparation steps.</p></div><span class="pill" data-i18n="step5_pill">Not an official decision</span></div>
+          <div class="actions" style="margin-top:0;margin-bottom:14px"><button class="btn btn-primary" id="run-assessment" data-i18n="btn_run_assessment">Generate assessment</button><button class="btn btn-outline hidden" id="refresh-assessment" data-i18n="btn_refresh_assessment">Refresh assessment</button></div>
+          <div id="assessment-message" aria-live="polite"></div>
+          <div id="assessment-result"></div>
+        </section>
+      </div>
+
+      <aside class="sidecol">
+        <div class="side-card"><h3 data-i18n="sidebar_journey_title">Your journey</h3><div class="metric"><span data-i18n="sidebar_selected_scheme">Selected scheme</span><strong id="side-scheme">Not selected</strong></div><div class="metric"><span data-i18n="sidebar_interview">Interview</span><strong id="side-interview">Not started</strong></div><div class="metric"><span data-i18n="sidebar_documents">Documents</span><strong id="side-documents">Not uploaded</strong></div><div class="metric"><span data-i18n="sidebar_assessment">Assessment</span><strong id="side-assessment">Not generated</strong></div></div>
+        <div class="side-card"><h3 data-i18n="sidebar_privacy_title">Privacy reminders</h3><ul><li data-i18n="sidebar_privacy_1">Never share an OTP or full Aadhaar number.</li><li data-i18n="sidebar_privacy_2">Only provide information needed for the scheme.</li><li data-i18n="sidebar_privacy_3">Use synthetic documents for local testing.</li><li data-i18n="sidebar_privacy_4">Uploaded file bytes are not retained by the current upload endpoint.</li></ul></div>
+        <div class="side-card"><h3 data-i18n="sidebar_reviewer_title">Need reviewer help?</h3><p data-i18n="sidebar_reviewer_desc">Local reviewers can inspect pending extracted fields through the separate reviewer dashboard.</p><a href="/reviewer" target="_blank" rel="noopener" style="color:var(--teal);font-size:12px;font-weight:750" data-i18n="sidebar_reviewer_link">Open reviewer dashboard ↗</a></div>
+      </aside>
+    </div>
+    <footer class="footer" data-i18n="footer_text">Scheme Navigator • Local development prototype • Verify all scheme rules and application requirements through official sources.</footer>
+  </main>
+
+<script>
+(() => {
+  const SESSION_KEY = 'scheme-navigator-citizen-session-v1';
+
+  const TRANSLATIONS = {
+    en: {
+      brand_name: "Scheme Navigator",
+      brand_tag: "Maharashtra public services • Citizen portal",
+      reviewer_link: "Reviewer dashboard ↗",
+      hero_eyebrow: "A guided way to prepare",
+      hero_title: "Find schemes. Understand requirements. Prepare with confidence.",
+      hero_desc: "Explore available scheme information, answer a few questions, and prepare the documents and steps you may need.",
+      hero_note_strong: "Important: preliminary assistance",
+      hero_note_body: "This local prototype uses demo scheme rules. It does not make government decisions, verify certificate authenticity, or submit applications. Always confirm current requirements with the official department.",
+      progress_step1: "Your details",
+      progress_step2: "Discover schemes",
+      progress_step3: "AI interview",
+      progress_step4: "Documents",
+      progress_step5: "Assessment",
+      step1_kicker: "Step 1",
+      step1_title: "Your details for scheme discovery",
+      step1_sub: "Provide minimal information to check preliminary eligibility. All fields are optional.",
+      step1_pill: "Anonymous discovery",
+      label_age: "Age (completed years)",
+      hint_age: "Leave blank if unknown",
+      label_gender: "Gender",
+      gender_opt_empty: "Don't know / Prefer not to say",
+      gender_opt_female: "Female",
+      gender_opt_male: "Male",
+      gender_opt_other: "Other",
+      label_state: "State of residence",
+      hint_state: "Schemes require Maharashtra residence",
+      state_opt_empty: "Don't know / Select state",
+      state_opt_mh: "Maharashtra",
+      state_opt_other: "Other state",
+      label_income: "Approximate annual family income (₹)",
+      hint_income: "Estimate in INR",
+      label_bank: "Bank account linked to Aadhaar?",
+      bank_opt_empty: "Don't know / Skip",
+      opt_yes: "Yes",
+      opt_no: "No",
+      label_bpl: "Family listed as BPL (Below Poverty Line)?",
+      label_pension: "Receiving another social-security pension?",
+      label_fin_year: "Target financial year",
+      btn_discover: "Find eligible schemes",
+      btn_browse_all: "Browse all schemes without profile",
+      step2_kicker: "Step 2",
+      step2_title: "Discovered schemes",
+      step2_sub: "Evaluation results based on your profile. Choose a scheme to begin guided interview preparation.",
+      search_placeholder: "Search by scheme name or keywords…",
+      dept_all: "All departments",
+      status_all: "All statuses",
+      status_needs_review: "Needs independent review (Demo)",
+      status_eligible: "Eligible (Preliminary)",
+      status_needs_info: "More information required",
+      status_ineligible: "Ineligible",
+      loading_catalog: "Loading scheme catalogue…",
+      no_schemes_found: "No schemes match your current search and filter criteria.",
+      scheme_count_text: "{count} of {total} schemes",
+      demo_rule_warn: "Demo fixture rule — verify official department guidelines before real use.",
+      heading_benefits: "Scheme benefits",
+      heading_documents: "Required documents",
+      heading_positive_conditions: "Conditions appearing satisfied",
+      heading_unmet_conditions: "Conditions not satisfied",
+      heading_missing_info: "Information needed to evaluate",
+      doc_verification_pending_badge: "Document verification pending",
+      trust_filter_all: "All verification states",
+      trust_filter_draft: "Draft candidates",
+      trust_filter_review: "Under review",
+      trust_filter_source_verified: "Source verified",
+      trust_filter_internally_reviewed: "Internally reviewed",
+      trust_filter_pub_auth: "Publication authorised",
+      trust_filter_active: "Active for evaluation",
+      trust_filter_expired: "Expired / superseded",
+      trust_heading: "Verification & Source Traceability",
+      trust_last_verified_prefix: "Source verified: ",
+      trust_not_verified: "Not yet verified",
+      trust_effective_prefix: "Operative period: ",
+      trust_sources_heading: "Official Government Resolutions & Citations",
+      trust_disclaimer: "⚠️ Citizen Notice: Scheme Navigator provides independent preliminary guidance based on official Government Resolutions. It is not an official government portal, does not issue entitlements, and source citations do not constitute government endorsement or benefit guarantees. Final eligibility is determined exclusively by the competent departmental authorities.",
+      heading_doc_prep: "Document Preparation & Verification Checklist",
+      heading_portal_guidance: "Official Portal Application Guidance",
+      portal_security_badge: "Safe Guidance (No OTP / Password Storage)",
+      btn_open_official_portal: "Open Official Portal ↗",
+      prefill_guidance_table_title: "Suggested Form Fields (Review before entering on portal):",
+      pre_submission_checklist_title: "Pre-Submission Safety Checklist (Must verify before applying):",
+      official_source_prefix: "Official scheme information: ",
+      btn_select_scheme: "Select scheme & start interview",
+      btn_scheme_selected: "Selected",
+      step3_kicker: "Step 3",
+      step3_title: "Guided citizen interview",
+      step3_sub: "Answer one question at a time. You can use typed input or voice recording.",
+      interview_in_progress: "In progress",
+      interview_completed: "Completed",
+      interview_kicker_prefix: "QUESTION • ",
+      interview_placeholder_text: "Type your answer",
+      interview_placeholder_num: "Enter a number",
+      interview_select_choice: "Select an answer",
+      btn_submit_answer: "Submit answer",
+      aadhaar_safe_hint: "Do not enter an Aadhaar number. Answer only yes or no.",
+      no_more_questions: "No further questions are required.",
+      interview_completed_title: "Interview completed",
+      interview_completed_desc: "Your answers have been collected. You may now upload supporting documents or proceed to preliminary assessment.",
+      btn_mic_label: "Voice",
+      mic_title: "Record voice answer",
+      recording_status: "Recording…",
+      btn_stop_record: "Done",
+      btn_cancel_record: "Cancel",
+      voice_transcribing: "Transcribing your voice answer…",
+      transcript_review_title: "Spoken answer (Review and edit before submitting)",
+      transcript_review_hint: "Check that the transcript matches your answer, or edit it if needed.",
+      btn_confirm_submit: "Confirm & Submit",
+      btn_rerecord: "Re-record",
+      btn_cancel_type: "Cancel & Type",
+      tab_type_answer: "Type Answer",
+      tab_voice_interview: "Voice Interview",
+      btn_start_voice_interview: "Start Voice Interview",
+      voice_status_ready: "Click once to start the continuous conversational voice interview. We will listen and advance automatically.",
+      voice_status_listening: "Listening… speak your answer clearly.",
+      voice_status_speaking: "Speaking detected… recording response.",
+      voice_status_transcribing: "Silence detected. Transcribing and understanding your answer…",
+      voice_status_submitting: "Verifying your answer with Scheme Navigator…",
+      voice_status_accepted: "Answer recognized! Moving to next question…",
+      voice_status_paused: "Voice interview paused. Click resume when ready.",
+      btn_pause_voice: "Pause",
+      btn_resume_voice: "Resume",
+      btn_stop_voice: "Stop Voice",
+      btn_switch_typed: "Switch to Typed Input",
+      voice_clarification_title: "Clarification Needed",
+      voice_clarification_hint: "We heard the response below, but need a clearer answer. You can speak again or edit the text directly.",
+      btn_speak_again: "Speak Again",
+      voice_provider_whisper_note: "Default: Speech is processed locally on the application server.",
+      voice_provider_bhashini_note: "Cloud option: Bhashini Indic ASR transmits audio to MeitY cloud service.",
+      consent_bhashini_label: "Use Bhashini Indic ASR (Sends audio to external MeitY cloud pipeline)",
+      err_mic_unsupported: "Your browser does not support audio recording. Please type your answer.",
+      err_mic_denied: "Microphone permission was denied. You can continue by typing your answer.",
+      err_transcription_empty: "No speech could be recognized. Please re-record or type your answer.",
+      err_transcription_failed: "Voice transcription service was unavailable. Please try again or type your answer.",
+      step4_kicker: "Step 4",
+      step4_title: "Upload supporting documents",
+      step4_sub: "Upload one PDF containing relevant documents (up to 10 pages), or one PNG, JPEG or WEBP image.",
+      step4_pill: "Pre-audit only",
+      doc_notice: "Do not upload real Aadhaar numbers, bank account numbers, OTPs or sensitive documents to an unapproved environment. This prototype sends the file to the configured Gemini extraction provider. Use synthetic test documents unless you have authorization and an approved data-processing arrangement.",
+      label_citizen_name: "Full name on documents (optional)",
+      placeholder_citizen_name: "Name as printed on certificate",
+      hint_citizen_name: "Used to check name consistency across uploaded certificates.",
+      label_choose_doc: "Choose a document",
+      hint_choose_doc: "PDF maximum 15MiB; image maximum 12 MiB. For several certificates, combine them into one PDF for this prototype.",
+      btn_upload_doc: "Upload and pre-audit",
+      btn_skip_doc: "Continue without a document",
+      doc_select_prompt: "Choose a PDF or image file first.",
+      audit_findings_title: "Audit findings",
+      rec_action_prefix: "Recommended action: ",
+      step5_kicker: "Step 5",
+      step5_title: "Your preliminary assessment",
+      step5_sub: "A consolidated view of rule checks, document findings and preparation steps.",
+      step5_pill: "Not an official decision",
+      btn_run_assessment: "Generate assessment",
+      btn_refresh_assessment: "Refresh assessment",
+      tile_scheme: "Scheme",
+      tile_status: "Status",
+      tile_review: "Human review",
+      tile_authenticity: "Authenticity",
+      heading_doc_findings: "Document findings affecting this assessment",
+      heading_plan: "Application preparation plan",
+      heading_actions: "Next actions",
+      notified_limit_prefix: "Published notified limit: ",
+      notified_limit_suffix: " days (verify current service notification).",
+      assessment_success: "Preliminary assessment generated. Review every warning and verify official scheme requirements.",
+      choose_scheme_first: "Choose a scheme and complete the interview first.",
+      sidebar_journey_title: "Your journey",
+      sidebar_selected_scheme: "Selected scheme",
+      sidebar_interview: "Interview",
+      sidebar_documents: "Documents",
+      sidebar_assessment: "Assessment",
+      status_not_selected: "Not selected",
+      status_not_started: "Not started",
+      status_not_uploaded: "Not uploaded",
+      status_uploaded: "Uploaded",
+      status_not_generated: "Not generated",
+      status_generated: "Generated",
+      sidebar_privacy_title: "Privacy reminders",
+      sidebar_privacy_1: "Never share an OTP or full Aadhaar number.",
+      sidebar_privacy_2: "Only provide information needed for the scheme.",
+      sidebar_privacy_3: "Use synthetic documents for local testing.",
+      sidebar_privacy_4: "Uploaded file bytes are not retained by the current upload endpoint.",
+      sidebar_reviewer_title: "Need reviewer help?",
+      sidebar_reviewer_desc: "Local reviewers can inspect pending extracted fields through the separate reviewer dashboard.",
+      sidebar_reviewer_link: "Open reviewer dashboard ↗",
+      sidebar_saved_title: "Saved progress",
+      sidebar_saved_desc: "Progress is stored in this browser tab to help recover after a refresh. This storage is not encrypted. Use synthetic data only; do not store real identity or financial documents here.",
+      btn_clear_saved: "Clear saved progress",
+      confirm_clear_saved: "Clear Scheme Navigator progress saved in this browser tab?",
+      storage_saved: "Session state saved in this tab.",
+      storage_restored: "Session state restored.",
+      storage_none: "No saved progress found in this tab.",
+      footer_text: "Scheme Navigator • Local development prototype • Verify all scheme rules and application requirements through official sources.",
+      please_wait: "Please wait…"
+    },
+    mr: {
+      brand_name: "योजना मार्गदर्शक (Scheme Navigator)",
+      brand_tag: "महाराष्ट्र सार्वजनिक सेवा • नागरिक पोर्टल",
+      reviewer_link: "समीक्षक डॅशबोर्ड ↗",
+      hero_eyebrow: "तयारीचा मार्गदर्शक मार्ग",
+      hero_title: "योजना शोधा. अटी समजून घ्या. आत्मविश्वासाने तयार व्हा.",
+      hero_desc: "उपलब्ध योजना माहिती तपासा, काही सोप्या प्रश्नांची उत्तरे द्या आणि आवश्यक कागदपत्रे व पायऱ्या तयार ठेवा.",
+      hero_note_strong: "महत्त्वाचे: प्राथमिक साहाय्य",
+      hero_note_body: "हा स्थानिक नमुना प्रात्यक्षिक योजना नियमांवर आधारित आहे. हा कोणताही शासकीय निर्णय घेत नाही, प्रमाणपत्रांची सत्यता तपासत नाही किंवा अर्ज सादर करत नाही. चालू अटींसाठी नेहमी अधिकृत विभागाकडून खात्री करा.",
+      progress_step1: "तुमची माहिती",
+      progress_step2: "योजना शोधा",
+      progress_step3: "AI मुलाखत",
+      progress_step4: "कागदपत्रे",
+      progress_step5: "मूल्यांकन",
+      step1_kicker: "पायरी १",
+      step1_title: "योजना शोधासाठी तुमची माहिती",
+      step1_sub: "प्राथमिक पात्रता तपासण्यासाठी प्राथमिक माहिती द्या. सर्व माहिती ऐच्छिक आहे.",
+      step1_pill: "अनामित शोध",
+      label_age: "वय (पूर्ण वर्षे)",
+      hint_age: "माहित नसल्यास रिकामे ठेवा",
+      label_gender: "लिंग",
+      gender_opt_empty: "माहित नाही / सांगू इच्छित नाही",
+      gender_opt_female: "महिला",
+      gender_opt_male: "पुरुष",
+      gender_opt_other: "इतर",
+      label_state: "रहिवासी राज्य",
+      hint_state: "योजनांसाठी महाराष्ट्र रहिवासी आवश्यक आहे",
+      state_opt_empty: "माहित नाही / राज्य निवडा",
+      state_opt_mh: "महाराष्ट्र",
+      state_opt_other: "इतर राज्य",
+      label_income: "अंदाजे वार्षिक कौटुंबिक उत्पन्न (₹)",
+      hint_income: "रुपयांमध्ये अंदाज",
+      label_bank: "बँक खाते आधारशी जोडलेले आहे का?",
+      bank_opt_empty: "माहित नाही / वगळा",
+      opt_yes: "होय",
+      opt_no: "नाही",
+      label_bpl: "कुटुंब दारिद्र्यरेषेखाली (BPL) नोंदलेले आहे का?",
+      label_pension: "इतर सामाजिक सुरक्षा पेन्शन मिळते का?",
+      label_fin_year: "लक्ष्य आर्थिक वर्ष",
+      btn_discover: "पात्र योजना शोधा",
+      btn_browse_all: "माहिती न भरता सर्व योजना पहा",
+      step2_kicker: "पायरी २",
+      step2_title: "सापडलेल्या योजना",
+      step2_sub: "तुमच्या माहितीनुसार मूल्यांकन निकाल. मुलाखत तयारी सुरू करण्यासाठी योजना निवडा.",
+      search_placeholder: "योजनेचे नाव किंवा शब्दाने शोधा…",
+      dept_all: "सर्व विभाग",
+      status_all: "सर्व स्थिती",
+      status_needs_review: "स्वतंत्र पुनरावलोकन आवश्यक (डेमो)",
+      status_eligible: "पात्र (प्राथमिक)",
+      status_needs_info: "अधिक माहिती आवश्यक",
+      status_ineligible: "अपात्र",
+      loading_catalog: "योजना सूची लोड होत आहे…",
+      no_schemes_found: "शोध अटींशी जुळणारी योजना सापडली नाही.",
+      scheme_count_text: "{total} पैकी {count} योजना",
+      demo_rule_warn: "डेमो नियम — प्रत्यक्ष वापरापूर्वी अधिकृत मार्गदर्शक तत्त्वांची खात्री करा.",
+      heading_benefits: "योजनेचे लाभ",
+      heading_documents: "आवश्यक कागदपत्रे",
+      heading_positive_conditions: "पूर्ण झालेल्या अटी",
+      heading_unmet_conditions: "अपूर्ण अटी",
+      heading_missing_info: "मूल्यांकनासाठी आवश्यक माहिती",
+      doc_verification_pending_badge: "कागदपत्र पडताळणी प्रलंबित",
+      trust_filter_all: "सर्व पडताळणी स्थिती",
+      trust_filter_draft: "मसुदा उमेदवार योजना",
+      trust_filter_review: "पुनरावलोकनाधीन (तपासणी सुरू)",
+      trust_filter_source_verified: "अधिकृत स्रोत पडताळित",
+      trust_filter_internally_reviewed: "अंतर्गत पुनरावलोकन पूर्ण",
+      trust_filter_pub_auth: "प्रकाशन प्राधिकृत",
+      trust_filter_active: "मूल्यमापनासाठी सक्रिय",
+      trust_filter_expired: "मुदत संपलेली / अधिक्रमित",
+      trust_heading: "पडताळणी व स्रोत पारदर्शकता",
+      trust_last_verified_prefix: "स्रोत पडताळणी: ",
+      trust_not_verified: "अद्याप पडताळणी प्रलंबित",
+      trust_effective_prefix: "लागू कालावधी: ",
+      trust_sources_heading: "अधिकृत शासन निर्णय व कायदेशीर संदर्भ",
+      trust_disclaimer: "⚠️ नागरिक सूचना: स्कीम नेव्हिगेटर सार्वजनिक शासन निर्णयांवर आधारित स्वतंत्र प्राथमिक मार्गदर्शन पुरवते. हे अधिकृत सरकारी पोर्टल नाही, कोणताही शासकीय हक्क प्रदान करत नाही आणि शासन निर्णय संदर्भ जोडलेला असणे म्हणजे सरकारी मंजुरी नव्हे. अंतिम पात्रता केवळ सक्षम सरकारी प्राधिकरणाकडूनच ठरवली जाते.",
+      heading_doc_prep: "कागदपत्र तयारी व पडताळणी सूची",
+      heading_portal_guidance: "अधिकृत पोर्टल अर्ज सहाय्यता",
+      portal_security_badge: "सुरक्षित सहाय्यता (पासवर्ड / OTP साठवला जात नाही)",
+      btn_open_official_portal: "अधिकृत पोर्टल उघडा ↗",
+      prefill_guidance_table_title: "पोर्टलसाठी सुचविलेली माहिती (पोर्टलवर भरण्यापूर्वी तपासा):",
+      pre_submission_checklist_title: "अर्ज सादर करण्यापूर्वीची सुरक्षा तपासणी सूची:",
+      official_source_prefix: "अधिकृत योजना माहिती: ",
+      btn_select_scheme: "योजना निवडा आणि मुलाखत सुरू करा",
+      btn_scheme_selected: "निवडलेली",
+      step3_kicker: "पायरी ३",
+      step3_title: "मार्गदर्शित नागरिक मुलाखत",
+      step3_sub: "एका वेळी एका प्रश्नाचे उत्तर द्या. तुम्ही टाईप करून किंवा आवाजाने उत्तर देऊ शकता.",
+      interview_in_progress: "सुरू आहे",
+      interview_completed: "पूर्ण झाली",
+      interview_kicker_prefix: "प्रश्न • ",
+      interview_placeholder_text: "उत्तर टाईप करा",
+      interview_placeholder_num: "संख्या प्रविष्ट करा",
+      interview_select_choice: "उत्तर निवडा",
+      btn_submit_answer: "उत्तर सबमिट करा",
+      aadhaar_safe_hint: "आधार क्रमांक टाकू नका. फक्त हो किंवा नाही उत्तर द्या.",
+      no_more_questions: "पुढील प्रश्नांची आवश्यकता नाही.",
+      interview_completed_title: "मुलाखत पूर्ण झाली",
+      interview_completed_desc: "तुमची उत्तरे नोंदवली गेली आहेत. आता तुम्ही कागदपत्रे अपलोड करू शकता किंवा मूल्यांकनाकडे जाऊ शकता.",
+      btn_mic_label: "आवाज",
+      mic_title: "आवाजाने उत्तर नोंदवा",
+      recording_status: "ध्वनिमुद्रण सुरू आहे…",
+      btn_stop_record: "झाले",
+      btn_cancel_record: "रद्द करा",
+      voice_transcribing: "तुमच्या आवाजाचे लिप्यंतरण होत आहे…",
+      transcript_review_title: "बोललेले उत्तर (सबमिट करण्यापूर्वी तपासा व सुधारा)",
+      transcript_review_hint: "लिप्यंतरण तुमच्या उत्तराशी जुळते का ते तपासा किंवा आवश्यकतेनुसार दुरुस्त करा.",
+      btn_confirm_submit: "पुष्टी करा आणि सबमिट करा",
+      btn_rerecord: "पुन्हा रेकॉर्ड करा",
+      btn_cancel_type: "रद्द करा आणि टाईप करा",
+      tab_type_answer: "टाईप करून उत्तर द्या",
+      tab_voice_interview: "आवाज मुलाखत",
+      btn_start_voice_interview: "आवाज मुलाखत सुरू करा",
+      voice_status_ready: "संभाषण आवाज मुलाखत सुरू करण्यासाठी एकदा क्लिक करा. आम्ही ऐकू आणि आपोआप पुढील प्रश्नावर जाऊ.",
+      voice_status_listening: "ऐकत आहे… आपले उत्तर स्पष्टपणे बोला.",
+      voice_status_speaking: "आवाज ओळखला… आपले उत्तर नोंदवले जात आहे.",
+      voice_status_transcribing: "शांतता आढळली. आपल्या उत्तराचे आकलन व लिप्यंतरण होत आहे…",
+      voice_status_submitting: "आपल्या उत्तराची पडताळणी होत आहे…",
+      voice_status_accepted: "उत्तर ओळखले गेले! पुढील प्रश्नाकडे जात आहोत…",
+      voice_status_paused: "आवाज मुलाखत थांबवली आहे. तयार झाल्यावर पुन्हा सुरू करा.",
+      btn_pause_voice: "थांबवा",
+      btn_resume_voice: "पुन्हा सुरू करा",
+      btn_stop_voice: "आवाज बंद करा",
+      btn_switch_typed: "टाईप करण्याकडे वळा",
+      voice_clarification_title: "स्पष्टीकरण आवश्यक आहे",
+      voice_clarification_hint: "आम्हाला खालील उत्तर ऐकू आले, परंतु अधिक स्पष्ट उत्तर हवे आहे. तुम्ही पुन्हा बोलू शकता किंवा खालील मजकूर थेट संपादित करू शकता.",
+      btn_speak_again: "पुन्हा बोला",
+      voice_provider_whisper_note: "डीफॉल्ट: आवाज स्थानिक पातळीवर सर्व्हरवर प्रक्रिया केला जातो.",
+      voice_provider_bhashini_note: "क्लाउड पर्याय: भाषिणी इंडिक ASR द्वारे ऑडिओ MeitY क्लाउडवर पाठवला जातो.",
+      consent_bhashini_label: "मी हे ध्वनिमुद्रण भाषिणी क्लाउड ASR कडे पाठवण्यास स्पष्ट संमती देतो/देते.",
+      err_mic_unsupported: "तुमचा ब्राउझर ऑडिओ रेकॉर्डिंगला पाठिंबा देत नाही. कृपया उत्तर टाईप करा.",
+      err_mic_denied: "मायक्रोफोन परवानगी नाकारली गेली. तुम्ही उत्तर टाईप करून पुढे जाऊ शकता.",
+      err_transcription_empty: "कोणताही आवाज ओळखता आला नाही. कृपया पुन्हा रेकॉर्ड करा किंवा टाईप करा.",
+      err_transcription_failed: "आवाज लिप्यंतरण सेवा अनुपलब्ध होती. कृपया पुन्हा प्रयत्न करा किंवा टाईप करा.",
+      step4_kicker: "पायरी ४",
+      step4_title: "साहाय्यक कागदपत्रे अपलोड करा",
+      step4_sub: "संबंधित कागदपत्रांची एक PDF (१० पानांपर्यंत) किंवा PNG, JPEG, WEBP छायाचित्र अपलोड करा.",
+      step4_pill: "केवळ पूर्व-तपासणी",
+      doc_notice: "अनधिकृत वातावरणात खरे आधार क्रमांक, बँक खाती, OTP किंवा संवेदनशील कागदपत्रे अपलोड करू नका. हा नमुना फाइल जेमिनी एक्स्ट्रॅक्शन प्रदात्याकडे पाठवतो. अधिकृत परवानगी असल्याशिवाय कृत्रिम चाचणी कागदपत्रे वापरा.",
+      label_citizen_name: "कागदपत्रावरील पूर्ण नाव (ऐच्छिक)",
+      placeholder_citizen_name: "प्रमाणपत्रावर छापल्याप्रमाणे नाव",
+      hint_citizen_name: "अपलोड केलेल्या प्रमाणपत्रांमधील नावांची सुसंगतता तपासण्यासाठी.",
+      label_choose_doc: "कागदपत्र निवडा",
+      hint_choose_doc: "PDF कमाल १५ MiB; छायाचित्र कमाल १२ MiB. एकाधिक प्रमाणपत्रांसाठी एक PDF तयार करा.",
+      btn_upload_doc: "अपलोड करा आणि पूर्व-तपासणी करा",
+      btn_skip_doc: "कागदपत्रांशिवाय पुढे जा",
+      doc_select_prompt: "प्रथम PDF किंवा इमेज फाइल निवडा.",
+      audit_findings_title: "ऑडिट निष्कर्ष",
+      rec_action_prefix: "शिफारस केलेली कृती: ",
+      step5_kicker: "पायरी ५",
+      step5_title: "तुमचे प्राथमिक मूल्यांकन",
+      step5_sub: "नियम तपासणी, कागदपत्र नोंदी आणि तयारीच्या पायऱ्यांचा एकत्रित अहवाल.",
+      step5_pill: "अधिकृत निर्णय नाही",
+      btn_run_assessment: "मूल्यांकन तयार करा",
+      btn_refresh_assessment: "मूल्यांकन रीफ्रेश करा",
+      tile_scheme: "योजना",
+      tile_status: "स्थिती",
+      tile_review: "मानवी पुनरावलोकन",
+      tile_authenticity: "सत्यता",
+      heading_doc_findings: "या मूल्यांकनावर परिणाम करणारे कागदपत्र निष्कर्ष",
+      heading_plan: "अर्ज तयारी आराखडा",
+      heading_actions: "पुढील कृती",
+      notified_limit_prefix: "अधिकृत अधिसूचित मर्यादा: ",
+      notified_limit_suffix: " दिवस (चालू सेवा अधिसूचनेची खात्री करा).",
+      assessment_success: "प्राथमिक मूल्यांकन तयार केले. प्रत्येक इशारा तपासा आणि अधिकृत योजना अटींची खात्री करा.",
+      choose_scheme_first: "प्रथम योजना निवडा आणि मुलाखत पूर्ण करा.",
+      sidebar_journey_title: "तुमचा प्रवास",
+      sidebar_selected_scheme: "निवडलेली योजना",
+      sidebar_interview: "मुलाखत",
+      sidebar_documents: "कागदपत्रे",
+      sidebar_assessment: "मूल्यांकन",
+      status_not_selected: "निवडलेली नाही",
+      status_not_started: "सुरू झालेली नाही",
+      status_not_uploaded: "अपलोड केलेले नाही",
+      status_uploaded: "अपलोड केले",
+      status_not_generated: "तयार केलेले नाही",
+      status_generated: "तयार केले",
+      sidebar_privacy_title: "गोपनीयता स्मरणपत्रे",
+      sidebar_privacy_1: "कधीही OTP किंवा पूर्ण आधार क्रमांक शेअर करू नका.",
+      sidebar_privacy_2: "केवळ योजनेसाठी आवश्यक असलेली माहिती द्या.",
+      sidebar_privacy_3: "स्थानिक चाचणीसाठी कृत्रिम कागदपत्रे वापरा.",
+      sidebar_privacy_4: "अपलोड केलेल्या फाइलचे बाइट्स साठवले जात नाहीत.",
+      sidebar_reviewer_title: "समीक्षक साहाय्य हवे आहे?",
+      sidebar_reviewer_desc: "स्थानिक समीक्षक वेगळ्या डॅशबोर्डद्वारे प्रलंबित निष्कर्षांची पाहणी करू शकतात.",
+      sidebar_reviewer_link: "समीक्षक डॅशबोर्ड उघडा ↗",
+      sidebar_saved_title: "जतन केलेली प्रगती",
+      sidebar_saved_desc: "रिफ्रेश झाल्यावर पूर्ववत करण्यासाठी प्रगती या ब्राउझर टॅबमध्ये साठवली जाते. हे स्टोरेज एन्क्रिप्टेड नाही. फक्त कृत्रिम डेटा वापरा; ओळख किंवा आर्थिक कागदपत्रे येथे ठेवू नका.",
+      btn_clear_saved: "जतन केलेली प्रगती हटवा",
+      confirm_clear_saved: "या ब्राउझर टॅबमधील प्रगती हटवायची का?",
+      storage_saved: "या टॅबमध्ये सत्र स्थिती जतन केली.",
+      storage_restored: "सत्र स्थिती पूर्ववत केली.",
+      storage_none: "या टॅबमध्ये कोणतीही जतन केलेली प्रगती आढळली नाही.",
+      footer_text: "योजना मार्गदर्शक • स्थानिक विकास नमुना • सर्व योजना नियम आणि अर्जाच्या अटींची अधिकृत स्रोतांद्वारे खात्री करा.",
+      please_wait: "कृपया प्रतीक्षा करा…"
+    },
+    hi: {
+      brand_name: "योजना मार्गदर्शक (Scheme Navigator)",
+      brand_tag: "महाराष्ट्र सार्वजनिक सेवाएं • नागरिक पोर्टल",
+      reviewer_link: "समीक्षक डैशबोर्ड ↗",
+      hero_eyebrow: "तैयारी का मार्गदर्शन",
+      hero_title: "योजनाएं खोजें। आवश्यकताएं समझें। आत्मविश्वास से तैयारी करें।",
+      hero_desc: "उपलब्ध योजना जानकारी देखें, कुछ प्रश्नों के उत्तर दें और आवश्यक दस्तावेज़ व चरण तैयार रखें।",
+      hero_note_strong: "महत्वपूर्ण: प्राथमिक सहायता",
+      hero_note_body: "यह प्रोटोटाइप डेमो योजना नियमों पर आधारित है। यह कोई सरकारी निर्णय नहीं लेता, प्रमाण पत्रों की सत्यता की जांच नहीं करता और न ही आवेदन जमा करता है। हमेशा आधिकारिक विभाग से वर्तमान आवश्यकताओं की पुष्टि करें।",
+      progress_step1: "आपका विवरण",
+      progress_step2: "योजनाएं खोजें",
+      progress_step3: "AI साक्षात्कार",
+      progress_step4: "दस्तावेज़",
+      progress_step5: "मूल्यांकन",
+      step1_kicker: "चरण १",
+      step1_title: "योजना खोज के लिए आपका विवरण",
+      step1_sub: "प्रारंभिक पात्रता जांचने के लिए न्यूनतम जानकारी दें। सभी फ़ील्ड वैकल्पिक हैं।",
+      step1_pill: "अनाम खोज",
+      label_age: "आयु (पूर्ण वर्ष)",
+      hint_age: "पता न होने पर खाली छोड़ें",
+      label_gender: "लिंग",
+      gender_opt_empty: "पता नहीं / बताना नहीं चाहते",
+      gender_opt_female: "महिला",
+      gender_opt_male: "पुरुष",
+      gender_opt_other: "अन्य",
+      label_state: "निवास का राज्य",
+      hint_state: "योजनाओं के लिए महाराष्ट्र निवास आवश्यक है",
+      state_opt_empty: "पता नहीं / राज्य चुनें",
+      state_opt_mh: "महाराष्ट्र",
+      state_opt_other: "अन्य राज्य",
+      label_income: "अनुमानित वार्षिक पारिवारिक आय (₹)",
+      hint_income: "रुपये में अनुमान",
+      label_bank: "क्या बैंक खाता आधार से जुड़ा है?",
+      bank_opt_empty: "पता नहीं / छोड़ें",
+      opt_yes: "हाँ",
+      opt_no: "नहीं",
+      label_bpl: "क्या परिवार गरीबी रेखा से नीचे (BPL) सूचीबद्ध है?",
+      label_pension: "क्या कोई अन्य सामाजिक सुरक्षा पेंशन मिल रही है?",
+      label_fin_year: "लक्षित वित्तीय वर्ष",
+      btn_discover: "पात्र योजनाएं खोजें",
+      btn_browse_all: "बिना विवरण के सभी योजनाएं देखें",
+      step2_kicker: "चरण २",
+      step2_title: "खोज की गई योजनाएं",
+      step2_sub: "आपके विवरण के आधार पर मूल्यांकन परिणाम। साक्षात्कार की तैयारी शुरू करने के लिए एक योजना चुनें।",
+      search_placeholder: "योजना का नाम या कीवर्ड से खोजें…",
+      dept_all: "सभी विभाग",
+      status_all: "सभी स्थितियां",
+      status_needs_review: "स्वतंत्र समीक्षा आवश्यक (डेमो)",
+      status_eligible: "पात्र (प्राथमिक)",
+      status_needs_info: "अतिरिक्त जानकारी आवश्यक",
+      status_ineligible: "अपात्र",
+      loading_catalog: "योजना सूची लोड हो रही है…",
+      no_schemes_found: "खोज से मेल खाती कोई योजना नहीं मिली।",
+      scheme_count_text: "{total} में से {count} योजनाएं",
+      demo_rule_warn: "डेमो नियम — वास्तविक उपयोग से पहले आधिकारिक दिशानिर्देशों की पुष्टि करें।",
+      heading_benefits: "योजना के लाभ",
+      heading_documents: "आवश्यक दस्तावेज़",
+      heading_positive_conditions: "पूरी हुई शर्तें",
+      heading_unmet_conditions: "अपूर्ण शर्तें",
+      heading_missing_info: "मूल्यांकन के लिए आवश्यक जानकारी",
+      doc_verification_pending_badge: "दस्तावेज़ सत्यापन लंबित",
+      trust_filter_all: "सभी सत्यापन स्थितियां",
+      trust_filter_draft: "प्रारूप उम्मीदवार योजनाएं",
+      trust_filter_review: "समीक्षाधीन (जांच जारी)",
+      trust_filter_source_verified: "आधिकारिक स्रोत सत्यापित",
+      trust_filter_internally_reviewed: "आंतरिक समीक्षा पूर्ण",
+      trust_filter_pub_auth: "प्रकाशन अधिकृत",
+      trust_filter_active: "मूल्यांकन हेतु सक्रिय",
+      trust_filter_expired: "अवधि समाप्त / अधिक्रमित",
+      trust_heading: "सत्यापन एवं स्रोत पारदर्शिता",
+      trust_last_verified_prefix: "स्रोत सत्यापन: ",
+      trust_not_verified: "सत्यापन अभी लंबित है",
+      trust_effective_prefix: "प्रभावी समयावधि: ",
+      trust_sources_heading: "आधिकारिक शासन निर्णय एवं कानूनी संदर्भ",
+      trust_disclaimer: "⚠️ नागरिक सूचना: स्कीम नेविगेटर सार्वजनिक शासन निर्णयों पर आधारित स्वतंत्र प्रारंभिक मार्गदर्शन प्रदान करता है। यह आधिकारिक सरकारी पोर्टल नहीं है, कोई सरकारी पात्रता प्रदान नहीं करता, और शासन निर्णय संदर्भ होना सरकारी स्वीकृति नहीं है। अंतिम पात्रता केवल सक्षम सरकारी प्राधिकरण द्वारा तय की जाती है।",
+      heading_doc_prep: "दस्तावेज़ तैयारी एवं सत्यापन चेकलिस्ट",
+      heading_portal_guidance: "आधिकारिक पोर्टल आवेदन सहायता",
+      portal_security_badge: "सुरक्षित सहायता (पासवर्ड / OTP कभी संग्रहित नहीं होता)",
+      btn_open_official_portal: "आधिकारिक पोर्टल खोलें ↗",
+      prefill_guidance_table_title: "पोर्टल हेतु सुझाई गई फ़ील्ड जानकारी (पोर्टल पर भरने से पहले जांचें):",
+      pre_submission_checklist_title: "आवेदन जमा करने से पहले सुरक्षा चेकलिस्ट:",
+      official_source_prefix: "आधिकारिक योजना जानकारी: ",
+      btn_select_scheme: "योजना चुनें और साक्षात्कार शुरू करें",
+      btn_scheme_selected: "चयनित",
+      step3_kicker: "चरण ३",
+      step3_title: "मार्गदर्शित नागरिक साक्षात्कार",
+      step3_sub: "एक समय में एक प्रश्न का उत्तर दें। आप टाइप करके या आवाज़ से उत्तर दे सकते हैं।",
+      interview_in_progress: "प्रगति पर",
+      interview_completed: "पूर्ण",
+      interview_kicker_prefix: "प्रश्न • ",
+      interview_placeholder_text: "अपना उत्तर टाइप करें",
+      interview_placeholder_num: "संख्या दर्ज करें",
+      interview_select_choice: "उत्तर चुनें",
+      btn_submit_answer: "उत्तर जमा करें",
+      aadhaar_safe_hint: "आधार नंबर दर्ज न करें। केवल हाँ या नहीं में उत्तर दें।",
+      no_more_questions: "आगे किसी प्रश्न की आवश्यकता नहीं है।",
+      interview_completed_title: "साक्षात्कार पूर्ण हुआ",
+      interview_completed_desc: "आपके उत्तर एकत्र कर लिए गए हैं। अब आप दस्तावेज़ अपलोड कर सकते हैं या मूल्यांकन पर आगे बढ़ सकते हैं।",
+      btn_mic_label: "आवाज़",
+      mic_title: "आवाज़ से उत्तर रिकॉर्ड करें",
+      recording_status: "ध्वनि रिकॉर्डिंग जारी है…",
+      btn_stop_record: "पूर्ण",
+      btn_cancel_record: "रद्द करें",
+      voice_transcribing: "आपकी आवाज़ का प्रतिलेखन हो रहा है…",
+      transcript_review_title: "बोला गया उत्तर (जमा करने से पहले जांचें व सुधारें)",
+      transcript_review_hint: "जांचें कि प्रतिलेखन सही है या आवश्यकतानुसार सुधारें।",
+      btn_confirm_submit: "पुष्टि करें और जमा करें",
+      btn_rerecord: "पुनः रिकॉर्ड करें",
+      btn_cancel_type: "रद्द करें और टाइप करें",
+      tab_type_answer: "उत्तर टाइप करें",
+      tab_voice_interview: "आवाज़ साक्षात्कार",
+      btn_start_voice_interview: "आवाज़ साक्षात्कार शुरू करें",
+      voice_status_ready: "सतत आवाज़ साक्षात्कार शुरू करने के लिए एक बार क्लिक करें। हम सुनेंगे और स्वतः अगले प्रश्न पर बढ़ेंगे।",
+      voice_status_listening: "सुन रहे हैं… अपना उत्तर स्पष्ट बोलें।",
+      voice_status_speaking: "आवाज़ पहचानी… आपका उत्तर रिकॉर्ड हो रहा है।",
+      voice_status_transcribing: "शांति पहचानी गई। आपके उत्तर का विश्लेषण व प्रतिलेखन हो रहा है…",
+      voice_status_submitting: "आपके उत्तर का सत्यापन किया जा रहा है…",
+      voice_status_accepted: "उत्तर पहचाना गया! अगले प्रश्न पर बढ़ रहे हैं…",
+      voice_status_paused: "आवाज़ साक्षात्कार रोका गया है। तैयार होने पर फिर शुरू करें।",
+      btn_pause_voice: "रोकें",
+      btn_resume_voice: "फिर शुरू करें",
+      btn_stop_voice: "आवाज़ बंद करें",
+      btn_switch_typed: "टाइप करने पर जाएं",
+      voice_clarification_title: "स्पष्टीकरण आवश्यक है",
+      voice_clarification_hint: "हमें नीचे दिया गया उत्तर सुनाई दिया, लेकिन अधिक स्पष्ट उत्तर की आवश्यकता है। आप फिर से बोल सकते हैं या नीचे दिए गए पाठ को सीधे संपादित कर सकते हैं।",
+      btn_speak_again: "फिर से बोलें",
+      voice_provider_whisper_note: "डिफ़ॉल्ट: आवाज़ को स्थानीय रूप से एप्लिकेशन सर्वर पर संसाधित किया जाता है।",
+      voice_provider_bhashini_note: "क्लाउड विकल्प: भाषिणी इंडिक ASR ऑडियो को MeitY क्लाउड पर भेजता है।",
+      consent_bhashini_label: "मैं इस रिकॉर्डिंग को भाषिणी क्लाउड ASR पर भेजने की स्पष्ट सहमति देता/देती हूँ।",
+      err_mic_unsupported: "आपका ब्राउज़र ऑडियो रिकॉर्डिंग का समर्थन नहीं करता है। कृपया अपना उत्तर टाइप करें।",
+      err_mic_denied: "माइक्रोफ़ोन की अनुमति अस्वीकार कर दी गई। आप उत्तर टाइप करके आगे बढ़ सकते हैं।",
+      err_transcription_empty: "कोई आवाज़ नहीं पहचानी जा सकी। कृपया पुनः रिकॉर्ड करें या टाइप करें।",
+      err_transcription_failed: "आवाज़ प्रतिलेखन सेवा अनुपलब्ध थी। कृपया पुनः प्रयास करें या टाइप करें।",
+      step4_kicker: "चरण ४",
+      step4_title: "सहायक दस्तावेज़ अपलोड करें",
+      step4_sub: "प्रासंगिक दस्तावेज़ों की एक PDF (१० पृष्ठों तक) या PNG, JPEG, WEBP चित्र अपलोड करें।",
+      step4_pill: "केवल पूर्व-ऑडिट",
+      doc_notice: "अनधिकृत वातावरण में वास्तविक आधार नंबर, बैंक खाते, OTP या संवेदनशील दस्तावेज़ अपलोड न करें। यह प्रोटोटाइप फ़ाइल जेमिनी निष्कर्षण प्रदाता को भेजता है। केवल परीक्षण दस्तावेज़ों का उपयोग करें।",
+      label_citizen_name: "दस्तावेज़ों पर पूरा नाम (वैकल्पिक)",
+      placeholder_citizen_name: "प्रमाण पत्र पर मुद्रित नाम",
+      hint_citizen_name: "अपलोड किए गए प्रमाण पत्रों में नाम की समानता जांचने के लिए।",
+      label_choose_doc: "दस्तावेज़ चुनें",
+      hint_choose_doc: "PDF अधिकतम 15 MiB; चित्र अधिकतम 12 MiB. एक से अधिक प्रमाणपत्रों के लिए एक PDF बनाएं।",
+      btn_upload_doc: "अपलोड करें और पूर्व-ऑडिट करें",
+      btn_skip_doc: "दस्तावेज़ के बिना जारी रखें",
+      doc_select_prompt: "पहले PDF या छवि फ़ाइल चुनें।",
+      audit_findings_title: "ऑडिट निष्कर्ष",
+      rec_action_prefix: "अनुशंसित कार्रवाई: ",
+      step5_kicker: "चरण ५",
+      step5_title: "आपका प्रारंभिक मूल्यांकन",
+      step5_sub: "नियम जांच, दस्तावेज़ निष्कर्ष और तैयारी के चरणों का समेकित विवरण।",
+      step5_pill: "आधिकारिक निर्णय नहीं",
+      btn_run_assessment: "मूल्यांकन उत्पन्न करें",
+      btn_refresh_assessment: "मूल्यांकन रीफ़्रेश करें",
+      tile_scheme: "योजना",
+      tile_status: "स्थिति",
+      tile_review: "मानव समीक्षा",
+      tile_authenticity: "सत्यता",
+      heading_doc_findings: "इस मूल्यांकन को प्रभावित करने वाले दस्तावेज़ निष्कर्ष",
+      heading_plan: "आवेदन तैयारी योजना",
+      heading_actions: "अगली कार्रवाइयां",
+      notified_limit_prefix: "प्रकाशित अधिसूचित सीमा: ",
+      notified_limit_suffix: " दिन (वर्तमान सेवा अधिसूचना की पुष्टि करें)।",
+      assessment_success: "प्राथमिक मूल्यांकन तैयार किया गया। हर चेतावनी की समीक्षा करें और आधिकारिक योजना नियमों की पुष्टि करें।",
+      choose_scheme_first: "पहले एक योजना चुनें और साक्षात्कार पूरा करें।",
+      sidebar_journey_title: "आपकी यात्रा",
+      sidebar_selected_scheme: "चयनित योजना",
+      sidebar_interview: "साक्षात्कार",
+      sidebar_documents: "दस्तावेज़",
+      sidebar_assessment: "मूल्यांकन",
+      status_not_selected: "चयनित नहीं",
+      status_not_started: "शुरू नहीं हुआ",
+      status_not_uploaded: "अपलोड नहीं हुआ",
+      status_uploaded: "अपलोड किया गया",
+      status_not_generated: "उत्पन्न नहीं हुआ",
+      status_generated: "उत्पन्न किया गया",
+      sidebar_privacy_title: "गोपनीयता अनुस्मारक",
+      sidebar_privacy_1: "कभी भी OTP या पूरा आधार नंबर साझा न करें।",
+      sidebar_privacy_2: "केवल योजना के लिए आवश्यक जानकारी दें।",
+      sidebar_privacy_3: "स्थानीय परीक्षण के लिए सिंथेटिक दस्तावेज़ों का उपयोग करें।",
+      sidebar_privacy_4: "अपलोड की गई फ़ाइल बाइट्स को बनाए नहीं रखा जाता है।",
+      sidebar_reviewer_title: "समीक्षक सहायता चाहिए?",
+      sidebar_reviewer_desc: "स्थानीय समीक्षक अलग डैशबोर्ड के माध्यम से लंबित निष्कर्षों का निरीक्षण कर सकते हैं।",
+      sidebar_reviewer_link: "समीक्षक डैशबोर्ड खोलें ↗",
+      sidebar_saved_title: "सहेजी गई प्रगति",
+      sidebar_saved_desc: "रिफ़्रेश के बाद पुनर्प्राप्त करने के लिए प्रगति इस ब्राउज़र टैब में सहेजी जाती है। यह सुरक्षित या एन्क्रिप्टेड नहीं है। संवेदनशील डेटा यहाँ न रखें।",
+      btn_clear_saved: "सहेजी गई प्रगति हटाएं",
+      confirm_clear_saved: "क्या आप इस ब्राउज़र टैब में सहेजी गई प्रगति को हटाना चाहते हैं?",
+      storage_saved: "सत्र स्थिति इस टैब में सहेजी गई।",
+      storage_restored: "सत्र स्थिति पुनर्स्थापित की गई।",
+      storage_none: "इस टैब में कोई सहेजी गई प्रगति नहीं मिली।",
+      footer_text: "योजना मार्गदर्शक • स्थानीय विकास प्रोटोटाइप • आधिकारिक स्रोतों के माध्यम से सभी योजना नियमों और आवेदन आवश्यकताओं की पुष्टि करें।",
+      please_wait: "कृपया प्रतीक्षा करें…"
+    }
+  };
+
+  const state = {
+    schemes: [],
+    evaluations: {},        // scheme_id -> EligibilityResult
+    discoveryProfile: null, // in-memory only!
+    selectedScheme: null,
+    threadId: null,
+    language: 'en',
+    interviewMode: 'voice', // 'voice' | 'typed'
+    interviewComplete: false,
+    currentQuestion: null,
+    reviewId: null,
+    assessment: null,
+    storageWarningShown: false
+  };
+
+  // Push-to-talk voice recording state (IN-MEMORY ONLY; NEVER PERSISTED IN STORAGE)
+  let activeMediaRecorder = null;
+  let activeMediaStream = null;
+  let activeAudioChunks = [];
+  let recordingIntervalTimer = null;
+  let recordingSeconds = 0;
+  const MAX_RECORDING_DURATION = 60; // 60 seconds max
+
+  // Continuous Conversational Voice Interview State (IN-MEMORY ONLY; NEVER PERSISTED IN STORAGE)
+  let continuousVoiceActive = false;
+  let continuousVoicePaused = false;
+  let continuousVoiceState = 'IDLE'; // 'IDLE' | 'REQUESTING' | 'LISTENING' | 'RECORDING' | 'TRANSCRIBING' | 'SUBMITTING' | 'ACCEPTED' | 'UNCERTAIN' | 'PAUSED'
+  let continuousStream = null;
+  let continuousAudioContext = null;
+  let continuousAnalyser = null;
+  let continuousRecorder = null;
+  let continuousChunks = [];
+  let continuousVadInterval = null;
+  let continuousCycleStart = 0;
+  let continuousRecognizedText = '';
+  let continuousUncertainReason = '';
+  let continuousMimeType = 'audio/webm';
+  let continuousFileExt = 'webm';
+  let speechStartTimestamp = 0;
+  let lastSpeechTimestamp = 0;
+  const SILENCE_THRESHOLD_MS = 1500; // ~1.5s of silence after speech ends answer segment
+  const MIN_SPEECH_MS = 400; // minimum valid speech duration (reject brief clicks)
+  const MAX_ANSWER_MS = 25000; // 25s maximum per answer segment
+  const RMS_SPEECH_TRIGGER = 0.028; // RMS onset trigger
+  const RMS_SPEECH_CONTINUE = 0.018; // RMS continue trigger
+
+  const $ = (id) => document.getElementById(id);
+  let sessionStatusNode = null;
+
+  function t(key, fallback = '') {
+    const lang = state.language || 'en';
+    return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) ||
+           (TRANSLATIONS['en'] && TRANSLATIONS['en'][key]) ||
+           fallback || key;
+  }
+
+  function setMessage(id, text, kind = 'info') {
+    const node = $(id);
+    if (!node) return;
+    node.replaceChildren();
+    if (!text) return;
+
+    const div = document.createElement('div');
+    div.className = `notice ${kind}`;
+    div.textContent = text;
+    node.append(div);
+  }
+
+  function textNode(tag, text, className) {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    el.textContent = text ?? '';
+    return el;
+  }
+
+  function setSessionStatus(message, warning = false) {
+    if (!sessionStatusNode) return;
+    sessionStatusNode.textContent = message;
+    sessionStatusNode.className = warning ? 'notice warn' : 'tiny muted';
+  }
+
+  function applyLanguageToUI() {
+    const lang = state.language || 'en';
+    document.documentElement.lang = lang;
+
+    // Update all elements with data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const val = t(key);
+      if (val) {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = val;
+        } else {
+          el.textContent = val;
+        }
+      }
+    });
+
+    // Update placeholders and dynamic labels
+    if ($('scheme-search-input')) $('scheme-search-input').placeholder = t('search_placeholder');
+    if ($('citizen-name')) $('citizen-name').placeholder = t('placeholder_citizen_name');
+    if ($('language')) $('language').value = lang;
+
+    // Re-render schemes if loaded
+    if (state.schemes && state.schemes.length) {
+      renderSchemes();
+    }
+
+    // Re-render current question if active
+    if (state.currentQuestion) {
+      renderQuestion(state.currentQuestion);
+    }
+
+    // Re-render assessment if generated
+    if (state.assessment) {
+      renderAssessment(state.assessment);
+    }
+
+    updateSidebar();
+  }
+
+  function installSessionControls() {
+    const sideColumn = document.querySelector('.sidecol');
+    if (!sideColumn) return;
+
+    const sessionCard = document.createElement('div');
+    sessionCard.className = 'side-card';
+    sessionCard.append(textNode('h3', t('sidebar_saved_title')));
+    sessionCard.append(textNode(
+      'p',
+      t('sidebar_saved_desc')
+    ));
+
+    sessionStatusNode = textNode(
+      'p',
+      t('storage_none'),
+      'tiny muted'
+    );
+    sessionStatusNode.setAttribute('aria-live', 'polite');
+
+    const clearButton = document.createElement('button');
+    clearButton.type = 'button';
+    clearButton.className = 'btn btn-outline';
+    clearButton.textContent = t('btn_clear_saved');
+    clearButton.style.marginTop = '8px';
+
+    clearButton.addEventListener('click', () => {
+      const confirmed = window.confirm(t('confirm_clear_saved'));
+      if (!confirmed) return;
+
+      try {
+        sessionStorage.removeItem(SESSION_KEY);
+        window.location.reload();
+      } catch (error) {
+        setSessionStatus('Unable to clear browser session storage.', true);
+      }
+    });
+
+    sessionCard.append(sessionStatusNode, clearButton);
+    sideColumn.append(sessionCard);
+  }
+
+  function saveSession() {
+    // STRICT STORAGE ALLOWLIST: Only non-sensitive operational identifiers are stored
+    // Audio, speech transcripts and citizen PII are NEVER written to browser storage!
+    const snapshot = {
+      version: 1,
+      selectedSchemeId: state.selectedScheme?.scheme_id || null,
+      threadId: state.threadId,
+      language: state.language,
+      interviewComplete: state.interviewComplete,
+      reviewId: state.reviewId || null,
+      financialYear: $('financial-year')?.value || '2026-27'
+    };
+
+    try {
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(snapshot));
+      setSessionStatus(t('storage_saved'));
+      return true;
+    } catch (error) {
+      setSessionStatus('Could not save progress. Storage may be full.', true);
+      return false;
+    }
+  }
+
+  async function restoreSession() {
+    let saved = null;
+    try {
+      const raw = sessionStorage.getItem(SESSION_KEY);
+      saved = raw ? JSON.parse(raw) : null;
+    } catch (error) {
+      setSessionStatus('Could not read saved browser progress.', true);
+      renderSchemes();
+      updateSidebar();
+      return;
+    }
+
+    if (!saved || saved.version !== 1) {
+      renderSchemes();
+      updateSidebar();
+      setSessionStatus(t('storage_none'));
+      return;
+    }
+
+    state.selectedScheme = state.schemes.find(
+      scheme => scheme.scheme_id === saved.selectedSchemeId
+    ) || null;
+    state.threadId = saved.threadId || null;
+    state.language = saved.language || 'en';
+    state.interviewComplete = Boolean(saved.interviewComplete);
+    state.reviewId = saved.reviewId || null;
+
+    if ($('financial-year')) {
+      $('financial-year').value = saved.financialYear || '2026-27';
+    }
+    if ($('language')) {
+      $('language').value = state.language;
+    }
+
+    applyLanguageToUI();
+    renderSchemes();
+
+    if (state.threadId) {
+      showPanel('interview-panel');
+      if (state.interviewComplete) {
+        handleInterviewResponse({ complete: true });
+        showPanel('document-panel');
+        showPanel('assessment-panel');
+        $('run-assessment')?.classList.remove('hidden');
+        updateProgress(4);
+      } else {
+        try {
+          const rec = await api(`/interview/${encodeURIComponent(state.threadId)}`);
+          if (rec.complete) {
+            handleInterviewResponse({ complete: true });
+            showPanel('document-panel');
+            showPanel('assessment-panel');
+            $('run-assessment')?.classList.remove('hidden');
+            updateProgress(4);
+          } else if (rec.question) {
+            $('interview-state').textContent = t('interview_in_progress');
+            renderQuestion(rec.question);
+            updateProgress(3);
+          }
+        } catch (err) {
+          setMessage(
+            'interview-message',
+            'Interview session expired or recovery unavailable. Start a new interview.',
+            'warn'
+          );
+        }
+      }
+    }
+
+    if (state.reviewId) {
+      showPanel('document-panel');
+      try {
+        const reviewData = await api(`/documents/reviews/${encodeURIComponent(state.reviewId)}`);
+        if (reviewData) {
+          renderUploadResult(reviewData);
+          updateProgress(4);
+        }
+      } catch (err) {
+        console.info('Document review recovery not available in this environment.');
+      }
+    }
+
+    updateSidebar();
+    setSessionStatus(t('storage_restored'));
+  }
+
+  function setBusy(button, busy, label) {
+    if (!button) return;
+    button.disabled = busy;
+    button.textContent = busy ? t('please_wait') : label;
+  }
+
+  async function api(url, options = {}) {
+    const response = await fetch(url, options);
+    const raw = await response.text();
+    let data;
+    try {
+      data = raw ? JSON.parse(raw) : {};
+    } catch {
+      data = { detail: raw || `HTTP ${response.status}` };
+    }
+    if (!response.ok) {
+      const detail = typeof data.detail === 'string'
+        ? data.detail
+        : JSON.stringify(data.detail || data);
+      throw new Error(detail || `Request failed (${response.status})`);
+    }
+    return data;
+  }
+
+  function updateProgress(step) {
+    document.querySelectorAll('[data-progress]').forEach(el => {
+      el.classList.toggle('active', Number(el.dataset.progress) <= step);
+    });
+  }
+
+  function updateSidebar() {
+    $('side-scheme').textContent = state.selectedScheme?.name || t('status_not_selected');
+    $('side-interview').textContent = state.interviewComplete
+      ? t('interview_completed')
+      : state.threadId ? t('interview_in_progress') : t('status_not_started');
+    $('side-documents').textContent = state.reviewId ? t('status_uploaded') : t('status_not_uploaded');
+    $('side-assessment').textContent = state.assessment ? t('status_generated') : t('status_not_generated');
+  }
+
+  function showPanel(id) {
+    const p = $(id);
+    if (p) p.classList.remove('hidden');
+  }
+
+  function validateOfficialSourceUrl(url) {
+    if (!url || typeof url !== 'string') return null;
+    try {
+      const parsed = new URL(url);
+      if (parsed.protocol !== 'https:') return null;
+      const host = parsed.hostname.toLowerCase();
+      if (host.endsWith('.gov.in') || host.endsWith('.nic.in') || host.endsWith('.digitalindia.gov.in')) {
+        return parsed.href;
+      }
+    } catch {
+      return null;
+    }
+    return null;
+  }
+
+  function getDiscoveryProfile() {
+    const profile = {};
+    const ageVal = $('discovery-age')?.value?.trim();
+    if (ageVal) {
+      const ageNum = parseInt(ageVal, 10);
+      if (!isNaN(ageNum) && ageNum >= 0 && ageNum <= 120) {
+        profile.age_years = ageNum;
+      }
+    }
+
+    const genderVal = $('discovery-gender')?.value;
+    if (genderVal === 'female' || genderVal === 'male' || genderVal === 'other') {
+      profile.gender = genderVal;
+    }
+
+    const stateVal = $('discovery-state')?.value;
+    if (stateVal === 'maharashtra') {
+      profile.resident_state = 'Maharashtra';
+    } else if (stateVal === 'other') {
+      profile.resident_state = 'Other state';
+    }
+
+    const incomeVal = $('discovery-income')?.value?.trim();
+    if (incomeVal) {
+      const incomeNum = parseInt(incomeVal.replace(/,/g, ''), 10);
+      if (!isNaN(incomeNum) && incomeNum >= 0) {
+        profile.annual_family_income = incomeNum;
+      }
+    }
+
+    const bankVal = $('discovery-aadhaar-bank')?.value;
+    if (bankVal === 'yes') profile.aadhaar_linked_bank_account = true;
+    else if (bankVal === 'no') profile.aadhaar_linked_bank_account = false;
+
+    const bplVal = $('discovery-bpl')?.value;
+    if (bplVal === 'yes') profile.bpl = true;
+    else if (bplVal === 'no') profile.bpl = false;
+
+    const pensionVal = $('discovery-pension')?.value;
+    if (pensionVal === 'yes') profile.receiving_other_pension = true;
+    else if (pensionVal === 'no') profile.receiving_other_pension = false;
+
+    return profile;
+  }
+
+  async function evaluateProfileSchemes() {
+    const btn = $('btn-discover-schemes');
+    setBusy(btn, true, t('btn_discover'));
+    setMessage('profile-message', '');
+    try {
+      const profile = getDiscoveryProfile();
+      state.discoveryProfile = profile;
+      const lang = state.language || 'en';
+      const results = await api(`/eligibility/evaluate?language=${encodeURIComponent(lang)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profile)
+      });
+      state.evaluations = {};
+      results.forEach(res => {
+        state.evaluations[res.scheme_id] = res;
+      });
+      renderSchemes();
+      updateProgress(2);
+      $('scheme-panel').scrollIntoView({ behavior: 'smooth' });
+      const total = results.length;
+      setMessage(
+        'profile-message',
+        `Evaluated ${total} schemes based on your profile.`,
+        'success'
+      );
+    } catch (err) {
+      setMessage('profile-message', `Evaluation failed: ${err.message}`, 'error');
+    } finally {
+      setBusy(btn, false, t('btn_discover'));
+    }
+  }
+
+  function browseAllSchemes() {
+    state.discoveryProfile = {};
+    renderSchemes();
+    updateProgress(2);
+    $('scheme-panel').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function computeSchemeTrust(scheme, lang) {
+    let status = 'draft_candidate';
+    if (scheme.rule_status === 'retired') {
+      status = 'expired_or_superseded';
+    } else if (scheme.rule_status === 'active' && scheme.publication_authorized) {
+      status = 'active';
+    } else if (scheme.scheme_id && (scheme.scheme_id.startsWith('demo-') || scheme.approved_by === 'local_demo_fixture_only')) {
+      status = 'active';
+    } else if (scheme.publication_authorized) {
+      status = 'publication_authorized';
+    } else if (scheme.rule_status === 'reviewed') {
+      status = 'internally_reviewed';
+    } else {
+      const hasGR = (scheme.sources || []).some(s =>
+        ['government_resolution', 'official_notification', 'official_scheme_page'].includes(s.source_kind) &&
+        s.evidence_sha256 && s.evidence_sha256.length === 64
+      );
+      const hasReviewedEvidence = (scheme.evidence || []).some(e =>
+        ['analyst_reviewed', 'legal_approved'].includes(e.verification_status)
+      );
+      if (hasReviewedEvidence) {
+        status = 'internally_reviewed';
+      } else if (hasGR) {
+        status = 'source_verified';
+      } else if (scheme.rule_status === 'draft') {
+        status = 'draft_candidate';
+      } else {
+        status = 'under_review';
+      }
+    }
+
+    const BADGE_MAP = {
+      en: {
+        draft_candidate: { label: 'Draft candidate', color: 'trust-amber', desc: 'Preliminary draft record under initial compilation. Not authorized for official evaluation.' },
+        under_review: { label: 'Under review', color: 'trust-amber', desc: 'Under active policy analysis and departmental rule verification.' },
+        source_verified: { label: 'Source verified', color: 'trust-blue', desc: 'Primary Government Resolution or guideline identified, excerpted, and cryptographic hash verified.' },
+        internally_reviewed: { label: 'Internally reviewed', color: 'trust-purple', desc: 'Internal policy rules reviewed by research team; pending administrative publication sign-off.' },
+        publication_authorized: { label: 'Publication authorised', color: 'trust-teal', desc: 'Authorised by catalogue administration for eligibility testing.' },
+        active: { label: 'Active for evaluation', color: 'trust-green', desc: 'Operative rule in active catalogue. Note: Preliminary results are not an official government entitlement.' },
+        expired_or_superseded: { label: 'Expired / superseded', color: 'trust-slate', desc: 'Rule superseded by later government resolution or financial year cycle ended.' }
+      },
+      mr: {
+        draft_candidate: { label: 'मसुदा उमेदवार (अंतिम नाही)', color: 'trust-amber', desc: 'प्राथमिक मसुदा नोंद; संकलन सुरू आहे. अधिकृत मूल्यांकनासाठी प्राधिकृत नाही.' },
+        under_review: { label: 'पुनरावलोकनाधीन (तपासणी सुरू)', color: 'trust-amber', desc: 'धोरण विश्लेषक व प्रशासकीय नियमांची सक्रिय पडताळणी सुरू आहे.' },
+        source_verified: { label: 'अधिकृत स्रोत पडताळित', color: 'trust-blue', desc: 'मूळ शासन निर्णय उपलब्ध असून डिजिटल परिच्छेद जुळला आहे.' },
+        internally_reviewed: { label: 'अंतर्गत पुनरावलोकन पूर्ण', color: 'trust-purple', desc: 'संशोधन चमूने अंतर्गत धोरण व अटी तपासल्या आहेत; अंतिम स्वाक्षरी प्रलंबित.' },
+        publication_authorized: { label: 'प्रकाशन प्राधिकृत', color: 'trust-teal', desc: 'पात्रता चाचणीसाठी सूची प्रशासनाने प्रकाशनास मान्यता दिली आहे.' },
+        active: { label: 'मूल्यमापनासाठी सक्रिय', color: 'trust-green', desc: 'सक्रिय सूचीतील लागू नियम. सूचना: प्राथमिक निकाल ही सरकारी मंजुरी नव्हे.' },
+        expired_or_superseded: { label: 'मुदत संपलेली / अधिक्रमित', color: 'trust-slate', desc: 'पुढील शासन निर्णयाद्वारे नियम बदलला आहे किंवा कालावधी समाप्त झाला आहे.' }
+      },
+      hi: {
+        draft_candidate: { label: 'प्रारूप उम्मीदवार (अंतिम नहीं)', color: 'trust-amber', desc: 'प्रारंभिक प्रारूप रिकॉर्ड; संकलन जारी है। आधिकारिक मूल्यांकन हेतु अधिकृत नहीं।' },
+        under_review: { label: 'समीक्षाधीन (जांच जारी)', color: 'trust-amber', desc: 'नीति विश्लेषक एवं विभागीय नियमों की सक्रिय जांच जारी है।' },
+        source_verified: { label: 'आधिकारिक स्रोत सत्यापित', color: 'trust-blue', desc: 'मूल शासन निर्णय उपलब्ध हैं और डिजिटल अंश संरेखित है।' },
+        internally_reviewed: { label: 'आंतरिक समीक्षा पूर्ण', color: 'trust-purple', desc: 'अनुसंधान दल द्वारा नीति व शर्तों की समीक्षा पूर्ण; प्रकाशन अनुमोदन लंबित।' },
+        publication_authorized: { label: 'प्रकाशन अधिकृत', color: 'trust-teal', desc: 'पात्रता परीक्षण हेतु कैटलॉग प्रशासन द्वारा प्रकाशन स्वीकृत।' },
+        active: { label: 'मूल्यांकन हेतु सक्रिय', color: 'trust-green', desc: 'सक्रिय कैटलॉग नियम। सूचना: प्रारंभिक परिणाम सरकारी स्वीकृति नहीं है।' },
+        expired_or_superseded: { label: 'अवधि समाप्त / अधिक्रमित', color: 'trust-slate', desc: 'परवर्ती शासन निर्णय द्वारा नियम संशोधित या वित्तीय समयावधि समाप्त।' }
+      }
+    };
+
+    const currentLangMap = BADGE_MAP[lang] || BADGE_MAP.en;
+    const badgeInfo = currentLangMap[status] || BADGE_MAP.en[status];
+
+    let effFrom = null, effUntil = null;
+    (scheme.evidence || []).forEach(ev => {
+      if (ev.effective_from && (!effFrom || ev.effective_from < effFrom)) effFrom = ev.effective_from;
+      if (ev.effective_until && (!effUntil || ev.effective_until > effUntil)) effUntil = ev.effective_until;
+    });
+
+    let effDisplay = '';
+    if (effFrom && effUntil) {
+      effDisplay = `${effFrom} → ${effUntil}`;
+    } else if (effFrom) {
+      effDisplay = `${effFrom} (${lang === 'mr' ? 'चालू' : (lang === 'hi' ? 'प्रभावी' : 'Ongoing')})`;
+    } else {
+      effDisplay = lang === 'mr' ? 'वर्तमान परिपत्रकानुसार' : (lang === 'hi' ? 'वर्तमान परिपत्रक अनुसार' : 'Current circulars');
+    }
+
+    let lastVerDisplay = '';
+    if (scheme.last_verified_at) {
+      try {
+        const d = new Date(scheme.last_verified_at);
+        lastVerDisplay = d.toISOString().split('T')[0];
+      } catch (_) {
+        lastVerDisplay = String(scheme.last_verified_at);
+      }
+    }
+
+    return {
+      status,
+      badgeLabel: badgeInfo.label,
+      badgeColor: badgeInfo.color,
+      badgeDesc: badgeInfo.desc,
+      effDisplay,
+      lastVerDisplay
+    };
+  }
+
+  function renderSchemes() {
+    const list = $('scheme-list');
+    list.replaceChildren();
+
+    const deptFilter = $('scheme-dept-filter');
+    if (deptFilter && deptFilter.options.length <= 1) {
+      const depts = new Set();
+      state.schemes.forEach(s => { if (s.department) depts.add(s.department); });
+      depts.forEach(dept => {
+        const opt = document.createElement('option');
+        opt.value = dept;
+        opt.textContent = dept;
+        deptFilter.append(opt);
+      });
+    }
+
+    const searchQuery = ($('scheme-search-input')?.value || '').trim().toLowerCase();
+    const selectedDept = $('scheme-dept-filter')?.value || '';
+    const selectedStatus = $('scheme-status-filter')?.value || '';
+    const selectedTrust = $('scheme-trust-filter')?.value || '';
+
+    const filtered = state.schemes.filter(scheme => {
+      const evalRes = state.evaluations[scheme.scheme_id];
+      const trust = computeSchemeTrust(scheme, state.language);
+      if (selectedDept && scheme.department !== selectedDept) return false;
+      if (selectedStatus && evalRes && evalRes.status !== selectedStatus) return false;
+      if (selectedTrust && trust.status !== selectedTrust) return false;
+      if (searchQuery) {
+        const text = `${scheme.name} ${scheme.department || ''} ${scheme.summary || ''} ${(scheme.benefits || []).join(' ')}`.toLowerCase();
+        if (!text.includes(searchQuery)) return false;
+      }
+      return true;
+    });
+
+    $('scheme-count').textContent = t('scheme_count_text')
+      .replace('{count}', filtered.length)
+      .replace('{total}', state.schemes.length);
+
+    if (!filtered.length) {
+      list.append(textNode('p', t('no_schemes_found'), 'muted'));
+      return;
+    }
+
+    filtered.forEach(scheme => {
+      const evalRes = state.evaluations[scheme.scheme_id];
+      const trust = computeSchemeTrust(scheme, state.language);
+      const card = document.createElement('article');
+      card.className = 'scheme-card' + (
+        state.selectedScheme?.scheme_id === scheme.scheme_id ? ' selected' : ''
+      );
+
+      const head = document.createElement('div');
+      head.style.display = 'flex';
+      head.style.justifyContent = 'space-between';
+      head.style.alignItems = 'flex-start';
+      head.style.gap = '8px';
+
+      head.append(textNode('h3', scheme.name || scheme.scheme_id));
+
+      const badgesWrap = document.createElement('div');
+      badgesWrap.style.display = 'flex';
+      badgesWrap.style.flexDirection = 'column';
+      badgesWrap.style.alignItems = 'flex-end';
+      badgesWrap.style.gap = '4px';
+
+      const trustPill = textNode('span', trust.badgeLabel, `pill ${trust.badgeColor}`);
+      trustPill.title = trust.badgeDesc;
+      badgesWrap.append(trustPill);
+
+      if (evalRes) {
+        let statusClass = 'pill-unknown';
+        let statusLabel = t('status_needs_info');
+        if (evalRes.status === 'eligible') {
+          statusClass = 'pill-matched';
+          statusLabel = t('status_eligible');
+        } else if (evalRes.status === 'ineligible') {
+          statusClass = 'pill-failed';
+          statusLabel = t('status_ineligible');
+        } else if (evalRes.status === 'needs_review') {
+          statusClass = 'pill-unknown';
+          statusLabel = t('status_needs_review');
+        }
+        badgesWrap.append(textNode('span', statusLabel, `pill ${statusClass}`));
+      }
+      head.append(badgesWrap);
+      card.append(head);
+
+      if (scheme.department) card.append(textNode('p', scheme.department, 'tiny muted'));
+      if (scheme.summary) card.append(textNode('p', scheme.summary));
+
+      // Phase 4.5: Citizen Trust and Verification Interface Box
+      const trustBox = document.createElement('div');
+      trustBox.className = 'trust-box';
+      trustBox.style.background = '#f8fafc';
+      trustBox.style.border = '1px solid #e2e8f0';
+      trustBox.style.borderRadius = '10px';
+      trustBox.style.padding = '10px 12px';
+      trustBox.style.margin = '8px 0';
+
+      const trustMetaRow = document.createElement('div');
+      trustMetaRow.style.display = 'flex';
+      trustMetaRow.style.justifyContent = 'space-between';
+      trustMetaRow.style.alignItems = 'center';
+      trustMetaRow.style.flexWrap = 'wrap';
+      trustMetaRow.style.gap = '6px';
+      trustMetaRow.style.fontSize = '12px';
+
+      const statusDescSpan = document.createElement('span');
+      statusDescSpan.style.color = 'var(--navy)';
+      statusDescSpan.style.fontWeight = '600';
+      statusDescSpan.textContent = `🛡️ ${trust.badgeLabel}: ${trust.badgeDesc}`;
+      trustMetaRow.append(statusDescSpan);
+
+      const datesSpan = document.createElement('span');
+      datesSpan.style.color = 'var(--muted)';
+      datesSpan.style.fontSize = '11px';
+      const verText = trust.lastVerDisplay ? `${t('trust_last_verified_prefix')}${trust.lastVerDisplay}` : t('trust_not_verified');
+      datesSpan.textContent = `📅 ${t('trust_effective_prefix')}${trust.effDisplay} | ${verText}`;
+      trustMetaRow.append(datesSpan);
+      trustBox.append(trustMetaRow);
+
+      if (scheme.sources && scheme.sources.length) {
+        const srcHeading = document.createElement('div');
+        srcHeading.className = 'meta-heading';
+        srcHeading.style.marginTop = '8px';
+        srcHeading.textContent = `📜 ${t('trust_sources_heading')}`;
+        trustBox.append(srcHeading);
+
+        const srcList = document.createElement('div');
+        srcList.style.display = 'flex';
+        srcList.style.flexDirection = 'column';
+        srcList.style.gap = '4px';
+        srcList.style.marginTop = '4px';
+
+        scheme.sources.forEach(src => {
+          const sItem = document.createElement('div');
+          sItem.style.fontSize = '11px';
+          const validUrl = validateOfficialSourceUrl(src.source_url);
+          const linkTag = validUrl
+            ? `<a href="${validUrl}" target="_blank" rel="noopener" style="color:var(--teal); font-weight:700;">${src.source_name || 'Official Reference'} ↗</a>`
+            : `<strong>${src.source_name}</strong>`;
+          const sectionTag = src.page_or_section ? ` <span style="color:var(--muted);">(${src.page_or_section})</span>` : '';
+          const dateTag = src.retrieved_at ? ` <span style="color:#8a99a8; font-size:10px;">[Retrieved ${String(src.retrieved_at).split('T')[0]}]</span>` : '';
+          sItem.innerHTML = `• ${linkTag}${sectionTag}${dateTag}`;
+          srcList.append(sItem);
+        });
+        trustBox.append(srcList);
+      }
+
+      const discP = document.createElement('p');
+      discP.style.fontSize = '11px';
+      discP.style.color = '#75551b';
+      discP.style.background = '#fff8e6';
+      discP.style.border = '1px solid #fae6b8';
+      discP.style.borderRadius = '6px';
+      discP.style.padding = '7px 9px';
+      discP.style.margin = '8px 0 2px';
+      discP.style.lineHeight = '1.4';
+      discP.textContent = t('trust_disclaimer');
+      trustBox.append(discP);
+
+      card.append(trustBox);
+
+      if (evalRes) {
+        if (evalRes.explanation) {
+          const exp = evalRes.explanation;
+
+          // Scheme verification state notice
+          if (exp.scheme_verification_label) {
+            const verBanner = document.createElement('div');
+            verBanner.className = 'notice ' + (exp.scheme_verification_status === 'verified_active' ? 'success' : 'warn');
+            verBanner.style.padding = '8px 12px';
+            verBanner.style.fontSize = '12px';
+            verBanner.style.fontWeight = '600';
+            verBanner.textContent = `ℹ️ ${exp.scheme_verification_label}`;
+            card.append(verBanner);
+          }
+
+          // Summary
+          if (exp.summary) {
+            const summaryP = document.createElement('p');
+            summaryP.style.fontWeight = '600';
+            summaryP.style.fontSize = '12px';
+            summaryP.style.color = 'var(--navy)';
+            summaryP.textContent = exp.summary;
+            card.append(summaryP);
+          }
+
+          // 1. Positive conditions (What appears satisfied)
+          if (exp.positive_conditions && exp.positive_conditions.length) {
+            const posHeading = document.createElement('div');
+            posHeading.className = 'meta-heading';
+            posHeading.style.color = '#1e6244';
+            posHeading.textContent = `✓ ${t('heading_positive_conditions')}`;
+            card.append(posHeading);
+
+            const posBox = document.createElement('div');
+            posBox.className = 'criteria-list';
+            exp.positive_conditions.forEach(cond => {
+              const chip = document.createElement('div');
+              chip.className = 'criteria-chip pill-matched';
+              chip.style.display = 'block';
+              chip.style.width = '100%';
+              chip.style.marginBottom = '4px';
+              chip.style.padding = '6px 10px';
+              chip.style.borderRadius = '8px';
+              
+              let html = `<strong>✓ ${cond.title}:</strong> ${cond.citizen_explanation}`;
+              if (cond.official_reference) {
+                html += ` <span style="font-size:10px; color:#2d6a4f;">(${cond.official_reference}${cond.page_or_section ? ' - ' + cond.page_or_section : ''})</span>`;
+              }
+              chip.innerHTML = html;
+              posBox.append(chip);
+            });
+            card.append(posBox);
+          }
+
+          // 2. Unmet conditions (What is not satisfied)
+          if (exp.unmet_conditions && exp.unmet_conditions.length) {
+            const unmetHeading = document.createElement('div');
+            unmetHeading.className = 'meta-heading';
+            unmetHeading.style.color = '#8d392d';
+            unmetHeading.textContent = `✗ ${t('heading_unmet_conditions')}`;
+            card.append(unmetHeading);
+
+            const unmetBox = document.createElement('div');
+            unmetBox.className = 'criteria-list';
+            exp.unmet_conditions.forEach(cond => {
+              const chip = document.createElement('div');
+              chip.className = 'criteria-chip pill-failed';
+              chip.style.display = 'block';
+              chip.style.width = '100%';
+              chip.style.marginBottom = '4px';
+              chip.style.padding = '6px 10px';
+              chip.style.borderRadius = '8px';
+              
+              let html = `<strong>✗ ${cond.title}:</strong> ${cond.citizen_explanation}`;
+              if (cond.official_reference) {
+                html += ` <span style="font-size:10px; color:#78281f;">(${cond.official_reference}${cond.page_or_section ? ' - ' + cond.page_or_section : ''})</span>`;
+              }
+              chip.innerHTML = html;
+              unmetBox.append(chip);
+            });
+            card.append(unmetBox);
+          }
+
+          // 3. Missing information (What remains unknown)
+          if (exp.missing_information && exp.missing_information.length) {
+            const missHeading = document.createElement('div');
+            missHeading.className = 'meta-heading';
+            missHeading.style.color = '#75551b';
+            missHeading.textContent = `? ${t('heading_missing_info')}`;
+            card.append(missHeading);
+
+            const missBox = document.createElement('div');
+            missBox.className = 'criteria-list';
+            exp.missing_information.forEach(cond => {
+              const chip = document.createElement('div');
+              chip.className = 'criteria-chip pill-unknown';
+              chip.style.display = 'block';
+              chip.style.width = '100%';
+              chip.style.marginBottom = '4px';
+              chip.style.padding = '6px 10px';
+              chip.style.borderRadius = '8px';
+              chip.innerHTML = `<strong>? ${cond.title}:</strong> ${cond.citizen_explanation}`;
+              missBox.append(chip);
+            });
+            card.append(missBox);
+          }
+
+          // 4. Next recommended action
+          if (exp.next_recommended_action) {
+            const actDiv = document.createElement('div');
+            actDiv.style.fontSize = '12px';
+            actDiv.style.color = 'var(--blue)';
+            actDiv.style.fontWeight = '600';
+            actDiv.style.margin = '6px 0';
+            actDiv.textContent = `👉 ${t('rec_action_prefix')}${exp.next_recommended_action}`;
+            card.append(actDiv);
+          }
+
+          // 5. Trust notices
+          if (exp.trust_notices && exp.trust_notices.length) {
+            const trustBox = document.createElement('div');
+            trustBox.style.fontSize = '11px';
+            trustBox.style.color = 'var(--muted)';
+            trustBox.style.borderTop = '1px solid var(--line)';
+            trustBox.style.paddingTop = '6px';
+            trustBox.style.marginTop = '6px';
+            trustBox.textContent = exp.trust_notices[0];
+            card.append(trustBox);
+          }
+
+        } else {
+          if (evalRes.status === 'needs_review') {
+            card.append(textNode('div', t('demo_rule_warn'), 'notice warn'));
+          }
+
+          if (evalRes.reason) {
+            card.append(textNode('p', evalRes.reason, 'tiny'));
+          }
+
+          const criteriaBox = document.createElement('div');
+          criteriaBox.className = 'criteria-list';
+
+          (evalRes.matched_conditions || []).forEach(cond => {
+            criteriaBox.append(textNode('span', `✓ ${cond}`, 'criteria-chip pill-matched'));
+          });
+          (evalRes.failed_conditions || []).forEach(cond => {
+            criteriaBox.append(textNode('span', `✗ ${cond}`, 'criteria-chip pill-failed'));
+          });
+          (evalRes.unknown_conditions || []).forEach(cond => {
+            criteriaBox.append(textNode('span', `? ${cond}`, 'criteria-chip pill-unknown'));
+          });
+          card.append(criteriaBox);
+        }
+      }
+
+      if (scheme.benefits && scheme.benefits.length) {
+        card.append(textNode('div', t('heading_benefits'), 'meta-heading'));
+        const bList = document.createElement('ul');
+        bList.style.margin = '2px 0 6px 16px';
+        bList.style.fontSize = '12px';
+        bList.style.color = 'var(--muted)';
+        scheme.benefits.forEach(b => {
+          const li = document.createElement('li');
+          li.textContent = b;
+          bList.append(li);
+        });
+        card.append(bList);
+      }
+
+      if (scheme.required_documents && scheme.required_documents.length) {
+        card.append(textNode('div', t('heading_documents'), 'meta-heading'));
+        const docsBox = document.createElement('div');
+        docsBox.className = 'criteria-list';
+        scheme.required_documents.forEach(d => {
+          docsBox.append(textNode('span', d, 'criteria-chip pill'));
+        });
+        card.append(docsBox);
+      }
+
+      const bottom = document.createElement('div');
+      bottom.className = 'card-bottom';
+      bottom.append(textNode('span', scheme.scheme_id, 'tiny muted'));
+
+      const btn = document.createElement('button');
+      const isSelected = state.selectedScheme?.scheme_id === scheme.scheme_id;
+      btn.className = 'btn ' + (isSelected ? 'btn-primary' : 'btn-secondary');
+      btn.textContent = isSelected ? t('btn_scheme_selected') : t('btn_select_scheme');
+      btn.addEventListener('click', () => {
+        selectSchemeAndStartInterview(scheme);
+      });
+      bottom.append(btn);
+      card.append(bottom);
+      list.append(card);
+    });
+  }
+
+  async function loadSchemes() {
+    try {
+      state.schemes = await api('/schemes');
+      restoreSession();
+      if (!state.schemes.length) {
+        setMessage('scheme-message', 'The catalogue is empty. Load scheme fixtures for local testing.', 'warn');
+      }
+    } catch (error) {
+      $('scheme-list').replaceChildren(
+        textNode('p', `Unable to load schemes: ${error.message}`, 'muted')
+      );
+    }
+  }
+
+  async function selectSchemeAndStartInterview(scheme) {
+    state.selectedScheme = scheme;
+    state.threadId = `citizen-${crypto.randomUUID()}`;
+    state.interviewComplete = false;
+    state.currentQuestion = null;
+    showPanel('interview-panel');
+    updateProgress(3);
+    updateSidebar();
+    $('interview-panel').scrollIntoView({ behavior: 'smooth' });
+
+    try {
+      const payload = {
+        thread_id: state.threadId,
+        language: state.language,
+        scheme_id: scheme.scheme_id,
+        profile: state.discoveryProfile || {}
+      };
+      const result = await api('/interview/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      handleInterviewResponse(result);
+      saveSession();
+    } catch (err) {
+      setMessage('interview-message', `Failed to start interview: ${err.message}`, 'error');
+    }
+  }
+
+  function stopMediaStreamTracks() {
+    if (activeMediaStream) {
+      try {
+        activeMediaStream.getTracks().forEach(track => track.stop());
+      } catch (err) {
+        console.warn('Error stopping audio tracks:', err);
+      }
+      activeMediaStream = null;
+    }
+  }
+
+  function cancelVoiceRecording() {
+    if (recordingIntervalTimer) {
+      clearInterval(recordingIntervalTimer);
+      recordingIntervalTimer = null;
+    }
+    if (activeMediaRecorder && activeMediaRecorder.state !== 'inactive') {
+      activeMediaRecorder.onstop = null; // discard onstop handler
+      try {
+        activeMediaRecorder.stop();
+      } catch (e) {}
+    }
+    activeMediaRecorder = null;
+    activeAudioChunks = [];
+    stopMediaStreamTracks();
+
+    const bar = $('voice-recording-bar');
+    if (bar) bar.classList.add('hidden');
+    const micBtn = $('btn-mic');
+    if (micBtn) {
+      micBtn.classList.remove('recording');
+      micBtn.disabled = false;
+    }
+    const input = $('interview-answer');
+    if (input) input.disabled = false;
+    const submitBtn = $('btn-submit-typed');
+    if (submitBtn) submitBtn.disabled = false;
+  }
+
+  function stopVoiceRecording() {
+    if (recordingIntervalTimer) {
+      clearInterval(recordingIntervalTimer);
+      recordingIntervalTimer = null;
+    }
+    if (activeMediaRecorder && activeMediaRecorder.state !== 'inactive') {
+      try {
+        activeMediaRecorder.stop();
+      } catch (e) {}
+    }
+    const bar = $('voice-recording-bar');
+    if (bar) bar.classList.add('hidden');
+    const micBtn = $('btn-mic');
+    if (micBtn) micBtn.classList.remove('recording');
+  }
+
+  async function startVoiceRecording() {
+    cancelVoiceRecording();
+    setMessage('interview-message', '');
+
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) {
+      setMessage('interview-message', t('err_mic_unsupported'), 'error');
+      return;
+    }
+
+    // Audio format negotiation
+    let selectedMime = 'audio/webm';
+    let fileExt = 'webm';
+    if (MediaRecorder.isTypeSupported('audio/webm;codecs=opus')) {
+      selectedMime = 'audio/webm;codecs=opus';
+      fileExt = 'webm';
+    } else if (MediaRecorder.isTypeSupported('audio/webm')) {
+      selectedMime = 'audio/webm';
+      fileExt = 'webm';
+    } else if (MediaRecorder.isTypeSupported('audio/mp4')) {
+      selectedMime = 'audio/mp4';
+      fileExt = 'mp4';
+    } else if (MediaRecorder.isTypeSupported('audio/ogg')) {
+      selectedMime = 'audio/ogg';
+      fileExt = 'ogg';
+    } else if (MediaRecorder.isTypeSupported('audio/wav')) {
+      selectedMime = 'audio/wav';
+      fileExt = 'wav';
+    }
+
+    try {
+      activeMediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (err) {
+      setMessage('interview-message', t('err_mic_denied'), 'error');
+      return;
+    }
+
+    activeAudioChunks = [];
+    try {
+      activeMediaRecorder = new MediaRecorder(activeMediaStream, { mimeType: selectedMime });
+    } catch (e) {
+      activeMediaRecorder = new MediaRecorder(activeMediaStream);
+      selectedMime = activeMediaRecorder.mimeType || 'audio/webm';
+    }
+
+    activeMediaRecorder.ondataavailable = (event) => {
+      if (event.data && event.data.size > 0) {
+        activeAudioChunks.push(event.data);
+      }
+    };
+
+    activeMediaRecorder.onstop = async () => {
+      stopMediaStreamTracks();
+      const chunks = activeAudioChunks;
+      activeAudioChunks = [];
+      activeMediaRecorder = null;
+
+      if (!chunks.length) {
+        setMessage('interview-message', t('err_transcription_empty'), 'warn');
+        return;
+      }
+
+      const audioBlob = new Blob(chunks, { type: selectedMime });
+      await processVoiceTranscription(audioBlob, fileExt, selectedMime);
+    };
+
+    activeMediaRecorder.start(250); // slices every 250ms
+    recordingSeconds = 0;
+
+    const bar = $('voice-recording-bar');
+    if (bar) bar.classList.remove('hidden');
+    const timer = $('recording-timer');
+    if (timer) timer.textContent = '00:00 / 01:00';
+    const micBtn = $('btn-mic');
+    if (micBtn) {
+      micBtn.classList.add('recording');
+      micBtn.disabled = true;
+    }
+    const input = $('interview-answer');
+    if (input) input.disabled = true;
+    const submitBtn = $('btn-submit-typed');
+    if (submitBtn) submitBtn.disabled = true;
+
+    recordingIntervalTimer = setInterval(() => {
+      recordingSeconds++;
+      const mins = String(Math.floor(recordingSeconds / 60)).padStart(2, '0');
+      const secs = String(recordingSeconds % 60).padStart(2, '0');
+      if (timer) timer.textContent = `${mins}:${secs} / 01:00`;
+      if (recordingSeconds >= MAX_RECORDING_DURATION) {
+        stopVoiceRecording();
+      }
+    }, 1000);
+  }
+
+  async function processVoiceTranscription(audioBlob, fileExt, mimeType) {
+    const notice = $('voice-transcribing-notice');
+    if (notice) notice.classList.remove('hidden');
+    setMessage('interview-message', '');
+
+    const bhashiniConsent = Boolean($('voice-bhashini-consent')?.checked);
+    const provider = bhashiniConsent ? 'bhashini' : 'whisper';
+    const consent = bhashiniConsent ? 'true' : 'false';
+
+    const formData = new FormData();
+    formData.append('file', audioBlob, `speech.${fileExt}`);
+
+    try {
+      const url = `/voice/transcribe?provider=${encodeURIComponent(provider)}&language=${encodeURIComponent(state.language)}&consent_to_cloud_processing=${consent}`;
+      const data = await api(url, {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!data.transcript || !data.transcript.trim()) {
+        setMessage('interview-message', t('err_transcription_empty'), 'warn');
+        restoreTypedInputState();
+        return;
+      }
+
+      // Display editable confirmation area. NEVER automatically submit unconfirmed transcript!
+      const confirmArea = $('transcript-confirmation-area');
+      const editInput = $('transcript-edit-input');
+      const metaSpan = $('transcript-meta');
+
+      if (editInput) editInput.value = data.transcript;
+      if (metaSpan) {
+        const confText = data.confidence != null ? `${Math.round(data.confidence * 100)}%` : 'N/A';
+        metaSpan.textContent = `${data.provider} • ${data.detected_language} • ${confText}`;
+      }
+      if (confirmArea) confirmArea.classList.remove('hidden');
+      editInput?.focus();
+
+    } catch (err) {
+      setMessage('interview-message', `${t('err_transcription_failed')} (${err.message})`, 'error');
+      restoreTypedInputState();
+    } finally {
+      if (notice) notice.classList.add('hidden');
+    }
+  }
+
+  function restoreTypedInputState() {
+    const input = $('interview-answer');
+    if (input) input.disabled = false;
+    const submitBtn = $('btn-submit-typed');
+    if (submitBtn) submitBtn.disabled = false;
+    const micBtn = $('btn-mic');
+    if (micBtn) {
+      micBtn.disabled = false;
+      micBtn.classList.remove('recording');
+    }
+  }
+
+  function stopContinuousVoiceSession() {
+    continuousVoiceActive = false;
+    continuousVoicePaused = false;
+    continuousVoiceState = 'IDLE';
+    if (continuousVadInterval) {
+      clearInterval(continuousVadInterval);
+      continuousVadInterval = null;
+    }
+    if (continuousRecorder && continuousRecorder.state !== 'inactive') {
+      continuousRecorder.onstop = null;
+      try { continuousRecorder.stop(); } catch (e) {}
+    }
+    continuousRecorder = null;
+    continuousChunks = [];
+    if (continuousAudioContext) {
+      try { continuousAudioContext.close(); } catch (e) {}
+      continuousAudioContext = null;
+      continuousAnalyser = null;
+    }
+    if (continuousStream) {
+      try {
+        continuousStream.getTracks().forEach(track => track.stop());
+      } catch (e) {}
+      continuousStream = null;
+    }
+  }
+
+  async function startContinuousVoiceSession() {
+    setMessage('interview-message', '');
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) {
+      setMessage('interview-message', t('err_mic_unsupported'), 'error');
+      return;
+    }
+
+    let selectedMime = 'audio/webm';
+    let fileExt = 'webm';
+    if (MediaRecorder.isTypeSupported('audio/webm;codecs=opus')) {
+      selectedMime = 'audio/webm;codecs=opus';
+      fileExt = 'webm';
+    } else if (MediaRecorder.isTypeSupported('audio/webm')) {
+      selectedMime = 'audio/webm';
+      fileExt = 'webm';
+    } else if (MediaRecorder.isTypeSupported('audio/mp4')) {
+      selectedMime = 'audio/mp4';
+      fileExt = 'mp4';
+    } else if (MediaRecorder.isTypeSupported('audio/ogg')) {
+      selectedMime = 'audio/ogg';
+      fileExt = 'ogg';
+    } else if (MediaRecorder.isTypeSupported('audio/wav')) {
+      selectedMime = 'audio/wav';
+      fileExt = 'wav';
+    }
+
+    continuousMimeType = selectedMime;
+    continuousFileExt = fileExt;
+    continuousVoiceState = 'REQUESTING';
+    if (state.currentQuestion) renderQuestion(state.currentQuestion);
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+      });
+      continuousStream = stream;
+      const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+      continuousAudioContext = new AudioCtxClass();
+      if (continuousAudioContext.state === 'suspended') {
+        await continuousAudioContext.resume();
+      }
+      const source = continuousAudioContext.createMediaStreamSource(stream);
+      continuousAnalyser = continuousAudioContext.createAnalyser();
+      continuousAnalyser.fftSize = 256;
+      continuousAnalyser.smoothingTimeConstant = 0.3;
+      source.connect(continuousAnalyser);
+
+      continuousVoiceActive = true;
+      continuousVoicePaused = false;
+      startContinuousListeningCycle();
+    } catch (err) {
+      continuousVoiceActive = false;
+      continuousVoiceState = 'IDLE';
+      setMessage('interview-message', t('err_mic_denied'), 'error');
+      if (state.currentQuestion) renderQuestion(state.currentQuestion);
+    }
+  }
+
+  function startContinuousListeningCycle() {
+    if (!continuousVoiceActive || continuousVoicePaused || state.interviewComplete || !state.currentQuestion) {
+      return;
+    }
+
+    continuousVoiceState = 'LISTENING';
+    continuousRecognizedText = '';
+    continuousUncertainReason = '';
+    if (state.currentQuestion) renderQuestion(state.currentQuestion);
+
+    if (continuousRecorder && continuousRecorder.state !== 'inactive') {
+      continuousRecorder.onstop = null;
+      try { continuousRecorder.stop(); } catch (e) {}
+    }
+    continuousChunks = [];
+
+    try {
+      continuousRecorder = new MediaRecorder(continuousStream, { mimeType: continuousMimeType });
+    } catch (e) {
+      continuousRecorder = new MediaRecorder(continuousStream);
+    }
+
+    continuousRecorder.ondataavailable = (e) => {
+      if (e.data && e.data.size > 0) continuousChunks.push(e.data);
+    };
+
+    continuousRecorder.start(100);
+    continuousCycleStart = Date.now();
+    speechStartTimestamp = 0;
+    lastSpeechTimestamp = 0;
+
+    startContinuousVadMonitor();
+  }
+
+  function startContinuousVadMonitor() {
+    if (continuousVadInterval) clearInterval(continuousVadInterval);
+
+    continuousVadInterval = setInterval(() => {
+      if (!continuousVoiceActive || continuousVoicePaused || !continuousAnalyser) {
+        clearInterval(continuousVadInterval);
+        continuousVadInterval = null;
+        return;
+      }
+
+      const buffer = new Uint8Array(continuousAnalyser.frequencyBinCount);
+      continuousAnalyser.getByteTimeDomainData(buffer);
+
+      let sumSquares = 0;
+      for (let i = 0; i < buffer.length; i++) {
+        const norm = (buffer[i] - 128) / 128;
+        sumSquares += norm * norm;
+      }
+      const rms = Math.sqrt(sumSquares / buffer.length);
+
+      drawVisualizerWave(buffer, rms);
+
+      const now = Date.now();
+
+      if (continuousVoiceState === 'LISTENING') {
+        if (rms >= RMS_SPEECH_TRIGGER) {
+          continuousVoiceState = 'RECORDING';
+          speechStartTimestamp = now;
+          lastSpeechTimestamp = now;
+          updateContinuousStatusDisplay();
+        } else if (now - continuousCycleStart > 18000) {
+          continuousChunks = [];
+          continuousCycleStart = now;
+        }
+      } else if (continuousVoiceState === 'RECORDING') {
+        if (rms >= RMS_SPEECH_CONTINUE) {
+          lastSpeechTimestamp = now;
+        }
+
+        const elapsedSpeech = now - speechStartTimestamp;
+        const elapsedSilence = now - lastSpeechTimestamp;
+
+        const timerEl = $('continuous-voice-timer');
+        if (timerEl) {
+          const secs = String(Math.floor(elapsedSpeech / 1000) % 60).padStart(2, '0');
+          timerEl.textContent = `00:${secs} / 00:25`;
+        }
+
+        if (elapsedSilence >= SILENCE_THRESHOLD_MS || elapsedSpeech >= MAX_ANSWER_MS) {
+          clearInterval(continuousVadInterval);
+          continuousVadInterval = null;
+
+          if (elapsedSpeech < MIN_SPEECH_MS) {
+            continuousChunks = [];
+            continuousVoiceState = 'LISTENING';
+            startContinuousListeningCycle();
+            return;
+          }
+
+          continuousVoiceState = 'TRANSCRIBING';
+          updateContinuousStatusDisplay();
+
+          if (continuousRecorder && continuousRecorder.state !== 'inactive') {
+            continuousRecorder.onstop = async () => {
+              const chunks = continuousChunks;
+              continuousChunks = [];
+              const blob = new Blob(chunks, { type: continuousMimeType });
+              await handleContinuousVoiceSegment(blob, continuousFileExt, continuousMimeType);
+            };
+            try { continuousRecorder.stop(); } catch (e) {}
+          }
+        }
+      }
+    }, 60);
+  }
+
+  function drawVisualizerWave(buffer, rms) {
+    const canvas = $('continuous-voice-visualizer');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = continuousVoiceState === 'RECORDING' ? '#dc2626' : '#0f766e';
+    ctx.beginPath();
+
+    const sliceWidth = canvas.width / buffer.length;
+    let x = 0;
+    for (let i = 0; i < buffer.length; i++) {
+      const v = buffer[i] / 128.0;
+      const y = (v * canvas.height) / 2;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+      x += sliceWidth;
+    }
+    ctx.lineTo(canvas.width, canvas.height / 2);
+    ctx.stroke();
+  }
+
+  function updateContinuousStatusDisplay() {
+    const radar = $('continuous-voice-radar');
+    const title = $('continuous-voice-title');
+    const sub = $('continuous-voice-sub');
+    const timer = $('continuous-voice-timer');
+
+    if (!radar || !title) return;
+
+    radar.className = 'voice-radar';
+    if (continuousVoiceState === 'LISTENING') {
+      radar.classList.add('listening');
+      radar.textContent = '🎤';
+      title.textContent = t('voice_status_listening');
+      if (sub) sub.textContent = '';
+      if (timer) timer.classList.add('hidden');
+    } else if (continuousVoiceState === 'RECORDING') {
+      radar.classList.add('recording');
+      radar.textContent = '🔴';
+      title.textContent = t('voice_status_speaking');
+      if (timer) timer.classList.remove('hidden');
+    } else if (continuousVoiceState === 'TRANSCRIBING') {
+      radar.classList.add('transcribing');
+      radar.textContent = '⏳';
+      title.textContent = t('voice_status_transcribing');
+      if (timer) timer.classList.add('hidden');
+    } else if (continuousVoiceState === 'SUBMITTING') {
+      radar.classList.add('transcribing');
+      radar.textContent = '⚙️';
+      title.textContent = t('voice_status_submitting');
+      if (timer) timer.classList.add('hidden');
+    } else if (continuousVoiceState === 'ACCEPTED') {
+      radar.classList.add('accepted');
+      radar.textContent = '✓';
+      title.textContent = t('voice_status_accepted');
+      if (sub) sub.textContent = `"${continuousRecognizedText}"`;
+      if (timer) timer.classList.add('hidden');
+    } else if (continuousVoiceState === 'PAUSED') {
+      radar.classList.add('paused');
+      radar.textContent = '⏸';
+      title.textContent = t('voice_status_paused');
+      if (timer) timer.classList.add('hidden');
+    }
+  }
+
+  let isContinuousVoiceSubmitting = false;
+
+  async function handleContinuousVoiceSegment(blob, fileExt, mimeType) {
+    if (isContinuousVoiceSubmitting) return;
+    if (!continuousVoiceActive || continuousVoicePaused) return;
+
+    isContinuousVoiceSubmitting = true;
+    continuousVoiceState = 'TRANSCRIBING';
+    updateContinuousStatusDisplay();
+
+    const bhashiniConsent = Boolean($('voice-bhashini-consent')?.checked);
+    const provider = bhashiniConsent ? 'bhashini' : 'whisper';
+    const consent = bhashiniConsent ? 'true' : 'false';
+
+    const formData = new FormData();
+    formData.append('file', blob, `speech.${fileExt}`);
+
+    try {
+      const url = `/voice/transcribe?provider=${encodeURIComponent(provider)}&language=${encodeURIComponent(state.language)}&consent_to_cloud_processing=${consent}`;
+      const data = await api(url, {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!data.transcript || !data.transcript.trim()) {
+        continuousVoiceState = 'LISTENING';
+        setMessage('interview-message', t('err_transcription_empty'), 'warn');
+        startContinuousListeningCycle();
+        return;
+      }
+
+      continuousRecognizedText = data.transcript.trim();
+      continuousVoiceState = 'SUBMITTING';
+      updateContinuousStatusDisplay();
+
+      const result = await api('/interview/answer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          thread_id: state.threadId,
+          answer: continuousRecognizedText,
+          language: state.language
+        })
+      });
+
+      if (result.question && result.question.validation_error) {
+        continuousVoiceState = 'UNCERTAIN';
+        continuousUncertainReason = result.question.validation_error;
+        if (state.currentQuestion) renderQuestion(state.currentQuestion);
+        return;
+      }
+
+      continuousVoiceState = 'ACCEPTED';
+      updateContinuousStatusDisplay();
+
+      handleInterviewResponse(result);
+
+      if (result.complete) {
+        stopContinuousVoiceSession();
+      } else {
+        setTimeout(() => {
+          if (continuousVoiceActive && !continuousVoicePaused) {
+            startContinuousListeningCycle();
+          }
+        }, 850);
+      }
+    } catch (err) {
+      continuousVoiceState = 'UNCERTAIN';
+      continuousUncertainReason = err.message;
+      if (state.currentQuestion) renderQuestion(state.currentQuestion);
+    } finally {
+      isContinuousVoiceSubmitting = false;
+    }
+  }
+
+  function renderQuestion(question) {
+    const area = $('question-area');
+    area.replaceChildren();
+    setMessage('interview-message', '');
+    cancelVoiceRecording();
+
+    if (!question) {
+      area.append(textNode('p', t('no_more_questions'), 'muted'));
+      return;
+    }
+
+    // Update Mode tabs
+    const tabVoice = $('tab-voice-mode');
+    const tabTyped = $('tab-typed-mode');
+    if (tabVoice && tabTyped) {
+      tabVoice.classList.toggle('active', state.interviewMode === 'voice');
+      tabTyped.classList.toggle('active', state.interviewMode === 'typed');
+    }
+
+    const box = document.createElement('div');
+    box.className = 'question-box';
+    box.append(textNode('div', `${t('interview_kicker_prefix')}${question.field || 'Applicant information'}`, 'step-kicker'));
+    box.append(textNode('h3', question.text || 'Please provide the requested information.'));
+
+    if (state.interviewMode === 'voice') {
+      // ------------------------------------------------------------------
+      // Continuous Voice Interview Stage
+      // ------------------------------------------------------------------
+      const stage = document.createElement('div');
+      stage.className = 'continuous-voice-stage';
+      stage.id = 'continuous-voice-stage';
+
+      if (!continuousVoiceActive && continuousVoiceState === 'IDLE') {
+        // Initial Ready State
+        const startBtn = document.createElement('button');
+        startBtn.type = 'button';
+        startBtn.id = 'btn-start-continuous-voice';
+        startBtn.className = 'btn btn-primary btn-lg';
+        startBtn.innerHTML = `🎤 <span>${t('btn_start_voice_interview')}</span>`;
+        startBtn.addEventListener('click', () => {
+          startContinuousVoiceSession();
+        });
+        stage.append(startBtn);
+
+        const readySub = textNode('p', t('voice_status_ready'), 'voice-stage-sub');
+        readySub.style.marginTop = '12px';
+        stage.append(readySub);
+      } else {
+        // Active Continuous Voice State Machine
+        const radarWrap = document.createElement('div');
+        radarWrap.className = 'voice-radar-wrap';
+
+        const radar = document.createElement('div');
+        radar.id = 'continuous-voice-radar';
+        radar.className = 'voice-radar';
+        radarWrap.append(radar);
+        stage.append(radarWrap);
+
+        const canvas = document.createElement('canvas');
+        canvas.id = 'continuous-voice-visualizer';
+        canvas.className = 'voice-visualizer-canvas';
+        canvas.width = 280;
+        canvas.height = 36;
+        stage.append(canvas);
+
+        const statusTitle = document.createElement('div');
+        statusTitle.id = 'continuous-voice-title';
+        statusTitle.className = 'voice-stage-title';
+        stage.append(statusTitle);
+
+        const statusSub = document.createElement('div');
+        statusSub.id = 'continuous-voice-sub';
+        statusSub.className = 'voice-stage-sub';
+        stage.append(statusSub);
+
+        const timerSpan = document.createElement('span');
+        timerSpan.id = 'continuous-voice-timer';
+        timerSpan.className = 'recording-timer hidden';
+        timerSpan.textContent = '00:00 / 00:25';
+        stage.append(timerSpan);
+
+        // Uncertain / Clarification Needed card
+        if (continuousVoiceState === 'UNCERTAIN') {
+          const card = document.createElement('div');
+          card.className = 'voice-clarification-card';
+
+          const cHead = document.createElement('strong');
+          cHead.textContent = t('voice_clarification_title');
+          cHead.style.color = '#9a3412';
+          card.append(cHead);
+
+          if (continuousUncertainReason) {
+            const errBox = textNode('div', continuousUncertainReason, 'notice warn');
+            errBox.style.margin = '8px 0';
+            card.append(errBox);
+          }
+
+          const editInput = document.createElement('input');
+          editInput.type = 'text';
+          editInput.className = 'answer-input';
+          editInput.id = 'voice-uncertain-input';
+          editInput.value = continuousRecognizedText;
+          editInput.style.margin = '8px 0';
+          card.append(editInput);
+
+          card.append(textNode('p', t('voice_clarification_hint'), 'tiny muted'));
+
+          const actRow = document.createElement('div');
+          actRow.className = 'actions';
+          actRow.style.marginTop = '10px';
+
+          const btnConfirm = document.createElement('button');
+          btnConfirm.type = 'button';
+          btnConfirm.className = 'btn btn-primary btn-sm';
+          btnConfirm.textContent = t('btn_confirm_submit');
+          btnConfirm.addEventListener('click', async () => {
+            const edited = editInput.value.trim();
+            if (!edited) {
+              editInput.focus();
+              return;
+            }
+            try {
+              const res = await api('/interview/answer', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  thread_id: state.threadId,
+                  answer: edited,
+                  language: state.language
+                })
+              });
+              if (res.question && res.question.validation_error) {
+                continuousUncertainReason = res.question.validation_error;
+                renderQuestion(state.currentQuestion);
+                return;
+              }
+              handleInterviewResponse(res);
+              if (res.complete) {
+                stopContinuousVoiceSession();
+              } else {
+                startContinuousListeningCycle();
+              }
+            } catch (e) {
+              continuousUncertainReason = e.message;
+              renderQuestion(state.currentQuestion);
+            }
+          });
+
+          const btnSpeak = document.createElement('button');
+          btnSpeak.type = 'button';
+          btnSpeak.className = 'btn btn-secondary btn-sm';
+          btnSpeak.textContent = t('btn_speak_again');
+          btnSpeak.addEventListener('click', () => {
+            continuousVoiceState = 'LISTENING';
+            startContinuousListeningCycle();
+          });
+
+          const btnSwitch = document.createElement('button');
+          btnSwitch.type = 'button';
+          btnSwitch.className = 'btn btn-outline btn-sm';
+          btnSwitch.textContent = t('btn_switch_typed');
+          btnSwitch.addEventListener('click', () => {
+            stopContinuousVoiceSession();
+            state.interviewMode = 'typed';
+            renderQuestion(state.currentQuestion);
+          });
+
+          actRow.append(btnConfirm, btnSpeak, btnSwitch);
+          card.append(actRow);
+          stage.append(card);
+        }
+
+        // Active Session Controls
+        const ctrlRow = document.createElement('div');
+        ctrlRow.className = 'voice-controls';
+
+        const pauseBtn = document.createElement('button');
+        pauseBtn.type = 'button';
+        pauseBtn.id = 'btn-pause-continuous-voice';
+        pauseBtn.className = 'btn btn-secondary btn-sm';
+        pauseBtn.textContent = continuousVoicePaused ? t('btn_resume_voice') : t('btn_pause_voice');
+        pauseBtn.addEventListener('click', () => {
+          if (continuousVoicePaused) {
+            continuousVoicePaused = false;
+            pauseBtn.textContent = t('btn_pause_voice');
+            startContinuousListeningCycle();
+          } else {
+            continuousVoicePaused = true;
+            pauseBtn.textContent = t('btn_resume_voice');
+            continuousVoiceState = 'PAUSED';
+            updateContinuousStatusDisplay();
+          }
+        });
+
+        const stopBtn = document.createElement('button');
+        stopBtn.type = 'button';
+        stopBtn.id = 'btn-stop-continuous-voice';
+        stopBtn.className = 'btn btn-outline btn-sm';
+        stopBtn.textContent = t('btn_stop_voice');
+        stopBtn.addEventListener('click', () => {
+          stopContinuousVoiceSession();
+          renderQuestion(state.currentQuestion);
+        });
+
+        const switchBtn = document.createElement('button');
+        switchBtn.type = 'button';
+        switchBtn.className = 'btn btn-outline btn-sm';
+        switchBtn.textContent = t('btn_switch_typed');
+        switchBtn.addEventListener('click', () => {
+          stopContinuousVoiceSession();
+          state.interviewMode = 'typed';
+          renderQuestion(state.currentQuestion);
+        });
+
+        ctrlRow.append(pauseBtn, stopBtn, switchBtn);
+        stage.append(ctrlRow);
+
+        updateContinuousStatusDisplay();
+      }
+
+      box.append(stage);
+
+    } else {
+      // ------------------------------------------------------------------
+      // Typed Input Mode (with Push-to-Talk Mic Dictation)
+      // ------------------------------------------------------------------
+      // 1. Voice recording bar (hidden initially)
+      const voiceBar = document.createElement('div');
+      voiceBar.id = 'voice-recording-bar';
+      voiceBar.className = 'voice-bar hidden';
+      voiceBar.setAttribute('aria-live', 'polite');
+
+      const indWrap = document.createElement('div');
+      indWrap.className = 'recording-indicator';
+      indWrap.append(textNode('span', '', 'recording-pulse'));
+      indWrap.append(textNode('span', t('recording_status'), 'recording-text'));
+      const timerSpan = textNode('span', '00:00 / 01:00', 'recording-timer');
+      timerSpan.id = 'recording-timer';
+      indWrap.append(timerSpan);
+      voiceBar.append(indWrap);
+
+      const recActs = document.createElement('div');
+      recActs.className = 'recording-actions';
+      const stopBtn = document.createElement('button');
+      stopBtn.type = 'button';
+      stopBtn.className = 'btn btn-primary btn-sm';
+      stopBtn.textContent = t('btn_stop_record');
+      stopBtn.addEventListener('click', stopVoiceRecording);
+
+      const cancelRecBtn = document.createElement('button');
+      cancelRecBtn.type = 'button';
+      cancelRecBtn.className = 'btn btn-outline btn-sm';
+      cancelRecBtn.textContent = t('btn_cancel_record');
+      cancelRecBtn.addEventListener('click', cancelVoiceRecording);
+
+      recActs.append(stopBtn, cancelRecBtn);
+      voiceBar.append(recActs);
+      box.append(voiceBar);
+
+      // 2. Transcribing loading notice (hidden initially)
+      const transNotice = document.createElement('div');
+      transNotice.id = 'voice-transcribing-notice';
+      transNotice.className = 'notice info hidden';
+      transNotice.append(textNode('span', '', 'loading'));
+      transNotice.append(textNode('span', ` ${t('voice_transcribing')}`));
+      box.append(transNotice);
+
+      // 3. Transcript review & confirmation area (hidden initially)
+      const confirmBox = document.createElement('div');
+      confirmBox.id = 'transcript-confirmation-area';
+      confirmBox.className = 'transcript-box hidden';
+      confirmBox.setAttribute('aria-live', 'polite');
+
+      const cHead = document.createElement('div');
+      cHead.className = 'transcript-head';
+      cHead.append(textNode('strong', t('transcript_review_title')));
+      const metaPill = textNode('span', '', 'pill');
+      metaPill.id = 'transcript-meta';
+      cHead.append(metaPill);
+      confirmBox.append(cHead);
+      confirmBox.append(textNode('p', t('transcript_review_hint'), 'tiny muted'));
+
+      const editArea = document.createElement('textarea');
+      editArea.id = 'transcript-edit-input';
+      editArea.className = 'answer-input';
+      editArea.rows = 2;
+      confirmBox.append(editArea);
+
+      const cActions = document.createElement('div');
+      cActions.className = 'actions';
+      cActions.style.marginTop = '10px';
+
+      const btnConfirm = document.createElement('button');
+      btnConfirm.type = 'button';
+      btnConfirm.id = 'btn-confirm-transcript';
+      btnConfirm.className = 'btn btn-primary';
+      btnConfirm.textContent = t('btn_confirm_submit');
+      btnConfirm.addEventListener('click', () => {
+        const confirmed = editArea.value.trim();
+        if (!confirmed) {
+          editArea.focus();
+          return;
+        }
+        submitAnswer(confirmed);
+      });
+
+      const btnRerecord = document.createElement('button');
+      btnRerecord.type = 'button';
+      btnRerecord.className = 'btn btn-secondary';
+      btnRerecord.textContent = t('btn_rerecord');
+      btnRerecord.addEventListener('click', () => {
+        confirmBox.classList.add('hidden');
+        startVoiceRecording();
+      });
+
+      const btnCancelTranscript = document.createElement('button');
+      btnCancelTranscript.type = 'button';
+      btnCancelTranscript.className = 'btn btn-outline';
+      btnCancelTranscript.textContent = t('btn_cancel_type');
+      btnCancelTranscript.addEventListener('click', () => {
+        const input = $('interview-answer');
+        if (input) {
+          input.value = editArea.value;
+          input.disabled = false;
+          input.focus();
+        }
+        confirmBox.classList.add('hidden');
+        restoreTypedInputState();
+      });
+
+      cActions.append(btnConfirm, btnRerecord, btnCancelTranscript);
+      confirmBox.append(cActions);
+      box.append(confirmBox);
+
+      // 4. Input row (typed text + voice button + submit button)
+      let input;
+      if (Array.isArray(question.choices) && question.choices.length) {
+        input = document.createElement('select');
+        input.className = 'answer-input';
+        const placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.textContent = t('interview_select_choice');
+        input.append(placeholder);
+        question.choices.forEach(choice => {
+          const opt = document.createElement('option');
+          opt.value = choice;
+          const displayLabel = (question.choice_labels && question.choice_labels[choice]) || choice;
+          opt.textContent = displayLabel;
+          input.append(opt);
+        });
+      } else {
+        input = document.createElement('input');
+        input.className = 'answer-input';
+        input.type = question.kind === 'integer' ? 'number' : 'text';
+        if (input.type === 'number') {
+          input.min = '0';
+          input.step = '1';
+        }
+        input.placeholder = question.kind === 'integer' ? t('interview_placeholder_num') : t('interview_placeholder_text');
+      }
+
+      input.id = 'interview-answer';
+      input.setAttribute('aria-label', question.text || 'Your answer');
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          submitAnswer();
+        }
+      });
+
+      const micBtn = document.createElement('button');
+      micBtn.type = 'button';
+      micBtn.id = 'btn-mic';
+      micBtn.className = 'btn mic-btn';
+      micBtn.setAttribute('aria-label', t('mic_title'));
+      micBtn.title = t('mic_title');
+      micBtn.innerHTML = `🎤 <span class="mic-label">${t('btn_mic_label')}</span>`;
+      micBtn.addEventListener('click', () => {
+        startVoiceRecording();
+      });
+
+      const submitBtn = document.createElement('button');
+      submitBtn.type = 'button';
+      submitBtn.id = 'btn-submit-typed';
+      submitBtn.className = 'btn btn-primary';
+      submitBtn.textContent = t('btn_submit_answer');
+      submitBtn.addEventListener('click', () => submitAnswer());
+
+      const row = document.createElement('div');
+      row.className = 'answer-row';
+      row.append(input, micBtn, submitBtn);
+      box.append(row);
+
+      input.focus();
+    }
+
+    // 5. Voice provider & Bhashini cloud consent controls
+    const voiceOpts = document.createElement('div');
+    voiceOpts.className = 'voice-options';
+    const consentLabel = document.createElement('label');
+    consentLabel.className = 'tiny muted';
+    consentLabel.style.display = 'inline-flex';
+    consentLabel.style.alignItems = 'center';
+    consentLabel.style.gap = '6px';
+    consentLabel.style.cursor = 'pointer';
+
+    const consentCheck = document.createElement('input');
+    consentCheck.type = 'checkbox';
+    consentCheck.id = 'voice-bhashini-consent';
+    consentLabel.append(consentCheck);
+    consentLabel.append(textNode('span', t('consent_bhashini_label')));
+    voiceOpts.append(consentLabel);
+
+    const providerNote = textNode('p', `${t('voice_provider_whisper_note')} ${t('voice_provider_bhashini_note')}`, 'tiny muted');
+    providerNote.style.margin = '4px 0 0';
+    voiceOpts.append(providerNote);
+    box.append(voiceOpts);
+
+    if (question.validation_error) {
+      box.append(textNode('div', question.validation_error, 'question-error'));
+    }
+    if (question.field === 'aadhaar_linked_bank_account') {
+      box.append(textNode('p', t('aadhaar_safe_hint'), 'hint'));
+    }
+
+    area.append(box);
+  }
+
+  function handleInterviewResponse(data) {
+    state.currentQuestion = data.complete ? null : (data.question || null);
+    if (data.complete) {
+      state.interviewComplete = true;
+      stopContinuousVoiceSession();
+      cancelVoiceRecording();
+      $('interview-state').textContent = t('interview_completed');
+      $('question-area').replaceChildren();
+      const summary = $('interview-summary');
+      summary.classList.remove('hidden');
+      summary.replaceChildren();
+      summary.append(textNode('h3', t('interview_completed_title'), ''));
+      summary.append(textNode('p', t('interview_completed_desc'), 'sub'));
+
+      showPanel('document-panel');
+      showPanel('assessment-panel');
+      $('run-assessment')?.classList.remove('hidden');
+      updateProgress(4);
+    } else if (data.question) {
+      $('interview-state').textContent = t('interview_in_progress');
+      renderQuestion(data.question);
+      updateProgress(3);
+    }
+    updateSidebar();
+    saveSession();
+  }
+  
+
+  let isSubmittingAnswer = false;
+
+  async function submitAnswer(explicitAnswer = null) {
+    if (isSubmittingAnswer) return;
+    const input = $('interview-answer');
+    const answer = explicitAnswer != null ? explicitAnswer.trim() : (input ? input.value.trim() : '');
+    if (!answer) {
+      if (input) input.focus();
+      return;
+    }
+
+    const submitBtn = $('btn-submit-typed') || $('btn-confirm-transcript');
+    isSubmittingAnswer = true;
+    if (input) input.disabled = true;
+    if (submitBtn) setBusy(submitBtn, true, t('btn_submit_answer'));
+    setMessage('interview-message', '');
+    try {
+      const result = await api('/interview/answer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          thread_id: state.threadId,
+          answer,
+          language: state.language
+        })
+      });
+      handleInterviewResponse(result);
+    } catch (error) {
+      setMessage('interview-message', error.message, 'error');
+    } finally {
+      isSubmittingAnswer = false;
+      if (input && input.isConnected) {
+        input.disabled = false;
+        input.focus();
+      }
+      if (submitBtn && submitBtn.isConnected) {
+        setBusy(submitBtn, false, t('btn_submit_answer'));
+      }
+    }
+  }
+
+  function renderUploadResult(data) {
+    const target = $('upload-summary');
+    target.replaceChildren();
+    const reviewId = data.review?.review_id;
+    const intro = document.createElement('div');
+    intro.className = `notice ${data.audit?.findings?.length ? 'warn' : 'success'}`;
+    intro.textContent = reviewId
+      ? `Upload complete. Local human-review case created: ${reviewId} (${data.review.status}).`
+      : 'Extraction completed. No linked human-review record was created in this environment.';
+    target.append(intro);
+
+    (data.extracted_documents || []).forEach((doc, index) => {
+      const card = document.createElement('div');
+      card.className = 'finding';
+      card.append(textNode('h4', `${index + 1}. ${(doc.document_type || 'Document').replaceAll('_', ' ')}`));
+      const lines = [
+        doc.person_name ? `Name: ${doc.person_name}` : null,
+        doc.date_of_birth ? `DOB: ${doc.date_of_birth}` : null,
+        doc.annual_family_income != null
+          ? `Annual family income: ₹${Number(doc.annual_family_income).toLocaleString('en-IN')}`
+          : null,
+        doc.valid_financial_year ? `Financial year: ${doc.valid_financial_year}` : null
+      ].filter(Boolean);
+      card.append(textNode(
+        'p',
+        lines.join(' • ') || 'No key fields were extracted. Inspect the original document.'
+      ));
+      target.append(card);
+    });
+
+    const findings = data.audit?.findings || [];
+    if (findings.length) {
+      target.append(textNode('h3', t('audit_findings_title')));
+      findings.forEach(finding => {
+        const card = document.createElement('div');
+        card.className = `finding notice ${finding.severity === 'error' ? 'error' : 'warn'}`;
+        card.append(textNode('h4', `${finding.severity.toUpperCase()} • ${finding.code}`));
+        card.append(textNode('p', finding.message));
+        if (finding.recommended_action) {
+          card.append(textNode('p', `${t('rec_action_prefix')}${finding.recommended_action}`));
+        }
+        target.append(card);
+      });
+    }
+  }
+
+  async function uploadDocument() {
+    const input = $('document-file');
+    const file = input.files?.[0];
+    if (!file) {
+      setMessage('upload-message', t('doc_select_prompt'), 'warn');
+      return;
+    }
+
+    const button = $('upload-document');
+    setBusy(button, true, t('btn_upload_doc'));
+    setMessage('upload-message', '');
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('target_financial_year', $('financial-year')?.value || '2026-27');
+
+    try {
+      const data = await api('/documents/audit-upload', {
+        method: 'POST',
+        body: formData
+      });
+      state.reviewId = data.review?.review_id || null;
+      renderUploadResult(data);
+      $('upload-message').replaceChildren();
+      showPanel('assessment-panel');
+      $('refresh-assessment')?.classList.toggle('hidden', !state.reviewId);
+      updateProgress(4);
+      updateSidebar();
+      saveSession();
+    } catch (error) {
+      setMessage('upload-message', error.message, 'error');
+    } finally {
+      setBusy(button, false, t('btn_upload_doc'));
+    }
+  }
+
+  function renderAssessment(result) {
+    const root = $('assessment-result');
+    root.replaceChildren();
+
+    const summaryGrid = document.createElement('div');
+    summaryGrid.className = 'result-grid';
+
+    const tiles = [
+      { label: t('tile_scheme'), value: result.scheme_name || result.scheme_id },
+      { label: t('tile_status'), value: (result.eligibility?.status || 'needs_review').replaceAll('_', ' ').toUpperCase() },
+      { label: t('tile_review'), value: (result.human_review_status || 'not_linked').replaceAll('_', ' ').toUpperCase() },
+      { label: t('tile_authenticity'), value: (result.document_authenticity_status || 'not_verified').replaceAll('_', ' ').toUpperCase() }
+    ];
+
+    tiles.forEach(tile => {
+      const div = document.createElement('div');
+      div.className = 'result-tile';
+      div.append(textNode('small', tile.label));
+      div.append(textNode('strong', tile.value));
+      summaryGrid.append(div);
+    });
+    root.append(summaryGrid);
+
+    // Phase 5.1: Intelligent Document Preparation Report
+    if (result.document_prep_report) {
+      const prep = result.document_prep_report;
+      root.append(textNode('h3', `📄 ${t('heading_doc_prep')}`));
+
+      const prepBox = document.createElement('div');
+      prepBox.className = 'notice ' + (prep.all_mandatory_satisfied ? 'success' : 'warn');
+      prepBox.style.padding = '12px 14px';
+      prepBox.style.marginBottom = '12px';
+      prepBox.textContent = prep.audit_summary;
+      root.append(prepBox);
+
+      if (prep.requirements && prep.requirements.length) {
+        const reqList = document.createElement('div');
+        reqList.style.display = 'flex';
+        reqList.style.flexDirection = 'column';
+        reqList.style.gap = '8px';
+        reqList.style.marginBottom = '16px';
+
+        prep.requirements.forEach(req => {
+          const reqCard = document.createElement('div');
+          reqCard.style.border = '1px solid var(--line)';
+          reqCard.style.borderRadius = '10px';
+          reqCard.style.padding = '10px 14px';
+          reqCard.style.background = '#fff';
+
+          let statusIcon = '✓';
+          let statusStyle = 'color:#1e6244; font-weight:700;';
+          if (req.match_status === 'missing') {
+            statusIcon = '✗';
+            statusStyle = 'color:#8d392d; font-weight:700;';
+          } else if (req.match_status === 'expired' || req.match_status === 'fy_mismatch') {
+            statusIcon = '⚠️';
+            statusStyle = 'color:#75551b; font-weight:700;';
+          }
+
+          const titleRow = document.createElement('div');
+          titleRow.style.display = 'flex';
+          titleRow.style.justifyContent = 'space-between';
+          titleRow.style.gap = '8px';
+          titleRow.innerHTML = `<span style="${statusStyle}">${statusIcon} ${req.document_name}</span><span class="pill" style="font-size:10px;">${req.issuing_authority}</span>`;
+          reqCard.append(titleRow);
+
+          const descP = document.createElement('p');
+          descP.style.fontSize = '12px';
+          descP.style.margin = '4px 0 2px';
+          descP.style.color = 'var(--muted)';
+          descP.textContent = `${req.explanation} 👉 ${req.action_needed}`;
+          reqCard.append(descP);
+
+          reqList.append(reqCard);
+        });
+        root.append(reqList);
+      }
+    }
+
+    const findings = result.document_audit?.findings || [];
+    if (findings.length) {
+      root.append(textNode('h3', t('heading_doc_findings')));
+      findings.forEach(f => {
+        const card = document.createElement('div');
+        card.className = `finding notice ${f.severity === 'error' ? 'error' : 'warn'}`;
+        card.append(textNode('h4', `${f.severity.toUpperCase()} • ${f.code}`));
+        card.append(textNode('p', f.message));
+        if (f.recommended_action) {
+          card.append(textNode('p', `${t('rec_action_prefix')}${f.recommended_action}`));
+        }
+        root.append(card);
+      });
+    }
+
+    root.append(textNode('h3', t('heading_plan')));
+    (result.application_plan?.steps || []).forEach(step => {
+      const card = document.createElement('div');
+      card.className = 'plan-step';
+      card.append(textNode('div', '•', 'step-dot'));
+      const body = document.createElement('div');
+      body.append(textNode('h4', step.title));
+      body.append(textNode('p', step.notes));
+      if (step.notified_limit_days != null) {
+        body.append(textNode(
+          'p',
+          `${t('notified_limit_prefix')}${step.notified_limit_days}${t('notified_limit_suffix')}`
+        ));
+      }
+      card.append(body);
+      root.append(card);
+    });
+
+    root.append(textNode('h3', t('heading_actions')));
+    (result.next_actions || []).forEach(action => {
+      const card = document.createElement('div');
+      card.className = 'next-action';
+      card.append(textNode(
+        'h4',
+        `${action.priority.toUpperCase()} • ${action.title}`
+      ));
+      card.append(textNode('p', action.detail));
+      root.append(card);
+    });
+
+    // Phase 5.3: Safe Portal Application Guidance Package
+    if (result.portal_guidance) {
+      const portal = result.portal_guidance;
+      root.append(textNode('h3', `🌐 ${t('heading_portal_guidance')}`));
+
+      const portalBanner = document.createElement('div');
+      portalBanner.className = 'notice info';
+      portalBanner.style.padding = '12px 14px';
+      portalBanner.style.marginBottom = '12px';
+      portalBanner.innerHTML = `<strong>🔒 ${t('portal_security_badge')}</strong><p style="margin:4px 0 8px; font-size:11px;">${portal.security_disclaimer}</p><a href="${portal.portal_url}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">${t('btn_open_official_portal')}</a>`;
+      root.append(portalBanner);
+
+      if (portal.field_mappings && portal.field_mappings.length) {
+        root.append(textNode('h4', t('prefill_guidance_table_title')));
+        const table = document.createElement('table');
+        table.style.width = '100%';
+        table.style.borderCollapse = 'collapse';
+        table.style.fontSize = '12px';
+        table.style.marginBottom = '14px';
+        table.innerHTML = `
+          <thead>
+            <tr style="border-bottom:2px solid var(--line); text-align:left;">
+              <th style="padding:6px 8px;">Field</th>
+              <th style="padding:6px 8px;">Suggested Guidance Value</th>
+              <th style="padding:6px 8px;">Source</th>
+              <th style="padding:6px 8px;">Citizen Instruction</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${portal.field_mappings.map(f => `
+              <tr style="border-bottom:1px solid #edf1f4;">
+                <td style="padding:6px 8px; font-weight:600;">${f.portal_field_label}</td>
+                <td style="padding:6px 8px; font-family:monospace; color:var(--navy);">${f.suggested_value || '<em>(Fill manually on portal)</em>'}</td>
+                <td style="padding:6px 8px;"><span class="pill" style="font-size:10px;">${f.source.replaceAll('_', ' ')}</span></td>
+                <td style="padding:6px 8px; color:var(--muted);">${f.instructions_for_citizen}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        `;
+        root.append(table);
+      }
+
+      if (portal.pre_submission_checklist && portal.pre_submission_checklist.length) {
+        root.append(textNode('h4', t('pre_submission_checklist_title')));
+        const checkList = document.createElement('ul');
+        checkList.style.fontSize = '12px';
+        checkList.style.color = 'var(--muted)';
+        checkList.style.paddingLeft = '20px';
+        portal.pre_submission_checklist.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = `☑️ ${item}`;
+          checkList.append(li);
+        });
+        root.append(checkList);
+      }
+    }
+
+    root.append(textNode(
+      'p',
+      result.scope_note || 'Preliminary assistance only; confirm current rules with the official department.',
+      'notice warn'
+    ));
+  }
+
+  async function runAssessment() {
+    if (!state.selectedScheme) {
+      setMessage('assessment-message', t('choose_scheme_first'), 'warn');
+      return;
+    }
+
+    const button = $('run-assessment');
+    setBusy(button, true, t('btn_run_assessment'));
+    try {
+      const payload = {
+        target_financial_year: $('financial-year')?.value || '2026-27'
+      };
+      if (state.threadId) {
+        payload.thread_id = state.threadId;
+      }
+      if (state.reviewId) {
+        payload.review_id = state.reviewId;
+      }
+      const nameVal = $('citizen-name')?.value?.trim();
+      if (nameVal) {
+        payload.profile = { name: nameVal };
+      }
+
+      const result = await api(
+        `/assessment/${encodeURIComponent(state.selectedScheme.scheme_id)}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }
+      );
+      state.assessment = result;
+      renderAssessment(result);
+      $('refresh-assessment')?.classList.toggle('hidden', !state.reviewId);
+      setMessage(
+        'assessment-message',
+        t('assessment_success'),
+        'success'
+      );
+      updateProgress(5);
+      updateSidebar();
+    } catch (error) {
+      setMessage('assessment-message', error.message, 'error');
+    } finally {
+      setBusy(button, false, t('btn_run_assessment'));
+    }
+  }
+
+  $('language')?.addEventListener('change', () => {
+    state.language = $('language').value;
+    saveSession();
+    applyLanguageToUI();
+    if (state.discoveryProfile) {
+      evaluateProfileSchemes();
+    }
+  });
+
+  $('tab-voice-mode')?.addEventListener('click', () => {
+    state.interviewMode = 'voice';
+    $('tab-voice-mode')?.classList.add('active');
+    $('tab-typed-mode')?.classList.remove('active');
+    if (state.currentQuestion) renderQuestion(state.currentQuestion);
+  });
+
+  $('tab-typed-mode')?.addEventListener('click', () => {
+    stopContinuousVoiceSession();
+    state.interviewMode = 'typed';
+    $('tab-typed-mode')?.classList.add('active');
+    $('tab-voice-mode')?.classList.remove('active');
+    if (state.currentQuestion) renderQuestion(state.currentQuestion);
+  });
+
+  window.addEventListener('beforeunload', () => {
+    stopContinuousVoiceSession();
+    cancelVoiceRecording();
+  });
+
+  $('financial-year')?.addEventListener('change', saveSession);
+  $('btn-discover-schemes')?.addEventListener('click', evaluateProfileSchemes);
+  $('btn-browse-all')?.addEventListener('click', browseAllSchemes);
+  $('scheme-search-input')?.addEventListener('input', renderSchemes);
+  $('scheme-dept-filter')?.addEventListener('change', renderSchemes);
+  $('scheme-status-filter')?.addEventListener('change', renderSchemes);
+  $('scheme-trust-filter')?.addEventListener('change', renderSchemes);
+  $('upload-document')?.addEventListener('click', uploadDocument);
+  $('skip-document')?.addEventListener('click', () => {
+    showPanel('assessment-panel');
+    updateProgress(5);
+    updateSidebar();
+    $('assessment-panel').scrollIntoView({ behavior: 'smooth' });
+    saveSession();
+  });
+  $('run-assessment')?.addEventListener('click', runAssessment);
+  $('refresh-assessment')?.addEventListener('click', runAssessment);
+
+  installSessionControls();
+  loadSchemes();
+  applyLanguageToUI();
+  updateSidebar();
+})();
+</script>
+</body>
+</html>

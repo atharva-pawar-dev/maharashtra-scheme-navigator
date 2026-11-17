@@ -1,0 +1,24 @@
+{
+  "corporation_id": "mc-kalyan-dombivli",
+  "corporation_name_en": "Kalyan Dombivli Municipal Corporation",
+  "corporation_name_mr": "कल्याण डोंबिवली महानगरपालिका",
+  "total_wards": 10,
+  "boundary_reference": "KDMC Administrative Ward Delimitation 2022",
+  "representative_wards": [
+    "Ward A (Kalyan West)",
+    "Ward B (Kalyan East)",
+    "Ward C (Dombivli West)",
+    "Ward D (Dombivli East)",
+    "Ward E (Mohone/Titwala)"
+  ],
+  "localities": [
+    "Kalyan West",
+    "Kalyan East",
+    "Dombivli West",
+    "Dombivli East",
+    "Titwala",
+    "Mohone",
+    "Khadakpada",
+    "Manpada"
+  ]
+}

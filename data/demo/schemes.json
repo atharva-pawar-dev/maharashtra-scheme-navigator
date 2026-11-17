@@ -1,0 +1,135 @@
+[
+  {
+    "scheme_id": "demo-majhi-ladki-bahin",
+    "name": "Mukhyamantri Majhi Ladki Bahin Yojana (demo fixture)",
+    "department": "Women and Child Development Department, Government of Maharashtra",
+    "summary": "Illustrative, source-linked eligibility fixture for a Maharashtra financial-assistance scheme. Re-check current official guidelines before real use.",
+    "benefits": [
+      "Published myScheme page describes financial assistance of ₹1,500 per month; verify current official terms."
+    ],
+    "required_documents": [
+      "identity proof",
+      "residence proof",
+      "income proof",
+      "bank account details",
+      "affirmation letter"
+    ],
+    "eligibility_rule": {
+      "op": "all",
+      "children": [
+        {
+          "op": "eq",
+          "field": "gender",
+          "value": "female"
+        },
+        {
+          "op": "eq",
+          "field": "resident_state",
+          "value": "maharashtra"
+        },
+        {
+          "op": "gte",
+          "field": "age",
+          "value": 21
+        },
+        {
+          "op": "lte",
+          "field": "age",
+          "value": 65
+        },
+        {
+          "op": "lte",
+          "field": "annual_family_income",
+          "value": 250000
+        },
+        {
+          "op": "eq",
+          "field": "aadhaar_linked_bank_account",
+          "value": true
+        }
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "myScheme.gov.in - Mukhyamantri Majhi Ladki Bahin Yojana",
+        "source_url": "https://www.myscheme.gov.in/schemes/mmlby",
+        "source_kind": "official_scheme_page",
+        "retrieved_at": "2026-10-27T00:00:00+05:30",
+        "page_or_section": "Details / Eligibility; snapshot for local demo only",
+        "evidence_excerpt": "The applicant should be a female. The applicant should be a resident of Maharashtra state. The applicant's age should be between 21-65 years. The applicant should have their bank account with an Aadhaar link. The annual income of the applicant's family should not exceed ₹2,50,000/-.\nSource: https://www.myscheme.gov.in/schemes/mmlby (local demo evidence excerpt; re-verify before production).",
+        "evidence_sha256": "5449ae8b014b62f2fabb78aaf78c65e773bbff078771a9bc7ff075f72233b9d8"
+      }
+    ],
+    "rule_version": "demo-2026-10-27.1",
+    "rule_status": "active",
+    "approved_by": "LOCAL_DEMO_FIXTURE_ONLY",
+    "approval_reference": "NOT_FOR_PRODUCTION/demo-fixture-review",
+    "last_verified_at": "2026-10-27T00:00:00+05:30",
+    "languages": [
+      "en",
+      "mr",
+      "hi"
+    ]
+  },
+  {
+    "scheme_id": "demo-indira-gandhi-old-age-pension",
+    "name": "Indira Gandhi National Old Age Pension Scheme (Maharashtra) (demo fixture)",
+    "department": "Social Justice and Special Assistance Department, Government of Maharashtra",
+    "summary": "Illustrative, source-linked eligibility fixture; the government source says age 65+, Maharashtra residence, BPL family, and no other social-security pension.",
+    "benefits": [
+      "Published myScheme page describes ₹600 monthly financial assistance; verify current official terms."
+    ],
+    "required_documents": [
+      "age proof",
+      "residence proof",
+      "BPL proof",
+      "bank details"
+    ],
+    "eligibility_rule": {
+      "op": "all",
+      "children": [
+        {
+          "op": "eq",
+          "field": "resident_state",
+          "value": "maharashtra"
+        },
+        {
+          "op": "gte",
+          "field": "age",
+          "value": 65
+        },
+        {
+          "op": "eq",
+          "field": "bpl",
+          "value": true
+        },
+        {
+          "op": "eq",
+          "field": "receiving_other_pension",
+          "value": false
+        }
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "myScheme.gov.in - Indira Gandhi National Old Age Pension Scheme (Maharashtra)",
+        "source_url": "https://www.myscheme.gov.in/schemes/igoapsm",
+        "source_kind": "official_scheme_page",
+        "retrieved_at": "2026-10-27T00:00:00+05:30",
+        "page_or_section": "Eligibility / Benefits; snapshot for local demo only",
+        "evidence_excerpt": "The applicant should be a resident of Maharashtra. The applicant should be 65 years of age or older. The applicant should be from a Below Poverty Line (BPL) family. The applicant should not be receiving pension benefits under any social security scheme.\nSource: https://www.myscheme.gov.in/schemes/igoapsm (local demo evidence excerpt; re-verify before production).",
+        "evidence_sha256": "4c5a3c16a8584700babcf61696cd02e47534744f84806ef8d93e8a6fbce71fc3"
+      }
+    ],
+    "rule_version": "demo-2026-10-27.1",
+    "rule_status": "active",
+    "approved_by": "LOCAL_DEMO_FIXTURE_ONLY",
+    "approval_reference": "NOT_FOR_PRODUCTION/demo-fixture-review",
+    "last_verified_at": "2026-10-27T00:00:00+05:30",
+    "languages": [
+      "en",
+      "mr",
+      "hi"
+    ]
+  }
+]

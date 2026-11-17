@@ -1,0 +1,43 @@
+{
+  "corporation_id": "mc-brihanmumbai",
+  "corporation_name_en": "Brihanmumbai Municipal Corporation",
+  "corporation_name_mr": "बृहन्मुंबई महानगरपालिका",
+  "total_wards": 24,
+  "boundary_reference": "BMC 24 Administrative Wards Directory & MMC Act 1888",
+  "representative_wards": [
+    "A Ward (Fort/Colaba)",
+    "D Ward (Malabar Hill)",
+    "F/North (Matunga)",
+    "G/North (Dharavi/Dadar)",
+    "K/East (Andheri E)",
+    "K/West (Andheri W)",
+    "H/East (Bandra E)",
+    "H/West (Bandra W)",
+    "P/North (Malad)",
+    "R/Central (Borivali)",
+    "L Ward (Kurla)",
+    "M/East (Govandi)",
+    "N Ward (Ghatkopar)",
+    "S Ward (Bhandup)",
+    "T Ward (Mulund)"
+  ],
+  "localities": [
+    "Colaba",
+    "Fort",
+    "Dadar",
+    "Bandra",
+    "Andheri",
+    "Juhu",
+    "Malad",
+    "Borivali",
+    "Goregaon",
+    "Kurla",
+    "Ghatkopar",
+    "Mulund",
+    "Chembur",
+    "Govandi",
+    "Dharavi",
+    "Worli",
+    "Byculla"
+  ]
+}

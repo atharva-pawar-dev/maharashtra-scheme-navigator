@@ -1,0 +1,21 @@
+{
+  "corporation_id": "mc-chandrapur",
+  "corporation_name_en": "Chandrapur Municipal Corporation",
+  "corporation_name_mr": "चंद्रपूर महानगरपालिका",
+  "total_wards": 17,
+  "boundary_reference": "Urban Development Dept Notification 2022",
+  "representative_wards": [
+    "Zone 1 (Jatpura)",
+    "Zone 2 (Bazar Ward)",
+    "Zone 3 (Babupeth)",
+    "Zone 4 (Ramnagar)"
+  ],
+  "localities": [
+    "Ramnagar",
+    "Babupeth",
+    "Jatpura",
+    "Tukum",
+    "Pathanpura",
+    "Civil Lines"
+  ]
+}

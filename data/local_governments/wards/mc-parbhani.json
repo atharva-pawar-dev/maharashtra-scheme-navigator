@@ -1,0 +1,21 @@
+{
+  "corporation_id": "mc-parbhani",
+  "corporation_name_en": "Parbhani Municipal Corporation",
+  "corporation_name_mr": "परभणी शहर महानगरपालिका",
+  "total_wards": 16,
+  "boundary_reference": "Parbhani MC Delimitation 2022",
+  "representative_wards": [
+    "Zone 1 (Station Road)",
+    "Zone 2 (Subhash Road)",
+    "Zone 3 (Jintur Road)",
+    "Zone 4 (Gangakhed Road)"
+  ],
+  "localities": [
+    "Station Road",
+    "Subhash Road",
+    "Jintur Road",
+    "Gangakhed Road",
+    "Karegaon Road",
+    "Shivaji Nagar"
+  ]
+}

@@ -1,0 +1,1594 @@
+[
+  {
+    "scheme_id": "candidate-majhi-ladki-bahin",
+    "name": "Mukhyamantri Majhi Ladki Bahin Yojana (मुख्यमंत्री - माझी लाडकी बहीण योजना)",
+    "department": "Women and Child Development Department, Government of Maharashtra",
+    "summary": "Provides Rs. 1,500 monthly DBT financial assistance to eligible women aged 21-65 years in Maharashtra with family income up to Rs. 2.5 Lakh. (DRAFT CANDIDATE - NON-PRODUCTION)",
+    "benefits": [
+      "Direct Benefit Transfer (DBT) of Rs. 1,500 per month deposited directly into Aadhaar-linked bank account",
+      "Economic empowerment and nutritional support for underprivileged women"
+    ],
+    "required_documents": [
+      "Aadhaar Card",
+      "Maharashtra Domicile Certificate / 15-year Ration Card / Voter ID / Birth Certificate",
+      "Income Certificate (<= Rs. 2.50 Lakh) or Yellow/Orange Ration Card",
+      "Bank Passbook of active Aadhaar-seeded bank account",
+      "Hamipatra (Self-declaration form)"
+    ],
+    "eligibility_rule": {
+      "op": "all",
+      "children": [
+        {
+          "op": "eq",
+          "children": [],
+          "field": "gender",
+          "value": "female",
+          "condition_id": "c_mmlby_gender_female",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "resident_state",
+          "value": "maharashtra",
+          "condition_id": "c_mmlby_resident_maharashtra",
+          "as_of_date": null
+        },
+        {
+          "op": "gte",
+          "children": [],
+          "field": "age",
+          "value": 21,
+          "condition_id": "c_mmlby_age_gte_21",
+          "as_of_date": null
+        },
+        {
+          "op": "lte",
+          "children": [],
+          "field": "age",
+          "value": 65,
+          "condition_id": "c_mmlby_age_lte_65",
+          "as_of_date": null
+        },
+        {
+          "op": "lte",
+          "children": [],
+          "field": "annual_family_income",
+          "value": 250000,
+          "condition_id": "c_mmlby_income_lte_250k",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "aadhaar_linked_bank_account",
+          "value": true,
+          "condition_id": "c_mmlby_aadhaar_linked_bank",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "receiving_other_pension",
+          "value": false,
+          "condition_id": "c_mmlby_no_other_pension",
+          "as_of_date": null
+        }
+      ],
+      "field": null,
+      "value": null,
+      "condition_id": null,
+      "as_of_date": null
+    },
+    "sources": [
+      {
+        "source_name": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02 (Base GR)",
+        "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202406281814018230.pdf",
+        "source_kind": "government_resolution",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "शासन निर्णय: राज्यातील २१ ते ६५ वर्षे वयोगटातील पात्र महिलांना दरमहा रु. १५००/- थेट बँक खात्यात (DBT) आर्थिक लाभ देण्यात येईल. कुटुंब वार्षिक उत्पन्न मर्यादा रु. २.५० लाख राहील.",
+        "evidence_sha256": "4c82a8b88a21b06042f46382b23d1327c8fa37a1eacefadbc9ca66778f0093fd",
+        "page_or_section": "Para 1-3"
+      },
+      {
+        "source_name": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02 (Shuddhipatra)",
+        "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407031335114330.pdf",
+        "source_kind": "government_resolution",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "शुद्धीपत्रक दिनांक ०३ जुलै २०२४: वयोमर्यादा २१ ते ६० ऐवजी २१ ते ६५ वर्षे करण्यात येत आहे. अधिवास प्रमाणपत्राऐवजी १५ वर्षांपूर्वीचे रेशन कार्ड, मतदार ओळखपत्र, शाळा सोडल्याचा दाखला किंवा जन्म दाखला ग्राह्य राहील.",
+        "evidence_sha256": "69f6b4dc283f7721c2e4adc1d62262df21213e7413fb739406d1470ccc08df40",
+        "page_or_section": "Para 1-4"
+      },
+      {
+        "source_name": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02 (Clarification GR)",
+        "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407121401594230.pdf",
+        "source_kind": "government_resolution",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "शासन निर्णय दिनांक १२ जुलै २०२४: पिवळे अथवा केशरी रेशनकार्डधारक कुटुंबांना स्वतंत्र उत्पन्नाच्या दाखल्याची आवश्यकता असणार नाही. परराज्यात जन्मलेल्या मात्र महाराष्ट्रातील अधिवास असलेल्या पुरुषाशी विवाह झालेल्या महिला पात्र राहतील.",
+        "evidence_sha256": "f39fcfbbe8ff299d4cb7752860fe22e8564a235c939b4c21111880744df134cd",
+        "page_or_section": "Clauses 1-4"
+      },
+      {
+        "source_name": "Official Ladki Bahin Portal (WCD Maharashtra)",
+        "source_url": "https://ladakibahin.maharashtra.gov.in/",
+        "source_kind": "official_portal",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "मुख्यमंत्री - माझी लाडकी बहीण योजना अधिकृत संकेतस्थळ (ladakibahin.maharashtra.gov.in): अर्जदाराचे आधार लिंक बँक खाते असणे अनिवार्य आहे. इतर शासकीय योजनेतून रु. १५०० किंवा अधिक लाभ घेणाऱ्या महिला अपात्र राहतील.",
+        "evidence_sha256": "ed8d389579fccc0ef31cb0029fe6ba42836f844cab3bb239dd495bc690e7e608",
+        "page_or_section": "Guidelines & FAQ"
+      }
+    ],
+    "rule_version": "0.2.2-candidate-draft",
+    "rule_status": "draft",
+    "approved_by": null,
+    "approval_reference": null,
+    "last_verified_at": null,
+    "languages": [
+      "en"
+    ],
+    "evidence": [
+      {
+        "condition_id": "c_mmlby_gender_female",
+        "source_title": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02",
+        "official_reference": "202406281814018230",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202406281814018230.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2024-06-28",
+        "effective_from": "2024-07-01",
+        "effective_until": null,
+        "page_or_section": "Para 2.1",
+        "verbatim_excerpt": "राज्यातील २१ ते ६० वयोगटातील विवाहित, विधवा, घटस्फोटीत, परित्यक्ता आणि निराधार महिला.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Married, widowed, divorced, deserted and destitute women in the state.",
+        "translation_provenance": "Official department guideline translation",
+        "source_document_sha256": "78e24c2eea353f5e5201f5244a8ed064b217fae6fade595124eff8a24d38bbb2",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": "Operative benefit baseline: Rs. 1,500/month. Proposed Rs. 2,100 rate has no gazetted GR."
+      },
+      {
+        "condition_id": "c_mmlby_resident_maharashtra",
+        "source_title": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02 (Shuddhipatra)",
+        "official_reference": "202407031335114330",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407031335114330.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2024-07-03",
+        "effective_from": "2024-07-01",
+        "effective_until": null,
+        "page_or_section": "Para 2.2",
+        "verbatim_excerpt": "लाभार्थी महिला ही महाराष्ट्र राज्याची रहिवासी असणे आवश्यक आहे. अधिवास प्रमाणपत्र उपलब्ध नसल्यास १५ वर्षांपूर्वीचे रेशन कार्ड, मतदार ओळखपत्र ग्राह्य धरण्यात येईल.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Beneficiary woman must be a resident of Maharashtra state.",
+        "translation_provenance": "Official department guideline translation",
+        "source_document_sha256": "5b799ab82911ce8f1ca74b66b436d8b1acb4e226573b15b9dc8e66680eff6330",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_mmlby_age_gte_21",
+        "source_title": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02",
+        "official_reference": "202406281814018230",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202406281814018230.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2024-06-28",
+        "effective_from": "2024-07-01",
+        "effective_until": null,
+        "page_or_section": "Para 2.1",
+        "verbatim_excerpt": "२१ वर्षे पूर्ण असणे आवश्यक आहे.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Must have completed 21 years of age.",
+        "translation_provenance": "Direct translation",
+        "source_document_sha256": "586de0174082b600e53837e8a6c143233b1e275fca772acfe6d97efa87066fcc",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_mmlby_age_lte_65",
+        "source_title": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02 (Shuddhipatra)",
+        "official_reference": "202407031335114330",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407031335114330.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2024-07-03",
+        "effective_from": "2024-07-01",
+        "effective_until": null,
+        "page_or_section": "Para 2.1",
+        "verbatim_excerpt": "वयोमर्यादा २१ ते ६० वर्षे ऐवजी २१ ते ६५ वर्षे अशी सुधारित करण्यात येत आहे.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Age limit is amended from 21-60 years to 21-65 years.",
+        "translation_provenance": "Official department translation",
+        "source_document_sha256": "8907c799aa5a08de08f884e58fc441fcc8a208afaa841e0d482bd3d26abe5146",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_mmlby_income_lte_250k",
+        "source_title": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02 (Clarification)",
+        "official_reference": "202407121401594230",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407121401594230.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2024-07-12",
+        "effective_from": "2024-07-01",
+        "effective_until": null,
+        "page_or_section": "Clause 1",
+        "verbatim_excerpt": "लाभार्थी कुटुंबाचे वार्षिक उत्पन्न रु. २,५०,०००/- पेक्षा जास्त नसावे. पिवळे अथवा केशरी रेशनकार्डधारक कुटुंबांना उत्पन्नाच्या दाखल्याची आवश्यकता नाही.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Annual family income must not exceed Rs. 2,50,000. Yellow/Orange ration card holders deemed compliant.",
+        "translation_provenance": "Official department translation",
+        "source_document_sha256": "04e1508a8ce760d00f075e7ca730a3e79b28d6f0df43460dfb35c8e249299e69",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_mmlby_aadhaar_linked_bank",
+        "source_title": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02",
+        "official_reference": "202406281814018230",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202406281814018230.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2024-06-28",
+        "effective_from": "2024-07-01",
+        "effective_until": null,
+        "page_or_section": "Para 2.4",
+        "verbatim_excerpt": "लाभार्थ्याचे स्वतःचे आधार लिंक असलेले बँक खाते असणे आवश्यक आहे.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Beneficiary must possess an individual bank account seeded with Aadhaar.",
+        "translation_provenance": "Direct translation",
+        "source_document_sha256": "46fcdba2d2dbf3bb74e537b1bb25371b141e8717955cf6f94ec916e019d49fe5",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_mmlby_no_other_pension",
+        "source_title": "Maharashtra GR No. Sankirna-2024/CR137/Karya-02",
+        "official_reference": "202406281814018230",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202406281814018230.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2024-06-28",
+        "effective_from": "2024-07-01",
+        "effective_until": null,
+        "page_or_section": "Para 3.4",
+        "verbatim_excerpt": "ज्या महिला शासनाच्या इतर विभागांमार्फत राबविण्यात येणाऱ्या आर्थिक लाभाच्या योजनेद्वारे दरमहा रु. १५००/- किंवा त्यापेक्षा जास्त लाभ घेत असतील त्या अपात्र ठरतील.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Women receiving Rs. 1,500/month or more from other government DBT schemes are ineligible.",
+        "translation_provenance": "Direct translation",
+        "source_document_sha256": "5cfd93751edd92eecb2db1956fdd1405827ef0c12d2e64c160a9bd2209b7843a",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      }
+    ],
+    "document_requirements": [],
+    "eligibility_reference_date": null,
+    "publication_authorized": false
+  },
+  {
+    "scheme_id": "candidate-sanjay-gandhi-niradhar",
+    "name": "Sanjay Gandhi Niradhar Anudan Yojana (संजय गांधी निराधार अनुदान योजना)",
+    "department": "Social Justice and Special Assistance Department, Government of Maharashtra",
+    "summary": "Provides monthly financial assistance of Rs. 1,500 (enhanced to Rs. 2,500 for severely disabled persons with >= 80% disability) to destitute adults (18-65), orphan children (< 18), and disabled persons (>= 40% disability, < 65) in Maharashtra. (DRAFT CANDIDATE - NON-PRODUCTION)",
+    "benefits": [
+      "Monthly assistance of Rs. 1,500 for single destitute beneficiary, orphan child, or disabled person with 40% to 79% certified disability",
+      "Enhanced monthly assistance of Rs. 2,500 specifically for beneficiaries with severe disability (>= 80% certified disability / UDID)",
+      "Assistance of Rs. 2,500 per month for family with two or more eligible beneficiaries"
+    ],
+    "required_documents": [
+      "15-year Maharashtra Residence / Domicile Certificate",
+      "Income Certificate issued by Tahsildar (<= Rs. 21,000 for general/orphan; <= Rs. 50,000 for disabled)",
+      "Disability Certificate / UDID (minimum 40% disability for eligibility; >= 80% for severe disability enhanced benefit)",
+      "Orphan Certificate / Death Certificate of parents for orphan category",
+      "Age proof (Birth Certificate, School Leaving Certificate, Medical Board Certificate)",
+      "Aadhaar-linked bank account passbook"
+    ],
+    "eligibility_rule": {
+      "op": "all",
+      "children": [
+        {
+          "op": "eq",
+          "children": [],
+          "field": "resident_state",
+          "value": "maharashtra",
+          "condition_id": "c_sgnay_residence",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "receiving_other_pension",
+          "value": false,
+          "condition_id": "c_sgnay_no_other_pension",
+          "as_of_date": null
+        },
+        {
+          "op": "lt",
+          "children": [],
+          "field": "age",
+          "value": 65,
+          "condition_id": "c_sgnay_age_lt_65",
+          "as_of_date": null
+        },
+        {
+          "op": "any",
+          "children": [
+            {
+              "op": "all",
+              "children": [
+                {
+                  "op": "gte",
+                  "children": [],
+                  "field": "disability_percentage",
+                  "value": 80,
+                  "condition_id": "c_sgnay_severe_disability_80",
+                  "as_of_date": null
+                },
+                {
+                  "op": "lte",
+                  "children": [],
+                  "field": "annual_family_income",
+                  "value": 50000,
+                  "condition_id": "c_sgnay_income_disabled",
+                  "as_of_date": null
+                }
+              ],
+              "field": null,
+              "value": null,
+              "condition_id": null,
+              "as_of_date": null
+            },
+            {
+              "op": "all",
+              "children": [
+                {
+                  "op": "gte",
+                  "children": [],
+                  "field": "disability_percentage",
+                  "value": 40,
+                  "condition_id": "c_sgnay_disability_min_40",
+                  "as_of_date": null
+                },
+                {
+                  "op": "lte",
+                  "children": [],
+                  "field": "annual_family_income",
+                  "value": 50000,
+                  "condition_id": "c_sgnay_income_disabled",
+                  "as_of_date": null
+                }
+              ],
+              "field": null,
+              "value": null,
+              "condition_id": null,
+              "as_of_date": null
+            },
+            {
+              "op": "all",
+              "children": [
+                {
+                  "op": "lte",
+                  "children": [],
+                  "field": "annual_family_income",
+                  "value": 21000,
+                  "condition_id": "c_sgnay_income_general",
+                  "as_of_date": null
+                }
+              ],
+              "field": null,
+              "value": null,
+              "condition_id": null,
+              "as_of_date": null
+            }
+          ],
+          "field": null,
+          "value": null,
+          "condition_id": null,
+          "as_of_date": null
+        }
+      ],
+      "field": null,
+      "value": null,
+      "condition_id": null,
+      "as_of_date": null
+    },
+    "sources": [
+      {
+        "source_name": "Maharashtra GR No. Visayo-2018/CR62/Visayo (Base GR)",
+        "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+        "source_kind": "government_resolution",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "शासन निर्णय क्र. विसयो-२०१८/प्र.क्र.६२/विसयो दिनांक २० ऑगस्ट २०१९: निराधार व्यक्ती, अंध, अपंग, अनाथ मुले, गंभीर आजारी व्यक्तींसाठी आर्थिक सहाय्य. सर्वसाधारण उत्पन्न मर्यादा रु. २१,००० व दिव्यांग प्रवर्गासाठी रु. ५०,००० राहील. ६५ वर्षे वयापर्यंत लागू.",
+        "evidence_sha256": "2a1f27f6d66b5b32c46bb57e29e44b8311e13ef60c064fcc12d9ab5d1abc016a",
+        "page_or_section": "Clauses 1-8"
+      },
+      {
+        "source_name": "Maharashtra GR No. Visayo-2023/CR30/Visayo (Assistance Revision)",
+        "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202307061137387522.pdf",
+        "source_kind": "government_resolution",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "शासन निर्णय क्र. विसयो-२०२३/प्र.क्र.३०/विसयो दिनांक ०५ जुलै २०२३: संजय गांधी निराधार अनुदान योजनेच्या अनुदानात वाढ करून दरमहा रु. १,५००/- करण्यात येत आहे. एकापेक्षा अधिक लाभार्थी असलेल्या कुटुंबास दरमहा रु. २,५००/- सहाय्य.",
+        "evidence_sha256": "85f619e9d67dc219bb0247b23bd7a7abf1020153fa1d854dbb5528ceac67491c",
+        "page_or_section": "Clauses 1-2"
+      },
+      {
+        "source_name": "Divyang Kalyan Dept GR No. Diayo-2025/CR48/Visayo",
+        "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202509151520117822.pdf",
+        "source_kind": "government_resolution",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "शासन निर्णय क्र. दिअयो-२०२५/प्र.क्र.४८/विसयो दिनांक १५ सप्टेंबर २०२५: किमान ४०% दिव्यांगत्व असलेल्या पात्र दिव्यांग लाभार्थ्यांना दरमहा रु. २,५००/- विशेष सहाय्य मंजूर.",
+        "evidence_sha256": "b86f64465a7439806d7ecb3d41170a0e8026adb77a713db591f2df7bfef7a065",
+        "page_or_section": "Para 1-3"
+      }
+    ],
+    "rule_version": "0.2.2-candidate-draft",
+    "rule_status": "draft",
+    "approved_by": null,
+    "approval_reference": null,
+    "last_verified_at": null,
+    "languages": [
+      "en"
+    ],
+    "evidence": [
+      {
+        "condition_id": "c_sgnay_residence",
+        "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+        "official_reference": "201908201732007222",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2019-08-20",
+        "effective_from": "2019-09-01",
+        "effective_until": null,
+        "page_or_section": "Para 2",
+        "verbatim_excerpt": "अर्जदार हा महाराष्ट्र राज्याचा १५ वर्षे सततचा रहिवासी असणे आवश्यक आहे.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Applicant must be a continuous resident of Maharashtra state for at least 15 years.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "8864572c07c465ffde56f1dc38cfe897f22a4e6e7e27ea563ed4adf7607bfeb6",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_sgnay_no_other_pension",
+        "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+        "official_reference": "201908201732007222",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2019-08-20",
+        "effective_from": "2019-09-01",
+        "effective_until": null,
+        "page_or_section": "Para 4",
+        "verbatim_excerpt": "अर्जदार इतर कोणत्याही योजनेतून निवृत्तीवेतन किंवा नियमित शासकीय सहाय्य घेत नसावा.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Applicant must not be receiving pension or regular government assistance from another scheme.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "1584eae847f36a2a9a66b234901cda516f2b884e15ed5e86da7d92fe7e94cae3",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_sgnay_age_lt_65",
+        "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+        "official_reference": "201908201732007222",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2019-08-20",
+        "effective_from": "2019-09-01",
+        "effective_until": null,
+        "page_or_section": "Para 2",
+        "verbatim_excerpt": "६५ वर्षांखालील निराधार व्यक्ती. ६५ वर्षे पूर्ण झालेल्या व्यक्ती श्रावणबाळ निवृत्तीवेतन योजनेस पात्र ठरतील.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Destitute persons under 65; persons completing 65 transition to Shravanbal scheme.",
+        "translation_provenance": "Direct translation",
+        "source_document_sha256": "250bf671d2863ff8e9b0c13452bd8cf0d8f2694353bbd4acffb50f440b1c2ee8",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": "Applies across all SGNAY branches (disabled, general destitute, and minor orphans). At age 65, beneficiaries migrate to Shravanbal."
+      },
+      {
+        "condition_id": "c_sgnay_disability_min_40",
+        "source_title": "Divyang Kalyan Dept GR No. Diayo-2025/CR48/Visayo",
+        "official_reference": "202509151520117822",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202509151520117822.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2025-09-15",
+        "effective_from": "2025-09-15",
+        "effective_until": null,
+        "page_or_section": "Cl. 1-2",
+        "verbatim_excerpt": "पात्र दिव्यांग लाभार्थ्यांना किमान ४० टक्के दिव्यांगत्वाचे प्रमाणपत्र (UDID) असणे अनिवार्य राहील.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Eligible disabled beneficiaries must possess at least 40% certified disability (UDID) to enter the disabled assistance track.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "526f1f198af9e913ed0edf383a1ba9a96481ccdfbcc0612d5890fb5ebe5f8801",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": "Statutory benchmark disability threshold (>= 40%) for entering the destitute disability pension track (Rs. 1,500/month baseline)."
+      },
+      {
+        "condition_id": "c_sgnay_severe_disability_80",
+        "source_title": "Divyang Kalyan Dept GR No. Diayo-2025/CR48/Visayo",
+        "official_reference": "202509151520117822",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202509151520117822.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2025-09-15",
+        "effective_from": "2025-09-15",
+        "effective_until": null,
+        "page_or_section": "Para 1-3",
+        "verbatim_excerpt": "८० टक्के किंवा त्याहून अधिक तीव्र दिव्यांगत्व असलेल्या लाभार्थ्यांना दरमहा रु. २,५००/- वाढीव विशेष सहाय्य अनुज्ञेय राहील.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Beneficiaries with severe disability of 80% or above (or IGNDPS benchmark) are entitled to enhanced financial assistance of Rs. 2,500 per month.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "2cbfe308ac8c25ea9ca701e03de924573a62ab5a75d217ae9bd92a827a27f533",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": "Enhanced benefit tier of Rs. 2,500/month specifically restricted to severe disability (>= 80%) or multi-beneficiary families under GR 15-09-2025."
+      },
+      {
+        "condition_id": "c_sgnay_income_disabled",
+        "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+        "official_reference": "201908201732007222",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2019-08-20",
+        "effective_from": "2019-09-01",
+        "effective_until": null,
+        "page_or_section": "Para 3",
+        "verbatim_excerpt": "दिव्यांग (अंध, अपंग) व्यक्तींसाठी कुटुंबाची वार्षिक उत्पन्न मर्यादा रु. ५०,०००/- राहील.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Annual family income limit for disabled individuals is Rs. 50,000.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "706f28d7b598f1428c35b93fd6a1d9274c4fe5fcd1a6f28dfcf22e419629b92c",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_sgnay_income_general",
+        "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+        "official_reference": "201908201732007222",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2019-08-20",
+        "effective_from": "2019-09-01",
+        "effective_until": null,
+        "page_or_section": "Para 3",
+        "verbatim_excerpt": "सर्वसाधारण प्रवर्गातील निराधार व्यक्तींसाठी कुटुंबाचे वार्षिक उत्पन्न मर्यादा रु. २१,०००/- राहील.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Annual family income limit for general destitute persons and orphan children is Rs. 21,000.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "e345ffc23f5d8808c91a09293ca244330fb5c320b79bf5b2541ba041a0539851",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": "General destitute adults (18-65) and orphan children (< 18) must meet the Rs. 21,000 ceiling. Minor orphans are statutorily recognized under Category 3 of GR 20-08-2019."
+      }
+    ],
+    "document_requirements": [],
+    "eligibility_reference_date": null,
+    "publication_authorized": false
+  },
+  {
+    "scheme_id": "candidate-shravanbal-nivruttivetan",
+    "name": "Shravanbal Seva Rajya Nivruttivetan Yojana (श्रावणबाळ सेवा राज्य निवृत्तीवेतन योजना)",
+    "department": "Social Justice and Special Assistance Department, Government of Maharashtra",
+    "summary": "Provides Rs. 1,500 monthly state/joint pension to destitute senior citizens aged 65 and above in Maharashtra under Group A (Central BPL) or Group B (Non-BPL, income <= Rs. 21,000). (DRAFT CANDIDATE - NON-PRODUCTION)",
+    "benefits": [
+      "Consolidated monthly pension of Rs. 1,500 per month deposited via DBT",
+      "Group A: Joint central (IGNOAPS Rs. 200/500) + state top-up (Rs. 1,300/1,000)",
+      "Group B: 100% state-funded pension of Rs. 1,500 per month",
+      "Enhanced assistance of Rs. 2,500 per month for severe disability (>= 80%) under September 2025 amendment"
+    ],
+    "required_documents": [
+      "Age proof verifying 65+ years (Birth Certificate, School Board Certificate, Civil Surgeon Age Certificate, Voter ID extract)",
+      "15-year Maharashtra Residence / Domicile Certificate",
+      "Group A: Certified copy of family inclusion in Central BPL list (issued by Gram Sevak / BDO / Chief Officer)",
+      "Group B: Tahsildar Income Certificate showing annual family income <= Rs. 21,000",
+      "Aadhaar-linked bank account passbook"
+    ],
+    "eligibility_rule": {
+      "op": "all",
+      "children": [
+        {
+          "op": "eq",
+          "children": [],
+          "field": "resident_state",
+          "value": "maharashtra",
+          "condition_id": "c_shravanbal_residence",
+          "as_of_date": null
+        },
+        {
+          "op": "gte",
+          "children": [],
+          "field": "age",
+          "value": 65,
+          "condition_id": "c_shravanbal_age_gte_65",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "receiving_other_pension",
+          "value": false,
+          "condition_id": "c_shravanbal_no_other_pension",
+          "as_of_date": null
+        },
+        {
+          "op": "any",
+          "children": [
+            {
+              "op": "eq",
+              "children": [],
+              "field": "bpl",
+              "value": true,
+              "condition_id": "c_shravanbal_group_a_bpl",
+              "as_of_date": null
+            },
+            {
+              "op": "all",
+              "children": [
+                {
+                  "op": "eq",
+                  "children": [],
+                  "field": "bpl",
+                  "value": false,
+                  "condition_id": "c_shravanbal_group_b_non_bpl",
+                  "as_of_date": null
+                },
+                {
+                  "op": "lte",
+                  "children": [],
+                  "field": "annual_family_income",
+                  "value": 21000,
+                  "condition_id": "c_shravanbal_group_b_income",
+                  "as_of_date": null
+                }
+              ],
+              "field": null,
+              "value": null,
+              "condition_id": null,
+              "as_of_date": null
+            }
+          ],
+          "field": null,
+          "value": null,
+          "condition_id": null,
+          "as_of_date": null
+        }
+      ],
+      "field": null,
+      "value": null,
+      "condition_id": null,
+      "as_of_date": null
+    },
+    "sources": [
+      {
+        "source_name": "Maharashtra GR No. Visayo-2018/CR62/Visayo (Base GR)",
+        "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+        "source_kind": "government_resolution",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "शासन निर्णय क्र. विसयो-२०१८/प्र.क्र.६२/विसयो दिनांक २० ऑगस्ट २०१९: ६५ वर्षे व त्यावरील ज्येष्ठ नागरिकांसाठी निवृत्तीवेतन. गट (अ): केंद्र शासनाच्या BPL यादीत नाव असणे. गट (ब): BPL नसलेले मात्र कौटुंबिक वार्षिक उत्पन्न रु. २१,००० पेक्षा जास्त नसलेले ज्येष्ठ नागरिक.",
+        "evidence_sha256": "85ebc9241b4a3f3962ee5261898adb183854873aa719b33a349fb05626704153",
+        "page_or_section": "Part II (Group A & B)"
+      },
+      {
+        "source_name": "Maharashtra GR No. Visayo-2023/CR30/Visayo (Assistance Revision)",
+        "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202307061137387522.pdf",
+        "source_kind": "government_resolution",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "शासन निर्णय क्र. विसयो-२०२३/प्र.क्र.३०/विसयो दिनांक ०५ जुलै २०२३: श्रावणबाळ योजनेच्या अनुदानात वाढ करून दरमहा एकत्रित रु. १,५००/- करण्यात येत आहे.",
+        "evidence_sha256": "e442859d35c7936cd2d201fba6faa5f3eebacadafcdaa0fb20c05d3e96d005fa",
+        "page_or_section": "Clauses 1-2"
+      },
+      {
+        "source_name": "Divyang Kalyan Dept GR No. Diayo-2025/CR48/Visayo",
+        "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202509151520117822.pdf",
+        "source_kind": "government_resolution",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "शासन निर्णय क्र. दिअयो-२०२५/प्र.क्र.४८/विसयो दिनांक १५ सप्टेंबर २०२५: तीव्र दिव्यांगत्व (८०% वरील) असलेल्या वृद्ध लाभार्थ्यांना दरमहा रु. २,५००/- एकत्रित निवृत्तीवेतन देय राहील.",
+        "evidence_sha256": "64916b3c03e13c96b309159db76d41c0b72c757a603c4f765c6d0f0595892a31",
+        "page_or_section": "Para 2"
+      }
+    ],
+    "rule_version": "0.2.2-candidate-draft",
+    "rule_status": "draft",
+    "approved_by": null,
+    "approval_reference": null,
+    "last_verified_at": null,
+    "languages": [
+      "en"
+    ],
+    "evidence": [
+      {
+        "condition_id": "c_shravanbal_residence",
+        "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+        "official_reference": "201908201732007222",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2019-08-20",
+        "effective_from": "2019-09-01",
+        "effective_until": null,
+        "page_or_section": "Para 2",
+        "verbatim_excerpt": "अर्जदार हा महाराष्ट्र राज्याचा १५ वर्षे सततचा रहिवासी असणे आवश्यक आहे.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Applicant must be a continuous resident of Maharashtra state for at least 15 years.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "8864572c07c465ffde56f1dc38cfe897f22a4e6e7e27ea563ed4adf7607bfeb6",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_shravanbal_age_gte_65",
+        "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+        "official_reference": "201908201732007222",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2019-08-20",
+        "effective_from": "2019-09-01",
+        "effective_until": null,
+        "page_or_section": "Part II",
+        "verbatim_excerpt": "अर्जदाराचे वय ६५ वर्षे किंवा त्याहून अधिक असणे आवश्यक आहे.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Applicant's age must be 65 years or above.",
+        "translation_provenance": "Direct translation",
+        "source_document_sha256": "add7cdd140fb46a260fc72ffc04f30bdd14551f2b707b859e5c07a23281eb086",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_shravanbal_no_other_pension",
+        "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+        "official_reference": "201908201732007222",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2019-08-20",
+        "effective_from": "2019-09-01",
+        "effective_until": null,
+        "page_or_section": "Para 4",
+        "verbatim_excerpt": "अर्जदारास इतर कोणत्याही शासकीय योजनेतून निवृत्तीवेतन मिळत नसावे.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Applicant must not be receiving pension from any other government scheme.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "d2a5cc666c830a032c5c80da67cf32ebfa821db2c8de5bdb1e0491710611260f",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": "UNRESOLVED POLICY CONFLICT (POL-SHRAVANBAL-01): Apparent statutory conflict between the no-other-pension exclusion clause ('अर्जदारास इतर कोणत्याही शासकीय योजनेतून निवृत्तीवेतन मिळत नसावे') and the Group A funding structure, which co-funds the Central Indira Gandhi National Old Age Pension Scheme (IGNOAPS). GR 20-08-2019 (Para 4) does not textually specify whether an existing IGNOAPS beneficiary is barred from receiving the state top-up under this exclusion clause or whether Group A acts as an automatic co-sanctioning vehicle. In accordance with strict governance principles, no unwritten exception is invented, and the condition remains marked UNRESOLVED pending formal written clarification from the Social Justice and Special Assistance Department."
+      },
+      {
+        "condition_id": "c_shravanbal_group_a_bpl",
+        "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+        "official_reference": "201908201732007222",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2019-08-20",
+        "effective_from": "2019-09-01",
+        "effective_until": null,
+        "page_or_section": "Part II (Group A)",
+        "verbatim_excerpt": "गट (अ): अर्जदाराचे अथवा त्याच्या कुटुंबाचे नाव केंद्र शासनाच्या दारिद्र्यरेषेखालील (BPL) यादीत समाविष्ट असावे.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Group A: Applicant or family name must be included in Central Government BPL list.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "e60e28e094f08d637e0d932ec0f95cd7e3c90b4f2d9a32cfb263f8ac7d06c8d3",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_shravanbal_group_b_non_bpl",
+        "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+        "official_reference": "201908201732007222",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2019-08-20",
+        "effective_from": "2019-09-01",
+        "effective_until": null,
+        "page_or_section": "Part II (Group B)",
+        "verbatim_excerpt": "गट (ब): अर्जदाराचे नाव दारिद्र्यरेषेखालील (BPL) यादीत नसावे.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Group B: Applicant name must not be in the BPL list.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "cf10feb659090caa1ec2578c41cba1e9aa7d36d52aef8adfdf5cacdb2bddd127",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_shravanbal_group_b_income",
+        "source_title": "Maharashtra GR No. Visayo-2018/CR62/Visayo",
+        "official_reference": "201908201732007222",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201908201732007222.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2019-08-20",
+        "effective_from": "2019-09-01",
+        "effective_until": null,
+        "page_or_section": "Part II (Group B)",
+        "verbatim_excerpt": "कुटुंबाचे एकूण वार्षिक उत्पन्न रु. २१,०००/- पेक्षा जास्त नसावे.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Total annual family income must not exceed Rs. 21,000.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "f3f5b1dd53ada9970e99ee57288e14c21512d71b51252c7c5a280acb8496d9a2",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      }
+    ],
+    "document_requirements": [],
+    "eligibility_reference_date": null,
+    "publication_authorized": false
+  },
+  {
+    "scheme_id": "candidate-post-matric-sc",
+    "name": "Centrally Sponsored Post-Matric Scholarship for SC Students (भारत सरकार मॅट्रिकोत्तर शिष्यवृत्ती - अनुसूचित जाती)",
+    "department": "Social Justice and Special Assistance Department, Government of Maharashtra",
+    "summary": "Provides reimbursement of compulsory non-refundable fees and monthly maintenance allowance to eligible SC/Nav-Bouddha students pursuing post-matric studies with parental annual income up to Rs. 2,50,000. (DRAFT CANDIDATE - NON-PRODUCTION)",
+    "benefits": [
+      "100% reimbursement of tuition fees, examination fees, and other compulsory non-refundable course fees",
+      "Monthly maintenance allowance categorized across Course Groups I to IV for hostellers and day scholars",
+      "Additional disability allowances for eligible scholars with benchmark disabilities"
+    ],
+    "required_documents": [
+      "Caste Certificate (SC / Nav-Bouddha) issued by Sub-Divisional Officer / Deputy Collector",
+      "Caste Validity Certificate (mandatory for professional and degree courses)",
+      "Income Certificate (<= Rs. 2,50,000) issued by competent revenue authority (Tahsildar)",
+      "Maharashtra Domicile Certificate",
+      "SSC/10th Marksheet and qualifying examination marksheets",
+      "Current year college fee receipt and admission confirmation letter",
+      "Aadhaar-linked bank account passbook"
+    ],
+    "eligibility_rule": {
+      "op": "all",
+      "children": [
+        {
+          "op": "eq",
+          "children": [],
+          "field": "resident_state",
+          "value": "maharashtra",
+          "condition_id": "c_pms_sc_resident",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "caste_category",
+          "value": "sc",
+          "condition_id": "c_pms_sc_caste",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "is_student",
+          "value": true,
+          "condition_id": "c_pms_sc_is_student",
+          "as_of_date": null
+        },
+        {
+          "op": "lte",
+          "children": [],
+          "field": "annual_family_income",
+          "value": 250000,
+          "condition_id": "c_pms_sc_income",
+          "as_of_date": null
+        }
+      ],
+      "field": null,
+      "value": null,
+      "condition_id": null,
+      "as_of_date": null
+    },
+    "sources": [
+      {
+        "source_name": "MoSJE Central Scheme Guidelines (15th FC Cycle)",
+        "source_url": "https://socialjustice.gov.in/writereaddata/UploadFile/Revised%20PMS%20SC%20Guidelines.pdf",
+        "source_kind": "official_notification",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "Centrally Sponsored Scheme Guidelines (Letter No. 14011/1/2020-SCD-V): Scheme provides financial assistance to SC students pursuing post-matric studies. Parental annual income from all sources does not exceed Rs. 2,50,000/-. Operative 60:40 fund split.",
+        "evidence_sha256": "ea3eb29a117cd2801e6bc4d0cfb8fb89cfb81fe5bb9d6889d17a19c62a1b90f8",
+        "page_or_section": "Para 1-5"
+      },
+      {
+        "source_name": "Maharashtra GR No. BCS-2020/CR25/Shikshan-2",
+        "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202103311652003222.pdf",
+        "source_kind": "government_resolution",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "शासन निर्णय क्र. बीसीएस-२०२०/प्र.क्र.२५/शिक्षण-२ दिनांक ३१ मार्च २०२१: केंद्र पुरस्कृत भारत सरकार मॅट्रिकोत्तर शिष्यवृत्ती योजना सुधारित मार्गदर्शक तत्त्वे राज्यात लागू. अनुसूचित जाती व नवबौद्ध विद्यार्थ्यांना शिक्षण शुल्क, परीक्षा शुल्क व निर्वाह भत्ता अनुज्ञेय.",
+        "evidence_sha256": "00509bd842a37ba389e01eada1b2c00f8d3986055fbc5be85f58db306355fd56",
+        "page_or_section": "Para 1-4"
+      },
+      {
+        "source_name": "MahaDBT 2.0 SC Scholarship Portal Notice",
+        "source_url": "https://mahadbt2.maharashtra.gov.in/",
+        "source_kind": "official_portal",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "MahaDBT 2.0 Notification for AY 2026-27: Fresh and renewal applications invited for Centrally Sponsored Post-Matric Scholarship for SC Students. Mandatory biometric/OTP Aadhaar authentication.",
+        "evidence_sha256": "e7f18c8da7d67382a32f5180ab030452e03e96f4e67c5f6976a4fb0c54c70bc0",
+        "page_or_section": "Academic Year 2026-27 Onboarding Notice"
+      }
+    ],
+    "rule_version": "0.2.2-candidate-draft",
+    "rule_status": "draft",
+    "approved_by": null,
+    "approval_reference": null,
+    "last_verified_at": null,
+    "languages": [
+      "en"
+    ],
+    "evidence": [
+      {
+        "condition_id": "c_pms_sc_resident",
+        "source_title": "MoSJE Scheme Guidelines & Maharashtra Adoption GR",
+        "official_reference": "14011/1/2020-SCD-V & 202103311652003222",
+        "official_source_url": "https://socialjustice.gov.in/writereaddata/UploadFile/Revised%20PMS%20SC%20Guidelines.pdf",
+        "source_type": "central_scheme_guideline",
+        "publication_date": "2020-12-31",
+        "effective_from": "2020-04-01",
+        "effective_until": null,
+        "page_or_section": "Para 4.1",
+        "verbatim_excerpt": "The scholarships are awarded by the government of the State to which the applicant actually belongs (permanently settled).",
+        "excerpt_language": "en",
+        "translated_excerpt": null,
+        "translation_provenance": null,
+        "source_document_sha256": "0749b541b8a04a6c6f6c61b6951bd4c914403b9dfc1f7e5bdccccae97823fa60",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": "Administered continuously; 16th Finance Commission revised central guidelines pending official gazette notification."
+      },
+      {
+        "condition_id": "c_pms_sc_caste",
+        "source_title": "MoSJE Scheme Guidelines",
+        "official_reference": "14011/1/2020-SCD-V",
+        "official_source_url": "https://socialjustice.gov.in/writereaddata/UploadFile/Revised%20PMS%20SC%20Guidelines.pdf",
+        "source_type": "central_scheme_guideline",
+        "publication_date": "2020-12-31",
+        "effective_from": "2020-04-01",
+        "effective_until": null,
+        "page_or_section": "Para 4.2",
+        "verbatim_excerpt": "The scholarships are available only to students belonging to Scheduled Castes.",
+        "excerpt_language": "en",
+        "translated_excerpt": null,
+        "translation_provenance": null,
+        "source_document_sha256": "ac40b8a74030d1b6491e97e073505743edff8e28266c2ba791f656d6697f5fe0",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": "In Maharashtra, recognizes Scheduled Castes and Nav-Bouddha community."
+      },
+      {
+        "condition_id": "c_pms_sc_is_student",
+        "source_title": "MoSJE Scheme Guidelines",
+        "official_reference": "14011/1/2020-SCD-V",
+        "official_source_url": "https://socialjustice.gov.in/writereaddata/UploadFile/Revised%20PMS%20SC%20Guidelines.pdf",
+        "source_type": "central_scheme_guideline",
+        "publication_date": "2020-12-31",
+        "effective_from": "2020-04-01",
+        "effective_until": null,
+        "page_or_section": "Para 3",
+        "verbatim_excerpt": "The scholarship will be provided for post-matriculation studies in recognized institutions.",
+        "excerpt_language": "en",
+        "translated_excerpt": null,
+        "translation_provenance": null,
+        "source_document_sha256": "c508d7515c5fc2f8f70b17bfb2c9e6741bb299e3ebfc048ac59d4764be5e9ffc",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_pms_sc_income",
+        "source_title": "MoSJE Scheme Guidelines",
+        "official_reference": "14011/1/2020-SCD-V",
+        "official_source_url": "https://socialjustice.gov.in/writereaddata/UploadFile/Revised%20PMS%20SC%20Guidelines.pdf",
+        "source_type": "central_scheme_guideline",
+        "publication_date": "2020-12-31",
+        "effective_from": "2020-04-01",
+        "effective_until": null,
+        "page_or_section": "Para 5",
+        "verbatim_excerpt": "Parental annual income from all sources does not exceed Rs. 2,50,000/-.",
+        "excerpt_language": "en",
+        "translated_excerpt": null,
+        "translation_provenance": null,
+        "source_document_sha256": "ba69216f5e338844449e0d08f0f925bd5f0256b56afa60280cb5e8bc40842672",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": "Distinct from Top Class Education Scheme for SC Students which has an Rs. 8 Lakh ceiling and applies to premier institutes only."
+      }
+    ],
+    "document_requirements": [],
+    "eligibility_reference_date": null,
+    "publication_authorized": false
+  },
+  {
+    "scheme_id": "candidate-post-matric-obc",
+    "name": "Post Matric Scholarship to OBC Students (इतर मागासवर्गीय मॅट्रिकोत्तर शिष्यवृत्ती योजना)",
+    "department": "Other Backward Bahujan Welfare Department, Government of Maharashtra",
+    "summary": "Provides tuition fee reimbursement and monthly maintenance allowance to eligible OBC students pursuing post-matric courses with parental annual income up to Rs. 2.5 Lakh (MahaDBT active threshold). (DRAFT CANDIDATE - NON-PRODUCTION)",
+    "benefits": [
+      "100% Tuition Fee & Examination Fee in Government / Aided institutions; 50% in private unaided institutions",
+      "Monthly maintenance allowance paid for 10 months according to course group (Group A to E) for day scholars and hostellers",
+      "Book allowances and thesis completion charges for post-graduate/research scholars where applicable"
+    ],
+    "required_documents": [
+      "Caste Certificate (OBC) issued by Sub-Divisional Officer / Deputy Collector",
+      "Valid Non-Creamy Layer (NCL) Certificate for current financial year",
+      "Income Certificate (<= Rs. 2,50,000) issued by Tahsildar",
+      "Maharashtra Domicile Certificate",
+      "Previous year examination marksheet",
+      "College admission fee receipt and Bonafide Certificate",
+      "Aadhaar-linked bank account passbook"
+    ],
+    "eligibility_rule": {
+      "op": "all",
+      "children": [
+        {
+          "op": "eq",
+          "children": [],
+          "field": "resident_state",
+          "value": "maharashtra",
+          "condition_id": "c_pms_obc_residence",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "caste_category",
+          "value": "obc",
+          "condition_id": "c_pms_obc_caste",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "is_student",
+          "value": true,
+          "condition_id": "c_pms_obc_is_student",
+          "as_of_date": null
+        },
+        {
+          "op": "lte",
+          "children": [],
+          "field": "annual_family_income",
+          "value": 250000,
+          "condition_id": "c_pms_obc_income",
+          "as_of_date": null
+        }
+      ],
+      "field": null,
+      "value": null,
+      "condition_id": null,
+      "as_of_date": null
+    },
+    "sources": [
+      {
+        "source_name": "Maharashtra GR No. EBC-2012/CR229/Mavak-2",
+        "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201310141640003222.pdf",
+        "source_kind": "government_resolution",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "शासन निर्णय क्र. ईबीसी-२०१२/प्र.क्र.२२९/मावक-२ दिनांक १४ ऑक्टोबर २०१३: इतर मागास प्रवर्गातील विद्यार्थ्यांसाठी मॅट्रिकोत्तर शिष्यवृत्ती योजना. शिक्षण शुल्क, परीक्षा शुल्क व निर्वाह भत्ता अनुज्ञेय. (महाडीबीटी २.० वरील निकष: वार्षिक उत्पन्न मर्यादा रु. २.५० लाख).",
+        "evidence_sha256": "1984fec908092e8b9bec87699b7eb07036548787bef6456c86b3a7296177c285",
+        "page_or_section": "Para 1-4"
+      },
+      {
+        "source_name": "MahaDBT 2.0 Post-Matric OBC Scheme Portal Guidelines",
+        "source_url": "https://mahadbt2.maharashtra.gov.in/",
+        "source_kind": "official_portal",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "MahaDBT 2.0 Official Scheme Details - Post Matric Scholarship to OBC Students: Applicant must belong to OBC category with valid Non-Creamy Layer. Parental annual income should be less than or equal to Rs. 2.50 Lakh. Mandatory 75% attendance. Provides fees and maintenance.",
+        "evidence_sha256": "ef98b5aad90d63be2a430deaf4fbd34ea17985ae27b38632bc1ae23d8f49a439",
+        "page_or_section": "Eligibility & Scheme Rules"
+      }
+    ],
+    "rule_version": "0.2.2-candidate-draft",
+    "rule_status": "draft",
+    "approved_by": null,
+    "approval_reference": null,
+    "last_verified_at": null,
+    "languages": [
+      "en"
+    ],
+    "evidence": [
+      {
+        "condition_id": "c_pms_obc_residence",
+        "source_title": "Maharashtra GR No. EBC-2012/CR229/Mavak-2 & MahaDBT Rules",
+        "official_reference": "201310141640003222",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201310141640003222.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2013-10-14",
+        "effective_from": "2013-10-14",
+        "effective_until": null,
+        "page_or_section": "Cl. 1",
+        "verbatim_excerpt": "अर्जदार विद्यार्थी हा इतर मागास प्रवर्गातील व महाराष्ट्राचा रहिवासी असावा.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Applicant student must belong to Other Backward Classes and be a resident of Maharashtra.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "d11acdb4a9a1f4e18d1df3e2d197e931c4d14e6b676baf250e4c7c989cff55d6",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_pms_obc_caste",
+        "source_title": "Maharashtra GR No. EBC-2012/CR229/Mavak-2",
+        "official_reference": "201310141640003222",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201310141640003222.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2013-10-14",
+        "effective_from": "2013-10-14",
+        "effective_until": null,
+        "page_or_section": "Cl. 1",
+        "verbatim_excerpt": "इतर मागास प्रवर्गातील (OBC) सक्षम प्राधिकरणाचे वैध जात प्रमाणपत्र असणे आवश्यक आहे.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Valid caste certificate of OBC category issued by competent authority is required.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "e17fa52af4d83807d916467a90ce5471565b6ecf1a4e17cf831c0642cf43683c",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_pms_obc_is_student",
+        "source_title": "Maharashtra GR No. EBC-2012/CR229/Mavak-2",
+        "official_reference": "201310141640003222",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201310141640003222.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2013-10-14",
+        "effective_from": "2013-10-14",
+        "effective_until": null,
+        "page_or_section": "Cl. 2",
+        "verbatim_excerpt": "विद्यार्थी मान्यताप्राप्त संस्थेत दहावीनंतरच्या उच्च शिक्षणात नियमित शिकत असावा.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Student must be regularly studying in recognized post-matric course in an approved institution.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "cd266847d5aad10deb25bef2f4af3599778a7fc94b8bf9507d079061ddd61130",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_pms_obc_income",
+        "source_title": "MahaDBT 2.0 Operating Scheme Portal Guidelines",
+        "official_reference": "MahaDBT-OBC-PMS-2026",
+        "official_source_url": "https://mahadbt2.maharashtra.gov.in/",
+        "source_type": "official_portal",
+        "publication_date": "2024-07-01",
+        "effective_from": "2024-07-01",
+        "effective_until": null,
+        "page_or_section": "Income Eligibility Section",
+        "verbatim_excerpt": "Parental annual income should be less than or equal to Rs. 2.50 Lakh.",
+        "excerpt_language": "en",
+        "translated_excerpt": null,
+        "translation_provenance": null,
+        "source_document_sha256": "7119921bcb093129cb25433d3e4edf6cf907979cb6ef1c4dda88d76ba76a8be6",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": "Active MahaDBT portal specifies Rs. 2.5 Lakh. Base 2013 GR specified Rs. 1 Lakh. State GR amending threshold to 2.5L is not indexed on gr.maharashtra.gov.in; flagged for review."
+      }
+    ],
+    "document_requirements": [],
+    "eligibility_reference_date": null,
+    "publication_authorized": false
+  },
+  {
+    "scheme_id": "candidate-post-matric-obc-girls-professional",
+    "name": "Post Matric Scholarship to the Girls Belonging to OBC taking admission in Professional Courses (व्यावसायिक अभ्यासक्रमास प्रवेश घेणाऱ्या इतर मागास प्रवर्गातील मुलींना मॅट्रिकोत्तर शिष्यवृत्ती)",
+    "department": "Other Backward Bahujan Welfare Department, Government of Maharashtra",
+    "summary": "Provides 100% scholarship covering tuition fees, examination fees, and monthly maintenance allowance to female OBC students in professional courses with parental annual income up to Rs. 2.5 Lakh. (DRAFT CANDIDATE - NON-PRODUCTION)",
+    "benefits": [
+      "100% Tuition Fee and Examination Fee reimbursement",
+      "Monthly maintenance allowance to support academic and living expenses",
+      "Hosteller allowance (1/3rd of standard rate if residing in a government hostel)"
+    ],
+    "required_documents": [
+      "OBC Caste Certificate issued by competent revenue authority",
+      "Valid Non-Creamy Layer (NCL) Certificate",
+      "Income Certificate (<= Rs. 2,50,000) issued by Tahsildar",
+      "Maharashtra Domicile Certificate",
+      "College admission receipt and Bonafide Certificate in a recognized professional course",
+      "Previous year marksheet",
+      "Aadhaar-linked bank account passbook"
+    ],
+    "eligibility_rule": {
+      "op": "all",
+      "children": [
+        {
+          "op": "eq",
+          "children": [],
+          "field": "resident_state",
+          "value": "maharashtra",
+          "condition_id": "c_pms_obc_gp_residence",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "caste_category",
+          "value": "obc",
+          "condition_id": "c_pms_obc_gp_caste",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "gender",
+          "value": "female",
+          "condition_id": "c_pms_obc_gp_gender",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "is_student",
+          "value": true,
+          "condition_id": "c_pms_obc_gp_is_student",
+          "as_of_date": null
+        },
+        {
+          "op": "lte",
+          "children": [],
+          "field": "annual_family_income",
+          "value": 250000,
+          "condition_id": "c_pms_obc_gp_income",
+          "as_of_date": null
+        }
+      ],
+      "field": null,
+      "value": null,
+      "condition_id": null,
+      "as_of_date": null
+    },
+    "sources": [
+      {
+        "source_name": "MahaDBT Official Portal - Girls Professional Post-Matric Scheme",
+        "source_url": "https://mahadbt2.maharashtra.gov.in/",
+        "source_kind": "official_portal",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "MahaDBT Scheme Details - Post Matric Scholarship to the Girls Belonging to Other Backward Classes taking admission in Professional Courses: Female OBC students enrolled in recognized professional courses with parental annual income up to Rs. 2.50 Lakh. Provides 100% scholarship covering tuition fees, exam fees, and monthly maintenance allowance (1/3rd for govt hostel inmates).",
+        "evidence_sha256": "fe67a6e74f1fd0f4c80a765abfe7d8980dc565dfeb2e83f4b0a973a712c85109",
+        "page_or_section": "OBC Girls Professional Scheme Guidelines"
+      }
+    ],
+    "rule_version": "0.2.2-candidate-draft",
+    "rule_status": "draft",
+    "approved_by": null,
+    "approval_reference": null,
+    "last_verified_at": null,
+    "languages": [
+      "en"
+    ],
+    "evidence": [
+      {
+        "condition_id": "c_pms_obc_gp_residence",
+        "source_title": "MahaDBT Girls Professional Post-Matric Guidelines",
+        "official_reference": "MahaDBT-OBC-GP-2026",
+        "official_source_url": "https://mahadbt2.maharashtra.gov.in/",
+        "source_type": "official_portal",
+        "publication_date": "2024-07-01",
+        "effective_from": "2024-07-01",
+        "effective_until": null,
+        "page_or_section": "Domicile Criteria",
+        "verbatim_excerpt": "The applicant must be a resident and domicile of Maharashtra State.",
+        "excerpt_language": "en",
+        "translated_excerpt": null,
+        "translation_provenance": null,
+        "source_document_sha256": "de8d5f43a1a5e680af073efdbecfca20a14f0a0fc1bee6976789bbe7687aff9a",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_pms_obc_gp_caste",
+        "source_title": "MahaDBT Girls Professional Post-Matric Guidelines",
+        "official_reference": "MahaDBT-OBC-GP-2026",
+        "official_source_url": "https://mahadbt2.maharashtra.gov.in/",
+        "source_type": "official_portal",
+        "publication_date": "2024-07-01",
+        "effective_from": "2024-07-01",
+        "effective_until": null,
+        "page_or_section": "Caste Verification",
+        "verbatim_excerpt": "Applicant must belong to Other Backward Classes category with valid Non-Creamy Layer certificate.",
+        "excerpt_language": "en",
+        "translated_excerpt": null,
+        "translation_provenance": null,
+        "source_document_sha256": "4e316d0bb25985893a7ab18cdd455ee10a3c8f808e35de42c5c89d9fd068ced9",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_pms_obc_gp_gender",
+        "source_title": "MahaDBT Girls Professional Post-Matric Guidelines",
+        "official_reference": "MahaDBT-OBC-GP-2026",
+        "official_source_url": "https://mahadbt2.maharashtra.gov.in/",
+        "source_type": "official_portal",
+        "publication_date": "2024-07-01",
+        "effective_from": "2024-07-01",
+        "effective_until": null,
+        "page_or_section": "Gender Eligibility",
+        "verbatim_excerpt": "Scheme is strictly restricted to female students belonging to Other Backward Classes.",
+        "excerpt_language": "en",
+        "translated_excerpt": null,
+        "translation_provenance": null,
+        "source_document_sha256": "2cf1ec114c482ea3e628ddeb5bde052becea76d0c3a48e750b079a79c3a683e1",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_pms_obc_gp_is_student",
+        "source_title": "MahaDBT Girls Professional Post-Matric Guidelines",
+        "official_reference": "MahaDBT-OBC-GP-2026",
+        "official_source_url": "https://mahadbt2.maharashtra.gov.in/",
+        "source_type": "official_portal",
+        "publication_date": "2024-07-01",
+        "effective_from": "2024-07-01",
+        "effective_until": null,
+        "page_or_section": "Enrollment Status",
+        "verbatim_excerpt": "Student must be enrolled and pursuing studies in an approved post-matric institution.",
+        "excerpt_language": "en",
+        "translated_excerpt": null,
+        "translation_provenance": null,
+        "source_document_sha256": "aefd04ad80c13b497cc3790fbee0e739893a838cd4cbdf3de6eed287cd011b8f",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": "Restricted to professional degree/diploma courses verified via college bonafide and admission letter."
+      },
+      {
+        "condition_id": "c_pms_obc_gp_income",
+        "source_title": "MahaDBT Girls Professional Post-Matric Guidelines",
+        "official_reference": "MahaDBT-OBC-GP-2026",
+        "official_source_url": "https://mahadbt2.maharashtra.gov.in/",
+        "source_type": "official_portal",
+        "publication_date": "2024-07-01",
+        "effective_from": "2024-07-01",
+        "effective_until": null,
+        "page_or_section": "Income Threshold",
+        "verbatim_excerpt": "Parental annual income must be less than or equal to Rs. 2,50,000/- for full scholarship and maintenance benefits.",
+        "excerpt_language": "en",
+        "translated_excerpt": null,
+        "translation_provenance": null,
+        "source_document_sha256": "acfd4ec8dc8ca73073dcdd8032a2ddd2e26f5e0ddb7f5b70bd1bfb4a1c0d503b",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": "MahaDBT explicit threshold for this girls professional track is Rs. 2.50 Lakh. Includes maintenance allowance."
+      }
+    ],
+    "document_requirements": [],
+    "eligibility_reference_date": null,
+    "publication_authorized": false
+  },
+  {
+    "scheme_id": "candidate-payment-tuition-exam-fees-obc-girls",
+    "name": "Payment of Tuition Fees and Examination Fees to OBC Girls Pursuing Professional Courses (व्यावसायिक अभ्यासक्रमास प्रवेश घेणाऱ्या इतर मागास प्रवर्गातील मुलींना शिक्षण शुल्क व परीक्षा शुल्क प्रतिपूर्ती)",
+    "department": "Higher and Technical Education Department, Government of Maharashtra",
+    "summary": "Provides 100% reimbursement of tuition and examination fees to eligible female OBC/EWS/SEBC students admitted through CAP in recognized professional courses with family annual income up to Rs. 8 Lakh under GR 8 July 2024. Crucially, provides NO maintenance allowance. (DRAFT CANDIDATE - NON-PRODUCTION)",
+    "benefits": [
+      "100% Tuition Fee waiver / reimbursement approved by Fee Regulating Authority (FRA)",
+      "100% Examination Fee reimbursement",
+      "NO monthly maintenance allowance is provided under this scheme"
+    ],
+    "required_documents": [
+      "Caste Certificate (OBC) issued by Sub-Divisional Officer / Deputy Collector",
+      "Valid Non-Creamy Layer (NCL) Certificate for current financial year",
+      "Income Certificate (<= Rs. 8,00,000) issued by Tahsildar",
+      "Maharashtra Domicile Certificate",
+      "CAP Allotment Letter confirming admission via Centralized Admission Process",
+      "College fee receipt and Bonafide Certificate",
+      "Previous qualifying examination marksheet (minimum 75% attendance record)",
+      "Aadhaar-linked bank account passbook"
+    ],
+    "eligibility_rule": {
+      "op": "all",
+      "children": [
+        {
+          "op": "eq",
+          "children": [],
+          "field": "resident_state",
+          "value": "maharashtra",
+          "condition_id": "c_fee_waiver_obc_girls_residence",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "caste_category",
+          "value": "obc",
+          "condition_id": "c_fee_waiver_obc_girls_caste",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "gender",
+          "value": "female",
+          "condition_id": "c_fee_waiver_obc_girls_gender",
+          "as_of_date": null
+        },
+        {
+          "op": "eq",
+          "children": [],
+          "field": "is_student",
+          "value": true,
+          "condition_id": "c_fee_waiver_obc_girls_is_student",
+          "as_of_date": null
+        },
+        {
+          "op": "lte",
+          "children": [],
+          "field": "annual_family_income",
+          "value": 800000,
+          "condition_id": "c_fee_waiver_obc_girls_income",
+          "as_of_date": null
+        }
+      ],
+      "field": null,
+      "value": null,
+      "condition_id": null,
+      "as_of_date": null
+    },
+    "sources": [
+      {
+        "source_name": "Maharashtra GR No. Shishyavru-2024/CR105/Tanshi-4",
+        "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407081745123408.pdf",
+        "source_kind": "government_resolution",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "शासन निर्णय क्र. शिष्यवृ-२०२४/प्र.क्र.१०५/तांशि-४ दिनांक ०८ जुलै २०२४: उच्च व तंत्र शिक्षण विभाग अंतर्गत व्यावसायिक अभ्यासक्रमांना केंद्रीभूत प्रवेश प्रक्रियेद्वारे (CAP) प्रवेश घेतलेल्या इतर मागास वर्ग (OBC), ईडब्ल्यूएस व एसईबीसी प्रवर्गातील मुलींना, ज्यांच्या कुटुंबाचे वार्षिक उत्पन्न रु. ८.०० लाखांपर्यंत आहे, त्यांना १००% शिक्षण शुल्क व परीक्षा शुल्क प्रतिपूर्ती. (कोणताही निर्वाह भत्ता अनुज्ञेय नाही).",
+        "evidence_sha256": "da5b6f552073347fe6912a8f82b444c100b9bfce5e6fa21e970605e02a21cc2d",
+        "page_or_section": "Para 1-4 & Government Decision"
+      },
+      {
+        "source_name": "MahaDBT 2.0 Fee Waiver Scheme Portal Guidelines",
+        "source_url": "https://mahadbt2.maharashtra.gov.in/",
+        "source_kind": "official_portal",
+        "retrieved_at": "2026-11-08T00:00:00",
+        "evidence_excerpt": "MahaDBT 2.0 Notification - Payment of Tuition Fees and Examination Fees to OBC Girls Pursuing Professional Courses: Female OBC students admitted through CAP round in approved professional/technical courses. Family annual income up to Rs. 8,00,000 with valid Non-Creamy Layer. 75% minimum attendance required. 100% fee waiver only.",
+        "evidence_sha256": "956807ecde16674ec955ddf373d14d03d353b0ffd594126fee44f96311a7c461",
+        "page_or_section": "Eligibility and Scheme Guidelines"
+      }
+    ],
+    "rule_version": "0.2.2-candidate-draft",
+    "rule_status": "draft",
+    "approved_by": null,
+    "approval_reference": null,
+    "last_verified_at": null,
+    "languages": [
+      "en"
+    ],
+    "evidence": [
+      {
+        "condition_id": "c_fee_waiver_obc_girls_residence",
+        "source_title": "Maharashtra GR No. Shishyavru-2024/CR105/Tanshi-4",
+        "official_reference": "202407081745123408",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407081745123408.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2024-07-08",
+        "effective_from": "2024-07-08",
+        "effective_until": null,
+        "page_or_section": "Preamble & Cl. 1",
+        "verbatim_excerpt": "महाराष्ट्र राज्यातील उच्च व तंत्र शिक्षण विभागाच्या मान्यताप्राप्त व्यावसायिक अभ्यासक्रमास प्रवेश घेतलेली विद्यार्थिनी.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Female student admitted to recognized professional courses under Higher & Technical Education Dept in Maharashtra.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "fb903a7b58827d55032ca1bd75acbb56e954ad5c744eb044cb58f1708161acd8",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_fee_waiver_obc_girls_caste",
+        "source_title": "Maharashtra GR No. Shishyavru-2024/CR105/Tanshi-4",
+        "official_reference": "202407081745123408",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407081745123408.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2024-07-08",
+        "effective_from": "2024-07-08",
+        "effective_until": null,
+        "page_or_section": "Cl. 1",
+        "verbatim_excerpt": "इतर मागास प्रवर्ग (OBC), ईडब्ल्यूएस व एसईबीसी प्रवर्गातील विद्यार्थिनी.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Girl students belonging to Other Backward Classes (OBC), EWS, and SEBC categories.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "843ef7cc521b121aba179e9226bcd00e7813677cd1b5e5e52e4850e96a1bba47",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_fee_waiver_obc_girls_gender",
+        "source_title": "Maharashtra GR No. Shishyavru-2024/CR105/Tanshi-4",
+        "official_reference": "202407081745123408",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407081745123408.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2024-07-08",
+        "effective_from": "2024-07-08",
+        "effective_until": null,
+        "page_or_section": "Decision Cl. 1",
+        "verbatim_excerpt": "इतर मागास प्रवर्ग (OBC), ईडब्ल्यूएस व एसईबीसी प्रवर्गातील मुलींना ५०% ऐवजी १००% शिक्षण शुल्क व परीक्षा शुल्क प्रतिपूर्ती.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "Reimbursement of 100% instead of 50% tuition and examination fees to girls belonging to OBC, EWS and SEBC categories.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "63221fc24c6b6d91203b6ee86ab66c8158fb9b519246c5f59328888fc7c69202",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": null
+      },
+      {
+        "condition_id": "c_fee_waiver_obc_girls_is_student",
+        "source_title": "Maharashtra GR No. Shishyavru-2024/CR105/Tanshi-4",
+        "official_reference": "202407081745123408",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407081745123408.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2024-07-08",
+        "effective_from": "2024-07-08",
+        "effective_until": null,
+        "page_or_section": "Cl. 2",
+        "verbatim_excerpt": "विद्यार्थिनीने चालू शैक्षणिक वर्षात मान्यताप्राप्त अभ्यासक्रमात नियमित प्रवेश घेतलेला असावा.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "The female student must have secured regular admission in an approved course during current academic year.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "8c305531562fb875a03b5541604835bd080023abceb57fb3423ff7871541d821",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": "Applies exclusively to students admitted through Centralized Admission Process (CAP) in approved professional courses."
+      },
+      {
+        "condition_id": "c_fee_waiver_obc_girls_income",
+        "source_title": "Maharashtra GR No. Shishyavru-2024/CR105/Tanshi-4",
+        "official_reference": "202407081745123408",
+        "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407081745123408.pdf",
+        "source_type": "government_resolution",
+        "publication_date": "2024-07-08",
+        "effective_from": "2024-07-08",
+        "effective_until": null,
+        "page_or_section": "Decision Cl. 1",
+        "verbatim_excerpt": "ज्यांच्या कुटुंबाचे वार्षिक उत्पन्न रु. ८,००,०००/- पर्यंत आहे अशा मुलींना.",
+        "excerpt_language": "mr",
+        "translated_excerpt": "For girl students whose family annual income is up to Rs. 8,00,000/-.",
+        "translation_provenance": "Official translation",
+        "source_document_sha256": "f146db3c61374457d0d741d1b11d360ac733db39a12dacfb7c1f10e82915b13c",
+        "verification_status": "extracted_unverified",
+        "verified_by": null,
+        "verification_timestamp": null,
+        "notes": "Crucially, this scheme provides 100% tuition and examination fee waiver only. No maintenance allowance."
+      }
+    ],
+    "document_requirements": [],
+    "eligibility_reference_date": null,
+    "publication_authorized": false
+  }
+]

@@ -1,0 +1,11 @@
+# Keep empty until dependencies are verified against the issuing authority's current checklist.
+# Keys are canonical document IDs. A value means a prerequisite must be held before applying.
+# Never infer document dependencies from an LLM summary alone.
+verified_dependencies: {}
+review_queue:
+  - document_id: income_certificate
+    note: Verify exact district/department checklist and financial-year wording.
+  - document_id: caste_certificate
+    note: Verify required lineage, school, residence and supporting certificates from official checklist.
+  - document_id: domicile_certificate
+    note: Verify current alternatives and evidence checklist from the issuing authority.

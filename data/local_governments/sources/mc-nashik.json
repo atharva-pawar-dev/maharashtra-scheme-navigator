@@ -1,0 +1,69 @@
+[
+  {
+    "source_id": "src_mc_nashik_main",
+    "corporation_id": "mc-nashik",
+    "department": "Commissioner & Administration",
+    "official_domain": "nmc.gov.in",
+    "page_document_url": "https://nmc.gov.in",
+    "source_type": "MUNICIPAL_OFFICIAL_PORTAL",
+    "scheme_categories": [
+      "Civic Services",
+      "Administration",
+      "Citizen Facilitation"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "5af3522169fc25d2aad7fd4c7f295ff8d43b15c86595b744099a8b06547a338a",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  },
+  {
+    "source_id": "src_mc_nashik_welfare",
+    "corporation_id": "mc-nashik",
+    "department": "Social Welfare & Women Child Development",
+    "official_domain": "nmc.gov.in",
+    "page_document_url": "https://nmc.gov.in/welfare",
+    "source_type": "MUNICIPAL_SCHEME_DIRECTORY",
+    "scheme_categories": [
+      "Social Welfare",
+      "Disability Welfare",
+      "Women and Child Development",
+      "Education Grants"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "d5100dce22b246df28fb1f12fe17c2da28c7fe1497466c44dca2c151afadf466",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "Budget continuation orders verified annually"
+  },
+  {
+    "source_id": "src_mc_nashik_budget",
+    "corporation_id": "mc-nashik",
+    "department": "Finance & Accounts",
+    "official_domain": "nmc.gov.in",
+    "page_document_url": "https://nmc.gov.in/budget",
+    "source_type": "ANNUAL_BUDGET_RESOLUTION",
+    "scheme_categories": [
+      "Budget Allocation",
+      "Welfare Head 5% Divyang",
+      "Welfare Head 5% Women Child"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "309d130d7aec5cf84d0787fff8d28ebc20811f5c3f3ce0f6a483bedbbe963d77",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "RULES_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  }
+]

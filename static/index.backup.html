@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102b46">
+  <title>Scheme Navigator — Citizen Portal</title>
+  <style>
+    :root{--navy:#102b46;--blue:#1d5b83;--teal:#0f766e;--ink:#172b3a;--muted:#607284;--line:#dce5eb;--paper:#f4f7f9;--white:#fff;--amber:#fff5df;--red:#fff0ed;--green:#eaf7f0;--shadow:0 12px 34px rgba(16,43,70,.08)}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}.topbar{background:var(--navy);color:#fff;padding:17px 24px}.top-inner{max-width:1160px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;gap:12px;align-items:center}.brandmark{width:42px;height:42px;border-radius:12px;background:#d9f0ed;color:var(--navy);display:grid;place-items:center;font-weight:900;font-size:19px}.brandname{font-weight:750;letter-spacing:.2px}.brandtag{font-size:12px;color:#c7d6e2}.top-actions{display:flex;align-items:center;gap:14px}.top-actions a{color:#e7f1f7;text-decoration:none;font-size:13px}.top-actions select{background:#fff;color:var(--ink);border:0;border-radius:8px;padding:8px 10px}.wrap{max-width:1160px;margin:30px auto;padding:0 20px 60px}.hero{background:linear-gradient(115deg,#102b46,#1c5c79);color:#fff;border-radius:22px;padding:34px 36px;display:grid;grid-template-columns:1.5fr .8fr;gap:25px;box-shadow:var(--shadow)}.eyebrow{text-transform:uppercase;letter-spacing:1.7px;font-size:11px;font-weight:750;color:#a9ded7}.hero h1{font-size:clamp(28px,4vw,43px);line-height:1.12;margin:10px 0 12px;max-width:700px}.hero p{color:#d7e5ec;max-width:680px;margin:0}.hero-note{align-self:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:15px;padding:17px;color:#e8f2f6;font-size:13px}.hero-note strong{display:block;color:#fff;margin-bottom:5px}.progress{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:22px 0}.progress-item{padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:12px;display:flex;gap:8px;align-items:center}.progress-item .num{width:23px;height:23px;border-radius:50%;display:grid;place-items:center;background:#eaf0f4;color:var(--navy);font-weight:750;flex:none}.progress-item.active{border-color:#8fc9c0;color:var(--navy);background:#f0faf8}.progress-item.active .num{background:var(--teal);color:#fff}.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}.maincol{min-width:0}.sidecol{position:sticky;top:18px}.panel{background:var(--white);border:1px solid var(--line);border-radius:17px;padding:23px;margin-bottom:17px;box-shadow:0 3px 15px rgba(16,43,70,.035)}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}.step-kicker{font-size:11px;text-transform:uppercase;letter-spacing:1.1px;color:var(--teal);font-weight:800}.panel h2{font-size:21px;margin:3px 0 5px;color:var(--navy)}.sub{color:var(--muted);font-size:13px;margin:0}.pill{display:inline-flex;align-items:center;border-radius:100px;padding:5px 10px;background:#edf3f6;color:#3c5c70;font-size:11px;font-weight:750;white-space:nowrap}.scheme-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.scheme-card{border:1px solid var(--line);border-radius:13px;padding:16px;display:flex;flex-direction:column;gap:8px;min-height:180px}.scheme-card.selected{border:2px solid var(--teal);background:#f5fbfa;padding:15px}.scheme-card h3{font-size:16px;line-height:1.3;margin:0;color:var(--navy)}.scheme-card p{font-size:12px;color:var(--muted);margin:0}.scheme-card .card-bottom{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:700;color:#385265}.field input,.field select,.answer-input{width:100%;padding:11px 12px;border:1px solid #cfdbe3;border-radius:9px;background:#fff;color:var(--ink);outline:none}.field input:focus,.field select:focus,.answer-input:focus{border-color:#378e87;box-shadow:0 0 0 3px rgba(15,118,110,.1)}.hint{font-size:11px;color:var(--muted)}.btn{border:0;border-radius:9px;padding:11px 16px;font-weight:750;font-size:13px;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn-primary{background:var(--teal);color:#fff}.btn-primary:hover{background:#0b625c}.btn-secondary{background:#eaf0f4;color:var(--navy)}.btn-outline{background:#fff;border:1px solid var(--line);color:var(--navy)}.btn:disabled{opacity:.55;cursor:not-allowed}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:17px}.question-box{background:#f3f8fa;border:1px solid #dce9ed;border-radius:13px;padding:18px}.question-box h3{margin:5px 0 13px;font-size:18px;color:var(--navy)}.question-error{color:#a33b2b;font-size:12px;margin-top:9px}.answer-row{display:flex;gap:9px}.answer-row>*{flex:1}.statusline{font-size:12px;color:var(--muted);margin-top:10px}.notice{border-radius:11px;padding:12px 14px;font-size:12px;margin:12px 0}.notice.info{background:#edf5fa;color:#35576d}.notice.warn{background:var(--amber);color:#75551b}.notice.error{background:var(--red);color:#8d392d}.notice.success{background:var(--green);color:#236044}.hidden{display:none!important}.side-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px;margin-bottom:14px}.side-card h3{margin:0 0 10px;color:var(--navy);font-size:15px}.side-card p,.side-card li{color:var(--muted);font-size:12px}.side-card ul{padding-left:17px;margin:7px 0}.metric{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #edf1f4;font-size:12px}.metric:last-child{border:0}.metric strong{color:var(--navy)}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.result-tile{border:1px solid var(--line);border-radius:12px;padding:13px}.result-tile small{display:block;color:var(--muted);font-size:11px}.result-tile strong{display:block;color:var(--navy);font-size:16px;margin-top:4px;overflow-wrap:anywhere}.finding,.plan-step,.next-action{border:1px solid var(--line);border-radius:11px;padding:13px;margin-top:9px}.finding h4,.plan-step h4{margin:0 0 4px;font-size:13px;color:var(--navy)}.finding p,.plan-step p,.next-action p{margin:0;color:var(--muted);font-size:12px}.finding .code{font-size:10px;color:#6c8291;font-family:ui-monospace,monospace}.plan-step{display:grid;grid-template-columns:28px 1fr;gap:10px}.step-dot{width:27px;height:27px;border-radius:50%;background:#e7f3f1;color:var(--teal);font-weight:800;display:grid;place-items:center;font-size:12px}.muted{color:var(--muted)}.tiny{font-size:11px}.footer{border-top:1px solid var(--line);padding:18px 0;color:#738696;font-size:11px;text-align:center}.loading{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+    @media(max-width:850px){.layout{grid-template-columns:1fr}.sidecol{position:static;display:grid;grid-template-columns:1fr 1fr;gap:12px}.hero{grid-template-columns:1fr}.hero-note{max-width:600px}.progress{grid-template-columns:repeat(5,minmax(0,1fr))}.progress-item{justify-content:center}.progress-item .label{display:none}}
+    @media(max-width:560px){.topbar{padding:13px 15px}.top-inner{align-items:flex-start}.top-actions{gap:7px;flex-direction:column;align-items:flex-end}.wrap{padding:0 12px 40px;margin:16px auto}.hero{padding:24px 20px;border-radius:16px}.progress{gap:5px}.progress-item{padding:8px 4px}.panel{padding:17px}.scheme-grid,.field-grid,.result-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.sidecol{display:block}.answer-row{flex-direction:column}.brandtag{display:none}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="top-inner">
+      <div class="brand"><div class="brandmark">SN</div><div><div class="brandname">Scheme Navigator</div><div class="brandtag">Maharashtra public services • Citizen portal</div></div></div>
+      <div class="top-actions"><a href="/reviewer" target="_blank" rel="noopener">Reviewer dashboard ↗</a><select id="language" aria-label="Interview language"><option value="en">English</option><option value="mr">मराठी</option><option value="hi">हिन्दी</option></select></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div><div class="eyebrow">A guided way to prepare</div><h1>Find schemes. Understand requirements. Prepare with confidence.</h1><p>Explore available scheme information, answer a few questions, and prepare the documents and steps you may need.</p></div>
+      <div class="hero-note"><strong>Important: preliminary assistance</strong>This local prototype uses demo scheme rules. It does not make government decisions, verify certificate authenticity, or submit applications. Always confirm current requirements with the official department.</div>
+    </section>
+
+    <div class="progress" aria-label="Application journey">
+      <div class="progress-item active" data-progress="1"><span class="num">1</span><span class="label">Choose scheme</span></div>
+      <div class="progress-item" data-progress="2"><span class="num">2</span><span class="label">Your details</span></div>
+      <div class="progress-item" data-progress="3"><span class="num">3</span><span class="label">AI interview</span></div>
+      <div class="progress-item" data-progress="4"><span class="num">4</span><span class="label">Documents</span></div>
+      <div class="progress-item" data-progress="5"><span class="num">5</span><span class="label">Assessment</span></div>
+    </div>
+
+    <div class="layout">
+      <div class="maincol">
+        <section class="panel" id="scheme-panel">
+          <div class="panel-head"><div><div class="step-kicker">Step 1</div><h2>Explore schemes</h2><p class="sub">Choose a scheme to begin. Scheme information is loaded from this application's catalogue.</p></div><span class="pill" id="scheme-count">Loading…</span></div>
+          <div id="scheme-list" class="scheme-grid"><p class="muted">Loading scheme catalogue…</p></div>
+          <div id="scheme-message" class="statusline" aria-live="polite"></div>
+        </section>
+
+        <section class="panel" id="profile-panel">
+          <div class="panel-head"><div><div class="step-kicker">Step 2</div><h2>Tell us about yourself</h2><p class="sub">Only provide details needed for the preliminary scheme assessment.</p></div><span class="pill">Private information</span></div>
+          <div class="field-grid">
+            <div class="field full"><label for="citizen-name">Full name as you use it on documents *</label><input id="citizen-name" maxlength="120" autocomplete="name" placeholder="Enter your name"><span class="hint">This will be compared with names extracted from uploaded documents. Differences are flagged for review.</span></div>
+            <div class="field"><label for="citizen-dob">Date of birth (optional)</label><input id="citizen-dob" type="date"><span class="hint">You can leave this blank and answer the age question during the interview.</span></div>
+            <div class="field"><label for="financial-year">Target financial year</label><select id="financial-year"><option value="2026-27" selected>2026–27</option><option value="2025-26">2025–26</option></select></div>
+          </div>
+          <div class="actions"><button class="btn btn-primary" id="start-interview">Start AI interview</button></div>
+          <div id="profile-message" aria-live="polite"></div>
+        </section>
+
+        <section class="panel hidden" id="interview-panel">
+          <div class="panel-head"><div><div class="step-kicker">Step 3</div><h2>Guided citizen interview</h2><p class="sub">Answer one question at a time. You can use the language selected above.</p></div><span class="pill" id="interview-state">In progress</span></div>
+          <div id="question-area"></div>
+          <div id="interview-summary" class="hidden"></div>
+        </section>
+
+        <section class="panel hidden" id="document-panel">
+          <div class="panel-head"><div><div class="step-kicker">Step 4</div><h2>Upload supporting documents</h2><p class="sub">Upload one PDF containing relevant documents (up to 10 pages), or one PNG, JPEG or WEBP image.</p></div><span class="pill">Pre-audit only</span></div>
+          <div class="notice warn">Do not upload real Aadhaar numbers, bank account numbers, OTPs or sensitive documents to an unapproved environment. This prototype sends the file to the configured Gemini extraction provider. Use synthetic test documents unless you have authorization and an approved data-processing arrangement.</div>
+          <div class="field-grid">
+            <div class="field full"><label for="document-file">Choose a document</label><input id="document-file" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/png,image/jpeg,image/webp"><span class="hint">PDF maximum 15 MiB; image maximum 12 MiB. For several certificates, combine them into one PDF for this prototype.</span></div>
+          </div>
+          <div class="actions"><button class="btn btn-primary" id="upload-document">Upload and pre-audit</button><button class="btn btn-outline" id="skip-document">Continue without a document</button></div>
+          <div id="upload-message" aria-live="polite"></div>
+          <div id="upload-summary"></div>
+        </section>
+
+        <section class="panel hidden" id="assessment-panel">
+          <div class="panel-head"><div><div class="step-kicker">Step 5</div><h2>Your preliminary assessment</h2><p class="sub">A consolidated view of rule checks, document findings and preparation steps.</p></div><span class="pill">Not an official decision</span></div>
+          <div class="actions" style="margin-top:0;margin-bottom:14px"><button class="btn btn-primary" id="run-assessment">Generate assessment</button><button class="btn btn-outline hidden" id="refresh-assessment">Refresh assessment</button></div>
+          <div id="assessment-message" aria-live="polite"></div>
+          <div id="assessment-result"></div>
+        </section>
+      </div>
+
+      <aside class="sidecol">
+        <div class="side-card"><h3>Your journey</h3><div class="metric"><span>Selected scheme</span><strong id="side-scheme">Not selected</strong></div><div class="metric"><span>Interview</span><strong id="side-interview">Not started</strong></div><div class="metric"><span>Documents</span><strong id="side-documents">Not uploaded</strong></div><div class="metric"><span>Assessment</span><strong id="side-assessment">Not generated</strong></div></div>
+        <div class="side-card"><h3>Privacy reminders</h3><ul><li>Never share an OTP or full Aadhaar number.</li><li>Only provide information needed for the scheme.</li><li>Use synthetic documents for local testing.</li><li>Uploaded file bytes are not retained by the current upload endpoint.</li></ul></div>
+        <div class="side-card"><h3>Need reviewer help?</h3><p>Local reviewers can inspect pending extracted fields through the separate reviewer dashboard.</p><a href="/reviewer" target="_blank" rel="noopener" style="color:var(--teal);font-size:12px;font-weight:750">Open reviewer dashboard ↗</a></div>
+      </aside>
+    </div>
+    <footer class="footer">Scheme Navigator • Local development prototype • Verify all scheme rules and application requirements through official sources.</footer>
+  </main>
+
+<script>
+(() => {
+  const state = {
+    schemes: [], selectedScheme: null, threadId: null, language: 'en',
+    profile: null, interviewComplete: false, uploadResult: null,
+    assessment: null, busy: false
+  };
+  const $ = (id) => document.getElementById(id);
+
+  function setMessage(id, text, kind = 'info') {
+    const node = $(id);
+    node.replaceChildren();
+    if (!text) return;
+    const div = document.createElement('div');
+    div.className = `notice ${kind}`;
+    div.textContent = text;
+    node.append(div);
+  }
+  function textNode(tag, text, className) {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    el.textContent = text ?? '';
+    return el;
+  }
+  function setBusy(button, busy, label) {
+    button.disabled = busy;
+    button.textContent = busy ? 'Please wait…' : label;
+  }
+  async function api(url, options = {}) {
+    const response = await fetch(url, options);
+    const raw = await response.text();
+    let data;
+    try { data = raw ? JSON.parse(raw) : {}; }
+    catch { data = { detail: raw || `HTTP ${response.status}` }; }
+    if (!response.ok) {
+      const detail = typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail || data);
+      throw new Error(detail || `Request failed (${response.status})`);
+    }
+    return data;
+  }
+  function updateProgress(step) {
+    document.querySelectorAll('[data-progress]').forEach(el => {
+      el.classList.toggle('active', Number(el.dataset.progress) <= step);
+    });
+  }
+  function updateSidebar() {
+    $('side-scheme').textContent = state.selectedScheme?.name || 'Not selected';
+    $('side-interview').textContent = state.interviewComplete ? 'Completed' : state.threadId ? 'In progress' : 'Not started';
+    $('side-documents').textContent = state.uploadResult ? 'Uploaded' : 'Not uploaded';
+    $('side-assessment').textContent = state.assessment ? 'Generated' : 'Not generated';
+  }
+  function showPanel(id) { $(id).classList.remove('hidden'); }
+
+  function renderSchemes() {
+    const list = $('scheme-list');
+    list.replaceChildren();
+    $('scheme-count').textContent = `${state.schemes.length} available`;
+    if (!state.schemes.length) {
+      list.append(textNode('p', 'No schemes are currently configured in the catalogue.', 'muted'));
+      return;
+    }
+    state.schemes.forEach(scheme => {
+      const card = document.createElement('article');
+      card.className = 'scheme-card' + (state.selectedScheme?.scheme_id === scheme.scheme_id ? ' selected' : '');
+      card.append(textNode('h3', scheme.name || scheme.scheme_id));
+      if (scheme.department) card.append(textNode('p', scheme.department));
+      if (scheme.summary) card.append(textNode('p', scheme.summary));
+      const bottom = document.createElement('div'); bottom.className = 'card-bottom';
+      bottom.append(textNode('span', scheme.scheme_id, 'tiny muted'));
+      const btn = document.createElement('button'); btn.className = 'btn ' + (state.selectedScheme?.scheme_id === scheme.scheme_id ? 'btn-primary' : 'btn-secondary');
+      btn.textContent = state.selectedScheme?.scheme_id === scheme.scheme_id ? 'Selected' : 'Choose scheme';
+      btn.addEventListener('click', () => {
+        state.selectedScheme = scheme; state.assessment = null;
+        renderSchemes(); updateSidebar(); updateProgress(1);
+        setMessage('scheme-message', `Selected: ${scheme.name || scheme.scheme_id}. Complete your details to begin.`, 'success');
+      });
+      bottom.append(btn); card.append(bottom); list.append(card);
+    });
+  }
+
+  async function loadSchemes() {
+    try {
+      state.schemes = await api('/schemes');
+      renderSchemes();
+      if (!state.schemes.length) setMessage('scheme-message', 'The catalogue is empty. Enable or load scheme fixtures for local testing.', 'warn');
+    } catch (error) {
+      $('scheme-list').textContent = '';
+      $('scheme-list').append(textNode('p', `Unable to load schemes: ${error.message}`, 'muted'));
+      setMessage('scheme-message', 'Check that the FastAPI server is running and GET /schemes is available.', 'error');
+    }
+  }
+
+  function renderQuestion(question) {
+    const area = $('question-area'); area.replaceChildren();
+    if (!question) {
+      area.append(textNode('p', 'No further questions are required.', 'muted'));
+      return;
+    }
+    const box = document.createElement('div'); box.className = 'question-box';
+    box.append(textNode('div', `QUESTION • ${question.field || 'Applicant information'}`, 'step-kicker'));
+    box.append(textNode('h3', question.text || 'Please provide the requested information.'));
+    let input;
+    if (Array.isArray(question.choices) && question.choices.length) {
+      input = document.createElement('select'); input.className = 'answer-input';
+      const placeholder = document.createElement('option'); placeholder.value = ''; placeholder.textContent = 'Select an answer'; input.append(placeholder);
+      question.choices.forEach(choice => { const opt = document.createElement('option'); opt.value = choice; opt.textContent = choice; input.append(opt); });
+    } else {
+      input = document.createElement('input'); input.className = 'answer-input';
+      input.type = question.kind === 'integer' ? 'number' : 'text';
+      if (input.type === 'number') { input.min = '0'; input.step = '1'; }
+      input.placeholder = question.kind === 'integer' ? 'Enter a number' : 'Type your answer';
+    }
+    input.id = 'interview-answer';
+    const row = document.createElement('div'); row.className = 'answer-row';
+    row.append(input);
+    const submit = document.createElement('button'); submit.className = 'btn btn-primary'; submit.textContent = 'Submit answer';
+    submit.addEventListener('click', submitAnswer);
+    row.append(submit); box.append(row);
+    if (question.validation_error) box.append(textNode('div', question.validation_error, 'question-error'));
+    if (question.field === 'aadhaar_linked_bank_account') box.append(textNode('p', 'Do not enter an Aadhaar number. Answer only yes or no.', 'hint'));
+    area.append(box); input.focus();
+  }
+
+  function handleInterviewResponse(data) {
+    state.profile = data.profile || state.profile || {};
+    if (data.complete) {
+      state.interviewComplete = true;
+      $('interview-state').textContent = 'Completed';
+      $('question-area').replaceChildren();
+      const summary = $('interview-summary'); summary.classList.remove('hidden'); summary.replaceChildren();
+      summary.append(textNode('h3', 'Interview completed', ''));
+      summary.append(textNode('p', 'Your answers have been collected. Generate a preliminary assessment for the selected scheme.', 'sub'));
+      const details = document.createElement('div'); details.className = 'result-grid';
+      const fields = [['Name', state.profile.name || 'Not supplied'], ['Age', state.profile.age_years ?? (state.profile.date_of_birth ? 'Calculated from DOB' : 'Not supplied')], ['State', state.profile.resident_state || 'Not supplied'], ['Annual family income', state.profile.annual_family_income == null ? 'Not supplied' : `₹${Number(state.profile.annual_family_income).toLocaleString('en-IN')}`]];
+      fields.forEach(([label, value]) => { const tile = document.createElement('div'); tile.className = 'result-tile'; tile.append(textNode('small', label)); tile.append(textNode('strong', String(value))); details.append(tile); });
+      summary.append(details);
+      showPanel('document-panel'); showPanel('assessment-panel');
+      $('run-assessment').classList.remove('hidden');
+      updateProgress(3); updateSidebar();
+    } else {
+      state.interviewComplete = false;
+      $('interview-state').textContent = 'In progress';
+      renderQuestion(data.question);
+      updateProgress(3); updateSidebar();
+    }
+  }
+
+  async function startInterview() {
+    if (!state.selectedScheme) { setMessage('profile-message', 'Please choose a scheme first.', 'warn'); $('scheme-panel').scrollIntoView({behavior:'smooth'}); return; }
+    const name = $('citizen-name').value.trim();
+    if (name.length < 2) { setMessage('profile-message', 'Enter your name as it appears on your documents.', 'warn'); $('citizen-name').focus(); return; }
+    state.language = $('language').value;
+    const profile = { name };
+    if ($('citizen-dob').value) profile.date_of_birth = $('citizen-dob').value;
+    const threadId = `citizen-${crypto.randomUUID()}`;
+    const button = $('start-interview'); setBusy(button, true, 'Start AI interview');
+    try {
+      const result = await api('/interview/start', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({thread_id:threadId, language:state.language, profile})});
+      state.threadId = threadId; state.profile = result.profile || profile; state.interviewComplete = false; state.uploadResult = null; state.assessment = null;
+      showPanel('interview-panel'); $('interview-summary').classList.add('hidden');
+      handleInterviewResponse(result); setMessage('profile-message', 'Interview started. Answer the questions below.', 'success');
+      $('interview-panel').scrollIntoView({behavior:'smooth',block:'start'});
+    } catch (error) { setMessage('profile-message', error.message, 'error'); }
+    finally { setBusy(button, false, 'Start AI interview'); }
+  }
+
+  async function submitAnswer() {
+    const input = $('interview-answer'); if (!input) return;
+    const answer = input.value.trim();
+    if (!answer) { input.focus(); return; }
+    const button = input.parentElement.querySelector('button'); setBusy(button, true, 'Submit answer');
+    try {
+      const result = await api('/interview/answer', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({thread_id:state.threadId, answer, language:state.language})});
+      handleInterviewResponse(result);
+    } catch (error) { setMessage('profile-message', error.message, 'error'); }
+    finally { if (button.isConnected) setBusy(button, false, 'Submit answer'); }
+  }
+
+  function renderUploadResult(data) {
+    const target = $('upload-summary'); target.replaceChildren();
+    const reviewId = data.review?.review_id;
+    const intro = document.createElement('div'); intro.className = `notice ${data.audit?.findings?.length ? 'warn' : 'success'}`;
+    intro.textContent = reviewId ? `Upload complete. Local human-review case created: ${reviewId} (${data.review.status}).` : 'Extraction completed. No linked human-review record was created in this environment.';
+    target.append(intro);
+    const docs = data.extracted_documents || [];
+    docs.forEach((doc, index) => {
+      const card = document.createElement('div'); card.className = 'finding';
+      card.append(textNode('h4', `${index + 1}. ${(doc.document_type || 'Document').replaceAll('_',' ')}`));
+      const lines = [doc.person_name ? `Name: ${doc.person_name}` : null, doc.date_of_birth ? `DOB: ${doc.date_of_birth}` : null, doc.annual_family_income != null ? `Annual family income: ₹${Number(doc.annual_family_income).toLocaleString('en-IN')}` : null, doc.valid_financial_year ? `Financial year: ${doc.valid_financial_year}` : null].filter(Boolean);
+      card.append(textNode('p', lines.join(' • ') || 'No key fields were extracted. Inspect the original document.'));
+      target.append(card);
+    });
+    (data.audit?.findings || []).forEach(finding => {
+      const card = document.createElement('div'); card.className = 'finding';
+      card.append(textNode('div', finding.code || 'DOCUMENT FINDING', 'code'));
+      card.append(textNode('h4', finding.message || 'Review required'));
+      if (finding.recommended_action) card.append(textNode('p', finding.recommended_action));
+      if (finding.evidence?.length) card.append(textNode('p', `Evidence: ${finding.evidence.join(' | ')}`));
+      target.append(card);
+    });
+    if (reviewId) target.append(textNode('p', 'A reviewer can inspect or correct extracted values in the separate Reviewer Dashboard. After review, use Refresh assessment to retrieve the latest review record.', 'hint'));
+  }
+
+  async function uploadDocument() {
+    const file = $('document-file').files[0];
+    if (!file) { setMessage('upload-message', 'Choose a PDF or supported image first.', 'warn'); return; }
+    const button = $('upload-document'); setBusy(button, true, 'Upload and pre-audit');
+    try {
+      const form = new FormData(); form.append('file', file);
+      const targetYear = encodeURIComponent($('financial-year').value);
+      const result = await api(`/documents/audit-upload?target_financial_year=${targetYear}`, {method:'POST', body:form});
+      state.uploadResult = result; state.assessment = null;
+      renderUploadResult(result); setMessage('upload-message', 'Document extraction and pre-audit completed. Check every extracted field against the original.', 'success');
+      updateSidebar(); updateProgress(4); $('assessment-panel').scrollIntoView({behavior:'smooth',block:'start'});
+    } catch (error) { setMessage('upload-message', error.message, 'error'); }
+    finally { setBusy(button, false, 'Upload and pre-audit'); }
+  }
+
+  function renderAssessment(result) {
+    const root = $('assessment-result'); root.replaceChildren();
+    const eligibility = result.eligibility || {};
+    const audit = result.document_audit;
+    const top = document.createElement('div'); top.className = 'result-grid';
+    const tiles = [
+      ['Eligibility status', eligibility.status || 'Not available'],
+      ['Document audit', audit?.status || 'Not performed'],
+      ['Human review', result.human_review_status || 'not_linked'],
+      ['Authenticity', result.document_authenticity_status || 'not_verified']
+    ];
+    tiles.forEach(([label,value]) => { const tile = document.createElement('div'); tile.className='result-tile'; tile.append(textNode('small',label)); tile.append(textNode('strong',String(value).replaceAll('_',' '))); top.append(tile); });
+    root.append(top);
+    if (eligibility.reason) root.append(textNode('div', eligibility.reason, 'notice warn'));
+    if (eligibility.matched_conditions?.length) {
+      root.append(textNode('h3', 'Conditions matched'));
+      const ul = document.createElement('ul'); eligibility.matched_conditions.forEach(item => ul.append(textNode('li',item))); root.append(ul);
+    }
+    if (eligibility.failed_conditions?.length) {
+      root.append(textNode('h3','Conditions not matched'));
+      const ul=document.createElement('ul'); eligibility.failed_conditions.forEach(item=>ul.append(textNode('li',item))); root.append(ul);
+    }
+    if (eligibility.unknown_conditions?.length) {
+      root.append(textNode('h3','Conditions requiring information'));
+      const ul=document.createElement('ul'); eligibility.unknown_conditions.forEach(item=>ul.append(textNode('li',item))); root.append(ul);
+    }
+    if (audit) {
+      root.append(textNode('h3',`Document findings (${audit.findings?.length || 0})`));
+      (audit.findings || []).forEach(f => { const card=document.createElement('div');card.className='finding';card.append(textNode('div',`${f.code} • ${f.severity}`,'code'));card.append(textNode('h4',f.message));if(f.recommended_action)card.append(textNode('p',f.recommended_action));if(f.evidence?.length)card.append(textNode('p',`Evidence: ${f.evidence.join(' | ')}`));root.append(card); });
+      if (!(audit.findings || []).length) root.append(textNode('p','No findings were raised by the current pre-audit checks. This is not certificate authenticity verification.','notice success'));
+    } else root.append(textNode('p','No documents were supplied, so the document audit was not run.','notice info'));
+    root.append(textNode('h3','Application preparation plan'));
+    (result.application_plan?.steps || []).forEach((step,i)=>{const card=document.createElement('div');card.className='plan-step';card.append(textNode('div',String(i+1),'step-dot'));const body=document.createElement('div');body.append(textNode('h4',step.title || step.step_id));body.append(textNode('p',step.notes || step.step_type || ''));if(step.notified_limit_days != null)body.append(textNode('p',`Published notified limit: ${step.notified_limit_days} days (verify current service notification).`));card.append(body);root.append(card);});
+    root.append(textNode('h3','Next actions'));
+    (result.next_actions || []).forEach(action=>{const card=document.createElement('div');card.className='next-action';card.append(textNode('h4',`${action.priority.toUpperCase()} • ${action.title}`));card.append(textNode('p',action.detail));root.append(card);});
+    root.append(textNode('p',result.scope_note || 'Preliminary assistance only; confirm current rules with the official department.','notice warn'));
+  }
+
+  async function runAssessment() {
+    if (!state.selectedScheme || !state.interviewComplete || !state.profile) { setMessage('assessment-message','Choose a scheme and complete the interview first.','warn'); return; }
+    const button = $('run-assessment'); setBusy(button,true,'Generate assessment');
+    try {
+      const payload = {profile:state.profile,target_financial_year:$('financial-year').value};
+      const reviewId = state.uploadResult?.review?.review_id;
+      if (reviewId) payload.review_id = reviewId;
+      else if (state.uploadResult?.extracted_documents?.length) payload.documents = state.uploadResult.extracted_documents;
+      const result = await api(`/assessment/${encodeURIComponent(state.selectedScheme.scheme_id)}`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      state.assessment = result; renderAssessment(result); $('refresh-assessment').classList.toggle('hidden', !reviewId);
+      setMessage('assessment-message','Preliminary assessment generated. Review every warning and verify the official scheme requirements.', 'success');
+      updateProgress(5); updateSidebar();
+    } catch (error) { setMessage('assessment-message',error.message,'error'); }
+    finally { setBusy(button,false,'Generate assessment'); }
+  }
+
+  $('language').addEventListener('change', () => {
+    if (state.threadId && !state.interviewComplete) setMessage('profile-message','The language for an active interview is fixed. Start a new interview to change languages.','warn');
+  });
+  $('start-interview').addEventListener('click', startInterview);
+  $('upload-document').addEventListener('click', uploadDocument);
+  $('skip-document').addEventListener('click', () => { showPanel('assessment-panel'); $('assessment-panel').scrollIntoView({behavior:'smooth'}); });
+  $('run-assessment').addEventListener('click', runAssessment);
+  $('refresh-assessment').addEventListener('click', runAssessment);
+
+  loadSchemes(); updateSidebar();
+})();
+</script>
+</body>
+</html>

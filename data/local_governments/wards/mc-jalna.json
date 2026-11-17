@@ -1,0 +1,21 @@
+{
+  "corporation_id": "mc-jalna",
+  "corporation_name_en": "Jalna Municipal Corporation",
+  "corporation_name_mr": "जालना महानगरपालिका",
+  "total_wards": 16,
+  "boundary_reference": "Urban Development Dept GR JALNA-MC-2023",
+  "representative_wards": [
+    "Ward 1 (Old Jalna)",
+    "Ward 2 (New Jalna)",
+    "Ward 3 (MIDC Road)",
+    "Ward 4 (Ambad Road)"
+  ],
+  "localities": [
+    "Old Jalna",
+    "New Jalna",
+    "Ambad Naka",
+    "Devalgaon Raja Road",
+    "Indira Nagar",
+    "MIDC Phase 1"
+  ]
+}

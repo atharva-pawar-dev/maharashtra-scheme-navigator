@@ -1,0 +1,21 @@
+{
+  "corporation_id": "mc-dhule",
+  "corporation_name_en": "Dhule Municipal Corporation",
+  "corporation_name_mr": "धुळे महानगरपालिका",
+  "total_wards": 19,
+  "boundary_reference": "Dhule MC Delimitation 2022",
+  "representative_wards": [
+    "Zone 1 (Deopur)",
+    "Zone 2 (Old Dhule)",
+    "Zone 3 (Agra Road)",
+    "Zone 4 (Mohadi)"
+  ],
+  "localities": [
+    "Deopur",
+    "Old Dhule",
+    "Mohadi",
+    "Waddhamna",
+    "Walwadi",
+    "Agra Road"
+  ]
+}

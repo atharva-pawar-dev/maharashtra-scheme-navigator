@@ -1,0 +1,21 @@
+{
+  "corporation_id": "mc-sangli-miraj-kupwad",
+  "corporation_name_en": "Sangli Miraj Kupwad Municipal Corporation",
+  "corporation_name_mr": "सांगली मिरज आणि कुपवाड शहर महानगरपालिका",
+  "total_wards": 20,
+  "boundary_reference": "SMKC 3 Zonal Structure Order 2022",
+  "representative_wards": [
+    "Zone 1 (Sangli)",
+    "Zone 2 (Miraj)",
+    "Zone 3 (Kupwad)"
+  ],
+  "localities": [
+    "Sangli City",
+    "Miraj City",
+    "Kupwad MIDC",
+    "Vishrambag",
+    "Khanbhag",
+    "Brahmapuri",
+    "Wanlesswadi"
+  ]
+}

@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Scheme Navigator · Document Review</title>
+  <style>
+    :root {
+      --ink: #18212f; --muted: #687386; --line: #e4e8ef; --paper: #ffffff;
+      --canvas: #f4f6f9; --blue: #2855a6; --blue-soft: #edf3ff;
+      --green: #176b4a; --green-soft: #eaf6ef; --amber: #8b5a08;
+      --amber-soft: #fff5df; --red: #a23434; --red-soft: #fff0ef;
+      --shadow: 0 8px 26px rgba(20, 35, 60, .06); --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--canvas); color: var(--ink); font: 14px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    .topbar { background: #17263e; color: #fff; padding: 18px 28px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:750; letter-spacing:.01em; font-size:16px; }
+    .brand-mark { width:34px;height:34px;border-radius:10px;background:#dce9ff;color:#204783;display:grid;place-items:center;font-weight:900; }
+    .topmeta { color:#c5d0e1; font-size:12px; }
+    .shell { max-width:1440px; margin:0 auto; padding:24px; }
+    .notice { border:1px solid #e9d7a8; background:#fff9e9; color:#704d12; padding:12px 14px; border-radius:12px; margin-bottom:18px; display:flex; gap:10px; align-items:flex-start; }
+    .notice strong { display:block; margin-bottom:2px; }
+    .pagehead { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; margin:4px 0 18px; }
+    h1 { margin:0; font-size:25px; letter-spacing:-.03em; }
+    .sub { color:var(--muted); margin-top:4px; }
+    .grid { display:grid; grid-template-columns:minmax(300px, .85fr) minmax(440px, 1.45fr); gap:18px; align-items:start; }
+    .stack { display:grid; gap:18px; min-width:0; }
+    .card { background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px; min-width:0; }
+    .card h2 { margin:0 0 4px; font-size:16px; letter-spacing:-.01em; }
+    .card-help { color:var(--muted); font-size:12px; margin-bottom:14px; }
+    .field { display:grid; gap:6px; margin-bottom:12px; }
+    label { font-weight:650; font-size:12px; color:#3c485b; }
+    input[type=text], input[type=number], input[type=date], select, textarea {
+      width:100%; border:1px solid #d8dee8; border-radius:9px; padding:10px 11px; background:#fff; color:var(--ink); outline:none;
+    }
+    input:focus, select:focus, textarea:focus { border-color:#6e94d7; box-shadow:0 0 0 3px rgba(53,103,190,.12); }
+    input[type=file] { width:100%; font-size:12px; }
+    textarea { min-height:72px; resize:vertical; }
+    .row { display:flex; gap:9px; align-items:center; }
+    .row > * { min-width:0; }
+    .grow { flex:1; }
+    .btn { border:1px solid transparent; background:var(--blue); color:#fff; border-radius:9px; padding:10px 14px; font-weight:700; }
+    .btn:hover { filter:brightness(.96); }
+    .btn:disabled { opacity:.5; cursor:not-allowed; }
+    .btn.secondary { background:#fff; color:#34445f; border-color:#d7deea; }
+    .btn.success { background:var(--green); }
+    .btn.danger { background:#fff; color:var(--red); border-color:#f0cccc; }
+    .btn.small { padding:7px 10px; font-size:12px; }
+    .muted { color:var(--muted); }
+    .tiny { font-size:11px; }
+    .divider { height:1px; background:var(--line); margin:15px 0; }
+    .pill { display:inline-flex; align-items:center; border-radius:999px; padding:4px 9px; font-size:11px; font-weight:750; text-transform:capitalize; white-space:nowrap; }
+    .pill.pending, .pill.pending_review, .pill.review_required { color:var(--amber); background:var(--amber-soft); }
+    .pill.review_completed, .pill.pass { color:var(--green); background:var(--green-soft); }
+    .pill.issues_found { color:var(--red); background:var(--red-soft); }
+    .pill.info { color:#34558b; background:var(--blue-soft); }
+    .metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin:14px 0 0; }
+    .metric { border:1px solid var(--line); border-radius:11px; padding:11px; }
+    .metric .value { font-size:20px; font-weight:800; letter-spacing:-.03em; }
+    .metric .label { color:var(--muted); font-size:11px; }
+    .preview { background:#eef1f5; min-height:250px; border:1px dashed #cbd3df; border-radius:11px; display:grid; place-items:center; overflow:hidden; }
+    .preview img { display:block; max-width:100%; max-height:560px; object-fit:contain; }
+    .preview iframe { width:100%; height:560px; border:0; background:#fff; }
+    .preview-placeholder { color:var(--muted); text-align:center; padding:30px; }
+    .statusline { min-height:20px; color:var(--muted); font-size:12px; margin-top:8px; }
+    .statusline.error { color:var(--red); }
+    .statusline.ok { color:var(--green); }
+    .findings { display:grid; gap:10px; }
+    .finding { border:1px solid var(--line); border-left:4px solid #d4a13a; border-radius:10px; padding:12px 13px; }
+    .finding.error { border-left-color:#c45151; }
+    .finding .finding-head { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:6px; }
+    .finding p { margin:6px 0; }
+    .finding .action { background:#f7f9fc; border-radius:8px; padding:9px 10px; margin-top:8px; }
+    .evidence { color:#586477; font-size:12px; margin:6px 0 0; padding-left:18px; }
+    .empty { color:var(--muted); border:1px dashed #d5dce6; padding:16px; border-radius:10px; text-align:center; }
+    .doc-table { width:100%; border-collapse:collapse; font-size:12px; }
+    .doc-table th,.doc-table td { border-bottom:1px solid var(--line); text-align:left; padding:9px 7px; vertical-align:top; }
+    .doc-table th { color:var(--muted); font-weight:700; }
+    .editor-list { display:grid; gap:9px; }
+    .edit-row { display:grid; grid-template-columns:minmax(120px,.7fr) minmax(150px,1fr) minmax(140px,1fr); align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid #edf0f4; }
+    .edit-row:last-child { border-bottom:0; }
+    .edit-name { font-size:12px; font-weight:700; }
+    .edit-original,.edit-current { color:var(--muted); font-size:11px; overflow-wrap:anywhere; }
+    .edit-input { min-width:0; }
+    .edit-input input,.edit-input select { padding:8px 9px; font-size:12px; }
+    .edit-toggle { display:flex; gap:6px; align-items:center; margin-top:4px; color:var(--muted); font-size:10px; font-weight:500; }
+    .review-controls { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .event { border-left:2px solid #dbe3f0; padding:0 0 12px 13px; margin-left:5px; }
+    .event:last-child { padding-bottom:0; }
+    .event-title { font-weight:700; font-size:12px; }
+    .event-meta { color:var(--muted); font-size:11px; margin-top:2px; }
+    .hidden { display:none !important; }
+    .footer-note { color:var(--muted); font-size:11px; margin:18px 2px 6px; }
+    @media (max-width:980px) { .grid { grid-template-columns:1fr; } }
+    @media (max-width:640px) { .shell { padding:14px; } .topbar { padding:14px; } .pagehead { display:block; } .metrics { grid-template-columns:repeat(2,1fr); } .edit-row { grid-template-columns:1fr; gap:5px; } .review-controls { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark">SN</div><div>Scheme Navigator <span style="color:#aabbd5;font-weight:500">/ Document Review</span></div></div>
+    <div class="topmeta">Local reviewer workspace · Prototype</div>
+  </header>
+  <main class="shell">
+    <div class="notice">
+      <div aria-hidden="true">⚠</div>
+      <div><strong>Local prototype — do not expose to the public internet</strong>
+        Reviewer IDs are currently caller-supplied, not authenticated. The backend stores extracted fields and review events temporarily, but does not retain the uploaded PDF/image. Use synthetic documents only until authentication, authorization and secure storage are implemented.</div>
+    </div>
+    <div class="pagehead">
+      <div><h1>Document review workspace</h1><div class="sub">Inspect Gemini extraction, resolve inconsistencies and record human decisions.</div></div>
+      <div id="reviewStatus" class="pill info">No review loaded</div>
+    </div>
+
+    <section class="grid">
+      <div class="stack">
+        <section class="card">
+          <h2>1. Upload a document</h2>
+          <div class="card-help">Upload a synthetic PNG, JPEG, WEBP or PDF. The preview remains in this browser tab only.</div>
+          <div class="field"><label for="fileInput">Certificate file</label><input id="fileInput" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/png,image/jpeg,image/webp"></div>
+          <div class="row">
+            <div class="field grow" style="margin:0"><label for="targetFy">Target financial year</label><input id="targetFy" type="text" value="2026-27" pattern="\d{4}-\d{2}"></div>
+            <button id="uploadBtn" class="btn" type="button">Upload & extract</button>
+          </div>
+          <div id="uploadStatus" class="statusline" role="status"></div>
+          <div class="divider"></div>
+          <div class="field"><label for="reviewIdInput">Or open an existing review ID</label>
+            <div class="row"><input id="reviewIdInput" class="grow" type="text" placeholder="Paste review ID"><button id="loadBtn" class="btn secondary" type="button">Load review</button></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Source document preview</h2>
+          <div class="card-help">Choose the source file above to preview it locally. It is not uploaded again when you open an existing review.</div>
+          <div id="preview" class="preview"><div class="preview-placeholder">Select a PDF or image to preview it here.</div></div>
+          <div id="previewMeta" class="statusline"></div>
+        </section>
+
+        <section id="reviewSummaryCard" class="card hidden">
+          <h2>Review overview</h2>
+          <div class="card-help" id="reviewMetaText"></div>
+          <div class="metrics">
+            <div class="metric"><div class="value" id="metricDocs">—</div><div class="label">Logical documents</div></div>
+            <div class="metric"><div class="value" id="metricPages">—</div><div class="label">PDF pages</div></div>
+            <div class="metric"><div class="value" id="metricFindings">—</div><div class="label">Audit findings</div></div>
+            <div class="metric"><div class="value" id="metricEvents">—</div><div class="label">Review events</div></div>
+          </div>
+          <div class="divider"></div>
+          <div class="tiny muted" id="scopeNote"></div>
+        </section>
+      </div>
+
+      <div class="stack">
+        <section id="auditCard" class="card hidden">
+          <h2>2. Audit findings & recommended actions</h2>
+          <div class="card-help">Review each finding against the original source. A completed review does not mean a certificate is authentic or a citizen is scheme-eligible.</div>
+          <div id="findings" class="findings"></div>
+        </section>
+
+        <section id="documentsCard" class="card hidden">
+          <h2>3. Extracted documents</h2>
+          <div class="card-help">Select a logical document below to inspect its fields and page mapping.</div>
+          <div class="field"><label for="documentSelect">Document / page group</label><select id="documentSelect"></select></div>
+          <div id="documentTable"></div>
+        </section>
+
+        <section id="editorCard" class="card hidden">
+          <h2>4. Confirm or correct fields</h2>
+          <div class="card-help">Tick only the fields you have inspected. Leave a selected text/date field blank to explicitly clear it. Original Gemini/page extraction is kept separately.</div>
+          <div class="row" style="justify-content:space-between; margin-bottom:10px">
+            <div class="tiny muted" id="selectedPageLabel"></div>
+            <button id="selectPopulatedBtn" class="btn secondary small" type="button">Select populated fields</button>
+          </div>
+          <div class="edit-row" style="padding-top:0;border-bottom:1px solid var(--line)">
+            <div class="edit-name">Field</div><div class="edit-original">Original extraction</div><div class="edit-current">Current value / review input</div>
+          </div>
+          <div id="editorFields" class="editor-list"></div>
+          <div class="divider"></div>
+          <div class="review-controls">
+            <div class="field"><label for="reviewerId">Reviewer ID (prototype only)</label><input id="reviewerId" type="text" value="local-reviewer-01" maxlength="120"></div>
+            <div class="field"><label for="correctionNote">Reason / review note</label><textarea id="correctionNote" placeholder="Describe which source pages you inspected and why you confirmed or changed the field."></textarea></div>
+          </div>
+          <div class="row" style="justify-content:flex-end"><button id="saveCorrectionsBtn" class="btn" type="button">Save selected confirmations / corrections</button></div>
+          <div id="editStatus" class="statusline" role="status"></div>
+        </section>
+
+        <section id="completeCard" class="card hidden">
+          <h2>5. Complete human review</h2>
+          <div class="card-help">Only complete after inspecting the original source pages and considering all outstanding findings.</div>
+          <div class="field"><label for="completionNote">Completion note</label><textarea id="completionNote" placeholder="Summarize what you inspected and any findings that remain unresolved."></textarea></div>
+          <label class="row" style="font-weight:500;margin:4px 0 12px"><input id="completionConfirm" type="checkbox"> I inspected the source pages and reviewed all outstanding findings.</label>
+          <div class="row" style="justify-content:flex-end"><button id="completeBtn" class="btn success" type="button">Complete review</button></div>
+          <div id="completeStatus" class="statusline" role="status"></div>
+        </section>
+
+        <section id="eventsCard" class="card hidden">
+          <h2>Review history</h2>
+          <div class="card-help">Append-only event history: confirmations and corrections remain visible.</div>
+          <div id="events"></div>
+        </section>
+      </div>
+    </section>
+    <div class="footer-note">Scheme Navigator document pre-audit is an assistive review tool only. It does not verify certificate authenticity, replace issuing-authority checks, or determine scheme eligibility.</div>
+  </main>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const state = { review: null, selectedDocumentId: null, previewUrl: null, busy: false };
+  const fields = [
+    { key: "document_type", label: "Document type", type: "select", options: ["income_certificate", "seven_twelve_extract", "caste_certificate", "domicile_certificate", "aadhaar_card", "other", "unknown"] },
+    { key: "person_name", label: "Applicant name", type: "text" },
+    { key: "date_of_birth", label: "Date of birth", type: "date" },
+    { key: "issue_date", label: "Issue date", type: "date" },
+    { key: "valid_until", label: "Valid until", type: "date" },
+    { key: "valid_financial_year", label: "Financial year", type: "text", placeholder: "2025-26", pattern: "\\d{4}-\\d{2}" },
+    { key: "annual_family_income", label: "Annual family income (INR)", type: "number", min: "0", max: "100000000", step: "1" },
+    { key: "income_currency", label: "Income currency", type: "select", options: ["INR"] },
+    { key: "certificate_number_masked", label: "Masked certificate number", type: "text" }
+  ];
+
+  function esc(value) {
+    return String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+  }
+  function fmt(value) {
+    if (value === null || value === undefined || value === "") return "Not extracted";
+    if (typeof value === "object") return JSON.stringify(value);
+    return String(value);
+  }
+  function setStatus(id, message, kind="") {
+    const node = $(id); node.textContent = message; node.className = `statusline ${kind}`;
+  }
+  function setBusy(value) {
+    state.busy = value;
+    ["uploadBtn","loadBtn","saveCorrectionsBtn","completeBtn"].forEach(id => { if ($(id)) $(id).disabled = value; });
+  }
+  async function api(path, options={}) {
+    const response = await fetch(path, options);
+    const raw = await response.text();
+    let data;
+    try { data = raw ? JSON.parse(raw) : {}; } catch { data = { detail: raw || response.statusText }; }
+    if (!response.ok) throw new Error(data.detail || `Request failed (${response.status})`);
+    return data;
+  }
+  function showPreview(file) {
+    if (state.previewUrl) URL.revokeObjectURL(state.previewUrl);
+    state.previewUrl = URL.createObjectURL(file);
+    const preview = $("preview");
+    if (file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")) {
+      preview.innerHTML = `<iframe title="Local PDF preview" src="${state.previewUrl}"></iframe>`;
+    } else {
+      preview.innerHTML = `<img alt="Local certificate preview" src="${state.previewUrl}">`;
+    }
+    $("previewMeta").textContent = `${file.name} · ${(file.size / 1024).toFixed(1)} KB · preview held in this browser tab only`;
+  }
+  function showCards() {
+    ["reviewSummaryCard","auditCard","documentsCard","editorCard","completeCard","eventsCard"].forEach(id => $(id).classList.remove("hidden"));
+  }
+  function currentGroup(documentId) {
+    return (state.review?.document_groups || []).find(group => group.document_id === documentId) || { page_numbers: [] };
+  }
+  function selectedDocument() {
+    return (state.review?.extracted_documents || []).find(doc => doc.document_id === state.selectedDocumentId) || null;
+  }
+  function originalPageValue(pageNumber, key) {
+    const page = state.review?.page_extractions?.[pageNumber - 1];
+    return page ? page[key] : null;
+  }
+  function render() {
+    if (!state.review) return;
+    const r = state.review;
+    showCards();
+    $("reviewStatus").textContent = r.status.replaceAll("_", " ");
+    $("reviewStatus").className = `pill ${r.status}`;
+    $("reviewMetaText").textContent = `Review ${r.review_id} · expires ${new Date(r.expires_at).toLocaleString()} · target FY ${r.target_financial_year}`;
+    $("metricDocs").textContent = (r.extracted_documents || []).length;
+    $("metricPages").textContent = (r.current_page_extractions || []).length || (r.page_extractions || []).length || 1;
+    $("metricFindings").textContent = (r.audit?.findings || []).length;
+    $("metricEvents").textContent = (r.events || []).length;
+    $("scopeNote").textContent = r.audit?.scope_note || r.storage_notice || "Pre-audit only. Scheme eligibility is evaluated separately.";
+    $("reviewIdInput").value = r.review_id;
+    renderFindings(); renderDocuments(); renderEvents();
+    const completed = r.status !== "pending_review";
+    $("editorCard").classList.toggle("hidden", completed);
+    $("completeCard").classList.toggle("hidden", completed);
+    if (completed) {
+      $("eventsCard").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }
+  function renderFindings() {
+    const findings = state.review.audit?.findings || [];
+    if (!findings.length) { $("findings").innerHTML = `<div class="empty">No audit findings are currently recorded. Continue reviewing the source fields.</div>`; return; }
+    $("findings").innerHTML = findings.map(f => `
+      <article class="finding ${f.severity === "error" ? "error" : ""}">
+        <div class="finding-head"><strong>${esc(f.code)}</strong><span class="pill ${f.severity === "error" ? "issues_found" : "review_required"}">${esc(f.severity)}</span><span class="pill info">${esc((f.category || "finding").replaceAll("_", " "))}</span></div>
+        <p>${esc(f.message)}</p>
+        ${f.recommended_action ? `<div class="action"><strong>Recommended action:</strong> ${esc(f.recommended_action)}</div>` : ""}
+        ${f.page_numbers?.length ? `<div class="tiny muted" style="margin-top:7px">Pages: ${esc(f.page_numbers.join(", "))}</div>` : ""}
+        ${f.evidence?.length ? `<ul class="evidence">${f.evidence.map(item => `<li>${esc(item)}</li>`).join("")}</ul>` : ""}
+      </article>`).join("");
+  }
+  function renderDocuments() {
+    const docs = state.review.extracted_documents || [];
+    const groups = state.review.document_groups || [];
+    if (!docs.length) { $("documentSelect").innerHTML = ""; $("documentTable").innerHTML = `<div class="empty">No extracted documents.</div>`; return; }
+    if (!docs.some(d => d.document_id === state.selectedDocumentId)) state.selectedDocumentId = docs[0].document_id;
+    $("documentSelect").innerHTML = docs.map((doc, index) => {
+      const pages = groups.find(g => g.document_id === doc.document_id)?.page_numbers || [];
+      return `<option value="${esc(doc.document_id)}" ${doc.document_id === state.selectedDocumentId ? "selected" : ""}>Document ${index + 1} · page${pages.length === 1 ? "" : "s"} ${esc(pages.join(", ") || "n/a")}</option>`;
+    }).join("");
+    const doc = selectedDocument();
+    const group = currentGroup(doc.document_id);
+    const pageLabel = group.page_numbers?.length ? group.page_numbers.join(", ") : "Not available";
+    $("documentTable").innerHTML = `<table class="doc-table"><tbody>
+      <tr><th>Document ID</th><td>${esc(doc.document_id)}</td></tr>
+      <tr><th>Type</th><td>${esc(doc.document_type)}</td></tr>
+      <tr><th>Pages</th><td>${esc(pageLabel)}</td></tr>
+      <tr><th>Applicant</th><td>${esc(fmt(doc.person_name))}</td></tr>
+      <tr><th>DOB</th><td>${esc(fmt(doc.date_of_birth))}</td></tr>
+      <tr><th>Annual income</th><td>${esc(fmt(doc.annual_family_income))} ${esc(doc.income_currency || "")}</td></tr>
+      <tr><th>Financial year</th><td>${esc(fmt(doc.valid_financial_year))}</td></tr>
+      <tr><th>Extraction confidence</th><td>${esc(fmt(doc.confidence))} <span class="muted">(model-reported; not proof of correctness)</span></td></tr>
+    </tbody></table>`;
+    $("selectedPageLabel").textContent = `Selected logical document · pages ${pageLabel}`;
+    renderEditor();
+  }
+  function renderEditor() {
+    const doc = selectedDocument();
+    if (!doc) return;
+    const group = currentGroup(doc.document_id);
+    const pages = group.page_numbers || [];
+    const currentPages = state.review.current_page_extractions || [];
+    $("editorFields").innerHTML = fields.map(field => {
+      const value = doc[field.key];
+      const originals = pages.map(p => `${p}: ${fmt(originalPageValue(p, field.key))}`);
+      const originalLabel = originals.length ? originals.map(v => `Page ${v}`).join(" · ") : fmt((state.review.original_extracted_documents || []).find(d => d.document_id === doc.document_id)?.[field.key]);
+      const originalEsc = esc(originalLabel);
+      let input;
+      if (field.type === "select") {
+        input = `<select id="value-${field.key}" disabled><option value="">(clear / null)</option>${field.options.map(option => `<option value="${esc(option)}" ${value === option ? "selected" : ""}>${esc(option)}</option>`).join("")}</select>`;
+      } else {
+        const attrs = [
+          `type="${field.type}"`, `id="value-${field.key}"`, `value="${esc(value ?? "")}"`,
+          field.placeholder ? `placeholder="${esc(field.placeholder)}"` : "",
+          field.min ? `min="${field.min}"` : "", field.max ? `max="${field.max}"` : "",
+          field.step ? `step="${field.step}"` : "", field.pattern ? `pattern="${field.pattern}"` : "",
+          "disabled"
+        ].filter(Boolean).join(" ");
+        input = `<input ${attrs}>`;
+      }
+      return `<div class="edit-row">
+        <div class="edit-name">${esc(field.label)}<label class="edit-toggle"><input class="field-check" type="checkbox" data-field="${field.key}"> Include in save</label></div>
+        <div class="edit-original">${originalEsc}</div>
+        <div class="edit-input">${input}<div class="edit-current tiny muted">Current: ${esc(fmt(value))}</div></div>
+      </div>`;
+    }).join("");
+    $("editorFields").querySelectorAll(".field-check").forEach(check => {
+      check.addEventListener("change", () => {
+        const input = $("value-" + check.dataset.field);
+        if (input) input.disabled = !check.checked;
+      });
+    });
+    const completed = state.review.status !== "pending_review";
+    $("saveCorrectionsBtn").disabled = completed;
+  }
+  function renderEvents() {
+    const events = [...(state.review.events || [])].reverse();
+    if (!events.length) { $("events").innerHTML = `<div class="empty">No review actions recorded yet.</div>`; return; }
+    $("events").innerHTML = events.map(event => `
+      <div class="event">
+        <div class="event-title">${esc(event.action.replaceAll("_", " "))}${event.field_name ? ` · ${esc(event.field_name)}` : ""}</div>
+        <div class="event-meta">${esc(event.reviewer_id)} · ${esc(event.document_id || "review-level action")} · ${esc(new Date(event.created_at).toLocaleString())}</div>
+        ${event.action !== "review_completed" ? `<div class="tiny muted">${esc(fmt(event.previous_value))} → ${esc(fmt(event.new_value))}</div>` : ""}
+        <div class="tiny muted">${esc(event.note || "")}</div>
+      </div>`).join("");
+  }
+  async function loadReview(reviewId) {
+    if (!reviewId.trim()) throw new Error("Enter a review ID first.");
+    setBusy(true); setStatus("uploadStatus", "Loading review…");
+    try {
+      state.review = await api(`/documents/reviews/${encodeURIComponent(reviewId.trim())}`);
+      state.selectedDocumentId = state.review.extracted_documents?.[0]?.document_id || null;
+      render(); setStatus("uploadStatus", "Review loaded successfully.", "ok");
+    } catch (error) { setStatus("uploadStatus", error.message, "error"); throw error; }
+    finally { setBusy(false); }
+  }
+
+  $("fileInput").addEventListener("change", event => {
+    const file = event.target.files?.[0];
+    if (file) showPreview(file);
+  });
+  $("uploadBtn").addEventListener("click", async () => {
+    const file = $("fileInput").files?.[0];
+    if (!file) { setStatus("uploadStatus", "Choose a PDF or supported image first.", "error"); return; }
+    const targetFy = $("targetFy").value.trim();
+    if (!/^\d{4}-\d{2}$/.test(targetFy)) { setStatus("uploadStatus", "Enter the target financial year in YYYY-YY format.", "error"); return; }
+    setBusy(true); setStatus("uploadStatus", "Uploading and extracting with Gemini… this can take several seconds.");
+    try {
+      const form = new FormData(); form.append("file", file);
+      const result = await api(`/documents/audit-upload?target_financial_year=${encodeURIComponent(targetFy)}`, { method: "POST", body: form });
+      if (!result.review?.review_id) throw new Error("Upload completed, but no local review case was created. Check that review APIs are enabled in this environment.");
+      $("reviewIdInput").value = result.review.review_id;
+      state.review = await api(`/documents/reviews/${encodeURIComponent(result.review.review_id)}`);
+      state.selectedDocumentId = state.review.extracted_documents?.[0]?.document_id || null;
+      render(); setStatus("uploadStatus", `Upload and extraction complete · review ${result.review.review_id}`, "ok");
+    } catch (error) { setStatus("uploadStatus", error.message, "error"); }
+    finally { setBusy(false); }
+  });
+  $("loadBtn").addEventListener("click", async () => {
+    try { await loadReview($("reviewIdInput").value); } catch { /* status already shown */ }
+  });
+  $("documentSelect").addEventListener("change", () => {
+    state.selectedDocumentId = $("documentSelect").value; renderDocuments();
+  });
+  $("selectPopulatedBtn").addEventListener("click", () => {
+    const doc = selectedDocument(); if (!doc) return;
+    $("editorFields").querySelectorAll(".field-check").forEach(check => {
+      const value = doc[check.dataset.field];
+      const include = value !== null && value !== undefined && value !== "";
+      check.checked = include;
+      const input = $("value-" + check.dataset.field);
+      if (input) input.disabled = !include;
+    });
+  });
+  $("saveCorrectionsBtn").addEventListener("click", async () => {
+    const doc = selectedDocument(); if (!doc || !state.review) return;
+    const reviewer = $("reviewerId").value.trim();
+    const note = $("correctionNote").value.trim();
+    if (reviewer.length < 2 || note.length < 3) { setStatus("editStatus", "Enter a reviewer ID and a note of at least 3 characters.", "error"); return; }
+    const corrections = {};
+    const selected = [...$("editorFields").querySelectorAll(".field-check:checked")];
+    if (!selected.length) { setStatus("editStatus", "Select at least one field to confirm or correct.", "error"); return; }
+    for (const check of selected) {
+      const key = check.dataset.field; const field = fields.find(item => item.key === key); const input = $("value-" + key);
+      if (field.type === "number") {
+        if (input.value === "") corrections[key] = null;
+        else {
+          const value = Number(input.value);
+          if (!Number.isSafeInteger(value) || value < 0 || value > 100000000) { setStatus("editStatus", `${field.label} must be a whole number between 0 and 100000000.`, "error"); return; }
+          corrections[key] = value;
+        }
+      } else if (field.type === "date") {
+        corrections[key] = input.value || null;
+      } else {
+        corrections[key] = input.value.trim() || null;
+      }
+    }
+    setBusy(true); setStatus("editStatus", "Saving reviewer decisions…");
+    try {
+      const path = `/documents/reviews/${encodeURIComponent(state.review.review_id)}/documents/${encodeURIComponent(doc.document_id)}`;
+      state.review = await api(path, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ reviewer_id: reviewer, note, corrections }) });
+      state.selectedDocumentId = state.review.extracted_documents?.find(item => item.document_id === doc.document_id)?.document_id || state.review.extracted_documents?.[0]?.document_id || null;
+      $("correctionNote").value = ""; render(); setStatus("editStatus", "Review updates saved. Original Gemini/page extraction remains preserved.", "ok");
+    } catch (error) { setStatus("editStatus", error.message, "error"); }
+    finally { setBusy(false); }
+  });
+  $("completeBtn").addEventListener("click", async () => {
+    if (!state.review) return;
+    const reviewer = $("reviewerId").value.trim();
+    const note = $("completionNote").value.trim();
+    if (!$("completionConfirm").checked) { setStatus("completeStatus", "Confirm that you inspected the source pages and outstanding findings.", "error"); return; }
+    if (reviewer.length < 2 || note.length < 5) { setStatus("completeStatus", "Enter a reviewer ID and a completion note of at least 5 characters.", "error"); return; }
+    if (!window.confirm("Complete this review? The case becomes read-only.")) return;
+    setBusy(true); setStatus("completeStatus", "Completing review…");
+    try {
+      state.review = await api(`/documents/reviews/${encodeURIComponent(state.review.review_id)}/complete`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ reviewer_id: reviewer, confirm_review_complete: true, note }) });
+      render(); setStatus("completeStatus", "Review completed and locked.", "ok");
+    } catch (error) { setStatus("completeStatus", error.message, "error"); }
+    finally { setBusy(false); }
+  });
+
+  // Allow opening a review directly as /reviewer#<review_id> without storing citizen data in browser storage.
+  const hashReviewId = decodeURIComponent(location.hash.replace(/^#/, "")).trim();
+  if (hashReviewId) { $("reviewIdInput").value = hashReviewId; loadReview(hashReviewId).catch(() => {}); }
+})();
+</script>
+</body>
+</html>

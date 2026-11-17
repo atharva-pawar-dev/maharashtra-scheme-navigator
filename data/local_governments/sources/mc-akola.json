@@ -1,0 +1,69 @@
+[
+  {
+    "source_id": "src_mc_akola_main",
+    "corporation_id": "mc-akola",
+    "department": "Commissioner & Administration",
+    "official_domain": "akolamc.org",
+    "page_document_url": "https://akolamc.org",
+    "source_type": "MUNICIPAL_OFFICIAL_PORTAL",
+    "scheme_categories": [
+      "Civic Services",
+      "Administration",
+      "Citizen Facilitation"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "2f525af8ac7353726055f3fe3bc12c9d6b681ca8eb6aab01e7be668559edb44d",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  },
+  {
+    "source_id": "src_mc_akola_welfare",
+    "corporation_id": "mc-akola",
+    "department": "Social Welfare & Poverty Alleviation",
+    "official_domain": "akolamc.org",
+    "page_document_url": "https://akolamc.org/social-welfare",
+    "source_type": "MUNICIPAL_SCHEME_DIRECTORY",
+    "scheme_categories": [
+      "Social Welfare",
+      "Disability Welfare",
+      "Women and Child Development",
+      "Education Grants"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "546108db7e058fe9921b3b015c8eea33d367d4328d623718d13da8f5cad03c76",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "Budget continuation orders verified annually"
+  },
+  {
+    "source_id": "src_mc_akola_budget",
+    "corporation_id": "mc-akola",
+    "department": "Finance & Accounts",
+    "official_domain": "akolamc.org",
+    "page_document_url": "https://akolamc.org/budget",
+    "source_type": "ANNUAL_BUDGET_RESOLUTION",
+    "scheme_categories": [
+      "Budget Allocation",
+      "Welfare Head 5% Divyang",
+      "Welfare Head 5% Women Child"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "7c54a5cf83e3b9fa6061fb9419c0d34e46d16ef703e072040fee4a1d3748f774",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "RULES_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  }
+]

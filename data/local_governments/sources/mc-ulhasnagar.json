@@ -1,0 +1,69 @@
+[
+  {
+    "source_id": "src_mc_ulhasnagar_main",
+    "corporation_id": "mc-ulhasnagar",
+    "department": "Commissioner & Administration",
+    "official_domain": "umc.gov.in",
+    "page_document_url": "https://umc.gov.in",
+    "source_type": "MUNICIPAL_OFFICIAL_PORTAL",
+    "scheme_categories": [
+      "Civic Services",
+      "Administration",
+      "Citizen Facilitation"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "e88eef807532372f36e541ec642149e092737dd6990fc339a1bc0216c37cd3b0",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  },
+  {
+    "source_id": "src_mc_ulhasnagar_welfare",
+    "corporation_id": "mc-ulhasnagar",
+    "department": "Social Welfare & Urban Poverty Cell",
+    "official_domain": "umc.gov.in",
+    "page_document_url": "https://umc.gov.in/welfare",
+    "source_type": "MUNICIPAL_SCHEME_DIRECTORY",
+    "scheme_categories": [
+      "Social Welfare",
+      "Disability Welfare",
+      "Women and Child Development",
+      "Education Grants"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "6dca0e4272e159c728a7970a1b2cbd471b7ffe871ab868fb0d576488c8411051",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "Budget continuation orders verified annually"
+  },
+  {
+    "source_id": "src_mc_ulhasnagar_budget",
+    "corporation_id": "mc-ulhasnagar",
+    "department": "Finance & Accounts",
+    "official_domain": "umc.gov.in",
+    "page_document_url": "https://umc.gov.in/budget",
+    "source_type": "ANNUAL_BUDGET_RESOLUTION",
+    "scheme_categories": [
+      "Budget Allocation",
+      "Welfare Head 5% Divyang",
+      "Welfare Head 5% Women Child"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "de854d67fa6573988674e2213817c7060193410a13da1f3dca1a4a4de0e4234b",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "RULES_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  }
+]

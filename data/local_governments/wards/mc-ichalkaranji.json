@@ -1,0 +1,21 @@
+{
+  "corporation_id": "mc-ichalkaranji",
+  "corporation_name_en": "Ichalkaranji Municipal Corporation",
+  "corporation_name_mr": "इचलकरंजी महानगरपालिका",
+  "total_wards": 16,
+  "boundary_reference": "Urban Development Dept GR IMC-2022/CR-45",
+  "representative_wards": [
+    "Ward 1 (Shahapur)",
+    "Ward 2 (Kabnur Link)",
+    "Ward 3 (Jawaharnagar)",
+    "Ward 4 (Station Road)"
+  ],
+  "localities": [
+    "Shahapur",
+    "Jawaharnagar",
+    "Station Road",
+    "Gandhinagar",
+    "Vikram Nagar",
+    "Industrial Estate"
+  ]
+}

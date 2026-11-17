@@ -1,0 +1,69 @@
+[
+  {
+    "source_id": "src_mc_pimpri_chinchwad_main",
+    "corporation_id": "mc-pimpri-chinchwad",
+    "department": "Commissioner & Administration",
+    "official_domain": "www.pcmcindia.gov.in",
+    "page_document_url": "https://www.pcmcindia.gov.in",
+    "source_type": "MUNICIPAL_OFFICIAL_PORTAL",
+    "scheme_categories": [
+      "Civic Services",
+      "Administration",
+      "Citizen Facilitation"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "ce94d11710e7105fdf3a1998359ec7c7d14b9102ef59d699f4edb39597c27601",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  },
+  {
+    "source_id": "src_mc_pimpri_chinchwad_welfare",
+    "corporation_id": "mc-pimpri-chinchwad",
+    "department": "Social Development Department (Samaj Vikas Vibhag)",
+    "official_domain": "www.pcmcindia.gov.in",
+    "page_document_url": "https://www.pcmcindia.gov.in/schemes.php",
+    "source_type": "MUNICIPAL_SCHEME_DIRECTORY",
+    "scheme_categories": [
+      "Social Welfare",
+      "Disability Welfare",
+      "Women and Child Development",
+      "Education Grants"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "d1863c23147cbaa19d3ebd05077ed255213e928b0348dbfb09996fce5d53c914",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "Budget continuation orders verified annually"
+  },
+  {
+    "source_id": "src_mc_pimpri_chinchwad_budget",
+    "corporation_id": "mc-pimpri-chinchwad",
+    "department": "Finance & Accounts",
+    "official_domain": "www.pcmcindia.gov.in",
+    "page_document_url": "https://www.pcmcindia.gov.in/financial_L2_E",
+    "source_type": "ANNUAL_BUDGET_RESOLUTION",
+    "scheme_categories": [
+      "Budget Allocation",
+      "Welfare Head 5% Divyang",
+      "Welfare Head 5% Women Child"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "11a96629c2671681b630e458332e0896fe0a04b272a9077bd4e8a598bcb5eec4",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "RULES_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  }
+]

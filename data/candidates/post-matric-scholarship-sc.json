@@ -1,0 +1,183 @@
+{
+  "scheme_id": "candidate-post-matric-sc",
+  "name": "Centrally Sponsored Post-Matric Scholarship for SC Students (भारत सरकार मॅट्रिकोत्तर शिष्यवृत्ती - अनुसूचित जाती)",
+  "department": "Social Justice and Special Assistance Department, Government of Maharashtra",
+  "summary": "Provides reimbursement of compulsory non-refundable fees and monthly maintenance allowance to eligible SC/Nav-Bouddha students pursuing post-matric studies with parental annual income up to Rs. 2,50,000. (DRAFT CANDIDATE - NON-PRODUCTION)",
+  "benefits": [
+    "100% reimbursement of tuition fees, examination fees, and other compulsory non-refundable course fees",
+    "Monthly maintenance allowance categorized across Course Groups I to IV for hostellers and day scholars",
+    "Additional disability allowances for eligible scholars with benchmark disabilities"
+  ],
+  "required_documents": [
+    "Caste Certificate (SC / Nav-Bouddha) issued by Sub-Divisional Officer / Deputy Collector",
+    "Caste Validity Certificate (mandatory for professional and degree courses)",
+    "Income Certificate (<= Rs. 2,50,000) issued by competent revenue authority (Tahsildar)",
+    "Maharashtra Domicile Certificate",
+    "SSC/10th Marksheet and qualifying examination marksheets",
+    "Current year college fee receipt and admission confirmation letter",
+    "Aadhaar-linked bank account passbook"
+  ],
+  "eligibility_rule": {
+    "op": "all",
+    "children": [
+      {
+        "op": "eq",
+        "children": [],
+        "field": "resident_state",
+        "value": "maharashtra",
+        "condition_id": "c_pms_sc_resident",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "caste_category",
+        "value": "sc",
+        "condition_id": "c_pms_sc_caste",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "is_student",
+        "value": true,
+        "condition_id": "c_pms_sc_is_student",
+        "as_of_date": null
+      },
+      {
+        "op": "lte",
+        "children": [],
+        "field": "annual_family_income",
+        "value": 250000,
+        "condition_id": "c_pms_sc_income",
+        "as_of_date": null
+      }
+    ],
+    "field": null,
+    "value": null,
+    "condition_id": null,
+    "as_of_date": null
+  },
+  "sources": [
+    {
+      "source_name": "MoSJE Central Scheme Guidelines (15th FC Cycle)",
+      "source_url": "https://socialjustice.gov.in/writereaddata/UploadFile/Revised%20PMS%20SC%20Guidelines.pdf",
+      "source_kind": "official_notification",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "Centrally Sponsored Scheme Guidelines (Letter No. 14011/1/2020-SCD-V): Scheme provides financial assistance to SC students pursuing post-matric studies. Parental annual income from all sources does not exceed Rs. 2,50,000/-. Operative 60:40 fund split.",
+      "evidence_sha256": "ea3eb29a117cd2801e6bc4d0cfb8fb89cfb81fe5bb9d6889d17a19c62a1b90f8",
+      "page_or_section": "Para 1-5"
+    },
+    {
+      "source_name": "Maharashtra GR No. BCS-2020/CR25/Shikshan-2",
+      "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202103311652003222.pdf",
+      "source_kind": "government_resolution",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "शासन निर्णय क्र. बीसीएस-२०२०/प्र.क्र.२५/शिक्षण-२ दिनांक ३१ मार्च २०२१: केंद्र पुरस्कृत भारत सरकार मॅट्रिकोत्तर शिष्यवृत्ती योजना सुधारित मार्गदर्शक तत्त्वे राज्यात लागू. अनुसूचित जाती व नवबौद्ध विद्यार्थ्यांना शिक्षण शुल्क, परीक्षा शुल्क व निर्वाह भत्ता अनुज्ञेय.",
+      "evidence_sha256": "00509bd842a37ba389e01eada1b2c00f8d3986055fbc5be85f58db306355fd56",
+      "page_or_section": "Para 1-4"
+    },
+    {
+      "source_name": "MahaDBT 2.0 SC Scholarship Portal Notice",
+      "source_url": "https://mahadbt2.maharashtra.gov.in/",
+      "source_kind": "official_portal",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "MahaDBT 2.0 Notification for AY 2026-27: Fresh and renewal applications invited for Centrally Sponsored Post-Matric Scholarship for SC Students. Mandatory biometric/OTP Aadhaar authentication.",
+      "evidence_sha256": "e7f18c8da7d67382a32f5180ab030452e03e96f4e67c5f6976a4fb0c54c70bc0",
+      "page_or_section": "Academic Year 2026-27 Onboarding Notice"
+    }
+  ],
+  "rule_version": "0.2.2-candidate-draft",
+  "rule_status": "draft",
+  "approved_by": null,
+  "approval_reference": null,
+  "last_verified_at": null,
+  "languages": [
+    "en"
+  ],
+  "evidence": [
+    {
+      "condition_id": "c_pms_sc_resident",
+      "source_title": "MoSJE Scheme Guidelines & Maharashtra Adoption GR",
+      "official_reference": "14011/1/2020-SCD-V & 202103311652003222",
+      "official_source_url": "https://socialjustice.gov.in/writereaddata/UploadFile/Revised%20PMS%20SC%20Guidelines.pdf",
+      "source_type": "central_scheme_guideline",
+      "publication_date": "2020-12-31",
+      "effective_from": "2020-04-01",
+      "effective_until": null,
+      "page_or_section": "Para 4.1",
+      "verbatim_excerpt": "The scholarships are awarded by the government of the State to which the applicant actually belongs (permanently settled).",
+      "excerpt_language": "en",
+      "translated_excerpt": null,
+      "translation_provenance": null,
+      "source_document_sha256": "0749b541b8a04a6c6f6c61b6951bd4c914403b9dfc1f7e5bdccccae97823fa60",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": "Administered continuously; 16th Finance Commission revised central guidelines pending official gazette notification."
+    },
+    {
+      "condition_id": "c_pms_sc_caste",
+      "source_title": "MoSJE Scheme Guidelines",
+      "official_reference": "14011/1/2020-SCD-V",
+      "official_source_url": "https://socialjustice.gov.in/writereaddata/UploadFile/Revised%20PMS%20SC%20Guidelines.pdf",
+      "source_type": "central_scheme_guideline",
+      "publication_date": "2020-12-31",
+      "effective_from": "2020-04-01",
+      "effective_until": null,
+      "page_or_section": "Para 4.2",
+      "verbatim_excerpt": "The scholarships are available only to students belonging to Scheduled Castes.",
+      "excerpt_language": "en",
+      "translated_excerpt": null,
+      "translation_provenance": null,
+      "source_document_sha256": "ac40b8a74030d1b6491e97e073505743edff8e28266c2ba791f656d6697f5fe0",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": "In Maharashtra, recognizes Scheduled Castes and Nav-Bouddha community."
+    },
+    {
+      "condition_id": "c_pms_sc_is_student",
+      "source_title": "MoSJE Scheme Guidelines",
+      "official_reference": "14011/1/2020-SCD-V",
+      "official_source_url": "https://socialjustice.gov.in/writereaddata/UploadFile/Revised%20PMS%20SC%20Guidelines.pdf",
+      "source_type": "central_scheme_guideline",
+      "publication_date": "2020-12-31",
+      "effective_from": "2020-04-01",
+      "effective_until": null,
+      "page_or_section": "Para 3",
+      "verbatim_excerpt": "The scholarship will be provided for post-matriculation studies in recognized institutions.",
+      "excerpt_language": "en",
+      "translated_excerpt": null,
+      "translation_provenance": null,
+      "source_document_sha256": "c508d7515c5fc2f8f70b17bfb2c9e6741bb299e3ebfc048ac59d4764be5e9ffc",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_pms_sc_income",
+      "source_title": "MoSJE Scheme Guidelines",
+      "official_reference": "14011/1/2020-SCD-V",
+      "official_source_url": "https://socialjustice.gov.in/writereaddata/UploadFile/Revised%20PMS%20SC%20Guidelines.pdf",
+      "source_type": "central_scheme_guideline",
+      "publication_date": "2020-12-31",
+      "effective_from": "2020-04-01",
+      "effective_until": null,
+      "page_or_section": "Para 5",
+      "verbatim_excerpt": "Parental annual income from all sources does not exceed Rs. 2,50,000/-.",
+      "excerpt_language": "en",
+      "translated_excerpt": null,
+      "translation_provenance": null,
+      "source_document_sha256": "ba69216f5e338844449e0d08f0f925bd5f0256b56afa60280cb5e8bc40842672",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": "Distinct from Top Class Education Scheme for SC Students which has an Rs. 8 Lakh ceiling and applies to premier institutes only."
+    }
+  ],
+  "document_requirements": [],
+  "eligibility_reference_date": null,
+  "publication_authorized": false
+}

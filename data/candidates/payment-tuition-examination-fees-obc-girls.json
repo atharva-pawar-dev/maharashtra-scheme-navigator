@@ -1,0 +1,203 @@
+{
+  "scheme_id": "candidate-payment-tuition-exam-fees-obc-girls",
+  "name": "Payment of Tuition Fees and Examination Fees to OBC Girls Pursuing Professional Courses (व्यावसायिक अभ्यासक्रमास प्रवेश घेणाऱ्या इतर मागास प्रवर्गातील मुलींना शिक्षण शुल्क व परीक्षा शुल्क प्रतिपूर्ती)",
+  "department": "Higher and Technical Education Department, Government of Maharashtra",
+  "summary": "Provides 100% reimbursement of tuition and examination fees to eligible female OBC/EWS/SEBC students admitted through CAP in recognized professional courses with family annual income up to Rs. 8 Lakh under GR 8 July 2024. Crucially, provides NO maintenance allowance. (DRAFT CANDIDATE - NON-PRODUCTION)",
+  "benefits": [
+    "100% Tuition Fee waiver / reimbursement approved by Fee Regulating Authority (FRA)",
+    "100% Examination Fee reimbursement",
+    "NO monthly maintenance allowance is provided under this scheme"
+  ],
+  "required_documents": [
+    "Caste Certificate (OBC) issued by Sub-Divisional Officer / Deputy Collector",
+    "Valid Non-Creamy Layer (NCL) Certificate for current financial year",
+    "Income Certificate (<= Rs. 8,00,000) issued by Tahsildar",
+    "Maharashtra Domicile Certificate",
+    "CAP Allotment Letter confirming admission via Centralized Admission Process",
+    "College fee receipt and Bonafide Certificate",
+    "Previous qualifying examination marksheet (minimum 75% attendance record)",
+    "Aadhaar-linked bank account passbook"
+  ],
+  "eligibility_rule": {
+    "op": "all",
+    "children": [
+      {
+        "op": "eq",
+        "children": [],
+        "field": "resident_state",
+        "value": "maharashtra",
+        "condition_id": "c_fee_waiver_obc_girls_residence",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "caste_category",
+        "value": "obc",
+        "condition_id": "c_fee_waiver_obc_girls_caste",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "gender",
+        "value": "female",
+        "condition_id": "c_fee_waiver_obc_girls_gender",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "is_student",
+        "value": true,
+        "condition_id": "c_fee_waiver_obc_girls_is_student",
+        "as_of_date": null
+      },
+      {
+        "op": "lte",
+        "children": [],
+        "field": "annual_family_income",
+        "value": 800000,
+        "condition_id": "c_fee_waiver_obc_girls_income",
+        "as_of_date": null
+      }
+    ],
+    "field": null,
+    "value": null,
+    "condition_id": null,
+    "as_of_date": null
+  },
+  "sources": [
+    {
+      "source_name": "Maharashtra GR No. Shishyavru-2024/CR105/Tanshi-4",
+      "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407081745123408.pdf",
+      "source_kind": "government_resolution",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "शासन निर्णय क्र. शिष्यवृ-२०२४/प्र.क्र.१०५/तांशि-४ दिनांक ०८ जुलै २०२४: उच्च व तंत्र शिक्षण विभाग अंतर्गत व्यावसायिक अभ्यासक्रमांना केंद्रीभूत प्रवेश प्रक्रियेद्वारे (CAP) प्रवेश घेतलेल्या इतर मागास वर्ग (OBC), ईडब्ल्यूएस व एसईबीसी प्रवर्गातील मुलींना, ज्यांच्या कुटुंबाचे वार्षिक उत्पन्न रु. ८.०० लाखांपर्यंत आहे, त्यांना १००% शिक्षण शुल्क व परीक्षा शुल्क प्रतिपूर्ती. (कोणताही निर्वाह भत्ता अनुज्ञेय नाही).",
+      "evidence_sha256": "da5b6f552073347fe6912a8f82b444c100b9bfce5e6fa21e970605e02a21cc2d",
+      "page_or_section": "Para 1-4 & Government Decision"
+    },
+    {
+      "source_name": "MahaDBT 2.0 Fee Waiver Scheme Portal Guidelines",
+      "source_url": "https://mahadbt2.maharashtra.gov.in/",
+      "source_kind": "official_portal",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "MahaDBT 2.0 Notification - Payment of Tuition Fees and Examination Fees to OBC Girls Pursuing Professional Courses: Female OBC students admitted through CAP round in approved professional/technical courses. Family annual income up to Rs. 8,00,000 with valid Non-Creamy Layer. 75% minimum attendance required. 100% fee waiver only.",
+      "evidence_sha256": "956807ecde16674ec955ddf373d14d03d353b0ffd594126fee44f96311a7c461",
+      "page_or_section": "Eligibility and Scheme Guidelines"
+    }
+  ],
+  "rule_version": "0.2.2-candidate-draft",
+  "rule_status": "draft",
+  "approved_by": null,
+  "approval_reference": null,
+  "last_verified_at": null,
+  "languages": [
+    "en"
+  ],
+  "evidence": [
+    {
+      "condition_id": "c_fee_waiver_obc_girls_residence",
+      "source_title": "Maharashtra GR No. Shishyavru-2024/CR105/Tanshi-4",
+      "official_reference": "202407081745123408",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407081745123408.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2024-07-08",
+      "effective_from": "2024-07-08",
+      "effective_until": null,
+      "page_or_section": "Preamble & Cl. 1",
+      "verbatim_excerpt": "महाराष्ट्र राज्यातील उच्च व तंत्र शिक्षण विभागाच्या मान्यताप्राप्त व्यावसायिक अभ्यासक्रमास प्रवेश घेतलेली विद्यार्थिनी.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Female student admitted to recognized professional courses under Higher & Technical Education Dept in Maharashtra.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "fb903a7b58827d55032ca1bd75acbb56e954ad5c744eb044cb58f1708161acd8",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_fee_waiver_obc_girls_caste",
+      "source_title": "Maharashtra GR No. Shishyavru-2024/CR105/Tanshi-4",
+      "official_reference": "202407081745123408",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407081745123408.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2024-07-08",
+      "effective_from": "2024-07-08",
+      "effective_until": null,
+      "page_or_section": "Cl. 1",
+      "verbatim_excerpt": "इतर मागास प्रवर्ग (OBC), ईडब्ल्यूएस व एसईबीसी प्रवर्गातील विद्यार्थिनी.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Girl students belonging to Other Backward Classes (OBC), EWS, and SEBC categories.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "843ef7cc521b121aba179e9226bcd00e7813677cd1b5e5e52e4850e96a1bba47",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_fee_waiver_obc_girls_gender",
+      "source_title": "Maharashtra GR No. Shishyavru-2024/CR105/Tanshi-4",
+      "official_reference": "202407081745123408",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407081745123408.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2024-07-08",
+      "effective_from": "2024-07-08",
+      "effective_until": null,
+      "page_or_section": "Decision Cl. 1",
+      "verbatim_excerpt": "इतर मागास प्रवर्ग (OBC), ईडब्ल्यूएस व एसईबीसी प्रवर्गातील मुलींना ५०% ऐवजी १००% शिक्षण शुल्क व परीक्षा शुल्क प्रतिपूर्ती.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Reimbursement of 100% instead of 50% tuition and examination fees to girls belonging to OBC, EWS and SEBC categories.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "63221fc24c6b6d91203b6ee86ab66c8158fb9b519246c5f59328888fc7c69202",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_fee_waiver_obc_girls_is_student",
+      "source_title": "Maharashtra GR No. Shishyavru-2024/CR105/Tanshi-4",
+      "official_reference": "202407081745123408",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407081745123408.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2024-07-08",
+      "effective_from": "2024-07-08",
+      "effective_until": null,
+      "page_or_section": "Cl. 2",
+      "verbatim_excerpt": "विद्यार्थिनीने चालू शैक्षणिक वर्षात मान्यताप्राप्त अभ्यासक्रमात नियमित प्रवेश घेतलेला असावा.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "The female student must have secured regular admission in an approved course during current academic year.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "8c305531562fb875a03b5541604835bd080023abceb57fb3423ff7871541d821",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": "Applies exclusively to students admitted through Centralized Admission Process (CAP) in approved professional courses."
+    },
+    {
+      "condition_id": "c_fee_waiver_obc_girls_income",
+      "source_title": "Maharashtra GR No. Shishyavru-2024/CR105/Tanshi-4",
+      "official_reference": "202407081745123408",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/202407081745123408.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2024-07-08",
+      "effective_from": "2024-07-08",
+      "effective_until": null,
+      "page_or_section": "Decision Cl. 1",
+      "verbatim_excerpt": "ज्यांच्या कुटुंबाचे वार्षिक उत्पन्न रु. ८,००,०००/- पर्यंत आहे अशा मुलींना.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "For girl students whose family annual income is up to Rs. 8,00,000/-.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "f146db3c61374457d0d741d1b11d360ac733db39a12dacfb7c1f10e82915b13c",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": "Crucially, this scheme provides 100% tuition and examination fee waiver only. No maintenance allowance."
+    }
+  ],
+  "document_requirements": [],
+  "eligibility_reference_date": null,
+  "publication_authorized": false
+}

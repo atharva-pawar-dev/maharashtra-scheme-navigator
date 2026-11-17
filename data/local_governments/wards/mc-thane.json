@@ -1,0 +1,31 @@
+{
+  "corporation_id": "mc-thane",
+  "corporation_name_en": "Thane Municipal Corporation",
+  "corporation_name_mr": "ठाणे महानगरपालिका",
+  "total_wards": 9,
+  "boundary_reference": "TMC 9 Ward Committee Delimitation 2022",
+  "representative_wards": [
+    "Naupada-Kopri (नौपाडा-कोपरी)",
+    "Majiwada-Manpada (माजीवडा-मानपाडा)",
+    "Vartak Nagar (वर्तक नगर)",
+    "Lokmanya-Savarkar Nagar (लोकमान्य-सावरकर नगर)",
+    "Wagle Estate (वागळे इस्टेट)",
+    "Kalwa (कळवा)",
+    "Mumbra (मुंब्रा)",
+    "Diva (दिवा)",
+    "Uthalsar (उथळसर)"
+  ],
+  "localities": [
+    "Naupada",
+    "Kopri",
+    "Ghubunder Road",
+    "Majiwada",
+    "Manpada",
+    "Vartak Nagar",
+    "Wagle Estate",
+    "Kalwa",
+    "Mumbra",
+    "Diva",
+    "Panchpakhadi"
+  ]
+}

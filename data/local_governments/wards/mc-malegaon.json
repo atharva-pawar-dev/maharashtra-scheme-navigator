@@ -1,0 +1,21 @@
+{
+  "corporation_id": "mc-malegaon",
+  "corporation_name_en": "Malegaon Municipal Corporation",
+  "corporation_name_mr": "मालेगाव महानगरपालिका",
+  "total_wards": 21,
+  "boundary_reference": "MMC Malegaon Delimitation 2022",
+  "representative_wards": [
+    "Zone 1 (Camp)",
+    "Zone 2 (Nayapura)",
+    "Zone 3 (Sangameshwar)",
+    "Zone 4 (Soygaon)"
+  ],
+  "localities": [
+    "Camp",
+    "Nayapura",
+    "Sangameshwar",
+    "Soygaon",
+    "Islampura",
+    "Ramzanpura"
+  ]
+}

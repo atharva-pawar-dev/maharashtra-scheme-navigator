@@ -1,0 +1,22 @@
+{
+  "corporation_id": "mc-bhiwandi-nizampur",
+  "corporation_name_en": "Bhiwandi Nizampur Municipal Corporation",
+  "corporation_name_mr": "भिवंडी निजामपूर शहर महानगरपालिका",
+  "total_wards": 5,
+  "boundary_reference": "BNCMC Delimitation Order 2022",
+  "representative_wards": [
+    "Ward Committee 1",
+    "Ward Committee 2",
+    "Ward Committee 3",
+    "Ward Committee 4",
+    "Ward Committee 5"
+  ],
+  "localities": [
+    "Nizampur",
+    "Shanti Nagar",
+    "Dhamankar Naka",
+    "Mandai",
+    "Kamathghar",
+    "Kaneri"
+  ]
+}

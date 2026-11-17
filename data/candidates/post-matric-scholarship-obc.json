@@ -1,0 +1,174 @@
+{
+  "scheme_id": "candidate-post-matric-obc",
+  "name": "Post Matric Scholarship to OBC Students (इतर मागासवर्गीय मॅट्रिकोत्तर शिष्यवृत्ती योजना)",
+  "department": "Other Backward Bahujan Welfare Department, Government of Maharashtra",
+  "summary": "Provides tuition fee reimbursement and monthly maintenance allowance to eligible OBC students pursuing post-matric courses with parental annual income up to Rs. 2.5 Lakh (MahaDBT active threshold). (DRAFT CANDIDATE - NON-PRODUCTION)",
+  "benefits": [
+    "100% Tuition Fee & Examination Fee in Government / Aided institutions; 50% in private unaided institutions",
+    "Monthly maintenance allowance paid for 10 months according to course group (Group A to E) for day scholars and hostellers",
+    "Book allowances and thesis completion charges for post-graduate/research scholars where applicable"
+  ],
+  "required_documents": [
+    "Caste Certificate (OBC) issued by Sub-Divisional Officer / Deputy Collector",
+    "Valid Non-Creamy Layer (NCL) Certificate for current financial year",
+    "Income Certificate (<= Rs. 2,50,000) issued by Tahsildar",
+    "Maharashtra Domicile Certificate",
+    "Previous year examination marksheet",
+    "College admission fee receipt and Bonafide Certificate",
+    "Aadhaar-linked bank account passbook"
+  ],
+  "eligibility_rule": {
+    "op": "all",
+    "children": [
+      {
+        "op": "eq",
+        "children": [],
+        "field": "resident_state",
+        "value": "maharashtra",
+        "condition_id": "c_pms_obc_residence",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "caste_category",
+        "value": "obc",
+        "condition_id": "c_pms_obc_caste",
+        "as_of_date": null
+      },
+      {
+        "op": "eq",
+        "children": [],
+        "field": "is_student",
+        "value": true,
+        "condition_id": "c_pms_obc_is_student",
+        "as_of_date": null
+      },
+      {
+        "op": "lte",
+        "children": [],
+        "field": "annual_family_income",
+        "value": 250000,
+        "condition_id": "c_pms_obc_income",
+        "as_of_date": null
+      }
+    ],
+    "field": null,
+    "value": null,
+    "condition_id": null,
+    "as_of_date": null
+  },
+  "sources": [
+    {
+      "source_name": "Maharashtra GR No. EBC-2012/CR229/Mavak-2",
+      "source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201310141640003222.pdf",
+      "source_kind": "government_resolution",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "शासन निर्णय क्र. ईबीसी-२०१२/प्र.क्र.२२९/मावक-२ दिनांक १४ ऑक्टोबर २०१३: इतर मागास प्रवर्गातील विद्यार्थ्यांसाठी मॅट्रिकोत्तर शिष्यवृत्ती योजना. शिक्षण शुल्क, परीक्षा शुल्क व निर्वाह भत्ता अनुज्ञेय. (महाडीबीटी २.० वरील निकष: वार्षिक उत्पन्न मर्यादा रु. २.५० लाख).",
+      "evidence_sha256": "1984fec908092e8b9bec87699b7eb07036548787bef6456c86b3a7296177c285",
+      "page_or_section": "Para 1-4"
+    },
+    {
+      "source_name": "MahaDBT 2.0 Post-Matric OBC Scheme Portal Guidelines",
+      "source_url": "https://mahadbt2.maharashtra.gov.in/",
+      "source_kind": "official_portal",
+      "retrieved_at": "2026-11-08T00:00:00",
+      "evidence_excerpt": "MahaDBT 2.0 Official Scheme Details - Post Matric Scholarship to OBC Students: Applicant must belong to OBC category with valid Non-Creamy Layer. Parental annual income should be less than or equal to Rs. 2.50 Lakh. Mandatory 75% attendance. Provides fees and maintenance.",
+      "evidence_sha256": "ef98b5aad90d63be2a430deaf4fbd34ea17985ae27b38632bc1ae23d8f49a439",
+      "page_or_section": "Eligibility & Scheme Rules"
+    }
+  ],
+  "rule_version": "0.2.2-candidate-draft",
+  "rule_status": "draft",
+  "approved_by": null,
+  "approval_reference": null,
+  "last_verified_at": null,
+  "languages": [
+    "en"
+  ],
+  "evidence": [
+    {
+      "condition_id": "c_pms_obc_residence",
+      "source_title": "Maharashtra GR No. EBC-2012/CR229/Mavak-2 & MahaDBT Rules",
+      "official_reference": "201310141640003222",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201310141640003222.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2013-10-14",
+      "effective_from": "2013-10-14",
+      "effective_until": null,
+      "page_or_section": "Cl. 1",
+      "verbatim_excerpt": "अर्जदार विद्यार्थी हा इतर मागास प्रवर्गातील व महाराष्ट्राचा रहिवासी असावा.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Applicant student must belong to Other Backward Classes and be a resident of Maharashtra.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "d11acdb4a9a1f4e18d1df3e2d197e931c4d14e6b676baf250e4c7c989cff55d6",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_pms_obc_caste",
+      "source_title": "Maharashtra GR No. EBC-2012/CR229/Mavak-2",
+      "official_reference": "201310141640003222",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201310141640003222.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2013-10-14",
+      "effective_from": "2013-10-14",
+      "effective_until": null,
+      "page_or_section": "Cl. 1",
+      "verbatim_excerpt": "इतर मागास प्रवर्गातील (OBC) सक्षम प्राधिकरणाचे वैध जात प्रमाणपत्र असणे आवश्यक आहे.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Valid caste certificate of OBC category issued by competent authority is required.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "e17fa52af4d83807d916467a90ce5471565b6ecf1a4e17cf831c0642cf43683c",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_pms_obc_is_student",
+      "source_title": "Maharashtra GR No. EBC-2012/CR229/Mavak-2",
+      "official_reference": "201310141640003222",
+      "official_source_url": "https://gr.maharashtra.gov.in/Site/Upload/GR/201310141640003222.pdf",
+      "source_type": "government_resolution",
+      "publication_date": "2013-10-14",
+      "effective_from": "2013-10-14",
+      "effective_until": null,
+      "page_or_section": "Cl. 2",
+      "verbatim_excerpt": "विद्यार्थी मान्यताप्राप्त संस्थेत दहावीनंतरच्या उच्च शिक्षणात नियमित शिकत असावा.",
+      "excerpt_language": "mr",
+      "translated_excerpt": "Student must be regularly studying in recognized post-matric course in an approved institution.",
+      "translation_provenance": "Official translation",
+      "source_document_sha256": "cd266847d5aad10deb25bef2f4af3599778a7fc94b8bf9507d079061ddd61130",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": null
+    },
+    {
+      "condition_id": "c_pms_obc_income",
+      "source_title": "MahaDBT 2.0 Operating Scheme Portal Guidelines",
+      "official_reference": "MahaDBT-OBC-PMS-2026",
+      "official_source_url": "https://mahadbt2.maharashtra.gov.in/",
+      "source_type": "official_portal",
+      "publication_date": "2024-07-01",
+      "effective_from": "2024-07-01",
+      "effective_until": null,
+      "page_or_section": "Income Eligibility Section",
+      "verbatim_excerpt": "Parental annual income should be less than or equal to Rs. 2.50 Lakh.",
+      "excerpt_language": "en",
+      "translated_excerpt": null,
+      "translation_provenance": null,
+      "source_document_sha256": "7119921bcb093129cb25433d3e4edf6cf907979cb6ef1c4dda88d76ba76a8be6",
+      "verification_status": "extracted_unverified",
+      "verified_by": null,
+      "verification_timestamp": null,
+      "notes": "Active MahaDBT portal specifies Rs. 2.5 Lakh. Base 2013 GR specified Rs. 1 Lakh. State GR amending threshold to 2.5L is not indexed on gr.maharashtra.gov.in; flagged for review."
+    }
+  ],
+  "document_requirements": [],
+  "eligibility_reference_date": null,
+  "publication_authorized": false
+}

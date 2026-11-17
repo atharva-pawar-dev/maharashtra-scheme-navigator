@@ -1,0 +1,34 @@
+{
+  "corporation_id": "mc-pimpri-chinchwad",
+  "corporation_name_en": "Pimpri Chinchwad Municipal Corporation",
+  "corporation_name_mr": "पिंपरी चिंचवड महानगरपालिका",
+  "total_wards": 8,
+  "boundary_reference": "PCMC 8 Zonal Offices & 32 Electoral Wards 2022",
+  "representative_wards": [
+    "Zone A (Nigdi/Pradhikaran)",
+    "Zone B (Chinchwad/Thergaon)",
+    "Zone C (Bhosari/Charholi)",
+    "Zone D (Pimple Saudagar/Wakad)",
+    "Zone E (Akurdi/Ravet)",
+    "Zone F (Yamunanagar/Talwade)",
+    "Zone G (Pimpri/Nehrunagar)",
+    "Zone H (Sangvi/Dapodi)"
+  ],
+  "localities": [
+    "Pimpri",
+    "Chinchwad",
+    "Akurdi",
+    "Bhosari",
+    "Nigdi",
+    "Wakad",
+    "Pimple Saudagar",
+    "Pimple Nilakh",
+    "Thergaon",
+    "Ravet",
+    "Sangvi",
+    "Dapodi",
+    "Charholi",
+    "Moshi",
+    "Talwade"
+  ]
+}

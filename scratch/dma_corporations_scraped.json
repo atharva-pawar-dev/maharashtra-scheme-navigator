@@ -1,0 +1,292 @@
+[
+  {
+    "sr_no": 1,
+    "division": "Nashik",
+    "district": "Ahilyanagar",
+    "name": "Ahilyanagar Municipal Corporation",
+    "class": "D",
+    "foundation_year": "2003",
+    "population_2011": "350,859",
+    "area_sq_km": "68.4"
+  },
+  {
+    "sr_no": 2,
+    "division": "Amravati",
+    "district": "Akola",
+    "name": "Akola Municipal Corporation",
+    "class": "D",
+    "foundation_year": "2001",
+    "population_2011": "537,137",
+    "area_sq_km": "128"
+  },
+  {
+    "sr_no": 3,
+    "division": "Amravati",
+    "district": "Amravati",
+    "name": "Amravati Municipal Corporation",
+    "class": "D",
+    "foundation_year": "1983",
+    "population_2011": "647,057",
+    "area_sq_km": "121.65"
+  },
+  {
+    "sr_no": 4,
+    "division": "Konkan",
+    "district": "Thane",
+    "name": "Bhiwandi Nizampur Municipal Corporation",
+    "class": "D",
+    "foundation_year": "2001",
+    "population_2011": "709,665",
+    "area_sq_km": "26.36"
+  },
+  {
+    "sr_no": 5,
+    "division": "Konkan",
+    "district": "Mumbai",
+    "name": "Brihanmumbai Municipal Corporation",
+    "class": "A+",
+    "foundation_year": "1888",
+    "population_2011": "12,442,373",
+    "area_sq_km": "483.14"
+  },
+  {
+    "sr_no": 6,
+    "division": "Nagpur",
+    "district": "Chandrapur",
+    "name": "Chandrapur Municipal Corporation",
+    "class": "D",
+    "foundation_year": "2011",
+    "population_2011": "320,379",
+    "area_sq_km": "56.41"
+  },
+  {
+    "sr_no": 7,
+    "division": "Chhatrapati Sambhaji Nagar",
+    "district": "Chhatrapati Sambhajinagar",
+    "name": "Chhtrapati Sambhajinagar Municipal Corporation",
+    "class": "C",
+    "foundation_year": "1982",
+    "population_2011": "1,228,032",
+    "area_sq_km": "175.65"
+  },
+  {
+    "sr_no": 8,
+    "division": "Nashik",
+    "district": "Dhule",
+    "name": "Dhule Municipal Corporation",
+    "class": "D",
+    "foundation_year": "2003",
+    "population_2011": "446,094",
+    "area_sq_km": "101.08"
+  },
+  {
+    "sr_no": 9,
+    "division": "Pune",
+    "district": "Kolhapur",
+    "name": "Ichalkaranji Municipal Corporation",
+    "class": "D",
+    "foundation_year": "2022",
+    "population_2011": "292,060",
+    "area_sq_km": "29.84"
+  },
+  {
+    "sr_no": 10,
+    "division": "Nashik",
+    "district": "Jalgaon",
+    "name": "Jalgaon Municipal Corporation",
+    "class": "D",
+    "foundation_year": "2003",
+    "population_2011": "460,228",
+    "area_sq_km": "68.24"
+  },
+  {
+    "sr_no": 11,
+    "division": "Chhatrapati Sambhaji Nagar",
+    "district": "Jalna",
+    "name": "Jalna Municipal Corporation",
+    "class": "D",
+    "foundation_year": "2023",
+    "population_2011": "285,577",
+    "area_sq_km": "83.89"
+  },
+  {
+    "sr_no": 12,
+    "division": "Konkan",
+    "district": "Thane",
+    "name": "Kalyan Dombivali Municipal Corporation",
+    "class": "C",
+    "foundation_year": "1983",
+    "population_2011": "1,518,765",
+    "area_sq_km": "116.08"
+  },
+  {
+    "sr_no": 13,
+    "division": "Pune",
+    "district": "Kolhapur",
+    "name": "Kolhapur Municipal Corporation",
+    "class": "D",
+    "foundation_year": "1972",
+    "population_2011": "549,236",
+    "area_sq_km": "66.82"
+  },
+  {
+    "sr_no": 14,
+    "division": "Chhatrapati Sambhaji Nagar",
+    "district": "Latur",
+    "name": "Latur Municipal Corporation",
+    "class": "D",
+    "foundation_year": "2011",
+    "population_2011": "382,940",
+    "area_sq_km": "36.5"
+  },
+  {
+    "sr_no": 15,
+    "division": "Nashik",
+    "district": "Nashik",
+    "name": "Malegaon Municipal Corporation",
+    "class": "D",
+    "foundation_year": "2001",
+    "population_2011": "590,998",
+    "area_sq_km": "63.18"
+  },
+  {
+    "sr_no": 16,
+    "division": "Konkan",
+    "district": "Thane",
+    "name": "Mira Bhayander Municipal Corporation",
+    "class": "D",
+    "foundation_year": "2002",
+    "population_2011": "809,378",
+    "area_sq_km": "79.4"
+  },
+  {
+    "sr_no": 17,
+    "division": "Nagpur",
+    "district": "Nagpur",
+    "name": "Nagpur Municipal Corporation",
+    "class": "A",
+    "foundation_year": "1951",
+    "population_2011": "2,405,665",
+    "area_sq_km": "227.19"
+  },
+  {
+    "sr_no": 18,
+    "division": "Chhatrapati Sambhaji Nagar",
+    "district": "Nanded",
+    "name": "Nanded Waghala Municipal Corporation",
+    "class": "D",
+    "foundation_year": "1997",
+    "population_2011": "550,439",
+    "area_sq_km": "65"
+  },
+  {
+    "sr_no": 19,
+    "division": "Nashik",
+    "district": "Nashik",
+    "name": "Nashik Municipal Corporation",
+    "class": "B",
+    "foundation_year": "1982",
+    "population_2011": "1,486,053",
+    "area_sq_km": "267.48"
+  },
+  {
+    "sr_no": 20,
+    "division": "Konkan",
+    "district": "Thane",
+    "name": "Navi Mumbai Municipal Corporation",
+    "class": "C",
+    "foundation_year": "1992",
+    "population_2011": "1,120,547",
+    "area_sq_km": "162.5"
+  },
+  {
+    "sr_no": 21,
+    "division": "Konkan",
+    "district": "Raigad",
+    "name": "Panvel Municipal Corporation",
+    "class": "D",
+    "foundation_year": "2016",
+    "population_2011": "509,901",
+    "area_sq_km": "110.06"
+  },
+  {
+    "sr_no": 22,
+    "division": "Chhatrapati Sambhaji Nagar",
+    "district": "Parbhani",
+    "name": "Parbhani Municipal Corporation",
+    "class": "D",
+    "foundation_year": "2011",
+    "population_2011": "307,170",
+    "area_sq_km": "57.54"
+  },
+  {
+    "sr_no": 23,
+    "division": "Pune",
+    "district": "Pune",
+    "name": "Pimpri Chinchwad Municipal Corporation",
+    "class": "B",
+    "foundation_year": "1982",
+    "population_2011": "1,727,692",
+    "area_sq_km": "181"
+  },
+  {
+    "sr_no": 24,
+    "division": "Pune",
+    "district": "Pune",
+    "name": "Pune Municipal Corporation",
+    "class": "A",
+    "foundation_year": "1950",
+    "population_2011": "3,556,824",
+    "area_sq_km": "503.08"
+  },
+  {
+    "sr_no": 25,
+    "division": "Pune",
+    "district": "Sangli",
+    "name": "Sangli Miraj Kupwad Municipal Corporation",
+    "class": "D",
+    "foundation_year": "1998",
+    "population_2011": "502,697",
+    "area_sq_km": "118.18"
+  },
+  {
+    "sr_no": 26,
+    "division": "Pune",
+    "district": "Solapur",
+    "name": "Solapur Municipal Corporation",
+    "class": "D",
+    "foundation_year": "1964",
+    "population_2011": "951,558",
+    "area_sq_km": "178.57"
+  },
+  {
+    "sr_no": 27,
+    "division": "Konkan",
+    "district": "Thane",
+    "name": "Thane Municipal Corporation",
+    "class": "B",
+    "foundation_year": "1982",
+    "population_2011": "1,841,488",
+    "area_sq_km": "147.22"
+  },
+  {
+    "sr_no": 28,
+    "division": "Konkan",
+    "district": "Thane",
+    "name": "Ulhasnagar Municipal Corporation",
+    "class": "D",
+    "foundation_year": "1998",
+    "population_2011": "506,937",
+    "area_sq_km": "13.34"
+  },
+  {
+    "sr_no": 29,
+    "division": "Konkan",
+    "district": "Palghar",
+    "name": "Vasai Virar Municipal Corporation",
+    "class": "C",
+    "foundation_year": "2009",
+    "population_2011": "1,222,390",
+    "area_sq_km": "311.36"
+  }
+]

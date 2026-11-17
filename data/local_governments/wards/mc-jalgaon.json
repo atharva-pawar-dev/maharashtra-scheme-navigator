@@ -1,0 +1,21 @@
+{
+  "corporation_id": "mc-jalgaon",
+  "corporation_name_en": "Jalgaon Municipal Corporation",
+  "corporation_name_mr": "जळगाव शहर महानगरपालिका",
+  "total_wards": 19,
+  "boundary_reference": "JMC Delimitation Order 2022",
+  "representative_wards": [
+    "Prabhag 1 (Pimprala)",
+    "Prabhag 2 (Mehrun)",
+    "Prabhag 3 (Old City)",
+    "Prabhag 4 (MIDC Parisar)"
+  ],
+  "localities": [
+    "Pimprala",
+    "Mehrun",
+    "Ramanand Nagar",
+    "Muktainagar Naka",
+    "MIDC",
+    "Nehru Nagar"
+  ]
+}

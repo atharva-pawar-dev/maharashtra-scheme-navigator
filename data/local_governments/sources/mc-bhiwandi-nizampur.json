@@ -1,0 +1,69 @@
+[
+  {
+    "source_id": "src_mc_bhiwandi_nizampur_main",
+    "corporation_id": "mc-bhiwandi-nizampur",
+    "department": "Commissioner & Administration",
+    "official_domain": "bncmc.gov.in",
+    "page_document_url": "https://bncmc.gov.in",
+    "source_type": "MUNICIPAL_OFFICIAL_PORTAL",
+    "scheme_categories": [
+      "Civic Services",
+      "Administration",
+      "Citizen Facilitation"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "cad245eb3af2afef27ba178c39c4950e1e8f7112e3c4ed4565819014b014f380",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  },
+  {
+    "source_id": "src_mc_bhiwandi_nizampur_welfare",
+    "corporation_id": "mc-bhiwandi-nizampur",
+    "department": "Social Development & Welfare",
+    "official_domain": "bncmc.gov.in",
+    "page_document_url": "https://bncmc.gov.in/welfare",
+    "source_type": "MUNICIPAL_SCHEME_DIRECTORY",
+    "scheme_categories": [
+      "Social Welfare",
+      "Disability Welfare",
+      "Women and Child Development",
+      "Education Grants"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "7a52cb05e44f71e9839a36a0e6a9c78a69b8a2285d59e9876ddc0a4edc85d488",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "Budget continuation orders verified annually"
+  },
+  {
+    "source_id": "src_mc_bhiwandi_nizampur_budget",
+    "corporation_id": "mc-bhiwandi-nizampur",
+    "department": "Finance & Accounts",
+    "official_domain": "bncmc.gov.in",
+    "page_document_url": "https://bncmc.gov.in/budget",
+    "source_type": "ANNUAL_BUDGET_RESOLUTION",
+    "scheme_categories": [
+      "Budget Allocation",
+      "Welfare Head 5% Divyang",
+      "Welfare Head 5% Women Child"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "77ea8342dfd47f640896621d2935001df9aea96cf2e916ddc6addce4a24b84de",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "RULES_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  }
+]

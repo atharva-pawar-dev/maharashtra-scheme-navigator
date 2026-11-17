@@ -1,0 +1,22 @@
+{
+  "corporation_id": "mc-kolhapur",
+  "corporation_name_en": "Kolhapur Municipal Corporation",
+  "corporation_name_mr": "कोल्हापूर महानगरपालिका",
+  "total_wards": 81,
+  "boundary_reference": "KMC Ward Delimitation Gazette 2022",
+  "representative_wards": [
+    "Prabhag 1 (Tarabai Park)",
+    "Prabhag 2 (Rajarampuri)",
+    "Prabhag 3 (Bhavani Mandap)",
+    "Prabhag 4 (Kasba Bawada)"
+  ],
+  "localities": [
+    "Rajarampuri",
+    "Tarabai Park",
+    "Kasba Bawada",
+    "Shahupuri",
+    "Nagala Park",
+    "Laxmipuri",
+    "Ruikar Colony"
+  ]
+}

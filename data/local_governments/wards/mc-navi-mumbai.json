@@ -1,0 +1,28 @@
+{
+  "corporation_id": "mc-navi-mumbai",
+  "corporation_name_en": "Navi Mumbai Municipal Corporation",
+  "corporation_name_mr": "नवी मुंबई महानगरपालिका",
+  "total_wards": 8,
+  "boundary_reference": "NMMC 8 Ward Committees Structure 2022",
+  "representative_wards": [
+    "Belapur (बेलापूर)",
+    "Nerul (नेरूळ)",
+    "Vashi (वाशी)",
+    "Turbhe (तुर्भे)",
+    "Koparkhairane (कोपरखैरणे)",
+    "Ghansoli (घणसोली)",
+    "Airoli (ऐरोली)",
+    "Digha (दिघा)"
+  ],
+  "localities": [
+    "Vashi",
+    "Nerul",
+    "Belapur",
+    "Kopar Khairane",
+    "Airoli",
+    "Ghansoli",
+    "Seawoods",
+    "Sanpada",
+    "Turbhe"
+  ]
+}

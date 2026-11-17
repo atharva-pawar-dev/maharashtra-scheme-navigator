@@ -1,0 +1,69 @@
+[
+  {
+    "source_id": "src_mc_brihanmumbai_main",
+    "corporation_id": "mc-brihanmumbai",
+    "department": "Commissioner & Administration",
+    "official_domain": "www.mcgm.gov.in",
+    "page_document_url": "https://www.mcgm.gov.in",
+    "source_type": "MUNICIPAL_OFFICIAL_PORTAL",
+    "scheme_categories": [
+      "Civic Services",
+      "Administration",
+      "Citizen Facilitation"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "0add1cf92ecaf0ab124d4f9c5f60d1964a9eac061ac748c9b79da9d624c62025",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  },
+  {
+    "source_id": "src_mc_brihanmumbai_welfare",
+    "corporation_id": "mc-brihanmumbai",
+    "department": "Planning Department (Social Welfare & Gender Budget)",
+    "official_domain": "www.mcgm.gov.in",
+    "page_document_url": "https://portal.mcgm.gov.in/planning",
+    "source_type": "MUNICIPAL_SCHEME_DIRECTORY",
+    "scheme_categories": [
+      "Social Welfare",
+      "Disability Welfare",
+      "Women and Child Development",
+      "Education Grants"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr,en",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "3f1f495ec135342aa60b7e78a5d4bc397c2ce412a3d5c6a329dbc8a1cc49500f",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "EXTRACTED_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "Budget continuation orders verified annually"
+  },
+  {
+    "source_id": "src_mc_brihanmumbai_budget",
+    "corporation_id": "mc-brihanmumbai",
+    "department": "Finance & Accounts",
+    "official_domain": "www.mcgm.gov.in",
+    "page_document_url": "https://portal.mcgm.gov.in/irj/portal/anonymous/qlbudget",
+    "source_type": "ANNUAL_BUDGET_RESOLUTION",
+    "scheme_categories": [
+      "Budget Allocation",
+      "Welfare Head 5% Divyang",
+      "Welfare Head 5% Women Child"
+    ],
+    "access_type": "PUBLIC_WEB",
+    "language": "mr",
+    "last_retrieval_date": "2026-11-16",
+    "content_hash": "7d90693eeb12f31b3ed18cd6b6e61abfc546a3ff6fe5e08acc3e186f72f4ec68",
+    "last_successful_parse": "2026-11-16T12:00:00Z",
+    "parser_version": "2.0.0",
+    "extraction_status": "RULES_VERIFIED",
+    "reviewer_status": "REVIEWED_OFFICIAL",
+    "known_coverage_gaps": "None"
+  }
+]
