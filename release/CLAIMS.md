@@ -39,3 +39,5 @@
 | C-032 | CERT-In 6-hour mandatory cyber incident response runbook documented | E-WS8-001 | CONFIRMED | Authored in `docs/production/observability_and_incident_response.md`. |
 | C-033 | Hardened multi-stage Docker container runs under non-root UID 10001 with HEALTHCHECK | E-WS9-001 | CONFIRMED | Verified in `test_dockerfile_hardening` and `test_dockerignore_coverage`. |
 | C-034 | Automated deployment verification script confirms /healthz, /readyz, security headers, catalogue, and sessions | E-WS9-001 | CONFIRMED | Verified in `test_in_process_deployment_verification` and `scripts/verify_deployment.py`. |
+| C-035 | CI/CD pipeline enforces Gate G23 test baseline preservation and static security scan | E-WS10-001 | CONFIRMED | Verified in `test_ci_workflow_specification`. |
+| C-036 | Automated rollback script supports code, catalogue, and database rollbacks with dry-run and health check | E-WS10-001 | CONFIRMED | Verified across 4 rollback tests in `tests/test_ci_cd_and_rollback.py`. |

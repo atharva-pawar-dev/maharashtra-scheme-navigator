@@ -1,0 +1,40 @@
+{
+  "workstream": "WS10",
+  "evidence_id": "E-WS10-001",
+  "timestamp": "2026-11-17T17:45:30Z",
+  "status": "PASS",
+  "description": "CI/CD quality pipeline definition, Gate G23 test baseline preservation check, and automated rollback utility",
+  "artifacts": {
+    "workflow": ".github/workflows/ci.yml",
+    "rollback_script": "scripts/rollback.py",
+    "specification": "docs/production/ci_cd_and_rollback.md",
+    "test_suite": "tests/test_ci_cd_and_rollback.py"
+  },
+  "pipeline_stages": [
+    {
+      "name": "security-and-lint",
+      "tools": ["ruff", "scripts/security_audit_scanner.py"]
+    },
+    {
+      "name": "test-suite",
+      "checks": [
+        "Gate G23 AST non-weakening assertion count check against release/evidence/baseline/test_inventory.json",
+        "pytest tests/ --ignore=tests/browser/"
+      ]
+    },
+    {
+      "name": "container-verification",
+      "steps": [
+        "docker build --file Dockerfile",
+        "scripts/verify_deployment.py --in-process"
+      ]
+    }
+  ],
+  "rollback_capabilities": {
+    "targets_supported": ["code", "catalogue", "database", "all"],
+    "dry_run_supported": true,
+    "pre_rollback_backup": true,
+    "post_rollback_healthcheck": true,
+    "mttr_sla_minutes": 5
+  }
+}

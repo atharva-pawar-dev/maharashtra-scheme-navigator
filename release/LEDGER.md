@@ -50,3 +50,7 @@
 | LEDGER-041 | 2026-11-17 | SCRIPT | WS9 | Deployment verification harness implemented at `scripts/verify_deployment.py`. | APPROVED |
 | LEDGER-042 | 2026-11-17 | TEST | WS9 | 4 container and deployment tests passing in `tests/test_deployment_and_containers.py`. | PASS |
 | LEDGER-043 | 2026-11-17 | EVIDENCE | WS9 | Recorded `release/evidence/ws9/E-WS9-001_containers_deployment.json`. | APPROVED |
+| LEDGER-044 | 2026-11-17 | WORKFLOW | WS10 | Authored `.github/workflows/ci.yml` defining lint, test, Gate G23, and container verification. | APPROVED |
+| LEDGER-045 | 2026-11-17 | SCRIPT | WS10 | Implemented `scripts/rollback.py` with code, catalogue, and database rollback support. | APPROVED |
+| LEDGER-046 | 2026-11-17 | TEST | WS10 | 5 tests passing in `tests/test_ci_cd_and_rollback.py`. | PASS |
+| LEDGER-047 | 2026-11-17 | EVIDENCE | WS10 | Recorded `release/evidence/ws10/E-WS10-001_ci_cd.json`. | APPROVED |

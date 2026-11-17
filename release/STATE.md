@@ -1,5 +1,5 @@
 ---
-current_workstream: WS10
+current_workstream: WS11
 completed_workstreams:
   - WS0
   - WS1
@@ -11,6 +11,7 @@ completed_workstreams:
   - WS7
   - WS8
   - WS9
+  - WS10
 open_blockers:
   - gate: G4
     reason: "No local PostgreSQL 16+ daemon running on 127.0.0.1:5432 and Docker engine not installed on host"
@@ -121,4 +122,13 @@ utc_timestamp: 2026-11-17T17:38:00Z
   - Deployment specification committed at `docs/production/deployment_and_release.md`.
   - Evidence recorded in `release/evidence/ws9/E-WS9-001_containers_deployment.json`.
 
-- **Next Workstream:** WS10 — CI/CD Pipeline and Rollback Strategy.
+- **WS10 CI/CD Pipeline and Rollback Strategy Complete:**
+  - Complete CI/CD workflow defined in `.github/workflows/ci.yml` across 3 stages: security/lint, test suite with Gate G23 check, and container build/verification.
+  - Gate G23 non-weakening assertion baseline enforcement integrated into CI.
+  - Automated rollback manager authored at `scripts/rollback.py` supporting code, scheme catalogue, and database rollbacks.
+  - Rollback features dry-run simulation, pre-rollback data preservation snapshot, and post-rollback health verification.
+  - 5 automated tests passing in `tests/test_ci_cd_and_rollback.py`.
+  - Strategy document committed at `docs/production/ci_cd_and_rollback.md`.
+  - Evidence recorded in `release/evidence/ws10/E-WS10-001_ci_cd.json`.
+
+- **Next Workstream:** WS11 — Backup and Disaster Recovery Drill.
