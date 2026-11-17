@@ -1,0 +1,23 @@
+{
+  "workstream": "WS3",
+  "evidence_id": "E-WS3-001",
+  "timestamp_utc": "2026-11-17T17:06:45.771825+00:00",
+  "title": "Content Governance and Scheme Truth Verification",
+  "pytest_exit_code": 0,
+  "pytest_summary": {
+    "passed": 11,
+    "failed": 0,
+    "xml": "release\\evidence\\ws3\\pytest_ws3.xml"
+  },
+  "governance_controls_verified": {
+    "invariant_b3_agent_ceiling_extracted": true,
+    "demo_fixtures_segregated_in_production": true,
+    "ssrf_protection_https_enforced": true,
+    "ssrf_protection_private_ips_blocked": true,
+    "ssrf_protection_domain_allowlist_enforced": true,
+    "citizen_issue_reporting_endpoint_active": true,
+    "multilingual_acknowledgement_supported": true
+  },
+  "documentation_path": "docs/production/content_governance.md",
+  "verdict": "PASS"
+}

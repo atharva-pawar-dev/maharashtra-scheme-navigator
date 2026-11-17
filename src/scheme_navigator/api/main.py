@@ -7,6 +7,7 @@ import logging
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Annotated, Any
+import uuid
 
 from datetime import datetime, timezone
 
@@ -529,6 +530,100 @@ def get_scheme_trust(
             detail=f"Scheme '{scheme_id}' was not found in the active catalogue or candidate registry.",
         )
     return generate_trust_report(scheme, language=language)
+
+
+class CitizenIssueReportRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    scheme_id: str
+    issue_type: str = Field(..., pattern=r"^(outdated_info|broken_link|incorrect_criteria|ineligible_denial|other)$")
+    description: str = Field(..., min_length=10, max_length=2000)
+    citizen_contact: str | None = Field(default=None, max_length=120)
+    language: Language = Language.EN
+
+
+class CitizenIssueReportResponse(BaseModel):
+    ticket_id: str
+    scheme_id: str
+    status: str
+    received_at_iso: str
+    message: str
+
+
+@app.post(
+    "/trust/report-issue",
+    response_model=CitizenIssueReportResponse,
+    tags=["trust"],
+    dependencies=[Depends(rate_limit(max_requests=10, window_seconds=60))],
+)
+def report_scheme_issue(
+    payload: CitizenIssueReportRequest,
+    request: Request,
+) -> CitizenIssueReportResponse:
+    scheme = catalog.get(payload.scheme_id) or canonical_catalog.get(payload.scheme_id)
+    if not scheme:
+        candidates_dir = Path(__file__).resolve().parents[3] / "data" / "candidates"
+        if candidates_dir.is_dir():
+            for p in candidates_dir.glob("*.json"):
+                if p.name == "candidate_schemes.json":
+                    continue
+                try:
+                    cdata = json.loads(p.read_text(encoding="utf-8"))
+                    if cdata.get("scheme_id") == payload.scheme_id:
+                        scheme = Scheme.model_validate(cdata)
+                        break
+                except Exception:
+                    pass
+    if not scheme:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Scheme '{payload.scheme_id}' was not found.",
+        )
+
+    ticket_id = f"TICKET-{uuid.uuid4().hex[:10].upper()}"
+    now_iso = datetime.now(timezone.utc).isoformat()
+    client_ip = request.client.host if request.client else None
+
+    # Persist report to structured audit log
+    reports_file = Path(__file__).resolve().parents[3] / "data" / "citizen_reports.jsonl"
+    reports_file.parent.mkdir(parents=True, exist_ok=True)
+    report_entry = {
+        "ticket_id": ticket_id,
+        "scheme_id": payload.scheme_id,
+        "scheme_name": getattr(scheme, "name", payload.scheme_id),
+        "issue_type": payload.issue_type,
+        "description": payload.description,
+        "citizen_contact": payload.citizen_contact,
+        "language": payload.language.value if hasattr(payload.language, "value") else str(payload.language),
+        "status": "RECEIVED",
+        "received_at_iso": now_iso,
+    }
+    with open(reports_file, "a", encoding="utf-8") as f:
+        f.write(json.dumps(report_entry, ensure_ascii=False) + "\n")
+
+    audit_logger.log_event(
+        event_type=AuditEventType.CITIZEN_REPORT_SUBMITTED,
+        actor_id="anonymous_citizen",
+        actor_role="citizen",
+        action="report_scheme_issue",
+        resource=payload.scheme_id,
+        client_ip=client_ip,
+        details={"ticket_id": ticket_id, "issue_type": payload.issue_type},
+    )
+
+    msg = {
+        Language.MR: "तुमचा अभिप्राय यशस्वीरीत्या नोंदवला गेला आहे. शासकीय स्रोत पडताळणी पथकाद्वारे याची तपासणी केली जाईल.",
+        Language.HI: "आपकी शिकायत/प्रतिक्रिया सफलतापूर्वक दर्ज कर ली गई है। आधिकारिक स्रोत सत्यापन दल द्वारा इसकी जांच की जाएगी।",
+        Language.EN: "Your issue report has been registered. It will be verified by the content governance team against official government sources.",
+    }.get(payload.language, "Your issue report has been registered.")
+
+    return CitizenIssueReportResponse(
+        ticket_id=ticket_id,
+        scheme_id=payload.scheme_id,
+        status="RECEIVED",
+        received_at_iso=now_iso,
+        message=msg,
+    )
 
 
 def _current_question(result: dict) -> dict | None:

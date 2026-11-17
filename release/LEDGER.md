@@ -16,3 +16,7 @@
 | LEDGER-007 | 2026-11-17 | IMPLEMENTATION | WS2 | Implemented 12 synthetic deterministic personas fixture in `data/fixtures/synthetic_personas.json`. | APPROVED |
 | LEDGER-008 | 2026-11-17 | TEST | WS2 | Created `tests/test_journeys_and_product_integrity.py` with 21 tests covering dead-ends, Kleene logic, Devanagari numerals, guardian flows, personas, and `LLM_MODE=off`. | APPROVED |
 | LEDGER-009 | 2026-11-17 | EVIDENCE | WS2 | Generated `release/evidence/ws2/E-WS2-001_journeys_integrity.json` verifying all 5 citizen journeys and core invariants pass. | APPROVED |
+| LEDGER-010 | 2026-11-17 | IMPLEMENTATION | WS3 | Added `POST /trust/report-issue` endpoint and `CITIZEN_REPORT_SUBMITTED` audit event type in `src/scheme_navigator/api/main.py`. | APPROVED |
+| LEDGER-011 | 2026-11-17 | TEST | WS3 | Created `tests/test_content_governance.py` with 11 tests covering Invariant B3, demo segregation, SSRF protection, and citizen feedback loop. | APPROVED |
+| LEDGER-012 | 2026-11-17 | DOCUMENTATION | WS3 | Authored `docs/production/content_governance.md` covering lifecycle state machine, primary-source citations, and citizen reporting SLA. | APPROVED |
+| LEDGER-013 | 2026-11-17 | EVIDENCE | WS3 | Recorded `release/evidence/ws3/E-WS3-001_content_governance.json` verifying all 11 content governance tests pass. | APPROVED |

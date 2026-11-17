@@ -29,6 +29,7 @@ class AuditEventType(StrEnum):
     SCHEME_PUBLISHED = "scheme_published"
     CATALOGUE_SIGNED = "catalogue_signed"
     SECURITY_VIOLATION = "security_violation"
+    CITIZEN_REPORT_SUBMITTED = "citizen_report_submitted"
 
 
 class UserSession(BaseModel):

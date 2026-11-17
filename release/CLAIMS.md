@@ -17,3 +17,7 @@
 | C-010 | Deterministic evaluation functions identically with `LLM_MODE=off` (Protocol B4) | E-WS2-001 | CONFIRMED | Verified in `test_llm_off_deterministic_invariance`. |
 | C-011 | Input parsing supports Devanagari numerals and Indian number grouping (lakh, crore) | E-WS2-001 | CONFIRMED | 10 distinct number/currency variations verified in `test_input_robustness_income`. |
 | C-012 | 12 synthetic deterministic personas evaluate successfully | E-WS2-001 | CONFIRMED | Verified in `test_twelve_synthetic_personas_evaluation`. |
+| C-013 | Agent ceiling strictly capped at `EXTRACTED`; human review cannot be simulated (Invariant B3) | E-WS3-001 | CONFIRMED | Verified in `test_invariant_b3_agent_ceiling_is_extracted`. |
+| C-014 | Demo fixtures disabled in production profile | E-WS3-001 | CONFIRMED | Verified in `test_demo_fixtures_segregated_in_production`. |
+| C-015 | SSRF protection rejects private IPs, loopback, metadata, userinfo, and non-HTTPS | E-WS3-001 | CONFIRMED | Verified across 4 SSRF security tests. |
+| C-016 | Citizen issue reporting active with ticket tracking and structured audit logging | E-WS3-001 | CONFIRMED | Verified via `POST /trust/report-issue` in `test_citizen_report_issue_success`. |
