@@ -428,8 +428,20 @@ def evaluate_scheme(
                 "Secondary conditions pending verification."
             )
     elif len(result.missing_fields) > 0 or len(unknown_leaves) > 0:
-        status = EligibilityStatus.NEEDS_INFORMATION
-        reason = "The profile is missing information needed to evaluate this scheme."
+        if pass_ratio >= min_pass_ratio and len(failed_hard) == 0 and len(failed_non_hard) <= max_failed_non_hard:
+            if not is_legacy_test_harness and not getattr(scheme, "publication_authorized", False):
+                status = EligibilityStatus.NEEDS_REVIEW
+                reason = "Scheme policy or evidence is undergoing official review. Matching is provisional."
+            else:
+                status = EligibilityStatus.PARTIAL
+                is_partial = True
+                reason = (
+                    f"Exploratory match — {int(pass_ratio * 100)}% of evaluated requirements satisfied. "
+                    "Remaining requirements pending additional profile details."
+                )
+        else:
+            status = EligibilityStatus.NEEDS_INFORMATION
+            reason = "The profile is missing information needed to evaluate this scheme."
     else:
         status = EligibilityStatus.INELIGIBLE
         reason = "At least one encoded eligibility condition did not match."

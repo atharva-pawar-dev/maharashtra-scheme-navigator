@@ -1,0 +1,45 @@
+{
+  "verified_at": "2026-11-18T21:17:41Z",
+  "base_url": "http://127.0.0.1:8995",
+  "journeys": {
+    "discover": {
+      "status": "PASS",
+      "cards_found": 75,
+      "screenshot": "01_discover_explore_mobile_mr.png"
+    },
+    "understand": {
+      "status": "PASS",
+      "modal_verified": true,
+      "screenshot": "02_understand_modal_mobile_mr.png"
+    },
+    "prepare": {
+      "status": "PASS",
+      "requirements_count": 5,
+      "screenshot": "03_prepare_auditor_mobile_mr.png"
+    },
+    "apply": {
+      "status": "PASS",
+      "factsheet_verified": true,
+      "screenshot": "04_apply_channel_mobile_mr.png"
+    }
+  },
+  "screenshots": [
+    "01_discover_explore_desktop_en.png",
+    "02_understand_modal_desktop_en.png",
+    "03_prepare_auditor_desktop_en.png",
+    "04_apply_channel_desktop_en.png",
+    "01_discover_explore_desktop_mr.png",
+    "02_understand_modal_desktop_mr.png",
+    "03_prepare_auditor_desktop_mr.png",
+    "04_apply_channel_desktop_mr.png",
+    "01_discover_explore_mobile_en.png",
+    "02_understand_modal_mobile_en.png",
+    "03_prepare_auditor_mobile_en.png",
+    "04_apply_channel_mobile_en.png",
+    "01_discover_explore_mobile_mr.png",
+    "02_understand_modal_mobile_mr.png",
+    "03_prepare_auditor_mobile_mr.png",
+    "04_apply_channel_mobile_mr.png"
+  ],
+  "console_errors": []
+}

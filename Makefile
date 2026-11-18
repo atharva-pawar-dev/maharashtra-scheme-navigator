@@ -1,4 +1,4 @@
-.PHONY: install test lint run form-worker
+.PHONY: install test lint run form-worker refresh-catalogue
 install:
 	python -m pip install -e '.[dev]'
 
@@ -13,3 +13,6 @@ run:
 
 form-worker:
 	python -m scheme_navigator.workers.mock_form_worker --profile data/demo/citizen_profile.json
+
+refresh-catalogue:
+	python scripts/build_verified_catalogue_v2.py

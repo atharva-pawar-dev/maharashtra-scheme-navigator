@@ -1,0 +1,811 @@
+{
+  "$defs": {
+    "ApplicationDetails": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": [
+            "online",
+            "offline",
+            "hybrid",
+            "csc_only"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "portal": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Portal"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        },
+        "window_open": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Window Open"
+        },
+        "window_close": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Window Close"
+        },
+        "rolling": {
+          "default": true,
+          "title": "Rolling",
+          "type": "boolean"
+        },
+        "fee": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": 0.0,
+          "title": "Fee"
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "title": "ApplicationDetails",
+      "type": "object"
+    },
+    "BenefitDetails": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "cash_transfer",
+            "subsidy",
+            "scholarship",
+            "in_kind",
+            "insurance",
+            "loan",
+            "other"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "amount_text": {
+          "title": "Amount Text",
+          "type": "string"
+        },
+        "amount_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount Value"
+        },
+        "frequency": {
+          "default": "unknown",
+          "enum": [
+            "one_time",
+            "monthly",
+            "quarterly",
+            "annual",
+            "academic_year",
+            "incident_based",
+            "unknown"
+          ],
+          "title": "Frequency",
+          "type": "string"
+        },
+        "duration": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duration"
+        }
+      },
+      "required": [
+        "type",
+        "amount_text"
+      ],
+      "title": "BenefitDetails",
+      "type": "object"
+    },
+    "Criterion": {
+      "additionalProperties": false,
+      "description": "Individual eligibility condition evaluated by the deterministic rule engine.",
+      "properties": {
+        "criterion_id": {
+          "description": "Unique criterion identifier, e.g. c_ladki_age_min",
+          "title": "Criterion Id",
+          "type": "string"
+        },
+        "field": {
+          "description": "Field name from Canonical Profile Vocabulary",
+          "title": "Field",
+          "type": "string"
+        },
+        "operator": {
+          "enum": [
+            "eq",
+            "ne",
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "in",
+            "exists"
+          ],
+          "title": "Operator",
+          "type": "string"
+        },
+        "value": {
+          "description": "Target comparison value",
+          "title": "Value"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Unit of measurement, e.g. INR, years, ha",
+          "title": "Unit"
+        },
+        "mandatory": {
+          "default": true,
+          "description": "True for hard statutory rules; False for advisory",
+          "title": "Mandatory",
+          "type": "boolean"
+        },
+        "applies_if": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Conditional evaluation guard",
+          "title": "Applies If"
+        },
+        "plain_en": {
+          "description": "Human-readable condition in English",
+          "title": "Plain En",
+          "type": "string"
+        },
+        "plain_mr": {
+          "description": "Human-readable condition in Marathi",
+          "title": "Plain Mr",
+          "type": "string"
+        },
+        "evidence": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CriterionEvidence"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Verbatim source evidence"
+        },
+        "verifiable_by_doc_types": {
+          "description": "Associated document types",
+          "items": {
+            "type": "string"
+          },
+          "title": "Verifiable By Doc Types",
+          "type": "array"
+        },
+        "interview_question_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Target slot-filling question",
+          "title": "Interview Question Id"
+        },
+        "status": {
+          "$ref": "#/$defs/CriterionStatus",
+          "default": "unverified"
+        }
+      },
+      "required": [
+        "criterion_id",
+        "field",
+        "operator",
+        "value",
+        "plain_en",
+        "plain_mr"
+      ],
+      "title": "Criterion",
+      "type": "object"
+    },
+    "CriterionEvidence": {
+      "additionalProperties": false,
+      "description": "Verbatim quote and provenance supporting a single eligibility criterion.",
+      "properties": {
+        "quote_original": {
+          "description": "Exact verbatim text snippet from source",
+          "minLength": 3,
+          "title": "Quote Original",
+          "type": "string"
+        },
+        "source_url": {
+          "description": "URL of source",
+          "title": "Source Url",
+          "type": "string"
+        },
+        "tier": {
+          "$ref": "#/$defs/SourceTier",
+          "description": "Tier of source"
+        },
+        "gr_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Government Resolution (GR) number and date",
+          "title": "Gr Ref"
+        }
+      },
+      "required": [
+        "quote_original",
+        "source_url",
+        "tier"
+      ],
+      "title": "CriterionEvidence",
+      "type": "object"
+    },
+    "CriterionStatus": {
+      "enum": [
+        "verified",
+        "unverified"
+      ],
+      "title": "CriterionStatus",
+      "type": "string"
+    },
+    "DocGroup": {
+      "properties": {
+        "group_id": {
+          "title": "Group Id",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/DocGroupMode",
+          "default": "ANY_OF"
+        }
+      },
+      "required": [
+        "group_id"
+      ],
+      "title": "DocGroup",
+      "type": "object"
+    },
+    "DocGroupMode": {
+      "enum": [
+        "ALL_OF",
+        "ANY_OF"
+      ],
+      "title": "DocGroupMode",
+      "type": "string"
+    },
+    "DocRequirement": {
+      "additionalProperties": false,
+      "description": "Scheme-specific document requirement mapped to multimodal extraction rules.",
+      "properties": {
+        "doc_type": {
+          "description": "Canonical document type (income_certificate, domicile_certificate, etc.)",
+          "title": "Doc Type",
+          "type": "string"
+        },
+        "label_en": {
+          "title": "Label En",
+          "type": "string"
+        },
+        "label_mr": {
+          "title": "Label Mr",
+          "type": "string"
+        },
+        "mandatory": {
+          "default": true,
+          "title": "Mandatory",
+          "type": "boolean"
+        },
+        "condition": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Condition description if conditional",
+          "title": "Condition"
+        },
+        "group": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DocGroup"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Alternative grouping (ALL_OF or ANY_OF)"
+        },
+        "validity_rule": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Sourced validity constraint; null if unsourced",
+          "title": "Validity Rule"
+        },
+        "issuing_authority": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuing Authority"
+        },
+        "where_to_obtain": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Official portal/service e.g. Aaple Sarkar",
+          "title": "Where To Obtain"
+        },
+        "evidence": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CriterionEvidence"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "doc_type",
+        "label_en",
+        "label_mr"
+      ],
+      "title": "DocRequirement",
+      "type": "object"
+    },
+    "LegalBasis": {
+      "additionalProperties": false,
+      "description": "Government Resolution (GR), Gazette notification, or Act governing the scheme.",
+      "properties": {
+        "gr_number": {
+          "title": "Gr Number",
+          "type": "string"
+        },
+        "date": {
+          "format": "date",
+          "title": "Date",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        },
+        "supersedes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Prior GR number superseded by this instrument",
+          "title": "Supersedes"
+        }
+      },
+      "required": [
+        "gr_number",
+        "date",
+        "title"
+      ],
+      "title": "LegalBasis",
+      "type": "object"
+    },
+    "SchemeLevel": {
+      "enum": [
+        "state",
+        "centrally_sponsored_implemented_in_MH",
+        "central_applicable"
+      ],
+      "title": "SchemeLevel",
+      "type": "string"
+    },
+    "SchemeStatus": {
+      "enum": [
+        "active",
+        "closed",
+        "paused",
+        "merged",
+        "unknown"
+      ],
+      "title": "SchemeStatus",
+      "type": "string"
+    },
+    "SourceEvidence": {
+      "additionalProperties": false,
+      "description": "Provenance tracking for official source materials cached under data/raw/.",
+      "properties": {
+        "url": {
+          "description": "Canonical URL of government document or portal",
+          "title": "Url",
+          "type": "string"
+        },
+        "tier": {
+          "$ref": "#/$defs/SourceTier",
+          "description": "Source authority tier (Tier 1, 2, or 3)"
+        },
+        "retrieved_at": {
+          "description": "Timestamp when raw content was crawled",
+          "format": "date-time",
+          "title": "Retrieved At",
+          "type": "string"
+        },
+        "sha256": {
+          "description": "Cryptographic SHA-256 of raw file",
+          "maxLength": 64,
+          "minLength": 64,
+          "title": "Sha256",
+          "type": "string"
+        },
+        "title": {
+          "description": "Official title of page, notification, or GR",
+          "title": "Title",
+          "type": "string"
+        },
+        "language": {
+          "default": "mr",
+          "enum": [
+            "mr",
+            "en",
+            "hi"
+          ],
+          "title": "Language",
+          "type": "string"
+        },
+        "raw_path": {
+          "description": "Relative path under data/raw/ where content is cached",
+          "title": "Raw Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "tier",
+        "retrieved_at",
+        "sha256",
+        "title",
+        "raw_path"
+      ],
+      "title": "SourceEvidence",
+      "type": "object"
+    },
+    "SourceTier": {
+      "enum": [
+        "tier_1",
+        "tier_2",
+        "tier_3"
+      ],
+      "title": "SourceTier",
+      "type": "string"
+    },
+    "VerificationMeta": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/VerificationStatus",
+          "default": "unverified"
+        },
+        "confidence": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "last_verified_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Verified At"
+        },
+        "conflicts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Conflicts",
+          "type": "array"
+        },
+        "reviewer_notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer Notes"
+        }
+      },
+      "title": "VerificationMeta",
+      "type": "object"
+    },
+    "VerificationStatus": {
+      "enum": [
+        "verified_primary",
+        "verified_cross",
+        "single_source_secondary",
+        "unverified"
+      ],
+      "title": "VerificationStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Verified Catalogue v2 Canonical Scheme Schema.",
+  "properties": {
+    "scheme_id": {
+      "description": "Stable lowercase slug",
+      "pattern": "^[a-z0-9-]+$",
+      "title": "Scheme Id",
+      "type": "string"
+    },
+    "name_en": {
+      "title": "Name En",
+      "type": "string"
+    },
+    "name_mr": {
+      "title": "Name Mr",
+      "type": "string"
+    },
+    "department": {
+      "title": "Department",
+      "type": "string"
+    },
+    "implementing_body": {
+      "title": "Implementing Body",
+      "type": "string"
+    },
+    "level": {
+      "$ref": "#/$defs/SchemeLevel",
+      "default": "state"
+    },
+    "categories": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Categories",
+      "type": "array"
+    },
+    "status": {
+      "$ref": "#/$defs/SchemeStatus",
+      "default": "active"
+    },
+    "benefit": {
+      "$ref": "#/$defs/BenefitDetails"
+    },
+    "description_en": {
+      "title": "Description En",
+      "type": "string"
+    },
+    "description_mr": {
+      "title": "Description Mr",
+      "type": "string"
+    },
+    "translation_method": {
+      "additionalProperties": {
+        "enum": [
+          "source",
+          "machine"
+        ],
+        "type": "string"
+      },
+      "title": "Translation Method",
+      "type": "object"
+    },
+    "application": {
+      "$ref": "#/$defs/ApplicationDetails"
+    },
+    "eligibility": {
+      "items": {
+        "$ref": "#/$defs/Criterion"
+      },
+      "title": "Eligibility",
+      "type": "array"
+    },
+    "exclusions": {
+      "items": {
+        "$ref": "#/$defs/Criterion"
+      },
+      "title": "Exclusions",
+      "type": "array"
+    },
+    "eligibility_notes": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Eligibility Notes"
+    },
+    "required_documents": {
+      "items": {
+        "$ref": "#/$defs/DocRequirement"
+      },
+      "title": "Required Documents",
+      "type": "array"
+    },
+    "how_to_apply_steps": {
+      "items": {
+        "type": "string"
+      },
+      "title": "How To Apply Steps",
+      "type": "array"
+    },
+    "grievance_helpline": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Grievance Helpline"
+    },
+    "legal_basis": {
+      "items": {
+        "$ref": "#/$defs/LegalBasis"
+      },
+      "title": "Legal Basis",
+      "type": "array"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceEvidence"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "verification": {
+      "$ref": "#/$defs/VerificationMeta"
+    },
+    "catalogue_version": {
+      "default": "2.0.0",
+      "title": "Catalogue Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "scheme_id",
+    "name_en",
+    "name_mr",
+    "department",
+    "implementing_body",
+    "benefit",
+    "description_en",
+    "description_mr",
+    "application"
+  ],
+  "title": "SchemeV2",
+  "type": "object"
+}

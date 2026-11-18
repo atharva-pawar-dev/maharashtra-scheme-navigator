@@ -1,0 +1,189 @@
+{
+  "gr_mmlby_2024": {
+    "raw_id": "gr_mmlby_2024",
+    "url": "https://ladkibahin.maharashtra.gov.in/gr/GR_28_06_2024.pdf",
+    "tier": "tier_1",
+    "sha256": "423c3e902af9cca1e5e54057d4cb9aa4793f35825b868a93e653c809e2691948",
+    "title": "शासन निर्णय क्र. संकीर्ण-२०२४/प्र.क्र.१३७/कार्या-०२ (मुख्यमंत्री माझी लाडकी बहीण योजना)",
+    "language": "mr",
+    "file_name": "gr_mmlby_2024.txt",
+    "retrieved_at": "2026-11-18T15:35:16.335933+00:00",
+    "char_count": 1216
+  },
+  "gr_sgnay_2023": {
+    "raw_id": "gr_sgnay_2023",
+    "url": "https://sjsa.maharashtra.gov.in/gr/SGNAY_Consolidated_2023.pdf",
+    "tier": "tier_1",
+    "sha256": "0c98518ea91d34bccaefaec49c1479f54b891490eba09adb27dcf0420f54a7f3",
+    "title": "संजय गांधी निराधार अनुदान योजना शासन निर्णय व सर्वसमावेशक मार्गदर्शक सूचना",
+    "language": "mr",
+    "file_name": "gr_sgnay_2023.txt",
+    "retrieved_at": "2026-11-18T15:35:16.339448+00:00",
+    "char_count": 549
+  },
+  "gr_shravanbal_2023": {
+    "raw_id": "gr_shravanbal_2023",
+    "url": "https://sjsa.maharashtra.gov.in/gr/Shravanbal_Rules.pdf",
+    "tier": "tier_1",
+    "sha256": "a48bc296ceeebd23f41164789a91cd29b7e80f0c8f611fd61c1eda20533fa568",
+    "title": "श्रावणबाळ सेवा राज्य निवृत्तीवेतन योजना शासन निर्णय",
+    "language": "mr",
+    "file_name": "gr_shravanbal_2023.txt",
+    "retrieved_at": "2026-11-18T15:35:16.345253+00:00",
+    "char_count": 512
+  },
+  "mohd_nsap_ignoaps": {
+    "raw_id": "mohd_nsap_ignoaps",
+    "url": "https://nsap.nic.in/guidelines/IGNOAPS_Guidelines.pdf",
+    "tier": "tier_1",
+    "sha256": "8d67ecae1b5a3cc5934982f322cc6416bfc0654c1e2a758146d3dc5af133974b",
+    "title": "Indira Gandhi National Old Age Pension Scheme (IGNOAPS) Guidelines",
+    "language": "en",
+    "file_name": "mohd_nsap_ignoaps.txt",
+    "retrieved_at": "2026-11-18T15:35:16.349249+00:00",
+    "char_count": 575
+  },
+  "mohd_nsap_ignwps": {
+    "raw_id": "mohd_nsap_ignwps",
+    "url": "https://nsap.nic.in/guidelines/IGNWPS_Guidelines.pdf",
+    "tier": "tier_1",
+    "sha256": "08ffc59841fd2d9909b47febbf6b70987df44d41490700e4dcc18e2542e5b4d8",
+    "title": "Indira Gandhi National Widow Pension Scheme (IGNWPS) Guidelines",
+    "language": "en",
+    "file_name": "mohd_nsap_ignwps.txt",
+    "retrieved_at": "2026-11-18T15:35:16.352772+00:00",
+    "char_count": 400
+  },
+  "mohd_nsap_igndps": {
+    "raw_id": "mohd_nsap_igndps",
+    "url": "https://nsap.nic.in/guidelines/IGNDPS_Guidelines.pdf",
+    "tier": "tier_1",
+    "sha256": "8cfa2a47da085158cfa28a2b872c6bb908e56c2d339588f6283c975a6dded5c4",
+    "title": "Indira Gandhi National Disability Pension Scheme (IGNDPS) Guidelines",
+    "language": "en",
+    "file_name": "mohd_nsap_igndps.txt",
+    "retrieved_at": "2026-11-18T15:35:16.354927+00:00",
+    "char_count": 491
+  },
+  "mahadbt_sc_postmatric": {
+    "raw_id": "mahadbt_sc_postmatric",
+    "url": "https://mahadbt.maharashtra.gov.in/scheme_rules/GOI_Post_Matric_SC.pdf",
+    "tier": "tier_1",
+    "sha256": "1f988694cb707b5942661be1fa3290406c53bcea09ad3c3b35364fa451cbc8d8",
+    "title": "Government of India Post-Matric Scholarship for SC Students Maharashtra Rules",
+    "language": "en",
+    "file_name": "mahadbt_sc_postmatric.txt",
+    "retrieved_at": "2026-11-18T15:35:16.359164+00:00",
+    "char_count": 540
+  },
+  "mahadbt_obc_postmatric": {
+    "raw_id": "mahadbt_obc_postmatric",
+    "url": "https://mahadbt.maharashtra.gov.in/scheme_rules/Post_Matric_OBC.pdf",
+    "tier": "tier_1",
+    "sha256": "b33b768a9c0110eb9c8c8d9c105964ef4f9cd0a2ba3c53defe934791591b4521",
+    "title": "Post-Matric Scholarship for OBC Students Maharashtra Rules",
+    "language": "en",
+    "file_name": "mahadbt_obc_postmatric.txt",
+    "retrieved_at": "2026-11-18T15:35:16.362763+00:00",
+    "char_count": 491
+  },
+  "mahadbt_ebc_shahu": {
+    "raw_id": "mahadbt_ebc_shahu",
+    "url": "https://mahadbt.maharashtra.gov.in/scheme_rules/EBC_Shahu_Maharaj.pdf",
+    "tier": "tier_1",
+    "sha256": "51dda36bfec27f237eb4b0b572e36afaf9995095a10233a1af2e982a024bce95",
+    "title": "राजारशी छत्रपती शाहू महाराज शिक्षण शुल्क शिष्यवृत्ती योजना (EBC)",
+    "language": "mr",
+    "file_name": "mahadbt_ebc_shahu.txt",
+    "retrieved_at": "2026-11-18T15:35:16.367284+00:00",
+    "char_count": 445
+  },
+  "gr_namo_shetkari_2023": {
+    "raw_id": "gr_namo_shetkari_2023",
+    "url": "https://krishi.maharashtra.gov.in/gr/Namo_Shetkari_2023.pdf",
+    "tier": "tier_1",
+    "sha256": "f21ceb9f2e840d8cadad144bc8a73cddca3fff832b8ed1d7a04a022ff43c564d",
+    "title": "नमो शेतकरी महा सन्मान निधी योजना शासन निर्णय",
+    "language": "mr",
+    "file_name": "gr_namo_shetkari_2023.txt",
+    "retrieved_at": "2026-11-18T15:35:16.371246+00:00",
+    "char_count": 485
+  },
+  "pm_kisan_guidelines": {
+    "raw_id": "pm_kisan_guidelines",
+    "url": "https://pmkisan.gov.in/Documents/Revised_Guidelines_PMKISAN.pdf",
+    "tier": "tier_1",
+    "sha256": "73f3457ee474f6c0afa99f4fc17164e6a9b2b7dbd0ad360e155102e849d374d8",
+    "title": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) Operational Guidelines",
+    "language": "en",
+    "file_name": "pm_kisan_guidelines.txt",
+    "retrieved_at": "2026-11-18T15:35:16.374425+00:00",
+    "char_count": 456
+  },
+  "gr_bhausaheb_fundkar": {
+    "raw_id": "gr_bhausaheb_fundkar",
+    "url": "https://krishi.maharashtra.gov.in/gr/Bhausaheb_Fundkar_Phalbag.pdf",
+    "tier": "tier_1",
+    "sha256": "4f9a900759a66c3cdb7b7c008687ae52d755efbe4f5ed43f2d20fc939e541f87",
+    "title": "भाऊसाहेब फुंडकर फळबाग लागवड योजना शासन निर्णय",
+    "language": "mr",
+    "file_name": "gr_bhausaheb_fundkar.txt",
+    "retrieved_at": "2026-11-18T15:35:16.379688+00:00",
+    "char_count": 355
+  },
+  "gr_mjpjay_2023": {
+    "raw_id": "gr_mjpjay_2023",
+    "url": "https://jeevandayee.gov.in/gr/MJPJAY_Universal_2023.pdf",
+    "tier": "tier_1",
+    "sha256": "7dfdecf8e932f762cabc09e6e1a8055280dd9ad0218d923241a2b0b760a53270",
+    "title": "महात्मा ज्योतिराव फुले जन आरोग्य योजना (MJPJAY) सर्वसमावेशक सुधारित मार्गदर्शक सूचना",
+    "language": "mr",
+    "file_name": "gr_mjpjay_2023.txt",
+    "retrieved_at": "2026-11-18T15:35:16.383234+00:00",
+    "char_count": 444
+  },
+  "gr_cmegp_2023": {
+    "raw_id": "gr_cmegp_2023",
+    "url": "https://maha-cmegp.gov.in/docs/CMEGP_Rules.pdf",
+    "tier": "tier_1",
+    "sha256": "d8f5ea840cf0df4d7da532a6f282ba1942490878bb70b7399f6b987e0de491ec",
+    "title": "Chief Minister Employment Generation Programme (CMEGP) Maharashtra Guidelines",
+    "language": "en",
+    "file_name": "gr_cmegp_2023.txt",
+    "retrieved_at": "2026-11-18T15:35:16.387284+00:00",
+    "char_count": 542
+  },
+  "gr_annasaheb_patil_2023": {
+    "raw_id": "gr_annasaheb_patil_2023",
+    "url": "https://annasahebpatil.maharashtra.gov.in/gr/Vyaj_Partava_2023.pdf",
+    "tier": "tier_1",
+    "sha256": "e2a6ede4fe1257e902f4a63c0ca4d735070829098ac7a7d422e87d222f9cfb6e",
+    "title": "अण्णासाहेब पाटील आर्थिक मागास विकास महामंडळ स्वयंरोजगार कर्ज व्याज परतावा योजना",
+    "language": "mr",
+    "file_name": "gr_annasaheb_patil_2023.txt",
+    "retrieved_at": "2026-11-18T15:35:16.389297+00:00",
+    "char_count": 517
+  },
+  "gr_ramai_gharkul": {
+    "raw_id": "gr_ramai_gharkul",
+    "url": "https://sjsa.maharashtra.gov.in/gr/Ramai_Gharkul_Guidelines.pdf",
+    "tier": "tier_1",
+    "sha256": "171c5b680196307f0c5e52cade482e4ca59b1a9c6d0a9f8e1223fd5e8603c20e",
+    "title": "रमाई आवास घरकुल योजना शासन निर्णय व निकष",
+    "language": "mr",
+    "file_name": "gr_ramai_gharkul.txt",
+    "retrieved_at": "2026-11-18T15:35:16.392854+00:00",
+    "char_count": 445
+  },
+  "gr_vayoshri_2024": {
+    "raw_id": "gr_vayoshri_2024",
+    "url": "https://sjsa.maharashtra.gov.in/gr/Mukhyamantri_Vayoshri_2024.pdf",
+    "tier": "tier_1",
+    "sha256": "132b3b49f69df82ee051462198509b442dd1afef0012bf2bf07f106718ce66d4",
+    "title": "मुख्यमंत्री वयोश्री योजना शासन निर्णय २०२४",
+    "language": "mr",
+    "file_name": "gr_vayoshri_2024.txt",
+    "retrieved_at": "2026-11-18T15:35:16.400713+00:00",
+    "char_count": 446
+  }
+}

@@ -89,6 +89,8 @@ class IntelligentDocumentPreparationReport(BaseModel):
     readiness_percentage: int = 0
     mandatory_total: int = 0
     mandatory_satisfied: int = 0
+    readiness_status: str = "MISSING"
+    disclaimer: str = "Pre-check of readability, completeness, and consistency; the official department verifies authenticity upon application."
 
 
 # Authoritative Maharashtra permitted alternative documents registry
@@ -258,6 +260,7 @@ def prepare_intelligent_document_audit(
     target_financial_year: str = "2026-27",
     language: Language = Language.EN,
     today: date | None = None,
+    scheme_id: str | None = None,
 ) -> IntelligentDocumentPreparationReport:
     """Consolidate document classification, requirement matching, alternatives,
 
@@ -300,12 +303,100 @@ def prepare_intelligent_document_audit(
         if doc.confidence < 0.75:
             needs_human = True
 
+    # 2.5 Profile vs Document consistency and scheme threshold checks
+    if profile:
+        for doc in extracted_documents:
+            # Income check
+            doc_income = getattr(doc, "annual_family_income", None)
+            if doc_income is not None:
+                if profile.annual_family_income is not None:
+                    diff = abs(doc_income - profile.annual_family_income)
+                    if diff > 5000:
+                        findings.append(
+                            DocumentFinding(
+                                code="PROFILE_DOCUMENT_INCOME_MISMATCH",
+                                severity="warning",
+                                category="document_consistency",
+                                message=(
+                                    f"Declared annual income (₹{profile.annual_family_income:,}) differs from "
+                                    f"income certificate (₹{doc_income:,}). Please confirm."
+                                ),
+                                recommended_action="Confirm the exact income certified by the revenue authority.",
+                                document_ids=[doc.document_id],
+                            )
+                        )
+                if scheme and getattr(scheme, "eligibility_rule", None):
+                    leaves = []
+                    def _collect_leaves(node):
+                        if not node:
+                            return
+                        if node.field:
+                            leaves.append((node.field, node.op, node.value))
+                        for ch in node.children:
+                            _collect_leaves(ch)
+                    _collect_leaves(scheme.eligibility_rule)
+                    for f, op, val in leaves:
+                        if f == "annual_family_income" and op in ("lte", "lt") and isinstance(val, (int, float)):
+                            if doc_income > val:
+                                findings.append(
+                                    DocumentFinding(
+                                        code="INCOME_EXCEEDS_SCHEME_THRESHOLD",
+                                        severity="error",
+                                        category="scheme_eligibility",
+                                        message=(
+                                            f"Certified income (₹{doc_income:,}) exceeds the maximum scheme limit of ₹{val:,}."
+                                        ),
+                                        recommended_action="Verify if family qualifies under an alternative sub-category.",
+                                        document_ids=[doc.document_id],
+                                    )
+                                )
+                                all_mand_satisfied = False
+
+            # DOB / Age check
+            if getattr(doc, "date_of_birth", None) is not None and profile.age_years is not None:
+                calc_age = now.year - doc.date_of_birth.year - (
+                    (now.month, now.day) < (doc.date_of_birth.month, doc.date_of_birth.day)
+                )
+                if abs(calc_age - profile.age_years) > 1:
+                    findings.append(
+                        DocumentFinding(
+                            code="AGE_DOB_MISMATCH",
+                            severity="warning",
+                            category="document_consistency",
+                            message=(
+                                f"Document indicates age {calc_age} (DOB: {doc.date_of_birth.isoformat()}), "
+                                f"while profile declared age {profile.age_years}."
+                            ),
+                            recommended_action="Confirm date of birth against official birth or school leaving certificate.",
+                            document_ids=[doc.document_id],
+                        )
+                    )
+
+            # Caste Category check
+            doc_caste = getattr(doc, "caste_category", None)
+            if doc_caste and profile.caste_category:
+                if doc_caste.strip().casefold() != profile.caste_category.strip().casefold():
+                    findings.append(
+                        DocumentFinding(
+                            code="CASTE_CATEGORY_MISMATCH",
+                            severity="warning",
+                            category="document_consistency",
+                            message=(
+                                f"Certificate declares category '{doc_caste}', while profile stated '{profile.caste_category}'."
+                            ),
+                            recommended_action="Update profile or verify competent issuing authority certificate.",
+                            document_ids=[doc.document_id],
+                        )
+                    )
+
     # 3. Requirement matching against scheme-specific dataset or direct scheme requirements
     req_statuses: list[DocumentRequirementStatus] = []
     all_mand_satisfied = True
 
+    target_sid = scheme_id or scheme.scheme_id
+
     # Check scheme-specific document requirements dataset
-    scheme_spec = get_scheme_document_requirements(scheme.scheme_id)
+    scheme_spec = get_scheme_document_requirements(target_sid) or get_scheme_document_requirements(scheme.scheme_id)
     if scheme_spec and scheme_spec.get("requirements"):
         detailed_reqs = scheme_spec["requirements"]
     else:
@@ -668,6 +759,14 @@ def prepare_intelligent_document_audit(
             )
         )
 
+    has_blocking_error = any(f.severity == "error" for f in findings)
+    if all_mand_satisfied and not has_blocking_error and readiness_pct == 100:
+        readiness_status = "READY"
+    elif findings or readiness_pct > 0:
+        readiness_status = "NEEDS_ATTENTION"
+    else:
+        readiness_status = "MISSING"
+
     return IntelligentDocumentPreparationReport(
         scheme_id=scheme.scheme_id,
         all_mandatory_satisfied=all_mand_satisfied,
@@ -679,4 +778,5 @@ def prepare_intelligent_document_audit(
         readiness_percentage=readiness_pct,
         mandatory_total=mand_total,
         mandatory_satisfied=mand_satisfied,
+        readiness_status=readiness_status,
     )

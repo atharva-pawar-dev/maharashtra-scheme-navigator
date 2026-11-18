@@ -1,0 +1,76 @@
+canonical_scheme_id,scheme_name,department,coverage_tier,verification_status,sources_found
+demo-majhi-ladki-bahin,Mukhyamantri Majhi Ladki Bahin Yojana (Demo Fixture),Women and Child Development Department,TIER_A,verified_primary,1
+demo-indira-gandhi-old-age-pension,Indira Gandhi National Old Age Pension Scheme (IGNOAPS) - Maharashtra (Demo Fixture),Social Justice and Special Assistance Department,TIER_A,verified_primary,1
+candidate-majhi-ladki-bahin,Mukhyamantri Majhi Ladki Bahin Yojana (Candidate Scheme),Women and Child Development Department,TIER_A,verified_primary,1
+candidate-sanjay-gandhi-niradhar-anudan,Sanjay Gandhi Niradhar Anudan Yojana (SGNAY),Social Justice and Special Assistance Department,TIER_A,verified_primary,1
+candidate-shravanbal-sewa-rajya-nivruttivetan,Shravanbal Seva Rajya Nivruttivetan Yojana (Group A & Group B),Social Justice and Special Assistance Department,TIER_A,verified_primary,1
+candidate-post-matric-sc,Government of India Post-Matric Scholarship for SC Students - Maharashtra,Social Justice and Special Assistance Department,TIER_A,verified_primary,1
+candidate-post-matric-obc,Post-Matric Scholarship for OBC Students - Maharashtra,"OBC, VJNT, SBC and SEBC Welfare Department",TIER_A,verified_primary,1
+candidate-post-matric-obc-girls-professional,Tuition Fee Reimbursement for OBC/EBC Girls in Higher & Technical Professional Courses,Higher and Technical Education Department,TIER_C,unverified,1
+candidate-tuition-fees-obc-girls,100% Tuition & Examination Fee Reimbursement for Girls (Higher & Technical Education),Higher and Technical Education Department,TIER_C,unverified,1
+scheme-ebc-tuition-waiver,Rajarshi Chhatrapati Shahu Maharaj Shikshan Shulkh Shishyavrutti Yojna (EBC),Higher and Technical Education Department,TIER_A,verified_primary,1
+scheme-majhi-kanya-bhagyashree,Majhi Kanya Bhagyashree Yojana (MKBY),Women and Child Development Department,TIER_C,unverified,1
+scheme-bhausaheb-fundkar-phalbag,Bhausaheb Fundkar Phalbag Lagwad Yojana,Agriculture Department,TIER_A,verified_primary,1
+scheme-namo-shetkari-maha-samman,Namo Shetkari Maha Samman Nidhi Yojana,Agriculture Department,TIER_A,verified_primary,1
+scheme-mukhyamantri-bal-seva,Mukhyamantri Bal Seva Yojana,Women and Child Development Department,TIER_C,unverified,1
+scheme-bal-sangopan-yojana,Bal Sangopan Yojana,Women and Child Development Department,TIER_C,unverified,1
+scheme-pm-kisan,Pradhan Mantri Kisan Samman Nidhi (PM-KISAN),Agriculture Department,TIER_A,verified_primary,1
+scheme-pm-mudra-yojana,Pradhan Mantri Mudra Yojana (PMMY),"Industries, Energy & Labour Department (MSME)",TIER_C,unverified,1
+scheme-pm-svanidhi,PM Street Vendor's AtmaNirbhar Nidhi (PM SVANidhi),Urban Development Department,TIER_C,unverified,1
+scheme-pm-surya-ghar,PM Surya Ghar: Muft Bijli Yojana - Maharashtra,Energy Department,TIER_C,unverified,1
+scheme-begum-hazrat-mahal,Begum Hazrat Mahal National Scholarship for Minority Girls,Minority Development Department,TIER_C,unverified,1
+scheme-ignwps-widow-pension,Indira Gandhi National Widow Pension Scheme (IGNWPS) - Maharashtra,Social Justice and Special Assistance Department,TIER_A,verified_primary,1
+scheme-igndps-disability-pension,Indira Gandhi National Disability Pension Scheme (IGNDPS) - Maharashtra,Social Justice and Special Assistance Department,TIER_A,verified_primary,1
+scheme-national-family-benefit,National Family Benefit Scheme (NFBS) - Maharashtra,Social Justice and Special Assistance Department,TIER_C,unverified,1
+scheme-post-matric-st,Government of India Post-Matric Scholarship for Scheduled Tribe Students - Maharashtra,Tribal Development Department,TIER_C,unverified,1
+scheme-post-matric-vjnt,Post-Matric Scholarship for VJNT Students - Maharashtra,"OBC, VJNT, SBC and SEBC Welfare Department",TIER_C,unverified,1
+scheme-post-matric-sbc,Post-Matric Scholarship for Special Backward Classes (SBC) - Maharashtra,"OBC, VJNT, SBC and SEBC Welfare Department",TIER_C,unverified,1
+scheme-pmay-gramin,Pradhan Mantri Awas Yojana - Gramin (PMAY-G) Maharashtra,Rural Development & Panchayati Raj Department,TIER_C,unverified,1
+scheme-pmay-urban,Pradhan Mantri Awas Yojana - Urban (PMAY-U) Maharashtra,Housing Department,TIER_C,unverified,1
+scheme-ramai-awas-yojana,Ramai Awas Gharkul Yojana - Maharashtra,Social Justice and Special Assistance Department,TIER_A,verified_primary,1
+scheme-shabari-gharkul-yojana,Shabari Adivasi Gharkul Yojana - Maharashtra,Tribal Development Department,TIER_C,unverified,1
+scheme-mjpjay-ayushman-bharat,Mahatma Jyotirao Phule Jan Arogya Yojana & Ayushman Bharat (MJPJAY),Public Health Department,TIER_A,verified_primary,1
+scheme-pm-fasal-bima,Pradhan Mantri Fasal Bima Yojana - Sarv Samaveshak ₹1 Token Scheme Maharashtra,Agriculture Department,TIER_C,unverified,1
+scheme-pm-kusum-saur-pump,Mukhyamantri Saur Krushi Pump Yojana / PM-KUSUM Component B,Energy Department,TIER_C,unverified,1
+scheme-pm-matru-vandana,Pradhan Mantri Matru Vandana Yojana (PMMVY) - Maharashtra,Women and Child Development Department,TIER_C,unverified,1
+scheme-swadhar-hostel-dbt,Bharatratna Dr. Babasaheb Ambedkar Swadhar Yojana,Social Justice and Special Assistance Department,TIER_C,unverified,1
+scheme-swayam-hostel-dbt,Pandit Deendayal Upadhyay Swayam Yojana,Tribal Development Department,TIER_C,unverified,1
+scheme-panjabrao-deshmukh-hostel,Dr. Panjabrao Deshmukh Vastigruh Nirvah Bhatta Yojna,Higher and Technical Education Department,TIER_C,unverified,1
+scheme-bocw-construction-welfare,Maharashtra Building & Other Construction Workers Welfare Board Benefits,Labour Department,TIER_C,unverified,1
+scheme-cmegp-self-employment,Chief Minister Employment Generation Programme (CMEGP),"Industries, Energy & Labour Department (MSME)",TIER_A,verified_primary,1
+scheme-annasaheb-patil-ir2,Annasaheb Patil Arthik-Magas Vikas Mahamandal - Loan Interest Reimbursement (IR2),"Skill Development, Employment and Entrepreneurship Department",TIER_A,verified_primary,1
+scheme-mpbcdc-seed-capital,Mahatma Phule Backward Class Development Corporation - Margin Capital & Subsidy,Social Justice and Special Assistance Department,TIER_C,unverified,1
+scheme-mamfdc-minority-loan,Maulana Azad Minorities Financial Development Corporation - Concessional Term Loan,Minority Development Department,TIER_C,unverified,1
+scheme-mahajyoti-fellowship,MahaJyoti PhD Research Fellowship Scheme,"OBC, VJNT, SBC and SEBC Welfare Department",TIER_C,unverified,1
+scheme-barti-fellowship,Dr. Babasaheb Ambedkar National Research Fellowship (BANRF) - BARTI,Social Justice and Special Assistance Department,TIER_C,unverified,1
+scheme-trti-fellowship,Tribal Research & Training Institute Research Fellowship & Coaching,Tribal Development Department,TIER_C,unverified,1
+scheme-sarthi-fellowship,Chhatrapati Shahu Maharaj National Research Fellowship (CSMNRF) - SARTHI,Planning Department,TIER_C,unverified,1
+scheme-mgnregs-maharashtra,Mahatma Gandhi National Rural Employment Guarantee Scheme (MGNREGS) - Maharashtra,Rural Development & Panchayati Raj Department,TIER_C,unverified,1
+scheme-mukhyamantri-vayoshri,Mukhyamantri Vayoshri Yojana,Social Justice and Special Assistance Department,TIER_A,verified_primary,1
+scheme-divyang-motorized-tricycle,Free Motorized Tricycle Scheme for Persons with Disabilities,Divyang Welfare Department,TIER_C,unverified,1
+scheme-divyang-swayamrojgar,Financial Assistance for Self-Employment of Persons with Disabilities,Divyang Welfare Department,TIER_C,unverified,1
+scheme-intercaste-marriage-incentive,Financial Incentive Scheme for Encouragement of Inter-Caste Marriages,Social Justice and Special Assistance Department,TIER_C,unverified,1
+scheme-ahilyabai-holkar-bus-travel,Punyashlok Ahilyadevi Holkar Free Bus Travel Scheme for School Girls,School Education & Sports Department,TIER_C,unverified,1
+scheme-asmita-yojana,Asmita Yojana - Subsidized Sanitary Napkins for Adolescent Girls & Women,Rural Development & Panchayati Raj Department,TIER_C,unverified,1
+scheme-antyodaya-anna-yojana,Antyodaya Anna Yojana (AAY) - Subsidized Ration Foodgrain Scheme Maharashtra,"Food, Civil Supplies and Consumer Protection Department",TIER_C,unverified,1
+scheme-annapurna-scheme,Annapurna Scheme - Free Foodgrains for Indigent Senior Citizens,"Food, Civil Supplies and Consumer Protection Department",TIER_C,unverified,1
+scheme-vrudha-kalawant-mandhan,Financial Assistance Scheme for Elderly Folk Artists & Literary Figures,Tourism and Cultural Affairs Department,TIER_C,unverified,1
+scheme-umed-msrlm-livelihood,Umed - Maharashtra State Rural Livelihoods Mission (MSRLM),Rural Development & Panchayati Raj Department,TIER_C,unverified,1
+scheme-krushi-yantrikikaran,Sub-Mission on Agricultural Mechanization (SMAM) Maharashtra,Agriculture Department,TIER_C,unverified,1
+scheme-sukshma-sinchan,Pradhan Mantri Krishi Sinchayee Yojana - Micro Irrigation (Drip & Sprinkler),Agriculture Department,TIER_C,unverified,1
+scheme-dairy-cow-buffalo-subsidy,Special Component & General Milch Cattle Purchase Subsidy Scheme,Animal Husbandry & Dairy Development Department,TIER_C,unverified,1
+pcmc-free-bicycle-girls,PCMC Free Bicycle Distribution to Girls (Project No.1),Social Development Department (Samaj Vikas Vibhag),TIER_B,single_source_secondary,1
+pcmc-sewing-machine-women,PCMC Free Sewing Machine for Self-Employment (Project No.2),Social Development Department (Samaj Vikas Vibhag),TIER_B,single_source_secondary,1
+pcmc-mscit-women,PCMC Computer Training (MS-CIT) for Women (Scheme No.4),Women and Child Welfare Section,TIER_B,single_source_secondary,1
+pcmc-disability-scholarship,PCMC Scholarship for Disabled Students (Scheme No.18),Disability Welfare Department (Divyang Kalyan),TIER_B,single_source_secondary,1
+pcmc-disability-assistive-devices,PCMC Free Assistive Instruments for Disabled Persons (Scheme No.19),Disability Welfare Department (Divyang Kalyan),TIER_B,single_source_secondary,1
+pcmc-backward-class-scholarship,PCMC Scholarship for Backward Class Students (Scheme No.22),Social Development Department (Samaj Vikas Vibhag),TIER_B,single_source_secondary,1
+pmc-maulana-azad-scholarship,PMC Bharatratna Maulana Abul Kalam Azad Educational Grant (10th Std),Social Development Department (Samaj Vikas Vibhag),TIER_B,single_source_secondary,1
+pmc-annabhau-sathe-scholarship,PMC Lokshahir Annabhau Sathe Educational Grant (12th Std),Social Development Department (Samaj Vikas Vibhag),TIER_B,single_source_secondary,1
+pmc-shahari-garib-arogya,PMC Urban Poor Health Scheme (Shahari Garib Arogya Yojana),Public Health Department,TIER_B,single_source_secondary,1
+bmc-anand-dighe-divyang,BMC Dharmaveer Anand Dighe Divyang Financial Assistance Scheme,Planning Department (Social Welfare),TIER_B,single_source_secondary,1
+bmc-mahila-arthik-vikas,BMC Women Self-Employment Machinery & Toolkit Subsidy,Planning Department (Gender Budget Section),TIER_B,single_source_secondary,1
+tmc-divyang-kalyan,TMC Divyang Subsistence Allowance and Education Grant,Social Development Department (Samaj Vikas Vibhag),TIER_B,single_source_secondary,1
+nmmc-divyang-education-grant,NMMC Disabled Student Education and Livelihood Grant,Social Development Department,TIER_B,single_source_secondary,1
+rural-zp-shetkari-sheti-shala,Zilla Parishad Rural Farmer Field School Support Programme,"Agriculture & Rural Development Department, Zilla Parishad",TIER_C,unverified,1
+ulb-council-swachh-livelihood,Maharashtra Municipal Councils Urban Livelihood & Sanitation Assistance,Directorate of Municipal Administration (DMA),TIER_C,unverified,1

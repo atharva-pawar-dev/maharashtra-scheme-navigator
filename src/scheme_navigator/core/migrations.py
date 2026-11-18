@@ -137,6 +137,43 @@ INGESTION_MIGRATIONS = [
         CREATE INDEX IF NOT EXISTS idx_queue_status ON ingestion_review_queue(review_status);
         """,
     ),
+    Migration(
+        version=2,
+        name="catalogue_v2_provenance_and_rules",
+        apply_sql="""
+        CREATE TABLE IF NOT EXISTS catalogue_v2_schemes (
+            scheme_id TEXT PRIMARY KEY,
+            name_en TEXT NOT NULL,
+            name_mr TEXT NOT NULL,
+            department TEXT NOT NULL,
+            implementing_body TEXT NOT NULL,
+            level TEXT NOT NULL,
+            status TEXT NOT NULL,
+            verification_status TEXT NOT NULL,
+            confidence REAL NOT NULL,
+            substantive_criteria_count INTEGER NOT NULL,
+            eligibility_incomplete INTEGER NOT NULL,
+            scheme_json TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_catalogue_v2_status ON catalogue_v2_schemes(status);
+        CREATE INDEX IF NOT EXISTS idx_catalogue_v2_verification ON catalogue_v2_schemes(verification_status);
+
+        CREATE TABLE IF NOT EXISTS catalogue_v2_criteria_evidence (
+            criterion_id TEXT PRIMARY KEY,
+            scheme_id TEXT NOT NULL,
+            field TEXT NOT NULL,
+            operator TEXT NOT NULL,
+            quote_original TEXT NOT NULL,
+            source_url TEXT NOT NULL,
+            source_tier TEXT NOT NULL,
+            gr_ref TEXT,
+            verified_at TEXT NOT NULL,
+            FOREIGN KEY(scheme_id) REFERENCES catalogue_v2_schemes(scheme_id)
+        );
+        CREATE INDEX IF NOT EXISTS idx_criteria_scheme ON catalogue_v2_criteria_evidence(scheme_id);
+        """,
+    ),
 ]
 
 CITIZEN_PROFILE_MIGRATIONS = [

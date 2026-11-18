@@ -448,8 +448,10 @@ def evaluate_eligibility(
     # Determine candidate schemes based on scope and environment
     if settings.scheme_catalog_path:
         schemes = catalog.all()
-    elif scope == "canonical" or (settings.app_env.casefold() in {"production", "prod"} and canonical_catalog.all()):
-        schemes = canonical_catalog.all()
+    elif scope == "canonical":
+        schemes = [s for s in canonical_catalog.all() if getattr(s, "rule_status", "") != "unverified"]
+    elif settings.app_env.casefold() in {"production", "prod"} and canonical_catalog.all():
+        schemes = [s for s in canonical_catalog.all() if getattr(s, "rule_status", "") != "unverified"]
     else:
         schemes = catalog.all()
 
@@ -775,8 +777,14 @@ def start_interview(
             )
         candidate_schemes = [selected]
     else:
-        if payload.scope == "canonical" or not catalog.all() or (payload.scope is None and settings.app_env.casefold() in {"production", "prod"} and canonical_catalog.all()):
-            candidate_schemes = canonical_catalog.all()
+        if settings.scheme_catalog_path:
+            candidate_schemes = catalog.all()
+        elif payload.scope == "canonical":
+            candidate_schemes = [s for s in canonical_catalog.all() if getattr(s, "rule_status", "") != "unverified"]
+        elif payload.scope is None and settings.app_env.casefold() in {"production", "prod"} and canonical_catalog.all():
+            candidate_schemes = [s for s in canonical_catalog.all() if getattr(s, "rule_status", "") != "unverified"]
+        elif not catalog.all() and canonical_catalog.all():
+            candidate_schemes = [s for s in canonical_catalog.all() if getattr(s, "rule_status", "") != "unverified"]
         else:
             candidate_schemes = catalog.all()
 
@@ -2087,13 +2095,17 @@ def audit_canonical_scheme_documents(
     scheme = catalog.get(scheme_id) or canonical_catalog.get(scheme_id)
     if not scheme:
         raise HTTPException(status_code=404, detail=f"Scheme '{scheme_id}' was not found.")
-    return prepare_intelligent_document_audit(
+    rep = prepare_intelligent_document_audit(
         scheme=scheme,
         extracted_documents=payload.documents,
         profile=payload.profile,
         target_financial_year=payload.target_financial_year,
         language=payload.language,
+        scheme_id=scheme_id,
     )
+    if rep.scheme_id != scheme_id:
+        rep = rep.model_copy(update={"scheme_id": scheme_id})
+    return rep
 
 
 @app.get("/canonical-schemes/{scheme_id}/factsheet", tags=["canonical_schemes"])

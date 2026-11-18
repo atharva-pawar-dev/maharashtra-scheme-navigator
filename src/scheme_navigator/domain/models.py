@@ -507,6 +507,7 @@ class ExtractedDocument(BaseModel):
     # Personal information
     person_name: str | None = None
     date_of_birth: date | None = None
+    caste_category: str | None = None
 
     # Certificate dates
     issue_date: date | None = None
