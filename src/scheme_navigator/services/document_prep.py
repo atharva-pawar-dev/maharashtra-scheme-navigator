@@ -306,6 +306,25 @@ def prepare_intelligent_document_audit(
     # 2.5 Profile vs Document consistency and scheme threshold checks
     if profile:
         for doc in extracted_documents:
+            # Name check
+            doc_name = getattr(doc, "person_name", None)
+            if doc_name and getattr(profile, "name", None):
+                from scheme_navigator.documents.audit import compare_person_names
+                comparison, score = compare_person_names(doc_name, profile.name)
+                if comparison in ("mismatch", "phonetic_review", "cross_script"):
+                    findings.append(
+                        DocumentFinding(
+                            code="PROFILE_DOCUMENT_NAME_MISMATCH",
+                            severity="warning",
+                            category="document_consistency",
+                            message=(
+                                f"Profile name '{profile.name}' differs from name on document '{doc_name}'."
+                            ),
+                            recommended_action="Update profile name or submit name change / gazette affidavit.",
+                            document_ids=[doc.document_id],
+                        )
+                    )
+
             # Income check
             doc_income = getattr(doc, "annual_family_income", None)
             if doc_income is not None:

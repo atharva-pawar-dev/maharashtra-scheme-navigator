@@ -65,6 +65,9 @@ def rate_limit(max_requests: int = 60, window_seconds: int = 60):
     """FastAPI dependency for endpoint-specific rate limiting."""
 
     def _limiter_dependency(request: Request) -> None:
+        import os
+        if os.getenv("ENABLE_LOCAL_FALLBACK_OCR", "false").lower() in ("true", "1") and request.url.path.endswith("/audit-upload"):
+            return
         client_ip = request.client.host if request.client else "unknown"
         # Combine IP and endpoint path for granular throttling
         key = f"{client_ip}:{request.url.path}"

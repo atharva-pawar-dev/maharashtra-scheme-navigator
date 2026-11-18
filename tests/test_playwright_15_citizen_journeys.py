@@ -125,7 +125,7 @@ def test_journey_02_incomplete_profile_citizen(page, live_server):
         }"""
     )
     page.wait_for_selector("#view-results.active", timeout=5000)
-    assert page.locator(".scheme-card").count() >= 1
+    assert page.locator("#results-cards-container .scheme-card").count() >= 1
 
     # Update income in profile to satisfy criteria
     page.evaluate(
@@ -136,7 +136,7 @@ def test_journey_02_incomplete_profile_citizen(page, live_server):
             renderResultsView();
         }"""
     )
-    page.wait_for_selector(".scheme-card", timeout=5000)
+    page.wait_for_selector("#results-cards-container .scheme-card", timeout=5000)
     card_text = page.locator("#results-cards-container").inner_text()
     assert "पात्र" in card_text or "Eligible" in card_text
 
@@ -335,7 +335,7 @@ def test_journey_10_document_replacement_recovery(page, live_server):
 
     # Remove wrong document
     page.locator(".btn-remove-doc").first.click()
-    time.sleep(0.5)
+    page.wait_for_function("() => document.querySelectorAll('.uploaded-doc-card').length === 0", timeout=5000)
     assert page.locator(".uploaded-doc-card").count() == 0
 
 

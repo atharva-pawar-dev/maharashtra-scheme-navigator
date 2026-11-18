@@ -3623,6 +3623,12 @@
     }
   }
 
+  function renderResultsView() {
+    renderResultsScoreboard();
+    renderResultsCards('all');
+  }
+  window.renderResultsView = renderResultsView;
+
   function renderResultsScoreboard() {
     let eligible = 0, partial = 0, moreinfo = 0, rejected = 0, review = 0;
     (state.results || []).forEach(r => {
@@ -4490,11 +4496,18 @@
     await renderDocumentAuditorView(state.selectedSchemeId);
   }
 
-  function removeUploadedDocument(docId) {
+  async function removeUploadedDocument(docId) {
     if (!state.uploadedDocuments) return;
     state.uploadedDocuments = state.uploadedDocuments.filter(d => d.document_id !== docId);
+    sessionStorage.setItem('scheme_nav_doc_audit_session', JSON.stringify(state.uploadedDocuments));
     saveSession();
-    renderDocumentAuditorView(state.selectedSchemeId);
+    const uploadedSecEl = document.getElementById('doc-uploaded-section');
+    const uploadedListEl = document.getElementById('doc-uploaded-list');
+    if (state.uploadedDocuments.length === 0) {
+      if (uploadedSecEl) uploadedSecEl.style.display = 'none';
+      if (uploadedListEl) uploadedListEl.innerHTML = '';
+    }
+    await renderDocumentAuditorView(state.selectedSchemeId);
   }
 
   function toggleEditDocument(docId) {

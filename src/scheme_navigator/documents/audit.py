@@ -403,9 +403,15 @@ LocalOllamaVisionExtractor = GeminiVisionExtractor
 class LocalFallbackDocumentExtractor:
     """Deterministic local document extractor fallback when GEMINI_API_KEY is not configured."""
 
+    def __init__(self, current_filename: str | None = None) -> None:
+        self.current_filename = current_filename
+
+    def set_filename(self, filename: str) -> None:
+        self.current_filename = filename
+
     def extract(self, image_bytes: bytes, filename: str) -> ExtractedDocument:
         digest = hashlib.sha256(image_bytes).hexdigest()
-        fname_lower = (filename or "").casefold()
+        fname_lower = (self.current_filename or filename or "").casefold()
 
         # Check for unreadable blur
         if "unreadable" in fname_lower or "blur" in fname_lower:

@@ -1,6 +1,6 @@
 {
   "audit_version": "2.0.0",
-  "generated_at": "2026-11-18T22:36:00+05:30",
+  "generated_at": "2026-11-18T23:01:00+05:30",
   "environment": {
     "os": "Windows",
     "python_version": "3.11.4",
@@ -15,7 +15,7 @@
     "total_browser_playwright_tests": 45,
     "browser_tests_passed": 45,
     "browser_tests_failed": 0,
-    "total_execution_seconds": 133.72
+    "total_execution_seconds": 128.60
   },
   "canary_verification_summary": {
     "total_canaries": 12,

@@ -99,7 +99,7 @@ def test_04b_focused_interview_ign_demo_journey(page, live_server):
 
     # Interview workspace should open
     page.wait_for_selector("#view-interview", timeout=10000)
-    page.wait_for_selector("#chat-stream .message.bot", timeout=10000)
+    page.wait_for_function("() => document.querySelectorAll('#chat-stream .message.bot').length >= 2", timeout=10000)
 
     stream_text = page.locator("#chat-stream").inner_text()
     assert "Error starting interview" not in stream_text

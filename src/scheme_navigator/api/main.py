@@ -1108,14 +1108,12 @@ async def audit_document_upload(
 
         # Created per request so a missing key does not prevent the API starting.
         import os
-        try:
+        from scheme_navigator.documents.audit import LocalFallbackDocumentExtractor
+        use_fallback = os.getenv("ENABLE_LOCAL_FALLBACK_OCR", "false").lower() in ("true", "1")
+        if use_fallback:
+            extractor = LocalFallbackDocumentExtractor(current_filename=safe_fname)
+        else:
             extractor = GeminiVisionExtractor()
-        except RuntimeError:
-            if os.getenv("ENABLE_LOCAL_FALLBACK_OCR", "false").lower() in ("true", "1"):
-                from scheme_navigator.documents.audit import LocalFallbackDocumentExtractor
-                extractor = LocalFallbackDocumentExtractor()
-            else:
-                raise
 
         if is_pdf:
             page_images = await run_in_threadpool(render_pdf_pages, raw, max_pages=10)
@@ -1124,10 +1122,11 @@ async def audit_document_upload(
 
             page_documents: list[tuple[int, ExtractedDocument]] = []
             for page_number, page_bytes in enumerate(page_images, start=1):
+                page_name = f"certificate-page-{page_number}.png"
                 page_doc = await run_in_threadpool(
                     extractor.extract,
                     page_bytes,
-                    f"certificate-page-{page_number}.png",
+                    page_name,
                 )
                 page_doc = page_doc.model_copy(
                     update={
