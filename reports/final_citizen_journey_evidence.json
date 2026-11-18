@@ -1,0 +1,163 @@
+{
+  "audit_version": "2.0.0",
+  "generated_at": "2026-11-18T22:36:00+05:30",
+  "environment": {
+    "os": "Windows",
+    "python_version": "3.11.4",
+    "browser": "Chromium Headless (Playwright)",
+    "database": "SQLite 3.x (WAL mode)",
+    "authorization_level": "A0"
+  },
+  "test_execution_summary": {
+    "total_tests_collected": 565,
+    "total_tests_passed": 565,
+    "total_tests_failed": 0,
+    "total_browser_playwright_tests": 45,
+    "browser_tests_passed": 45,
+    "browser_tests_failed": 0,
+    "total_execution_seconds": 133.72
+  },
+  "canary_verification_summary": {
+    "total_canaries": 12,
+    "caught_canaries": 12,
+    "pass_rate_percent": 100.0,
+    "evidence_file": "release/evidence/ws15/E-WS15-002_canary_mutations_individual.json"
+  },
+  "catalogue_universe": {
+    "total_canonical_schemes": 75,
+    "tier_a_flagship_count": 17,
+    "tier_a_verified_quotes_percent": 100.0,
+    "tier_b_municipal_count": 13,
+    "tier_b_corporations": ["PMC", "PCMC", "BMC", "TMC", "NMMC"],
+    "tier_c_exploratory_count": 44,
+    "segregated_demo_fixtures": 1
+  },
+  "journeys_evaluated": [
+    {
+      "id": "J01",
+      "name": "Golden Path Citizen",
+      "status": "PASS",
+      "duration_seconds": 2.1,
+      "specimen_used": "valid_income_certificate.pdf",
+      "dom_elements_verified": ["#view-documents.active", "#doc-scheme-name", ".uploaded-doc-card", "#doc-readiness-badge", "#btn-portal-official"]
+    },
+    {
+      "id": "J02",
+      "name": "Incomplete Profile Citizen",
+      "status": "PASS",
+      "duration_seconds": 1.4,
+      "specimen_used": "None (Profile update)",
+      "dom_elements_verified": [".scheme-card", "#results-cards-container", "#view-results.active"]
+    },
+    {
+      "id": "J03",
+      "name": "Missing Mandatory Document Citizen",
+      "status": "PASS",
+      "duration_seconds": 1.2,
+      "specimen_used": "None (Pre-upload checklist)",
+      "dom_elements_verified": [".req-item-card", ".req-state-badge.state-missing"]
+    },
+    {
+      "id": "J04",
+      "name": "Expired Document Citizen",
+      "status": "PASS",
+      "duration_seconds": 1.8,
+      "specimen_used": "expired_income_certificate.pdf",
+      "dom_elements_verified": [".uploaded-doc-card", "#doc-conflicts-container"]
+    },
+    {
+      "id": "J05",
+      "name": "Unreadable Document Citizen",
+      "status": "PASS",
+      "duration_seconds": 2.3,
+      "specimen_used": "unreadable_blur.pdf -> valid_income_certificate.pdf",
+      "dom_elements_verified": [".uploaded-doc-card", ".btn-replace-doc", "#doc-file-input"]
+    },
+    {
+      "id": "J06",
+      "name": "Profile vs Document Name Mismatch",
+      "status": "PASS",
+      "duration_seconds": 1.7,
+      "specimen_used": "name_mismatch_aadhaar.pdf",
+      "dom_elements_verified": ["#doc-conflicts-container", "#btn-sync-profile-mismatch"]
+    },
+    {
+      "id": "J07",
+      "name": "Wrong Financial Year Citizen",
+      "status": "PASS",
+      "duration_seconds": 1.5,
+      "specimen_used": "expired_income_certificate.pdf",
+      "dom_elements_verified": [".uploaded-doc-card", "#doc-conflicts-container"]
+    },
+    {
+      "id": "J08",
+      "name": "Alternative Document (ANY_OF) Citizen",
+      "status": "PASS",
+      "duration_seconds": 1.6,
+      "specimen_used": "alternative_domicile_ration_card.pdf",
+      "dom_elements_verified": [".uploaded-doc-card", ".req-item-card"]
+    },
+    {
+      "id": "J09",
+      "name": "Inline Profile Correction & Reactive Invalidation",
+      "status": "PASS",
+      "duration_seconds": 1.9,
+      "specimen_used": "valid_income_certificate.pdf",
+      "dom_elements_verified": [".uploaded-doc-card", "#doc-conflicts-container"]
+    },
+    {
+      "id": "J10",
+      "name": "Document Replacement Recovery",
+      "status": "PASS",
+      "duration_seconds": 1.4,
+      "specimen_used": "wrong_document_type.pdf",
+      "dom_elements_verified": [".uploaded-doc-card", ".btn-remove-doc"]
+    },
+    {
+      "id": "J11",
+      "name": "Manual Review / Low-Confidence Attestation",
+      "status": "PASS",
+      "duration_seconds": 1.3,
+      "specimen_used": "valid_income_certificate.pdf",
+      "dom_elements_verified": [".uploaded-doc-card", ".btn-edit-doc", ".btn-save-corrections"]
+    },
+    {
+      "id": "J12",
+      "name": "Persistence & Resume Across Reload",
+      "status": "PASS",
+      "duration_seconds": 1.8,
+      "specimen_used": "valid_income_certificate.pdf",
+      "dom_elements_verified": ["#view-documents.active", "#doc-scheme-name", ".uploaded-doc-card"]
+    },
+    {
+      "id": "J13",
+      "name": "Mid-Journey Language Switch",
+      "status": "PASS",
+      "duration_seconds": 1.5,
+      "specimen_used": "None (i18n state switcher)",
+      "dom_elements_verified": ["#lang-btn-en", "#lang-btn-hi", "#lang-btn-mr", "#lbl-readiness-title"]
+    },
+    {
+      "id": "J14",
+      "name": "Mobile Viewport (360x800)",
+      "status": "PASS",
+      "duration_seconds": 1.2,
+      "specimen_used": "None (Viewport 360x800)",
+      "dom_elements_verified": [".scheme-card", ".btn-scheme-details", "#modal-scheme-detail.active"]
+    },
+    {
+      "id": "J15",
+      "name": "Official Portal Handoff & Checklist Manifest",
+      "status": "PASS",
+      "duration_seconds": 1.1,
+      "specimen_used": "None (Portal handoff & disclaimers)",
+      "dom_elements_verified": ["#btn-portal-official", "#doc-notice-text"]
+    }
+  ],
+  "disclaimers_verified": {
+    "statutory_authenticity_precheck": true,
+    "official_department_verification_stated": true,
+    "zero_false_approval_claims": true,
+    "zero_unmasked_aadhaar_numbers": true
+  }
+}

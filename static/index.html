@@ -642,11 +642,15 @@
       .scoreboard { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 600px) {
+      .nav-container { padding: 8px 10px; gap: 6px; }
+      .brand-wrap { gap: 8px; }
+      .brand-title { font-size: 0.95rem; }
+      .brand-subtitle { font-size: 0.65rem; }
       .hero-title { font-size: 1.65rem; }
       .steps-grid { grid-template-columns: 1fr; }
       .schemes-grid { grid-template-columns: 1fr; }
       .scoreboard { grid-template-columns: 1fr; }
-      .main-content { padding: 14px; }
+      .main-content { padding: 10px; }
       .nav-links { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -1122,6 +1126,11 @@
         </div>
       </div>
 
+      <!-- Statutory Notice Box -->
+      <div id="doc-notice-box" style="background:#FFFBEB; border-left:3px solid #D97706; padding:10px 14px; border-radius:4px; margin-bottom:18px; font-size:0.84rem; color:#92400E;">
+        <span id="doc-notice-text"><strong>वैधानिक सूचना:</strong> मशिन निष्कर्षण शासकीय मंजुरी नाही. अधिकृत पडताळणी संबंधित विभागामार्फतच केली जाते.</span>
+      </div>
+
       <!-- Readiness Score & Status Strip -->
       <div id="doc-readiness-strip" class="info-strip" style="background:var(--warm-ivory); margin-bottom:24px; border:1px solid var(--border-crisp);">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
@@ -1168,9 +1177,6 @@
       <div id="doc-extracted-preview" class="info-strip" style="max-width:760px; margin:0 auto; display:none;">
         <h4 id="doc-preview-title" style="margin-bottom:12px; color:var(--sahyadri-green);">कागदपत्रातून निष्कर्षित माहिती</h4>
         <div id="doc-extracted-fields"></div>
-        <div id="doc-notice-box" style="background:#FFFBEB; border-left:3px solid #D97706; padding:10px 14px; border-radius:4px; margin-top:14px; font-size:0.82rem; color:#92400E;">
-          <span id="doc-notice-text"><strong>वैधानिक सूचना:</strong> मशिन निष्कर्षण शासकीय मंजुरी नाही. अधिकृत पडताळणी संबंधित विभागामार्फतच केली जाते.</span>
-        </div>
       </div>
 
       <!-- Completion View for Documents -->
@@ -4268,12 +4274,20 @@
         const confs = report.conflicts_detected || [];
         if (confs.length > 0) {
           conflictsEl.style.display = 'block';
+          const hasMismatch = confs.some(c => (c.code || '').includes('MISMATCH') || (c.code || '').includes('PROFILE'));
           conflictsEl.innerHTML = `
             <div style="background:#FEF2F2; border-left:3px solid #DC2626; padding:10px 14px; border-radius:4px;">
               <strong style="color:#991B1B; font-size:0.86rem;">⚠️ ${isMr ? 'कागदपत्रांमधील तफावत / त्रुटी:' : (isHi ? 'दस्तावेज़ विसंगति / चेतावनी:' : 'Document Inconsistencies / Warnings:')}</strong>
               <ul style="margin:6px 0 0 18px; font-size:0.82rem; color:#7F1D1D;">
                 ${confs.map(c => `<li><strong>${escapeHtml(c.code)}:</strong> ${escapeHtml(c.message)} ${c.recommended_action ? `<em>(${escapeHtml(c.recommended_action)})</em>` : ''}</li>`).join('')}
               </ul>
+              ${hasMismatch ? `
+                <div style="margin-top:10px;">
+                  <button class="btn btn-primary btn-sm btn-sync-profile-mismatch" id="btn-sync-profile-mismatch" onclick="syncProfileFromFirstDocument()" style="font-size:0.8rem; padding:4px 10px;">
+                    👤 ${isMr ? 'माझे प्रोफाईल दस्तऐवजाप्रमाणे अपडेट करा' : (isHi ? 'मेरी प्रोफ़ाइल दस्तावेज़ के अनुसार अपडेट करें' : 'Update My Profile to Match Document')}
+                  </button>
+                </div>
+              ` : ''}
             </div>
           `;
         } else {
@@ -4365,7 +4379,13 @@
                     <button class="btn btn-secondary btn-sm btn-edit-doc" onclick="toggleEditDocument('${escapeHtml(docId)}')">
                       ✏️ ${isMr ? 'माहिती दुरुस्त करा' : (isHi ? 'संशोधन करें' : 'Edit Fields')}
                     </button>
-                    <button class="btn btn-secondary btn-sm" onclick="removeUploadedDocument('${escapeHtml(docId)}')" style="color:#DC2626; border-color:#FECACA;">
+                    <button class="btn btn-secondary btn-sm btn-sync-profile" onclick="syncProfileFromDocument('${escapeHtml(docId)}')">
+                      👤 ${isMr ? 'माझे प्रोफाईल जुळवा' : (isHi ? 'प्रोफ़ाइल अपडेट करें' : 'Sync Profile')}
+                    </button>
+                    <button class="btn btn-secondary btn-sm btn-replace-doc" onclick="replaceDocument('${escapeHtml(docId)}')">
+                      🔄 ${isMr ? 'कागदपत्र बदला' : (isHi ? 'दस्तावेज़ बदलें' : 'Replace Document')}
+                    </button>
+                    <button class="btn btn-secondary btn-sm btn-remove-doc" onclick="removeUploadedDocument('${escapeHtml(docId)}')" style="color:#DC2626; border-color:#FECACA;">
                       🗑️ ${isMr ? 'हटवा' : (isHi ? 'हटाएं' : 'Remove')}
                     </button>
                   </div>
@@ -4504,6 +4524,53 @@
 
     saveSession();
     await renderDocumentAuditorView(state.selectedSchemeId);
+  }
+
+  async function syncProfileFromDocument(docId) {
+    if (!state.uploadedDocuments) return;
+    const doc = state.uploadedDocuments.find(d => (d.document_id === docId) || ('doc_' + state.uploadedDocuments.indexOf(d) === docId));
+    if (!doc) return;
+
+    state.profile = state.profile || {};
+    if (doc.annual_family_income !== null && doc.annual_family_income !== undefined) {
+      state.profile.annual_family_income = doc.annual_family_income;
+    }
+    if (doc.person_name) {
+      state.profile.name = doc.person_name;
+    }
+    if (doc.caste_category) {
+      state.profile.caste_category = doc.caste_category;
+    }
+    if (doc.age_years) {
+      state.profile.age_years = doc.age_years;
+    }
+
+    try {
+      await api('/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ profile: getCleanCitizenProfile() })
+      });
+    } catch (e) {
+      console.warn('Profile sync API error:', e);
+    }
+    saveSession();
+    updateProfileDisplay();
+    await renderDocumentAuditorView(state.selectedSchemeId);
+  }
+
+  async function syncProfileFromFirstDocument() {
+    if (state.uploadedDocuments && state.uploadedDocuments.length > 0) {
+      const firstDoc = state.uploadedDocuments[0];
+      const docId = firstDoc.document_id || 'doc_0';
+      await syncProfileFromDocument(docId);
+    }
+  }
+
+  function replaceDocument(docId) {
+    removeUploadedDocument(docId);
+    const input = document.getElementById('doc-file-input');
+    if (input) input.click();
   }
 
   function openOfficialPortalForSelectedScheme() {

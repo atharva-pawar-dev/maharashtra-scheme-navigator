@@ -80,6 +80,10 @@ def test_01_scheme_details_modal_has_auditor_and_factsheet_buttons(page, live_se
     btn_factsheet.click()
     page.wait_for_selector("#modal-scheme-factsheet.active", timeout=5000)
     assert page.locator("#factsheet-modal-content").is_visible()
+    page.wait_for_function(
+        "() => !document.querySelector('#factsheet-modal-content').innerText.includes('तयार होत आहे') && !document.querySelector('#factsheet-modal-content').innerText.includes('Generating')",
+        timeout=10000,
+    )
 
     # Verify factsheet contains public information and no citizen PII
     fs_text = page.locator("#factsheet-modal-content").inner_text()

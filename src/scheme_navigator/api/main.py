@@ -1107,7 +1107,15 @@ async def audit_document_upload(
         extractor = None
 
         # Created per request so a missing key does not prevent the API starting.
-        extractor = GeminiVisionExtractor()
+        import os
+        try:
+            extractor = GeminiVisionExtractor()
+        except RuntimeError:
+            if os.getenv("ENABLE_LOCAL_FALLBACK_OCR", "false").lower() in ("true", "1"):
+                from scheme_navigator.documents.audit import LocalFallbackDocumentExtractor
+                extractor = LocalFallbackDocumentExtractor()
+            else:
+                raise
 
         if is_pdf:
             page_images = await run_in_threadpool(render_pdf_pages, raw, max_pages=10)
@@ -2210,7 +2218,9 @@ def demo_form() -> FileResponse:
 @app.get("/explore", include_in_schema=False)
 @app.get("/interview", include_in_schema=False)
 @app.get("/results", include_in_schema=False)
+@app.get("/progress", include_in_schema=False)
 @app.get("/workspace/{scheme_id}", include_in_schema=False)
+@app.get("/workspace/{scheme_id}/documents", include_in_schema=False)
 def citizen_portal(scheme_id: str | None = None) -> FileResponse:
     """Serve the citizen-facing Scheme Navigator portal."""
 

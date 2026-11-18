@@ -1,0 +1,35 @@
+# Release Gates Ledger (LEDGER.md)
+**Project:** Maharashtra Scheme Navigator  
+**Last Updated:** 2026-11-18T22:15:00+05:30  
+**Governing Standard:** Production Release Program v2.0 (Part E1, E2)  
+
+---
+
+## 1. Master Release Gate Status Table
+
+| Gate ID | Gate Name | Classification | Primary Evidence Reference | Verification Date | Summary of Audit Finding |
+| :---: | :--- | :---: | :--- | :---: | :--- |
+| **G1** | Citizen journeys | **PASS** | `reports/browser_journey_evidence.json`, `test_browser_citizen_experience.py` | 2026-11-18 | All core journeys (A, B, C, Municipal) pass end-to-end in Chromium across 3 languages (EN, MR, HI) and 2 viewports (Desktop, Mobile 360x800). |
+| **G2** | Document auditor | **PASS** | `test_browser_document_auditor_journey.py`, `tests/test_document_*.py` | 2026-11-18 | Complete Document Auditor lifecycle verified: upload, magic-byte validation, OCR extraction, requirements matching, plain findings, inline correction, and session persistence. |
+| **G3** | Catalogue integrity | **PASS** | `data/catalogue/schemes.json`, `schemas/catalogue_v2.json`, `tests/test_catalogue_v2_contracts.py` | 2026-11-18 | 75 canonical schemes validate against JSON schema. Demo fixtures physically isolated. Zero residency-only schemes in Tier A/B. |
+| **G4** | Scheme accuracy | **PARTIAL** | `data/raw/`, `tests/test_catalogue_v2_contracts.py` | 2026-11-18 | All 17 Tier A schemes have 100% verified verbatim Marathi quotes matching official GRs. Agent ceiling is `EXTRACTED`; named departmental human sign-offs pending. |
+| **G5** | Application handoff | **PASS** | `tests/test_application_assistance.py`, `docs/application_channels.md` | 2026-11-18 | External official portal links verified; statutory advisory disclaimers displayed prominently on cards, modals, and factsheets. |
+| **G6** | Production database | **BLOCKED** | `docs/production/postgres_schema.sql` | 2026-11-18 | PostgreSQL schema and migration engine authored; local PostgreSQL daemon absent on port 5432 under A0 authorization. |
+| **G7** | Document storage | **PARTIAL** | `src/scheme_navigator/security/storage.py`, `tests/test_data_layer_and_storage.py` | 2026-11-18 | Storage abstraction enforces magic-byte validation, 15-minute signed URL expiry, and hourly purge. Local filesystem tested; live AWS S3 drill pending. |
+| **G8** | AuthN / AuthZ | **PARTIAL** | `tests/test_auth_and_sessions_hardening.py` | 2026-11-18 | Anonymous HMAC-SHA256 session tokens, 4-tier RBAC, role escalation guards, and IDOR isolation verified. Privileged MFA not implemented. |
+| **G9** | Internal security verification | **PARTIAL** | `src/scheme_navigator/security/ast_scan.py`, `tests/test_production_security.py` | 2026-11-18 | AST static scan clean (0 hardcoded credentials, 0 `eval`/`exec`, 0 dynamic SQL). Formal DAST, container scanning, and third-party SAST pending. |
+| **G10** | External VAPT | **BLOCKED** | `docs/production/vapt_pack/` | 2026-11-18 | VAPT readiness pack and threat model documented. External certified pen-testing firm not engaged under local A0 environment. |
+| **G11** | Privacy implementation | **PASS** | `src/scheme_navigator/security/retention.py`, `tests/test_privacy_and_legal.py` | 2026-11-18 | 24-hour document retention ceiling, automated purge workers, Aadhaar $D_5$ redaction, and Bhashini consent gate verified. |
+| **G12** | Legal review | **BLOCKED** | `docs/production/privacy_and_legal.md` | 2026-11-18 | Legal and regulatory crosswalk authored; independent Indian legal counsel sign-off pending. |
+| **G13** | DPDP / CERT-In ledger | **PASS** | `docs/production/observability_and_incident_response.md` | 2026-11-18 | 6-hour CERT-In incident reporting runbook documented; DPDP compliance controls operational. |
+| **G14** | Observability | **PARTIAL** | `src/scheme_navigator/security/audit_logger.py`, `tests/test_observability_and_incident_response.py` | 2026-11-18 | Health/readiness probes and structured JSON audit logging with Aadhaar redaction operational. Live Prometheus/Grafana stack pending. |
+| **G15** | Disaster recovery | **PARTIAL** | `scripts/dr_drill.py`, `release/evidence/ws15/E-WS15-001_dr_drill_full.json` | 2026-11-18 | Automated SQLite restore drill achieves 0.337s RTO and 100% SHA-256 match. Live PostgreSQL/S3 cluster drill pending. |
+| **G16** | Accessibility | **PARTIAL** | `tests/test_browser_citizen_experience.py` | 2026-11-18 | High-contrast CSS mode, semantic landmarks, ARIA attributes, and touch target minimums pass automated checks. Human screen-reader audit pending. |
+| **G17** | Performance | **PARTIAL** | `tests/test_rule_boundary_matrix.py` | 2026-11-18 | Rule engine benchmarked at p95 0.444ms (< 500ms target). Full HTTP load test under 150 concurrent sessions pending. |
+| **G18** | CI/CD and rollback | **PARTIAL** | `.github/workflows/ci.yml`, `scripts/rollback.py`, `tests/test_ci_cd_and_rollback.py` | 2026-11-18 | Local rollback script verified across code, catalogue, and SQLite databases. Remote GitHub Actions run pending. |
+| **G19** | Staging acceptance | **BLOCKED** | `scripts/verify_deployment.py` | 2026-11-18 | Local deployment verification passed; remote staging environment not provisioned under A0 authorization. |
+| **G20** | Domain and HTTPS | **BLOCKED** | `src/scheme_navigator/api/main.py` | 2026-11-18 | HTTPS cookie flags and TLS redirects configured; public domain registration and live DNS/CAA records pending. |
+| **G21** | Public content and contacts | **PARTIAL** | `tests/test_trust_surface_and_notices.py` | 2026-11-18 | Zero placeholder text; all public disclaimers live. Formal department contact identity pending in `OPERATOR_INPUTS.yaml`. |
+| **G22** | Human ownership | **PARTIAL** | `docs/production/operations_runbook.md` | 2026-11-18 | RACI matrix defined for 5 operational roles; named human personnel assignments pending. |
+| **G23** | Test integrity | **PASS** | `release/evidence/ws15/E-WS15-002_canary_mutations_individual.json` | 2026-11-18 | Non-weakening test suite verified (550 tests passing); **12/12 individual Appendix H5 canaries caught on real codebase**. |
+| **G24** | Evidence completeness | **PASS** | `release/CLAIMS.md`, `reports/browser_journey_evidence.json` | 2026-11-18 | All claims reconciled against immutable test runs and JSON records; zero unsubstantiated claims. |
