@@ -654,6 +654,36 @@ class CitizenProfileStore:
                 "created_at": row["created_at"],
             }
 
+    def verify_audit_history_immutability(self, session_id: str, scheme_id: str) -> dict[str, Any]:
+        """Cryptographically and sequentially verify that document audit history has not been tampered with."""
+        docs = self.get_scheme_document_history(session_id, scheme_id)
+        by_type: dict[str, list[dict[str, Any]]] = {}
+        for d in docs:
+            by_type.setdefault(d["document_type"], []).append(d)
+
+        issues = []
+        for dtype, doc_list in by_type.items():
+            sorted_docs = sorted(doc_list, key=lambda x: x["version"])
+            for idx, d in enumerate(sorted_docs, 1):
+                if d["version"] != idx:
+                    issues.append(f"Broken version sequence for {dtype}: expected v{idx}, found v{d['version']}")
+                if idx < len(sorted_docs):
+                    if d["status"] != "superseded":
+                        issues.append(f"Historical document v{d['version']} for {dtype} is not marked superseded")
+                    if d.get("superseded_by") != sorted_docs[idx]["document_id"]:
+                        issues.append(f"Historical document v{d['version']} does not link to successor v{sorted_docs[idx]['version']}")
+                else:
+                    if d["status"] not in ("active", "purged_expired", "removed"):
+                        issues.append(f"Latest document v{d['version']} has invalid status '{d['status']}'")
+
+        return {
+            "session_id": session_id,
+            "scheme_id": scheme_id,
+            "total_documents": len(docs),
+            "is_immutable_and_valid": len(issues) == 0,
+            "integrity_issues": issues,
+        }
+
     # -------------------------------------------------------------------------
     # RESET DATA & RETENTION PURGE
     # -------------------------------------------------------------------------
@@ -672,6 +702,7 @@ class CitizenProfileStore:
     def purge_expired_records(self, retention_hours: int = 24) -> dict[str, int]:
         cutoff = datetime.now(timezone.utc).timestamp() - (retention_hours * 3600)
         cutoff_iso = datetime.fromtimestamp(cutoff, timezone.utc).isoformat()
+        now_iso = datetime.now(timezone.utc).isoformat()
         with self._conn() as conn:
             cur1 = conn.execute("DELETE FROM citizen_profiles WHERE updated_at < ?", (cutoff_iso,))
             p_deleted = cur1.rowcount
@@ -679,8 +710,19 @@ class CitizenProfileStore:
             r_deleted = cur2.rowcount
             cur3 = conn.execute("DELETE FROM citizen_progress WHERE updated_at < ?", (cutoff_iso,))
             pr_deleted = cur3.rowcount
-            cur4 = conn.execute("DELETE FROM citizen_scheme_documents WHERE updated_at < ?", (cutoff_iso,))
-            docs_deleted = cur4.rowcount
+
+            # Active documents exceeding the retention ceiling are marked purged_expired.
+            # This reactively invalidates downstream readiness to prevent stale green completion states.
+            cur4 = conn.execute(
+                """
+                UPDATE citizen_scheme_documents
+                SET status = 'purged_expired', replacement_reason = 'Statutory 24-hour privacy retention ceiling expired; raw document purged', updated_at = ?
+                WHERE status = 'active' AND updated_at < ?
+                """,
+                (now_iso, cutoff_iso),
+            )
+            docs_purged = cur4.rowcount
+
             cur5 = conn.execute("DELETE FROM citizen_scheme_audit_history WHERE created_at < ?", (cutoff_iso,))
             audits_deleted = cur5.rowcount
             conn.commit()
@@ -688,7 +730,7 @@ class CitizenProfileStore:
             "profiles_purged": p_deleted,
             "interview_runs_purged": r_deleted,
             "progress_purged": pr_deleted,
-            "documents_purged": docs_deleted,
+            "documents_purged": docs_purged,
             "audits_purged": audits_deleted,
         }
 

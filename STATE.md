@@ -1,11 +1,11 @@
 # Application State Ledger (STATE.md)
 **Project:** Maharashtra Scheme Navigator  
-**Last Updated:** 2026-11-19T21:05:00+05:30  
-**Active Execution Program:** RC2 Forensic Acceptance & Integration Audit  
+**Last Updated:** 2026-11-19T22:25:00+05:30  
+**Active Execution Program:** RC3 — Document Intelligence, Scheme Coverage & Citizen Trust Hardening  
 **Governing Standard:** Production Release Program v2.0 (Evidence-Gated & Honest by Construction)  
 **Git Branch:** `feat/catalogue-v2`  
-**Base Commit:** `4ccee63` (Tagged `vertical-slice-complete-rc2`)  
-**Safety Backup:** `_backups/safety-backup-20261118-221135`  
+**Base Commit:** `f10a0a0` (Tagged `rc2-forensic-accepted`)  
+**Hardened Milestone:** Tag `rc3-hardened`  
 **Execution Environment:** Authorisation Level A0 (Local Windows Developer Machine, Python 3.11.4, SQLite 3.x, Chromium Headless)
 
 ---
@@ -25,30 +25,41 @@ $$\mathbf{Launch\ State:\ INTERNAL\_DEMO\_READY}$$
 
 ## 2. Test Execution & Quality Baseline
 
-- **Total Unit & Integration Tests:** 574 passed, 0 failed (`pytest tests/`)
+- **Total Unit & Integration Tests:** **606 passed, 0 failed** (`pytest tests/`)
 - **Browser Playwright Suites:**
   - `tests/test_playwright_15_citizen_journeys.py`: 15 passed
   - `tests/test_playwright_backend_restart_persistence.py`: 1 passed (P0 restart durability drill)
+  - `tests/test_trilingual_parity.py`: 3 passed (Language switching & full UI verification)
   - `tests/test_browser_citizen_experience.py`: 21 passed
   - `tests/test_browser_document_auditor_journey.py`: 4 passed
   - `tests/test_browser_municipal_citizen_journey.py`: 5 passed
-  - **Total Browser Tests:** 46 passed (0 failed)
+  - **Total Browser Tests:** 47 passed (0 failed)
 - **Mutation Canary Verification:** 12/12 individual canary mutations caught (`release/evidence/ws15/E-WS15-002_canary_mutations_individual.json`)
 
 ---
 
-## 3. P0 Forensic Implementations & Invariants
+## 3. RC3 Document Intelligence & Trust Invariants
 
-1. **Authoritative SQLite Persistence Across Server Restarts:**
-   - Database Migration v4 in `src/scheme_navigator/core/migrations.py` applied (`citizen_scheme_documents`, `citizen_scheme_audit_history`).
-   - Server process killed with `process.kill()`, `sessionStorage` purged, server restarted, state fully re-hydrated from SQLite.
-   - Evidence screenshots: `reports/evidence_screenshots/01_before_restart_replacement.png`, `02_after_restart_restored_from_sqlite.png`.
-2. **Document Replacement Lineage ($v1 \to v2$):**
-   - Active document replaced with new version, unique document ID, and fresh SHA-256 digest.
-   - Previous document marked `status='superseded'`, preserved with replacement reason, and rendered in `#doc-history-section`.
-3. **Local Fallback OCR Specimen Content (PyMuPDF):**
-   - Extracted directly from PyMuPDF document text streams (zero filename heuristics).
-   - Validated via `tests/test_local_fallback_ocr_content.py` (6/6 passed). Isolated behind `ENABLE_LOCAL_FALLBACK_OCR="true"`.
+1. **Real OCR Classification & Quality Rejections:**
+   - Physical medium classification: `SEARCHABLE_PDF`, `SCANNED_PDF`, `PHOTOGRAPH`, `IMAGE`.
+   - Quality rejection thresholds: Resolution < 250px (`LOW_RESOLUTION_IMAGE`), Blur Laplacian variance < 45.0 (`IMAGE_EXCESSIVE_BLUR`).
+   - Multi-page missing page detection (`MISSING_PAGE_IN_SEQUENCE`).
+   - Devanagari numerals (`०-९`), currency (`₹`, `INR`), and FY parsing.
+   - Separation of OCR uncertainty (`OCR_UNCERTAINTY`) from statutory rule failures.
+2. **Representative Scheme-Diverse Coverage:**
+   - 12 representative scheme families with specific document requirement models, alternative acceptance (ANY_OF), and issuing authorities.
+   - Deliverable: `docs/quality/scheme_diverse_document_coverage.md`.
+3. **Immutable Document Audit History:**
+   - SQLite Migration 5 triggers prevent UPDATE on document content, hashes, version, or created_at in `citizen_scheme_documents`, and strictly enforce append-only on `citizen_scheme_audit_history`.
+4. **24-Hour Privacy Retention & Reactive Invalidation:**
+   - Expired documents marked `purged_expired` under 24-hr privacy retention ceiling.
+   - Readiness engine reactively drops score to 0% and issues localized re-upload notices in EN, MR, and HI.
+5. **Eligibility State Normalization:**
+   - `EligibilityStatus.MEETS_VERIFIED_CRITERIA = "meets_verified_criteria"` standard in models and UI.
+   - Fail-closed evaluation: demo fixtures and unapproved rules fail closed to `NEEDS_REVIEW` (Caseworker Review).
+6. **End-to-End Trilingual Parity:**
+   - Exact 1:1 symmetry across 112 keys in EN, MR, HI in `static/index.html`.
+   - Complete browser journey validation across EN, MR, and HI in Chromium headless.
 
 ---
 
@@ -62,11 +73,9 @@ $$\mathbf{Launch\ State:\ INTERNAL\_DEMO\_READY}$$
 
 ---
 
-## 5. Active Workstreams & Next Milestones
+## 5. Audit Reports Manifest
 
-1. **[DONE] P0 SQLite Durability & Server Restart Drill:** `tests/test_playwright_backend_restart_persistence.py`
-2. **[DONE] P0 Document Replacement & Lineage Tracking:** `tests/test_sqlite_persistence_and_replacement.py`
-3. **[DONE] P0 Local Fallback OCR Content Overhaul:** `tests/test_local_fallback_ocr_content.py`
-4. **[DONE] 15 Mandatory End-to-End Playwright Browser Journeys:** `tests/test_playwright_15_citizen_journeys.py` (15/15 passed)
-5. **[DONE] Full Regression Suite:** 574 tests passing (0 failed)
-6. **[DONE] Forensic Acceptance Audit Report:** `reports/rc2_forensic_acceptance_audit.md`
+1. `reports/rc3_hardening_audit.md` (RC3 Hardening Forensic Report)
+2. `docs/quality/scheme_diverse_document_coverage.md` (Scheme-Diverse Document Requirements Coverage)
+3. `reports/rc2_forensic_acceptance_audit.md` (RC2 Forensic Audit Report)
+4. `reports/final_citizen_journey_evidence.json` (Playwright Browser Journey Evidence)

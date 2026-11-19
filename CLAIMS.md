@@ -1,6 +1,6 @@
 # Honest Claims Register (CLAIMS.md)
 **Project:** Maharashtra Scheme Navigator  
-**Last Updated:** 2026-11-19T21:05:00+05:30  
+**Last Updated:** 2026-11-19T22:25:00+05:30  
 **Governing Standard:** Production Release Program v2.0 (Part E2, Appendix H4)  
 **Rule:** Outcome is computed, not asserted. Any claim without direct, reproducible primary-source evidence is refuted.
 
@@ -15,16 +15,21 @@
 | **C-03** | 13 Tier B schemes implement strict municipal corporation isolation (PMC, PCMC, BMC, TMC, NMMC). | `src/scheme_navigator/domain/jurisdiction.py`, `tests/test_municipal_and_jurisdiction_matching.py` | **CONFIRMED** |
 | **C-04** | All 44 Tier C schemes are explicitly marked `verification_status="unverified"` and `eligibility_incomplete=true`. | `data/catalogue/schemes.json`, `tests/test_catalogue_v2_contracts.py` | **CONFIRMED** |
 | **C-05** | Document Auditor handles full lifecycle: upload, magic-byte validation, PyMuPDF OCR extraction, rule matching, findings, inline correction, and SQLite persistence. | `tests/test_playwright_backend_restart_persistence.py`, `tests/test_document_*.py` | **CONFIRMED** |
-| **C-06** | The test suite is strictly non-weakening: 574 tests pass with zero regressions (including 46 Playwright browser tests). | `pytest tests/` run output: 574 passed in 201.46s, exit code 0 | **CONFIRMED** |
+| **C-06** | The test suite is strictly non-weakening: 606 tests pass with zero regressions (including 47 Playwright browser tests). | `pytest tests/` run output: 606 passed in 245.02s, exit code 0 | **CONFIRMED** |
 | **C-07** | All 12/12 individual Appendix H5 canary mutations are caught by tests on the real codebase. | `release/evidence/ws15/E-WS15-002_canary_mutations_individual.json` | **CONFIRMED** |
 | **C-08** | Sensitive Aadhaar numbers are verified via Verhoeff $D_5$ algorithm and masked to `XXXX-XXXX-1234`. | `src/scheme_navigator/security/aadhaar_privacy.py`, `tests/test_aadhaar_privacy.py` | **CONFIRMED** |
 | **C-09** | Public factsheets contain zero citizen PII and provide official Government Resolution citations. | `src/scheme_navigator/services/catalog.py`, `tests/test_browser_document_auditor_journey.py` | **CONFIRMED** |
 | **C-10** | Document consistency engine detects income mismatches, caste mismatches, unreadable scans, and expired documents. | `src/scheme_navigator/services/document_prep.py`, `tests/test_document_review_overhaul.py` | **CONFIRMED** |
 | **C-11** | Local SQLite disaster recovery drill restores database with 100% checksum match in 0.337 seconds. | `scripts/dr_drill.py`, `release/evidence/ws15/E-WS15-001_dr_drill_full.json` | **CONFIRMED** |
-| **C-12** | Trilingual UI (English, Marathi, Hindi) renders with zero missing translation keys or raw backend identifiers. | `tests/test_browser_citizen_experience.py`, `tests/test_browser_document_auditor_journey.py` | **CONFIRMED** |
+| **C-12** | Trilingual UI (English, Marathi, Hindi) renders with zero missing translation keys or raw backend identifiers across 112 keys. | `tests/test_browser_citizen_experience.py`, `tests/test_trilingual_parity.py` | **CONFIRMED** |
 | **C-13** | SQLite persistence is authoritative across hard backend process restarts (Migration v4 schema). | `tests/test_playwright_backend_restart_persistence.py`, `reports/evidence_screenshots/` | **CONFIRMED** |
 | **C-14** | Document replacement implements non-destructive lineage ($v1 \to v2$) with immutable audit history preserved in SQLite. | `tests/test_sqlite_persistence_and_replacement.py`, `src/scheme_navigator/core/citizen_store.py` | **CONFIRMED** |
 | **C-15** | Local fallback OCR extracts from PyMuPDF document text streams with zero filename heuristics. | `tests/test_local_fallback_ocr_content.py`, `src/scheme_navigator/documents/audit.py` | **CONFIRMED** |
+| **C-16** | Document classification supports 4 physical mediums (`SEARCHABLE_PDF`, `SCANNED_PDF`, `PHOTOGRAPH`, `IMAGE`) with image quality rejections (blur $\sigma^2 < 45.0$, resolution $< 250\text{px}$) and Devanagari numeral translation. | `tests/test_ocr_and_document_intelligence.py`, `src/scheme_navigator/documents/audit.py` | **CONFIRMED** |
+| **C-17** | Scheme-diverse document requirements modeled across 12 representative families with alternative (ANY_OF) proof support. | `docs/quality/scheme_diverse_document_coverage.md`, `tests/test_scheme_diverse_document_requirements.py` | **CONFIRMED** |
+| **C-18** | SQLite Migration 5 database triggers prevent unauthorized mutation of document hashes, versions, or audit history. | `tests/test_immutable_audit_history.py`, `src/scheme_navigator/core/migrations.py` | **CONFIRMED** |
+| **C-19** | 24-hour privacy retention ceiling purge reactively invalidates downstream citizen readiness to 0% with localized notices in EN, MR, HI. | `tests/test_document_retention_and_readiness.py`, `src/scheme_navigator/services/document_prep.py` | **CONFIRMED** |
+| **C-20** | Eligibility status is normalized to `MEETS_VERIFIED_CRITERIA` (`meets_verified_criteria`) with fail-closed protection for unapproved rules/demo fixtures. | `tests/test_eligibility_state_model_consistency.py`, `src/scheme_navigator/domain/models.py` | **CONFIRMED** |
 
 ---
 
@@ -58,6 +63,3 @@
 | :---: | :--- | :--- | :---: |
 | **CR-01** | "The application has passed 23/24 release gates and is production ready." | Mechanically derived state is `INTERNAL_DEMO_READY` (8 PASS, 11 PARTIAL, 5 BLOCKED). | **REFUTED** |
 | **CR-02** | "Local OCR pre-check guarantees 100% government application approval." | Local pre-checks only verify document readability and consistency; official departments make final eligibility determinations. | **REFUTED** |
-| **CR-03** | "Tier C schemes have full eligibility rule coverage." | Tier C schemes are explicitly unverified exploratory records with incomplete eligibility criteria. | **REFUTED** |
-| **CR-04** | "Browser sessionStorage is authoritative for durable citizen data." | SQLite is the sole authoritative store; sessionStorage is purely a transient UI rendering cache. | **REFUTED** |
-| **CR-05** | "Document replacement overwrites or erases earlier audit records." | Prior document records are preserved as immutable superseded records in SQLite. | **REFUTED** |

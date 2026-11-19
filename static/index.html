@@ -2218,7 +2218,7 @@
       lbl_reset_profile_btn: "Reset My Data",
       results_main_title: "Discovered Schemes & Eligibility Results",
       results_main_desc: "Preliminary evaluation outcomes based on your declared profile.",
-      lbl_score_eligible: "Eligible Schemes",
+      lbl_score_eligible: "Meets Verified Criteria",
       lbl_score_partial: "Partial Match",
       lbl_score_moreinfo: "Needs Information",
       lbl_score_review: "Caseworker Review",
@@ -2332,7 +2332,7 @@
       lbl_reset_profile_btn: "माझा डेटा हटवा",
       results_main_title: "शोधलेल्या योजना व पात्रता निकाल",
       results_main_desc: "आपण पुरवलेल्या माहितीनुसार प्राथमिक पात्रता निकाल खालीलप्रमाणे आहेत.",
-      lbl_score_eligible: "प्राथमिक पात्र योजना",
+      lbl_score_eligible: "पडताळणी निकष पूर्ण योजना",
       lbl_score_partial: "अंशतः पात्र योजना",
       lbl_score_moreinfo: "अधिक माहिती आवश्यक",
       lbl_score_review: "सत्यापन / पुनरावलोकन",
@@ -2446,7 +2446,7 @@
       lbl_reset_profile_btn: "मेरा डेटा रीसेट करें",
       results_main_title: "खोजे गए परिणाम और पात्रता",
       results_main_desc: "आपके द्वारा दी गई जानकारी के आधार पर प्रारंभिक परिणाम निम्न हैं।",
-      lbl_score_eligible: "प्रारंभिक पात्र योजनाएं",
+      lbl_score_eligible: "सत्यापित मानदंड पूर्ण योजना",
       lbl_score_partial: "आंशिक पात्र योजनाएं",
       lbl_score_moreinfo: "अधिक जानकारी आवश्यक",
       lbl_score_review: "समीक्षा / सत्यापन",
@@ -3666,7 +3666,7 @@
     let eligible = 0, partial = 0, moreinfo = 0, rejected = 0, review = 0;
     (state.results || []).forEach(r => {
       const st = (r.status || '').toLowerCase();
-      if (st === 'true' || st === 'eligible') eligible++;
+      if (st === 'true' || st === 'eligible' || st === 'meets_verified_criteria') eligible++;
       else if (st === 'partial' || r.is_partial === true) partial++;
       else if (st === 'false' || st === 'ineligible' || st === 'not_eligible') rejected++;
       else if (st === 'unknown' || st === 'needs_information' || st === 'needs_info') moreinfo++;
@@ -3688,7 +3688,7 @@
     const isMr = state.language === 'mr';
     const isHi = state.language === 'hi';
 
-    const lblEligible = isMr ? 'प्राथमिक पात्र' : (isHi ? 'प्रारंभिक पात्र' : 'Eligible');
+    const lblEligible = isMr ? 'पडताळणी निकष पूर्ण' : (isHi ? 'सत्यापित मानदंड पूर्ण' : 'Meets Verified Criteria');
     const lblPartial = isMr ? 'अंशतः पात्र' : (isHi ? 'आंशिक पात्र' : 'Partial Match');
     const lblMoreInfo = isMr ? 'अधिक माहिती आवश्यक' : (isHi ? 'अधिक जानकारी आवश्यक' : 'Needs Information');
     const lblIneligible = isMr ? 'सध्याच्या माहितीनुसार अपात्र' : (isHi ? 'वर्तमान में अपात्र' : 'Not Eligible');
@@ -3710,7 +3710,7 @@
     let badgeStyle = '';
     let isEligible = false;
 
-    if (st === 'true' || st === 'eligible') {
+    if (st === 'true' || st === 'eligible' || st === 'meets_verified_criteria') {
       badgeClass = 'badge-active';
       badgeText = lblEligible;
       isEligible = true;
@@ -3977,7 +3977,7 @@
 
     (state.results || []).forEach(r => {
       const st = (r.status || '').toLowerCase();
-      if (st === 'true' || st === 'eligible') eligibleList.push(r);
+      if (st === 'true' || st === 'eligible' || st === 'meets_verified_criteria') eligibleList.push(r);
       else if (st === 'partial' || r.is_partial === true) partialList.push(r);
       else if (st === 'false' || st === 'ineligible' || st === 'not_eligible') rejectedList.push(r);
       else if (st === 'unknown' || st === 'needs_information' || st === 'needs_info') moreinfoList.push(r);

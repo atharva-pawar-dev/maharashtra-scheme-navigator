@@ -159,6 +159,8 @@ ISSUING_AUTHORITY_MAP: dict[str, tuple[str, int | None]] = {
     "affirmation letter": ("Applicant Self-Declaration / Hamipatra", None),
 }
 
+from scheme_navigator.source_registry.registry import CANONICAL_SCHEME_ALIAS_MAP
+
 _SCHEME_REQ_CACHE: dict[str, dict[str, Any]] | None = None
 
 
@@ -181,7 +183,12 @@ def get_all_scheme_document_requirements() -> dict[str, dict[str, Any]]:
 
 def get_scheme_document_requirements(scheme_id: str) -> dict[str, Any] | None:
     all_reqs = get_all_scheme_document_requirements()
-    return all_reqs.get(scheme_id)
+    if scheme_id in all_reqs:
+        return all_reqs[scheme_id]
+    alias_target = CANONICAL_SCHEME_ALIAS_MAP.get(scheme_id.upper())
+    if alias_target and alias_target in all_reqs:
+        return all_reqs[alias_target]
+    return None
 
 
 def _match_document_type(
@@ -449,7 +456,44 @@ def prepare_intelligent_document_audit(
 
             if matched_doc:
                 doc_label = matched_doc.field_evidence.get("document_title") or matched_doc.document_type
-                if matched_doc.confidence < 0.50:
+                is_purged = (
+                    getattr(matched_doc, "is_purged", False)
+                    or getattr(matched_doc, "status", "") == "purged_expired"
+                    or any("purged" in n.lower() for n in getattr(matched_doc, "extraction_notes", []))
+                    or (matched_doc.document_id and matched_doc.document_id.startswith("purged_"))
+                )
+                if is_purged:
+                    m_status = DocumentMatchStatus.EXPIRED_OR_STALE
+                    s_state = DocumentMatchStatus.REPLACEMENT_REQUIRED
+                    if is_mandatory:
+                        all_mand_satisfied = False
+                    exp_text = (
+                        "Document evidence has expired under 24-hour privacy retention ceiling. Please re-upload current certificate."
+                        if lang_code == "en"
+                        else (
+                            "२४ तासांच्या गोपनीयता मर्यादा संपल्यामुळे कागदपत्र पुरावा हटवला गेला आहे. कृपया पुन्हा अपलोड करा."
+                            if lang_code == "mr"
+                            else "२४ घंटे की गोपनीयता समयसीमा समाप्त होने के कारण दस्तावेज़ हटा दिया गया है। कृपया पुनः अपलोड करें।"
+                        )
+                    )
+                    action_text = (
+                        f"Re-upload valid document from {authority}."
+                        if lang_code == "en"
+                        else f"{authority} कडून मिळालेले वैध कागदपत्र पुन्हा अपलोड करा."
+                        if lang_code == "mr"
+                        else f"{authority} से प्राप्त वैध दस्तावेज़ पुनः अपलोड करें।"
+                    )
+                    findings.append(
+                        DocumentFinding(
+                            code="RETENTION_PERIOD_EXPIRED",
+                            severity="error",
+                            category="document_validity",
+                            message=exp_text,
+                            recommended_action=action_text,
+                            document_ids=[matched_doc.document_id],
+                        )
+                    )
+                elif matched_doc.confidence < 0.50:
                     m_status = DocumentMatchStatus.UNREADABLE
                     s_state = DocumentMatchStatus.UNREADABLE
                     if is_mandatory:
@@ -623,7 +667,43 @@ def prepare_intelligent_document_audit(
 
             if matched_doc:
                 doc_label = matched_doc.field_evidence.get("document_title") or matched_doc.document_type
-                if matched_doc.valid_until and matched_doc.valid_until < now:
+                is_purged = (
+                    getattr(matched_doc, "is_purged", False)
+                    or getattr(matched_doc, "status", "") == "purged_expired"
+                    or any("purged" in n.lower() for n in getattr(matched_doc, "extraction_notes", []))
+                    or (matched_doc.document_id and matched_doc.document_id.startswith("purged_"))
+                )
+                if is_purged:
+                    m_status = DocumentMatchStatus.EXPIRED_OR_STALE
+                    s_state = DocumentMatchStatus.REPLACEMENT_REQUIRED
+                    all_mand_satisfied = False
+                    exp_text = (
+                        "Document evidence has expired under 24-hour privacy retention ceiling. Please re-upload current certificate."
+                        if lang_code == "en"
+                        else (
+                            "२४ तासांच्या गोपनीयता मर्यादा संपल्यामुळे कागदपत्र पुरावा हटवला गेला आहे. कृपया पुन्हा अपलोड करा."
+                            if lang_code == "mr"
+                            else "२४ घंटे की गोपनीयता समयसीमा समाप्त होने के कारण दस्तावेज़ हटा दिया गया है। कृपया पुनः अपलोड करें।"
+                        )
+                    )
+                    action_text = (
+                        f"Re-upload valid document from {authority}."
+                        if lang_code == "en"
+                        else f"{authority} कडून मिळालेले वैध कागदपत्र पुन्हा अपलोड करा."
+                        if lang_code == "mr"
+                        else f"{authority} से प्राप्त वैध दस्तावेज़ पुनः अपलोड करें।"
+                    )
+                    findings.append(
+                        DocumentFinding(
+                            code="RETENTION_PERIOD_EXPIRED",
+                            severity="error",
+                            category="document_validity",
+                            message=exp_text,
+                            recommended_action=action_text,
+                            document_ids=[matched_doc.document_id],
+                        )
+                    )
+                elif matched_doc.valid_until and matched_doc.valid_until < now:
                     m_status = DocumentMatchStatus.EXPIRED
                     s_state = DocumentMatchStatus.EXPIRED_OR_STALE
                     all_mand_satisfied = False

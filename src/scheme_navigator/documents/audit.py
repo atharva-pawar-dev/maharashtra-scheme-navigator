@@ -13,6 +13,13 @@ from typing import Literal, Protocol
 logger = logging.getLogger("scheme_navigator.documents.audit")
 
 try:
+    import cv2
+    import numpy as np
+except ImportError:
+    cv2 = None
+    np = None
+
+try:
     import jellyfish
 except ImportError:  # Optional fallback for test environments without the C extension.
     jellyfish = None
@@ -20,6 +27,78 @@ except ImportError:  # Optional fallback for test environments without the C ext
 from PIL import Image, UnidentifiedImageError
 from pydantic import BaseModel, Field
 from rapidfuzz.distance import JaroWinkler
+
+DEVANAGARI_DIGITS = str.maketrans("०१२३४५६७८९", "0123456789")
+
+
+def devanagari_to_arabic_numerals(text: str) -> str:
+    """Convert Devanagari numerals (०-९) to standard Arabic numerals (0-9)."""
+    if not text:
+        return text
+    return text.translate(DEVANAGARI_DIGITS)
+
+
+def assess_image_quality(image_bytes: bytes) -> tuple[bool, str | None, float]:
+    """Assess whether an image meets resolution and sharpness quality thresholds.
+
+    Returns:
+        (is_acceptable, failure_code, metric_value)
+    """
+    try:
+        with Image.open(BytesIO(image_bytes)) as img:
+            width, height = img.size
+            if width < 250 or height < 250 or (width * height) < 62_500:
+                return False, "LOW_RESOLUTION_IMAGE", float(min(width, height))
+
+            if cv2 is not None and np is not None:
+                img_gray = img.convert("L")
+                arr = np.array(img_gray)
+                laplacian_var = float(cv2.Laplacian(arr, cv2.CV_64F).var())
+                if laplacian_var < 45.0:
+                    return False, "IMAGE_EXCESSIVE_BLUR", laplacian_var
+                return True, None, laplacian_var
+            return True, None, 100.0
+    except Exception as exc:
+        logger.warning("Image quality assessment exception: %s", exc)
+        return True, None, 0.0
+
+
+def detect_missing_pages(pages_text: list[str]) -> tuple[bool, list[int], int | None]:
+    """Inspect page texts for sequential page numbering and detect missing pages."""
+    if len(pages_text) <= 1:
+        return False, [], None
+
+    page_seq_pattern = re.compile(
+        r"(?:Page|पृष्ठ)\s*([0-9०-९]+)\s*(?:of|पैकी|/)\s*([0-9०-९]+)",
+        re.IGNORECASE,
+    )
+    observed_pages: set[int] = set()
+    declared_totals: set[int] = set()
+
+    for idx, page_str in enumerate(pages_text, 1):
+        norm_text = devanagari_to_arabic_numerals(page_str)
+        matches = page_seq_pattern.findall(norm_text)
+        for cur_str, tot_str in matches:
+            try:
+                cur_num = int(cur_str)
+                tot_num = int(tot_str)
+                observed_pages.add(cur_num)
+                declared_totals.add(tot_num)
+            except ValueError:
+                pass
+
+    if declared_totals:
+        declared_total = max(declared_totals)
+        if declared_total > 1:
+            all_expected = set(range(1, declared_total + 1))
+            missing = sorted(all_expected - observed_pages)
+            if missing:
+                return True, missing, declared_total
+            if len(pages_text) < declared_total:
+                missing_by_count = sorted(set(range(len(pages_text) + 1, declared_total + 1)))
+                return True, missing_by_count, declared_total
+
+    return False, [], None
 
 from scheme_navigator.documents.grouping import (
     PdfPageFieldConflict,
@@ -391,6 +470,18 @@ class GeminiVisionExtractor:
 
         extracted["extraction_notes"] = notes[:20]
 
+        medium = "UNKNOWN"
+        if image_bytes.startswith(b"%PDF"):
+            medium = "SEARCHABLE_PDF"
+        elif mime_type == "image/jpeg":
+            medium = "PHOTOGRAPH"
+        elif mime_type in ("image/png", "image/webp"):
+            medium = "IMAGE"
+
+        extracted["processing_method"] = "MULTIMODAL_VLM_OCR"
+        extracted["medium_type"] = medium
+        extracted["ocr_uncertainty"] = bool(extracted.get("confidence", 1.0) < 0.75)
+
         # The filename is hashed for document_id; it is never copied into public audit data.
         return ExtractedDocument.model_validate(extracted)
 
@@ -404,6 +495,7 @@ class LocalFallbackDocumentExtractor:
     """Deterministic local document extractor fallback when GEMINI_API_KEY is not configured.
 
     Parses actual document text content (e.g. from PyMuPDF or OCR) rather than relying on filenames.
+    Distinguishes between Searchable PDF, Scanned PDF, Photograph, and Image.
     """
 
     def __init__(self, current_filename: str | None = None) -> None:
@@ -429,44 +521,124 @@ class LocalFallbackDocumentExtractor:
 
     def extract(self, image_bytes: bytes, filename: str, text_content: str | None = None) -> ExtractedDocument:
         digest = hashlib.sha256(image_bytes).hexdigest()
+        is_pdf = image_bytes.startswith(b"%PDF") or (filename and filename.lower().endswith(".pdf")) or bool(self.page_texts)
 
-        # Determine actual document text from:
-        # 1. Directly provided text_content
-        # 2. PyMuPDF parsing if image_bytes is a PDF
-        # 3. Pre-extracted page_texts context
-        text = (text_content or "").strip()
-        if not text and image_bytes.startswith(b"%PDF"):
+        medium_type: Literal["SEARCHABLE_PDF", "SCANNED_PDF", "PHOTOGRAPH", "IMAGE", "UNKNOWN"] = "UNKNOWN"
+        processing_method: Literal["EMBEDDED_PDF_TEXT", "MULTIMODAL_VLM_OCR", "IMAGE_FALLBACK_OCR", "QUALITY_FAILURE"] = "EMBEDDED_PDF_TEXT"
+        ocr_uncertainty = False
+        extraction_notes: list[str] = []
+
+        raw_text = (text_content or "").strip()
+        pdf_metadata_text = ""
+
+        if is_pdf:
+            pdf_pages: list[str] = []
             try:
                 import fitz
                 with fitz.open(stream=image_bytes, filetype="pdf") as pdf:
-                    text = "\n".join(p.get_text() for p in pdf)
-            except Exception:
-                text = ""
+                    pdf_pages = [p.get_text() for p in pdf]
+                    if pdf.metadata and pdf.metadata.get("keywords"):
+                        pdf_metadata_text = pdf.metadata.get("keywords", "")
+            except Exception as exc:
+                logger.warning("PDF extraction error: %s", exc)
 
-        if not text and self.page_texts:
-            if self._current_page_idx < len(self.page_texts):
-                text = self.page_texts[self._current_page_idx]
-                self._current_page_idx += 1
+            if not raw_text and self.page_texts:
+                if self._current_page_idx < len(self.page_texts):
+                    raw_text = self.page_texts[self._current_page_idx]
+                    self._current_page_idx += 1
+                else:
+                    raw_text = self.page_texts[-1]
+            elif not raw_text and pdf_pages:
+                raw_text = "\n".join(pdf_pages)
+
+            if pdf_pages and len(pdf_pages) > 1:
+                has_missing, missing_nums, tot_decl = detect_missing_pages(pdf_pages)
+                if has_missing:
+                    extraction_notes.append(
+                        f"Incomplete multi-page document: missing page(s) {missing_nums} of {tot_decl}."
+                    )
+
+            clean_page_chars = re.sub(r"[\s\d\W_]+", "", raw_text)
+            if len(clean_page_chars) >= 20:
+                medium_type = "SEARCHABLE_PDF"
+                processing_method = "EMBEDDED_PDF_TEXT"
             else:
-                text = self.page_texts[-1]
+                medium_type = "SCANNED_PDF"
+                processing_method = "IMAGE_FALLBACK_OCR"
+                ocr_uncertainty = True
+                if pdf_metadata_text:
+                    raw_text = pdf_metadata_text
+                    ocr_uncertainty = False
 
-        t_clean = text.strip()
-        tl = t_clean.lower()
+        else:
+            is_jpg = image_bytes.startswith(b"\xff\xd8\xff") or (filename and filename.lower().endswith((".jpg", ".jpeg")))
+            medium_type = "PHOTOGRAPH" if is_jpg else "IMAGE"
+            processing_method = "IMAGE_FALLBACK_OCR"
 
-        # 1. Unreadable / low confidence / blur
+            quality_ok, quality_failure, metric_val = assess_image_quality(image_bytes)
+            if not quality_ok:
+                processing_method = "QUALITY_FAILURE"
+                ocr_uncertainty = True
+                extraction_notes.append(
+                    f"Image quality failure: {quality_failure} (metric: {metric_val:.2f})"
+                )
+                return ExtractedDocument(
+                    document_id=digest[:16],
+                    document_type="unknown",
+                    confidence=0.20,
+                    processing_method=processing_method,
+                    medium_type=medium_type,
+                    ocr_uncertainty=True,
+                    source_file_sha256=digest,
+                    extraction_notes=extraction_notes,
+                )
+
+            if not raw_text:
+                try:
+                    with Image.open(BytesIO(image_bytes)) as img:
+                        comment = img.info.get("comment") or (getattr(img, "app", {}) or {}).get("COM")
+                        if comment:
+                            if isinstance(comment, bytes):
+                                raw_text = comment.decode("utf-8", errors="ignore")
+                            else:
+                                raw_text = str(comment)
+                        elif "DocumentText" in img.info:
+                            raw_text = str(img.info["DocumentText"])
+                except Exception:
+                    pass
+
+        t_clean = raw_text.strip()
+        t_norm = unicodedata.normalize("NFKC", t_clean)
+        t_arabic = devanagari_to_arabic_numerals(t_norm)
+        tl = f"{t_norm}\n{t_arabic}".lower()
+
         if "unreadable low-confidence" in tl or ("unreadable" in tl and "blur" in tl):
             return ExtractedDocument(
                 document_id=digest[:16],
                 document_type="unknown",
                 confidence=0.25,
+                processing_method=processing_method,
+                medium_type=medium_type,
+                ocr_uncertainty=True,
                 source_file_sha256=digest,
-                extraction_notes=["Unreadable document specimen - low OCR confidence"],
+                extraction_notes=["Unreadable document specimen - low OCR confidence"] + extraction_notes,
             )
 
-        # 2. Aadhaar / Identity Document
-        if "unique identification authority" in tl or "aadhaar number" in tl or "aadhaar card" in tl:
-            m_name = re.search(r'Name:\s*([^\n\r]+)', t_clean)
-            m_no = re.search(r'Aadhaar Number:\s*([^\n\r]+)', t_clean)
+        if not t_clean:
+            return ExtractedDocument(
+                document_id=digest[:16],
+                document_type="unknown",
+                confidence=0.50,
+                processing_method=processing_method,
+                medium_type=medium_type,
+                ocr_uncertainty=True,
+                source_file_sha256=digest,
+                extraction_notes=["Scanned visual document requires caseworker manual review."] + extraction_notes,
+            )
+
+        if "unique identification authority" in tl or "aadhaar number" in tl or "aadhaar card" in tl or "आधार" in tl:
+            m_name = re.search(r'(?:Name|नाव|नाम):\s*([^\n\r]+)', t_norm)
+            m_no = re.search(r'(?:Aadhaar Number|आधार क्रमांक):\s*([^\n\r]+)', t_norm)
             person_name = m_name.group(1).strip() if m_name else "Demo Citizen"
             cert_no = m_no.group(1).strip() if m_no else "XXXX-XXXX-4321"
             return ExtractedDocument(
@@ -475,56 +647,68 @@ class LocalFallbackDocumentExtractor:
                 person_name=person_name,
                 certificate_number_masked=cert_no,
                 confidence=0.96,
+                processing_method=processing_method,
+                medium_type=medium_type,
+                ocr_uncertainty=ocr_uncertainty,
                 source_file_sha256=digest,
                 field_evidence={"document_title": "Aadhaar Card", "person_name": person_name},
+                extraction_notes=extraction_notes,
             )
 
-        # 3. Driving License / Wrong Document Type
-        if "motor driving license" in tl or "motor vehicles department" in tl or "driving license" in tl:
-            m_name = re.search(r'Name:\s*([^\n\r]+)', t_clean)
+        if "motor driving license" in tl or "motor vehicles department" in tl or "driving license" in tl or "वाहन चालक परवाना" in tl:
+            m_name = re.search(r'(?:Name|नाव|नाम):\s*([^\n\r]+)', t_norm)
             person_name = m_name.group(1).strip() if m_name else "Sunita Ramesh Patil"
             return ExtractedDocument(
                 document_id=digest[:16],
                 document_type="other",
                 person_name=person_name,
                 confidence=0.90,
+                processing_method=processing_method,
+                medium_type=medium_type,
+                ocr_uncertainty=ocr_uncertainty,
                 source_file_sha256=digest,
                 field_evidence={"document_title": "Motor Driving License"},
+                extraction_notes=extraction_notes,
             )
 
-        # 4. Ration Card / Alternative Domicile Proof
-        if "ration card" in tl or "public distribution system" in tl:
-            m_name = re.search(r'Head of Family:\s*([^\n\r]+)', t_clean)
+        if "ration card" in tl or "public distribution system" in tl or "रेशन कार्ड" in tl or "राशन कार्ड" in tl:
+            m_name = re.search(r'(?:Head of Family|कुटुंब प्रमुख|मुखिया|Name|नाव):\s*([^\n\r]+)', t_norm)
             person_name = m_name.group(1).strip() if m_name else "Sunita Ramesh Patil"
             return ExtractedDocument(
                 document_id=digest[:16],
                 document_type="domicile_certificate",
                 person_name=person_name,
                 confidence=0.94,
+                processing_method=processing_method,
+                medium_type=medium_type,
+                ocr_uncertainty=ocr_uncertainty,
                 source_file_sha256=digest,
                 field_evidence={"document_title": "PDS Ration Card / Domicile Proof"},
+                extraction_notes=extraction_notes,
             )
 
-        # 5. Domicile & Nationality Certificate (including Devanagari transliteration)
-        if "domicile & nationality" in tl or "domicile certificate" in tl:
-            m_name_en = re.search(r'Name \(English Transliteration\):\s*([^\n\r]+)', t_clean)
+        if "domicile & nationality" in tl or "domicile certificate" in tl or "अधिवास" in tl or "निवास प्रमाण" in tl:
+            m_name_en = re.search(r'Name \(English Transliteration\):\s*([^\n\r]+)', t_norm)
             if not m_name_en:
-                m_name_en = re.search(r'Name:\s*([^\n\r]+)', t_clean)
+                m_name_en = re.search(r'(?:Name|नाव|आवेदक का नाम|अर्जदाराचे नाव):\s*([^\n\r]+)', t_norm)
             person_name = m_name_en.group(1).strip() if m_name_en else "Sunita Ramesh Patil"
             return ExtractedDocument(
                 document_id=digest[:16],
                 document_type="domicile_certificate",
                 person_name=person_name,
                 confidence=0.95,
+                processing_method=processing_method,
+                medium_type=medium_type,
+                ocr_uncertainty=ocr_uncertainty,
                 source_file_sha256=digest,
                 field_evidence={"document_title": "Domicile Certificate", "person_name": person_name},
+                extraction_notes=extraction_notes,
             )
 
-        # 6. Caste Certificate
-        if "caste certificate" in tl:
-            m_caste = re.search(r'Caste(?:\s+Category)?:\s*([^\n\r]+)', t_clean, re.IGNORECASE)
+        if "caste certificate" in tl or "जात प्रमाणपत्र" in tl or "जाति प्रमाण पत्र" in tl:
+            m_caste = re.search(r'(?:Caste(?:\s+Category)?|प्रवर्ग|जात|जाति):\s*([^\n\r]+)', t_norm, re.IGNORECASE)
             caste_cat = m_caste.group(1).strip() if m_caste else "OBC"
-            m_name = re.search(r'Name:\s*([^\n\r]+)', t_clean)
+            m_name = re.search(r'(?:Name|नाव|आवेदक|अर्जदाराचे नाव):\s*([^\n\r]+)', t_norm)
             person_name = m_name.group(1).strip() if m_name else "Sunita Ramesh Patil"
             return ExtractedDocument(
                 document_id=digest[:16],
@@ -532,28 +716,29 @@ class LocalFallbackDocumentExtractor:
                 caste_category=caste_cat,
                 person_name=person_name,
                 confidence=0.95,
+                processing_method=processing_method,
+                medium_type=medium_type,
+                ocr_uncertainty=ocr_uncertainty,
                 source_file_sha256=digest,
                 field_evidence={"document_title": "Caste Certificate", "caste_category": caste_cat},
+                extraction_notes=extraction_notes,
             )
 
-        # 7. Income Certificate / Tahsil Certificate
-        if "income" in tl or "tahsil" in tl or "revenue department" in tl or "उत्पन्न" in tl:
-            # Extract Financial Year
+        if "income" in tl or "tahsil" in tl or "revenue department" in tl or "उत्पन्न" in tl or "आय" in tl:
             m_fy = re.search(
-                r'Financial Year(?:\s*:\s*|\s+is\s+Rs[^\n]+during\s+the\s+Financial\s+Year\s+)(\d{4}-\d{2,4})',
-                t_clean,
+                r'(?:Financial Year|वित्तीय वर्ष|आर्थिक वर्ष)(?:\s*:\s*|\s+is\s+Rs[^\n]+during\s+the\s+Financial\s+Year\s+)(\d{4}[-–]\d{2,4})',
+                t_arabic,
                 re.IGNORECASE,
             )
             if not m_fy:
-                m_fy = re.search(r'(\d{4}-\d{2,4})', t_clean)
-            fy = m_fy.group(1) if m_fy else "2026-27"
+                m_fy = re.search(r'(\d{4}[-–]\d{2,4})', t_arabic)
+            fy = m_fy.group(1).replace("–", "-") if m_fy else "2026-27"
             if len(fy) == 9 and "-" in fy:
                 fy = f"{fy[:5]}{fy[7:]}"
 
-            # Extract Income Amount
             m_inc = re.search(
-                r'(?:Annual Income|total annual family income was|total annual income[^\n]+is)[:\s]*(?:Rs\.?)?\s*([\d,]+)',
-                t_clean,
+                r'(?:Annual Income|total annual family income was|total annual income[^\n]+is|वार्षिक कौटुंबिक उत्पन्न|वार्षिक उत्पन्न|वार्षिक आय)[:\s]*(?:₹|Rs\.?|INR)?\s*([\d,]+)',
+                t_arabic,
                 re.IGNORECASE,
             )
             inc_val = 120000
@@ -562,12 +747,16 @@ class LocalFallbackDocumentExtractor:
                 if cleaned.isdigit():
                     inc_val = int(cleaned)
 
-            # Extract Person Name
             m_name = re.search(
-                r'(?:Beneficiary Name:|certify that (?:Smt\.|Shri)?\s*)([A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+)',
-                t_clean,
+                r'(?:Beneficiary Name:|certify that (?:Smt\.|Shri)?\s*|अर्जदाराचे नाव:\s*|आवेदक का नाम:\s*)([^\n\r,]+)',
+                t_norm,
+                re.IGNORECASE,
             )
-            person_name = m_name.group(1).strip() if m_name else "Sunita Ramesh Patil"
+            if m_name:
+                person_name = m_name.group(1).strip()
+            else:
+                person_name = "Sunita Ramesh Patil"
+            person_name = re.sub(r'^(?:Smt\.|Shri|श्रीमती|श्री)\s*', '', person_name).strip()
 
             return ExtractedDocument(
                 document_id=digest[:16],
@@ -577,11 +766,14 @@ class LocalFallbackDocumentExtractor:
                 income_currency="INR",
                 valid_financial_year=fy,
                 confidence=0.95,
+                processing_method=processing_method,
+                medium_type=medium_type,
+                ocr_uncertainty=ocr_uncertainty,
                 source_file_sha256=digest,
                 field_evidence={"document_title": "Tahsil Income Certificate", "valid_financial_year": fy, "annual_family_income": str(inc_val)},
+                extraction_notes=extraction_notes,
             )
 
-        # Default fallback (valid certificate)
         return ExtractedDocument(
             document_id=digest[:16],
             document_type="income_certificate",
@@ -590,8 +782,12 @@ class LocalFallbackDocumentExtractor:
             income_currency="INR",
             valid_financial_year="2026-27",
             confidence=0.95,
+            processing_method=processing_method,
+            medium_type=medium_type,
+            ocr_uncertainty=ocr_uncertainty,
             source_file_sha256=digest,
             field_evidence={"document_title": "Tahsil Income Certificate", "valid_financial_year": "2026-27"},
+            extraction_notes=extraction_notes,
         )
 
 
@@ -619,6 +815,11 @@ def _phonetic_signature(value: str) -> str:
 
 _FINDING_CATEGORIES = {
     "LOW_EXTRACTION_CONFIDENCE": "document_extraction",
+    "OCR_UNCERTAINTY": "document_extraction",
+    "LOW_RESOLUTION_IMAGE": "document_extraction",
+    "IMAGE_EXCESSIVE_BLUR": "document_extraction",
+    "MISSING_PAGE_IN_SEQUENCE": "document_validity",
+    "RETENTION_PERIOD_EXPIRED": "document_validity",
     "INCOME_FY_NOT_EXTRACTED": "document_extraction",
     "INCOME_AMOUNT_NOT_EXTRACTED": "document_extraction",
     "CERTIFICATE_EXPIRED": "document_validity",
@@ -633,6 +834,21 @@ _FINDING_CATEGORIES = {
 _RECOMMENDED_ACTIONS = {
     "LOW_EXTRACTION_CONFIDENCE": (
         "Open the original image and manually confirm every extracted field before using it."
+    ),
+    "OCR_UNCERTAINTY": (
+        "Manual caseworker inspection is recommended because text was extracted under OCR uncertainty or from visual scan."
+    ),
+    "LOW_RESOLUTION_IMAGE": (
+        "Upload a higher-resolution scan or photo (minimum 250x250 pixels) where certificate details are clearly legible."
+    ),
+    "IMAGE_EXCESSIVE_BLUR": (
+        "Upload a sharp, in-focus scan or photograph. The uploaded image is too blurry for reliable automated extraction."
+    ),
+    "MISSING_PAGE_IN_SEQUENCE": (
+        "Upload all pages of the multi-page certificate. The uploaded file is missing one or more sequential pages."
+    ),
+    "RETENTION_PERIOD_EXPIRED": (
+        "Upload fresh document to restore readiness and proceed with application. Previous evidence purged under 24-hour privacy retention rules."
     ),
     "INCOME_FY_NOT_EXTRACTED": (
         "Check the certificate for a printed financial year or validity period; enter it only "
@@ -850,6 +1066,56 @@ def audit_extracted_documents(
     findings: list[DocumentFinding] = []
 
     for doc in documents:
+        if doc.processing_method == "QUALITY_FAILURE":
+            is_low_res = any("LOW_RESOLUTION" in n or "resolution" in n.lower() for n in doc.extraction_notes)
+            is_blur = any("BLUR" in n or "blur" in n.lower() for n in doc.extraction_notes)
+            if is_low_res:
+                findings.append(
+                    DocumentFinding(
+                        code="LOW_RESOLUTION_IMAGE",
+                        severity="error",
+                        message=(
+                            "Image resolution is below minimum threshold (250x250) for reliable text extraction."
+                        ),
+                        document_ids=[doc.document_id],
+                    )
+                )
+            elif is_blur:
+                findings.append(
+                    DocumentFinding(
+                        code="IMAGE_EXCESSIVE_BLUR",
+                        severity="error",
+                        message=(
+                            "Image is excessively blurred (Laplacian variance < 45.0); text cannot be reliably extracted."
+                        ),
+                        document_ids=[doc.document_id],
+                    )
+                )
+
+        missing_page_note = next((n for n in doc.extraction_notes if "missing page" in n.lower()), None)
+        if missing_page_note:
+            findings.append(
+                DocumentFinding(
+                    code="MISSING_PAGE_IN_SEQUENCE",
+                    severity="error",
+                    message=missing_page_note,
+                    document_ids=[doc.document_id],
+                )
+            )
+
+        if doc.ocr_uncertainty:
+            findings.append(
+                DocumentFinding(
+                    code="OCR_UNCERTAINTY",
+                    severity="warning",
+                    message=(
+                        "Document contains OCR uncertainty or visual quality constraints; "
+                        "manual caseworker inspection is recommended."
+                    ),
+                    document_ids=[doc.document_id],
+                )
+            )
+
         if doc.confidence < 0.75:
             findings.append(
                 DocumentFinding(

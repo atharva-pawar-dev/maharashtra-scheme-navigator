@@ -274,6 +274,35 @@ CITIZEN_PROFILE_MIGRATIONS = [
         ON citizen_scheme_audit_history(session_id, scheme_id);
         """,
     ),
+    Migration(
+        version=5,
+        name="enforce_immutable_audit_history_triggers",
+        apply_sql="""
+        CREATE TRIGGER IF NOT EXISTS trg_guard_citizen_scheme_documents_update
+        BEFORE UPDATE ON citizen_scheme_documents
+        FOR EACH ROW
+        BEGIN
+            SELECT CASE
+                WHEN OLD.source_file_sha256 != NEW.source_file_sha256
+                     OR OLD.extracted_json != NEW.extracted_json
+                     OR OLD.findings_json != NEW.findings_json
+                     OR OLD.filename != NEW.filename
+                     OR OLD.version != NEW.version
+                     OR OLD.created_at != NEW.created_at
+                THEN RAISE(ABORT, 'Illegal modification: document audit content, hashes, version, and created_at are immutable')
+                WHEN OLD.status = 'superseded' AND NEW.status != 'superseded'
+                THEN RAISE(ABORT, 'Illegal modification: superseded audit document record cannot be reactivated')
+            END;
+        END;
+
+        CREATE TRIGGER IF NOT EXISTS trg_guard_citizen_scheme_audit_history_update
+        BEFORE UPDATE ON citizen_scheme_audit_history
+        FOR EACH ROW
+        BEGIN
+            SELECT RAISE(ABORT, 'Illegal modification: citizen_scheme_audit_history records are strictly append-only');
+        END;
+        """,
+    ),
 ]
 
 

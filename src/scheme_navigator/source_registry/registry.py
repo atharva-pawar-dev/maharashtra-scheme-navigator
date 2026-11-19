@@ -19,6 +19,27 @@ from scheme_navigator.source_registry.models import (
 
 DEFAULT_REGISTRY_DIR = Path(__file__).resolve().parents[3] / "data" / "source_registry"
 
+CANONICAL_SCHEME_ALIAS_MAP: dict[str, str] = {
+    "MHA-S-0001": "candidate-sanjay-gandhi-niradhar-anudan",
+    "MHA-S-0002": "demo-indira-gandhi-old-age-pension",
+    "MHA-S-0003": "candidate-majhi-ladki-bahin",
+    "MHA-S-0004": "candidate-shravanbal-sewa-rajya-nivruttivetan",
+    "MHA-S-0005": "scheme-ignwps-widow-pension",
+    "MHA-S-0006": "scheme-igndps-disability-pension",
+    "MHA-S-0007": "scheme-divyang-motorized-tricycle",
+    "MHA-S-0008": "candidate-post-matric-sc",
+    "MHA-S-0009": "candidate-post-matric-obc",
+    "MHA-S-0010": "scheme-ebc-tuition-waiver",
+    "MHA-S-0011": "scheme-namo-shetkari-maha-samman",
+    "MHA-S-0012": "scheme-pm-kisan",
+    "MHA-S-0013": "scheme-bhausaheb-fundkar-phalbag",
+    "MHA-S-0014": "scheme-mukhyamantri-bal-seva",
+    "MHA-S-0015": "scheme-bhausaheb-fundkar-phalbag",
+    "MHA-S-0016": "scheme-ramai-awas-yojana",
+    "MHA-S-0017": "scheme-mjpjay-ayushman-bharat",
+    "MHA-S-0018": "scheme-annasaheb-patil-ir2",
+}
+
 
 class SourceRegistry:
     """Manages Maharashtra source coverage, public services registry, and application channels."""
@@ -183,7 +204,13 @@ class SourceRegistry:
         return results
 
     def get_canonical_scheme(self, canonical_scheme_id: str) -> CanonicalSchemeRecord | None:
-        return self._canonical_schemes.get(canonical_scheme_id)
+        rec = self._canonical_schemes.get(canonical_scheme_id)
+        if rec is not None:
+            return rec
+        alias_target = CANONICAL_SCHEME_ALIAS_MAP.get(canonical_scheme_id.upper())
+        if alias_target:
+            return self._canonical_schemes.get(alias_target)
+        return None
 
     # --- Coverage Matrix Breakdown ---
     def get_coverage_matrix(self) -> list[SourceCoverageStats]:

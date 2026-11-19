@@ -16,6 +16,7 @@ class Language(StrEnum):
 
 
 class EligibilityStatus(StrEnum):
+    MEETS_VERIFIED_CRITERIA = "meets_verified_criteria"
     ELIGIBLE = "eligible"
     PARTIAL = "partial"
     INELIGIBLE = "ineligible"
@@ -549,6 +550,22 @@ class ExtractedDocument(BaseModel):
         default_factory=list,
         max_length=20,
     )
+
+    # RC3 Document Intelligence & OCR Metadata
+    processing_method: Literal[
+        "EMBEDDED_PDF_TEXT",
+        "MULTIMODAL_VLM_OCR",
+        "IMAGE_FALLBACK_OCR",
+        "QUALITY_FAILURE",
+    ] = "EMBEDDED_PDF_TEXT"
+    medium_type: Literal[
+        "SEARCHABLE_PDF",
+        "SCANNED_PDF",
+        "PHOTOGRAPH",
+        "IMAGE",
+        "UNKNOWN",
+    ] = "UNKNOWN"
+    ocr_uncertainty: bool = False
 
 
 

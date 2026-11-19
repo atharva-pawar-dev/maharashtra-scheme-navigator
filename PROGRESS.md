@@ -1,7 +1,8 @@
 # Progress Tracker: Verified Catalogue v2 & Document Review Overhaul (PROGRESS.md)
-**Last Updated:** 2026-11-19T21:05:00+05:30  
-**Active Phase:** Complete — RC2 Forensic Acceptance & Integration Audit Verified  
+**Last Updated:** 2026-11-19T22:25:00+05:30  
+**Active Phase:** Complete — RC3 Document Intelligence, Scheme Coverage & Citizen Trust Hardening Verified  
 **Branch:** `feat/catalogue-v2`  
+**Milestone Tag:** `rc3-hardened`
 
 ---
 
@@ -17,7 +18,8 @@
 | **Schemes with < 2 Substantive Criteria** | 0 in Tier A / B | **0 schemes** | **PASS** |
 | **Schemes with Verbatim Sourced Quotes** | 100% of Tier A | **100% of Tier A criteria verified against data/raw/** | **PASS** |
 | **Document Consistency Checks** | Mismatch + Expiry | **Income mismatch, Caste mismatch, Expiry, Unreadable** | **PASS** |
-| **Regression Test Invariance** | 0 Regressions | **574/574 Pytest + 46/46 Playwright Browser PASSED** | **PASS** |
+| **Regression Test Invariance** | 0 Regressions | **606/606 Pytest + 47/47 Playwright Browser PASSED** | **PASS** |
+| **Canary Mutation Detection** | 12/12 caught | **12/12 Individual Appendix H5 Canaries Caught** | **PASS** |
 
 ---
 
@@ -52,16 +54,22 @@
 
 - [x] **Phase 6: 15 Mandatory End-to-End Playwright Browser Journeys** (Completed 2026-11-18)
   - Executed and passed all 15 journeys in `tests/test_playwright_15_citizen_journeys.py`.
-  - Total browser tests: 45 passed (0 failed).
-  - Total test suite: 565 passed (0 failed).
+  - Total browser tests: 46 passed (0 failed).
 
-- [x] **Phase 7: Master Deliverables Manifest** (Completed 2026-11-18)
-  - Quality, architecture, and security reports authored and verified.
+- [x] **Phase 7: RC2 Forensic Acceptance & Hard Restart Invariance** (Completed 2026-11-19)
+  - SQLite Migration 4: durable document and audit history schema across hard server restarts.
+  - Non-destructive document replacement lineage ($v1 \to v2$) with hash and reason tracking.
+  - Tagged `rc2-forensic-accepted` at commit `f10a0a0`.
 
-- [x] **Phase 8: RC2 Forensic Acceptance & Defect Closure** (Completed 2026-11-19)
-  - **P0 SQLite Authoritative Persistence:** Applied SQLite Migration v4 (`citizen_scheme_documents`, `citizen_scheme_audit_history`). Tested server restart durability with Playwright Chromium killing the live server and clearing client storage (`tests/test_playwright_backend_restart_persistence.py`).
-  - **P0 Document Replacement & Lineage:** Implemented non-destructive replacement ($v1 \to v2$) with immutable audit history in SQLite and UI `#doc-history-section`.
-  - **P0 Local Fallback OCR Overhaul:** Implemented content-based PyMuPDF extraction (0 filename heuristics) behind strict environment flag `ENABLE_LOCAL_FALLBACK_OCR="true"`.
-  - **P1 Revalidation of 15 Citizen Journeys:** Enhanced J03 (1-of-2 mandatory document fulfillment) and J12 (backend restart recovery). All 15 passed in real Chromium.
-  - **P2 Regression Integrity:** 574 tests collected, 574 passed (100% pass rate in 201.46s).
-  - **Master Forensic Report:** `reports/rc2_forensic_acceptance_audit.md` and updated `reports/final_citizen_journey_evidence.json`.
+- [x] **Phase 8: RC3 Document Intelligence, Scheme Coverage & Citizen Trust Hardening** (Completed 2026-11-19)
+  - Multimodal document processing distinguishing `SEARCHABLE_PDF`, `SCANNED_PDF`, `PHOTOGRAPH`, `IMAGE`.
+  - Image quality rejection: resolution < 250px (`LOW_RESOLUTION_IMAGE`) and blur variance < 45.0 (`IMAGE_EXCESSIVE_BLUR`).
+  - Devanagari numerals (`०-९`), currency, and FY extraction; separated OCR uncertainty from rule failures.
+  - Multi-page missing page detection (`MISSING_PAGE_IN_SEQUENCE`).
+  - Scheme-diverse document requirement coverage across 12 families (`docs/quality/scheme_diverse_document_coverage.md`).
+  - SQLite Migration 5 triggers enforcing append-only immutability on document content, hashes, and audit history.
+  - 24-hr retention ceiling purge with reactive readiness invalidation and localized re-upload notices in EN, MR, HI.
+  - Normalized eligibility status `MEETS_VERIFIED_CRITERIA` with fail-closed protection for demo fixtures.
+  - Exact trilingual symmetry across 112 keys in `static/index.html` verified via Playwright in Chromium.
+  - Full test suite: **606/606 tests passing**, **12/12 canaries caught**.
+  - Tagged `rc3-hardened`.
