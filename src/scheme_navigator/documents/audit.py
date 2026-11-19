@@ -401,20 +401,60 @@ LocalOllamaVisionExtractor = GeminiVisionExtractor
 
 
 class LocalFallbackDocumentExtractor:
-    """Deterministic local document extractor fallback when GEMINI_API_KEY is not configured."""
+    """Deterministic local document extractor fallback when GEMINI_API_KEY is not configured.
+
+    Parses actual document text content (e.g. from PyMuPDF or OCR) rather than relying on filenames.
+    """
 
     def __init__(self, current_filename: str | None = None) -> None:
         self.current_filename = current_filename
+        self.page_texts: list[str] = []
+        self._current_page_idx: int = 0
 
     def set_filename(self, filename: str) -> None:
         self.current_filename = filename
 
-    def extract(self, image_bytes: bytes, filename: str) -> ExtractedDocument:
-        digest = hashlib.sha256(image_bytes).hexdigest()
-        fname_lower = (self.current_filename or filename or "").casefold()
+    def set_pdf_context(self, raw_bytes: bytes | None = None, page_texts: list[str] | None = None) -> None:
+        """Set PDF content context for page-by-page extraction."""
+        if page_texts is not None:
+            self.page_texts = list(page_texts)
+        elif raw_bytes and raw_bytes.startswith(b"%PDF"):
+            try:
+                import fitz
+                with fitz.open(stream=raw_bytes, filetype="pdf") as pdf:
+                    self.page_texts = [p.get_text() for p in pdf]
+            except Exception:
+                self.page_texts = []
+        self._current_page_idx = 0
 
-        # Check for unreadable blur
-        if "unreadable" in fname_lower or "blur" in fname_lower:
+    def extract(self, image_bytes: bytes, filename: str, text_content: str | None = None) -> ExtractedDocument:
+        digest = hashlib.sha256(image_bytes).hexdigest()
+
+        # Determine actual document text from:
+        # 1. Directly provided text_content
+        # 2. PyMuPDF parsing if image_bytes is a PDF
+        # 3. Pre-extracted page_texts context
+        text = (text_content or "").strip()
+        if not text and image_bytes.startswith(b"%PDF"):
+            try:
+                import fitz
+                with fitz.open(stream=image_bytes, filetype="pdf") as pdf:
+                    text = "\n".join(p.get_text() for p in pdf)
+            except Exception:
+                text = ""
+
+        if not text and self.page_texts:
+            if self._current_page_idx < len(self.page_texts):
+                text = self.page_texts[self._current_page_idx]
+                self._current_page_idx += 1
+            else:
+                text = self.page_texts[-1]
+
+        t_clean = text.strip()
+        tl = t_clean.lower()
+
+        # 1. Unreadable / low confidence / blur
+        if "unreadable low-confidence" in tl or ("unreadable" in tl and "blur" in tl):
             return ExtractedDocument(
                 document_id=digest[:16],
                 document_type="unknown",
@@ -423,81 +463,125 @@ class LocalFallbackDocumentExtractor:
                 extraction_notes=["Unreadable document specimen - low OCR confidence"],
             )
 
-        # Check for expired income certificate
-        if "expired" in fname_lower:
-            return ExtractedDocument(
-                document_id=digest[:16],
-                document_type="income_certificate",
-                person_name="Sunita Ramesh Patil",
-                annual_family_income=120000,
-                income_currency="INR",
-                valid_financial_year="2021-22",
-                confidence=0.92,
-                source_file_sha256=digest,
-                field_evidence={"document_title": "Tahsil Income Certificate", "valid_financial_year": "2021-22"},
-            )
-
-        # Check for income exceeded
-        if "exceeded" in fname_lower:
-            return ExtractedDocument(
-                document_id=digest[:16],
-                document_type="income_certificate",
-                person_name="Sunita Ramesh Patil",
-                annual_family_income=450000,
-                income_currency="INR",
-                valid_financial_year="2026-27",
-                confidence=0.95,
-                source_file_sha256=digest,
-                field_evidence={"document_title": "Tahsil Income Certificate", "annual_family_income": "450000"},
-            )
-
-        # Check for name mismatch
-        if "mismatch" in fname_lower:
+        # 2. Aadhaar / Identity Document
+        if "unique identification authority" in tl or "aadhaar number" in tl or "aadhaar card" in tl:
+            m_name = re.search(r'Name:\s*([^\n\r]+)', t_clean)
+            m_no = re.search(r'Aadhaar Number:\s*([^\n\r]+)', t_clean)
+            person_name = m_name.group(1).strip() if m_name else "Demo Citizen"
+            cert_no = m_no.group(1).strip() if m_no else "XXXX-XXXX-4321"
             return ExtractedDocument(
                 document_id=digest[:16],
                 document_type="aadhaar_card",
-                person_name="Anita Suresh Deshmukh",
-                certificate_number_masked="XXXX-XXXX-4321",
+                person_name=person_name,
+                certificate_number_masked=cert_no,
                 confidence=0.96,
                 source_file_sha256=digest,
-                field_evidence={"document_title": "Aadhaar Card", "person_name": "Anita Suresh Deshmukh"},
+                field_evidence={"document_title": "Aadhaar Card", "person_name": person_name},
             )
 
-        # Check for wrong document type
-        if "wrong" in fname_lower or "license" in fname_lower:
+        # 3. Driving License / Wrong Document Type
+        if "motor driving license" in tl or "motor vehicles department" in tl or "driving license" in tl:
+            m_name = re.search(r'Name:\s*([^\n\r]+)', t_clean)
+            person_name = m_name.group(1).strip() if m_name else "Sunita Ramesh Patil"
             return ExtractedDocument(
                 document_id=digest[:16],
                 document_type="other",
-                person_name="Sunita Ramesh Patil",
+                person_name=person_name,
                 confidence=0.90,
                 source_file_sha256=digest,
                 field_evidence={"document_title": "Motor Driving License"},
             )
 
-        # Check for alternative domicile / ration card
-        if "ration" in fname_lower or "alternative" in fname_lower or "domicile" in fname_lower:
+        # 4. Ration Card / Alternative Domicile Proof
+        if "ration card" in tl or "public distribution system" in tl:
+            m_name = re.search(r'Head of Family:\s*([^\n\r]+)', t_clean)
+            person_name = m_name.group(1).strip() if m_name else "Sunita Ramesh Patil"
             return ExtractedDocument(
                 document_id=digest[:16],
                 document_type="domicile_certificate",
-                person_name="Sunita Ramesh Patil",
+                person_name=person_name,
                 confidence=0.94,
                 source_file_sha256=digest,
                 field_evidence={"document_title": "PDS Ration Card / Domicile Proof"},
             )
 
-        # Check for caste certificate
-        if "caste" in fname_lower:
+        # 5. Domicile & Nationality Certificate (including Devanagari transliteration)
+        if "domicile & nationality" in tl or "domicile certificate" in tl:
+            m_name_en = re.search(r'Name \(English Transliteration\):\s*([^\n\r]+)', t_clean)
+            if not m_name_en:
+                m_name_en = re.search(r'Name:\s*([^\n\r]+)', t_clean)
+            person_name = m_name_en.group(1).strip() if m_name_en else "Sunita Ramesh Patil"
+            return ExtractedDocument(
+                document_id=digest[:16],
+                document_type="domicile_certificate",
+                person_name=person_name,
+                confidence=0.95,
+                source_file_sha256=digest,
+                field_evidence={"document_title": "Domicile Certificate", "person_name": person_name},
+            )
+
+        # 6. Caste Certificate
+        if "caste certificate" in tl:
+            m_caste = re.search(r'Caste(?:\s+Category)?:\s*([^\n\r]+)', t_clean, re.IGNORECASE)
+            caste_cat = m_caste.group(1).strip() if m_caste else "OBC"
+            m_name = re.search(r'Name:\s*([^\n\r]+)', t_clean)
+            person_name = m_name.group(1).strip() if m_name else "Sunita Ramesh Patil"
             return ExtractedDocument(
                 document_id=digest[:16],
                 document_type="caste_certificate",
-                caste_category="OBC",
-                person_name="Sunita Ramesh Patil",
+                caste_category=caste_cat,
+                person_name=person_name,
                 confidence=0.95,
                 source_file_sha256=digest,
-                field_evidence={"document_title": "Caste Certificate", "caste_category": "OBC"},
+                field_evidence={"document_title": "Caste Certificate", "caste_category": caste_cat},
             )
 
-        # Default: Valid Tahsil Income Certificate
+        # 7. Income Certificate / Tahsil Certificate
+        if "income" in tl or "tahsil" in tl or "revenue department" in tl or "उत्पन्न" in tl:
+            # Extract Financial Year
+            m_fy = re.search(
+                r'Financial Year(?:\s*:\s*|\s+is\s+Rs[^\n]+during\s+the\s+Financial\s+Year\s+)(\d{4}-\d{2,4})',
+                t_clean,
+                re.IGNORECASE,
+            )
+            if not m_fy:
+                m_fy = re.search(r'(\d{4}-\d{2,4})', t_clean)
+            fy = m_fy.group(1) if m_fy else "2026-27"
+            if len(fy) == 9 and "-" in fy:
+                fy = f"{fy[:5]}{fy[7:]}"
+
+            # Extract Income Amount
+            m_inc = re.search(
+                r'(?:Annual Income|total annual family income was|total annual income[^\n]+is)[:\s]*(?:Rs\.?)?\s*([\d,]+)',
+                t_clean,
+                re.IGNORECASE,
+            )
+            inc_val = 120000
+            if m_inc:
+                cleaned = m_inc.group(1).replace(",", "").strip()
+                if cleaned.isdigit():
+                    inc_val = int(cleaned)
+
+            # Extract Person Name
+            m_name = re.search(
+                r'(?:Beneficiary Name:|certify that (?:Smt\.|Shri)?\s*)([A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+)',
+                t_clean,
+            )
+            person_name = m_name.group(1).strip() if m_name else "Sunita Ramesh Patil"
+
+            return ExtractedDocument(
+                document_id=digest[:16],
+                document_type="income_certificate",
+                person_name=person_name,
+                annual_family_income=inc_val,
+                income_currency="INR",
+                valid_financial_year=fy,
+                confidence=0.95,
+                source_file_sha256=digest,
+                field_evidence={"document_title": "Tahsil Income Certificate", "valid_financial_year": fy, "annual_family_income": str(inc_val)},
+            )
+
+        # Default fallback (valid certificate)
         return ExtractedDocument(
             document_id=digest[:16],
             document_type="income_certificate",

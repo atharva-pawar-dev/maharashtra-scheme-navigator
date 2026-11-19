@@ -238,6 +238,42 @@ CITIZEN_PROFILE_MIGRATIONS = [
         ALTER TABLE citizen_profiles ADD COLUMN pin_code TEXT;
         """,
     ),
+    Migration(
+        version=4,
+        name="add_citizen_scheme_documents_and_history",
+        apply_sql="""
+        CREATE TABLE IF NOT EXISTS citizen_scheme_documents (
+            document_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL,
+            scheme_id TEXT NOT NULL,
+            document_type TEXT NOT NULL,
+            version INTEGER NOT NULL DEFAULT 1,
+            status TEXT NOT NULL DEFAULT 'active',
+            source_file_sha256 TEXT NOT NULL,
+            filename TEXT NOT NULL,
+            extracted_json TEXT NOT NULL DEFAULT '{}',
+            findings_json TEXT NOT NULL DEFAULT '[]',
+            superseded_by TEXT,
+            replacement_reason TEXT,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_scheme_docs_session_scheme 
+        ON citizen_scheme_documents(session_id, scheme_id, status);
+
+        CREATE TABLE IF NOT EXISTS citizen_scheme_audit_history (
+            audit_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL,
+            scheme_id TEXT NOT NULL,
+            readiness_percentage INTEGER NOT NULL DEFAULT 0,
+            audit_summary TEXT NOT NULL DEFAULT '',
+            report_json TEXT NOT NULL DEFAULT '{}',
+            created_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_audit_history_session_scheme 
+        ON citizen_scheme_audit_history(session_id, scheme_id);
+        """,
+    ),
 ]
 
 
@@ -348,16 +384,18 @@ def restore_database(backup_path: Path | str, target_path: Path | str) -> bool:
 
 
 def run_all_migrations(data_dir: Path | str | None = None) -> dict[str, list[int]]:
-    """Run all schema migrations across the three core application SQLite stores."""
+    """Run all schema migrations across the core application SQLite stores."""
     base_dir = Path(data_dir).resolve() if data_dir else Path(__file__).resolve().parents[3] / "data"
 
     interviews_db = base_dir / "interviews.sqlite3"
     reviews_db = base_dir / "document_reviews.sqlite3"
     ingestion_db = base_dir / "ingestion.sqlite3"
+    citizen_profiles_db = base_dir / "citizen_profiles.sqlite3"
 
     results = {
         "interviews": apply_migrations(interviews_db, INTERVIEW_MIGRATIONS),
         "document_reviews": apply_migrations(reviews_db, REVIEW_MIGRATIONS),
         "ingestion": apply_migrations(ingestion_db, INGESTION_MIGRATIONS),
+        "citizen_profiles": apply_migrations(citizen_profiles_db, CITIZEN_PROFILE_MIGRATIONS),
     }
     return results

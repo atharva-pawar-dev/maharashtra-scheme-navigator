@@ -1174,6 +1174,12 @@
         <div id="doc-uploaded-list" style="display:flex; flex-direction:column; gap:10px;"></div>
       </div>
 
+      <!-- Document Audit History & Superseded Records -->
+      <div id="doc-history-section" style="margin-bottom:28px; display:none;">
+        <h4 id="lbl-doc-history-title" style="font-size:1.0rem; color:var(--slate-muted); margin-bottom:10px;">📜 कागदपत्र इतिहास व बदललेली कागदपत्रे (Document Audit History & Superseded Records)</h4>
+        <div id="doc-history-list" style="display:flex; flex-direction:column; gap:8px;"></div>
+      </div>
+
       <div id="doc-extracted-preview" class="info-strip" style="max-width:760px; margin:0 auto; display:none;">
         <h4 id="doc-preview-title" style="margin-bottom:12px; color:var(--sahyadri-green);">कागदपत्रातून निष्कर्षित माहिती</h4>
         <div id="doc-extracted-fields"></div>
@@ -1982,7 +1988,7 @@
     }
   }
 
-  function restoreSession() {
+  async function restoreSession() {
     try {
       const raw = sessionStorage.getItem('scheme_nav_session');
       if (raw) {
@@ -2000,7 +2006,34 @@
         if (Array.isArray(docs)) state.uploadedDocuments = docs;
       }
     } catch (e) {
-      console.warn('Could not restore session', e);
+      console.warn('Could not restore session from storage', e);
+    }
+
+    // Authoritative SQLite Backend State Recovery:
+    try {
+      const prog = await api('/progress');
+      if (prog && prog.active_scheme_id) {
+        if (!state.selectedSchemeId) state.selectedSchemeId = prog.active_scheme_id;
+      }
+      const prof = await api('/profile');
+      if (prof && typeof prof === 'object') {
+        const cData = (prof.profile && typeof prof.profile === 'object') ? prof.profile : prof;
+        state.profile = state.profile || {};
+        for (const [k, v] of Object.entries(cData)) {
+          if (k !== 'session_id' && k !== 'profile' && k !== 'provenance') {
+            state.profile[k] = v;
+          }
+        }
+      }
+      if (state.selectedSchemeId) {
+        const docState = await api(`/canonical-schemes/${encodeURIComponent(state.selectedSchemeId)}/documents/state`);
+        if (docState && Array.isArray(docState.active_documents)) {
+          state.uploadedDocuments = docState.active_documents;
+          state.documentHistory = docState.history || [];
+        }
+      }
+    } catch (e) {
+      console.warn('Authoritative backend session recovery note:', e);
     }
   }
 
@@ -4256,6 +4289,18 @@
       reqListEl.innerHTML = `<p style="color:var(--slate-muted); font-size:0.9rem;">${isMr ? 'अधिकृत कागदपत्र नियम व पडताळणी लोड होत आहे...' : (isHi ? 'नियम व सत्यापन लोड हो रहा है...' : 'Loading statutory requirements & audit...')}</p>`;
     }
 
+    // Authoritative state recovery from backend SQLite store:
+    try {
+      const stateRes = await api(`/canonical-schemes/${encodeURIComponent(targetId)}/documents/state`);
+      if (stateRes && Array.isArray(stateRes.active_documents)) {
+        state.uploadedDocuments = stateRes.active_documents;
+        state.activeDocRecords = stateRes.active_document_records || [];
+        state.documentHistory = stateRes.history || [];
+      }
+    } catch (e) {
+      console.warn('Could not query authoritative scheme document state from SQLite', e);
+    }
+
     state.uploadedDocuments = state.uploadedDocuments || [];
 
     try {
@@ -4265,7 +4310,7 @@
         body: JSON.stringify({
           scheme_id: targetId,
           documents: state.uploadedDocuments,
-          profile: state.profile || null,
+          profile: getCleanCitizenProfile(),
           target_financial_year: state.financialYear || '2026-27',
           language: state.language || 'mr'
         })
@@ -4372,11 +4417,17 @@
             const incStr = ud.annual_family_income ? ` | ₹${toLocalizedDigits(ud.annual_family_income)}` : '';
             const conf = ud.confidence ? (ud.confidence * 100).toFixed(0) + '%' : '95%';
             const docId = ud.document_id || ('doc_' + idx);
+            const rec = (state.activeDocRecords || []).find(r => r.document_id === docId);
+            const verNum = rec ? rec.version : (ud.version || 1);
+            const verBadge = `<span class="badge" style="background:#D1FAE5; color:#065F46; font-size:0.75rem; font-weight:700; padding:2px 8px; border-radius:4px; margin-left:6px;">v${verNum} (Active)</span>`;
             return `
               <div class="uploaded-doc-card" style="display:flex; flex-direction:column; gap:8px; border:1px solid var(--border-crisp); padding:14px; border-radius:8px; background:var(--warm-ivory); margin-bottom:10px;">
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px;">
                   <div>
-                    <strong style="color:var(--deep-heritage-maroon); font-size:0.96rem;">📄 ${escapeHtml(docName)}</strong>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                      <strong style="color:var(--deep-heritage-maroon); font-size:0.96rem;">📄 ${escapeHtml(docName)}</strong>
+                      ${verBadge}
+                    </div>
                     <div style="font-size:0.82rem; color:var(--slate-muted); margin-top:3px;">
                       👤 ${escapeHtml(pName)}${fyStr}${incStr} | <span style="color:#059669; font-weight:600;">विश्वासार्हता: ${conf}</span>
                     </div>
@@ -4434,6 +4485,43 @@
         }
       }
 
+      // Render Document Audit History & Superseded Records:
+      const historySecEl = document.getElementById('doc-history-section');
+      const historyListEl = document.getElementById('doc-history-list');
+      const supersededDocs = (state.documentHistory || []).filter(h => h.status === 'superseded');
+      if (historySecEl && historyListEl) {
+        if (supersededDocs.length > 0) {
+          historySecEl.style.display = 'block';
+          historyListEl.innerHTML = supersededDocs.map((sd) => {
+            const ext = sd.extracted || {};
+            const docName = ext.field_evidence && ext.field_evidence.document_title ? ext.field_evidence.document_title : (sd.document_type || 'दाखला');
+            const shaBrief = sd.source_file_sha256 ? sd.source_file_sha256.slice(0, 12) + '...' : '-';
+            const verBadge = `<span class="badge" style="background:#E2E8F0; color:#475569; font-weight:700; padding:2px 8px; border-radius:4px; font-size:0.75rem;">v${sd.version} (Superseded)</span>`;
+            return `
+              <div class="history-doc-card" style="border:1px dashed #CBD5E1; background:#F8FAFC; padding:12px 14px; border-radius:6px; margin-bottom:8px; opacity:0.85;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                  <div>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                      <strong style="color:#64748B; font-size:0.9rem; text-decoration:line-through;">📄 ${escapeHtml(docName)}</strong>
+                      ${verBadge}
+                    </div>
+                    <div style="font-size:0.78rem; color:#64748B; margin-top:3px;">
+                      SHA-256: <code>${escapeHtml(shaBrief)}</code> | Filename: <em>${escapeHtml(sd.filename || '')}</em>
+                    </div>
+                    <div style="font-size:0.78rem; color:#D97706; margin-top:2px;">
+                      ℹ️ ${escapeHtml(sd.replacement_reason || 'Superseded by updated document')}
+                    </div>
+                  </div>
+                  <span style="font-size:0.75rem; color:#94A3B8;">${new Date(sd.created_at).toLocaleString()}</span>
+                </div>
+              </div>
+            `;
+          }).join('');
+        } else {
+          historySecEl.style.display = 'none';
+        }
+      }
+
       const compCard = document.getElementById('preparation-completion-card');
       if (compCard) {
         compCard.style.display = (report.all_mandatory_satisfied && state.uploadedDocuments.length > 0) ? 'block' : 'none';
@@ -4465,6 +4553,12 @@
       const formData = new FormData();
       formData.append('file', file);
       formData.append('target_financial_year', state.financialYear || '2026-27');
+      if (state.selectedSchemeId) formData.append('scheme_id', state.selectedSchemeId);
+      const repId = state.replacingDocId;
+      if (repId) {
+        formData.append('replaces_document_id', repId);
+        formData.append('replacement_reason', 'Citizen uploaded corrected replacement document');
+      }
 
       try {
         const res = await api('/documents/audit-upload', {
@@ -4474,9 +4568,13 @@
         if (res.review && res.review.review_id) state.reviewId = res.review.review_id;
         if (res.extracted_documents && res.extracted_documents.length > 0) {
           state.uploadedDocuments = state.uploadedDocuments || [];
+          if (repId) {
+            state.uploadedDocuments = state.uploadedDocuments.filter(d => d.document_id !== repId);
+          }
           state.uploadedDocuments.push(...res.extracted_documents);
-          successCount++;
         }
+        state.replacingDocId = null;
+        successCount++;
       } catch (err) {
         console.error('File upload error for', file.name, err);
       }
@@ -4497,13 +4595,22 @@
   }
 
   async function removeUploadedDocument(docId) {
-    if (!state.uploadedDocuments) return;
-    state.uploadedDocuments = state.uploadedDocuments.filter(d => d.document_id !== docId);
-    sessionStorage.setItem('scheme_nav_doc_audit_session', JSON.stringify(state.uploadedDocuments));
+    if (state.selectedSchemeId) {
+      try {
+        await api(`/canonical-schemes/${encodeURIComponent(state.selectedSchemeId)}/documents/${encodeURIComponent(docId)}`, {
+          method: 'DELETE'
+        });
+      } catch (e) {
+        console.warn('Failed removing document on backend', e);
+      }
+    }
+    if (state.uploadedDocuments) {
+      state.uploadedDocuments = state.uploadedDocuments.filter(d => d.document_id !== docId);
+    }
     saveSession();
     const uploadedSecEl = document.getElementById('doc-uploaded-section');
     const uploadedListEl = document.getElementById('doc-uploaded-list');
-    if (state.uploadedDocuments.length === 0) {
+    if (state.uploadedDocuments && state.uploadedDocuments.length === 0) {
       if (uploadedSecEl) uploadedSecEl.style.display = 'none';
       if (uploadedListEl) uploadedListEl.innerHTML = '';
     }
@@ -4581,7 +4688,7 @@
   }
 
   function replaceDocument(docId) {
-    removeUploadedDocument(docId);
+    state.replacingDocId = docId;
     const input = document.getElementById('doc-file-input');
     if (input) input.click();
   }

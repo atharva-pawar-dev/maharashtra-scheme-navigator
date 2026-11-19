@@ -482,7 +482,7 @@ def prepare_intelligent_document_audit(
                         else f"{authority} से नवीनीकृत प्रमाण पत्र प्राप्त करें।"
                     )
                 elif (
-                    req_canon == "income certificate"
+                    ("income" in req_canon or getattr(matched_doc, "document_type", "") == "income_certificate")
                     and matched_doc.valid_financial_year
                     and matched_doc.valid_financial_year != target_financial_year
                 ):
@@ -644,7 +644,7 @@ def prepare_intelligent_document_audit(
                         else f"{authority} से नवीनीकृत प्रमाण पत्र प्राप्त करें।"
                     )
                 elif (
-                    req_canon == "income certificate"
+                    ("income" in req_canon or getattr(matched_doc, "document_type", "") == "income_certificate")
                     and matched_doc.valid_financial_year
                     and matched_doc.valid_financial_year != target_financial_year
                 ):

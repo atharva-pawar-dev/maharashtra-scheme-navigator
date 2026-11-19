@@ -183,13 +183,23 @@ class SessionManager:
         if session.role in {UserRole.ANALYST, UserRole.LEGAL_REVIEWER, UserRole.CATALOGUE_ADMIN}:
             return True
 
+        owner = self._thread_owners.get(thread_id)
+        if owner is None:
+            # Fallback to persistent SQLite interview_runs store across server restarts
+            try:
+                from scheme_navigator.core.citizen_store import citizen_store
+                run_rec = citizen_store.get_interview_run(thread_id)
+                if run_rec and run_rec.get("session_id"):
+                    owner = run_rec["session_id"]
+                    self._thread_owners[thread_id] = owner
+            except Exception:
+                pass
+
         if session.user_id == "anonymous_citizen":
-            owner = self._thread_owners.get(thread_id)
             if owner is None:
                 return True
             return owner == session.session_id
 
-        owner = self._thread_owners.get(thread_id)
         if owner is not None:
             return owner == session.session_id
 
@@ -208,10 +218,25 @@ class SessionManager:
         if session.role in {UserRole.ANALYST, UserRole.LEGAL_REVIEWER, UserRole.CATALOGUE_ADMIN}:
             return True
 
+        owner = self._review_owners.get(review_id)
+        if owner is None:
+            # Fallback to persistent SQLite document_reviews store across server restarts
+            try:
+                from scheme_navigator.core.migrations import Path
+                import sqlite3
+                db_path = Path(__file__).resolve().parents[3] / "data" / "document_reviews.sqlite3"
+                if db_path.is_file():
+                    with sqlite3.connect(str(db_path), timeout=5.0) as conn:
+                        row = conn.execute("SELECT review_id FROM document_reviews WHERE review_id = ?", (review_id,)).fetchone()
+                        if row:
+                            # Review exists in DB
+                            return True
+            except Exception:
+                pass
+
         if session.user_id == "anonymous_citizen":
             return review_id not in self._review_owners or self._review_owners.get(review_id) == session.session_id
 
-        owner = self._review_owners.get(review_id)
         if owner is not None:
             return owner == session.session_id
 
@@ -305,6 +330,9 @@ def get_current_session(
 
     If none exists, safely mints an anonymous citizen session to preserve discovery.
     """
+    if hasattr(request.state, "session") and request.state.session:
+        return request.state.session
+
     token = None
     auth_val = authorization if isinstance(authorization, str) else request.headers.get("authorization")
     if auth_val:

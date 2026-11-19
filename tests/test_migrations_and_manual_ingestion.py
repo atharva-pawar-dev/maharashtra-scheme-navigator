@@ -74,7 +74,7 @@ def _create_synthetic_pdf(text: str) -> bytes:
 def test_sqlite_migration_runner_and_idempotency(tmp_path: Path):
     """Migration runner creates databases, applies versioned migrations, and is idempotent."""
     reports = run_all_migrations(tmp_path)
-    assert len(reports) == 3
+    assert len(reports) == 4
 
     for db_name, applied in reports.items():
         assert len(applied) >= 1

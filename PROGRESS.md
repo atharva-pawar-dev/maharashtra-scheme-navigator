@@ -1,6 +1,6 @@
 # Progress Tracker: Verified Catalogue v2 & Document Review Overhaul (PROGRESS.md)
-**Last Updated:** 2026-11-18T22:36:00+05:30  
-**Active Phase:** Complete — All 15 Playwright Citizen Journeys & Master Deliverables Delivered  
+**Last Updated:** 2026-11-19T21:05:00+05:30  
+**Active Phase:** Complete — RC2 Forensic Acceptance & Integration Audit Verified  
 **Branch:** `feat/catalogue-v2`  
 
 ---
@@ -17,7 +17,7 @@
 | **Schemes with < 2 Substantive Criteria** | 0 in Tier A / B | **0 schemes** | **PASS** |
 | **Schemes with Verbatim Sourced Quotes** | 100% of Tier A | **100% of Tier A criteria verified against data/raw/** | **PASS** |
 | **Document Consistency Checks** | Mismatch + Expiry | **Income mismatch, Caste mismatch, Expiry, Unreadable** | **PASS** |
-| **Regression Test Invariance** | 0 Regressions | **565/565 Pytest + 45/45 Playwright Browser PASSED** | **PASS** |
+| **Regression Test Invariance** | 0 Regressions | **574/574 Pytest + 46/46 Playwright Browser PASSED** | **PASS** |
 
 ---
 
@@ -56,14 +56,12 @@
   - Total test suite: 565 passed (0 failed).
 
 - [x] **Phase 7: Master Deliverables Manifest** (Completed 2026-11-18)
-  - `docs/quality/ui_to_backend_integration_inventory.md`
-  - `docs/architecture/citizen_journey.md`
-  - `docs/architecture/document_verification.md`
-  - `docs/architecture/readiness_engine.md`
-  - `docs/quality/document_verification_test_matrix.md`
-  - `docs/quality/citizen_journey_acceptance.md`
-  - `docs/catalogue/catalogue_integrity_audit.md`
-  - `docs/security/document_data_handling.md`
-  - `reports/final_citizen_journey_evidence.json`
-  - `reports/final_acceptance_report.md`
-  - `STATE.md`, `LEDGER.md`, `CLAIMS.md`, `PROGRESS.md`.
+  - Quality, architecture, and security reports authored and verified.
+
+- [x] **Phase 8: RC2 Forensic Acceptance & Defect Closure** (Completed 2026-11-19)
+  - **P0 SQLite Authoritative Persistence:** Applied SQLite Migration v4 (`citizen_scheme_documents`, `citizen_scheme_audit_history`). Tested server restart durability with Playwright Chromium killing the live server and clearing client storage (`tests/test_playwright_backend_restart_persistence.py`).
+  - **P0 Document Replacement & Lineage:** Implemented non-destructive replacement ($v1 \to v2$) with immutable audit history in SQLite and UI `#doc-history-section`.
+  - **P0 Local Fallback OCR Overhaul:** Implemented content-based PyMuPDF extraction (0 filename heuristics) behind strict environment flag `ENABLE_LOCAL_FALLBACK_OCR="true"`.
+  - **P1 Revalidation of 15 Citizen Journeys:** Enhanced J03 (1-of-2 mandatory document fulfillment) and J12 (backend restart recovery). All 15 passed in real Chromium.
+  - **P2 Regression Integrity:** 574 tests collected, 574 passed (100% pass rate in 201.46s).
+  - **Master Forensic Report:** `reports/rc2_forensic_acceptance_audit.md` and updated `reports/final_citizen_journey_evidence.json`.

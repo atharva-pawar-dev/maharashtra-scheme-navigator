@@ -11,7 +11,7 @@ import uuid
 
 from datetime import datetime, timezone
 
-from fastapi import Depends, FastAPI, File, Header, HTTPException, Request, Response, UploadFile
+from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Request, Response, UploadFile
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 from starlette.concurrency import run_in_threadpool
@@ -203,6 +203,43 @@ app = FastAPI(
 
 @app.middleware("http")
 async def security_headers_middleware(request: Request, call_next):
+    # Session cookie / stateless session re-hydration:
+    is_auth_endpoint = request.url.path.startswith("/auth/session") or request.url.path.startswith("/admin/auth/")
+    if not is_auth_endpoint:
+        token = None
+        auth_val = request.headers.get("authorization")
+        if auth_val:
+            parts = auth_val.split()
+            if len(parts) == 2 and parts[0].casefold() == "bearer":
+                token = parts[1]
+            elif len(parts) == 1:
+                token = parts[0]
+        if not token:
+            token = request.cookies.get("__Host-sn_session") or request.cookies.get("sn_session")
+
+        session = None
+        try:
+            session = session_manager.validate_token(token) if token else None
+        except Exception:
+            session = None
+
+        new_token = None
+        if not session and settings.app_env.casefold() not in {"production", "prod"}:
+            client_ip = request.client.host if request.client else None
+            try:
+                session, new_token = session_manager.create_session(
+                    role=UserRole.CITIZEN,
+                    user_id="anonymous_citizen",
+                    client_ip=client_ip,
+                )
+            except Exception:
+                session, new_token = None, None
+
+        if session:
+            request.state.session = session
+        if new_token:
+            request.state.new_session_token = new_token
+
     response = await call_next(request)
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["X-Frame-Options"] = "DENY"
@@ -220,6 +257,32 @@ async def security_headers_middleware(request: Request, call_next):
     )
     if settings.app_env.casefold() in {"production", "prod"}:
         response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+
+    # Set session cookie if newly minted and not already explicitly set by endpoint
+    if not is_auth_endpoint and hasattr(request.state, "new_session_token") and request.state.new_session_token:
+        response_set_cookie = response.headers.get("set-cookie", "")
+        if "sn_session=" not in response_set_cookie:
+            is_prod = settings.app_env.casefold() in {"production", "prod"}
+            cookie_name = "__Host-sn_session" if is_prod else "sn_session"
+            response.set_cookie(
+                key=cookie_name,
+                value=request.state.new_session_token,
+                httponly=True,
+                secure=is_prod,
+                samesite="lax",
+                max_age=24 * 3600,
+                path="/",
+            )
+            if is_prod:
+                response.set_cookie(
+                    key="sn_session",
+                    value=request.state.new_session_token,
+                    httponly=True,
+                    secure=True,
+                    samesite="lax",
+                    max_age=24 * 3600,
+                    path="/",
+                )
     return response
 
 app.include_router(reviewer_ui_router)
@@ -1053,6 +1116,9 @@ def audit_documents(payload: DocumentAuditRequest) -> DocumentAuditResponse:
 async def audit_document_upload(
     file: UploadFile = File(...),
     target_financial_year: str = "2026-27",
+    scheme_id: str | None = Form(default=None),
+    replaces_document_id: str | None = Form(default=None),
+    replacement_reason: str | None = Form(default=None),
     session: UserSession = Depends(get_current_session),
 ) -> dict:
     """Extract and pre-audit a document; group compatible consecutive PDF pages."""
@@ -1112,6 +1178,13 @@ async def audit_document_upload(
         use_fallback = os.getenv("ENABLE_LOCAL_FALLBACK_OCR", "false").lower() in ("true", "1")
         if use_fallback:
             extractor = LocalFallbackDocumentExtractor(current_filename=safe_fname)
+            if is_pdf:
+                try:
+                    import fitz
+                    with fitz.open(stream=raw, filetype="pdf") as pdf_doc:
+                        extractor.set_pdf_context(page_texts=[p.get_text() for p in pdf_doc])
+                except Exception:
+                    pass
         else:
             extractor = GeminiVisionExtractor()
 
@@ -1226,10 +1299,37 @@ async def audit_document_upload(
         except Exception:
             pass
 
+    persisted_records = []
+    effective_scheme_id = scheme_id
+    if not effective_scheme_id:
+        try:
+            prog = citizen_store.get_progress(session.session_id)
+            if prog and prog.get("active_scheme_id"):
+                effective_scheme_id = prog["active_scheme_id"]
+        except Exception:
+            pass
+
+    if effective_scheme_id:
+        for doc_item in extracted_payload:
+            try:
+                rec = citizen_store.save_scheme_document(
+                    session_id=session.session_id,
+                    scheme_id=effective_scheme_id,
+                    doc_dict=doc_item,
+                    filename=safe_fname,
+                    source_file_sha256=source_hash,
+                    replaces_doc_id=replaces_document_id,
+                    replacement_reason=replacement_reason,
+                )
+                persisted_records.append(rec)
+            except Exception as e:
+                logger.warning("Failed saving scheme document to SQLite: %s", e)
+
     return {
         # Logical documents are the units audited. PDF pages may be grouped when
         # their type, identity anchors and overlapping certificate fields agree.
         "extracted_documents": extracted_payload,
+        "persisted_documents": persisted_records,
         # Keep original Gemini page outputs so page-level provenance is inspectable.
         "page_extractions": page_extractions,
         "document_groups": document_groups,
@@ -2098,6 +2198,7 @@ def get_canonical_scheme_documents(scheme_id: str) -> dict[str, Any]:
 def audit_canonical_scheme_documents(
     scheme_id: str,
     payload: AuditAndPrepareRequest,
+    session: UserSession = Depends(get_current_session),
 ) -> IntelligentDocumentPreparationReport:
     scheme = catalog.get(scheme_id) or canonical_catalog.get(scheme_id)
     if not scheme:
@@ -2112,7 +2213,43 @@ def audit_canonical_scheme_documents(
     )
     if rep.scheme_id != scheme_id:
         rep = rep.model_copy(update={"scheme_id": scheme_id})
+    try:
+        session_id = session.session_id if isinstance(session, UserSession) else "anonymous"
+        citizen_store.save_scheme_audit_report(session_id, scheme_id, rep.model_dump(mode="json"))
+    except Exception:
+        pass
     return rep
+
+
+@app.get("/canonical-schemes/{scheme_id}/documents/state", tags=["canonical_schemes"])
+def get_canonical_scheme_documents_state(
+    scheme_id: str,
+    session: UserSession = Depends(get_current_session),
+) -> dict[str, Any]:
+    session_id = session.session_id if isinstance(session, UserSession) else "anonymous"
+    active_docs = citizen_store.get_scheme_documents(session_id, scheme_id, include_superseded=False)
+    history = citizen_store.get_scheme_document_history(session_id, scheme_id)
+    latest_audit = citizen_store.get_latest_scheme_audit(session_id, scheme_id)
+    return {
+        "scheme_id": scheme_id,
+        "active_documents": [d["extracted"] for d in active_docs],
+        "active_document_records": active_docs,
+        "history": history,
+        "latest_audit": latest_audit,
+        "total_active": len(active_docs),
+        "total_superseded": len([h for h in history if h.get("status") == "superseded"]),
+    }
+
+
+@app.delete("/canonical-schemes/{scheme_id}/documents/{document_id}", tags=["canonical_schemes"])
+def delete_canonical_scheme_document(
+    scheme_id: str,
+    document_id: str,
+    session: UserSession = Depends(get_current_session),
+) -> dict[str, Any]:
+    session_id = session.session_id if isinstance(session, UserSession) else "anonymous"
+    ok = citizen_store.remove_scheme_document(session_id, scheme_id, document_id)
+    return {"status": "removed" if ok else "not_found", "document_id": document_id}
 
 
 @app.get("/canonical-schemes/{scheme_id}/factsheet", tags=["canonical_schemes"])

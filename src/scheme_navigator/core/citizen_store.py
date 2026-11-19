@@ -1,8 +1,10 @@
 """Persistent SQLite store for CitizenProfile, scoped InterviewRuns, and single-active-scheme Progress."""
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
+import secrets
 import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
@@ -442,15 +444,228 @@ class CitizenProfileStore:
             }
 
     # -------------------------------------------------------------------------
+    # SCHEME DOCUMENT AUDIT & VERSIONED REPLACEMENT OPERATIONS
+    # -------------------------------------------------------------------------
+
+    def save_scheme_document(
+        self,
+        session_id: str,
+        scheme_id: str,
+        doc_dict: dict[str, Any],
+        filename: str,
+        source_file_sha256: str,
+        replaces_doc_id: str | None = None,
+        replacement_reason: str | None = None,
+    ) -> dict[str, Any]:
+        """Save a scheme document with strict audit lineage and versioning.
+
+        If replaces_doc_id is provided or an active document of the same type exists,
+        the prior record is marked 'superseded' with superseded_by and replacement_reason.
+        Prior records are NEVER erased.
+        """
+        now_iso = datetime.now(timezone.utc).isoformat()
+        doc_type = doc_dict.get("document_type") or "unknown"
+        doc_id = f"doc_{secrets.token_hex(12)}"
+        doc_dict["document_id"] = doc_id
+
+        with self._conn() as conn:
+            prior_doc = None
+            if replaces_doc_id:
+                prior_doc = conn.execute(
+                    "SELECT * FROM citizen_scheme_documents WHERE session_id = ? AND scheme_id = ? AND document_id = ?",
+                    (session_id, scheme_id, replaces_doc_id),
+                ).fetchone()
+
+            if not prior_doc:
+                # Check if there is an active document of the same document_type to supersede
+                prior_doc = conn.execute(
+                    "SELECT * FROM citizen_scheme_documents WHERE session_id = ? AND scheme_id = ? AND document_type = ? AND status = 'active' ORDER BY version DESC LIMIT 1",
+                    (session_id, scheme_id, doc_type),
+                ).fetchone()
+
+            version = 1
+            if prior_doc:
+                version = int(prior_doc["version"]) + 1
+                reason = replacement_reason or f"Superseded by updated {doc_type} (v{version})"
+                conn.execute(
+                    """
+                    UPDATE citizen_scheme_documents
+                    SET status = 'superseded', superseded_by = ?, replacement_reason = ?, updated_at = ?
+                    WHERE document_id = ?
+                    """,
+                    (doc_id, reason, now_iso, prior_doc["document_id"]),
+                )
+
+            extracted_json = json.dumps(doc_dict)
+            findings_json = json.dumps(doc_dict.get("findings", []))
+
+            conn.execute(
+                """
+                INSERT INTO citizen_scheme_documents
+                (document_id, session_id, scheme_id, document_type, version, status,
+                 source_file_sha256, filename, extracted_json, findings_json, superseded_by,
+                 replacement_reason, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, 'active', ?, ?, ?, ?, NULL, NULL, ?, ?)
+                """,
+                (
+                    doc_id,
+                    session_id,
+                    scheme_id,
+                    doc_type,
+                    version,
+                    source_file_sha256,
+                    filename,
+                    extracted_json,
+                    findings_json,
+                    now_iso,
+                    now_iso,
+                ),
+            )
+            conn.commit()
+
+        return {
+            "document_id": doc_id,
+            "session_id": session_id,
+            "scheme_id": scheme_id,
+            "document_type": doc_type,
+            "version": version,
+            "status": "active",
+            "source_file_sha256": source_file_sha256,
+            "filename": filename,
+            "extracted": doc_dict,
+            "supersedes": prior_doc["document_id"] if prior_doc else None,
+            "created_at": now_iso,
+        }
+
+    def get_scheme_documents(
+        self,
+        session_id: str,
+        scheme_id: str,
+        include_superseded: bool = False,
+    ) -> list[dict[str, Any]]:
+        """Retrieve documents for this session and scheme. Default returns only active documents."""
+        with self._conn() as conn:
+            if include_superseded:
+                rows = conn.execute(
+                    "SELECT * FROM citizen_scheme_documents WHERE session_id = ? AND scheme_id = ? AND status != 'removed' ORDER BY document_type, version ASC",
+                    (session_id, scheme_id),
+                ).fetchall()
+            else:
+                rows = conn.execute(
+                    "SELECT * FROM citizen_scheme_documents WHERE session_id = ? AND scheme_id = ? AND status = 'active' ORDER BY created_at ASC",
+                    (session_id, scheme_id),
+                ).fetchall()
+
+            results = []
+            for r in rows:
+                try:
+                    ext = json.loads(r["extracted_json"])
+                except Exception:
+                    ext = {}
+                results.append({
+                    "document_id": r["document_id"],
+                    "session_id": r["session_id"],
+                    "scheme_id": r["scheme_id"],
+                    "document_type": r["document_type"],
+                    "version": r["version"],
+                    "status": r["status"],
+                    "source_file_sha256": r["source_file_sha256"],
+                    "filename": r["filename"],
+                    "extracted": ext,
+                    "superseded_by": r["superseded_by"],
+                    "replacement_reason": r["replacement_reason"],
+                    "created_at": r["created_at"],
+                    "updated_at": r["updated_at"],
+                })
+            return results
+
+    def get_scheme_document_history(
+        self,
+        session_id: str,
+        scheme_id: str,
+    ) -> list[dict[str, Any]]:
+        """Retrieve all documents including superseded ones, structured as audit history."""
+        return self.get_scheme_documents(session_id, scheme_id, include_superseded=True)
+
+    def remove_scheme_document(self, session_id: str, scheme_id: str, document_id: str) -> bool:
+        """Mark document as removed, preserving statutory audit record."""
+        now_iso = datetime.now(timezone.utc).isoformat()
+        with self._conn() as conn:
+            cur = conn.execute(
+                """
+                UPDATE citizen_scheme_documents
+                SET status = 'removed', updated_at = ?
+                WHERE session_id = ? AND scheme_id = ? AND document_id = ?
+                """,
+                (now_iso, session_id, scheme_id, document_id),
+            )
+            conn.commit()
+            return cur.rowcount > 0
+
+    def save_scheme_audit_report(
+        self,
+        session_id: str,
+        scheme_id: str,
+        report_data: dict[str, Any],
+    ) -> str:
+        """Persist document audit findings and readiness calculation in SQLite."""
+        now_iso = datetime.now(timezone.utc).isoformat()
+        audit_id = hashlib.sha256(f"{session_id}:{scheme_id}:{now_iso}".encode("utf-8")).hexdigest()[:16]
+        readiness = int(report_data.get("readiness_percentage", 0))
+        summary = str(report_data.get("readiness_summary", report_data.get("audit_summary", "")))
+        report_json = json.dumps(report_data)
+
+        with self._conn() as conn:
+            conn.execute(
+                """
+                INSERT INTO citizen_scheme_audit_history
+                (audit_id, session_id, scheme_id, readiness_percentage, audit_summary, report_json, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (audit_id, session_id, scheme_id, readiness, summary, report_json, now_iso),
+            )
+            conn.commit()
+        return audit_id
+
+    def get_latest_scheme_audit(
+        self,
+        session_id: str,
+        scheme_id: str,
+    ) -> dict[str, Any] | None:
+        """Retrieve latest persisted audit report for this scheme."""
+        with self._conn() as conn:
+            row = conn.execute(
+                "SELECT * FROM citizen_scheme_audit_history WHERE session_id = ? AND scheme_id = ? ORDER BY created_at DESC LIMIT 1",
+                (session_id, scheme_id),
+            ).fetchone()
+            if not row:
+                return None
+            try:
+                report = json.loads(row["report_json"])
+            except Exception:
+                report = {}
+            return {
+                "audit_id": row["audit_id"],
+                "session_id": row["session_id"],
+                "scheme_id": row["scheme_id"],
+                "readiness_percentage": row["readiness_percentage"],
+                "audit_summary": row["audit_summary"],
+                "report": report,
+                "created_at": row["created_at"],
+            }
+
+    # -------------------------------------------------------------------------
     # RESET DATA & RETENTION PURGE
     # -------------------------------------------------------------------------
 
     def reset_citizen_data(self, session_id: str) -> bool:
-        """Securely wipe the citizen's profile, interview runs, and progress records."""
+        """Securely wipe the citizen's profile, interview runs, progress, documents, and audit history."""
         with self._conn() as conn:
             conn.execute("DELETE FROM citizen_profiles WHERE session_id = ?", (session_id,))
             conn.execute("DELETE FROM interview_runs WHERE session_id = ?", (session_id,))
             conn.execute("DELETE FROM citizen_progress WHERE session_id = ?", (session_id,))
+            conn.execute("DELETE FROM citizen_scheme_documents WHERE session_id = ?", (session_id,))
+            conn.execute("DELETE FROM citizen_scheme_audit_history WHERE session_id = ?", (session_id,))
             conn.commit()
         return True
 
@@ -464,8 +679,18 @@ class CitizenProfileStore:
             r_deleted = cur2.rowcount
             cur3 = conn.execute("DELETE FROM citizen_progress WHERE updated_at < ?", (cutoff_iso,))
             pr_deleted = cur3.rowcount
+            cur4 = conn.execute("DELETE FROM citizen_scheme_documents WHERE updated_at < ?", (cutoff_iso,))
+            docs_deleted = cur4.rowcount
+            cur5 = conn.execute("DELETE FROM citizen_scheme_audit_history WHERE created_at < ?", (cutoff_iso,))
+            audits_deleted = cur5.rowcount
             conn.commit()
-        return {"profiles_purged": p_deleted, "interview_runs_purged": r_deleted, "progress_purged": pr_deleted}
+        return {
+            "profiles_purged": p_deleted,
+            "interview_runs_purged": r_deleted,
+            "progress_purged": pr_deleted,
+            "documents_purged": docs_deleted,
+            "audits_purged": audits_deleted,
+        }
 
 
 citizen_store = CitizenProfileStore()

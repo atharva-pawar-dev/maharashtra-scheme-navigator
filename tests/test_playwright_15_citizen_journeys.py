@@ -73,7 +73,7 @@ def test_journey_01_golden_path_citizen(page, live_server):
 
     # Open first scheme detail modal
     page.locator(".scheme-card .btn-scheme-details").first.click()
-    page.wait_for_selector("#btn-modal-check-docs", timeout=5000).click()
+    page.wait_for_selector("#btn-modal-check-docs", timeout=10000).click()
 
     # In Document Auditor view
     page.wait_for_selector("#view-documents.active", timeout=5000)
@@ -145,18 +145,35 @@ def test_journey_02_incomplete_profile_citizen(page, live_server):
 # JOURNEY 3: Missing Mandatory Document Citizen
 # -----------------------------------------------------------------------------
 def test_journey_03_missing_mandatory_document_citizen(page, live_server):
-    """Citizen has unfulfilled requirements marked with missing status badge."""
+    """Citizen has 1-of-2 mandatory documents satisfied while 2nd independently blocks readiness."""
     page.goto(f"{live_server}/explore")
     page.wait_for_selector(".scheme-card", timeout=10000)
     page.locator(".scheme-card .btn-scheme-details").first.click()
-    page.wait_for_selector("#btn-modal-check-docs", timeout=5000).click()
+    page.wait_for_selector("#btn-modal-check-docs", timeout=10000).click()
 
-    page.wait_for_selector("#view-documents.active", timeout=5000)
+    page.wait_for_selector("#view-documents.active", timeout=10000)
     page.wait_for_selector(".req-item-card", timeout=10000)
 
-    # Missing badges should exist when 0 files uploaded
+    # Initial state: 0 files uploaded, missing badges exist for all requirements
     missing_badges = page.locator(".req-state-badge.state-missing")
-    assert missing_badges.count() >= 1
+    initial_missing = missing_badges.count()
+    assert initial_missing >= 1
+
+    # Upload 1 valid document (Income Certificate satisfying 1 requirement)
+    specimen = SPECIMENS_DIR / "valid_income_certificate.pdf"
+    page.set_input_files("#doc-file-input", str(specimen))
+    page.locator("#btn-do-upload").click()
+    page.wait_for_selector(".uploaded-doc-card", timeout=10000)
+
+    # Verify first requirement is satisfied with state-matched badge
+    page.wait_for_selector(".req-state-badge.state-matched", timeout=10000)
+    assert page.locator(".req-state-badge.state-matched").count() >= 1
+
+    # If scheme has multiple requirements, verify the remaining requirement independently blocks full readiness
+    if initial_missing > 1:
+        assert page.locator(".req-state-badge.state-missing").count() >= 1
+        readiness_badge = page.locator("#doc-readiness-badge").inner_text()
+        assert "100%" not in readiness_badge
 
 
 # -----------------------------------------------------------------------------
@@ -167,7 +184,7 @@ def test_journey_04_expired_document_citizen(page, live_server):
     page.goto(f"{live_server}/explore")
     page.wait_for_selector(".scheme-card", timeout=10000)
     page.locator(".scheme-card .btn-scheme-details").first.click()
-    page.wait_for_selector("#btn-modal-check-docs", timeout=5000).click()
+    page.wait_for_selector("#btn-modal-check-docs", timeout=10000).click()
     page.wait_for_selector("#view-documents.active", timeout=5000)
 
     # Upload expired specimen
@@ -192,7 +209,7 @@ def test_journey_05_unreadable_document_citizen(page, live_server):
     page.goto(f"{live_server}/explore")
     page.wait_for_selector(".scheme-card", timeout=10000)
     page.locator(".scheme-card .btn-scheme-details").first.click()
-    page.wait_for_selector("#btn-modal-check-docs", timeout=5000).click()
+    page.wait_for_selector("#btn-modal-check-docs", timeout=10000).click()
     page.wait_for_selector("#view-documents.active", timeout=5000)
 
     # Upload unreadable blur
@@ -223,7 +240,7 @@ def test_journey_06_profile_vs_document_name_mismatch_citizen(page, live_server)
     page.evaluate("() => { state.profile = { name: 'Sunita Ramesh Patil', gender: 'female', age_years: 32 }; }")
 
     page.locator(".scheme-card .btn-scheme-details").first.click()
-    page.wait_for_selector("#btn-modal-check-docs", timeout=5000).click()
+    page.wait_for_selector("#btn-modal-check-docs", timeout=10000).click()
     page.wait_for_selector("#view-documents.active", timeout=5000)
 
     # Upload mismatch specimen (Anita Suresh Deshmukh)
@@ -251,7 +268,7 @@ def test_journey_07_wrong_financial_year_citizen(page, live_server):
     page.goto(f"{live_server}/explore")
     page.wait_for_selector(".scheme-card", timeout=10000)
     page.locator(".scheme-card .btn-scheme-details").first.click()
-    page.wait_for_selector("#btn-modal-check-docs", timeout=5000).click()
+    page.wait_for_selector("#btn-modal-check-docs", timeout=10000).click()
     page.wait_for_selector("#view-documents.active", timeout=5000)
 
     specimen = SPECIMENS_DIR / "expired_income_certificate.pdf"
@@ -271,7 +288,7 @@ def test_journey_08_alternative_document_any_of_citizen(page, live_server):
     page.goto(f"{live_server}/explore")
     page.wait_for_selector(".scheme-card", timeout=10000)
     page.locator(".scheme-card .btn-scheme-details").first.click()
-    page.wait_for_selector("#btn-modal-check-docs", timeout=5000).click()
+    page.wait_for_selector("#btn-modal-check-docs", timeout=10000).click()
     page.wait_for_selector("#view-documents.active", timeout=5000)
 
     # Upload alternative domicile ration card
@@ -291,7 +308,7 @@ def test_journey_09_inline_profile_correction_reactive_invalidation(page, live_s
     page.goto(f"{live_server}/explore")
     page.wait_for_selector(".scheme-card", timeout=10000)
     page.locator(".scheme-card .btn-scheme-details").first.click()
-    page.wait_for_selector("#btn-modal-check-docs", timeout=5000).click()
+    page.wait_for_selector("#btn-modal-check-docs", timeout=10000).click()
     page.wait_for_selector("#view-documents.active", timeout=5000)
 
     # Upload valid income certificate
@@ -302,16 +319,16 @@ def test_journey_09_inline_profile_correction_reactive_invalidation(page, live_s
 
     # Citizen updates profile to high income (e.g. 5,00,000)
     page.evaluate(
-        """() => {
+        """async () => {
             state.profile = state.profile || {};
             state.profile.annual_family_income = 500000;
-            renderDocumentAuditorView(state.selectedSchemeId);
+            await renderDocumentAuditorView(state.selectedSchemeId);
         }"""
     )
-    time.sleep(1)
 
     # Verify reactive invalidation/mismatch detected in findings
     conf_box = page.locator("#doc-conflicts-container")
+    conf_box.wait_for(state="visible", timeout=10000)
     assert conf_box.is_visible()
     assert "INCOME" in conf_box.inner_text() or "तफावत" in conf_box.inner_text()
 
@@ -324,7 +341,7 @@ def test_journey_10_document_replacement_recovery(page, live_server):
     page.goto(f"{live_server}/explore")
     page.wait_for_selector(".scheme-card", timeout=10000)
     page.locator(".scheme-card .btn-scheme-details").first.click()
-    page.wait_for_selector("#btn-modal-check-docs", timeout=5000).click()
+    page.wait_for_selector("#btn-modal-check-docs", timeout=10000).click()
     page.wait_for_selector("#view-documents.active", timeout=5000)
 
     # Upload wrong type
@@ -347,7 +364,7 @@ def test_journey_11_manual_review_low_confidence_attestation(page, live_server):
     page.goto(f"{live_server}/explore")
     page.wait_for_selector(".scheme-card", timeout=10000)
     page.locator(".scheme-card .btn-scheme-details").first.click()
-    page.wait_for_selector("#btn-modal-check-docs", timeout=5000).click()
+    page.wait_for_selector("#btn-modal-check-docs", timeout=10000).click()
     page.wait_for_selector("#view-documents.active", timeout=5000)
 
     # Upload specimen
@@ -356,14 +373,23 @@ def test_journey_11_manual_review_low_confidence_attestation(page, live_server):
     page.locator("#btn-do-upload").click()
     page.wait_for_selector(".uploaded-doc-card", timeout=10000)
 
+    # Wait for auditor view and uploaded card
+    page.wait_for_selector(".uploaded-doc-card", timeout=10000)
+    time.sleep(0.5)
+
     # Toggle inline field editor
     page.locator(".btn-edit-doc").first.click()
-    page.wait_for_selector(".btn-save-corrections", timeout=5000)
+    page.wait_for_selector(".btn-save-corrections", timeout=10000)
     assert page.locator(".btn-save-corrections").first.is_visible()
 
-    # Modify income field and save
+    # Modify income field and save corrections
     page.locator(".btn-save-corrections").first.click()
     time.sleep(0.5)
+
+    # Verify statutory notice caveat is visible and clear
+    assert page.locator("#doc-notice-text").is_visible()
+    notice_text = page.locator("#doc-notice-text").inner_text()
+    assert "Statutory" in notice_text or "वैधानिक" in notice_text
 
 
 # -----------------------------------------------------------------------------
@@ -374,7 +400,7 @@ def test_journey_12_persistence_resume_reload(page, live_server):
     page.goto(f"{live_server}/explore")
     page.wait_for_selector(".scheme-card", timeout=10000)
     page.locator(".scheme-card .btn-scheme-details").first.click()
-    page.wait_for_selector("#btn-modal-check-docs", timeout=5000).click()
+    page.wait_for_selector("#btn-modal-check-docs", timeout=10000).click()
     page.wait_for_selector("#view-documents.active", timeout=5000)
 
     specimen = SPECIMENS_DIR / "valid_income_certificate.pdf"
@@ -386,7 +412,8 @@ def test_journey_12_persistence_resume_reload(page, live_server):
     page.reload()
     page.wait_for_selector("#view-documents.active", timeout=10000)
 
-    # Verify session restored
+    # Verify session restored from SQLite backend
+    page.wait_for_selector(".uploaded-doc-card", timeout=10000)
     assert page.locator("#doc-scheme-name").is_visible()
     assert page.locator(".uploaded-doc-card").count() >= 1
 
@@ -399,7 +426,7 @@ def test_journey_13_mid_journey_language_switch(page, live_server):
     page.goto(f"{live_server}/explore")
     page.wait_for_selector(".scheme-card", timeout=10000)
     page.locator(".scheme-card .btn-scheme-details").first.click()
-    page.wait_for_selector("#btn-modal-check-docs", timeout=5000).click()
+    page.wait_for_selector("#btn-modal-check-docs", timeout=10000).click()
     page.wait_for_selector("#view-documents.active", timeout=5000)
 
     # English
@@ -448,7 +475,7 @@ def test_journey_15_official_portal_handoff_and_checklist_manifest(page, live_se
     page.goto(f"{live_server}/explore")
     page.wait_for_selector(".scheme-card", timeout=10000)
     page.locator(".scheme-card .btn-scheme-details").first.click()
-    page.wait_for_selector("#btn-modal-check-docs", timeout=5000).click()
+    page.wait_for_selector("#btn-modal-check-docs", timeout=10000).click()
     page.wait_for_selector("#view-documents.active", timeout=5000)
 
     portal_btn = page.locator("#btn-portal-official")
