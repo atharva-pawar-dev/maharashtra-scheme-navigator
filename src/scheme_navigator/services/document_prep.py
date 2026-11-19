@@ -312,12 +312,17 @@ def prepare_intelligent_document_audit(
 
     # 2.5 Profile vs Document consistency and scheme threshold checks
     if profile:
+        p_name = getattr(profile, "name", None) or (profile.get("name") if isinstance(profile, dict) else None)
+        p_income = getattr(profile, "annual_family_income", None)
+        if p_income is None and isinstance(profile, dict):
+            p_income = profile.get("annual_family_income")
+
         for doc in extracted_documents:
             # Name check
             doc_name = getattr(doc, "person_name", None)
-            if doc_name and getattr(profile, "name", None):
+            if doc_name and p_name:
                 from scheme_navigator.documents.audit import compare_person_names
-                comparison, score = compare_person_names(doc_name, profile.name)
+                comparison, score = compare_person_names(doc_name, p_name)
                 if comparison in ("mismatch", "phonetic_review", "cross_script"):
                     findings.append(
                         DocumentFinding(
@@ -325,7 +330,7 @@ def prepare_intelligent_document_audit(
                             severity="warning",
                             category="document_consistency",
                             message=(
-                                f"Profile name '{profile.name}' differs from name on document '{doc_name}'."
+                                f"Profile name '{p_name}' differs from name on document '{doc_name}'."
                             ),
                             recommended_action="Update profile name or submit name change / gazette affidavit.",
                             document_ids=[doc.document_id],
@@ -335,8 +340,8 @@ def prepare_intelligent_document_audit(
             # Income check
             doc_income = getattr(doc, "annual_family_income", None)
             if doc_income is not None:
-                if profile.annual_family_income is not None:
-                    diff = abs(doc_income - profile.annual_family_income)
+                if p_income is not None:
+                    diff = abs(doc_income - p_income)
                     if diff > 5000:
                         findings.append(
                             DocumentFinding(
@@ -344,7 +349,7 @@ def prepare_intelligent_document_audit(
                                 severity="warning",
                                 category="document_consistency",
                                 message=(
-                                    f"Declared annual income (₹{profile.annual_family_income:,}) differs from "
+                                    f"Declared annual income (₹{p_income:,}) differs from "
                                     f"income certificate (₹{doc_income:,}). Please confirm."
                                 ),
                                 recommended_action="Confirm the exact income certified by the revenue authority.",

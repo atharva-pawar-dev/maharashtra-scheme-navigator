@@ -1,8 +1,8 @@
 # Progress Tracker: Verified Catalogue v2 & Document Review Overhaul (PROGRESS.md)
-**Last Updated:** 2026-11-19T22:25:00+05:30  
-**Active Phase:** Complete — RC3 Document Intelligence, Scheme Coverage & Citizen Trust Hardening Verified  
+**Last Updated:** 2026-11-19T23:20:00+05:30  
+**Active Phase:** Complete — RC4 Real-World Document Intelligence & Citizen Trust Acceptance Verified  
 **Branch:** `feat/catalogue-v2`  
-**Milestone Tag:** `rc3-hardened`
+**Milestone Tag:** `rc4-accepted`
 
 ---
 
@@ -18,7 +18,7 @@
 | **Schemes with < 2 Substantive Criteria** | 0 in Tier A / B | **0 schemes** | **PASS** |
 | **Schemes with Verbatim Sourced Quotes** | 100% of Tier A | **100% of Tier A criteria verified against data/raw/** | **PASS** |
 | **Document Consistency Checks** | Mismatch + Expiry | **Income mismatch, Caste mismatch, Expiry, Unreadable** | **PASS** |
-| **Regression Test Invariance** | 0 Regressions | **606/606 Pytest + 47/47 Playwright Browser PASSED** | **PASS** |
+| **Regression Test Invariance** | 0 Regressions | **613/613 Pytest + 47/47 Playwright Browser PASSED** | **PASS** |
 | **Canary Mutation Detection** | 12/12 caught | **12/12 Individual Appendix H5 Canaries Caught** | **PASS** |
 
 ---
@@ -73,3 +73,13 @@
   - Exact trilingual symmetry across 112 keys in `static/index.html` verified via Playwright in Chromium.
   - Full test suite: **606/606 tests passing**, **12/12 canaries caught**.
   - Tagged `rc3-hardened`.
+
+- [x] **Phase 9: RC4 Real-World Document Intelligence & Citizen Trust Acceptance** (Completed 2026-11-19)
+  - Verified 6 document processing routes end-to-end: Searchable PDF, Scanned PDF (Tesseract OCR), Multi-page with gap detection, Mobile phone photo (EXIF orientation), Low-contrast official scan handling, and Trilingual extraction (EN, MR, HI).
+  - Field-level ground truth accuracy: 64/64 fields matched across Marathi, Hindi, and English specimens with 0 false rejections on readable low-contrast scans.
+  - Scheme-diverse document coverage: 12/12 scheme families executed end-to-end through discovery, requirements, upload, OCR, persistence, readiness, and official handoff (`reports/rc4_scheme_diverse_journey_evidence.json`).
+  - Proportional readiness math: Verified monotonic, non-collapsing score adjustments ($N \to N-1$, 100% $\to$ 80% $\to$ 60%) upon purge of individual documents, with valid ANY_OF alternate requirements logic.
+  - Staged DPDP commencement vs IT SPDI Rules 2011 distinction established across 7 data classes with concrete retention policies (`reports/rc4_retention_and_privacy_audit.md`).
+  - Trilingual UI & notices: Full 112-key parity across English, Marathi, Hindi with Devanagari numeral conversions and localized expiry notifications.
+  - Full regression test suite: **613/613 Pytest tests passing**, **47/47 Playwright browser tests passing**, **12/12 canaries caught**.
+  - Milestone Tag: `rc4-accepted`.

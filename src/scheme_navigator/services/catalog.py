@@ -89,6 +89,14 @@ class SchemeCatalog:
         for s in self._schemes.values():
             if s.scheme_id == scheme_id or getattr(s, "canonical_scheme_id", None) == scheme_id:
                 return s
+        from scheme_navigator.source_registry.registry import CANONICAL_SCHEME_ALIAS_MAP
+        alias_target = CANONICAL_SCHEME_ALIAS_MAP.get(scheme_id.upper())
+        if alias_target:
+            if alias_target in self._schemes:
+                return self._schemes[alias_target]
+            for s in self._schemes.values():
+                if s.scheme_id == alias_target or getattr(s, "canonical_scheme_id", None) == alias_target:
+                    return s
         if hasattr(self, "_canonical_service") and self._canonical_service:
             return self._canonical_service.get(scheme_id)
         return canonical_catalog.get(scheme_id) if "canonical_catalog" in globals() else None
@@ -361,6 +369,14 @@ class CanonicalCatalogService:
         for s in self._schemes.values():
             if s.scheme_id == scheme_id or getattr(s, "canonical_scheme_id", None) == scheme_id:
                 return s
+        from scheme_navigator.source_registry.registry import CANONICAL_SCHEME_ALIAS_MAP
+        alias_target = CANONICAL_SCHEME_ALIAS_MAP.get(scheme_id.upper())
+        if alias_target:
+            if alias_target in self._schemes:
+                return self._schemes[alias_target]
+            for s in self._schemes.values():
+                if s.scheme_id == alias_target or getattr(s, "canonical_scheme_id", None) == alias_target:
+                    return s
         return None
 
 

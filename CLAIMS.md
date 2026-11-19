@@ -1,6 +1,6 @@
 # Honest Claims Register (CLAIMS.md)
 **Project:** Maharashtra Scheme Navigator  
-**Last Updated:** 2026-11-19T22:25:00+05:30  
+**Last Updated:** 2026-11-19T23:15:00+05:30  
 **Governing Standard:** Production Release Program v2.0 (Part E2, Appendix H4)  
 **Rule:** Outcome is computed, not asserted. Any claim without direct, reproducible primary-source evidence is refuted.
 
@@ -14,22 +14,25 @@
 | **C-02** | 17 Tier A Flagship schemes have 100% verified verbatim Marathi quotes matching official GR documents. | `data/raw/`, `scripts/build_verified_catalogue_v2.py`, `tests/test_catalogue_v2_contracts.py` | **CONFIRMED** |
 | **C-03** | 13 Tier B schemes implement strict municipal corporation isolation (PMC, PCMC, BMC, TMC, NMMC). | `src/scheme_navigator/domain/jurisdiction.py`, `tests/test_municipal_and_jurisdiction_matching.py` | **CONFIRMED** |
 | **C-04** | All 44 Tier C schemes are explicitly marked `verification_status="unverified"` and `eligibility_incomplete=true`. | `data/catalogue/schemes.json`, `tests/test_catalogue_v2_contracts.py` | **CONFIRMED** |
-| **C-05** | Document Auditor handles full lifecycle: upload, magic-byte validation, PyMuPDF OCR extraction, rule matching, findings, inline correction, and SQLite persistence. | `tests/test_playwright_backend_restart_persistence.py`, `tests/test_document_*.py` | **CONFIRMED** |
-| **C-06** | The test suite is strictly non-weakening: 606 tests pass with zero regressions (including 47 Playwright browser tests). | `pytest tests/` run output: 606 passed in 245.02s, exit code 0 | **CONFIRMED** |
+| **C-05** | Document Auditor handles full lifecycle: upload, magic-byte validation, OCR extraction, rule matching, findings, inline correction, and SQLite persistence. | `tests/test_playwright_backend_restart_persistence.py`, `tests/test_document_*.py` | **CONFIRMED** |
+| **C-06** | The test suite is strictly non-weakening: **613 tests pass with zero regressions** (including 47 Playwright browser tests). | `pytest tests/` run output: 613 passed, exit code 0 | **CONFIRMED** |
 | **C-07** | All 12/12 individual Appendix H5 canary mutations are caught by tests on the real codebase. | `release/evidence/ws15/E-WS15-002_canary_mutations_individual.json` | **CONFIRMED** |
-| **C-08** | Sensitive Aadhaar numbers are verified via Verhoeff $D_5$ algorithm and masked to `XXXX-XXXX-1234`. | `src/scheme_navigator/security/aadhaar_privacy.py`, `tests/test_aadhaar_privacy.py` | **CONFIRMED** |
-| **C-09** | Public factsheets contain zero citizen PII and provide official Government Resolution citations. | `src/scheme_navigator/services/catalog.py`, `tests/test_browser_document_auditor_journey.py` | **CONFIRMED** |
-| **C-10** | Document consistency engine detects income mismatches, caste mismatches, unreadable scans, and expired documents. | `src/scheme_navigator/services/document_prep.py`, `tests/test_document_review_overhaul.py` | **CONFIRMED** |
-| **C-11** | Local SQLite disaster recovery drill restores database with 100% checksum match in 0.337 seconds. | `scripts/dr_drill.py`, `release/evidence/ws15/E-WS15-001_dr_drill_full.json` | **CONFIRMED** |
-| **C-12** | Trilingual UI (English, Marathi, Hindi) renders with zero missing translation keys or raw backend identifiers across 112 keys. | `tests/test_browser_citizen_experience.py`, `tests/test_trilingual_parity.py` | **CONFIRMED** |
-| **C-13** | SQLite persistence is authoritative across hard backend process restarts (Migration v4 schema). | `tests/test_playwright_backend_restart_persistence.py`, `reports/evidence_screenshots/` | **CONFIRMED** |
-| **C-14** | Document replacement implements non-destructive lineage ($v1 \to v2$) with immutable audit history preserved in SQLite. | `tests/test_sqlite_persistence_and_replacement.py`, `src/scheme_navigator/core/citizen_store.py` | **CONFIRMED** |
-| **C-15** | Local fallback OCR extracts from PyMuPDF document text streams with zero filename heuristics. | `tests/test_local_fallback_ocr_content.py`, `src/scheme_navigator/documents/audit.py` | **CONFIRMED** |
-| **C-16** | Document classification supports 4 physical mediums (`SEARCHABLE_PDF`, `SCANNED_PDF`, `PHOTOGRAPH`, `IMAGE`) with image quality rejections (blur $\sigma^2 < 45.0$, resolution $< 250\text{px}$) and Devanagari numeral translation. | `tests/test_ocr_and_document_intelligence.py`, `src/scheme_navigator/documents/audit.py` | **CONFIRMED** |
-| **C-17** | Scheme-diverse document requirements modeled across 12 representative families with alternative (ANY_OF) proof support. | `docs/quality/scheme_diverse_document_coverage.md`, `tests/test_scheme_diverse_document_requirements.py` | **CONFIRMED** |
-| **C-18** | SQLite Migration 5 database triggers prevent unauthorized mutation of document hashes, versions, or audit history. | `tests/test_immutable_audit_history.py`, `src/scheme_navigator/core/migrations.py` | **CONFIRMED** |
-| **C-19** | 24-hour privacy retention ceiling purge reactively invalidates downstream citizen readiness to 0% with localized notices in EN, MR, HI. | `tests/test_document_retention_and_readiness.py`, `src/scheme_navigator/services/document_prep.py` | **CONFIRMED** |
+| **C-08** | Complete trilingual UI and document guidance across English, Marathi, and Hindi (112 keys with zero leakage). | `static/index.html`, `tests/test_trilingual_parity.py`, `reports/rc4_multilingual_acceptance.md` | **CONFIRMED** |
+| **C-09** | SQLite database operations use WAL mode with immediate transaction isolation and strict restart durability. | `src/scheme_navigator/core/citizen_store.py`, `tests/test_sqlite_persistence_and_replacement.py` | **CONFIRMED** |
+| **C-10** | Demo fixture `demo-majhi-ladki-bahin` is quarantined and cannot trigger verified eligibility in production. | `tests/test_fail_closed_activation.py`, `tests/test_browser_citizen_experience.py` | **CONFIRMED** |
+| **C-11** | Unapproved rules or draft schemes fail closed to Caseworker Review (`NEEDS_REVIEW`). | `tests/test_fail_closed_activation.py`, `src/scheme_navigator/domain/rules.py` | **CONFIRMED** |
+| **C-12** | Right to Services (RTS) statutory delivery timelines are rendered on factsheets and document preparation modals. | `data/source_registry/canonical_schemes.json`, `static/index.html` | **CONFIRMED** |
+| **C-13** | Verification Tier badges (`Tier A Verified`, `Tier B Verified`, `Tier C Under Review`) reflect authentic evidentiary status. | `static/index.html`, `tests/test_trust_verification_ui.py` | **CONFIRMED** |
+| **C-14** | All 15 mandatory citizen journeys (J01–J15) pass in real Chromium via Playwright. | `reports/final_citizen_journey_evidence.json`, `tests/test_playwright_15_citizen_journeys.py` | **CONFIRMED** |
+| **C-15** | Document replacement strictly tracks lineage ($v1 \to v2$) with immutable SQLite triggers protecting history. | `tests/test_immutable_audit_history.py`, `src/scheme_navigator/core/citizen_store.py` | **CONFIRMED** |
+| **C-16** | Document medium is explicitly categorized (`SEARCHABLE_PDF`, `SCANNED_PDF`, `PHOTOGRAPH`, `IMAGE`). | `tests/test_ocr_and_document_intelligence.py`, `src/scheme_navigator/documents/audit.py` | **CONFIRMED** |
+| **C-17** | Image quality gates mathematically detect blur (Laplacian $< 45.0$) and resolution ($< 250$px). | `tests/test_ocr_and_document_intelligence.py`, `src/scheme_navigator/documents/audit.py` | **CONFIRMED** |
+| **C-18** | Devanagari numerals (`०-९`) and vernacular formats are accurately parsed into integers and ISO dates. | `tests/test_ocr_and_document_intelligence.py`, `src/scheme_navigator/documents/audit.py` | **CONFIRMED** |
+| **C-19** | Document retention purge reactively invalidates downstream readiness proportionally (e.g. 4/5 = 80%, not 0%) with localized re-upload notices in EN, MR, HI. | `tests/test_rc4_retention_and_readiness_math.py`, `tests/test_document_retention_and_readiness.py` | **CONFIRMED** |
 | **C-20** | Eligibility status is normalized to `MEETS_VERIFIED_CRITERIA` (`meets_verified_criteria`) with fail-closed protection for unapproved rules/demo fixtures. | `tests/test_eligibility_state_model_consistency.py`, `src/scheme_navigator/domain/models.py` | **CONFIRMED** |
+| **C-21** | Field-level extraction matches ground truth with 100% precision (64/64 fields matched) across English, Marathi, Hindi specimens. | `reports/rc4_document_intelligence_accuracy.md`, `tests/test_rc4_document_intelligence_accuracy.py` | **CONFIRMED** |
+| **C-22** | 12 representative scheme families validated end-to-end with real upload journeys logged to structured JSON evidence. | `reports/rc4_scheme_diverse_journey_evidence.json`, `tests/test_rc4_scheme_diverse_e2e_journeys.py` | **CONFIRMED** |
+| **C-23** | Retention architecture reflects MeitY DPDP staged commencement facts and governs 7 distinct data classes under IT SPDI Rules 2011. | `reports/rc4_retention_and_privacy_audit.md`, `src/scheme_navigator/core/config.py` | **CONFIRMED** |
 
 ---
 
@@ -63,3 +66,4 @@
 | :---: | :--- | :--- | :---: |
 | **CR-01** | "The application has passed 23/24 release gates and is production ready." | Mechanically derived state is `INTERNAL_DEMO_READY` (8 PASS, 11 PARTIAL, 5 BLOCKED). | **REFUTED** |
 | **CR-02** | "Local OCR pre-check guarantees 100% government application approval." | Local pre-checks only verify document readability and consistency; official departments make final eligibility determinations. | **REFUTED** |
+| **CR-03** | "The 24-hour document purge is a universal statutory deadline under the DPDP Act." | The DPDP Act is in staged commencement by MeitY; the 24-hr purge is a platform privacy ceiling under IT SPDI Rules 2011 and data minimization. | **REFUTED** |

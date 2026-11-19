@@ -61,14 +61,23 @@ When a citizen lacks a primary certificate, uploading an approved alternative au
 
 ## 4. Verification & Testing Evidence
 
-All 12 scheme families were systematically audited via automated regression tests:
+All 12 scheme families were systematically audited via automated regression tests, distinguishing requirement graph inspection from actual upload-and-validation journeys:
+
+### 4.1 Requirement Graph & Alternative Logic Tests
 - **Suite:** `tests/test_scheme_diverse_document_requirements.py`
 - **Results:**
   - `test_representative_12_scheme_families_exist_in_registry`: **PASSED** (Dual ID lookup and metadata verified)
-  - `test_readiness_computation_for_all_12_schemes`: **PASSED** (Baseline 0% missing states verified)
+  - `test_readiness_computation_for_all_12_schemes`: **PASSED** (Baseline missing states verified)
   - `test_any_of_alternative_document_satisfaction`: **PASSED** (15-yr Ration Card satisfies Domicile)
   - `test_farmer_scheme_landholding_document_requirement`: **PASSED** (7/12 Mahabhulekh extract verified)
   - `test_sqlite_persistence_across_multiple_schemes`: **PASSED** (Cross-scheme attachments survive restart)
+
+### 4.2 Real End-to-End Upload, Audit, Readiness & Handoff Journeys (RC4)
+- **Suite:** `tests/test_rc4_scheme_diverse_e2e_journeys.py`
+- **Evidence Artifact:** `reports/rc4_scheme_diverse_journey_evidence.json`
+- **Results:**
+  - `test_rc4_scheme_diverse_e2e_journeys`: **PASSED** (12/12 successful citizen upload journeys)
+  - For every scheme family: Discover in catalog -> Resolve canonical alias (`MHA-S-0001` - `MHA-S-0012`) -> Verify official source & handoff channel -> Retrieve requirement graph -> Upload synthetic specimen -> Execute real document audit -> Verify findings & readiness math -> Verify SQLite persistence & restart durability.
 
 ---
 
