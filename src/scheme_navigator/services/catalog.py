@@ -203,7 +203,7 @@ class CanonicalCatalogService:
                         department=item.get("department", "Government of Maharashtra"),
                         summary=item.get("description_en") or f"Official scheme {item.get('name_en')}",
                         benefits=[item.get("benefit", {}).get("amount_text", "Government financial assistance")],
-                        required_documents=[d.get("label_en", "Required Document") for d in item.get("required_documents", [])] or ["Aadhaar Card"],
+                        required_documents=[(d.get("label_en") if isinstance(d, dict) else str(d)) for d in item.get("required_documents", [])] or ["Aadhaar Card"],
                         eligibility_rule=rule,
                         sources=[src],
                         rule_version="2.0.0",

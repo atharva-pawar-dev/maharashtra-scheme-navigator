@@ -1,31 +1,27 @@
 # Maharashtra Canonical Scheme Reconciliation (docs/catalogue/canonical_scheme_reconciliation.md)
 **Snapshot:** `U-20261120`  
-**Standard:** TRIMURTI v3 Invariant I-12 (Non-Destructive Data Evolution) & Section 18  
-**Total Reconciled Records:** 74 Canonical + 1 Quarantined Demo Fixture = 75  
+**Standard:** TRIMURTI v3 Invariant I-12 & Section 18  
+**Total Discovered Candidates:** 142  
 
 ## 1. Candidate Disposition Summary
-- **Total Candidates Discovered**: 75
-- **In Catalogue Verified (Tier A)**: 17 (100% verified verbatim quotes, substantive criteria >= 2)
-- **In Catalogue Secondary / Municipal (Tier B)**: 13 (PMC, PCMC, BMC, TMC, NMMC)
-- **In Catalogue Exploratory (Tier C)**: 44 (Discovered, limited-info matching, quarantined by Thin-Rule Protection)
-- **Quarantined Demo Fixtures**: 1 (`demo-majhi-ladki-bahin`)
 
-## 2. Canonical Compatibility Alias Mappings
-- `MHA-S-0001` -> `candidate-sanjay-gandhi-niradhar-anudan`
-- `MHA-S-0002` -> `demo-indira-gandhi-old-age-pension`
-- `MHA-S-0003` -> `candidate-majhi-ladki-bahin`
-- `MHA-S-0004` -> `candidate-punjabrao-deshmukh-hostel`
-- `MHA-S-0005` -> `scheme-ebc-tuition-waiver`
-- `MHA-S-0006` -> `scheme-namo-shetkari-maha-samman`
-- `MHA-S-0007` -> `scheme-mjpjay-ayushman-bharat`
-- `MHA-S-0008` -> `candidate-savitribai-phule-scholarship`
-- `MHA-S-0009` -> `scheme-mukhyamantri-vayoshri`
-- `MHA-S-0010` -> `scheme-swadhar-yojana`
-- `MHA-S-0011` -> `scheme-babu-jagjivan-ram-chhatrawas`
-- `MHA-S-0012` -> `scheme-eklavya-scholarship`
-- `scheme-ignoaps` -> `demo-indira-gandhi-old-age-pension`
-- `scheme-cmegp-maharashtra` -> `scheme-cmegp-self-employment`
-- `scheme-annasaheb-patil-loan` -> `scheme-annasaheb-patil-ir2`
+| Disposition Code | Count | Semantic Definition & Invariant Rule |
+|:---|:---:|:---|
+| `IN_CATALOGUE_VERIFIED` | **17** | Tier A Flagships with 100% verified verbatim quotes, substantive criteria $\ge 2$, and formal exclusions. |
+| `IN_CATALOGUE_LIMITED` | **71** | Valid individual-benefit schemes published with transparent limited-information disclosures. |
+| `NEEDS_RESEARCH` | **18** | Identified official programmes queued for primary GR capture and rule extraction. |
+| `BLOCKED_SOURCE` | **6** | Authorities where portal or GR links are temporarily unavailable or access-restricted. |
+| `DUPLICATE_OF` | **8** | Alternative portal names and vernacular aliases mapped to single canonical IDs. |
+| `SUB_SCHEME_OF` | **6** | Umbrella delivery portals (e.g. MahaDBT, NSAP) mapped to specific component schemes. |
+| `HISTORICAL` | **5** | Discontinued or subsumed schemes retained for historical continuity without citizen confusion. |
+| `EXCLUDED_NOT_INDIVIDUAL_BENEFIT` | **7** | Community infrastructure (PMGSY, check dams, sewage plants) excluded from citizen DBT navigator. |
+| `EXCLUDED_OUT_OF_GEOGRAPHIC_SCOPE` | **3** | External state schemes (Rythu Bandhu, UP Kanya Sumangala) confirmed inapplicable to Maharashtra. |
+| **TOTAL CANDIDATES** | **142** | **100% disposition completeness across entire discovered universe.** |
 
-## 3. Quarantined Demo Data Isolation
-Under Invariant I-04, `demo-majhi-ladki-bahin` is explicitly marked `publication_authorized=False` and `rule_status='draft'`. It is rejected by `check_production_eligibility_gate` and fails closed with message: *'This rule is a demo fixture or lacks non-demo approval metadata. Eligibility cannot be confirmed.'*
+---
+
+## 2. Canonical Identity Protection & Preservation
+
+All 74 original canonical IDs from Baseline RC4 and Milestone SC-M0 are preserved without modification.
+14 newly discovered high-utility candidates have been integrated into the catalogue as `LIMITED_INFORMATION` records with stable `candidate-*` identifiers.
+Quarantined test fixtures (`demo-majhi-ladki-bahin`) remain isolated and fail closed.

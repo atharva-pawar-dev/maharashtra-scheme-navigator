@@ -8688,5 +8688,867 @@
     "application_window_status": "APPLICATION_WINDOW_OPEN",
     "substantive_criteria_count": 0,
     "eligibility_incomplete": true
+  },
+  {
+    "id": "candidate-mahila-samman-msrtc",
+    "scheme_id": "candidate-mahila-samman-msrtc",
+    "name_en": "Mahila Samman Yojana (50% MSRTC Bus Concession)",
+    "name_mr": "महिला सन्मान योजना (एसटी बस प्रवासात ५०% सवलत)",
+    "name_hi": "महिला सम्मान योजना (एसटी बस में 50% छूट)",
+    "department": "Transport Department",
+    "level": "state",
+    "jurisdiction_scope": "MAHARASHTRA_STATE",
+    "summary": "50% concession on standard ticket fares across all ordinary and semi-luxury MSRTC buses for female residents of Maharashtra.",
+    "eligibility": [
+      {
+        "field": "resident_state",
+        "operator": "eq",
+        "value": "Maharashtra",
+        "type": "string"
+      },
+      {
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "type": "number"
+      }
+    ],
+    "benefit": {
+      "type": "direct_benefit",
+      "amount_text": "50% direct discount on bus tickets across all MSRTC ordinary, express, and Shivshahi bus routes within Maharashtra.",
+      "frequency": "recurring"
+    },
+    "exclusions": [
+      "Air-conditioned sleeper buses (Shivneri/Ashwamedh) are excluded from the 50% discount rate."
+    ],
+    "required_documents": [
+      "Aadhaar Card",
+      "Proof of Residency in Maharashtra"
+    ],
+    "sources": [
+      {
+        "title": "GR No. MSRTC/P-2023/54 dated 17 March 2023",
+        "url": "https://msrtc.maharashtra.gov.in",
+        "evidence_excerpt": "सर्व प्रकारच्या एसटी बस प्रवासात महिलांना तिकीट दरात ५०% सवलत."
+      }
+    ],
+    "verification": {
+      "status": "single_source_secondary",
+      "last_verified_at": "2026-11-20"
+    },
+    "application": {
+      "url": "https://msrtc.maharashtra.gov.in",
+      "mode": "offline"
+    },
+    "status": "active",
+    "is_decision_ready": false,
+    "public_status_category": "LIMITED_INFORMATION",
+    "advisory_banner": {
+      "en": "Informational Listing: This scheme has been identified from official Government of Maharashtra records but has not yet undergone full eligibility attestation. Eligibility cannot be definitively confirmed online. Please verify with the administering department before applying.",
+      "mr": "माहितीपर नोंद: ही योजना महाराष्ट्र शासनाच्या अधिकृत नोंदींमधून समाविष्ट केली आहे, परंतु अंतिम पात्रता पडताळणी प्रलंबित आहे. अर्ज करण्यापूर्वी संबंधित विभागाकडे खातरजमा करावी.",
+      "hi": "सूचनात्मक प्रविष्टि: यह योजना महाराष्ट्र सरकार के आधिकारिक रिकॉर्ड से पहचानी गई है, लेकिन इसकी अंतिम पात्रता सत्यापन लंबित है। कृपया आवेदन करने से पहले संबंधित विभाग से पुष्टि करें。"
+    }
+  },
+  {
+    "id": "candidate-amrit-jyeshtha-nagrik-msrtc",
+    "scheme_id": "candidate-amrit-jyeshtha-nagrik-msrtc",
+    "name_en": "Amrit Jyeshtha Nagrik Yojana (Free Travel 75+)",
+    "name_mr": "अमृत ज्येष्ठ नागरिक योजना (७५ वर्षांवरील ज्येष्ठांना मोफत एसटी प्रवास)",
+    "name_hi": "अमृत ज्येष्ठ नागरिक योजना (75+ मुफ्त यात्रा)",
+    "department": "Transport Department",
+    "level": "state",
+    "jurisdiction_scope": "MAHARASHTRA_STATE",
+    "summary": "100% free bus travel on MSRTC buses for all senior citizens of Maharashtra aged 75 years and above.",
+    "eligibility": [
+      {
+        "field": "resident_state",
+        "operator": "eq",
+        "value": "Maharashtra",
+        "type": "string"
+      },
+      {
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "type": "number"
+      }
+    ],
+    "benefit": {
+      "type": "direct_benefit",
+      "amount_text": "100% free ticket concession across all ordinary and semi-luxury MSRTC buses.",
+      "frequency": "recurring"
+    },
+    "exclusions": [
+      "Age less than 75 years (citizens aged 65-74 receive standard 50% senior citizen concession)."
+    ],
+    "required_documents": [
+      "Aadhaar Card or Voter ID proving age 75+"
+    ],
+    "sources": [
+      {
+        "title": "GR No. MSRTC/P-2022/411 dated 26 August 2022",
+        "url": "https://msrtc.maharashtra.gov.in",
+        "evidence_excerpt": "७५ वर्षे पूर्ण केलेल्या राज्यातील ज्येष्ठ नागरिकांना १००% मोफत प्रवास."
+      }
+    ],
+    "verification": {
+      "status": "single_source_secondary",
+      "last_verified_at": "2026-11-20"
+    },
+    "application": {
+      "url": "https://msrtc.maharashtra.gov.in",
+      "mode": "offline"
+    },
+    "status": "active",
+    "is_decision_ready": false,
+    "public_status_category": "LIMITED_INFORMATION",
+    "advisory_banner": {
+      "en": "Informational Listing: This scheme has been identified from official Government of Maharashtra records but has not yet undergone full eligibility attestation. Eligibility cannot be definitively confirmed online. Please verify with the administering department before applying.",
+      "mr": "माहितीपर नोंद: ही योजना महाराष्ट्र शासनाच्या अधिकृत नोंदींमधून समाविष्ट केली आहे, परंतु अंतिम पात्रता पडताळणी प्रलंबित आहे. अर्ज करण्यापूर्वी संबंधित विभागाकडे खातरजमा करावी.",
+      "hi": "सूचनात्मक प्रविष्टि: यह योजना महाराष्ट्र सरकार के आधिकारिक रिकॉर्ड से पहचानी गई है, लेकिन इसकी अंतिम पात्रता सत्यापन लंबित है। कृपया आवेदन करने से पहले संबंधित विभाग से पुष्टि करें。"
+    }
+  },
+  {
+    "id": "candidate-pm-svanidhi",
+    "scheme_id": "candidate-pm-svanidhi",
+    "name_en": "PM SVANidhi (Street Vendor Working Capital Loan)",
+    "name_mr": "पीएम स्वनिधी योजना (फेरीवाले कर्ज योजना)",
+    "name_hi": "पीएम स्वनिधि योजना",
+    "department": "Urban Development Department",
+    "level": "state",
+    "jurisdiction_scope": "MAHARASHTRA_STATE",
+    "summary": "Collateral-free working capital micro-loans of Rs 10,000 to Rs 50,000 with 7% interest subsidy for urban street vendors.",
+    "eligibility": [
+      {
+        "field": "resident_state",
+        "operator": "eq",
+        "value": "Maharashtra",
+        "type": "string"
+      },
+      {
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "type": "number"
+      }
+    ],
+    "benefit": {
+      "type": "direct_benefit",
+      "amount_text": "Initial working capital loan of Rs 10,000; upon timely repayment eligible for Rs 20,000 and Rs 50,000 tranches with 7% interest subsidy.",
+      "frequency": "recurring"
+    },
+    "exclusions": [
+      "Non-urban or non-vending occupations.",
+      "Defaulters with non-performing loans in commercial banks."
+    ],
+    "required_documents": [
+      "Certificate of Vending / ID Card issued by ULB",
+      "Aadhaar Card",
+      "Bank Account Passbook"
+    ],
+    "sources": [
+      {
+        "title": "MoHUA PM SVANidhi Guidelines",
+        "url": "https://pmsvanidhi.mohua.gov.in",
+        "evidence_excerpt": "Collateral-free working capital loan up to Rs 10,000 with 7% interest subvention."
+      }
+    ],
+    "verification": {
+      "status": "single_source_secondary",
+      "last_verified_at": "2026-11-20"
+    },
+    "application": {
+      "url": "https://pmsvanidhi.mohua.gov.in",
+      "mode": "online"
+    },
+    "status": "active",
+    "is_decision_ready": false,
+    "public_status_category": "LIMITED_INFORMATION",
+    "advisory_banner": {
+      "en": "Informational Listing: This scheme has been identified from official Government of Maharashtra records but has not yet undergone full eligibility attestation. Eligibility cannot be definitively confirmed online. Please verify with the administering department before applying.",
+      "mr": "माहितीपर नोंद: ही योजना महाराष्ट्र शासनाच्या अधिकृत नोंदींमधून समाविष्ट केली आहे, परंतु अंतिम पात्रता पडताळणी प्रलंबित आहे. अर्ज करण्यापूर्वी संबंधित विभागाकडे खातरजमा करावी.",
+      "hi": "सूचनात्मक प्रविष्टि: यह योजना महाराष्ट्र सरकार के आधिकारिक रिकॉर्ड से पहचानी गई है, लेकिन इसकी अंतिम पात्रता सत्यापन लंबित है। कृपया आवेदन करने से पहले संबंधित विभाग से पुष्टि करें。"
+    }
+  },
+  {
+    "id": "candidate-pm-vishwakarma",
+    "scheme_id": "candidate-pm-vishwakarma",
+    "name_en": "PM Vishwakarma Scheme (Traditional Artisans)",
+    "name_mr": "पीएम विश्वकर्मा योजना (पारंपरिक कारागीर कल्याण योजना)",
+    "name_hi": "पीएम विश्वकर्मा योजना",
+    "department": "Industries, Energy & Labour Department (MSME)",
+    "level": "state",
+    "jurisdiction_scope": "MAHARASHTRA_STATE",
+    "summary": "End-to-end support for 18 traditional family trades including recognition, skill training, Rs 15,000 toolkit e-voucher, and collateral-free loans up to Rs 3 lakh.",
+    "eligibility": [
+      {
+        "field": "resident_state",
+        "operator": "eq",
+        "value": "Maharashtra",
+        "type": "string"
+      },
+      {
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "type": "number"
+      }
+    ],
+    "benefit": {
+      "type": "direct_benefit",
+      "amount_text": "PM Vishwakarma Certificate & ID, Rs 500/day training stipend, Rs 15,000 toolkit incentive, and collateral-free credit at 5% interest.",
+      "frequency": "recurring"
+    },
+    "exclusions": [
+      "Government employees and their immediate family members.",
+      "Persons who have availed MUDRA or PMEGP loans in past 5 years with outstanding balance."
+    ],
+    "required_documents": [
+      "Aadhaar Card",
+      "Mobile Linked Bank Account",
+      "Ration Card"
+    ],
+    "sources": [
+      {
+        "title": "Ministry of MSME PM Vishwakarma Guidelines",
+        "url": "https://pmvishwakarma.gov.in",
+        "evidence_excerpt": "Collateral-free enterprise credit up to Rs 3 lakh at 5% interest and Rs 15,000 toolkit incentive."
+      }
+    ],
+    "verification": {
+      "status": "single_source_secondary",
+      "last_verified_at": "2026-11-20"
+    },
+    "application": {
+      "url": "https://pmvishwakarma.gov.in",
+      "mode": "online"
+    },
+    "status": "active",
+    "is_decision_ready": false,
+    "public_status_category": "LIMITED_INFORMATION",
+    "advisory_banner": {
+      "en": "Informational Listing: This scheme has been identified from official Government of Maharashtra records but has not yet undergone full eligibility attestation. Eligibility cannot be definitively confirmed online. Please verify with the administering department before applying.",
+      "mr": "माहितीपर नोंद: ही योजना महाराष्ट्र शासनाच्या अधिकृत नोंदींमधून समाविष्ट केली आहे, परंतु अंतिम पात्रता पडताळणी प्रलंबित आहे. अर्ज करण्यापूर्वी संबंधित विभागाकडे खातरजमा करावी.",
+      "hi": "सूचनात्मक प्रविष्टि: यह योजना महाराष्ट्र सरकार के आधिकारिक रिकॉर्ड से पहचानी गई है, लेकिन इसकी अंतिम पात्रता सत्यापन लंबित है। कृपया आवेदन करने से पहले संबंधित विभाग से पुष्टि करें。"
+    }
+  },
+  {
+    "id": "candidate-pmmvy",
+    "scheme_id": "candidate-pmmvy",
+    "name_en": "Pradhan Mantri Matru Vandana Yojana (PMMVY Maternity Benefit)",
+    "name_mr": "प्रधानमंत्री मातृ वंदना योजना (गरोदर महिला आर्थिक सहाय्य)",
+    "name_hi": "प्रधानमंत्री मातृ वंदना योजना",
+    "department": "Women and Child Development Department",
+    "level": "state",
+    "jurisdiction_scope": "MAHARASHTRA_STATE",
+    "summary": "Direct cash transfer of Rs 5,000 for first child in two installments and Rs 6,000 for second girl child for pregnant women and lactating mothers.",
+    "eligibility": [
+      {
+        "field": "resident_state",
+        "operator": "eq",
+        "value": "Maharashtra",
+        "type": "string"
+      },
+      {
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "type": "number"
+      }
+    ],
+    "benefit": {
+      "type": "direct_benefit",
+      "amount_text": "Rs 5,000 for first live birth upon ANC registration and child immunization; Rs 6,000 lump-sum for second girl child.",
+      "frequency": "recurring"
+    },
+    "exclusions": [
+      "Women in regular employment with Central/State Govt or PSUs receiving paid maternity leave."
+    ],
+    "required_documents": [
+      "Mother and Child Protection (MCP) Card",
+      "Aadhaar Card of Mother",
+      "Aadhaar-seeded Bank Passbook"
+    ],
+    "sources": [
+      {
+        "title": "MoWCD Mission Shakti PMMVY Guidelines 2023",
+        "url": "https://pmmvy.wcd.gov.in",
+        "evidence_excerpt": "Maternity cash incentive of Rs 5,000 for first child and Rs 6,000 for second girl child."
+      }
+    ],
+    "verification": {
+      "status": "single_source_secondary",
+      "last_verified_at": "2026-11-20"
+    },
+    "application": {
+      "url": "https://pmmvy.wcd.gov.in",
+      "mode": "online"
+    },
+    "status": "active",
+    "is_decision_ready": false,
+    "public_status_category": "LIMITED_INFORMATION",
+    "advisory_banner": {
+      "en": "Informational Listing: This scheme has been identified from official Government of Maharashtra records but has not yet undergone full eligibility attestation. Eligibility cannot be definitively confirmed online. Please verify with the administering department before applying.",
+      "mr": "माहितीपर नोंद: ही योजना महाराष्ट्र शासनाच्या अधिकृत नोंदींमधून समाविष्ट केली आहे, परंतु अंतिम पात्रता पडताळणी प्रलंबित आहे. अर्ज करण्यापूर्वी संबंधित विभागाकडे खातरजमा करावी.",
+      "hi": "सूचनात्मक प्रविष्टि: यह योजना महाराष्ट्र सरकार के आधिकारिक रिकॉर्ड से पहचानी गई है, लेकिन इसकी अंतिम पात्रता सत्यापन लंबित है। कृपया आवेदन करने से पहले संबंधित विभाग से पुष्टि करें。"
+    }
+  },
+  {
+    "id": "candidate-pmay-gramin",
+    "scheme_id": "candidate-pmay-gramin",
+    "name_en": "Pradhan Mantri Awas Yojana - Gramin (PMAY-G)",
+    "name_mr": "प्रधानमंत्री आवास योजना - ग्रामीण (महाराष्ट्र)",
+    "name_hi": "प्रधानमंत्री आवास योजना - ग्रामीण",
+    "department": "Rural Development & Panchayati Raj Department",
+    "level": "state",
+    "jurisdiction_scope": "MAHARASHTRA_STATE",
+    "summary": "Grant of Rs 1,20,000 for construction of disaster-resilient pucca house with toilet and clean cooking facility in rural Maharashtra.",
+    "eligibility": [
+      {
+        "field": "resident_state",
+        "operator": "eq",
+        "value": "Maharashtra",
+        "type": "string"
+      },
+      {
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "type": "number"
+      }
+    ],
+    "benefit": {
+      "type": "direct_benefit",
+      "amount_text": "Direct financial aid of Rs 1,20,000 in three installments + 90 days MGNREGA unskilled labour wages (Rs 24,570) + Rs 12,000 for toilet under SBM.",
+      "frequency": "recurring"
+    },
+    "exclusions": [
+      "Families owning a pucca house in any part of India.",
+      "Families owning motorized four-wheeler, mechanized 3-4 wheeler agricultural equipment, or 5+ acres irrigated land."
+    ],
+    "required_documents": [
+      "Job Card (MGNREGA)",
+      "Aadhaar Card",
+      "Land Title / Gram Panchayat NOC",
+      "Bank Account Passbook"
+    ],
+    "sources": [
+      {
+        "title": "MoRD PMAY-G Guidelines",
+        "url": "https://pmayg.nic.in",
+        "evidence_excerpt": "Unit assistance of Rs 1,20,000 in plain areas plus MGNREGA labour and SBM toilet."
+      }
+    ],
+    "verification": {
+      "status": "single_source_secondary",
+      "last_verified_at": "2026-11-20"
+    },
+    "application": {
+      "url": "https://pmayg.nic.in",
+      "mode": "online"
+    },
+    "status": "active",
+    "is_decision_ready": false,
+    "public_status_category": "LIMITED_INFORMATION",
+    "advisory_banner": {
+      "en": "Informational Listing: This scheme has been identified from official Government of Maharashtra records but has not yet undergone full eligibility attestation. Eligibility cannot be definitively confirmed online. Please verify with the administering department before applying.",
+      "mr": "माहितीपर नोंद: ही योजना महाराष्ट्र शासनाच्या अधिकृत नोंदींमधून समाविष्ट केली आहे, परंतु अंतिम पात्रता पडताळणी प्रलंबित आहे. अर्ज करण्यापूर्वी संबंधित विभागाकडे खातरजमा करावी.",
+      "hi": "सूचनात्मक प्रविष्टि: यह योजना महाराष्ट्र सरकार के आधिकारिक रिकॉर्ड से पहचानी गई है, लेकिन इसकी अंतिम पात्रता सत्यापन लंबित है। कृपया आवेदन करने से पहले संबंधित विभाग से पुष्टि करें。"
+    }
+  },
+  {
+    "id": "candidate-pmay-urban",
+    "scheme_id": "candidate-pmay-urban",
+    "name_en": "Pradhan Mantri Awas Yojana - Urban (PMAY-U)",
+    "name_mr": "प्रधानमंत्री आवास योजना - शहरी",
+    "name_hi": "प्रधानमंत्री आवास योजना - शहरी",
+    "department": "Housing Department",
+    "level": "state",
+    "jurisdiction_scope": "MAHARASHTRA_STATE",
+    "summary": "Affordable housing support for EWS/LIG families in urban areas including interest subvention up to Rs 2.67 lakh or Rs 2.50 lakh direct grant.",
+    "eligibility": [
+      {
+        "field": "resident_state",
+        "operator": "eq",
+        "value": "Maharashtra",
+        "type": "string"
+      },
+      {
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "type": "number"
+      }
+    ],
+    "benefit": {
+      "type": "direct_benefit",
+      "amount_text": "Central/State subsidy of Rs 2.50 lakh under Beneficiary Led Construction (BLC) or affordable housing in partnership (AHP).",
+      "frequency": "recurring"
+    },
+    "exclusions": [
+      "Ownership of any pucca house anywhere in India by any family member."
+    ],
+    "required_documents": [
+      "Aadhaar Card",
+      "Income Certificate",
+      "Land Ownership / Property Card for BLC",
+      "Bank Passbook"
+    ],
+    "sources": [
+      {
+        "title": "MoHUA PMAY-U Operating Manual",
+        "url": "https://pmaymis.gov.in",
+        "evidence_excerpt": "Subsidies up to Rs 2.50 lakh for EWS urban households."
+      }
+    ],
+    "verification": {
+      "status": "single_source_secondary",
+      "last_verified_at": "2026-11-20"
+    },
+    "application": {
+      "url": "https://pmaymis.gov.in",
+      "mode": "online"
+    },
+    "status": "active",
+    "is_decision_ready": false,
+    "public_status_category": "LIMITED_INFORMATION",
+    "advisory_banner": {
+      "en": "Informational Listing: This scheme has been identified from official Government of Maharashtra records but has not yet undergone full eligibility attestation. Eligibility cannot be definitively confirmed online. Please verify with the administering department before applying.",
+      "mr": "माहितीपर नोंद: ही योजना महाराष्ट्र शासनाच्या अधिकृत नोंदींमधून समाविष्ट केली आहे, परंतु अंतिम पात्रता पडताळणी प्रलंबित आहे. अर्ज करण्यापूर्वी संबंधित विभागाकडे खातरजमा करावी.",
+      "hi": "सूचनात्मक प्रविष्टि: यह योजना महाराष्ट्र सरकार के आधिकारिक रिकॉर्ड से पहचानी गई है, लेकिन इसकी अंतिम पात्रता सत्यापन लंबित है। कृपया आवेदन करने से पहले संबंधित विभाग से पुष्टि करें。"
+    }
+  },
+  {
+    "id": "candidate-pm-fasal-bima",
+    "scheme_id": "candidate-pm-fasal-bima",
+    "name_en": "One-Rupee Crop Insurance Scheme (PMFBY Maharashtra)",
+    "name_mr": "सर्वसमावेशक पीक विमा योजना (एक रुपयात पीक विमा)",
+    "name_hi": "एक रुपये में फसल बीमा योजना",
+    "department": "Agriculture Department",
+    "level": "state",
+    "jurisdiction_scope": "MAHARASHTRA_STATE",
+    "summary": "Crop insurance for kharif and rabi crops at just Re 1 token payment by farmers, with the remaining premium borne entirely by the Maharashtra Government.",
+    "eligibility": [
+      {
+        "field": "resident_state",
+        "operator": "eq",
+        "value": "Maharashtra",
+        "type": "string"
+      },
+      {
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "type": "number"
+      }
+    ],
+    "benefit": {
+      "type": "direct_benefit",
+      "amount_text": "Comprehensive risk coverage against localized calamities, mid-season adversity, and post-harvest losses. Farmers pay only Re 1 per application.",
+      "frequency": "recurring"
+    },
+    "exclusions": [
+      "Crops or plots not notified in the official district gazette for the given season."
+    ],
+    "required_documents": [
+      "7/12 Land Extract",
+      "8-A Extract",
+      "Crop Sowing Self-Declaration (Pik Perani)",
+      "Aadhaar Linked Bank Passbook"
+    ],
+    "sources": [
+      {
+        "title": "Agriculture Dept Maharashtra GR No. PVI-2023/CR-45/11-A dated 26 June 2023",
+        "url": "https://pmfby.gov.in",
+        "evidence_excerpt": "केवळ १ रुपया भरून खरीप व रब्बी हंगामासाठी पीक विमा संरक्षण उपलब्ध."
+      }
+    ],
+    "verification": {
+      "status": "single_source_secondary",
+      "last_verified_at": "2026-11-20"
+    },
+    "application": {
+      "url": "https://pmfby.gov.in",
+      "mode": "online"
+    },
+    "status": "active",
+    "is_decision_ready": false,
+    "public_status_category": "LIMITED_INFORMATION",
+    "advisory_banner": {
+      "en": "Informational Listing: This scheme has been identified from official Government of Maharashtra records but has not yet undergone full eligibility attestation. Eligibility cannot be definitively confirmed online. Please verify with the administering department before applying.",
+      "mr": "माहितीपर नोंद: ही योजना महाराष्ट्र शासनाच्या अधिकृत नोंदींमधून समाविष्ट केली आहे, परंतु अंतिम पात्रता पडताळणी प्रलंबित आहे. अर्ज करण्यापूर्वी संबंधित विभागाकडे खातरजमा करावी.",
+      "hi": "सूचनात्मक प्रविष्टि: यह योजना महाराष्ट्र सरकार के आधिकारिक रिकॉर्ड से पहचानी गई है, लेकिन इसकी अंतिम पात्रता सत्यापन लंबित है। कृपया आवेदन करने से पहले संबंधित विभाग से पुष्टि करें。"
+    }
+  },
+  {
+    "id": "candidate-saur-krushi-pump",
+    "scheme_id": "candidate-saur-krushi-pump",
+    "name_en": "Mukhyamantri Saur Krushi Pump Yojana (Solar Water Pumps)",
+    "name_mr": "मुख्यमंत्री सौर कृषी पंप योजना",
+    "name_hi": "मुख्यमंत्री सौर कृषि पंप योजना",
+    "department": "Energy Department",
+    "level": "state",
+    "jurisdiction_scope": "MAHARASHTRA_STATE",
+    "summary": "Deployment of off-grid solar agricultural pumps (3 HP to 7.5 HP) with 90% subsidy for General farmers and 95% for SC/ST farmers.",
+    "eligibility": [
+      {
+        "field": "resident_state",
+        "operator": "eq",
+        "value": "Maharashtra",
+        "type": "string"
+      },
+      {
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "type": "number"
+      }
+    ],
+    "benefit": {
+      "type": "direct_benefit",
+      "amount_text": "Solar photovoltaic water pump system installed at field site; farmer pays only 5% (SC/ST) or 10% (Others) of benchmark cost.",
+      "frequency": "recurring"
+    },
+    "exclusions": [
+      "Farmers already having conventional electric connection on the land plot."
+    ],
+    "required_documents": [
+      "7/12 & 8-A Extract",
+      "Caste Certificate (for SC/ST concession)",
+      "Aadhaar Card",
+      "NOC from co-owners"
+    ],
+    "sources": [
+      {
+        "title": "Energy Dept GR No. MSK-2019/CR-14/Energy-2",
+        "url": "https://www.mahadiscom.in/solar_mskvy/",
+        "evidence_excerpt": "3 HP, 5 HP, and 7.5 HP solar water pumps with 90-95% government subsidy."
+      }
+    ],
+    "verification": {
+      "status": "single_source_secondary",
+      "last_verified_at": "2026-11-20"
+    },
+    "application": {
+      "url": "https://www.mahadiscom.in/solar_mskvy/",
+      "mode": "online"
+    },
+    "status": "active",
+    "is_decision_ready": false,
+    "public_status_category": "LIMITED_INFORMATION",
+    "advisory_banner": {
+      "en": "Informational Listing: This scheme has been identified from official Government of Maharashtra records but has not yet undergone full eligibility attestation. Eligibility cannot be definitively confirmed online. Please verify with the administering department before applying.",
+      "mr": "माहितीपर नोंद: ही योजना महाराष्ट्र शासनाच्या अधिकृत नोंदींमधून समाविष्ट केली आहे, परंतु अंतिम पात्रता पडताळणी प्रलंबित आहे. अर्ज करण्यापूर्वी संबंधित विभागाकडे खातरजमा करावी.",
+      "hi": "सूचनात्मक प्रविष्टि: यह योजना महाराष्ट्र सरकार के आधिकारिक रिकॉर्ड से पहचानी गई है, लेकिन इसकी अंतिम पात्रता सत्यापन लंबित है। कृपया आवेदन करने से पहले संबंधित विभाग से पुष्टि करें。"
+    }
+  },
+  {
+    "id": "candidate-shabari-awas",
+    "scheme_id": "candidate-shabari-awas",
+    "name_en": "Shabari Adivasi Gharkul Yojana (ST Rural Housing)",
+    "name_mr": "शबरी आदिवासी घरकुल योजना",
+    "name_hi": "शबरी आदिवासी घरकुल योजना",
+    "department": "Tribal Development Department",
+    "level": "state",
+    "jurisdiction_scope": "MAHARASHTRA_STATE",
+    "summary": "State housing grant of Rs 1,30,000 for houseless Scheduled Tribe families living in rural and hilly areas of Maharashtra.",
+    "eligibility": [
+      {
+        "field": "resident_state",
+        "operator": "eq",
+        "value": "Maharashtra",
+        "type": "string"
+      },
+      {
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "type": "number"
+      }
+    ],
+    "benefit": {
+      "type": "direct_benefit",
+      "amount_text": "Grant of Rs 1,30,000 in instalments linked to construction milestones for building 269 sq ft pucca house.",
+      "frequency": "recurring"
+    },
+    "exclusions": [
+      "Non-ST individuals.",
+      "Families owning a pucca house or possessing family income > Rs 1,00,000."
+    ],
+    "required_documents": [
+      "Caste Certificate (ST)",
+      "Income Certificate (Tahsildar)",
+      "Land Ownership / Gram Panchayat Land Certificate",
+      "Aadhaar Card"
+    ],
+    "sources": [
+      {
+        "title": "Tribal Development Dept GR No. Shabari-2022/CR-12/Desk-10",
+        "url": "https://tribal.maharashtra.gov.in",
+        "evidence_excerpt": "अनुसूचित जमातीच्या बेघर कुटुंबांना पक्के घर बांधण्यासाठी रु. १,३०,००० अनुदान."
+      }
+    ],
+    "verification": {
+      "status": "single_source_secondary",
+      "last_verified_at": "2026-11-20"
+    },
+    "application": {
+      "url": "https://tribal.maharashtra.gov.in",
+      "mode": "offline"
+    },
+    "status": "active",
+    "is_decision_ready": false,
+    "public_status_category": "LIMITED_INFORMATION",
+    "advisory_banner": {
+      "en": "Informational Listing: This scheme has been identified from official Government of Maharashtra records but has not yet undergone full eligibility attestation. Eligibility cannot be definitively confirmed online. Please verify with the administering department before applying.",
+      "mr": "माहितीपर नोंद: ही योजना महाराष्ट्र शासनाच्या अधिकृत नोंदींमधून समाविष्ट केली आहे, परंतु अंतिम पात्रता पडताळणी प्रलंबित आहे. अर्ज करण्यापूर्वी संबंधित विभागाकडे खातरजमा करावी.",
+      "hi": "सूचनात्मक प्रविष्टि: यह योजना महाराष्ट्र सरकार के आधिकारिक रिकॉर्ड से पहचानी गई है, लेकिन इसकी अंतिम पात्रता सत्यापन लंबित है। कृपया आवेदन करने से पहले संबंधित विभाग से पुष्टि करें。"
+    }
+  },
+  {
+    "id": "candidate-mbocw-toolkit",
+    "scheme_id": "candidate-mbocw-toolkit",
+    "name_en": "MBOCW Construction Worker Tool Kit Scheme",
+    "name_mr": "इमारत बांधकाम कामगार सुरक्षा व अवजारे संच योजना",
+    "name_hi": "निर्माण श्रमिक सुरक्षा एवं औजार किट योजना",
+    "department": "Labour Department",
+    "level": "state",
+    "jurisdiction_scope": "MAHARASHTRA_STATE",
+    "summary": "Free distribution of essential occupational toolkits and safety kits (helmet, safety boots, jacket) to registered building workers.",
+    "eligibility": [
+      {
+        "field": "resident_state",
+        "operator": "eq",
+        "value": "Maharashtra",
+        "type": "string"
+      },
+      {
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "type": "number"
+      }
+    ],
+    "benefit": {
+      "type": "direct_benefit",
+      "amount_text": "In-kind trade-specific toolkit box (masonry, carpentry, plumbing, electrical) + safety equipment package.",
+      "frequency": "recurring"
+    },
+    "exclusions": [
+      "Non-registered labourers or registrations with expired annual membership."
+    ],
+    "required_documents": [
+      "MBOCW Registration Smart Card / Certificate",
+      "90-Day Employer Certificate",
+      "Aadhaar Card"
+    ],
+    "sources": [
+      {
+        "title": "MBOCW Welfare Guidelines",
+        "url": "https://mahabocw.in",
+        "evidence_excerpt": "नोंदणीकृत इमारत व इतर बांधकाम कामगारांना मोफत आवश्यक सुरक्षा किट व कामाची अवजारे पेटी."
+      }
+    ],
+    "verification": {
+      "status": "single_source_secondary",
+      "last_verified_at": "2026-11-20"
+    },
+    "application": {
+      "url": "https://mahabocw.in",
+      "mode": "online"
+    },
+    "status": "active",
+    "is_decision_ready": false,
+    "public_status_category": "LIMITED_INFORMATION",
+    "advisory_banner": {
+      "en": "Informational Listing: This scheme has been identified from official Government of Maharashtra records but has not yet undergone full eligibility attestation. Eligibility cannot be definitively confirmed online. Please verify with the administering department before applying.",
+      "mr": "माहितीपर नोंद: ही योजना महाराष्ट्र शासनाच्या अधिकृत नोंदींमधून समाविष्ट केली आहे, परंतु अंतिम पात्रता पडताळणी प्रलंबित आहे. अर्ज करण्यापूर्वी संबंधित विभागाकडे खातरजमा करावी.",
+      "hi": "सूचनात्मक प्रविष्टि: यह योजना महाराष्ट्र सरकार के आधिकारिक रिकॉर्ड से पहचानी गई है, लेकिन इसकी अंतिम पात्रता सत्यापन लंबित है। कृपया आवेदन करने से पहले संबंधित विभाग से पुष्टि करें。"
+    }
+  },
+  {
+    "id": "candidate-mahajyoti-fellowship",
+    "scheme_id": "candidate-mahajyoti-fellowship",
+    "name_en": "Mahajyoti Research Fellowship (MJRF for OBC/VJNT/SBC)",
+    "name_mr": "महाज्योती संशोधन अधिछात्रवृत्ती",
+    "name_hi": "महाज्योति शोध अध्येतावृत्ति",
+    "department": "Other Backward Bahujan Welfare Department",
+    "level": "state",
+    "jurisdiction_scope": "MAHARASHTRA_STATE",
+    "summary": "Monthly research fellowship of Rs 31,000 (JRF) and Rs 35,000 (SRF) plus contingency grant for OBC, VJNT, and SBC scholars pursuing regular Ph.D.",
+    "eligibility": [
+      {
+        "field": "resident_state",
+        "operator": "eq",
+        "value": "Maharashtra",
+        "type": "string"
+      },
+      {
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "type": "number"
+      }
+    ],
+    "benefit": {
+      "type": "direct_benefit",
+      "amount_text": "Rs 31,000/month for first 2 years, Rs 35,000/month for next 3 years + HRA and Rs 10,000/yr annual contingency grant.",
+      "frequency": "recurring"
+    },
+    "exclusions": [
+      "Candidates availing any other government fellowship (UGC-NET-JRF, CSIR, BANRF, SARTHI, etc.)."
+    ],
+    "required_documents": [
+      "Caste Certificate & Validity",
+      "Non-Creamy Layer Certificate",
+      "University Ph.D. Registration Letter",
+      "Aadhaar Card"
+    ],
+    "sources": [
+      {
+        "title": "Mahajyoti Fellowship Guidelines 2023",
+        "url": "https://mahajyoti.org.in",
+        "evidence_excerpt": "दरमहा रु. ३१,००० ते रु. ३५,००० फेलोशिप."
+      }
+    ],
+    "verification": {
+      "status": "single_source_secondary",
+      "last_verified_at": "2026-11-20"
+    },
+    "application": {
+      "url": "https://mahajyoti.org.in",
+      "mode": "online"
+    },
+    "status": "active",
+    "is_decision_ready": false,
+    "public_status_category": "LIMITED_INFORMATION",
+    "advisory_banner": {
+      "en": "Informational Listing: This scheme has been identified from official Government of Maharashtra records but has not yet undergone full eligibility attestation. Eligibility cannot be definitively confirmed online. Please verify with the administering department before applying.",
+      "mr": "माहितीपर नोंद: ही योजना महाराष्ट्र शासनाच्या अधिकृत नोंदींमधून समाविष्ट केली आहे, परंतु अंतिम पात्रता पडताळणी प्रलंबित आहे. अर्ज करण्यापूर्वी संबंधित विभागाकडे खातरजमा करावी.",
+      "hi": "सूचनात्मक प्रविष्टि: यह योजना महाराष्ट्र सरकार के आधिकारिक रिकॉर्ड से पहचानी गई है, लेकिन इसकी अंतिम पात्रता सत्यापन लंबित है। कृपया आवेदन करने से पहले संबंधित विभाग से पुष्टि करें。"
+    }
+  },
+  {
+    "id": "candidate-sarthi-csmnrf",
+    "scheme_id": "candidate-sarthi-csmnrf",
+    "name_en": "SARTHI Research Fellowship (CSMNRF)",
+    "name_mr": "सारथी छत्रपती शाहू महाराज राष्ट्रीय संशोधन अधिछात्रवृत्ती",
+    "name_hi": "सारथी राष्ट्रीय शोध अध्येतावृत्ति",
+    "department": "General Administration Department (GAD)",
+    "level": "state",
+    "jurisdiction_scope": "MAHARASHTRA_STATE",
+    "summary": "Monthly financial fellowship of Rs 31,000 to Rs 35,000 for Maratha, Kunbi, and Maratha-Kunbi scholars pursuing regular Ph.D. programs.",
+    "eligibility": [
+      {
+        "field": "resident_state",
+        "operator": "eq",
+        "value": "Maharashtra",
+        "type": "string"
+      },
+      {
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "type": "number"
+      }
+    ],
+    "benefit": {
+      "type": "direct_benefit",
+      "amount_text": "Rs 31,000 to Rs 35,000 per month fellowship + HRA and Rs 10,000 annual contingency allowance up to 5 years.",
+      "frequency": "recurring"
+    },
+    "exclusions": [
+      "Candidates already availing any other state or central fellowship."
+    ],
+    "required_documents": [
+      "Caste Certificate / School Leaving Certificate indicating Maratha/Kunbi",
+      "Income Certificate (< 8 LPA)",
+      "Ph.D. Registration Letter",
+      "Aadhaar Card"
+    ],
+    "sources": [
+      {
+        "title": "SARTHI Fellowship Guidelines",
+        "url": "https://sarthi-maharashtragov.in",
+        "evidence_excerpt": "मराठा, कुणबी प्रवर्गातील विद्यार्थ्यांना दरमहा रु. ३१,००० ते ३५,००० फेलोशिप."
+      }
+    ],
+    "verification": {
+      "status": "single_source_secondary",
+      "last_verified_at": "2026-11-20"
+    },
+    "application": {
+      "url": "https://sarthi-maharashtragov.in",
+      "mode": "online"
+    },
+    "status": "active",
+    "is_decision_ready": false,
+    "public_status_category": "LIMITED_INFORMATION",
+    "advisory_banner": {
+      "en": "Informational Listing: This scheme has been identified from official Government of Maharashtra records but has not yet undergone full eligibility attestation. Eligibility cannot be definitively confirmed online. Please verify with the administering department before applying.",
+      "mr": "माहितीपर नोंद: ही योजना महाराष्ट्र शासनाच्या अधिकृत नोंदींमधून समाविष्ट केली आहे, परंतु अंतिम पात्रता पडताळणी प्रलंबित आहे. अर्ज करण्यापूर्वी संबंधित विभागाकडे खातरजमा करावी.",
+      "hi": "सूचनात्मक प्रविष्टि: यह योजना महाराष्ट्र सरकार के आधिकारिक रिकॉर्ड से पहचानी गई है, लेकिन इसकी अंतिम पात्रता सत्यापन लंबित है। कृपया आवेदन करने से पहले संबंधित विभाग से पुष्टि करें。"
+    }
+  },
+  {
+    "id": "candidate-mslsa-free-legal-aid",
+    "scheme_id": "candidate-mslsa-free-legal-aid",
+    "name_en": "MSLSA Free Legal Aid Services",
+    "name_mr": "महाराष्ट्र राज्य विधी सेवा प्राधिकरण मोफत कायदेशीर मदत",
+    "name_hi": "महाराष्ट्र राज्य विधिक सेवा प्राधिकरण मुफ्त कानूनी सहायता",
+    "department": "Law and Judiciary Department",
+    "level": "state",
+    "jurisdiction_scope": "MAHARASHTRA_STATE",
+    "summary": "Free legal counsel, advocates, court fee payment, and paper drafting for women, SC/ST, children, industrial workers, persons in custody, and citizens with annual income up to Rs 3 lakh.",
+    "eligibility": [
+      {
+        "field": "resident_state",
+        "operator": "eq",
+        "value": "Maharashtra",
+        "type": "string"
+      },
+      {
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "type": "number"
+      }
+    ],
+    "benefit": {
+      "type": "direct_benefit",
+      "amount_text": "Complete legal representation by empanelled advocates in Civil, Criminal, Labour, and Revenue courts without cost to beneficiary.",
+      "frequency": "recurring"
+    },
+    "exclusions": [
+      "Proceedings concerning defamation, malicious prosecution, election disputes, or economic offenses."
+    ],
+    "required_documents": [
+      "Income Certificate (< 3 LPA) or Self-Declaration (exempt for women, SC/ST, children)",
+      "Aadhaar Card",
+      "Court Case / Dispute Details"
+    ],
+    "sources": [
+      {
+        "title": "Legal Services Authorities Act 1987 / MSLSA Rules",
+        "url": "https://legalservices.maharashtra.gov.in",
+        "evidence_excerpt": "महिला, मुले, अनुसूचित जाती/जमाती, दिव्यांग व रु. ३ लाखांपेक्षा कमी उत्पन्न असलेल्या नागरिकांना मोफत वकिल व न्यायालयीन कायदेशीर सहाय्य."
+      }
+    ],
+    "verification": {
+      "status": "single_source_secondary",
+      "last_verified_at": "2026-11-20"
+    },
+    "application": {
+      "url": "https://legalservices.maharashtra.gov.in",
+      "mode": "offline"
+    },
+    "status": "active",
+    "is_decision_ready": false,
+    "public_status_category": "LIMITED_INFORMATION",
+    "advisory_banner": {
+      "en": "Informational Listing: This scheme has been identified from official Government of Maharashtra records but has not yet undergone full eligibility attestation. Eligibility cannot be definitively confirmed online. Please verify with the administering department before applying.",
+      "mr": "माहितीपर नोंद: ही योजना महाराष्ट्र शासनाच्या अधिकृत नोंदींमधून समाविष्ट केली आहे, परंतु अंतिम पात्रता पडताळणी प्रलंबित आहे. अर्ज करण्यापूर्वी संबंधित विभागाकडे खातरजमा करावी.",
+      "hi": "सूचनात्मक प्रविष्टि: यह योजना महाराष्ट्र सरकार के आधिकारिक रिकॉर्ड से पहचानी गई है, लेकिन इसकी अंतिम पात्रता सत्यापन लंबित है। कृपया आवेदन करने से पहले संबंधित विभाग से पुष्टि करें。"
+    }
   }
 ]

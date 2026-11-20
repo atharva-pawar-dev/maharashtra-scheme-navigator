@@ -1,0 +1,52 @@
+department_name,total_candidates,verified_tier_a,limited_tier_bc,dispositioned_other,status
+"Agriculture & Rural Development Department, Zilla Parishad",1,0,1,0,IN_PROGRESS
+Agriculture Department,11,3,4,4,VERIFIED_PRIMARY
+Animal Husbandry & Dairy Development Department,1,0,1,0,IN_PROGRESS
+"Animal Husbandry, Dairy Development & Fisheries Department",2,0,0,2,CATALOGUED
+"Cooperation, Marketing and Textiles Department",2,0,0,2,CATALOGUED
+Directorate of Information Technology (DIT),1,0,0,1,CATALOGUED
+Directorate of Municipal Administration (DMA),1,0,1,0,IN_PROGRESS
+Disability Welfare Department (Divyang Kalyan),2,0,2,0,IN_PROGRESS
+Divyang Welfare Department,2,0,2,0,IN_PROGRESS
+Energy Department,3,0,3,0,IN_PROGRESS
+"Food, Civil Supplies and Consumer Protection Department",3,0,2,1,IN_PROGRESS
+General Administration Department (GAD),1,0,1,0,IN_PROGRESS
+Government of Tamil Nadu,1,0,0,1,CATALOGUED
+Government of Telangana,1,0,0,1,CATALOGUED
+Government of Uttar Pradesh,1,0,0,1,CATALOGUED
+Higher and Technical Education Department,5,1,3,1,VERIFIED_PRIMARY
+Housing Department,3,0,2,1,IN_PROGRESS
+"Industries, Energy & Labour Department",1,1,0,0,VERIFIED_PRIMARY
+"Industries, Energy & Labour Department (MSME)",5,0,2,3,IN_PROGRESS
+Labour Department,3,0,2,1,IN_PROGRESS
+Law and Judiciary Department,1,0,1,0,IN_PROGRESS
+Ministry of Education,1,0,0,1,CATALOGUED
+Ministry of Finance,3,0,0,3,CATALOGUED
+Ministry of Petroleum and Natural Gas,1,0,0,1,CATALOGUED
+Ministry of Rural Development,1,0,0,1,CATALOGUED
+Minority Development Department,3,0,2,1,IN_PROGRESS
+"OBC, VJNT, SBC and SEBC Welfare Department",3,0,3,0,IN_PROGRESS
+"OBC, VJNT, SBC and Social Welfare Department",1,1,0,0,VERIFIED_PRIMARY
+Other Backward Bahujan Welfare Department,2,0,1,1,IN_PROGRESS
+Planning / Skill Development Department,1,1,0,0,VERIFIED_PRIMARY
+Planning Department,2,0,1,1,IN_PROGRESS
+Planning Department (Gender Budget Section),1,0,1,0,IN_PROGRESS
+Planning Department (Social Welfare),1,0,1,0,IN_PROGRESS
+Public Health Department,2,1,1,0,VERIFIED_PRIMARY
+Public Health and Family Welfare Department,2,0,0,2,CATALOGUED
+Public Works Department,1,0,0,1,CATALOGUED
+Rural Development & Panchayati Raj Department,5,0,5,0,IN_PROGRESS
+Rural Development and Panchayati Raj Department,2,0,0,2,CATALOGUED
+School Education & Sports Department,3,0,1,2,IN_PROGRESS
+School Education and Sports Department,1,0,0,1,CATALOGUED
+Social Development Department,1,0,1,0,IN_PROGRESS
+Social Development Department (Samaj Vikas Vibhag),6,0,6,0,IN_PROGRESS
+Social Justice and Special Assistance,8,8,0,0,VERIFIED_PRIMARY
+Social Justice and Special Assistance Department,11,0,5,6,IN_PROGRESS
+Soil and Water Conservation Department,2,0,0,2,CATALOGUED
+Tourism and Cultural Affairs Department,2,0,1,1,IN_PROGRESS
+Transport Department,3,0,2,1,IN_PROGRESS
+Tribal Development Department,7,0,5,2,IN_PROGRESS
+Urban Development Department,4,0,2,2,IN_PROGRESS
+Women and Child Development Department,10,1,5,4,VERIFIED_PRIMARY
+Women and Child Welfare Section,1,0,1,0,IN_PROGRESS

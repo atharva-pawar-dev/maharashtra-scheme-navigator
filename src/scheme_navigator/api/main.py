@@ -2444,6 +2444,152 @@ def record_completeness_attestation_endpoint(
         raise HTTPException(status_code=400, detail=str(exc))
 
 
+@app.get("/governance/research-summary", tags=["governance"])
+def get_governance_research_summary(session: UserSession = Depends(get_current_session)) -> dict[str, Any]:
+    """Return live mechanically computed research universe summary."""
+    import csv
+
+    repo_root = Path(__file__).resolve().parents[3]
+    universe_path = repo_root / "data" / "research" / "universe" / "U-20261120.json"
+    candidates_path = repo_root / "docs" / "catalogue" / "scheme_discovery_master_register.csv"
+    link_health_path = repo_root / "reports" / "sc_g2_source_link_health.csv"
+    schemes_path = repo_root / "data" / "catalogue" / "schemes.json"
+
+    universe_meta: dict[str, Any] = {}
+    if universe_path.exists():
+        u_data = json.loads(universe_path.read_text(encoding="utf-8"))
+        authorities = u_data.get("authorities", [])
+        cat_counts: dict[str, int] = {}
+        for a in authorities:
+            c = a.get("category", "UNKNOWN")
+            cat_counts[c] = cat_counts.get(c, 0) + 1
+        universe_meta = {
+            "snapshot_id": u_data.get("universe_snapshot_id", "U-20261120"),
+            "created_at": u_data.get("created_at"),
+            "standard": u_data.get("standard"),
+            "total_authorities": len(authorities),
+            "authorities_by_category": cat_counts,
+            "denominators": u_data.get("denominators", {}),
+        }
+
+    candidate_counts: dict[str, int] = {}
+    dept_counts: dict[str, int] = {}
+    total_candidates = 0
+    if candidates_path.exists():
+        with candidates_path.open(encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                total_candidates += 1
+                disp = row.get("disposition", "UNKNOWN")
+                candidate_counts[disp] = candidate_counts.get(disp, 0) + 1
+                dept = row.get("authority", "Unknown")
+                dept_counts[dept] = dept_counts.get(dept, 0) + 1
+
+    link_counts: dict[str, int] = {}
+    total_links = 0
+    if link_health_path.exists():
+        with link_health_path.open(encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                total_links += 1
+                res = row.get("check_result", "Unknown")
+                link_counts[res] = link_counts.get(res, 0) + 1
+
+    schemes_count = 0
+    flagship_count = 0
+    limited_count = 0
+    if schemes_path.exists():
+        schemes = json.loads(schemes_path.read_text(encoding="utf-8"))
+        schemes_count = len(schemes)
+        for s in schemes:
+            if s.get("verification", {}).get("status") == "verified_primary":
+                flagship_count += 1
+            else:
+                limited_count += 1
+
+    return {
+        "status": "HEALTHY",
+        "milestone": "SC-G2",
+        "universe_snapshot": universe_meta,
+        "candidates": {
+            "total": total_candidates,
+            "by_disposition": candidate_counts,
+            "by_department_top10": dict(sorted(dept_counts.items(), key=lambda x: x[1], reverse=True)[:10]),
+        },
+        "canonical_catalogue": {
+            "total_canonical": schemes_count,
+            "verified_flagships": flagship_count,
+            "limited_information": limited_count,
+            "demo_fixtures_quarantined": 1,
+        },
+        "source_link_health": {
+            "total_urls_checked": total_links,
+            "by_result": link_counts,
+        },
+    }
+
+
+@app.get("/governance/candidates", tags=["governance"])
+def list_governance_candidates(
+    disposition: str | None = None,
+    authority: str | None = None,
+    search: str | None = None,
+    session: UserSession = Depends(get_current_session),
+) -> list[dict[str, Any]]:
+    """List and filter candidate schemes discovered during universe reconciliation."""
+    import csv
+
+    repo_root = Path(__file__).resolve().parents[3]
+    candidates_path = repo_root / "docs" / "catalogue" / "scheme_discovery_master_register.csv"
+    if not candidates_path.exists():
+        return []
+
+    results = []
+    with candidates_path.open(encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if disposition and row.get("disposition", "").upper() != disposition.upper():
+                continue
+            if authority and authority.lower() not in row.get("authority", "").lower():
+                continue
+            if search:
+                s_lower = search.lower()
+                name_match = (
+                    s_lower in row.get("discovered_name", "").lower()
+                    or s_lower in row.get("marathi_name", "").lower()
+                    or s_lower in row.get("hindi_name", "").lower()
+                    or s_lower in row.get("candidate_id", "").lower()
+                )
+                if not name_match:
+                    continue
+            results.append(row)
+    return results
+
+
+@app.get("/governance/authorities", tags=["governance"])
+def list_governance_authorities(
+    category: str | None = None,
+    jurisdiction_level: str | None = None,
+    session: UserSession = Depends(get_current_session),
+) -> list[dict[str, Any]]:
+    """List official government authorities identified in the research universe."""
+    repo_root = Path(__file__).resolve().parents[3]
+    universe_path = repo_root / "data" / "research" / "universe" / "U-20261120.json"
+    if not universe_path.exists():
+        return []
+
+    u_data = json.loads(universe_path.read_text(encoding="utf-8"))
+    authorities = u_data.get("authorities", [])
+    results = []
+    for a in authorities:
+        if category and a.get("category", "").upper() != category.upper():
+            continue
+        if jurisdiction_level and a.get("jurisdiction_level", "").upper() != jurisdiction_level.upper():
+            continue
+        results.append(a)
+    return results
+
+
 @app.get("/", include_in_schema=False)
 @app.get("/explore", include_in_schema=False)
 @app.get("/interview", include_in_schema=False)

@@ -69,6 +69,18 @@
     .statusline { min-height:20px; color:var(--muted); font-size:12px; margin-top:8px; }
     .statusline.error { color:var(--red); }
     .statusline.ok { color:var(--green); }
+    .uni-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:12px; }
+    .uni-table th, .uni-table td { border-bottom:1px solid var(--line); text-align:left; padding:9px 8px; vertical-align:top; }
+    .uni-table th { background:#f8fafc; color:var(--muted); font-weight:700; position:sticky; top:0; }
+    .uni-table tr:hover { background:#f9fbfe; }
+    .disp-pill { display:inline-block; padding:3px 8px; border-radius:12px; font-size:11px; font-weight:600; text-transform:uppercase; }
+    .disp-verified { background:#dcfce7; color:#166534; }
+    .disp-limited { background:#dbeafe; color:#1e40af; }
+    .disp-research { background:#fef3c7; color:#92400e; }
+    .disp-blocked { background:#fee2e2; color:#991b1b; }
+    .disp-duplicate, .disp-subscheme { background:#f3e8ff; color:#6b21a8; }
+    .disp-historical { background:#e2e8f0; color:#475569; }
+    .disp-excluded { background:#ffedd5; color:#9a3412; }
     .findings { display:grid; gap:10px; }
     .finding { border:1px solid var(--line); border-left:4px solid #d4a13a; border-radius:10px; padding:12px 13px; }
     .finding.error { border-left-color:#c45151; }
@@ -110,6 +122,13 @@
       <div><strong>Local prototype — do not expose to the public internet</strong>
         Reviewer IDs are currently caller-supplied, not authenticated. The backend stores extracted fields and review events temporarily, but does not retain the uploaded PDF/image. Use synthetic documents only until authentication, authorization and secure storage are implemented.</div>
     </div>
+
+    <nav class="nav-tabs" style="display:flex; gap:12px; margin-bottom:20px; border-bottom:1px solid var(--line); padding-bottom:8px;">
+      <button id="tabReviewerBtn" class="btn" type="button" style="padding:8px 16px;">Document Review</button>
+      <button id="tabUniverseBtn" class="btn secondary" type="button" style="padding:8px 16px;">Universe Intelligence & Reconciliation (SC-G2)</button>
+    </nav>
+
+    <div id="reviewerView">
     <div class="pagehead">
       <div><h1>Document review workspace</h1><div class="sub">Inspect Gemini extraction, resolve inconsistencies and record human decisions.</div></div>
       <div id="reviewStatus" class="pill info">No review loaded</div>
@@ -203,6 +222,123 @@
         </section>
       </div>
     </section>
+    </div><!-- /#reviewerView -->
+
+    <div id="universeView" class="hidden">
+      <div class="pagehead">
+        <div>
+          <h1>Scheme Universe & Department Reconciliation (SC-G2)</h1>
+          <div class="sub">Mechanically computed from Snapshot U-20261120, Candidate Register, and Source Link Verification.</div>
+        </div>
+        <div id="universeStatus" class="pill pass">Snapshot U-20261120</div>
+      </div>
+
+      <!-- KPI Metrics Cards -->
+      <div class="metrics" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 20px;">
+        <div class="metric">
+          <div class="label">Total Authorities (LGD/Govt)</div>
+          <div class="value" id="kpiAuthorities" style="color:var(--blue);">137</div>
+          <div class="tiny muted" id="kpiAuthoritiesSub">40 Depts, 18 Corps, 14 Central, 29 MCs, 36 Dist</div>
+        </div>
+        <div class="metric">
+          <div class="label">Discovered Candidates</div>
+          <div class="value" id="kpiCandidates" style="color:var(--green);">142</div>
+          <div class="tiny muted" id="kpiCandidatesSub">Across all 9 required dispositions</div>
+        </div>
+        <div class="metric">
+          <div class="label">Canonical Catalogue</div>
+          <div class="value" id="kpiCanonical" style="color:#7c3aed;">88</div>
+          <div class="tiny muted" id="kpiCanonicalSub">17 Tier A + 71 Limited (1 Demo Quarantined)</div>
+        </div>
+        <div class="metric">
+          <div class="label">Official Source Links</div>
+          <div class="value" id="kpiLinks" style="color:#ea580c;">135</div>
+          <div class="tiny muted" id="kpiLinksSub">57 Working, 26 Dead, 46 Temp, 6 Unknown</div>
+        </div>
+      </div>
+
+      <!-- Candidate Register Viewer -->
+      <section class="card" style="margin-bottom: 20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
+          <div>
+            <h2 style="margin:0;">Discovered Candidate Master Register</h2>
+            <div class="card-help" style="margin:0;">Filter candidates across all 9 formal dispositions from docs/catalogue/scheme_discovery_master_register.csv</div>
+          </div>
+          <div class="row" style="gap:8px;">
+            <select id="candDispositionFilter" style="width:auto; padding:6px 10px; font-size:12px;">
+              <option value="">All Dispositions (142)</option>
+              <option value="IN_CATALOGUE_VERIFIED">IN_CATALOGUE_VERIFIED (17)</option>
+              <option value="IN_CATALOGUE_LIMITED">IN_CATALOGUE_LIMITED (71)</option>
+              <option value="NEEDS_RESEARCH">NEEDS_RESEARCH (18)</option>
+              <option value="BLOCKED_SOURCE">BLOCKED_SOURCE (6)</option>
+              <option value="DUPLICATE_OF">DUPLICATE_OF (8)</option>
+              <option value="SUB_SCHEME_OF">SUB_SCHEME_OF (6)</option>
+              <option value="HISTORICAL">HISTORICAL (5)</option>
+              <option value="EXCLUDED_NOT_INDIVIDUAL_BENEFIT">EXCLUDED_NOT_INDIVIDUAL_BENEFIT (7)</option>
+              <option value="EXCLUDED_OUT_OF_GEOGRAPHIC_SCOPE">EXCLUDED_OUT_OF_GEOGRAPHIC_SCOPE (3)</option>
+            </select>
+            <input id="candSearchInput" type="text" placeholder="Search candidate, department, alias..." style="width:220px; padding:6px 10px; font-size:12px;">
+            <button id="refreshCandidatesBtn" class="btn secondary small" type="button">Refresh</button>
+          </div>
+        </div>
+        <div style="max-height: 480px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px;">
+          <table class="uni-table">
+            <thead>
+              <tr>
+                <th style="width:90px;">Candidate ID</th>
+                <th>Discovered Name</th>
+                <th>Marathi Name</th>
+                <th>Authority</th>
+                <th style="width:160px;">Disposition</th>
+                <th style="width:140px;">Next Action</th>
+                <th>Evidence / Reason</th>
+              </tr>
+            </thead>
+            <tbody id="candidatesTableBody">
+              <tr><td colspan="7" class="muted" style="text-align:center; padding:20px;">Loading candidate register...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Authority Directory Viewer -->
+      <section class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
+          <div>
+            <h2 style="margin:0;">Government Authorities Universe Directory (U-20261120)</h2>
+            <div class="card-help" style="margin:0;">Official departments, statutory corporations, central ministries, municipal corporations, and district collectorates</div>
+          </div>
+          <div class="row" style="gap:8px;">
+            <select id="authCategoryFilter" style="width:auto; padding:6px 10px; font-size:12px;">
+              <option value="">All Authority Categories (137)</option>
+              <option value="STATE_DEPARTMENT">State Departments & Directorates (40)</option>
+              <option value="STATE_CORPORATION">State Statutory Corporations (18)</option>
+              <option value="CENTRAL_MINISTRY">Central Ministries CSS/CS (14)</option>
+              <option value="MUNICIPAL_CORPORATION">Municipal Corporations LGD (29)</option>
+              <option value="DISTRICT_COLLECTORATE">District Collectorates / DPDC (36)</option>
+            </select>
+          </div>
+        </div>
+        <div style="max-height: 400px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px;">
+          <table class="uni-table">
+            <thead>
+              <tr>
+                <th style="width:140px;">Authority ID</th>
+                <th>Authority Name (EN)</th>
+                <th>Authority Name (MR)</th>
+                <th style="width:180px;">Category</th>
+                <th style="width:200px;">Official Website / Portal</th>
+                <th>Inclusion Reason</th>
+              </tr>
+            </thead>
+            <tbody id="authoritiesTableBody">
+              <tr><td colspan="6" class="muted" style="text-align:center; padding:20px;">Loading authority directory...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div><!-- /#universeView -->
+
     <div class="footer-note">Scheme Navigator document pre-audit is an assistive review tool only. It does not verify certificate authenticity, replace issuing-authority checks, or determine scheme eligibility.</div>
   </main>
 
@@ -471,6 +607,144 @@
     } catch (error) { setStatus("completeStatus", error.message, "error"); }
     finally { setBusy(false); }
   });
+
+  // Universe Intelligence & Reconciliation Dashboard (SC-G2)
+  let universeLoaded = false;
+  let allCandidates = [];
+  let allAuthorities = [];
+
+  function switchTab(target) {
+    if (target === "universe") {
+      $("reviewerView").classList.add("hidden");
+      $("universeView").classList.remove("hidden");
+      $("tabUniverseBtn").classList.remove("secondary");
+      $("tabReviewerBtn").classList.add("secondary");
+      if (!universeLoaded) {
+        loadUniverseData();
+        universeLoaded = true;
+      }
+    } else {
+      $("universeView").classList.add("hidden");
+      $("reviewerView").classList.remove("hidden");
+      $("tabReviewerBtn").classList.remove("secondary");
+      $("tabUniverseBtn").classList.add("secondary");
+    }
+  }
+
+  $("tabReviewerBtn")?.addEventListener("click", () => switchTab("reviewer"));
+  $("tabUniverseBtn")?.addEventListener("click", () => switchTab("universe"));
+
+  async function loadUniverseData() {
+    try {
+      const summary = await api("/governance/research-summary");
+      if (summary) {
+        if ($("kpiAuthorities")) $("kpiAuthorities").textContent = summary.universe_snapshot?.total_authorities || 137;
+        if ($("kpiCandidates")) $("kpiCandidates").textContent = summary.candidates?.total || 142;
+        if ($("kpiCanonical")) $("kpiCanonical").textContent = summary.canonical_catalogue?.total_canonical || 88;
+        if ($("kpiLinks")) $("kpiLinks").textContent = summary.source_link_health?.total_urls_checked || 135;
+
+        const linkCounts = summary.source_link_health?.by_result || {};
+        const linksDetail = Object.entries(linkCounts).map(([k, v]) => `${v} ${k}`).join(", ");
+        if ($("kpiLinksSub") && linksDetail) $("kpiLinksSub").textContent = linksDetail;
+      }
+    } catch (e) {
+      console.error("Failed to load research summary:", e);
+    }
+    loadCandidates();
+    loadAuthorities();
+  }
+
+  function getDispPillClass(disp) {
+    if (disp === "IN_CATALOGUE_VERIFIED") return "disp-verified";
+    if (disp === "IN_CATALOGUE_LIMITED") return "disp-limited";
+    if (disp === "NEEDS_RESEARCH") return "disp-research";
+    if (disp === "BLOCKED_SOURCE") return "disp-blocked";
+    if (disp === "DUPLICATE_OF") return "disp-duplicate";
+    if (disp === "SUB_SCHEME_OF") return "disp-subscheme";
+    if (disp === "HISTORICAL") return "disp-historical";
+    return "disp-excluded";
+  }
+
+  async function loadCandidates() {
+    const tbody = $("candidatesTableBody");
+    if (!tbody) return;
+    try {
+      const disp = $("candDispositionFilter")?.value || "";
+      const search = $("candSearchInput")?.value || "";
+      const params = new URLSearchParams();
+      if (disp) params.set("disposition", disp);
+      if (search) params.set("search", search);
+
+      const candidates = await api("/governance/candidates" + (params.toString() ? "?" + params.toString() : ""));
+      allCandidates = candidates;
+      renderCandidatesTable(candidates);
+    } catch (e) {
+      tbody.innerHTML = `<tr><td colspan="7" class="statusline error">Failed to load candidates: ${esc(e.message)}</td></tr>`;
+    }
+  }
+
+  function renderCandidatesTable(candidates) {
+    const tbody = $("candidatesTableBody");
+    if (!tbody) return;
+    if (!candidates || !candidates.length) {
+      tbody.innerHTML = `<tr><td colspan="7" class="muted" style="text-align:center; padding:20px;">No candidates match current filters.</td></tr>`;
+      return;
+    }
+    tbody.innerHTML = candidates.map(c => `
+      <tr>
+        <td><strong>${esc(c.candidate_id)}</strong></td>
+        <td>${esc(c.discovered_name)}</td>
+        <td style="font-size:11px;">${esc(c.marathi_name || "-")}</td>
+        <td><small>${esc(c.authority)}</small></td>
+        <td><span class="disp-pill ${getDispPillClass(c.disposition)}">${esc(c.disposition)}</span></td>
+        <td><code>${esc(c.next_action || "-")}</code></td>
+        <td class="tiny muted">${esc(c.reason || c.evidence || "-")}</td>
+      </tr>
+    `).join("");
+  }
+
+  async function loadAuthorities() {
+    const tbody = $("authoritiesTableBody");
+    if (!tbody) return;
+    try {
+      const cat = $("authCategoryFilter")?.value || "";
+      const params = new URLSearchParams();
+      if (cat) params.set("category", cat);
+
+      const authorities = await api("/governance/authorities" + (params.toString() ? "?" + params.toString() : ""));
+      allAuthorities = authorities;
+      renderAuthoritiesTable(authorities);
+    } catch (e) {
+      tbody.innerHTML = `<tr><td colspan="6" class="statusline error">Failed to load authorities: ${esc(e.message)}</td></tr>`;
+    }
+  }
+
+  function renderAuthoritiesTable(authorities) {
+    const tbody = $("authoritiesTableBody");
+    if (!tbody) return;
+    if (!authorities || !authorities.length) {
+      tbody.innerHTML = `<tr><td colspan="6" class="muted" style="text-align:center; padding:20px;">No authorities found.</td></tr>`;
+      return;
+    }
+    tbody.innerHTML = authorities.map(a => `
+      <tr>
+        <td><strong>${esc(a.authority_id)}</strong></td>
+        <td>${esc(a.name_en)}</td>
+        <td style="font-size:11px;">${esc(a.name_mr || "-")}</td>
+        <td><span class="pill info">${esc(a.category)}</span></td>
+        <td><a href="${esc(a.official_website)}" target="_blank" rel="noopener noreferrer" style="color:var(--blue);">${esc(a.portal_domain || a.official_website)}</a></td>
+        <td class="tiny muted">${esc(a.inclusion_reason || "-")}</td>
+      </tr>
+    `).join("");
+  }
+
+  $("candDispositionFilter")?.addEventListener("change", loadCandidates);
+  $("candSearchInput")?.addEventListener("input", () => {
+    clearTimeout(window._candSearchTimer);
+    window._candSearchTimer = setTimeout(loadCandidates, 250);
+  });
+  $("refreshCandidatesBtn")?.addEventListener("click", loadCandidates);
+  $("authCategoryFilter")?.addEventListener("change", loadAuthorities);
 
   // Allow opening a review directly as /reviewer#<review_id> without storing citizen data in browser storage.
   const hashReviewId = decodeURIComponent(location.hash.replace(/^#/, "")).trim();

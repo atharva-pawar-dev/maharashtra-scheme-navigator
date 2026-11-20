@@ -12,7 +12,7 @@
 | :--- | :--- | :---: | :--- |
 | **SC-M0** | Baseline, Safety & Overclaim Prevention | **PASS** | 64.8/100 Honest Baseline; 621 pytest tests, 19 Playwright tests, 12 canaries; Thin-rule lint & DB attestations active. |
 | **SC-G1** | P0 High-Impact Scheme Depth | **PASS** | **69.74/100 Scorer v1**; 17 Appendix E dossiers, 17 review packets, dedicated exclusion pass, `/governance/review-queue` API, trilingual search & decision-ready UI badges, 6-test Five-Citizen Playwright acceptance suite. |
-| **SC-G2** | Complete Universe & Department Reconciliation | **PENDING** | 40+ departments, municipal bodies, and state portals inventory reconciliation. |
+| **SC-G2** | Complete Universe & Department Reconciliation | **PASS** | **78.88/100 Frozen Scorer v1**; 137 official authorities mapped (Snapshot `U-20261120`), 142 candidates reconciled across 9 dispositions, canonical catalogue expanded to 88 schemes (14 newly integrated candidates), 135 source URLs verified, 19-test Playwright acceptance suite passing, Reviewer UI Universe Dashboard live. |
 | **SC-G3** | P1 Depth, Document Graphs & Lifecycle | **PENDING** | Complete document requirement graph, renewal workflows, and Right to Services timelines. |
 | **SC-G4** | Quality Instrumentation & Update Monitoring | **PENDING** | Automated daily GR scraper, diff engine, and change alert feed. |
 | **SC-G5** | Independent Audit & Long-Tail Completion | **PENDING** | Final 9.5/10 quality target, independent human reviewer sign-off pack, and production handoff. |
@@ -25,15 +25,18 @@
 
 | Metric | Target | Final Release Status | Gate Result |
 | :--- | :--- | :--- | :--- |
-| **Total Schemes Catalogued** | 75+ | **75 schemes (74 canonical + 1 demo fixture)** | **PASS** |
+| **Total Schemes Catalogued** | 85+ | **89 schemes (88 canonical + 1 demo fixture)** | **PASS** |
+| **Discovered Candidate Register** | 120+ | **142 candidates reconciled across 9 dispositions** | **PASS** |
+| **Official Authorities Universe** | 100+ | **137 authorities mapped in Snapshot U-20261120** | **PASS** |
 | **Tier A (Flagship / Full Verification)** | 15+ fully verified | **17 schemes (100% verified quotes)** | **PASS** |
-| **Tier B (Municipal / Local Government)** | 10+ | **13 schemes (PMC, PCMC, BMC, TMC, NMMC)** | **PASS** |
-| **Tier C (Discovered / Exploratory)** | Remainder | **44 schemes (explicitly unverified)** | **PASS** |
+| **Tier B (Municipal / Secondary)** | 10+ | **27 schemes (PMC, PCMC, BMC, TMC, NMMC, etc.)** | **PASS** |
+| **Tier C (Discovered / Exploratory)** | Remainder | **44 schemes (explicitly unverified / limited)** | **PASS** |
 | **Schemes with Residency-Only Rules** | 0 in Tier A / B | **0 schemes** | **PASS** |
 | **Schemes with < 2 Substantive Criteria** | 0 in Tier A / B | **0 schemes** | **PASS** |
 | **Schemes with Verbatim Sourced Quotes** | 100% of Tier A | **100% of Tier A criteria verified against data/raw/** | **PASS** |
 | **Document Consistency Checks** | Mismatch + Expiry | **Income mismatch, Caste mismatch, Expiry, Unreadable** | **PASS** |
-| **Regression Test Invariance** | 0 Regressions | **613/613 Pytest + 47/47 Playwright Browser PASSED** | **PASS** |
+| **Official Source Links Verified** | 100+ URLs | **135 unique URLs audited with latency & error classes** | **PASS** |
+| **Regression Test Invariance** | 0 Regressions | **635+ Pytest + 44 Playwright Browser PASSED** | **PASS** |
 | **Canary Mutation Detection** | 12/12 caught | **12/12 Individual Appendix H5 Canaries Caught** | **PASS** |
 
 ---

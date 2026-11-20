@@ -24,3 +24,4 @@ data/temp_uploads/
 data/citizen_reports.jsonl
 data/ingested/
 data/security_audit.log
+_backups/

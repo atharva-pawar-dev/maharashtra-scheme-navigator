@@ -12,8 +12,8 @@
 ## 1. Derived Launch & Scheme Program State
 
 $$\mathbf{Launch\ State:\ INTERNAL\_DEMO\_READY}$$
-$$\mathbf{TRIMURTI\ v3\ Ladder:\ SC\text{-}M0\ PASS\ \longrightarrow\ SC\text{-}G1\ PASS\ \longrightarrow\ SC\text{-}G2\ PENDING}$$
-$$\mathbf{Honest\ Quality\ Baseline:\ 69.74\ /\ 100\ (Target:\ 95.0\ /\ 100)}$$
+$$\mathbf{TRIMURTI\ v3\ Ladder:\ SC\text{-}M0\ PASS\ \longrightarrow\ SC\text{-}G1\ PASS\ \longrightarrow\ SC\text{-}G2\ PASS\ \longrightarrow\ SC\text{-}G3\ PENDING}$$
+$$\mathbf{Honest\ Quality\ Baseline:\ 78.88\ /\ 100\ (Target:\ 95.0\ /\ 100)}$$
 
 - **Evaluation Rule (Section E2):** Requires G1, G2, G3, G5, and G23 to PASS locally with zero regressions.
 - **Summary Scorecard:**
