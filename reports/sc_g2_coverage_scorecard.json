@@ -1,7 +1,7 @@
 {
   "version": "1.0.0-sc-g1",
-  "evaluated_at": "2026-11-20T18:49:03.736558+00:00",
-  "composite_score": 78.88,
+  "evaluated_at": "2026-11-20T19:52:37.122786+00:00",
+  "composite_score": 76.65,
   "dimensions": [
     {
       "name": "Official Source Universe & Department Discovery",
@@ -46,10 +46,10 @@
     {
       "name": "Eligibility & Exclusion Completeness",
       "weight": 20.0,
-      "score": 82.55,
-      "weighted_score": 16.51,
+      "score": 71.41,
+      "weighted_score": 14.28,
       "details": {
-        "schemes_with_2_substantive": 35,
+        "schemes_with_2_substantive": 21,
         "schemes_with_exclusions": 31
       }
     },
@@ -105,7 +105,7 @@
     "tier_a_fully_verified": 17,
     "tier_b_municipal_secondary": 27,
     "tier_c_exploratory_unverified": 44,
-    "composite_score_out_of_100": 78.88,
+    "composite_score_out_of_100": 76.65,
     "truth_standard": "Honest Scorer v1 computed mechanically from actual records without fabrication under Milestone SC-G1."
   }
 }

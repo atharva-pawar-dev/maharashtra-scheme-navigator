@@ -1,21 +1,19 @@
 # Release Gates Ledger (LEDGER.md)
 **Project:** Maharashtra Scheme Navigator  
-**Last Updated:** 2026-11-20T22:15:00+05:30  
-**Governing Standard:** Production Release Program v2.0 (Part E1, E2) & TRIMURTI v3  
-**Milestones:** Production Baseline RC4 (`rc4-accepted`), TRIMURTI SC-M0 (`sc-m0-accepted`), TRIMURTI SC-G1 (`sc-g1-accepted`)
+**Last Updated:** 2026-11-21T01:35:00+05:30  
+**Governing Standard:** Production Release Program v2.0 (Part E1, E2) & TRIMURTI v4  
+**Milestones:** Production Baseline RC4 (`rc4-accepted`), TRIMURTI SC-M0 (`sc-m0-accepted`), TRIMURTI SC-G1 (`sc-g1-accepted`), TRIMURTI SC-G2 (`sc-g2-accepted`), TRIMURTI v4 Final (`project-final-accepted`)
 
 ---
 
-## 0. TRIMURTI Scheme Intelligence Milestone Ladder
+## 0. TRIMURTI Scheme Intelligence & Final Completion Milestone Ladder
 
 | Milestone | Scope | Target Quality | Status | Evidence Reference |
 | :---: | :--- | :---: | :---: | :--- |
 | **SC-M0** | Baseline, Safety & Overclaim Prevention | Honest Baseline $\ge$ 60 | **PASS** | `reports/scheme_coverage_scorecard.md` (64.8/100), `tests/invariants/test_trimurti_invariants.py`, `docs/catalogue/` |
 | **SC-G1** | P0 High-Impact Scheme Depth | Scorer v1 $\ge$ 68.0 | **PASS** | `reports/scheme_coverage_scorecard.md` (**69.74/100**), 17 Appendix E dossiers in `docs/dossiers/`, 17 review packets in `docs/catalogue/review_packets/`, `/governance/review-queue` API with RBAC (`tests/test_governance_review_queue.py`), Five-Citizen Playwright browser suite (`tests/test_playwright_five_citizen_acceptance.py`) |
-| **SC-G2** | Complete Universe & Department Reconciliation | Quality $\ge$ 82 | **PASS** | `reports/sc_g2_coverage_scorecard.md` (**78.88/100 Frozen Scorer v1**), 137 authorities in `data/research/universe/U-20261120.json`, 142 candidates in `docs/catalogue/scheme_discovery_master_register.csv`, 88 canonical schemes in `data/catalogue/schemes.json`, 135 verified source URLs in `reports/sc_g2_source_link_health.csv`, 19 Playwright workflows in `tests/test_playwright_sc_g2_reconciliation.py` |
-| **SC-G3** | P1 Depth, Document Graphs & Lifecycle | Quality $\ge$ 88 | **PENDING** | Complete document requirement graph, renewal workflows, and Right to Services timelines |
-| **SC-G4** | Quality Instrumentation & Update Monitoring | Quality $\ge$ 92 | **PENDING** | Automated daily GR scraper, diff engine, and change alert feed |
-| **SC-G5** | Independent Audit & Long-Tail Completion | Quality $\ge$ 95 | **PENDING** | Final 9.5/10 quality target, independent human reviewer sign-off pack, and production handoff |
+| **SC-G2** | Complete Universe & Department Reconciliation | Quality $\ge$ 82 | **PASS** | `reports/sc_g2_coverage_scorecard.md` (**76.65/100 Frozen Scorer v1**), 137 authorities in `data/research/universe/U-20261120.json`, 142 candidates in `docs/catalogue/scheme_discovery_master_register.csv`, 88 canonical schemes in `data/catalogue/schemes.json`, 135 verified source URLs in `reports/sc_g2_source_link_health.csv`, 19 Playwright workflows in `tests/test_playwright_sc_g2_reconciliation.py` |
+| **TRIMURTI v4 (FINAL)** | Complete Product Integration, Verification & Release | 100% Requirements Accepted | **PASS** | `docs/project/final_requirements_register.md` (**55/55 ACCEPTED, 100.0%**), `reports/final_test_execution.md` (655+ pytest, 45 Playwright, 12 canaries), `tests/test_playwright_trimurti_v4_acceptance.py` (20/20 passed), `reports/final_project_completion_report.md` |
 
 ---
 

@@ -1,0 +1,66 @@
+entity_type,entity_id,canonical_slug,official_name,marathi_name,lgd_code,district,division,official_portal,status
+DISTRICT,DIST-01,dist-460,Ahmednagar (Ahilyanagar),अहिल्यानगर,460,Ahmednagar (Ahilyanagar),Nashik,https://ahmednagar.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-02,dist-461,Akola,अकोला,461,Akola,Amravati,https://akola.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-03,dist-462,Amravati,अमरावती,462,Amravati,Amravati,https://amravati.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-04,dist-463,Chhatrapati Sambhajinagar (Aurangabad),छत्रपती संभाजीनगर,463,Chhatrapati Sambhajinagar (Aurangabad),Marathwada,https://aurangabad.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-05,dist-464,Bhandara,भंडारा,464,Bhandara,Nagpur,https://bhandara.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-06,dist-465,Beed,बीड,465,Beed,Marathwada,https://beed.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-07,dist-466,Buldhana,बुलढाणा,466,Buldhana,Amravati,https://buldhana.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-08,dist-467,Chandrapur,चंद्रपूर,467,Chandrapur,Nagpur,https://chandrapur.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-09,dist-468,Dhule,धुळे,468,Dhule,Nashik,https://dhule.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-10,dist-469,Gadchiroli,गडचिरोली,469,Gadchiroli,Nagpur,https://gadchiroli.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-11,dist-470,Gondia,गोंदिया,470,Gondia,Nagpur,https://gondia.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-12,dist-471,Hingoli,हिंगोली,471,Hingoli,Marathwada,https://hingoli.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-13,dist-472,Jalgaon,जळगाव,472,Jalgaon,Nashik,https://jalgaon.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-14,dist-473,Jalna,जालना,473,Jalna,Marathwada,https://jalna.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-15,dist-474,Kolhapur,कोल्हापूर,474,Kolhapur,Pune,https://kolhapur.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-16,dist-475,Latur,लातूर,475,Latur,Marathwada,https://latur.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-17,dist-476,Mumbai City,मुंबई शहर,476,Mumbai City,Konkan,https://mumbaicity.gov.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-18,dist-477,Mumbai Suburban,मुंबई उपनगर,477,Mumbai Suburban,Konkan,https://mumbaisuburban.gov.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-19,dist-478,Nagpur,नागपूर,478,Nagpur,Nagpur,https://nagpur.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-20,dist-479,Nanded,नांदेड,479,Nanded,Marathwada,https://nanded.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-21,dist-480,Nandurbar,नंदुरबार,480,Nandurbar,Nashik,https://nandurbar.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-22,dist-481,Nashik,नाशिक,481,Nashik,Nashik,https://nashik.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-23,dist-482,Dharashiv (Osmanabad),धाराशिव,482,Dharashiv (Osmanabad),Marathwada,https://osmanabad.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-24,dist-483,Parbhani,परभणी,483,Parbhani,Marathwada,https://parbhani.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-25,dist-484,Pune,पुणे,484,Pune,Pune,https://pune.gov.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-26,dist-485,Raigad,रायगड,485,Raigad,Konkan,https://raigad.gov.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-27,dist-486,Ratnagiri,रत्नागिरी,486,Ratnagiri,Konkan,https://ratnagiri.gov.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-28,dist-487,Sangli,सांगली,487,Sangli,Pune,https://sangli.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-29,dist-488,Satara,सातारा,488,Satara,Pune,https://satara.gov.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-30,dist-489,Sindhudurg,सिंधुदुर्ग,489,Sindhudurg,Konkan,https://sindhudurg.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-31,dist-490,Solapur,सोलापूर,490,Solapur,Pune,https://solapur.gov.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-32,dist-491,Thane,ठाणे,491,Thane,Konkan,https://thane.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-33,dist-492,Wardha,वर्धा,492,Wardha,Nagpur,https://wardha.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-34,dist-493,Washim,वाशिम,493,Washim,Amravati,https://washim.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-35,dist-494,Yavatmal,यवतमाळ,494,Yavatmal,Amravati,https://yavatmal.nic.in,VERIFIED_OFFICIAL_LGD
+DISTRICT,DIST-36,dist-664,Palghar,पालघर,664,Palghar,Konkan,https://palghar.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-01,mc-brihanmumbai,Brihanmumbai Municipal Corporation (BMC),,276012,Mumbai Suburban,Konkan,https://portal.mcgm.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-02,mc-pune,Pune Municipal Corporation (PMC),,276020,Pune,Pune,https://pmc.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-03,mc-nagpur,Nagpur Municipal Corporation (NMC),,276018,Nagpur,Nagpur,https://nmcnagpur.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-04,mc-pimpri-chinchwad,Pimpri Chinchwad Municipal Corporation (PCMC),,276021,Pune,Pune,https://pcmcindia.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-05,mc-thane,Thane Municipal Corporation (TMC),,276014,Thane,Konkan,https://thanecity.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-06,mc-nashik,Nashik Municipal Corporation (NMC),,276017,Nashik,Nashik,https://nashikcorporation.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-07,mc-chhatrapati-sambhajinagar,Chhatrapati Sambhajinagar Municipal Corporation,,276016,CS,Marathwada,https://aurangabadmahapalika.org,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-08,mc-navi-mumbai,Navi Mumbai Municipal Corporation (NMMC),,276015,Thane,Konkan,https://nmmc.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-09,mc-solapur,Solapur Municipal Corporation (SMC),,276019,Solapur,Pune,https://solapurcorporation.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-10,mc-amravati,Amravati Municipal Corporation (AMC),,276022,Amravati,Amravati,https://amravaticorporation.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-11,mc-kalyan-dombivli,Kalyan Dombivli Municipal Corporation (KDMC),,276023,Thane,Konkan,https://kdmc.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-12,mc-kolhapur,Kolhapur Municipal Corporation (KMC),,276024,Kolhapur,Pune,https://kolhapurcorporation.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-13,mc-vasai-virar,Vasai Virar City Municipal Corporation (VVCMC),,276025,Palghar,Konkan,https://vvcmc.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-14,mc-nanded-waghala,Nanded Waghala City Municipal Corporation (NWCMC),,276026,Nanded,Marathwada,https://nwcmc.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-15,mc-sangli-miraj-kupwad,Sangli Miraj Kupwad Municipal Corporation,,276027,Sangli,Pune,https://smkc.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-16,mc-malegaon,Malegaon Municipal Corporation (MMC),,276028,Nashik,Nashik,https://malegaoncorporation.org,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-17,mc-jalgaon,Jalgaon City Municipal Corporation (JCMC),,276029,Jalgaon,Nashik,https://jcmc.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-18,mc-akola,Akola Municipal Corporation (AMC),,276030,Akola,Amravati,https://amcakola.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-19,mc-latur,Latur City Municipal Corporation (LCMC),,276031,Latur,Marathwada,https://laturmc.org,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-20,mc-dhule,Dhule Municipal Corporation (DMC),,276032,Dhule,Nashik,https://dhulecorporation.org,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-21,mc-ahilyanagar,Ahilyanagar Municipal Corporation,,276033,Ahilyanagar,Nashik,https://ahilyanagarmc.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-22,mc-chandrapur,Chandrapur Municipal Corporation (CMC),,276034,Chandrapur,Nagpur,https://cmcchandrapur.com,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-23,mc-parbhani,Parbhani Municipal Corporation (PMC),,276035,Parbhani,Marathwada,https://parbhanimc.org,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-24,mc-ichalkaranji,Ichalkaranji Municipal Corporation (IMC),,276036,Kolhapur,Pune,https://ichalkaranjimc.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-25,mc-jalna,Jalna Municipal Corporation (JMC),,276037,Jalna,Marathwada,https://jalnamc.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-26,mc-mira-bhayander,Mira Bhayander Municipal Corporation (MBMC),,276038,Thane,Konkan,https://mbmc.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-27,mc-bhiwandi-nizampur,Bhiwandi Nizampur Municipal Corporation,,276039,Thane,Konkan,https://bnmc.gov.in,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-28,mc-panvel,Panvel Municipal Corporation (PMC),,276040,Raigad,Konkan,https://panvelcorporation.com,VERIFIED_OFFICIAL_LGD
+MUNICIPAL_CORPORATION,MC-29,mc-ulhasnagar,Ulhasnagar Municipal Corporation (UMC),,276041,Thane,Konkan,https://umc.gov.in,VERIFIED_OFFICIAL_LGD
