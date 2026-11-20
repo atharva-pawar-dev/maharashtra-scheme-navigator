@@ -1,0 +1,71 @@
+{
+  "packet_id": "HRP-SCHEME-BHAUSAHEB-FUNDKAR-PHALBAG",
+  "scheme_id": "scheme-bhausaheb-fundkar-phalbag",
+  "scheme_version": "2.0.0",
+  "department": "Agriculture Department",
+  "verification_tier": "tier_a_flagship",
+  "governing_instruments": [
+    {
+      "title": "भाऊसाहेब फुंडकर फळबाग लागवड योजना शासन निर्णय",
+      "url": "https://krishi.maharashtra.gov.in/gr/Bhausaheb_Fundkar_Phalbag.pdf",
+      "sha256": "4f9a900759a66c3cdb7b7c008687ae52d755efbe4f5ed43f2d20fc939e541f87",
+      "cached_path": "data/raw/gr_bhausaheb_fundkar.txt"
+    }
+  ],
+  "substantive_criteria_count": 4,
+  "decision_driving_rules": [
+    {
+      "rule_id": "c_bfp_state",
+      "field": "resident_state",
+      "operator": "eq",
+      "value": "maharashtra",
+      "plain_en": "Resident farmer of Maharashtra",
+      "verbatim_quote": "शेतकरी महाराष्ट्र राज्याचा रहिवासी असावा."
+    },
+    {
+      "rule_id": "c_bfp_farmer",
+      "field": "has_land",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Must be a landowner farmer",
+      "verbatim_quote": "शेतकऱ्याकडे स्वतःच्या नावावर किमान ०.२० हेक्टर ते कमाल ६.०० हेक्टरपर्यंत शेतीजमीन असणे आवश्यक."
+    },
+    {
+      "rule_id": "c_bfp_land_min",
+      "field": "landholding_hectares",
+      "operator": "gte",
+      "value": 0.2,
+      "plain_en": "Minimum cultivable landholding of 0.20 hectares",
+      "verbatim_quote": "शेतकऱ्याकडे स्वतःच्या नावावर किमान ०.२० हेक्टर ते कमाल ६.०० हेक्टरपर्यंत शेतीजमीन असणे आवश्यक."
+    },
+    {
+      "rule_id": "c_bfp_land_max",
+      "field": "landholding_hectares",
+      "operator": "lte",
+      "value": 6.0,
+      "plain_en": "Maximum landholding limit of 6.00 hectares",
+      "verbatim_quote": "शेतकऱ्याकडे स्वतःच्या नावावर किमान ०.२० हेक्टर ते कमाल ६.०० हेक्टरपर्यंत शेतीजमीन असणे आवश्यक."
+    }
+  ],
+  "exclusions": [
+    {
+      "exclusion_id": "e_fundkar_land_ceiling",
+      "field": "agricultural_land_hectares",
+      "operator": "lte",
+      "value": 6.0,
+      "plain_en": "Excludes landholders owning more than 6.00 hectares of cultivable land",
+      "verbatim_quote": "किमान ०.२० हेक्टर ते कमाल ६.०० हेक्टरपर्यंत शेतीजमीन असणे आवश्यक."
+    }
+  ],
+  "numeric_double_confirmation": "PASSED",
+  "exclusion_pass_status": "COMPLETED",
+  "review_controls": {
+    "can_approve": true,
+    "can_reject": true,
+    "requires_human_reviewer_role": [
+      "LEGAL_REVIEWER",
+      "CATALOGUE_ADMIN"
+    ]
+  },
+  "proposed_decision": "APPROVE_DECISION_READY"
+}

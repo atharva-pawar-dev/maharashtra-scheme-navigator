@@ -1,8 +1,8 @@
-# Maharashtra Scheme Quality Scorecard (Baseline v0)
-**Scorecard Version:** `0.1.0-baseline`  
-**Evaluated At:** `2026-11-20T15:08:13.414771+00:00`  
-**Composite Quality Score:** **64.8 / 100**  
-**Governing Standard:** *A truthful lower baseline is better than a fabricated 9.5.*
+# Maharashtra Scheme Quality Scorecard (Milestone SC-G1)
+**Scorecard Version:** `1.0.0-sc-g1`  
+**Evaluated At:** `2026-11-20T16:29:29.143169+00:00`  
+**Composite Quality Score:** **69.74 / 100**  
+**Governing Standard:** *A truthful 69.7/100 is better than a fabricated 9.5.*
 
 ---
 
@@ -14,13 +14,13 @@
 | 2 | Candidate Discovery & Inventory Reconciliation | 15.0 | 98.67 | **14.8** | reconciled_schemes: 74, candidate_denominator: 75 |
 | 3 | Canonical Identity & Lifecycle Accuracy | 10.0 | 100.0 | **10.0** | schemes_with_lifecycle: 74 |
 | 4 | Official Source Provenance & Freshness | 15.0 | 37.7 | **5.66** | verified_primary: 17, single_source_secondary: 13, unverified: 44 |
-| 5 | Eligibility & Exclusion Completeness | 20.0 | 25.16 | **5.03** | schemes_with_2_substantive: 21, schemes_with_exclusions: 3 |
+| 5 | Eligibility & Exclusion Completeness | 20.0 | 49.86 | **9.97** | schemes_with_2_substantive: 21, schemes_with_exclusions: 17 |
 | 6 | Benefit Structure & Calculations | 8.0 | 100.0 | **8.0** | schemes_with_benefit_details: 74 |
 | 7 | Documents & Application Requirements | 8.0 | 61.49 | **4.92** | schemes_with_docs: 17, schemes_with_portal: 74 |
 | 8 | Geography & Beneficiary Coverage | 4.0 | 100.0 | **4.0** | schemes_with_geo: 74 |
 | 9 | Language & Citizen-Facing Information | 3.0 | 100.0 | **3.0** | schemes_bilingual: 74 |
 | 10 | Monitoring & Update Reliability | 2.0 | 40.54 | **0.81** | schemes_monitored: 30 |
-| | **TOTAL COMPOSITE** | **100.0** | | **64.8 / 100** | |
+| | **TOTAL COMPOSITE** | **100.0** | | **69.74 / 100** | |
 
 ---
 
@@ -37,7 +37,7 @@
 
 ## 3. Road to 95/100 (TRIMURTI Program Milestones)
 
-- **SC-M0**: Establish honest baseline, thin-rule linting, fail-closed completeness attestations, and error reporting. (Score: ~64.8)
+- **SC-M0**: Establish honest baseline, thin-rule linting, fail-closed completeness attestations, and error reporting. (Score: ~69.74)
 - **SC-G1**: Deep research on P0 high-impact schemes (expanding Tier A from 17 to 30+ with human review packets).
 - **SC-G2**: Full Universe Reconciliation across all 40+ departments, LGD codes, and central schemes.
 - **SC-G3**: P1 depth expansion, complex exclusion trees, and alternative ANY_OF document requirement graphs.

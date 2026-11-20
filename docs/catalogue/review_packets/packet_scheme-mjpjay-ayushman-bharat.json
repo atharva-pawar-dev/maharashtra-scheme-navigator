@@ -1,0 +1,68 @@
+{
+  "packet_id": "HRP-SCHEME-MJPJAY-AYUSHMAN-BHARAT",
+  "scheme_id": "scheme-mjpjay-ayushman-bharat",
+  "scheme_version": "2.0.0",
+  "department": "Public Health Department",
+  "verification_tier": "tier_a_flagship",
+  "governing_instruments": [
+    {
+      "title": "महात्मा ज्योतिराव फुले जन आरोग्य योजना (MJPJAY) सर्वसमावेशक सुधारित मार्गदर्शक सूचना",
+      "url": "https://jeevandayee.gov.in/gr/MJPJAY_Universal_2023.pdf",
+      "sha256": "7dfdecf8e932f762cabc09e6e1a8055280dd9ad0218d923241a2b0b760a53270",
+      "cached_path": "data/raw/gr_mjpjay_2023.txt"
+    }
+  ],
+  "substantive_criteria_count": 3,
+  "decision_driving_rules": [
+    {
+      "rule_id": "c_mjpjay_state",
+      "field": "resident_state",
+      "operator": "eq",
+      "value": "maharashtra",
+      "plain_en": "Resident of Maharashtra",
+      "verbatim_quote": "महाराष्ट्र राज्यातील सर्व शिधापत्रिकाधारक कुटुंबे पात्र आहेत."
+    },
+    {
+      "rule_id": "c_mjpjay_ration",
+      "field": "ration_card_type",
+      "operator": "in",
+      "value": [
+        "aay",
+        "bpl_yellow",
+        "apl_orange",
+        "white"
+      ],
+      "plain_en": "Possess valid ration card (Yellow, Orange, White, or Antyodaya)",
+      "verbatim_quote": "अंत्योदय, पिवळी, केशरी व पांढरी शिधापत्रिकाधारक कुटुंब या योजनेअंतर्गत वार्षिक रु. ५,००,०००/- पर्यंत मोफत वैद्यकीय उपचार मिळण्यास पात्र आहेत."
+    },
+    {
+      "rule_id": "c_mjpjay_domicile",
+      "field": "residence_years",
+      "operator": "gte",
+      "value": 15,
+      "plain_en": "At least 15 years domicile or residence in Maharashtra",
+      "verbatim_quote": "लाभार्थी कुटुंबाकडे महाराष्ट्रात किमान १५ वर्षे वास्तव्याचा अधिवास दाखला किंवा वैध शिधापत्रिका असणे आवश्यक आहे."
+    }
+  ],
+  "exclusions": [
+    {
+      "exclusion_id": "e_mjpjay_ration_card_required",
+      "field": "has_valid_ration_card",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Excludes households not possessing a valid Maharashtra Ration Card or Domicile Certificate",
+      "verbatim_quote": "लाभार्थी कुटुंबाकडे महाराष्ट्रात किमान १५ वर्षे वास्तव्याचा अधिवास दाखला किंवा वैध शिधापत्रिका असणे आवश्यक आहे."
+    }
+  ],
+  "numeric_double_confirmation": "PASSED",
+  "exclusion_pass_status": "COMPLETED",
+  "review_controls": {
+    "can_approve": true,
+    "can_reject": true,
+    "requires_human_reviewer_role": [
+      "LEGAL_REVIEWER",
+      "CATALOGUE_ADMIN"
+    ]
+  },
+  "proposed_decision": "APPROVE_DECISION_READY"
+}

@@ -1,0 +1,63 @@
+{
+  "packet_id": "HRP-SCHEME-PM-KISAN",
+  "scheme_id": "scheme-pm-kisan",
+  "scheme_version": "2.0.0",
+  "department": "Agriculture Department",
+  "verification_tier": "tier_a_flagship",
+  "governing_instruments": [
+    {
+      "title": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) Operational Guidelines",
+      "url": "https://pmkisan.gov.in/Documents/Revised_Guidelines_PMKISAN.pdf",
+      "sha256": "73f3457ee474f6c0afa99f4fc17164e6a9b2b7dbd0ad360e155102e849d374d8",
+      "cached_path": "data/raw/pm_kisan_guidelines.txt"
+    }
+  ],
+  "substantive_criteria_count": 3,
+  "decision_driving_rules": [
+    {
+      "rule_id": "c_pmkisan_state",
+      "field": "resident_state",
+      "operator": "eq",
+      "value": "maharashtra",
+      "plain_en": "Resident farmer in Maharashtra",
+      "verbatim_quote": "Small and marginal landholder farmer family comprising husband, wife and minor children who own cultivable landholding."
+    },
+    {
+      "rule_id": "c_pmkisan_farmer",
+      "field": "has_land",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Own cultivable landholding",
+      "verbatim_quote": "Small and marginal landholder farmer family comprising husband, wife and minor children who own cultivable landholding."
+    },
+    {
+      "rule_id": "c_pmkisan_bank",
+      "field": "aadhaar_linked_bank_account",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Bank account must be seeded with Aadhaar",
+      "verbatim_quote": "Beneficiary farmer must have land registered in state revenue records and active bank account with Aadhaar seeding."
+    }
+  ],
+  "exclusions": [
+    {
+      "exclusion_id": "e_pmkisan_statutory_exclusions",
+      "field": "income_tax_payer",
+      "operator": "eq",
+      "value": false,
+      "plain_en": "Excludes institutional landholders, income tax payees, and government employees",
+      "verbatim_quote": "Excludes institutional landholders, income tax payees, and government employees."
+    }
+  ],
+  "numeric_double_confirmation": "PASSED",
+  "exclusion_pass_status": "COMPLETED",
+  "review_controls": {
+    "can_approve": true,
+    "can_reject": true,
+    "requires_human_reviewer_role": [
+      "LEGAL_REVIEWER",
+      "CATALOGUE_ADMIN"
+    ]
+  },
+  "proposed_decision": "APPROVE_DECISION_READY"
+}

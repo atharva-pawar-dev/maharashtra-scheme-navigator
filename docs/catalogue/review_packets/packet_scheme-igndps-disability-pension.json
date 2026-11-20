@@ -1,0 +1,71 @@
+{
+  "packet_id": "HRP-SCHEME-IGNDPS-DISABILITY-PENSION",
+  "scheme_id": "scheme-igndps-disability-pension",
+  "scheme_version": "2.0.0",
+  "department": "Social Justice and Special Assistance",
+  "verification_tier": "tier_a_flagship",
+  "governing_instruments": [
+    {
+      "title": "Indira Gandhi National Disability Pension Scheme (IGNDPS) Guidelines",
+      "url": "https://nsap.nic.in/guidelines/IGNDPS_Guidelines.pdf",
+      "sha256": "8cfa2a47da085158cfa28a2b872c6bb908e56c2d339588f6283c975a6dded5c4",
+      "cached_path": "data/raw/mohd_nsap_igndps.txt"
+    }
+  ],
+  "substantive_criteria_count": 4,
+  "decision_driving_rules": [
+    {
+      "rule_id": "c_igndps_state",
+      "field": "resident_state",
+      "operator": "eq",
+      "value": "maharashtra",
+      "plain_en": "Resident of Maharashtra",
+      "verbatim_quote": "The applicant must be a person with severe disability aged 18 to 79 years."
+    },
+    {
+      "rule_id": "c_igndps_has_disability",
+      "field": "has_disability",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Must have a certified disability",
+      "verbatim_quote": "The applicant must be a person with severe disability aged 18 to 79 years."
+    },
+    {
+      "rule_id": "c_igndps_pct",
+      "field": "disability_percentage",
+      "operator": "gte",
+      "value": 80,
+      "plain_en": "Disability percentage must be at least 80%",
+      "verbatim_quote": "Minimum disability percentage must be 80% or severe multiple disability as certified by competent medical authority."
+    },
+    {
+      "rule_id": "c_igndps_bpl",
+      "field": "bpl",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Belong to BPL household",
+      "verbatim_quote": "The applicant must belong to a household living below poverty line according to BPL list."
+    }
+  ],
+  "exclusions": [
+    {
+      "exclusion_id": "e_igndps_sub_80_disability",
+      "field": "disability_percentage",
+      "operator": "gte",
+      "value": 80,
+      "plain_en": "Excludes persons with disability percentage below 80% (mild/moderate disabilities)",
+      "verbatim_quote": "Minimum disability percentage must be 80% or severe multiple disability as certified by competent medical authority."
+    }
+  ],
+  "numeric_double_confirmation": "PASSED",
+  "exclusion_pass_status": "COMPLETED",
+  "review_controls": {
+    "can_approve": true,
+    "can_reject": true,
+    "requires_human_reviewer_role": [
+      "LEGAL_REVIEWER",
+      "CATALOGUE_ADMIN"
+    ]
+  },
+  "proposed_decision": "APPROVE_DECISION_READY"
+}

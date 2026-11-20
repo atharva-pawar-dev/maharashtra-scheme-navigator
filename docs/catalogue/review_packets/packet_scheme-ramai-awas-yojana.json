@@ -1,0 +1,71 @@
+{
+  "packet_id": "HRP-SCHEME-RAMAI-AWAS-YOJANA",
+  "scheme_id": "scheme-ramai-awas-yojana",
+  "scheme_version": "2.0.0",
+  "department": "Social Justice and Special Assistance",
+  "verification_tier": "tier_a_flagship",
+  "governing_instruments": [
+    {
+      "title": "रमाई आवास घरकुल योजना शासन निर्णय व निकष",
+      "url": "https://sjsa.maharashtra.gov.in/gr/Ramai_Gharkul_Guidelines.pdf",
+      "sha256": "171c5b680196307f0c5e52cade482e4ca59b1a9c6d0a9f8e1223fd5e8603c20e",
+      "cached_path": "data/raw/gr_ramai_gharkul.txt"
+    }
+  ],
+  "substantive_criteria_count": 4,
+  "decision_driving_rules": [
+    {
+      "rule_id": "c_ramai_state",
+      "field": "resident_state",
+      "operator": "eq",
+      "value": "maharashtra",
+      "plain_en": "Resident of Maharashtra for at least 15 years",
+      "verbatim_quote": "अर्जदार महाराष्ट्र राज्यातील किमान १५ वर्षे वास्तव्य असणारा रहिवासी असावा."
+    },
+    {
+      "rule_id": "c_ramai_domicile",
+      "field": "residence_years",
+      "operator": "gte",
+      "value": 15,
+      "plain_en": "15 years residence in Maharashtra",
+      "verbatim_quote": "अर्जदार महाराष्ट्र राज्यातील किमान १५ वर्षे वास्तव्य असणारा रहिवासी असावा."
+    },
+    {
+      "rule_id": "c_ramai_caste",
+      "field": "caste_category",
+      "operator": "eq",
+      "value": "SC",
+      "plain_en": "Must belong to Scheduled Caste (SC) category",
+      "verbatim_quote": "अनुसूचित जाती व नवबौद्ध प्रवर्गातील बेघर व कच्चे घर असणारे कुटुंब पात्र राहील."
+    },
+    {
+      "rule_id": "c_ramai_income",
+      "field": "annual_family_income",
+      "operator": "lte",
+      "value": 100000,
+      "plain_en": "Annual family income up to ₹1,00,000 (rural areas)",
+      "verbatim_quote": "वार्षिक कौटुंबिक उत्पन्न ग्रामीण भागासाठी रु. १,००,०००/- व नागरी भागासाठी रु. ३,००,०००/- पर्यंत असणे आवश्यक आहे."
+    }
+  ],
+  "exclusions": [
+    {
+      "exclusion_id": "e_ramai_pucca_house",
+      "field": "owns_pucca_house",
+      "operator": "eq",
+      "value": false,
+      "plain_en": "Excludes applicants who already possess a pucca house in their own or family's name",
+      "verbatim_quote": "स्वतःची जागा किंवा कच्चे घर असणे आवश्यक असून पक्के घर नसावे."
+    }
+  ],
+  "numeric_double_confirmation": "PASSED",
+  "exclusion_pass_status": "COMPLETED",
+  "review_controls": {
+    "can_approve": true,
+    "can_reject": true,
+    "requires_human_reviewer_role": [
+      "LEGAL_REVIEWER",
+      "CATALOGUE_ADMIN"
+    ]
+  },
+  "proposed_decision": "APPROVE_DECISION_READY"
+}

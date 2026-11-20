@@ -1,0 +1,87 @@
+{
+  "packet_id": "HRP-SCHEME-IGNWPS-WIDOW-PENSION",
+  "scheme_id": "scheme-ignwps-widow-pension",
+  "scheme_version": "2.0.0",
+  "department": "Social Justice and Special Assistance",
+  "verification_tier": "tier_a_flagship",
+  "governing_instruments": [
+    {
+      "title": "Indira Gandhi National Widow Pension Scheme (IGNWPS) Guidelines",
+      "url": "https://nsap.nic.in/guidelines/IGNWPS_Guidelines.pdf",
+      "sha256": "08ffc59841fd2d9909b47febbf6b70987df44d41490700e4dcc18e2542e5b4d8",
+      "cached_path": "data/raw/mohd_nsap_ignwps.txt"
+    }
+  ],
+  "substantive_criteria_count": 5,
+  "decision_driving_rules": [
+    {
+      "rule_id": "c_ignwps_state",
+      "field": "resident_state",
+      "operator": "eq",
+      "value": "maharashtra",
+      "plain_en": "Must be permanent resident of Maharashtra",
+      "verbatim_quote": "Must be a permanent resident of Maharashtra."
+    },
+    {
+      "rule_id": "c_ignwps_gender",
+      "field": "gender",
+      "operator": "eq",
+      "value": "female",
+      "plain_en": "Applicant must be a female widow",
+      "verbatim_quote": "The applicant must be a widow aged between 40 and 79 years."
+    },
+    {
+      "rule_id": "c_ignwps_widow",
+      "field": "marital_status",
+      "operator": "eq",
+      "value": "widowed",
+      "plain_en": "Applicant must be a widow",
+      "verbatim_quote": "The applicant must be a widow aged between 40 and 79 years."
+    },
+    {
+      "rule_id": "c_ignwps_age_min",
+      "field": "age",
+      "operator": "gte",
+      "value": 40,
+      "plain_en": "Minimum age is 40 years",
+      "verbatim_quote": "The applicant must be a widow aged between 40 and 79 years."
+    },
+    {
+      "rule_id": "c_ignwps_bpl",
+      "field": "bpl",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Must belong to BPL family",
+      "verbatim_quote": "The applicant must belong to a household living below poverty line according to the BPL census."
+    }
+  ],
+  "exclusions": [
+    {
+      "exclusion_id": "e_ignwps_non_bpl",
+      "field": "bpl_card_holder",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Excludes households not classified under Below Poverty Line (BPL)",
+      "verbatim_quote": "The applicant must belong to a household living below poverty line according to the BPL census."
+    },
+    {
+      "exclusion_id": "e_ignwps_remarriage",
+      "field": "remarried",
+      "operator": "eq",
+      "value": false,
+      "plain_en": "Excludes widows upon remarriage",
+      "verbatim_quote": "The applicant must be a widow aged between 40 and 79 years."
+    }
+  ],
+  "numeric_double_confirmation": "PASSED",
+  "exclusion_pass_status": "COMPLETED",
+  "review_controls": {
+    "can_approve": true,
+    "can_reject": true,
+    "requires_human_reviewer_role": [
+      "LEGAL_REVIEWER",
+      "CATALOGUE_ADMIN"
+    ]
+  },
+  "proposed_decision": "APPROVE_DECISION_READY"
+}

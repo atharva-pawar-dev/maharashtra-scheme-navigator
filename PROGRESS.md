@@ -1,8 +1,8 @@
 # Progress Tracker: Verified Catalogue v2 & Document Review Overhaul (PROGRESS.md)
-**Last Updated:** 2026-11-20T21:05:00+05:30  
-**Active Phase:** TRIMURTI v3 — Milestone SC-M0 Complete, SC-G1 In Progress  
+**Last Updated:** 2026-11-20T22:15:00+05:30  
+**Active Phase:** TRIMURTI v3 — Milestone SC-G1 Complete, SC-G2 Pending  
 **Branch:** `feat/catalogue-v2`  
-**Milestone Tags:** `rc4-accepted`, `sc-m0-accepted` (pending tag)
+**Milestone Tags:** `rc4-accepted`, `sc-m0-accepted`, `sc-g1-accepted`
 
 ---
 
@@ -11,7 +11,7 @@
 | Milestone | Target Scope | Status | Audit Score / Evidence |
 | :--- | :--- | :---: | :--- |
 | **SC-M0** | Baseline, Safety & Overclaim Prevention | **PASS** | 64.8/100 Honest Baseline; 621 pytest tests, 19 Playwright tests, 12 canaries; Thin-rule lint & DB attestations active. |
-| **SC-G1** | P0 High-Impact Scheme Depth | **IN PROGRESS** | Flagship social assistance, DBT, scholarships, and pension deep dossiers with verbatim quotes. |
+| **SC-G1** | P0 High-Impact Scheme Depth | **PASS** | **69.74/100 Scorer v1**; 17 Appendix E dossiers, 17 review packets, dedicated exclusion pass, `/governance/review-queue` API, trilingual search & decision-ready UI badges, 6-test Five-Citizen Playwright acceptance suite. |
 | **SC-G2** | Complete Universe & Department Reconciliation | **PENDING** | 40+ departments, municipal bodies, and state portals inventory reconciliation. |
 | **SC-G3** | P1 Depth, Document Graphs & Lifecycle | **PENDING** | Complete document requirement graph, renewal workflows, and Right to Services timelines. |
 | **SC-G4** | Quality Instrumentation & Update Monitoring | **PENDING** | Automated daily GR scraper, diff engine, and change alert feed. |

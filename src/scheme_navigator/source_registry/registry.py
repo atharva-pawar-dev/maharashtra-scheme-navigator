@@ -84,8 +84,36 @@ class SourceRegistry:
         canonical_file = self.registry_dir / "canonical_schemes.json"
         if canonical_file.exists():
             data = json.loads(canonical_file.read_text(encoding="utf-8"))
+            from scheme_navigator.governance.attestation_store import (
+                attestation_store,
+                compute_scheme_rule_set_hash,
+            )
+            from scheme_navigator.governance.thin_rule_lint import lint_scheme_rules
+            from scheme_navigator.services.catalog import canonical_catalog
+
             for item in data:
                 rec = CanonicalSchemeRecord.model_validate(item)
+                scheme_domain = canonical_catalog.get(rec.canonical_scheme_id)
+                if rec.canonical_scheme_id.startswith("demo-") or rec.publication_status in {"DEMO_ONLY", "ACTIVE_DEMO_FIXTURE"}:
+                    rec.public_status_category = "DEMO_FIXTURE"
+                    rec.is_decision_ready = False
+                    rec.completeness_attested = False
+                elif scheme_domain:
+                    rule_hash = compute_scheme_rule_set_hash(scheme_domain)
+                    att = attestation_store.get_valid_attestation(scheme_domain.scheme_id, rule_hash)
+                    lint = lint_scheme_rules(scheme_domain)
+                    if att and lint.is_valid:
+                        rec.is_decision_ready = True
+                        rec.completeness_attested = True
+                        rec.public_status_category = "DECISION_READY"
+                    else:
+                        rec.is_decision_ready = False
+                        rec.completeness_attested = bool(att)
+                        rec.public_status_category = "LIMITED_INFORMATION"
+                else:
+                    rec.is_decision_ready = False
+                    rec.completeness_attested = False
+                    rec.public_status_category = "LIMITED_INFORMATION"
                 self._canonical_schemes[rec.canonical_scheme_id] = rec
 
     # --- Source Management ---

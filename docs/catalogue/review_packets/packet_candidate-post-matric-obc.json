@@ -1,0 +1,79 @@
+{
+  "packet_id": "HRP-CANDIDATE-POST-MATRIC-OBC",
+  "scheme_id": "candidate-post-matric-obc",
+  "scheme_version": "2.0.0",
+  "department": "OBC, VJNT, SBC and Social Welfare Department",
+  "verification_tier": "tier_a_flagship",
+  "governing_instruments": [
+    {
+      "title": "Post-Matric Scholarship for OBC Students Maharashtra Rules",
+      "url": "https://mahadbt.maharashtra.gov.in/scheme_rules/Post_Matric_OBC.pdf",
+      "sha256": "b33b768a9c0110eb9c8c8d9c105964ef4f9cd0a2ba3c53defe934791591b4521",
+      "cached_path": "data/raw/mahadbt_obc_postmatric.txt"
+    }
+  ],
+  "substantive_criteria_count": 4,
+  "decision_driving_rules": [
+    {
+      "rule_id": "c_pmobc_state",
+      "field": "resident_state",
+      "operator": "eq",
+      "value": "maharashtra",
+      "plain_en": "Resident of Maharashtra",
+      "verbatim_quote": "The applicant must belong to Other Backward Classes (OBC) category with valid Caste and Non-Creamy Layer Certificate."
+    },
+    {
+      "rule_id": "c_pmobc_caste",
+      "field": "caste_category",
+      "operator": "eq",
+      "value": "OBC",
+      "plain_en": "Must belong to Other Backward Class (OBC)",
+      "verbatim_quote": "The applicant must belong to Other Backward Classes (OBC) category with valid Caste and Non-Creamy Layer Certificate."
+    },
+    {
+      "rule_id": "c_pmobc_student",
+      "field": "is_student",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Must be an enrolled student in recognized college",
+      "verbatim_quote": "Candidate must be an enrolled student pursuing a recognized post-matric education course in an approved college."
+    },
+    {
+      "rule_id": "c_pmobc_income",
+      "field": "annual_family_income",
+      "operator": "lte",
+      "value": 150000,
+      "plain_en": "Family annual income up to ₹1,50,000 (scholarship)",
+      "verbatim_quote": "Family annual income ceiling of Rs. 1,50,000 to Rs. 2,50,000 for maintenance allowance and tuition fees."
+    }
+  ],
+  "exclusions": [
+    {
+      "exclusion_id": "e_obc_scholarship_income",
+      "field": "annual_family_income",
+      "operator": "lte",
+      "value": 250000,
+      "plain_en": "Excludes OBC candidates whose total annual family income exceeds Rs. 2,50,000",
+      "verbatim_quote": "Family annual income ceiling of Rs. 1,50,000 to Rs. 2,50,000 for maintenance allowance and tuition fees."
+    },
+    {
+      "exclusion_id": "e_obc_scholarship_creamy_layer",
+      "field": "creamy_layer_status",
+      "operator": "eq",
+      "value": "non_creamy_layer",
+      "plain_en": "Excludes candidates belonging to Creamy Layer or lacking valid Non-Creamy Layer certificate",
+      "verbatim_quote": "The applicant must belong to Other Backward Classes (OBC) category with valid Caste and Non-Creamy Layer Certificate."
+    }
+  ],
+  "numeric_double_confirmation": "PASSED",
+  "exclusion_pass_status": "COMPLETED",
+  "review_controls": {
+    "can_approve": true,
+    "can_reject": true,
+    "requires_human_reviewer_role": [
+      "LEGAL_REVIEWER",
+      "CATALOGUE_ADMIN"
+    ]
+  },
+  "proposed_decision": "APPROVE_DECISION_READY"
+}

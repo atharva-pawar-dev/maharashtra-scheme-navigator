@@ -1,10 +1,10 @@
 # Application State Ledger (STATE.md)
 **Project:** Maharashtra Scheme Navigator  
-**Last Updated:** 2026-11-20T21:05:00+05:30  
+**Last Updated:** 2026-11-20T22:15:00+05:30  
 **Active Execution Program:** TRIMURTI v3 — Scheme Universe Intelligence Master Execution Specification  
 **Governing Standard:** Evidence-Gated · Human-Governed · UI-First · Self-Auditing · Resumable  
 **Git Branch:** `feat/catalogue-v2`  
-**Base Baselines:** Commit `ad0385e` (Tagged `rc4-accepted`), Tag `sc-m0-accepted` (pending)  
+**Base Baselines:** Commit `ad0385e` (Tagged `rc4-accepted`), Tag `sc-m0-accepted` (`06580fe`), Tag `sc-g1-accepted`  
 **Execution Environment:** Authorisation Level A0 (Local Windows Developer Machine, Python 3.11.4, SQLite 3.x, Chromium Headless)
 
 ---
@@ -12,8 +12,8 @@
 ## 1. Derived Launch & Scheme Program State
 
 $$\mathbf{Launch\ State:\ INTERNAL\_DEMO\_READY}$$
-$$\mathbf{TRIMURTI\ v3\ Ladder:\ SC\text{-}M0\ PASS\ \longrightarrow\ SC\text{-}G1\ IN\_PROGRESS}$$
-$$\mathbf{Honest\ Quality\ Baseline:\ 64.8\ /\ 100\ (Target:\ 95.0\ /\ 100)}$$
+$$\mathbf{TRIMURTI\ v3\ Ladder:\ SC\text{-}M0\ PASS\ \longrightarrow\ SC\text{-}G1\ PASS\ \longrightarrow\ SC\text{-}G2\ PENDING}$$
+$$\mathbf{Honest\ Quality\ Baseline:\ 69.74\ /\ 100\ (Target:\ 95.0\ /\ 100)}$$
 
 - **Evaluation Rule (Section E2):** Requires G1, G2, G3, G5, and G23 to PASS locally with zero regressions.
 - **Summary Scorecard:**
@@ -26,12 +26,15 @@ $$\mathbf{Honest\ Quality\ Baseline:\ 64.8\ /\ 100\ (Target:\ 95.0\ /\ 100)}$$
 
 ## 2. Test Execution & Quality Baseline
 
-- **Total Unit & Integration Tests:** **621 passed, 0 failed** (`pytest tests/`)
+- **Total Unit & Integration Tests:** **631 passed, 0 failed** (`pytest tests/`)
   - Baseline RC4 tests: 613 passed
   - Added SC-M0 test suites:
     - `tests/invariants/test_trimurti_invariants.py`: 7 passed (Invariants I-02, I-03, I-04, I-05, I-06, I-07, I-15, I-17)
     - `tests/test_playwright_scheme_issue_reporting.py`: 1 passed (Real Playwright trilingual report submission flow)
-- **Browser Playwright Suites:** 19 real Chromium browser tests passing with 0 failures
+  - Added SC-G1 test suites:
+    - `tests/test_governance_review_queue.py`: 4 passed (Review packet endpoints, RBAC enforcement, Invariant I-05 non-self-authorization)
+    - `tests/test_playwright_five_citizen_acceptance.py`: 6 passed (Citizen A-E journeys + Decision-Ready vs Limited-Info UI distinction)
+- **Browser Playwright Suites:** 25 real Chromium browser tests passing with 0 failures (19 earlier + 6 Five-Citizen acceptance tests)
 - **Mutation Canary Verification:** 12/12 individual canary mutations caught (`release/evidence/ws15/E-WS15-002_canary_mutations_individual.json`)
 
 ---

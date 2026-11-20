@@ -1,0 +1,79 @@
+{
+  "packet_id": "HRP-CANDIDATE-POST-MATRIC-SC",
+  "scheme_id": "candidate-post-matric-sc",
+  "scheme_version": "2.0.0",
+  "department": "Social Justice and Special Assistance",
+  "verification_tier": "tier_a_flagship",
+  "governing_instruments": [
+    {
+      "title": "Government of India Post-Matric Scholarship for SC Students Maharashtra Rules",
+      "url": "https://mahadbt.maharashtra.gov.in/scheme_rules/GOI_Post_Matric_SC.pdf",
+      "sha256": "1f988694cb707b5942661be1fa3290406c53bcea09ad3c3b35364fa451cbc8d8",
+      "cached_path": "data/raw/mahadbt_sc_postmatric.txt"
+    }
+  ],
+  "substantive_criteria_count": 4,
+  "decision_driving_rules": [
+    {
+      "rule_id": "c_pmsc_state",
+      "field": "resident_state",
+      "operator": "eq",
+      "value": "maharashtra",
+      "plain_en": "Resident of Maharashtra",
+      "verbatim_quote": "Applicant must belong to Scheduled Caste (SC) category of Maharashtra."
+    },
+    {
+      "rule_id": "c_pmsc_caste",
+      "field": "caste_category",
+      "operator": "eq",
+      "value": "SC",
+      "plain_en": "Must belong to Scheduled Caste (SC) category",
+      "verbatim_quote": "Applicant must belong to Scheduled Caste (SC) category of Maharashtra."
+    },
+    {
+      "rule_id": "c_pmsc_student",
+      "field": "is_student",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Must be an enrolled student pursuing post-matric education",
+      "verbatim_quote": "The student must have passed Class 10 (SSC) and be enrolled in a recognized post-matric course."
+    },
+    {
+      "rule_id": "c_pmsc_income",
+      "field": "annual_family_income",
+      "operator": "lte",
+      "value": 250000,
+      "plain_en": "Family annual income must not exceed ₹2,50,000",
+      "verbatim_quote": "Family annual income from all sources must not exceed Rs. 2,50,000 per annum."
+    }
+  ],
+  "exclusions": [
+    {
+      "exclusion_id": "e_sc_scholarship_income",
+      "field": "annual_family_income",
+      "operator": "lte",
+      "value": 250000,
+      "plain_en": "Excludes SC students whose total family annual income exceeds Rs. 2,50,000",
+      "verbatim_quote": "Family annual income from all sources must not exceed Rs. 2,50,000 per annum."
+    },
+    {
+      "exclusion_id": "e_sc_scholarship_third_boy",
+      "field": "third_male_child_beneficiary",
+      "operator": "eq",
+      "value": false,
+      "plain_en": "Only two boys from the same family are eligible; restriction does not apply to girls",
+      "verbatim_quote": "Only two boys from the same family are eligible, but this restriction does not apply to girls."
+    }
+  ],
+  "numeric_double_confirmation": "PASSED",
+  "exclusion_pass_status": "COMPLETED",
+  "review_controls": {
+    "can_approve": true,
+    "can_reject": true,
+    "requires_human_reviewer_role": [
+      "LEGAL_REVIEWER",
+      "CATALOGUE_ADMIN"
+    ]
+  },
+  "proposed_decision": "APPROVE_DECISION_READY"
+}

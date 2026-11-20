@@ -1,0 +1,111 @@
+{
+  "packet_id": "HRP-CANDIDATE-MAJHI-LADKI-BAHIN",
+  "scheme_id": "candidate-majhi-ladki-bahin",
+  "scheme_version": "2.0.0",
+  "department": "Women and Child Development Department",
+  "verification_tier": "tier_a_flagship",
+  "governing_instruments": [
+    {
+      "title": "शासन निर्णय क्र. संकीर्ण-२०२४/प्र.क्र.१३७/कार्या-०२ (मुख्यमंत्री माझी लाडकी बहीण योजना)",
+      "url": "https://ladkibahin.maharashtra.gov.in/gr/GR_28_06_2024.pdf",
+      "sha256": "423c3e902af9cca1e5e54057d4cb9aa4793f35825b868a93e653c809e2691948",
+      "cached_path": "data/raw/gr_mmlby_2024.txt"
+    }
+  ],
+  "substantive_criteria_count": 6,
+  "decision_driving_rules": [
+    {
+      "rule_id": "c_mmlby_state",
+      "field": "resident_state",
+      "operator": "eq",
+      "value": "maharashtra",
+      "plain_en": "Must be a permanent resident of Maharashtra",
+      "verbatim_quote": "महिला महाराष्ट्र राज्याची रहिवासी असणे आवश्यक आहे"
+    },
+    {
+      "rule_id": "c_mmlby_gender",
+      "field": "gender",
+      "operator": "eq",
+      "value": "female",
+      "plain_en": "Must be a female applicant",
+      "verbatim_quote": "२१ ते ६५ वयोगटातील विवाहित, विधवा, घटस्फोटित, परित्यक्त्या आणि निराधार महिला"
+    },
+    {
+      "rule_id": "c_mmlby_age_min",
+      "field": "age",
+      "operator": "gte",
+      "value": 21,
+      "plain_en": "Minimum age must be 21 years",
+      "verbatim_quote": "२१ ते ६५ वयोगटातील विवाहित, विधवा, घटस्फोटित, परित्यक्त्या आणि निराधार महिला"
+    },
+    {
+      "rule_id": "c_mmlby_age_max",
+      "field": "age",
+      "operator": "lte",
+      "value": 65,
+      "plain_en": "Maximum age must be 65 years",
+      "verbatim_quote": "२१ ते ६५ वयोगटातील विवाहित, विधवा, घटस्फोटित, परित्यक्त्या आणि निराधार महिला"
+    },
+    {
+      "rule_id": "c_mmlby_income",
+      "field": "annual_family_income",
+      "operator": "lte",
+      "value": 250000,
+      "plain_en": "Annual family income must not exceed ₹2,50,000",
+      "verbatim_quote": "सदर योजनेच्या लाभासाठी कुटुंबाचे वार्षिक उत्पन्न रु. २.५० लाखांपेक्षा जास्त नसावे"
+    },
+    {
+      "rule_id": "c_mmlby_bank",
+      "field": "aadhaar_linked_bank_account",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Bank account must be Aadhaar-seeded for DBT payments",
+      "verbatim_quote": "लाभार्थी महिलेचे बँक खाते आधार लिंक असणे आवश्यक आहे"
+    }
+  ],
+  "exclusions": [
+    {
+      "exclusion_id": "e_mmlby_tax",
+      "field": "income_tax_payer",
+      "operator": "eq",
+      "value": false,
+      "plain_en": "No family member should be an income tax payer",
+      "verbatim_quote": "कुटुंबातील सदस्य आयकरदाता नसावा"
+    },
+    {
+      "exclusion_id": "e_mmlby_govt_job",
+      "field": "govt_employee_in_family",
+      "operator": "eq",
+      "value": false,
+      "plain_en": "No family member should be a regular government employee or pensioner",
+      "verbatim_quote": "कुटुंबातील सदस्य नियमित/कायम कर्मचारी म्हणून शासकीय विभाग/उपक्रम यामध्ये कार्यरत नसावा"
+    },
+    {
+      "exclusion_id": "e_mmlby_vehicle",
+      "field": "owns_four_wheeler",
+      "operator": "eq",
+      "value": false,
+      "plain_en": "Family must not own a four-wheeler vehicle (tractor excluded)",
+      "verbatim_quote": "कुटुंबातील सदस्यांच्या नावावर चारचाकी वाहन (ट्रॅक्टर वगळून) नसावे"
+    },
+    {
+      "exclusion_id": "e_mmlby_duplicate_benefit",
+      "field": "receives_other_monthly_dbt_ge_1500",
+      "operator": "eq",
+      "value": false,
+      "plain_en": "Must not receive monthly financial assistance of Rs. 1,500 or more from other government schemes",
+      "verbatim_quote": "ज्या कुटुंबातील महिला इतर कोणत्याही योजनेतून दरमहा रु. १५००/- किंवा त्यापेक्षा जास्त आर्थिक लाभ घेत असतील त्या अपात्र ठरतील."
+    }
+  ],
+  "numeric_double_confirmation": "PASSED",
+  "exclusion_pass_status": "COMPLETED",
+  "review_controls": {
+    "can_approve": true,
+    "can_reject": true,
+    "requires_human_reviewer_role": [
+      "LEGAL_REVIEWER",
+      "CATALOGUE_ADMIN"
+    ]
+  },
+  "proposed_decision": "APPROVE_DECISION_READY"
+}

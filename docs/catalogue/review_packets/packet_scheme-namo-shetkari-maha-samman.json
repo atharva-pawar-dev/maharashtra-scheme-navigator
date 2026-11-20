@@ -1,0 +1,63 @@
+{
+  "packet_id": "HRP-SCHEME-NAMO-SHETKARI-MAHA-SAMMAN",
+  "scheme_id": "scheme-namo-shetkari-maha-samman",
+  "scheme_version": "2.0.0",
+  "department": "Agriculture Department",
+  "verification_tier": "tier_a_flagship",
+  "governing_instruments": [
+    {
+      "title": "नमो शेतकरी महा सन्मान निधी योजना शासन निर्णय",
+      "url": "https://krishi.maharashtra.gov.in/gr/Namo_Shetkari_2023.pdf",
+      "sha256": "f21ceb9f2e840d8cadad144bc8a73cddca3fff832b8ed1d7a04a022ff43c564d",
+      "cached_path": "data/raw/gr_namo_shetkari_2023.txt"
+    }
+  ],
+  "substantive_criteria_count": 3,
+  "decision_driving_rules": [
+    {
+      "rule_id": "c_nsmny_state",
+      "field": "resident_state",
+      "operator": "eq",
+      "value": "maharashtra",
+      "plain_en": "Resident farmer of Maharashtra",
+      "verbatim_quote": "महाराष्ट्र राज्यातील पात्र अल्प व अत्यल्प भूधारक शेतकरी कुटुंब या योजनेस पात्र राहील."
+    },
+    {
+      "rule_id": "c_nsmny_farmer",
+      "field": "has_land",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Must own cultivable agricultural land registered in 7/12 extract",
+      "verbatim_quote": "महाराष्ट्र राज्यातील पात्र अल्प व अत्यल्प भूधारक शेतकरी कुटुंब या योजनेस पात्र राहील."
+    },
+    {
+      "rule_id": "c_nsmny_bank",
+      "field": "aadhaar_linked_bank_account",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Bank account must be Aadhaar seeded for DBT",
+      "verbatim_quote": "शेतकरी कुटुंबाचे बँक खाते आधार संलग्न असणे आवश्यक आहे."
+    }
+  ],
+  "exclusions": [
+    {
+      "exclusion_id": "e_namo_tax_and_institutional",
+      "field": "income_tax_payer",
+      "operator": "eq",
+      "value": false,
+      "plain_en": "Excludes institutional landholders, income tax payees, and regular government employees",
+      "verbatim_quote": "कुटुंबातील कोणताही सदस्य आयकर भरणारा नसावा आणि नियमित शासकीय सेवेत नसावा."
+    }
+  ],
+  "numeric_double_confirmation": "PASSED",
+  "exclusion_pass_status": "COMPLETED",
+  "review_controls": {
+    "can_approve": true,
+    "can_reject": true,
+    "requires_human_reviewer_role": [
+      "LEGAL_REVIEWER",
+      "CATALOGUE_ADMIN"
+    ]
+  },
+  "proposed_decision": "APPROVE_DECISION_READY"
+}

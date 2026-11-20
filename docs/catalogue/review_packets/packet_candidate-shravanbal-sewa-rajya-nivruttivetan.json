@@ -1,0 +1,79 @@
+{
+  "packet_id": "HRP-CANDIDATE-SHRAVANBAL-SEWA-RAJYA-NIVRUTTIVETAN",
+  "scheme_id": "candidate-shravanbal-sewa-rajya-nivruttivetan",
+  "scheme_version": "2.0.0",
+  "department": "Social Justice and Special Assistance",
+  "verification_tier": "tier_a_flagship",
+  "governing_instruments": [
+    {
+      "title": "श्रावणबाळ सेवा राज्य निवृत्तीवेतन योजना शासन निर्णय",
+      "url": "https://sjsa.maharashtra.gov.in/gr/Shravanbal_Rules.pdf",
+      "sha256": "a48bc296ceeebd23f41164789a91cd29b7e80f0c8f611fd61c1eda20533fa568",
+      "cached_path": "data/raw/gr_shravanbal_2023.txt"
+    }
+  ],
+  "substantive_criteria_count": 4,
+  "decision_driving_rules": [
+    {
+      "rule_id": "c_shravan_state",
+      "field": "resident_state",
+      "operator": "eq",
+      "value": "maharashtra",
+      "plain_en": "Must be resident of Maharashtra",
+      "verbatim_quote": "महाराष्ट्रात किमान १५ वर्षे सलग वास्तव्याचा दाखला आवश्यक आहे"
+    },
+    {
+      "rule_id": "c_shravan_domicile",
+      "field": "residence_years",
+      "operator": "gte",
+      "value": 15,
+      "plain_en": "Must have resided in Maharashtra for at least 15 continuous years",
+      "verbatim_quote": "महाराष्ट्रात किमान १५ वर्षे सलग वास्तव्याचा दाखला आवश्यक आहे"
+    },
+    {
+      "rule_id": "c_shravan_age",
+      "field": "age",
+      "operator": "gte",
+      "value": 65,
+      "plain_en": "Applicant must be aged 65 years or above",
+      "verbatim_quote": "वय ६५ वर्षे व त्यावरील निराधार वृद्ध व्यक्ती असणे आवश्यक आहे"
+    },
+    {
+      "rule_id": "c_shravan_income",
+      "field": "annual_family_income",
+      "operator": "lte",
+      "value": 21000,
+      "plain_en": "Family annual income must not exceed ₹21,000 (Group A)",
+      "verbatim_quote": "गट (अ) साठी कौटुंबिक वार्षिक उत्पन्न मर्यादा रु. २१,०००/- पर्यंत असावी"
+    }
+  ],
+  "exclusions": [
+    {
+      "exclusion_id": "e_shravanbal_income_ceiling",
+      "field": "annual_family_income",
+      "operator": "lte",
+      "value": 21000,
+      "plain_en": "Excludes individuals with annual family income exceeding Rs. 21,000 for Group A",
+      "verbatim_quote": "गट (अ) साठी कौटुंबिक वार्षिक उत्पन्न मर्यादा रु. २१,०००/- पर्यंत असावी."
+    },
+    {
+      "exclusion_id": "e_shravanbal_duplicate_pension",
+      "field": "receives_nsap_pension",
+      "operator": "eq",
+      "value": false,
+      "plain_en": "Excludes individuals receiving duplicate central old age pension under IGNOAPS",
+      "verbatim_quote": "निराधार वृद्ध व्यक्ती असणे आवश्यक आहे"
+    }
+  ],
+  "numeric_double_confirmation": "PASSED",
+  "exclusion_pass_status": "COMPLETED",
+  "review_controls": {
+    "can_approve": true,
+    "can_reject": true,
+    "requires_human_reviewer_role": [
+      "LEGAL_REVIEWER",
+      "CATALOGUE_ADMIN"
+    ]
+  },
+  "proposed_decision": "APPROVE_DECISION_READY"
+}

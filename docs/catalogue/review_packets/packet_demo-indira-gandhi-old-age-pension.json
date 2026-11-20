@@ -1,0 +1,63 @@
+{
+  "packet_id": "HRP-DEMO-INDIRA-GANDHI-OLD-AGE-PENSION",
+  "scheme_id": "demo-indira-gandhi-old-age-pension",
+  "scheme_version": "2.0.0",
+  "department": "Social Justice and Special Assistance",
+  "verification_tier": "tier_a_flagship",
+  "governing_instruments": [
+    {
+      "title": "Indira Gandhi National Old Age Pension Scheme (IGNOAPS) Guidelines",
+      "url": "https://nsap.nic.in/guidelines/IGNOAPS_Guidelines.pdf",
+      "sha256": "8d67ecae1b5a3cc5934982f322cc6416bfc0654c1e2a758146d3dc5af133974b",
+      "cached_path": "data/raw/mohd_nsap_ignoaps.txt"
+    }
+  ],
+  "substantive_criteria_count": 3,
+  "decision_driving_rules": [
+    {
+      "rule_id": "c_ignoaps_state",
+      "field": "resident_state",
+      "operator": "eq",
+      "value": "maharashtra",
+      "plain_en": "Must be resident of Maharashtra",
+      "verbatim_quote": "The applicant must be a citizen of India residing in Maharashtra."
+    },
+    {
+      "rule_id": "c_ignoaps_age",
+      "field": "age",
+      "operator": "gte",
+      "value": 60,
+      "plain_en": "Must be aged 60 years or above",
+      "verbatim_quote": "The age of the applicant must be 60 years or above."
+    },
+    {
+      "rule_id": "c_ignoaps_bpl",
+      "field": "bpl",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Must belong to a household living Below Poverty Line (BPL)",
+      "verbatim_quote": "The applicant must belong to a household living Below Poverty Line (BPL) according to criteria prescribed by the Government."
+    }
+  ],
+  "exclusions": [
+    {
+      "exclusion_id": "e_ignoaps_non_bpl",
+      "field": "bpl_card_holder",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Excludes households not identified as Below Poverty Line in official census",
+      "verbatim_quote": "The applicant must belong to a household living Below Poverty Line (BPL)"
+    }
+  ],
+  "numeric_double_confirmation": "PASSED",
+  "exclusion_pass_status": "COMPLETED",
+  "review_controls": {
+    "can_approve": true,
+    "can_reject": true,
+    "requires_human_reviewer_role": [
+      "LEGAL_REVIEWER",
+      "CATALOGUE_ADMIN"
+    ]
+  },
+  "proposed_decision": "APPROVE_DECISION_READY"
+}

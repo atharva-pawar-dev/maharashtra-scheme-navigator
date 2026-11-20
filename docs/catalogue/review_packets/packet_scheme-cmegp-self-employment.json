@@ -1,0 +1,63 @@
+{
+  "packet_id": "HRP-SCHEME-CMEGP-SELF-EMPLOYMENT",
+  "scheme_id": "scheme-cmegp-self-employment",
+  "scheme_version": "2.0.0",
+  "department": "Industries, Energy & Labour Department",
+  "verification_tier": "tier_a_flagship",
+  "governing_instruments": [
+    {
+      "title": "Chief Minister Employment Generation Programme (CMEGP) Maharashtra Guidelines",
+      "url": "https://maha-cmegp.gov.in/docs/CMEGP_Rules.pdf",
+      "sha256": "d8f5ea840cf0df4d7da532a6f282ba1942490878bb70b7399f6b987e0de491ec",
+      "cached_path": "data/raw/gr_cmegp_2023.txt"
+    }
+  ],
+  "substantive_criteria_count": 3,
+  "decision_driving_rules": [
+    {
+      "rule_id": "c_cmegp_state",
+      "field": "resident_state",
+      "operator": "eq",
+      "value": "maharashtra",
+      "plain_en": "Permanent resident of Maharashtra",
+      "verbatim_quote": "Applicant must be a permanent resident of Maharashtra."
+    },
+    {
+      "rule_id": "c_cmegp_age_min",
+      "field": "age",
+      "operator": "gte",
+      "value": 18,
+      "plain_en": "Minimum age of 18 years",
+      "verbatim_quote": "Minimum age of 18 years and maximum age of 45 years (relaxable up to 50 years for SC, ST, Women and Divyang)."
+    },
+    {
+      "rule_id": "c_cmegp_age_max",
+      "field": "age",
+      "operator": "lte",
+      "value": 45,
+      "plain_en": "Maximum age of 45 years (up to 50 years for reserved/women)",
+      "verbatim_quote": "Minimum age of 18 years and maximum age of 45 years (relaxable up to 50 years for SC, ST, Women and Divyang)."
+    }
+  ],
+  "exclusions": [
+    {
+      "exclusion_id": "e_cmegp_prior_subsidy",
+      "field": "availed_prior_pmegp_subsidy",
+      "operator": "eq",
+      "value": false,
+      "plain_en": "Excludes candidates who have already availed financial subsidy under PMEGP or CMEGP",
+      "verbatim_quote": "Subsidy ranging from 15% to 35% of project cost with bank loan facilitation."
+    }
+  ],
+  "numeric_double_confirmation": "PASSED",
+  "exclusion_pass_status": "COMPLETED",
+  "review_controls": {
+    "can_approve": true,
+    "can_reject": true,
+    "requires_human_reviewer_role": [
+      "LEGAL_REVIEWER",
+      "CATALOGUE_ADMIN"
+    ]
+  },
+  "proposed_decision": "APPROVE_DECISION_READY"
+}

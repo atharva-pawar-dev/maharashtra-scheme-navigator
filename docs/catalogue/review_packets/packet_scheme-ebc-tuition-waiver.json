@@ -1,0 +1,71 @@
+{
+  "packet_id": "HRP-SCHEME-EBC-TUITION-WAIVER",
+  "scheme_id": "scheme-ebc-tuition-waiver",
+  "scheme_version": "2.0.0",
+  "department": "Higher and Technical Education Department",
+  "verification_tier": "tier_a_flagship",
+  "governing_instruments": [
+    {
+      "title": "राजारशी छत्रपती शाहू महाराज शिक्षण शुल्क शिष्यवृत्ती योजना (EBC)",
+      "url": "https://mahadbt.maharashtra.gov.in/scheme_rules/EBC_Shahu_Maharaj.pdf",
+      "sha256": "51dda36bfec27f237eb4b0b572e36afaf9995095a10233a1af2e982a024bce95",
+      "cached_path": "data/raw/mahadbt_ebc_shahu.txt"
+    }
+  ],
+  "substantive_criteria_count": 3,
+  "decision_driving_rules": [
+    {
+      "rule_id": "c_ebc_state",
+      "field": "resident_state",
+      "operator": "eq",
+      "value": "maharashtra",
+      "plain_en": "Resident of Maharashtra",
+      "verbatim_quote": "अर्जदार विद्यार्थी महाराष्ट्र राज्याचा रहिवासी असणे आवश्यक आहे."
+    },
+    {
+      "rule_id": "c_ebc_student",
+      "field": "is_student",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Enrolled student in recognized course",
+      "verbatim_quote": "विद्यार्थी मान्यताप्राप्त व्यावसायिक किंवा बिगर-व्यावसायिक अभ्यासक्रमात नियमित शिक्षण घेत असावा."
+    },
+    {
+      "rule_id": "c_ebc_income",
+      "field": "annual_family_income",
+      "operator": "lte",
+      "value": 800000,
+      "plain_en": "Family annual income must not exceed ₹8,00,000",
+      "verbatim_quote": "कौटुंबिक वार्षिक उत्पन्न मर्यादा रु. ८,००,०००/- पर्यंत असणे आवश्यक आहे."
+    }
+  ],
+  "exclusions": [
+    {
+      "exclusion_id": "e_ebc_income_ceiling",
+      "field": "annual_family_income",
+      "operator": "lte",
+      "value": 800000,
+      "plain_en": "Excludes students whose family annual income exceeds Rs. 8,00,000",
+      "verbatim_quote": "कौटुंबिक वार्षिक उत्पन्न मर्यादा रु. ८,००,०००/- पर्यंत असणे आवश्यक आहे."
+    },
+    {
+      "exclusion_id": "e_ebc_management_quota",
+      "field": "cap_round_admission",
+      "operator": "eq",
+      "value": true,
+      "plain_en": "Excludes admissions secured through management quota or non-centralized admission process",
+      "verbatim_quote": "विद्यार्थी मान्यताप्राप्त व्यावसायिक किंवा बिगर-व्यावसायिक अभ्यासक्रमात नियमित शिक्षण घेत असावा."
+    }
+  ],
+  "numeric_double_confirmation": "PASSED",
+  "exclusion_pass_status": "COMPLETED",
+  "review_controls": {
+    "can_approve": true,
+    "can_reject": true,
+    "requires_human_reviewer_role": [
+      "LEGAL_REVIEWER",
+      "CATALOGUE_ADMIN"
+    ]
+  },
+  "proposed_decision": "APPROVE_DECISION_READY"
+}

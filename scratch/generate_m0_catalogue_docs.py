@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from scheme_navigator.domain.profile_vocabulary import is_field_substantive
 
-repo_root = Path(__file__).resolve().parents[1]
+repo_root = Path(__file__).resolve().parents[3]
 v2_path = repo_root / "data" / "catalogue" / "schemes.json"
 schemes = json.loads(v2_path.read_text(encoding="utf-8"))
 
@@ -70,3 +70,4 @@ for i, s in enumerate(schemes, start=1):
 out_rule = repo_root / "docs" / "catalogue" / "eligibility_rule_completeness.md"
 out_rule.write_text("\n".join(rule_lines) + "\n", encoding="utf-8")
 print(f"Wrote {out_rule}")
+

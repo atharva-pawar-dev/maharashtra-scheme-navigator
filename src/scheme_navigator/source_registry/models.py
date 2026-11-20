@@ -205,6 +205,11 @@ class CanonicalSchemeRecord(BaseModel):
     source_doc_ids: list[str] = Field(default_factory=list)
     geography: str = "Statewide (Maharashtra)"
 
+    # TRIMURTI v3 Decision Readiness & Status Categorization (Invariants I-04, I-07)
+    is_decision_ready: bool = False
+    completeness_attested: bool = False
+    public_status_category: str = "LIMITED_INFORMATION"
+
     def model_post_init(self, __context: Any) -> None:
         # Synchronize backward-compatible aliases
         if not self.official_name_en:

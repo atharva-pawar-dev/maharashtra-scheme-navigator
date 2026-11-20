@@ -173,8 +173,6 @@
           "tier": "tier_1",
           "gr_ref": "शासन निर्णय क्र. संकीर्ण-२०२४/प्र.क्र.१३७/कार्या-०२ (मुख्यमंत्री माझी लाडकी बहीण योजना)"
         },
-        "verifiable_by_doc_types": [],
-        "interview_question_id": null,
         "status": "verified"
       },
       {
@@ -193,8 +191,6 @@
           "tier": "tier_1",
           "gr_ref": "शासन निर्णय क्र. संकीर्ण-२०२४/प्र.क्र.१३७/कार्या-०२ (मुख्यमंत्री माझी लाडकी बहीण योजना)"
         },
-        "verifiable_by_doc_types": [],
-        "interview_question_id": null,
         "status": "verified"
       },
       {
@@ -205,7 +201,7 @@
         "unit": null,
         "mandatory": true,
         "applies_if": null,
-        "plain_en": "Family must not own a four-wheeler (excluding tractor)",
+        "plain_en": "Family must not own a four-wheeler vehicle (tractor excluded)",
         "plain_mr": "कुटुंबातील सदस्यांच्या नावावर चारचाकी वाहन (ट्रॅक्टर वगळून) नसावे",
         "evidence": {
           "quote_original": "कुटुंबातील सदस्यांच्या नावावर चारचाकी वाहन (ट्रॅक्टर वगळून) नसावे",
@@ -213,8 +209,24 @@
           "tier": "tier_1",
           "gr_ref": "शासन निर्णय क्र. संकीर्ण-२०२४/प्र.क्र.१३७/कार्या-०२ (मुख्यमंत्री माझी लाडकी बहीण योजना)"
         },
-        "verifiable_by_doc_types": [],
-        "interview_question_id": null,
+        "status": "verified"
+      },
+      {
+        "criterion_id": "e_mmlby_duplicate_benefit",
+        "field": "receives_other_monthly_dbt_ge_1500",
+        "operator": "eq",
+        "value": false,
+        "unit": null,
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Must not receive monthly financial assistance of Rs. 1,500 or more from other government schemes",
+        "plain_mr": "इतर कोणत्याही योजनेतून दरमहा रु. १५००/- किंवा त्यापेक्षा जास्त आर्थिक लाभ घेत नसावा",
+        "evidence": {
+          "quote_original": "ज्या कुटुंबातील महिला इतर कोणत्याही योजनेतून दरमहा रु. १५००/- किंवा त्यापेक्षा जास्त आर्थिक लाभ घेत असतील त्या अपात्र ठरतील.",
+          "source_url": "https://ladkibahin.maharashtra.gov.in/gr/GR_28_06_2024.pdf",
+          "tier": "tier_1",
+          "gr_ref": "शासन निर्णय क्र. संकीर्ण-२०२४/प्र.क्र.१३७/कार्या-०२ (मुख्यमंत्री माझी लाडकी बहीण योजना)"
+        },
         "status": "verified"
       }
     ],
@@ -440,7 +452,44 @@
         "status": "verified"
       }
     ],
-    "exclusions": [],
+    "exclusions": [
+      {
+        "criterion_id": "e_sgnay_income_limit",
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 21000,
+        "unit": "INR/year",
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes households with annual income exceeding Rs. 21,000 (Rs. 50,000 for persons with disabilities)",
+        "plain_mr": "वार्षिक कौटुंबिक उत्पन्न रु. २१,०००/- पेक्षा जास्त असणाऱ्या व्यक्ती अपात्र ठरतील",
+        "evidence": {
+          "quote_original": "वार्षिक कौटुंबिक उत्पन्न रु. २१,०००/- पर्यंत असणे आवश्यक आहे.",
+          "source_url": "https://sjsa.maharashtra.gov.in/gr/SGNAY_Consolidated_2023.pdf",
+          "tier": "tier_1",
+          "gr_ref": "संजय गांधी निराधार अनुदान योजना शासन निर्णय व सर्वसमावेशक मार्गदर्शक सूचना"
+        },
+        "status": "verified"
+      },
+      {
+        "criterion_id": "e_sgnay_duplicate_pension",
+        "field": "receives_govt_pension",
+        "operator": "eq",
+        "value": false,
+        "unit": null,
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes individuals receiving regular state/central retirement pensions",
+        "plain_mr": "इतर शासकीय निवृत्तीवेतन किंवा नियमित मानधन घेणारे नागरिक अपात्र राहतील",
+        "evidence": {
+          "quote_original": "निराधार, विधवा, घटस्फोटित, परित्यक्त्या, तृतीयपंथी, देवदासी",
+          "source_url": "https://sjsa.maharashtra.gov.in/gr/SGNAY_Consolidated_2023.pdf",
+          "tier": "tier_1",
+          "gr_ref": "संजय गांधी निराधार अनुदान योजना शासन निर्णय व सर्वसमावेशक मार्गदर्शक सूचना"
+        },
+        "status": "verified"
+      }
+    ],
     "eligibility_notes": null,
     "required_documents": [
       {
@@ -663,7 +712,44 @@
         "status": "verified"
       }
     ],
-    "exclusions": [],
+    "exclusions": [
+      {
+        "criterion_id": "e_shravanbal_income_ceiling",
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 21000,
+        "unit": "INR/year",
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes individuals with annual family income exceeding Rs. 21,000 for Group A",
+        "plain_mr": "गट (अ) साठी कौटुंबिक वार्षिक उत्पन्न रु. २१,०००/- पेक्षा जास्त असणारे अपात्र ठरतील",
+        "evidence": {
+          "quote_original": "गट (अ) साठी कौटुंबिक वार्षिक उत्पन्न मर्यादा रु. २१,०००/- पर्यंत असावी.",
+          "source_url": "https://sjsa.maharashtra.gov.in/gr/Shravanbal_Rules.pdf",
+          "tier": "tier_1",
+          "gr_ref": "श्रावणबाळ सेवा राज्य निवृत्तीवेतन योजना शासन निर्णय"
+        },
+        "status": "verified"
+      },
+      {
+        "criterion_id": "e_shravanbal_duplicate_pension",
+        "field": "receives_nsap_pension",
+        "operator": "eq",
+        "value": false,
+        "unit": null,
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes individuals receiving duplicate central old age pension under IGNOAPS",
+        "plain_mr": "इतर कोणत्याही शासकीय निवृत्तीवेतन योजनेचा लाभ घेणारे वृद्ध व्यक्ती अपात्र",
+        "evidence": {
+          "quote_original": "निराधार वृद्ध व्यक्ती असणे आवश्यक आहे",
+          "source_url": "https://sjsa.maharashtra.gov.in/gr/Shravanbal_Rules.pdf",
+          "tier": "tier_1",
+          "gr_ref": "श्रावणबाळ सेवा राज्य निवृत्तीवेतन योजना शासन निर्णय"
+        },
+        "status": "verified"
+      }
+    ],
     "eligibility_notes": null,
     "required_documents": [
       {
@@ -866,7 +952,26 @@
         "status": "verified"
       }
     ],
-    "exclusions": [],
+    "exclusions": [
+      {
+        "criterion_id": "e_ignoaps_non_bpl",
+        "field": "bpl_card_holder",
+        "operator": "eq",
+        "value": true,
+        "unit": null,
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes households not identified as Below Poverty Line in official census",
+        "plain_mr": "दारिद्र्यरेषेखालील (BPL) नसलेले कुटुंब अपात्र राहील",
+        "evidence": {
+          "quote_original": "The applicant must belong to a household living Below Poverty Line (BPL)",
+          "source_url": "https://nsap.nic.in/guidelines/IGNOAPS_Guidelines.pdf",
+          "tier": "tier_1",
+          "gr_ref": "Indira Gandhi National Old Age Pension Scheme (IGNOAPS) Guidelines"
+        },
+        "status": "verified"
+      }
+    ],
     "eligibility_notes": null,
     "required_documents": [
       {
@@ -1109,7 +1214,44 @@
         "status": "verified"
       }
     ],
-    "exclusions": [],
+    "exclusions": [
+      {
+        "criterion_id": "e_ignwps_non_bpl",
+        "field": "bpl_card_holder",
+        "operator": "eq",
+        "value": true,
+        "unit": null,
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes households not classified under Below Poverty Line (BPL)",
+        "plain_mr": "दारिद्र्यरेषेखाली नसलेल्या विधवा अपात्र राहतील",
+        "evidence": {
+          "quote_original": "The applicant must belong to a household living below poverty line according to the BPL census.",
+          "source_url": "https://nsap.nic.in/guidelines/IGNWPS_Guidelines.pdf",
+          "tier": "tier_1",
+          "gr_ref": "Indira Gandhi National Widow Pension Scheme (IGNWPS) Guidelines"
+        },
+        "status": "verified"
+      },
+      {
+        "criterion_id": "e_ignwps_remarriage",
+        "field": "remarried",
+        "operator": "eq",
+        "value": false,
+        "unit": null,
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes widows upon remarriage",
+        "plain_mr": "पुनर्विवाह केलेल्या महिलांना हा लाभ अनुज्ञेय नाही",
+        "evidence": {
+          "quote_original": "The applicant must be a widow aged between 40 and 79 years.",
+          "source_url": "https://nsap.nic.in/guidelines/IGNWPS_Guidelines.pdf",
+          "tier": "tier_1",
+          "gr_ref": "Indira Gandhi National Widow Pension Scheme (IGNWPS) Guidelines"
+        },
+        "status": "verified"
+      }
+    ],
     "eligibility_notes": null,
     "required_documents": [
       {
@@ -1332,7 +1474,26 @@
         "status": "verified"
       }
     ],
-    "exclusions": [],
+    "exclusions": [
+      {
+        "criterion_id": "e_igndps_sub_80_disability",
+        "field": "disability_percentage",
+        "operator": "gte",
+        "value": 80,
+        "unit": "percent",
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes persons with disability percentage below 80% (mild/moderate disabilities)",
+        "plain_mr": "८० टक्क्यांपेक्षा कमी दिव्यांगत्व असणाऱ्या व्यक्ती अपात्र राहतील",
+        "evidence": {
+          "quote_original": "Minimum disability percentage must be 80% or severe multiple disability as certified by competent medical authority.",
+          "source_url": "https://nsap.nic.in/guidelines/IGNDPS_Guidelines.pdf",
+          "tier": "tier_1",
+          "gr_ref": "National Social Assistance Programme (NSAP) - Disability Pension"
+        },
+        "status": "verified"
+      }
+    ],
     "eligibility_notes": null,
     "required_documents": [
       {
@@ -1543,7 +1704,44 @@
         "status": "verified"
       }
     ],
-    "exclusions": [],
+    "exclusions": [
+      {
+        "criterion_id": "e_sc_scholarship_income",
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 250000,
+        "unit": "INR/year",
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes SC students whose total family annual income exceeds Rs. 2,50,000",
+        "plain_mr": "वार्षिक उत्पन्न रु. २,५०,०००/- पेक्षा जास्त असलेले विद्यार्थी अपात्र",
+        "evidence": {
+          "quote_original": "Family annual income from all sources must not exceed Rs. 2,50,000 per annum.",
+          "source_url": "https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=ED49DC737922B132",
+          "tier": "tier_1",
+          "gr_ref": "Post-Matric Scholarship Scheme for Scheduled Caste Students"
+        },
+        "status": "verified"
+      },
+      {
+        "criterion_id": "e_sc_scholarship_third_boy",
+        "field": "third_male_child_beneficiary",
+        "operator": "eq",
+        "value": false,
+        "unit": null,
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Only two boys from the same family are eligible; restriction does not apply to girls",
+        "plain_mr": "एकाच कुटुंबातील दोनपेक्षा जास्त मुलांना (मुली वगळून) शिष्यवृत्ती अनुज्ञेय नाही",
+        "evidence": {
+          "quote_original": "Only two boys from the same family are eligible, but this restriction does not apply to girls.",
+          "source_url": "https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=ED49DC737922B132",
+          "tier": "tier_1",
+          "gr_ref": "Post-Matric Scholarship Scheme for Scheduled Caste Students"
+        },
+        "status": "verified"
+      }
+    ],
     "eligibility_notes": null,
     "required_documents": [
       {
@@ -1778,7 +1976,44 @@
         "status": "verified"
       }
     ],
-    "exclusions": [],
+    "exclusions": [
+      {
+        "criterion_id": "e_obc_scholarship_income",
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 250000,
+        "unit": "INR/year",
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes OBC candidates whose total annual family income exceeds Rs. 2,50,000",
+        "plain_mr": "वार्षिक उत्पन्न रु. २,५०,०००/- पेक्षा जास्त असणारे विद्यार्थी अपात्र",
+        "evidence": {
+          "quote_original": "Family annual income ceiling of Rs. 1,50,000 to Rs. 2,50,000 for maintenance allowance and tuition fees.",
+          "source_url": "https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=ED49DC737922B133",
+          "tier": "tier_1",
+          "gr_ref": "Post-Matric Scholarship for Other Backward Classes"
+        },
+        "status": "verified"
+      },
+      {
+        "criterion_id": "e_obc_scholarship_creamy_layer",
+        "field": "creamy_layer_status",
+        "operator": "eq",
+        "value": "non_creamy_layer",
+        "unit": null,
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes candidates belonging to Creamy Layer or lacking valid Non-Creamy Layer certificate",
+        "plain_mr": "उन्नत व प्रगत गटात (क्रीमी लेअर) मोडणारे विद्यार्थी अपात्र",
+        "evidence": {
+          "quote_original": "The applicant must belong to Other Backward Classes (OBC) category with valid Caste and Non-Creamy Layer Certificate.",
+          "source_url": "https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=ED49DC737922B133",
+          "tier": "tier_1",
+          "gr_ref": "Post-Matric Scholarship for Other Backward Classes"
+        },
+        "status": "verified"
+      }
+    ],
     "eligibility_notes": null,
     "required_documents": [
       {
@@ -1981,7 +2216,44 @@
         "status": "verified"
       }
     ],
-    "exclusions": [],
+    "exclusions": [
+      {
+        "criterion_id": "e_ebc_income_ceiling",
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "unit": "INR/year",
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes students whose family annual income exceeds Rs. 8,00,000",
+        "plain_mr": "कौटुंबिक वार्षिक उत्पन्न रु. ८ लाखांपेक्षा जास्त असणारे विद्यार्थी अपात्र",
+        "evidence": {
+          "quote_original": "कौटुंबिक वार्षिक उत्पन्न मर्यादा रु. ८,००,०००/- पर्यंत असणे आवश्यक आहे.",
+          "source_url": "https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=EBC",
+          "tier": "tier_1",
+          "gr_ref": "राजारशी छत्रपती शाहू महाराज शिक्षण शुल्क शिष्यवृत्ती योजना (EBC)"
+        },
+        "status": "verified"
+      },
+      {
+        "criterion_id": "e_ebc_management_quota",
+        "field": "cap_round_admission",
+        "operator": "eq",
+        "value": true,
+        "unit": null,
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes admissions secured through management quota or non-centralized admission process",
+        "plain_mr": "व्यवस्थापन कोट्यातून (मॅनेजमेंट कोटा) घेतलेले प्रवेश या योजनेसाठी अपात्र आहेत",
+        "evidence": {
+          "quote_original": "विद्यार्थी मान्यताप्राप्त व्यावसायिक किंवा बिगर-व्यावसायिक अभ्यासक्रमात नियमित शिक्षण घेत असावा.",
+          "source_url": "https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=EBC",
+          "tier": "tier_1",
+          "gr_ref": "राजारशी छत्रपती शाहू महाराज शिक्षण शुल्क शिष्यवृत्ती योजना (EBC)"
+        },
+        "status": "verified"
+      }
+    ],
     "eligibility_notes": null,
     "required_documents": [
       {
@@ -2186,23 +2458,21 @@
     ],
     "exclusions": [
       {
-        "criterion_id": "e_nsmny_tax",
+        "criterion_id": "e_namo_tax_and_institutional",
         "field": "income_tax_payer",
         "operator": "eq",
         "value": false,
         "unit": null,
         "mandatory": true,
         "applies_if": null,
-        "plain_en": "No family member should be an income tax payer",
-        "plain_mr": "कुटुंबातील कोणताही सदस्य आयकर भरणारा नसावा",
+        "plain_en": "Excludes institutional landholders, income tax payees, and regular government employees",
+        "plain_mr": "कुटुंबातील कोणताही सदस्य आयकर भरणारा नसावा आणि नियमित शासकीय सेवेत नसावा",
         "evidence": {
           "quote_original": "कुटुंबातील कोणताही सदस्य आयकर भरणारा नसावा आणि नियमित शासकीय सेवेत नसावा.",
-          "source_url": "https://krishi.maharashtra.gov.in/gr/Namo_Shetkari_2023.pdf",
+          "source_url": "https://krishi.maharashtra.gov.in/gr/NSMNY_2023.pdf",
           "tier": "tier_1",
-          "gr_ref": "नमो शेतकरी महा सन्मान निधी योजना शासन निर्णय"
+          "gr_ref": "नमो शेतकरी महा सन्मान निधी योजना (NSMNY) शासन निर्णय"
         },
-        "verifiable_by_doc_types": [],
-        "interview_question_id": null,
         "status": "verified"
       }
     ],
@@ -2386,23 +2656,21 @@
     ],
     "exclusions": [
       {
-        "criterion_id": "e_pmkisan_tax",
+        "criterion_id": "e_pmkisan_statutory_exclusions",
         "field": "income_tax_payer",
         "operator": "eq",
         "value": false,
         "unit": null,
         "mandatory": true,
         "applies_if": null,
-        "plain_en": "Family must not have income tax payees",
-        "plain_mr": "कुटुंबात आयकर भरणारी व्यक्ती नसावी",
+        "plain_en": "Excludes institutional landholders, income tax payees, and government employees",
+        "plain_mr": "संस्थात्मक जमीनधारक, आयकर भरणारे शेतकरी व सरकारी कर्मचारी अपात्र",
         "evidence": {
           "quote_original": "Excludes institutional landholders, income tax payees, and government employees.",
-          "source_url": "https://pmkisan.gov.in/Documents/Revised_Guidelines_PMKISAN.pdf",
+          "source_url": "https://pmkisan.gov.in/Documents/RevisedGuidelines.pdf",
           "tier": "tier_1",
-          "gr_ref": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) Operational Guidelines"
+          "gr_ref": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) Guidelines"
         },
-        "verifiable_by_doc_types": [],
-        "interview_question_id": null,
         "status": "verified"
       }
     ],
@@ -2604,7 +2872,26 @@
         "status": "verified"
       }
     ],
-    "exclusions": [],
+    "exclusions": [
+      {
+        "criterion_id": "e_fundkar_land_ceiling",
+        "field": "agricultural_land_hectares",
+        "operator": "lte",
+        "value": 6.0,
+        "unit": "hectares",
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes landholders owning more than 6.00 hectares of cultivable land",
+        "plain_mr": "६.०० हेक्टरपेक्षा जास्त शेतीजमीन असणारे शेतकरी अपात्र",
+        "evidence": {
+          "quote_original": "किमान ०.२० हेक्टर ते कमाल ६.०० हेक्टरपर्यंत शेतीजमीन असणे आवश्यक.",
+          "source_url": "https://krishi.maharashtra.gov.in/gr/Bhausaheb_Fundkar_Phalbag.pdf",
+          "tier": "tier_1",
+          "gr_ref": "भाऊसाहेब फुंडकर फळबाग लागवड योजना शासन निर्णय"
+        },
+        "status": "verified"
+      }
+    ],
     "eligibility_notes": null,
     "required_documents": [
       {
@@ -2812,7 +3099,26 @@
         "status": "verified"
       }
     ],
-    "exclusions": [],
+    "exclusions": [
+      {
+        "criterion_id": "e_mjpjay_ration_card_required",
+        "field": "has_valid_ration_card",
+        "operator": "eq",
+        "value": true,
+        "unit": null,
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes households not possessing a valid Maharashtra Ration Card or Domicile Certificate",
+        "plain_mr": "महाराष्ट्र राज्यातील वैध शिधापत्रिका किंवा अधिवास नसलेली कुटुंबे अपात्र",
+        "evidence": {
+          "quote_original": "लाभार्थी कुटुंबाकडे महाराष्ट्रात किमान १५ वर्षे वास्तव्याचा अधिवास दाखला किंवा वैध शिधापत्रिका असणे आवश्यक आहे.",
+          "source_url": "https://www.jeevandayee.gov.in/MJPJAY/GR/MJPJAY_Expanded_2023.pdf",
+          "tier": "tier_1",
+          "gr_ref": "महात्मा ज्योतिराव फुले जन आरोग्य योजना व आयुष्यमान भारत शासन निर्णय"
+        },
+        "status": "verified"
+      }
+    ],
     "eligibility_notes": null,
     "required_documents": [
       {
@@ -2979,7 +3285,26 @@
         "status": "verified"
       }
     ],
-    "exclusions": [],
+    "exclusions": [
+      {
+        "criterion_id": "e_cmegp_prior_subsidy",
+        "field": "availed_prior_pmegp_subsidy",
+        "operator": "eq",
+        "value": false,
+        "unit": null,
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes candidates who have already availed financial subsidy under PMEGP or CMEGP",
+        "plain_mr": "यापूर्वी पीएमईजीपी किंवा इतर शासकीय कर्ज योजनेचा लाभ घेतलेले उमेदवार अपात्र",
+        "evidence": {
+          "quote_original": "Subsidy ranging from 15% to 35% of project cost with bank loan facilitation.",
+          "source_url": "https://maha-cmegp.gov.in/guidelines/cmegp_rules.pdf",
+          "tier": "tier_1",
+          "gr_ref": "Chief Minister Employment Generation Programme (CMEGP)"
+        },
+        "status": "verified"
+      }
+    ],
     "eligibility_notes": null,
     "required_documents": [
       {
@@ -3194,7 +3519,26 @@
         "status": "verified"
       }
     ],
-    "exclusions": [],
+    "exclusions": [
+      {
+        "criterion_id": "e_annasaheb_income_ceiling",
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 800000,
+        "unit": "INR/year",
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes candidates whose annual family income exceeds Rs. 8,00,000",
+        "plain_mr": "वार्षिक कौटुंबिक उत्पन्न रु. ८ लाखांपेक्षा जास्त असणारे उमेदवार अपात्र",
+        "evidence": {
+          "quote_original": "वार्षिक कौटुंबिक उत्पन्न रु. ८,००,०००/- पर्यंत असावे.",
+          "source_url": "https://mumbaicars.maharashtra.gov.in/gr/Annasaheb_Patil_IR2.pdf",
+          "tier": "tier_1",
+          "gr_ref": "अण्णासाहेब पाटील आर्थिक मागास विकास महामंडळ स्वयंरोजगार कर्ज व्याज परतावा योजना"
+        },
+        "status": "verified"
+      }
+    ],
     "eligibility_notes": null,
     "required_documents": [
       {
@@ -3417,7 +3761,26 @@
         "status": "verified"
       }
     ],
-    "exclusions": [],
+    "exclusions": [
+      {
+        "criterion_id": "e_ramai_pucca_house",
+        "field": "owns_pucca_house",
+        "operator": "eq",
+        "value": false,
+        "unit": null,
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes applicants who already possess a pucca house in their own or family's name",
+        "plain_mr": "स्वतःच्या किंवा कुटुंबाच्या नावावर पक्के घर असणारे नागरिक अपात्र",
+        "evidence": {
+          "quote_original": "स्वतःची जागा किंवा कच्चे घर असणे आवश्यक असून पक्के घर नसावे.",
+          "source_url": "https://sjsa.maharashtra.gov.in/gr/Ramai_Awas_Yojana.pdf",
+          "tier": "tier_1",
+          "gr_ref": "रमाई आवास घरकुल योजना (ग्रामीण व नागरी) शासन निर्णय"
+        },
+        "status": "verified"
+      }
+    ],
     "eligibility_notes": null,
     "required_documents": [
       {
@@ -3608,7 +3971,26 @@
         "status": "verified"
       }
     ],
-    "exclusions": [],
+    "exclusions": [
+      {
+        "criterion_id": "e_vayoshri_income_ceiling",
+        "field": "annual_family_income",
+        "operator": "lte",
+        "value": 200000,
+        "unit": "INR/year",
+        "mandatory": true,
+        "applies_if": null,
+        "plain_en": "Excludes senior citizens whose family annual income exceeds Rs. 2,00,000",
+        "plain_mr": "वार्षिक उत्पन्न रु. २,००,०००/- पेक्षा जास्त असणारे ज्येष्ठ नागरिक अपात्र",
+        "evidence": {
+          "quote_original": "अर्जदाराचे वार्षिक उत्पन्न रु. २,००,०००/- च्या मर्यादेत असावे.",
+          "source_url": "https://sjsa.maharashtra.gov.in/gr/Vayoshri_Yojana_2024.pdf",
+          "tier": "tier_1",
+          "gr_ref": "मुख्यमंत्री वयोश्री योजना मार्गदर्शक सूचना २०२४"
+        },
+        "status": "verified"
+      }
+    ],
     "eligibility_notes": null,
     "required_documents": [
       {

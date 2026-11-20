@@ -92,7 +92,7 @@
       "test_command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_auth_and_sessions_hardening.py -k test_production_session_cookie_has_secure_flag",
       "exit_code_under_mutation": 1,
       "exit_code_after_restoration": 0,
-      "failure_detected_by_test": "E       AssertionError: assert 'secure' in '__host-sn_session=sess_2081f1d2391ea0b5a5ccf1595e43d32a:user_7a3dde1750ff1581:citizen:1795275088:b7m4jh_bwlujuxd12ll-...50ff1581:citizen:1795275088:b7m4jh_bwlujuxd12ll-fz0cyijhlp29oxy20csk2xo; httponly; max-age=86400; path=/; samesite=lax'",
+      "failure_detected_by_test": "E       AssertionError: assert 'secure' in '__host-sn_session=sess_3a93b070eb6c73b82f4cbfb82c5bfe28:user_1b183c369272b6db:citizen:1795278734:boeoutvzw-lix3xxhcxw...9272b6db:citizen:1795278734:boeoutvzw-lix3xxhcxwo7oejwnfjmnmrvz1g2uoprw; httponly; max-age=86400; path=/; samesite=lax'",
       "caught": true,
       "status": "PASS"
     },

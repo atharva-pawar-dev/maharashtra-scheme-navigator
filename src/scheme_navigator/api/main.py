@@ -2350,6 +2350,100 @@ def demo_form() -> FileResponse:
         headers={"Cache-Control": "no-store"},
     )
 
+class CompletenessAttestRequest(BaseModel):
+    scope: str = "P0 Flagship Deep Verification"
+    exclusion_pass_reference: str = "EXCLUSION-PASS-MHA-P0"
+    limitations: list[str] = Field(default_factory=list)
+
+
+class RuleApproveRequest(BaseModel):
+    decision: str = "APPROVED"
+    notes: str | None = None
+
+
+@app.get("/governance/review-queue", tags=["governance"])
+def list_governance_review_queue(session: UserSession = Depends(get_current_session)) -> list[dict[str, Any]]:
+    from scheme_navigator.governance.attestation_store import (
+        attestation_store,
+        compute_scheme_rule_set_hash,
+    )
+    from scheme_navigator.services.catalog import canonical_catalog
+    from scheme_navigator.governance.thin_rule_lint import lint_scheme_rules
+
+    packets_dir = Path(__file__).resolve().parents[3] / "docs" / "catalogue" / "review_packets"
+    results = []
+    if packets_dir.exists():
+        for p in sorted(packets_dir.glob("packet_*.json")):
+            try:
+                pkt = json.loads(p.read_text(encoding="utf-8"))
+                sid = pkt.get("scheme_id")
+                scheme_dom = canonical_catalog.get(sid)
+                if scheme_dom:
+                    r_hash = compute_scheme_rule_set_hash(scheme_dom)
+                    att = attestation_store.get_valid_attestation(sid, r_hash)
+                    pkt["completeness_attested"] = bool(att)
+                    pkt["attestation_details"] = att.model_dump() if att else None
+                    lint = lint_scheme_rules(scheme_dom)
+                    pkt["is_decision_ready"] = bool(att and lint.is_valid)
+                results.append(pkt)
+            except Exception:
+                continue
+    return results
+
+
+@app.get("/governance/review-queue/{scheme_id}", tags=["governance"])
+def get_governance_review_packet(scheme_id: str, session: UserSession = Depends(get_current_session)) -> dict[str, Any]:
+    packets_dir = Path(__file__).resolve().parents[3] / "docs" / "catalogue" / "review_packets"
+    packet_path = packets_dir / f"packet_{scheme_id}.json"
+    if not packet_path.exists():
+        raise HTTPException(status_code=404, detail=f"Review packet for '{scheme_id}' not found.")
+    return json.loads(packet_path.read_text(encoding="utf-8"))
+
+
+@app.post("/governance/review-queue/{scheme_id}/attest", tags=["governance"])
+def record_completeness_attestation_endpoint(
+    scheme_id: str,
+    payload: CompletenessAttestRequest,
+    session: UserSession = Depends(get_current_session),
+) -> dict[str, Any]:
+    from scheme_navigator.governance.attestation_store import (
+        attestation_store,
+        compute_scheme_rule_set_hash,
+    )
+    from scheme_navigator.services.catalog import canonical_catalog
+
+    scheme_dom = canonical_catalog.get(scheme_id)
+    if not scheme_dom:
+        raise HTTPException(status_code=404, detail=f"Scheme '{scheme_id}' not found in canonical catalog.")
+
+    rule_hash = compute_scheme_rule_set_hash(scheme_dom)
+    source_hashes = [src.evidence_sha256 for src in scheme_dom.sources if getattr(src, "evidence_sha256", None)] or ["0"*64]
+    scheme_ver = getattr(scheme_dom, "catalogue_version", None) or "2.0.0"
+
+    try:
+        att = attestation_store.record_completeness_attestation(
+            session=session,
+            scheme_id=scheme_dom.scheme_id,
+            scheme_version=scheme_ver,
+            source_hashes=source_hashes,
+            rule_set_hash=rule_hash,
+            exclusion_pass_reference=payload.exclusion_pass_reference,
+            scope=payload.scope,
+            explicit_limitations=payload.limitations,
+        )
+        return {
+            "status": "ATTESTED",
+            "attestation_id": att.attestation_id,
+            "attested_by": att.attested_by,
+            "rule_set_hash": att.rule_set_hash,
+            "attested_at": att.attested_at.isoformat(),
+        }
+    except PermissionError as pe:
+        raise HTTPException(status_code=403, detail=str(pe))
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+
+
 @app.get("/", include_in_schema=False)
 @app.get("/explore", include_in_schema=False)
 @app.get("/interview", include_in_schema=False)
