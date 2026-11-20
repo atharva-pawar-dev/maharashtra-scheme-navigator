@@ -1,8 +1,23 @@
 # Progress Tracker: Verified Catalogue v2 & Document Review Overhaul (PROGRESS.md)
-**Last Updated:** 2026-11-19T23:20:00+05:30  
-**Active Phase:** Complete — RC4 Real-World Document Intelligence & Citizen Trust Acceptance Verified  
+**Last Updated:** 2026-11-20T21:05:00+05:30  
+**Active Phase:** TRIMURTI v3 — Milestone SC-M0 Complete, SC-G1 In Progress  
 **Branch:** `feat/catalogue-v2`  
-**Milestone Tag:** `rc4-accepted`
+**Milestone Tags:** `rc4-accepted`, `sc-m0-accepted` (pending tag)
+
+---
+
+## 0. TRIMURTI v3 Scheme Universe Intelligence Ladder
+
+| Milestone | Target Scope | Status | Audit Score / Evidence |
+| :--- | :--- | :---: | :--- |
+| **SC-M0** | Baseline, Safety & Overclaim Prevention | **PASS** | 64.8/100 Honest Baseline; 621 pytest tests, 19 Playwright tests, 12 canaries; Thin-rule lint & DB attestations active. |
+| **SC-G1** | P0 High-Impact Scheme Depth | **IN PROGRESS** | Flagship social assistance, DBT, scholarships, and pension deep dossiers with verbatim quotes. |
+| **SC-G2** | Complete Universe & Department Reconciliation | **PENDING** | 40+ departments, municipal bodies, and state portals inventory reconciliation. |
+| **SC-G3** | P1 Depth, Document Graphs & Lifecycle | **PENDING** | Complete document requirement graph, renewal workflows, and Right to Services timelines. |
+| **SC-G4** | Quality Instrumentation & Update Monitoring | **PENDING** | Automated daily GR scraper, diff engine, and change alert feed. |
+| **SC-G5** | Independent Audit & Long-Tail Completion | **PENDING** | Final 9.5/10 quality target, independent human reviewer sign-off pack, and production handoff. |
+
+---
 
 ---
 
@@ -83,3 +98,14 @@
   - Trilingual UI & notices: Full 112-key parity across English, Marathi, Hindi with Devanagari numeral conversions and localized expiry notifications.
   - Full regression test suite: **613/613 Pytest tests passing**, **47/47 Playwright browser tests passing**, **12/12 canaries caught**.
   - Milestone Tag: `rc4-accepted`.
+
+- [x] **Phase 10: TRIMURTI Milestone SC-M0 — Baseline, Safety & Overclaim Prevention** (Completed 2026-11-20)
+  - Enforced 7 hard architectural safeguards preventing overclaims and AI self-authorization.
+  - Implemented Thin-Rule Protection (`thin_rule_lint.py`) failing closed schemes with < 2 substantive criteria or residency-only rules (Invariant I-07).
+  - Built SQLite-backed Attestation Store (`attestation_store.py`) enforcing server-side human reviewer role check and binding approvals to rule set SHA-256 hashes (Invariants I-04, I-05, I-06).
+  - Audited 64 official government links & GRs (`reports/source_link_health_report.md`).
+  - Implemented 10-dimension auditable quality scorecard (`scorer.py`) deriving an honest baseline score of **64.8 / 100** (`reports/scheme_coverage_scorecard.md`).
+  - Integrated public trilingual error reporting (`#modal-report-issue`) directly into citizen UI with immutable audit logging (`tests/test_playwright_scheme_issue_reporting.py`).
+  - Authored comprehensive catalogue documentation: Universe Scope (`U-20261120`), Department Source Inventory (32 departments), Provenance Matrix, Lifecycle Register, Canonical Reconciliation, and Rule Completeness Register.
+  - Test Suite: **621/621 Pytest tests passing**, **19/19 Playwright browser tests passing**, **12/12 canaries caught**.
+  - Milestone Tag: `sc-m0-accepted`.

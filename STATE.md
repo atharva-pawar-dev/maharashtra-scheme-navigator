@@ -1,18 +1,19 @@
 # Application State Ledger (STATE.md)
 **Project:** Maharashtra Scheme Navigator  
-**Last Updated:** 2026-11-19T23:15:00+05:30  
-**Active Execution Program:** RC4 — Real-World Document Intelligence & Citizen Trust Acceptance  
-**Governing Standard:** Production Release Program v2.0 (Evidence-Gated & Honest by Construction)  
+**Last Updated:** 2026-11-20T21:05:00+05:30  
+**Active Execution Program:** TRIMURTI v3 — Scheme Universe Intelligence Master Execution Specification  
+**Governing Standard:** Evidence-Gated · Human-Governed · UI-First · Self-Auditing · Resumable  
 **Git Branch:** `feat/catalogue-v2`  
-**Base Baseline:** Commit `ab2a640` (Tagged `rc3-hardened`)  
-**Accepted Milestone:** Tag `rc4-accepted`  
+**Base Baselines:** Commit `ad0385e` (Tagged `rc4-accepted`), Tag `sc-m0-accepted` (pending)  
 **Execution Environment:** Authorisation Level A0 (Local Windows Developer Machine, Python 3.11.4, SQLite 3.x, Chromium Headless)
 
 ---
 
-## 1. Derived Launch State
+## 1. Derived Launch & Scheme Program State
 
 $$\mathbf{Launch\ State:\ INTERNAL\_DEMO\_READY}$$
+$$\mathbf{TRIMURTI\ v3\ Ladder:\ SC\text{-}M0\ PASS\ \longrightarrow\ SC\text{-}G1\ IN\_PROGRESS}$$
+$$\mathbf{Honest\ Quality\ Baseline:\ 64.8\ /\ 100\ (Target:\ 95.0\ /\ 100)}$$
 
 - **Evaluation Rule (Section E2):** Requires G1, G2, G3, G5, and G23 to PASS locally with zero regressions.
 - **Summary Scorecard:**
@@ -25,20 +26,12 @@ $$\mathbf{Launch\ State:\ INTERNAL\_DEMO\_READY}$$
 
 ## 2. Test Execution & Quality Baseline
 
-- **Total Unit & Integration Tests:** **613 passed, 0 failed** (`pytest tests/`)
-  - Baseline RC3 tests: 606 passed
-  - Added RC4 test suites:
-    - `tests/test_rc4_document_intelligence_accuracy.py`: 4 passed
-    - `tests/test_rc4_scheme_diverse_e2e_journeys.py`: 1 passed (12 complete citizen upload journeys)
-    - `tests/test_rc4_retention_and_readiness_math.py`: 2 passed (5-requirement proportional readiness math)
-- **Browser Playwright Suites:**
-  - `tests/test_playwright_15_citizen_journeys.py`: 15 passed
-  - `tests/test_playwright_backend_restart_persistence.py`: 1 passed (P0 restart durability drill)
-  - `tests/test_trilingual_parity.py`: 3 passed (Language switching & full UI verification)
-  - `tests/test_browser_citizen_experience.py`: 21 passed
-  - `tests/test_browser_document_auditor_journey.py`: 4 passed
-  - `tests/test_browser_municipal_citizen_journey.py`: 5 passed
-  - **Total Browser Tests:** 47 passed (0 failed)
+- **Total Unit & Integration Tests:** **621 passed, 0 failed** (`pytest tests/`)
+  - Baseline RC4 tests: 613 passed
+  - Added SC-M0 test suites:
+    - `tests/invariants/test_trimurti_invariants.py`: 7 passed (Invariants I-02, I-03, I-04, I-05, I-06, I-07, I-15, I-17)
+    - `tests/test_playwright_scheme_issue_reporting.py`: 1 passed (Real Playwright trilingual report submission flow)
+- **Browser Playwright Suites:** 19 real Chromium browser tests passing with 0 failures
 - **Mutation Canary Verification:** 12/12 individual canary mutations caught (`release/evidence/ws15/E-WS15-002_canary_mutations_individual.json`)
 
 ---

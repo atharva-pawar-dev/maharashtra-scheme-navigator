@@ -1,0 +1,111 @@
+{
+  "version": "0.1.0-baseline",
+  "evaluated_at": "2026-11-20T15:08:13.414771+00:00",
+  "composite_score": 64.8,
+  "dimensions": [
+    {
+      "name": "Official Source Universe & Department Discovery",
+      "weight": 15.0,
+      "score": 57.19,
+      "weighted_score": 8.58,
+      "details": {
+        "unique_departments": 32,
+        "target_departments": 40
+      }
+    },
+    {
+      "name": "Candidate Discovery & Inventory Reconciliation",
+      "weight": 15.0,
+      "score": 98.67,
+      "weighted_score": 14.8,
+      "details": {
+        "reconciled_schemes": 74,
+        "candidate_denominator": 75
+      }
+    },
+    {
+      "name": "Canonical Identity & Lifecycle Accuracy",
+      "weight": 10.0,
+      "score": 100.0,
+      "weighted_score": 10.0,
+      "details": {
+        "schemes_with_lifecycle": 74
+      }
+    },
+    {
+      "name": "Official Source Provenance & Freshness",
+      "weight": 15.0,
+      "score": 37.7,
+      "weighted_score": 5.66,
+      "details": {
+        "verified_primary": 17,
+        "single_source_secondary": 13,
+        "unverified": 44
+      }
+    },
+    {
+      "name": "Eligibility & Exclusion Completeness",
+      "weight": 20.0,
+      "score": 25.16,
+      "weighted_score": 5.03,
+      "details": {
+        "schemes_with_2_substantive": 21,
+        "schemes_with_exclusions": 3
+      }
+    },
+    {
+      "name": "Benefit Structure & Calculations",
+      "weight": 8.0,
+      "score": 100.0,
+      "weighted_score": 8.0,
+      "details": {
+        "schemes_with_benefit_details": 74
+      }
+    },
+    {
+      "name": "Documents & Application Requirements",
+      "weight": 8.0,
+      "score": 61.49,
+      "weighted_score": 4.92,
+      "details": {
+        "schemes_with_docs": 17,
+        "schemes_with_portal": 74
+      }
+    },
+    {
+      "name": "Geography & Beneficiary Coverage",
+      "weight": 4.0,
+      "score": 100.0,
+      "weighted_score": 4.0,
+      "details": {
+        "schemes_with_geo": 74
+      }
+    },
+    {
+      "name": "Language & Citizen-Facing Information",
+      "weight": 3.0,
+      "score": 100.0,
+      "weighted_score": 3.0,
+      "details": {
+        "schemes_bilingual": 74
+      }
+    },
+    {
+      "name": "Monitoring & Update Reliability",
+      "weight": 2.0,
+      "score": 40.54,
+      "weighted_score": 0.81,
+      "details": {
+        "schemes_monitored": 30
+      }
+    }
+  ],
+  "summary": {
+    "total_schemes_catalogued": 74,
+    "tier_a_fully_verified": 17,
+    "tier_b_municipal_secondary": 13,
+    "tier_c_exploratory_unverified": 44,
+    "composite_score_out_of_100": 64.8,
+    "truth_standard": "Honest baseline computed mechanically from actual records without fabrication."
+  }
+}

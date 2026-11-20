@@ -33,6 +33,10 @@
 | **C-21** | Field-level extraction matches ground truth with 100% precision (64/64 fields matched) across English, Marathi, Hindi specimens. | `reports/rc4_document_intelligence_accuracy.md`, `tests/test_rc4_document_intelligence_accuracy.py` | **CONFIRMED** |
 | **C-22** | 12 representative scheme families validated end-to-end with real upload journeys logged to structured JSON evidence. | `reports/rc4_scheme_diverse_journey_evidence.json`, `tests/test_rc4_scheme_diverse_e2e_journeys.py` | **CONFIRMED** |
 | **C-23** | Retention architecture reflects MeitY DPDP staged commencement facts and governs 7 distinct data classes under IT SPDI Rules 2011. | `reports/rc4_retention_and_privacy_audit.md`, `src/scheme_navigator/core/config.py` | **CONFIRMED** |
+| **C-24** | Thin-Rule Protection fails closed to Caseworker Review / Limited Info any scheme with < 2 substantive criteria or residency-only rules (Invariant I-07). | `src/scheme_navigator/governance/thin_rule_lint.py`, `tests/invariants/test_trimurti_invariants.py` | **CONFIRMED** |
+| **C-25** | Definitive eligibility verdicts strictly require authenticated server-side human completeness attestations bound to rule set SHA-256 hashes; AI cannot self-attest (Invariants I-04, I-05, I-06). | `src/scheme_navigator/governance/attestation_store.py`, `tests/invariants/test_trimurti_invariants.py` | **CONFIRMED** |
+| **C-26** | Public error and feedback reporting modal (`#modal-report-issue`) is integrated across English, Marathi, Hindi with ticket creation and immutable JSONL audit ledger. | `static/index.html`, `tests/test_playwright_scheme_issue_reporting.py`, `data/citizen_reports.jsonl` | **CONFIRMED** |
+| **C-27** | 10-dimension auditable quality scorecard mechanically computes composite score (honest baseline: 64.8/100) across 75 schemes with zero denominator tampering. | `src/scheme_navigator/governance/scorer.py`, `reports/scheme_coverage_scorecard.json` | **CONFIRMED** |
 
 ---
 

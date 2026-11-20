@@ -1270,6 +1270,46 @@
     </div>
   </div>
 
+  <!-- Public Scheme Issue / Error Report Modal (TRIMURTI v3 / Invariant I-05) -->
+  <div id="modal-report-issue" class="modal-backdrop" onclick="if(event.target===this) closeReportModal()">
+    <div class="modal-box" role="dialog" aria-modal="true" style="max-width:550px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h3 id="report-modal-header" style="color:var(--deep-heritage-maroon); margin:0; font-size:1.25rem;">🚨 योजनेच्या माहितीबद्दल त्रुटी नोंदवा</h3>
+        <button class="modal-close" style="position:static;" onclick="closeReportModal()">✕</button>
+      </div>
+      <p id="report-modal-desc" style="font-size:0.86rem; color:var(--slate-muted); margin-bottom:14px;">
+        शासकीय योजनांची माहिती अचूक व अद्ययावत ठेवण्यासाठी नागरिकांचा सहभाग महत्त्वाचा आहे. आढळलेली त्रुटी येथे नोंदवा.
+      </p>
+      <form id="form-report-issue" onsubmit="submitSchemeIssueReport(event)">
+        <input type="hidden" id="report-scheme-id" value="">
+        <div style="margin-bottom:12px;">
+          <label id="lbl-report-type-text" style="display:block; font-size:0.86rem; font-weight:600; margin-bottom:4px;">त्रुटीचा प्रकार (Issue Type):</label>
+          <select id="report-issue-type" style="width:100%; padding:8px; border-radius:var(--radius-sm); border:1px solid var(--border-crisp); background:white;">
+            <option value="incorrect_criteria">पात्रता अटी चुकीच्या आहेत (Incorrect Criteria)</option>
+            <option value="broken_link">अधिकृत संकेतस्थळाचा दुवा बंद आहे (Broken Official Link)</option>
+            <option value="outdated_dates">अर्ज करण्याची मुदत/तारीख चुकीची आहे (Outdated Window/Deadline)</option>
+            <option value="missing_document">आवश्यक कागदपत्रांची यादी अपूर्ण आहे (Missing Documents)</option>
+            <option value="incorrect_translation">मराठी/हिंदी भाषांतर चुकीचे आहे (Incorrect Translation)</option>
+            <option value="other">इतर तक्रार/सूचना (Other Feedback)</option>
+          </select>
+        </div>
+        <div style="margin-bottom:12px;">
+          <label id="lbl-report-desc-text" style="display:block; font-size:0.86rem; font-weight:600; margin-bottom:4px;">तपशील (Description):</label>
+          <textarea id="report-description" required rows="3" style="width:100%; padding:8px; border-radius:var(--radius-sm); border:1px solid var(--border-crisp); font-family:inherit;" placeholder="अधिकृत GR क्रमांक, खरी माहिती किंवा त्रुटीबद्दल थोडक्यात सांगा..."></textarea>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label id="lbl-report-contact-text" style="display:block; font-size:0.86rem; font-weight:600; margin-bottom:4px;">संपर्क (ऐच्छिक / Optional Email/Phone):</label>
+          <input type="text" id="report-contact" style="width:100%; padding:8px; border-radius:var(--radius-sm); border:1px solid var(--border-crisp);" placeholder="उदा. 98xxxxxxxx किंवा email@domain.com">
+        </div>
+        <div id="report-result-status" style="margin-bottom:12px; font-size:0.88rem; display:none;"></div>
+        <div style="display:flex; justify-content:flex-end; gap:8px;">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="closeReportModal()">रद्द करा (Cancel)</button>
+          <button type="submit" id="btn-submit-report" class="btn btn-primary btn-sm">नोंदणी करा (Submit Report)</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Test Compatibility Vault -->
   <div id="test-compatibility-vault" style="display:none;" aria-hidden="true">
     <div id="voice-recording-bar"></div>
@@ -2254,7 +2294,14 @@
       roadmap_portal_btn: "Go to Official Portal ↗",
       footer_brand: "Maharashtra Scheme Navigator",
       footer_desc: "Independent citizen guidance platform. Not an official Government of Maharashtra portal. Final approval authority rests exclusively with the respective department.",
-      footer_credit: "MahaDBT 2.0 & Aaple Sarkar Public Information Architecture • 2026-27"
+      footer_credit: "MahaDBT 2.0 & Aaple Sarkar Public Information Architecture • 2026-27",
+      btn_report_issue: "Report Issue",
+      modal_report_title: "Report an Issue with Scheme Data",
+      modal_report_desc: "Help us keep Maharashtra scheme information truthful, complete, and up to date. Sourced corrections will be audited against official GRs.",
+      lbl_report_type: "Issue Classification:",
+      lbl_report_desc: "Description & Official Source Reference:",
+      lbl_report_contact: "Contact (Optional Email / Phone):",
+      btn_submit_report: "Submit Report"
     },
     mr: {
       skip_link: "मुख्य मजकुरावर जा",
@@ -2368,7 +2415,14 @@
       roadmap_portal_btn: "अधिकृत पोर्टलवर जा ↗",
       footer_brand: "महाराष्ट्र योजना मार्गदर्शक",
       footer_desc: "स्वतंत्र नागरिक मार्गदर्शन मंच. हे महाराष्ट्र शासनाचे अधिकृत पोर्टल नाही. अंतिम मंजुरीचा अधिकार संबंधित विभागाचा आहे.",
-      footer_credit: "महाडीबीटी २.० व आपले सरकार सार्वजनिक माहिती मंच • २०२६-२७"
+      footer_credit: "महाडीबीटी २.० व आपले सरकार सार्वजनिक माहिती मंच • २०२६-२७",
+      btn_report_issue: "त्रुटी नोंदवा",
+      modal_report_title: "योजनेच्या माहितीबद्दल त्रुटी नोंदवा",
+      modal_report_desc: "शासकीय योजनांची माहिती अचूक व अद्ययावत ठेवण्यासाठी नागरिकांचा सहभाग महत्त्वाचा आहे. नोंदवलेल्या दुरुस्त्या अधिकृत शासन निर्णयानुसार तपासल्या जातील.",
+      lbl_report_type: "त्रुटीचा प्रकार:",
+      lbl_report_desc: "तपशील व अधिकृत शासन संदर्भ:",
+      lbl_report_contact: "संपर्क (ऐच्छिक ईमेल / फोन):",
+      btn_submit_report: "तक्रार नोंदवा"
     },
     hi: {
       skip_link: "मुख्य सामग्री पर जाएं",
@@ -2482,7 +2536,14 @@
       roadmap_portal_btn: "आधिकारिक पोर्टल पर जाएं ↗",
       footer_brand: "महाराष्ट्र योजना मार्गदर्शक",
       footer_desc: "स्वतंत्र नागरिक मार्गदर्शन मंच। यह महाराष्ट्र सरकार का आधिकारिक पोर्टल नहीं है। अंतिम अनुमोदन का अधिकार संबंधित विभाग के पास सुरक्षित है।",
-      footer_credit: "महाडीबीटी २.० व आपले सरकार सार्वजनिक सूचना मंच • २०२६-२७"
+      footer_credit: "महाडीबीटी २.० व आपले सरकार सार्वजनिक सूचना मंच • २०२६-२७",
+      btn_report_issue: "त्रुटि दर्ज करें",
+      modal_report_title: "योजना की जानकारी में त्रुटि दर्ज करें",
+      modal_report_desc: "सरकारी योजनाओं की जानकारी सटीक और अद्यतन रखने के लिए नागरिकों की भागीदारी आवश्यक है। दर्ज सुधारों की आधिकारिक जीआर से जांच की जाएगी।",
+      lbl_report_type: "त्रुटि का प्रकार:",
+      lbl_report_desc: "विवरण और आधिकारिक स्रोत संदर्भ:",
+      lbl_report_contact: "संपर्क (वैकल्पिक ईमेल / फोन):",
+      btn_submit_report: "त्रुटि दर्ज करें"
     }
   };
 
@@ -3089,6 +3150,7 @@
         <button class="btn btn-secondary btn-sm" id="btn-modal-share-factsheet" onclick="openSchemeFactsheet('${escapeHtml(scheme.scheme_id)}')">📋 ${isMr ? 'माहिती पत्रक / शेअर' : (isHi ? 'विवरण पत्र / साझा करें' : 'Scheme Factsheet / Share')}</button>
         <a href="${escapeHtml(portalUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">${lblPortal}</a>
         <button class="btn btn-secondary btn-sm" onclick="closeModal(); startFocusedAssessment('${escapeHtml(scheme.scheme_id)}')">${lblCheck}</button>
+        <button class="btn btn-secondary btn-sm" id="btn-modal-report-issue" onclick="openReportModal('${escapeHtml(scheme.scheme_id)}')">🚨 ${isMr ? 'त्रुटी नोंदवा' : (isHi ? 'त्रुटि दर्ज करें' : 'Report Issue')}</button>
         <button class="btn btn-secondary btn-sm" onclick="closeModal()">${lblClose}</button>
       </div>
     `;
@@ -3097,6 +3159,95 @@
 
   function closeModal() {
     document.querySelectorAll('.modal-backdrop').forEach(m => m.classList.remove('active'));
+  }
+
+  function openReportModal(schemeId) {
+    const el = document.getElementById('report-scheme-id');
+    if (el) el.value = schemeId;
+    const t = I18N_PAGE[state.language] || I18N_PAGE.en;
+    
+    const hEl = document.getElementById('report-modal-header');
+    if (hEl) hEl.textContent = '🚨 ' + t.modal_report_title;
+    const dEl = document.getElementById('report-modal-desc');
+    if (dEl) dEl.textContent = t.modal_report_desc;
+    const l1 = document.getElementById('lbl-report-type-text');
+    if (l1) l1.textContent = t.lbl_report_type;
+    const l2 = document.getElementById('lbl-report-desc-text');
+    if (l2) l2.textContent = t.lbl_report_desc;
+    const l3 = document.getElementById('lbl-report-contact-text');
+    if (l3) l3.textContent = t.lbl_report_contact;
+    const bSub = document.getElementById('btn-submit-report');
+    if (bSub) bSub.textContent = t.btn_submit_report;
+
+    const st = document.getElementById('report-result-status');
+    if (st) {
+      st.style.display = 'none';
+      st.innerHTML = '';
+    }
+
+    const modal = document.getElementById('modal-report-issue');
+    if (modal) modal.classList.add('active');
+  }
+
+  function closeReportModal() {
+    const modal = document.getElementById('modal-report-issue');
+    if (modal) modal.classList.remove('active');
+  }
+
+  async function submitSchemeIssueReport(e) {
+    e.preventDefault();
+    const schemeId = document.getElementById('report-scheme-id').value;
+    const issueType = document.getElementById('report-issue-type').value;
+    const description = document.getElementById('report-description').value;
+    const citizenContact = document.getElementById('report-contact').value || null;
+    const statusEl = document.getElementById('report-result-status');
+    const submitBtn = document.getElementById('btn-submit-report');
+
+    if (submitBtn) submitBtn.disabled = true;
+    if (statusEl) {
+      statusEl.style.display = 'block';
+      statusEl.innerHTML = '<span style="color:var(--paithani-teal);">⏳ Submitting report to audit ledger...</span>';
+    }
+
+    try {
+      const resp = await fetch('/trust/report-issue', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          scheme_id: schemeId,
+          issue_type: issueType,
+          description: description,
+          citizen_contact: citizenContact,
+          language: state.language
+        })
+      });
+
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.detail || 'Failed to submit report');
+      }
+
+      const res = await resp.json();
+      if (statusEl) {
+        statusEl.innerHTML = `
+          <div style="background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; padding:10px; border-radius:var(--radius-sm);">
+            <strong>✓ ${escapeHtml(res.message)}</strong><br>
+            <small>Ticket ID: <strong>${escapeHtml(res.ticket_id)}</strong></small>
+          </div>
+        `;
+      }
+      setTimeout(() => {
+        closeReportModal();
+        if (submitBtn) submitBtn.disabled = false;
+        const f = document.getElementById('form-report-issue');
+        if (f) f.reset();
+      }, 3500);
+    } catch (err) {
+      if (statusEl) {
+        statusEl.innerHTML = `<div style="background:#fef2f2; color:#991b1b; border:1px solid #fecaca; padding:10px; border-radius:var(--radius-sm);">❌ ${escapeHtml(err.message)}</div>`;
+      }
+      if (submitBtn) submitBtn.disabled = false;
+    }
   }
 
   let confirmModalCallback = null;

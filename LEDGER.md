@@ -1,8 +1,23 @@
 # Release Gates Ledger (LEDGER.md)
 **Project:** Maharashtra Scheme Navigator  
-**Last Updated:** 2026-11-19T23:15:00+05:30  
-**Governing Standard:** Production Release Program v2.0 (Part E1, E2)  
-**Milestone:** RC4 — Real-World Document Intelligence & Citizen Trust Acceptance
+**Last Updated:** 2026-11-20T21:05:00+05:30  
+**Governing Standard:** Production Release Program v2.0 (Part E1, E2) & TRIMURTI v3  
+**Milestones:** Production Baseline RC4 (`rc4-accepted`), TRIMURTI SC-M0 (`sc-m0-accepted`), TRIMURTI SC-G1 (In Progress)
+
+---
+
+## 0. TRIMURTI Scheme Intelligence Milestone Ladder
+
+| Milestone | Scope | Target Quality | Status | Evidence Reference |
+| :---: | :--- | :---: | :---: | :--- |
+| **SC-M0** | Baseline, Safety & Overclaim Prevention | Honest Baseline $\ge$ 60 | **PASS** | `reports/scheme_coverage_scorecard.md` (64.8/100), `tests/invariants/test_trimurti_invariants.py`, `docs/catalogue/` |
+| **SC-G1** | P0 High-Impact Scheme Depth | Quality $\ge$ 75 | **IN PROGRESS** | Flagship DBT, social pensions, scholarships, and women's welfare deep dossiers |
+| **SC-G2** | Complete Universe & Department Reconciliation | Quality $\ge$ 82 | **PENDING** | 40+ departments, municipal bodies, and state portals inventory reconciliation |
+| **SC-G3** | P1 Depth, Document Graphs & Lifecycle | Quality $\ge$ 88 | **PENDING** | Complete document requirement graph, renewal workflows, and Right to Services timelines |
+| **SC-G4** | Quality Instrumentation & Update Monitoring | Quality $\ge$ 92 | **PENDING** | Automated daily GR scraper, diff engine, and change alert feed |
+| **SC-G5** | Independent Audit & Long-Tail Completion | Quality $\ge$ 95 | **PENDING** | Final 9.5/10 quality target, independent human reviewer sign-off pack, and production handoff |
+
+---
 
 ---
 

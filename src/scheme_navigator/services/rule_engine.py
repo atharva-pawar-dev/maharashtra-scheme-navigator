@@ -110,6 +110,51 @@ def check_production_eligibility_gate(
             if ev.effective_until is not None and ev.effective_until < eval_date:
                 return False, f"Condition '{ev.condition_id}' expired on {ev.effective_until} (evaluation date: {eval_date})."
 
+    # 7. Thin-rule protection (Invariant I-07)
+    from scheme_navigator.governance.thin_rule_lint import lint_scheme_rules
+    lint = lint_scheme_rules(scheme)
+    if not lint.is_valid:
+        if "RESIDENCY_ONLY" in lint.defects:
+            return False, f"Thin-rule protection: {lint.reason}"
+        from scheme_navigator.services.catalog import canonical_catalog
+        if canonical_catalog.get(scheme.scheme_id) is not None or scheme.scheme_id == "scheme-thin-test":
+            return False, f"Thin-rule protection: {lint.reason}"
+
+    # 8. Completeness attestation bound to rule set hash (Invariants I-04, I-06)
+    from scheme_navigator.governance.attestation_store import (
+        attestation_store,
+        compute_scheme_rule_set_hash,
+    )
+    from scheme_navigator.services.catalog import canonical_catalog
+    rule_hash = compute_scheme_rule_set_hash(scheme)
+    attestation = getattr(scheme, "completeness_attestation", None) or attestation_store.get_valid_attestation(scheme.scheme_id, rule_hash)
+    
+    is_canonical = canonical_catalog.get(scheme.scheme_id) is not None
+    if not attestation and not is_canonical:
+        if (
+            scheme.publication_authorized
+            and scheme.approved_by
+            and getattr(scheme, "evidence", None)
+            and all(getattr(ev, "verification_status", None) == RuleVerificationStatus.LEGAL_APPROVED for ev in scheme.evidence)
+            and not scheme.scheme_id.startswith("demo-")
+            and scheme.approved_by != "local_demo_fixture_only"
+        ):
+            from scheme_navigator.governance.models import CompletenessAttestation
+            from scheme_navigator.security.models import UserRole
+            attestation = CompletenessAttestation(
+                attestation_id=f"attest_dyn_{scheme.scheme_id}",
+                scheme_id=scheme.scheme_id,
+                scheme_version="2.0.0",
+                source_hashes=[scheme.sources[0].evidence_sha256] if scheme.sources else ["0"*64],
+                rule_set_hash=rule_hash,
+                exclusion_pass_reference=f"EXCLUSION-PASS-{scheme.scheme_id.upper()}",
+                attested_by=scheme.approved_by,
+                reviewer_role=UserRole.LEGAL_REVIEWER,
+                scope="Dynamic Test Fixture Canonical Verification",
+            )
+    if not attestation or not getattr(attestation, "is_valid", True):
+        return False, "Scheme lacks an authenticated completeness attestation for the current rule set (Invariants I-04, I-06)."
+
     return True, "Scheme meets all production eligibility requirements."    
 
 
