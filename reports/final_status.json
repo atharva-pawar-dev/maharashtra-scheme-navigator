@@ -1,7 +1,7 @@
 {
   "mission_id": "MSN-FINAL-CLOSURE-01",
-  "generated_at": "2026-11-21T09:11:22.337739+00:00",
-  "commit_sha": "b2b48af6f274b71a595d1a9f683e84a5da7bc1d4",
+  "generated_at": "2026-11-21T09:13:19.204417+00:00",
+  "commit_sha": "fe4f847880f3fddc9bbc9f77ce4f0262ac3a1590",
   "branch": "feat/catalogue-v2",
   "requirements": {
     "denominator": 55,
