@@ -17,10 +17,25 @@ DEFAULT_AUDIT_LOG_PATH = Path(__file__).resolve().parents[3] / "data" / "securit
 class SecurityAuditLogger:
     """Thread-safe append-only structured audit logger for compliance and security monitoring."""
 
-    def __init__(self, log_path: Path = DEFAULT_AUDIT_LOG_PATH) -> None:
+    def __init__(self, log_path: Path | None = None) -> None:
+        if log_path is None:
+            import os
+            env_p = os.getenv("SECURITY_AUDIT_LOG_PATH")
+            if env_p:
+                log_path = Path(env_p)
+            else:
+                log_path = DEFAULT_AUDIT_LOG_PATH
         self._log_path = log_path
         self._lock = Lock()
         self._buffer: list[AuditEvent] = []
+
+    @property
+    def log_path(self) -> Path:
+        import os
+        env_p = os.getenv("SECURITY_AUDIT_LOG_PATH")
+        if env_p:
+            return Path(env_p)
+        return self._log_path
 
     def log_event(
         self,
@@ -62,8 +77,9 @@ class SecurityAuditLogger:
             self._buffer.append(event)
             # Write to file if parent directory is writable
             try:
-                self._log_path.parent.mkdir(parents=True, exist_ok=True)
-                with open(self._log_path, "a", encoding="utf-8") as f:
+                target_path = self.log_path
+                target_path.parent.mkdir(parents=True, exist_ok=True)
+                with open(target_path, "a", encoding="utf-8") as f:
                     f.write(json.dumps(event.model_dump(), ensure_ascii=False) + "\n")
             except OSError as err:
                 logger.warning(f"Could not append to security audit file: {err}")

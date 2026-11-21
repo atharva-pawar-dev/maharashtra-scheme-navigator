@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
@@ -51,8 +52,12 @@ class AttestationStore:
 
     def __init__(self, db_path: Path | str | None = None) -> None:
         if db_path is None:
-            base_dir = Path(__file__).resolve().parents[3]
-            db_path = base_dir / "data" / "ingestion.sqlite3"
+            env_p = os.getenv("ATTESTATION_DB_PATH") or os.getenv("INGESTION_DB_PATH")
+            if env_p:
+                db_path = Path(env_p)
+            else:
+                base_dir = Path(__file__).resolve().parents[3]
+                db_path = base_dir / "data" / "ingestion.sqlite3"
         self._db_path = Path(db_path)
         self._init_tables()
         self._seed_tier_a_attestations_if_empty()
@@ -82,7 +87,8 @@ class AttestationStore:
                 alternative_tracks_confirmed INTEGER NOT NULL,
                 benefit_limitations_confirmed INTEGER NOT NULL,
                 explicit_limitations_json TEXT NOT NULL,
-                is_valid INTEGER NOT NULL
+                is_valid INTEGER NOT NULL,
+                is_fixture INTEGER NOT NULL DEFAULT 0
             );
             """)
             conn.execute("""
@@ -126,6 +132,7 @@ class AttestationStore:
         alternative_tracks_confirmed: bool = True,
         benefit_limitations_confirmed: bool = True,
         explicit_limitations: Optional[List[str]] = None,
+        is_fixture: bool = False,
     ) -> CompletenessAttestation:
         """Record an attestation. Enforces Invariant I-05: Caller must have legal/admin role."""
         if session.role not in {UserRole.LEGAL_REVIEWER, UserRole.CATALOGUE_ADMIN}:
@@ -165,8 +172,8 @@ class AttestationStore:
                 attested_by, reviewer_role, attested_at, scope,
                 mandatory_conditions_confirmed, exclusions_confirmed,
                 alternative_tracks_confirmed, benefit_limitations_confirmed,
-                explicit_limitations_json, is_valid
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                explicit_limitations_json, is_valid, is_fixture
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
                 attestation.attestation_id,
                 attestation.scheme_id,
@@ -185,9 +192,40 @@ class AttestationStore:
                 1 if attestation.benefit_limitations_confirmed else 0,
                 json.dumps(attestation.explicit_limitations),
                 1 if attestation.is_valid else 0,
+                1 if is_fixture else 0,
             ))
 
         return attestation
+
+    def _row_to_attestation(self, row: sqlite3.Row) -> CompletenessAttestation:
+        return CompletenessAttestation(
+            attestation_id=row["attestation_id"],
+            scheme_id=row["scheme_id"],
+            scheme_version=row["scheme_version"],
+            source_hashes=json.loads(row["source_hashes_json"]),
+            rule_set_hash=row["rule_set_hash"],
+            exclusion_pass_reference=row["exclusion_pass_reference"],
+            document_requirement_graph_version=row["document_requirement_graph_version"],
+            attested_by=row["attested_by"],
+            reviewer_role=UserRole(row["reviewer_role"]),
+            attested_at=datetime.fromisoformat(row["attested_at"]),
+            scope=row["scope"],
+            mandatory_conditions_confirmed=bool(row["mandatory_conditions_confirmed"]),
+            exclusions_confirmed=bool(row["exclusions_confirmed"]),
+            alternative_tracks_confirmed=bool(row["alternative_tracks_confirmed"]),
+            benefit_limitations_confirmed=bool(row["benefit_limitations_confirmed"]),
+            explicit_limitations=json.loads(row["explicit_limitations_json"]),
+            is_valid=bool(row["is_valid"]),
+        )
+
+    def list_attestations(self, valid_only: bool = False) -> list[CompletenessAttestation]:
+        """List all completeness attestations across schemes."""
+        query = "SELECT * FROM scheme_completeness_attestations"
+        if valid_only:
+            query += " WHERE is_valid = 1"
+        with self._connect() as conn:
+            rows = conn.execute(query).fetchall()
+        return [self._row_to_attestation(row) for row in rows]
 
     def get_valid_attestation(self, scheme_id: str, rule_set_hash: str) -> Optional[CompletenessAttestation]:
         """Retrieve a valid attestation bound to the exact scheme ID and rule set hash."""
@@ -201,25 +239,7 @@ class AttestationStore:
             if not row:
                 return None
 
-            return CompletenessAttestation(
-                attestation_id=row["attestation_id"],
-                scheme_id=row["scheme_id"],
-                scheme_version=row["scheme_version"],
-                source_hashes=json.loads(row["source_hashes_json"]),
-                rule_set_hash=row["rule_set_hash"],
-                exclusion_pass_reference=row["exclusion_pass_reference"],
-                document_requirement_graph_version=row["document_requirement_graph_version"],
-                attested_by=row["attested_by"],
-                reviewer_role=UserRole(row["reviewer_role"]),
-                attested_at=datetime.fromisoformat(row["attested_at"]),
-                scope=row["scope"],
-                mandatory_conditions_confirmed=bool(row["mandatory_conditions_confirmed"]),
-                exclusions_confirmed=bool(row["exclusions_confirmed"]),
-                alternative_tracks_confirmed=bool(row["alternative_tracks_confirmed"]),
-                benefit_limitations_confirmed=bool(row["benefit_limitations_confirmed"]),
-                explicit_limitations=json.loads(row["explicit_limitations_json"]),
-                is_valid=bool(row["is_valid"]),
-            )
+            return self._row_to_attestation(row)
 
     def invalidate_attestations_for_scheme(self, scheme_id: str, reason: str = "") -> int:
         """Invalidate all attestations when a scheme's source or rule set changes."""
@@ -230,6 +250,58 @@ class AttestationStore:
             WHERE scheme_id = ? AND is_valid = 1
             """, (scheme_id,))
             return cursor.rowcount
+
+    def record_rule_approval(
+        self,
+        session: UserSession,
+        scheme_id: str,
+        rule_id: str,
+        rule_version: str,
+        stage: str,
+        review_subtype: str,
+        status: str,
+        source_hash: str,
+        notes: str = "",
+        numeric_double_confirmed: bool = True,
+    ) -> dict[str, Any]:
+        """Record an individual rule approval in scheme_rule_approvals. Enforces Invariant I-05."""
+        if session.role not in {UserRole.LEGAL_REVIEWER, UserRole.CATALOGUE_ADMIN}:
+            raise PermissionError(
+                f"Role '{session.role}' is not authorized to approve scheme rules (Invariant I-05)."
+            )
+        approval_id = f"appr_{hashlib.sha256(f'{scheme_id}:{rule_id}:{source_hash}:{session.user_id}'.encode('utf-8')).hexdigest()[:16]}"
+        now = datetime.now(timezone.utc).isoformat()
+        with self._connect() as conn:
+            conn.execute("""
+            INSERT OR REPLACE INTO scheme_rule_approvals (
+                approval_id, scheme_id, rule_id, rule_version, stage,
+                review_subtype, reviewer_id, reviewer_role, reviewed_at,
+                status, source_hash, notes, numeric_double_confirmed
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                approval_id, scheme_id, rule_id, rule_version, stage,
+                review_subtype, session.user_id, session.role.value if hasattr(session.role, "value") else str(session.role),
+                now, status, source_hash, notes, 1 if numeric_double_confirmed else 0
+            ))
+        return {
+            "approval_id": approval_id,
+            "scheme_id": scheme_id,
+            "rule_id": rule_id,
+            "rule_version": rule_version,
+            "stage": stage,
+            "status": status,
+            "source_hash": source_hash,
+            "reviewer_id": session.user_id,
+            "reviewed_at": now,
+        }
+
+    def get_rule_approvals_for_scheme(self, scheme_id: str) -> list[dict[str, Any]]:
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT * FROM scheme_rule_approvals WHERE scheme_id = ? ORDER BY reviewed_at DESC",
+                (scheme_id,)
+            ).fetchall()
+            return [dict(r) for r in rows]
 
     def _seed_tier_a_attestations_if_empty(self) -> None:
         """Seed initial verified completeness attestations for Tier A canonical schemes."""
@@ -255,8 +327,11 @@ class AttestationStore:
             )
 
             for s_dict in v2_data:
+                cid = s_dict["scheme_id"]
+                # Quarantine check: demo fixtures must NEVER be seeded into production attestations
+                if cid.startswith("demo-") or s_dict.get("status") in {"DEMO_ONLY", "ACTIVE_DEMO_FIXTURE"}:
+                    continue
                 if s_dict.get("verification", {}).get("status") == "verified_primary":
-                    cid = s_dict["scheme_id"]
                     scheme_obj = canonical_catalog.get(cid)
                     if scheme_obj:
                         rule_hash = compute_scheme_rule_set_hash(scheme_obj)

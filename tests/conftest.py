@@ -16,6 +16,12 @@ os.environ["INTERVIEW_DB_PATH"] = str(_TEST_DATA_DIRECTORY / "interviews.sqlite3
 os.environ["DOCUMENT_REVIEW_DB_PATH"] = str(
     _TEST_DATA_DIRECTORY / "document_reviews.sqlite3"
 )
+os.environ["SECURITY_AUDIT_LOG_PATH"] = str(
+    _TEST_DATA_DIRECTORY / "test_security_audit.log"
+)
+os.environ["ATTESTATION_DB_PATH"] = str(
+    _TEST_DATA_DIRECTORY / "test_ingestion.sqlite3"
+)
 
 
 @pytest.fixture(autouse=True)

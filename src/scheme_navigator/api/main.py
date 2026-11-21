@@ -2284,7 +2284,17 @@ def get_scheme_coverage_report() -> dict[str, Any]:
     schemes = source_registry.list_canonical_schemes()
     all_doc_reqs = get_all_scheme_document_requirements()
     
-    total = len(schemes)
+    registry_total = len(schemes)
+    quarantined = [
+        s for s in schemes
+        if getattr(s, "publication_status", "") == "ACTIVE_DEMO_FIXTURE"
+        or getattr(s, "is_fixture", False)
+        or s.canonical_scheme_id.startswith("demo-")
+    ]
+    quarantined_fixture_count = len(quarantined)
+    active_schemes = [s for s in schemes if s not in quarantined]
+    total_active = len(active_schemes)
+
     verified = sum(1 for s in schemes if getattr(s, "publication_status", "") == "VERIFIED_FOR_INFORMATION")
     with_docs = len(all_doc_reqs)
     
@@ -2294,12 +2304,15 @@ def get_scheme_coverage_report() -> dict[str, Any]:
         jurisdictions[scope] = jurisdictions.get(scope, 0) + 1
 
     return {
-        "total_canonical_schemes": total,
+        "registry_total": registry_total,
+        "total_canonical_schemes": registry_total,
+        "total_active_canonical_schemes": total_active,
+        "quarantined_fixture_count": quarantined_fixture_count,
         "verified_schemes": verified,
         "schemes_with_detailed_document_requirements": with_docs,
         "jurisdiction_breakdown": jurisdictions,
-        "all_75_schemes_covered": total >= 75,
-        "coverage_percentage": 100 if total >= 75 else int((total / 75) * 100),
+        "all_75_schemes_covered": with_docs >= 75,
+        "coverage_percentage": 100 if with_docs >= 75 else int((with_docs / 75) * 100),
     }
 
 

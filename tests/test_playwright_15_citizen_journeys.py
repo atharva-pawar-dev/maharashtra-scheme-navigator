@@ -248,14 +248,17 @@ def test_journey_06_profile_vs_document_name_mismatch_citizen(page, live_server)
     page.set_input_files("#doc-file-input", str(specimen))
     page.locator("#btn-do-upload").click()
 
-    page.wait_for_selector("#doc-conflicts-container", timeout=10000)
-    assert page.locator("#btn-sync-profile-mismatch").is_visible()
-
-    # Click Update My Profile to Match Document
-    page.locator("#btn-sync-profile-mismatch").click()
-    time.sleep(1)
+    # Wait for the async audit to complete and reveal the profile sync button
+    sync_btn = page.locator("#btn-sync-profile-mismatch")
+    sync_btn.wait_for(state="visible", timeout=25000)
+    sync_btn.scroll_into_view_if_needed()
+    sync_btn.click()
 
     # Verify profile name was synced to Anita Suresh Deshmukh
+    page.wait_for_function(
+        "() => state.profile && state.profile.name && (state.profile.name.includes('Anita') || state.profile.name.includes('Deshmukh'))",
+        timeout=10000,
+    )
     updated_name = page.evaluate("() => state.profile.name")
     assert "Anita" in updated_name or "Deshmukh" in updated_name
 

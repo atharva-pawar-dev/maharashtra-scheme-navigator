@@ -248,12 +248,61 @@ def test_api_get_scheme_factsheet_404(client):
 # -------------------------------------------------------------------------
 
 def test_api_admin_scheme_coverage_report(client):
-    """Admin scheme coverage report confirms 100% scheme coverage across all 75 schemes."""
+    """Admin scheme coverage report confirms scheme coverage contract and document requirements."""
     resp = client.get("/admin/scheme-coverage")
     assert resp.status_code == 200
     data = resp.json()
-    assert data["total_canonical_schemes"] == 75
+    assert data["registry_total"] == 89
+    assert data["total_canonical_schemes"] == 89
+    assert data["total_active_canonical_schemes"] == 87
+    assert data["quarantined_fixture_count"] == 2
     assert data["schemes_with_detailed_document_requirements"] == 75
     assert data["coverage_percentage"] == 100
     assert data["verified_schemes"] >= 50
     assert data["all_75_schemes_covered"] is True
+
+
+def test_quarantined_fixtures_excluded_from_confirmed_eligibility():
+    """Invariant I-02: Quarantined fixtures never produce confirmed production eligibility."""
+    from scheme_navigator.domain.models import CitizenProfile, EligibilityStatus
+    from scheme_navigator.services.catalog import canonical_catalog
+    from scheme_navigator.services.rule_engine import evaluate_scheme
+
+    demo_scheme = canonical_catalog.get("demo-majhi-ladki-bahin")
+    assert demo_scheme is not None
+    assert not getattr(demo_scheme, "publication_authorized", True)
+
+    profile = CitizenProfile(
+        age_years=30,
+        gender="female",
+        annual_family_income=100000,
+        resident_state="Maharashtra",
+    )
+    result = evaluate_scheme(demo_scheme, profile)
+    assert result.status != EligibilityStatus.ELIGIBLE
+    assert result.status == EligibilityStatus.NEEDS_REVIEW
+
+
+def test_quarantined_fixtures_not_in_decision_ready_pool():
+    """Quarantined demo fixtures are never flagged as decision ready."""
+    from scheme_navigator.source_registry.registry import SourceRegistry
+    reg = SourceRegistry()
+    schemes = reg.list_canonical_schemes()
+    fixtures = [s for s in schemes if s.canonical_scheme_id.startswith("demo-")]
+    assert len(fixtures) >= 2
+    for f in fixtures:
+        assert getattr(f, "is_decision_ready", False) is False
+        assert getattr(f, "publication_status", "") == "ACTIVE_DEMO_FIXTURE"
+
+
+def test_quarantined_fixtures_isolated_from_production_attestations():
+    """Real production attestation store does not hold completeness attestations for demo fixtures."""
+    from pathlib import Path
+    from scheme_navigator.governance.attestation_store import AttestationStore
+    base_dir = Path(__file__).resolve().parents[1]
+    prod_store = AttestationStore(db_path=base_dir / "data" / "ingestion.sqlite3")
+    attestations = prod_store.list_attestations()
+    demo_attestations = [a for a in attestations if a.scheme_id.startswith("demo-")]
+    assert len(demo_attestations) == 0, f"Found demo fixture attestations in production DB: {demo_attestations}"
+    # Verify exactly 16 genuine scheme attestations
+    assert len(attestations) == 16, f"Expected 16 genuine attestations, found {len(attestations)}"

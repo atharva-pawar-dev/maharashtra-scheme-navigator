@@ -28,3 +28,26 @@ Static code analysis over `src/scheme_navigator/` confirms:
 - **Dynamic SQL Expressions:** 0 found (all queries use parameterized bindings `?`).
 - **Unsafe Invocations (`eval`, `exec`):** 0 found.
 - **Unredacted Logging of Tokens:** 0 found.
+
+---
+
+## 3. Statutory Realignment & Legal Terminology Corrections
+
+### 3.1 IT (SPDI) Rules, 2011 — Rule 5(4) Purpose-Based Retention
+Earlier drafts loosely characterized the 24-hour document purge as a "statutory ceiling under SPDI Rule 5(4)". This audit provides the formal statutory clarification:
+- **Statutory Language of Rule 5(4):**  
+  > *"Body corporate or any person on its behalf holding sensitive personal data or information shall not retain that information for longer than is required for the purposes for which the information may lawfully be used or is otherwise required under any other law for the time being in force."*
+- **Platform Engineering Distinction:**  
+  Rule 5(4) establishes a **purpose-based retention principle**, not an arbitrary 24-hour numerical ceiling. The 24-hour automatic purge worker (`purge_expired_data`) in `scheme_navigator` is an internal platform policy and data minimization engineering choice designed to enforce conservative retention, rather than a statutory mandate imposed by law.
+
+### 3.2 DPDP Act, 2023 Phased Commencement
+- The Digital Personal Data Protection Act, 2023 received Presidential assent on August 11, 2023.
+- The Ministry of Electronics and Information Technology (MeitY) is implementing the Act through **phased commencement** by gazette notifications. Substantive obligations (including Data Protection Board establishment, consent manager frameworks, data fiduciary duties, and retention schedules) commence upon final notification of corresponding rules.
+- Operational mechanisms implemented in `scheme_navigator` (such as consent banners, unconsented Bhashini fallback gates, and proactive data scrubbing) represent defensive architectural alignment with DPDP principles, not statutory certification. Formal legal determinations remain subject to review by qualified Indian legal counsel.
+
+### 3.3 CERT-In Terminology & External VAPT Classification
+- **Official Terminology:** The statutory body designated by MeitY is a **CERT-In empanelled Information Security Auditing Organisation** (not a "certified third-party vendor").
+- **Internal vs. External Security Classification:**
+  - Automated test suites (`tests/test_production_security.py`, `tests/test_auth_and_sessions_hardening.py`, and AST static analysis) constitute **internal security regression testing**.
+  - Internal testing does NOT substitute for an external Vulnerability Assessment and Penetration Testing (VAPT) engagement.
+  - Release Gate G10 remains formally classified as **BLOCKED / PENDING EXTERNAL AUDIT** until a CERT-In empanelled Information Security Auditing Organisation conducts independent testing and issues an official formal audit report.
