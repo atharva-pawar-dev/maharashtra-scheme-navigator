@@ -46,7 +46,7 @@ def main() -> int:
     gov = status.get("governance_integrity", {})
     print("\nGovernance & Database Integrity:")
     print(f"  Production DB: {gov.get('production_db_path', 'unknown')}")
-    print(f"  Genuine Completeness Attestations: {gov.get('valid_genuine_attestations', 0)}")
+    print(f"  Genuine Completeness Attestations: {gov.get('total_genuine_attestations', gov.get('valid_genuine_attestations', 0))} ({gov.get('valid_genuine_attestations', 0)} valid)")
     print(f"  Demo Fixtures in Production DB: {gov.get('demo_fixture_attestations_in_prod', 0)}")
     print(f"  Real Human Rule Approvals: {gov.get('real_human_rule_approvals', 0)}")
     print(f"  Data Isolation Verified: {gov.get('is_isolated', False)}")

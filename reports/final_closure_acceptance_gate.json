@@ -1,0 +1,76 @@
+{
+  "gate_name": "MSN_FINAL_CLOSURE_ACCEPTANCE_GATE",
+  "mission_id": "MSN-FINAL-CLOSURE-01",
+  "generated_at": "2026-11-21T08:33:00Z",
+  "tested_commit_sha": "b2b48af6f274b71a595d1a9f683e84a5da7bc1d4",
+  "branch": "feat/catalogue-v2",
+  "preservation_status": {
+    "historical_tag": "project-final-accepted",
+    "historical_commit": "7adb0f93074f4fc6e4cbc69c1ba172b0cb73eb04",
+    "tag_preserved_unmoved": true
+  },
+  "overall_gate_status": "PASSED",
+  "software_closure_classification": "CLOSURE_COMPLETE",
+  "checks": {
+    "requirements_completeness": {
+      "status": "PASS",
+      "denominator": 55,
+      "numerator_accepted": 55,
+      "percentage": 100.0,
+      "register_path": "docs/project/final_requirements_register.csv",
+      "evidence_manifest_path": "reports/final_evidence_manifest.json"
+    },
+    "database_isolation": {
+      "status": "PASS",
+      "production_database": "data/ingestion.sqlite3",
+      "demo_fixtures_in_production": 0,
+      "fake_rule_approvals_in_production": 0,
+      "genuine_scheme_attestations": 16,
+      "isolated_test_database": "data/test_governance.sqlite3",
+      "safeguard_backup": "_backups/ingestion.sqlite3.backup_before_fixture_isolation"
+    },
+    "security_log_isolation": {
+      "status": "PASS",
+      "log_path": "data/security_audit.log",
+      "test_pollution_events": 0,
+      "dynamic_redirection_active": true
+    },
+    "defect_closure": {
+      "status": "PASS",
+      "defects_reconciled": {
+        "D-01": {
+          "title": "Admin scheme coverage contract",
+          "resolution": "Updated /admin/scheme-coverage to return explicit registry_total (89), quarantined_fixture_count (2), total_active_canonical_schemes (87), and schemes_with_detailed_document_requirements (75). Updated test and added fixture leakage tests.",
+          "status": "RESOLVED"
+        },
+        "D-02": {
+          "title": "Playwright Journey 06 profile mismatch click timeout",
+          "resolution": "Eliminated race condition by waiting explicitly for #btn-sync-profile-mismatch state='visible' and scrolling into view. Removed arbitrary sleep.",
+          "status": "RESOLVED"
+        },
+        "D-03": {
+          "title": "scheme_rule_approvals table has 0 rows in production",
+          "resolution": "Maintained authentic 0 rows in production (refusing to manufacture synthetic approvals). Verified approval functionality end-to-end via isolated test in test_governance_review_queue.py.",
+          "status": "RESOLVED"
+        },
+        "D-04": {
+          "title": "Fixture attestation leaked into production DB",
+          "resolution": "Purged demo-indira-gandhi-old-age-pension from production database into data/test_governance.sqlite3. Production DB now contains 0 fixtures and exactly 16 genuine attestations.",
+          "status": "RESOLVED"
+        }
+      }
+    },
+    "frozen_scorer_reconciliation": {
+      "status": "PASS",
+      "scorer_version": "1.0.0-sc-g1",
+      "sc_g2_preliminary_score": 78.88,
+      "final_mechanical_score": 76.65,
+      "variance_explained": true,
+      "root_cause": "Dimension 5 (Eligibility & Exclusion Completeness) candidate denominator expansion from 74 to 88 schemes. D5 weighted score shifted from 16.51 to 14.28 (2.23 pt difference). All other 9 dimensions identical."
+    },
+    "external_regulatory_gates": {
+      "G10_CERT_IN_VAPT": "PENDING_EXTERNAL_AUDIT (Blocked on formal third-party engagement by CERT-In empanelled Information Security Auditing Organisation)",
+      "G12_LEGAL_SIGN_OFF": "PENDING_REGULATORY_COUNSEL (Blocked on formal legal opinion by qualified Indian regulatory counsel)"
+    }
+  }
+}

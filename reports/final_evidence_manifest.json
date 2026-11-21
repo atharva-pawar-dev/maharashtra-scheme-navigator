@@ -1,0 +1,132 @@
+{
+  "tests/test_universe_reconciliation.py": {
+    "path": "tests/test_universe_reconciliation.py",
+    "size_bytes": 7524,
+    "sha256": "2c6015606ea9ce562e81390bcde87014f53f801abe145d6c84a7434d6c783128"
+  },
+  "reports/sc_g2_source_link_health.csv": {
+    "path": "reports/sc_g2_source_link_health.csv",
+    "size_bytes": 28587,
+    "sha256": "db97be4eb1fa206beac1fffcf7c8fcf4b9756ab9225240da95e77da6694c29e8"
+  },
+  "reports/final_lgd_reconciliation.csv": {
+    "path": "reports/final_lgd_reconciliation.csv",
+    "size_bytes": 9020,
+    "sha256": "c81e85c48039ffed8aef9287f07f926eddf19186741b7888e79929593caeeed8"
+  },
+  "tests/invariants/test_trimurti_invariants.py": {
+    "path": "tests/invariants/test_trimurti_invariants.py",
+    "size_bytes": 9839,
+    "sha256": "264f1211c0c5d6441f4bde6830c9f4c305746f5a5bcb1724176d62e4041eaf4b"
+  },
+  "tests/test_catalogue_v2_contracts.py": {
+    "path": "tests/test_catalogue_v2_contracts.py",
+    "size_bytes": 8038,
+    "sha256": "94bbffc17a07ad4568a128243ab01276335477e34792735091b9e6a0e1b8397e"
+  },
+  "tests/test_playwright_sc_g2_reconciliation.py": {
+    "path": "tests/test_playwright_sc_g2_reconciliation.py",
+    "size_bytes": 13159,
+    "sha256": "d06dcd114faadcfda2071f4f600e206d58d6e09b4173f9a50733c27b3c8880b4"
+  },
+  "tests/test_playwright_15_citizen_journeys.py": {
+    "path": "tests/test_playwright_15_citizen_journeys.py",
+    "size_bytes": 22473,
+    "sha256": "2eeb1b3b83a564590c69b47cb75ff4737ce3be2460603193b4e087463b0ef3ff"
+  },
+  "tests/test_playwright_five_citizen_acceptance.py": {
+    "path": "tests/test_playwright_five_citizen_acceptance.py",
+    "size_bytes": 8463,
+    "sha256": "69d996d79fb07e4e9be7cef2467ae84c0a53f347ec7116bc8f8e36cd3f3cfe25"
+  },
+  "tests/test_multilingual_voice.py": {
+    "path": "tests/test_multilingual_voice.py",
+    "size_bytes": 14672,
+    "sha256": "20093a8cdcd9ec347ab573a1191b3a4c87d2b2452f16a47ebb9c41537d3deeec"
+  },
+  "tests/test_trilingual_parity.py": {
+    "path": "tests/test_trilingual_parity.py",
+    "size_bytes": 9917,
+    "sha256": "2929dbf827a094ee8454c8e076668674b1944abcc8d00ec2ad62dd0cfe57f516"
+  },
+  "tests/test_application_assistance.py": {
+    "path": "tests/test_application_assistance.py",
+    "size_bytes": 10335,
+    "sha256": "55cc38aed175e8bd4703538f56e84c7a914e8d5c142dfb012a7d9cd5f972545b"
+  },
+  "tests/test_data_layer_and_storage.py": {
+    "path": "tests/test_data_layer_and_storage.py",
+    "size_bytes": 6501,
+    "sha256": "9bc9aa82177ece161f45927dd07bdfee15abadd9f7061ac7db156afbacd764e1"
+  },
+  "tests/test_rc4_document_intelligence_accuracy.py": {
+    "path": "tests/test_rc4_document_intelligence_accuracy.py",
+    "size_bytes": 11312,
+    "sha256": "e14ac38392b1414e3cecc7d716e162d6ed22b2239cba039caea2ee603ba78d15"
+  },
+  "tests/test_ocr_and_document_intelligence.py": {
+    "path": "tests/test_ocr_and_document_intelligence.py",
+    "size_bytes": 10875,
+    "sha256": "a93184f57f59f8d3f887606667dd7e10572849fd510ea96095bd362dec4c85f7"
+  },
+  "tests/test_document_audit.py": {
+    "path": "tests/test_document_audit.py",
+    "size_bytes": 4709,
+    "sha256": "150914ef7aee6b1695e55dab45f99013d63705f8a00f78669846c5321038745c"
+  },
+  "tests/test_immutable_audit_history.py": {
+    "path": "tests/test_immutable_audit_history.py",
+    "size_bytes": 6119,
+    "sha256": "a56f5d89b86b56329434a83a946add54d786e1f2c36aefd1da452ce2e9693bfc"
+  },
+  "tests/test_rc4_retention_and_readiness_math.py": {
+    "path": "tests/test_rc4_retention_and_readiness_math.py",
+    "size_bytes": 10116,
+    "sha256": "c93fc5f420b48a416c272546a73d6bf35cd8d57f35434baf8adbe5044a138ded"
+  },
+  "tests/test_sqlite_persistence_and_replacement.py": {
+    "path": "tests/test_sqlite_persistence_and_replacement.py",
+    "size_bytes": 13399,
+    "sha256": "068507febc06b02928f3dec0bf8649a78265dde3e3f8bde2e49eca51197dc45f"
+  },
+  "tests/test_playwright_backend_restart_persistence.py": {
+    "path": "tests/test_playwright_backend_restart_persistence.py",
+    "size_bytes": 7122,
+    "sha256": "243bb459c0a51a524c8bcef51fdc86f219d0dbce1027e98e7d1f7f33263bd3e0"
+  },
+  "tests/test_governance_review_queue.py": {
+    "path": "tests/test_governance_review_queue.py",
+    "size_bytes": 6106,
+    "sha256": "49d10c351b5a6fc7456f181cc81d4f94b65aa97794de169398c95e7d0d1b3366"
+  },
+  "tests/test_security_remediation.py": {
+    "path": "tests/test_security_remediation.py",
+    "size_bytes": 25789,
+    "sha256": "24e2d93277ad91e2ec7d34f8f7186105d0f04f84fb52beb73ae189c7f31506a2"
+  },
+  "tests/test_production_security.py": {
+    "path": "tests/test_production_security.py",
+    "size_bytes": 8238,
+    "sha256": "743de79e83a8b59be6aa36efb66fc310f7286c7d820805e6209d7340def15674"
+  },
+  "tests/test_auth_and_sessions_hardening.py": {
+    "path": "tests/test_auth_and_sessions_hardening.py",
+    "size_bytes": 7742,
+    "sha256": "80737c0ca98e2cc1923595efd11012319e175a0200a64faed371754cfba24745"
+  },
+  "tests/test_observability_and_incident_response.py": {
+    "path": "tests/test_observability_and_incident_response.py",
+    "size_bytes": 2686,
+    "sha256": "7202a1c956e3f2a8e33545991334e33dd4e38724d7625bf8d597af69055fbf5f"
+  },
+  "release/evidence/ws15/E-WS15-002_canary_mutations_individual.json": {
+    "path": "release/evidence/ws15/E-WS15-002_canary_mutations_individual.json",
+    "size_bytes": 14532,
+    "sha256": "fea921acdd321d7329d4396b27253296549c47e8273aeb1f1372bf0c71eeda4b"
+  },
+  "reports/final_closure_test_results.json": {
+    "path": "reports/final_closure_test_results.json",
+    "size_bytes": 28162,
+    "sha256": "97e09332f440a7ed8c7088a0de416f91543330f5a0e8d4aee4eae59e9cde911b"
+  }
+}

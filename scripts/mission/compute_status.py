@@ -76,7 +76,10 @@ def check_database_isolation() -> dict[str, Any]:
     )
     demo_attestations = cursor.fetchone()[0]
 
-    cursor.execute("SELECT COUNT(*) FROM scheme_completeness_attestations WHERE is_valid = 1")
+    cursor.execute("SELECT COUNT(*) FROM scheme_completeness_attestations WHERE is_fixture = 0")
+    total_genuine_attestations = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM scheme_completeness_attestations WHERE is_fixture = 0 AND is_valid = 1")
     valid_attestations = cursor.fetchone()[0]
 
     conn.close()
@@ -85,6 +88,7 @@ def check_database_isolation() -> dict[str, Any]:
         "production_db_path": str(prod_db.relative_to(BASE_DIR)),
         "real_human_rule_approvals": rule_approvals,
         "demo_fixture_attestations_in_prod": demo_attestations,
+        "total_genuine_attestations": total_genuine_attestations,
         "valid_genuine_attestations": valid_attestations,
         "is_isolated": (rule_approvals == 0 and demo_attestations == 0),
     }

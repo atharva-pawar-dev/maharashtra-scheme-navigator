@@ -1,0 +1,146 @@
+{
+  "mission_id": "MSN-FINAL-CLOSURE-01",
+  "generated_at": "2026-11-21T08:30:00Z",
+  "scorer_version": "1.0.0-sc-g1",
+  "score_reconciliation": {
+    "sc_g2_preliminary_score": 78.88,
+    "final_mechanical_score": 76.65,
+    "variance": 2.23,
+    "root_cause_dimension": "Dimension 5: Eligibility & Exclusion Completeness",
+    "preliminary_d5_score": 82.55,
+    "preliminary_d5_weighted": 16.51,
+    "mechanical_d5_score": 71.41,
+    "mechanical_d5_weighted": 14.28,
+    "d5_weighted_difference": 2.23,
+    "other_dimensions_variance": 0.00,
+    "mathematical_explanation": "In preliminary SC-G2 reporting, Dimension 5 was estimated at 16.51 based on a 74-scheme baseline. When 14 candidate schemes were integrated into the active catalogue (expanding the active denominator from 74 to 88) with fail-closed LIMITED_INFORMATION status, the frozen formula evaluated substantive criteria against 88 schemes, yielding a weighted score of 14.28. 16.51 - 14.28 = 2.23 points exactly."
+  },
+  "dimension_breakdown": [
+    {
+      "id": "D01",
+      "name": "Official Source Universe & Department Discovery",
+      "weight": 15.0,
+      "score": 68.09,
+      "weighted_score": 10.21,
+      "details": {
+        "unique_departments": 36,
+        "target_departments": 40
+      }
+    },
+    {
+      "id": "D02",
+      "name": "Candidate Discovery & Inventory Reconciliation",
+      "weight": 15.0,
+      "score": 98.67,
+      "weighted_score": 14.80,
+      "details": {
+        "reconciled_schemes": 74,
+        "candidate_denominator": 75
+      }
+    },
+    {
+      "id": "D03",
+      "name": "Canonical Identity & Lifecycle Accuracy",
+      "weight": 10.0,
+      "score": 100.00,
+      "weighted_score": 10.00,
+      "details": {
+        "schemes_with_lifecycle": 88
+      }
+    },
+    {
+      "id": "D04",
+      "name": "Official Source Provenance & Freshness",
+      "weight": 15.0,
+      "score": 39.66,
+      "weighted_score": 5.95,
+      "details": {
+        "verified_primary": 17,
+        "single_source_secondary": 27,
+        "unverified": 44
+      }
+    },
+    {
+      "id": "D05",
+      "name": "Eligibility & Exclusion Completeness",
+      "weight": 20.0,
+      "score": 71.41,
+      "weighted_score": 14.28,
+      "details": {
+        "schemes_with_2_substantive": 21,
+        "schemes_with_exclusions": 31
+      }
+    },
+    {
+      "id": "D06",
+      "name": "Benefit Structure & Calculations",
+      "weight": 8.0,
+      "score": 100.00,
+      "weighted_score": 8.00,
+      "details": {
+        "schemes_with_benefit_details": 88
+      }
+    },
+    {
+      "id": "D07",
+      "name": "Documents & Application Requirements",
+      "weight": 8.0,
+      "score": 67.61,
+      "weighted_score": 5.41,
+      "details": {
+        "schemes_with_docs": 31,
+        "schemes_with_portal": 88
+      }
+    },
+    {
+      "id": "D08",
+      "name": "Geography & Beneficiary Coverage",
+      "weight": 4.0,
+      "score": 100.00,
+      "weighted_score": 4.00,
+      "details": {
+        "schemes_with_geo": 88
+      }
+    },
+    {
+      "id": "D09",
+      "name": "Language & Citizen-Facing Information",
+      "weight": 3.0,
+      "score": 100.00,
+      "weighted_score": 3.00,
+      "details": {
+        "schemes_bilingual": 88
+      }
+    },
+    {
+      "id": "D10",
+      "name": "Monitoring & Update Reliability",
+      "weight": 2.0,
+      "score": 50.00,
+      "weighted_score": 1.00,
+      "details": {
+        "schemes_monitored": 44
+      }
+    }
+  ],
+  "composite_score": 76.65,
+  "four_independent_metrics": {
+    "discovery_coverage": {
+      "percentage": 90.0,
+      "description": "Proportion of authoritative government departments mapped (36 out of 40 target state departments and directorates)."
+    },
+    "data_completeness": {
+      "core_fields_percentage": 100.0,
+      "operational_criteria_percentage": 35.2,
+      "description": "Proportion of active catalogue schemes with core metadata (88/88 = 100%) and operational criteria/exclusions (31/88 = 35.2%)."
+    },
+    "decision_readiness": {
+      "percentage": 19.32,
+      "description": "Scheme Verification Rate: Proportion of schemes with complete legal attestations authorized for definitive citizen eligibility (17 out of 88 schemes). Note: this is a scheme verification rate, not dossier completeness."
+    },
+    "citizen_surface_integrity": {
+      "percentage": 100.0,
+      "description": "Proportion of verified citizen journeys, UI flows, and trilingual parity passing without regressions or leakage."
+    }
+  }
+}

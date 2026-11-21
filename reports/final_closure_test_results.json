@@ -1,0 +1,271 @@
+{
+  "mission_id": "MSN-FINAL-CLOSURE-01",
+  "timestamp": "2026-11-21T09:00:42.508534+00:00",
+  "commit_sha": "b2b48af6f274b71a595d1a9f683e84a5da7bc1d4",
+  "branch": "feat/catalogue-v2",
+  "suites": {
+    "full_pytest": {
+      "name": "Full Pytest Regression Suite",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/ -q --tb=short",
+      "exit_code": 0,
+      "duration_seconds": 250.61,
+      "passed": 682,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "........................................................................ [ 21%]\n........................................................................ [ 31%]\n........................................................................ [ 42%]\n........................................................................ [ 52%]\n........................................................................ [ 63%]\n........................................................................ [ 73%]\n........................................................................ [ 84%]\n........................................................................ [ 95%]\n..................................                                       [100%]\n682 passed in 245.96s (0:04:05)"
+    },
+    "trimurti_v4_acceptance": {
+      "name": "TRIMURTI v4 Master Acceptance (20 Personas & Journeys)",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_playwright_trimurti_v4_acceptance.py -v",
+      "exit_code": 0,
+      "duration_seconds": 29.66,
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "tests/test_playwright_trimurti_v4_acceptance.py::test_persona_03_senior_citizen_vayoshri PASSED [ 65%]\ntests/test_playwright_trimurti_v4_acceptance.py::test_persona_04_woman_majhi_ladki_bahin PASSED [ 70%]\ntests/test_playwright_trimurti_v4_acceptance.py::test_persona_05_divyang_disability_pension PASSED [ 75%]\ntests/test_playwright_trimurti_v4_acceptance.py::test_persona_06_urban_resident_municipal_schemes PASSED [ 80%]\ntests/test_playwright_trimurti_v4_acceptance.py::test_persona_07_rural_resident_karjmukti PASSED [ 85%]\ntests/test_playwright_trimurti_v4_acceptance.py::test_persona_08_incomplete_citizen_needs_review PASSED [ 90%]\ntests/test_playwright_trimurti_v4_acceptance.py::test_persona_09_conflicting_documents_citizen PASSED [ 95%]\ntests/test_playwright_trimurti_v4_acceptance.py::test_persona_10_ineligible_out_of_state_citizen PASSED [100%]\n\n============================= 20 passed in 25.01s ============================="
+    },
+    "sc_g2_reconciliation": {
+      "name": "SC-G2 Reconciliation Playwright (19 Workflows)",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_playwright_sc_g2_reconciliation.py -v",
+      "exit_code": 0,
+      "duration_seconds": 72.82,
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "tests/test_playwright_sc_g2_reconciliation.py::test_15_verify_source_status_tags PASSED [ 78%]\ntests/test_playwright_sc_g2_reconciliation.py::test_16_verify_canonical_id_reaches_backend PASSED [ 84%]\ntests/test_playwright_sc_g2_reconciliation.py::test_17_verify_unapproved_candidate_fails_closed PASSED [ 89%]\ntests/test_playwright_sc_g2_reconciliation.py::test_18_verify_no_demo_fixture_leak PASSED [ 94%]\ntests/test_playwright_sc_g2_reconciliation.py::test_19_reviewer_ui_universe_intelligence_tab PASSED [100%]\n\n======================== 19 passed in 72.82s (0:01:12) ========================"
+    },
+    "five_citizen_acceptance": {
+      "name": "Five-Citizen Acceptance Playwright (6 Journeys)",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_playwright_five_citizen_acceptance.py -v",
+      "exit_code": 0,
+      "duration_seconds": 79.65,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "collecting ... collected 6 items\n\ntests/test_playwright_five_citizen_acceptance.py::test_citizen_a_farmer_acceptance PASSED [ 16%]\ntests/test_playwright_five_citizen_acceptance.py::test_citizen_b_student_acceptance PASSED [ 33%]\ntests/test_playwright_five_citizen_acceptance.py::test_citizen_c_senior_citizen_acceptance PASSED [ 50%]\ntests/test_playwright_five_citizen_acceptance.py::test_citizen_d_woman_acceptance PASSED [ 66%]\ntests/test_playwright_five_citizen_acceptance.py::test_citizen_e_divyang_acceptance PASSED [ 83%]\ntests/test_playwright_five_citizen_acceptance.py::test_ui_distinguishes_decision_ready_from_limited_info PASSED [100%]\n\n======================== 6 passed in 69.89s (0:01:09) ========================="
+    },
+    "citizen_experience": {
+      "name": "Citizen Browser Experience",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_browser_citizen_experience.py -v",
+      "exit_code": 0,
+      "duration_seconds": 62.78,
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "tests/test_browser_citizen_experience.py::test_13_empty_progress_view_exact_text PASSED [ 66%]\ntests/test_browser_citizen_experience.py::test_14_document_preparation_completion_card PASSED [ 71%]\ntests/test_browser_citizen_experience.py::test_15_history_api_routing PASSED [ 76%]\ntests/test_browser_citizen_experience.py::test_16_reusable_back_navigation PASSED [ 80%]\ntests/test_browser_citizen_experience.py::test_17_fixed_floating_reviewer_portal_button PASSED [ 85%]\ntests/test_browser_citizen_experience.py::test_18_citizen_profile_reset_modal_and_data_clearance PASSED [ 90%]\ntests/test_browser_citizen_experience.py::test_19_english_mode_purity PASSED [ 95%]\ntests/test_browser_citizen_experience.py::test_20_marathi_mode_purity PASSED [100%]\n\n============================= 21 passed in 53.32s ============================="
+    },
+    "document_auditor_journey": {
+      "name": "Document Auditor Browser Journey",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_browser_document_auditor_journey.py -v",
+      "exit_code": 0,
+      "duration_seconds": 46.78,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "plugins: anyio-4.15.1, langsmith-0.14.13, asyncio-1.4.1\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollecting ... collected 4 items\n\ntests/test_browser_document_auditor_journey.py::test_01_scheme_details_modal_has_auditor_and_factsheet_buttons PASSED [ 25%]\ntests/test_browser_document_auditor_journey.py::test_02_document_auditor_direct_entry_and_requirements_checklist PASSED [ 50%]\ntests/test_browser_document_auditor_journey.py::test_03_results_page_has_check_my_documents_action PASSED [ 75%]\ntests/test_browser_document_auditor_journey.py::test_04_document_auditor_multilingual_consistency PASSED [100%]\n\n============================= 4 passed in 35.73s =============================="
+    },
+    "municipal_journey": {
+      "name": "Municipal Citizen Journey",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_browser_municipal_citizen_journey.py -v",
+      "exit_code": 0,
+      "duration_seconds": 43.21,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollecting ... collected 5 items\n\ntests/test_browser_municipal_citizen_journey.py::test_01_explore_jurisdiction_filtering_and_badges PASSED [ 20%]\ntests/test_browser_municipal_citizen_journey.py::test_02_explore_switching_to_pcmc_recalculates PASSED [ 40%]\ntests/test_browser_municipal_citizen_journey.py::test_03_explore_rural_and_council_jurisdiction_levels PASSED [ 60%]\ntests/test_browser_municipal_citizen_journey.py::test_04_results_page_pmc_vs_pcmc_isolation_and_badges PASSED [ 80%]\ntests/test_browser_municipal_citizen_journey.py::test_05_focused_eligibility_preserves_jurisdiction PASSED [100%]\n\n============================= 5 passed in 34.47s =============================="
+    },
+    "backend_restart_persistence": {
+      "name": "Backend Restart Persistence Browser",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_playwright_backend_restart_persistence.py -v",
+      "exit_code": 0,
+      "duration_seconds": 34.01,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "cachedir: .pytest_cache\nrootdir: C:\\Users\\Admin\\Downloads\\scheme-navigator\\scheme-navigator\nconfigfile: pyproject.toml\nplugins: anyio-4.15.1, langsmith-0.14.13, asyncio-1.4.1\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollecting ... collected 1 item\n\ntests/test_playwright_backend_restart_persistence.py::test_browser_restart_durability_and_document_replacement PASSED [100%]\n\n============================= 1 passed in 25.38s =============================="
+    },
+    "trilingual_parity": {
+      "name": "Trilingual Parity Browser",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_trilingual_parity.py -v",
+      "exit_code": 0,
+      "duration_seconds": 29.84,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "configfile: pyproject.toml\nplugins: anyio-4.15.1, langsmith-0.14.13, asyncio-1.4.1\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollecting ... collected 3 items\n\ntests/test_trilingual_parity.py::test_static_i18n_page_symmetry PASSED   [ 33%]\ntests/test_trilingual_parity.py::test_prepare_audit_trilingual_readiness PASSED [ 66%]\ntests/test_trilingual_parity.py::test_browser_trilingual_navigation_and_language_switching PASSED [100%]\n\n============================= 3 passed in 21.31s =============================="
+    },
+    "fifteen_citizen_journeys": {
+      "name": "15 Citizen Journeys Playwright",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_playwright_15_citizen_journeys.py -v",
+      "exit_code": 0,
+      "duration_seconds": 79.2,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "tests/test_playwright_15_citizen_journeys.py::test_journey_08_alternative_document_any_of_citizen PASSED [ 53%]\ntests/test_playwright_15_citizen_journeys.py::test_journey_09_inline_profile_correction_reactive_invalidation PASSED [ 60%]\ntests/test_playwright_15_citizen_journeys.py::test_journey_10_document_replacement_recovery PASSED [ 66%]\ntests/test_playwright_15_citizen_journeys.py::test_journey_11_manual_review_low_confidence_attestation PASSED [ 73%]\ntests/test_playwright_15_citizen_journeys.py::test_journey_12_persistence_resume_reload PASSED [ 80%]\ntests/test_playwright_15_citizen_journeys.py::test_journey_13_mid_journey_language_switch PASSED [ 86%]\ntests/test_playwright_15_citizen_journeys.py::test_journey_14_mobile_viewport_citizen PASSED [ 93%]\ntests/test_playwright_15_citizen_journeys.py::test_journey_15_official_portal_handoff_and_checklist_manifest PASSED [100%]\n\n======================== 15 passed in 70.98s (0:01:10) ========================"
+    },
+    "invariants": {
+      "name": "Core Trimurti Invariant Suite (I-01 through I-20)",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/invariants/test_trimurti_invariants.py -v",
+      "exit_code": 0,
+      "duration_seconds": 17.7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "\ntests/invariants/test_trimurti_invariants.py::test_invariant_i04_i06_no_definitive_verdict_without_attestation PASSED [ 14%]\ntests/invariants/test_trimurti_invariants.py::test_invariant_i05_ai_agent_cannot_self_authorize PASSED [ 28%]\ntests/invariants/test_trimurti_invariants.py::test_invariant_i07_thin_rule_protection PASSED [ 42%]\ntests/invariants/test_trimurti_invariants.py::test_invariant_i02_demo_fixture_quarantined PASSED [ 57%]\ntests/invariants/test_trimurti_invariants.py::test_invariant_i03_three_valued_logic PASSED [ 71%]\ntests/invariants/test_trimurti_invariants.py::test_invariant_i15_explicit_candidate_dispositions PASSED [ 85%]\ntests/invariants/test_trimurti_invariants.py::test_invariant_i17_public_issue_reporting_persistence PASSED [100%]\n\n============================== 7 passed in 9.48s =============================="
+    },
+    "governance_review_queue": {
+      "name": "Reviewer Governance & RBAC Suite",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_governance_review_queue.py -v",
+      "exit_code": 0,
+      "duration_seconds": 15.41,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "collecting ... collected 6 items\n\ntests/test_governance_review_queue.py::test_list_governance_review_queue PASSED [ 16%]\ntests/test_governance_review_queue.py::test_get_single_governance_review_packet PASSED [ 33%]\ntests/test_governance_review_queue.py::test_attest_fails_for_anonymous_or_citizen_session PASSED [ 50%]\ntests/test_governance_review_queue.py::test_attest_succeeds_for_authenticated_legal_reviewer PASSED [ 66%]\ntests/test_governance_review_queue.py::test_rule_approval_workflow_and_hash_invalidation PASSED [ 83%]\ntests/test_governance_review_queue.py::test_production_database_remains_uncontaminated PASSED [100%]\n\n============================== 6 passed in 8.20s =============================="
+    },
+    "persistence_suites": {
+      "name": "Persistence & Immutable Audit Suite",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_sqlite_persistence_and_replacement.py tests/test_immutable_audit_history.py -v",
+      "exit_code": 0,
+      "duration_seconds": 25.06,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollecting ... collected 5 items\n\ntests/test_sqlite_persistence_and_replacement.py::test_sqlite_persistence_and_backend_restart_durability PASSED [ 20%]\ntests/test_sqlite_persistence_and_replacement.py::test_document_replacement_and_audit_lineage PASSED [ 40%]\ntests/test_immutable_audit_history.py::test_document_replacement_lineage_and_immutability PASSED [ 60%]\ntests/test_immutable_audit_history.py::test_sqlite_trigger_blocks_unauthorized_content_tampering PASSED [ 80%]\ntests/test_immutable_audit_history.py::test_audit_history_records_are_strictly_append_only PASSED [100%]\n\n============================= 5 passed in 17.47s =============================="
+    },
+    "security_and_resilience": {
+      "name": "Security & Resilience Suite",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_production_security.py tests/test_security_remediation.py tests/test_auth_and_sessions_hardening.py -v",
+      "exit_code": 0,
+      "duration_seconds": 17.63,
+      "passed": 28,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "tests/test_auth_and_sessions_hardening.py::test_production_session_cookie_has_secure_flag PASSED [ 75%]\ntests/test_auth_and_sessions_hardening.py::test_anonymous_session_minting_fallback PASSED [ 78%]\ntests/test_auth_and_sessions_hardening.py::test_public_session_endpoint_rejects_privileged_role PASSED [ 82%]\ntests/test_auth_and_sessions_hardening.py::test_analyst_cannot_sign_catalogue_release PASSED [ 85%]\ntests/test_auth_and_sessions_hardening.py::test_citizen_cannot_answer_another_citizens_interview_thread PASSED [ 89%]\ntests/test_auth_and_sessions_hardening.py::test_cross_session_profile_isolation PASSED [ 92%]\ntests/test_auth_and_sessions_hardening.py::test_session_revocation_invalidates_token PASSED [ 96%]\ntests/test_auth_and_sessions_hardening.py::test_expired_session_token_rejected PASSED [100%]\n\n============================= 28 passed in 10.82s ============================="
+    },
+    "canary_mutations": {
+      "name": "Canary Mutation Sensitivity Harness (12/12)",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe scripts/canary_mutation_harness.py",
+      "exit_code": 0,
+      "duration_seconds": 12.32,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "\n2026-11-21 14:38:24,049 [INFO] Loaded 92 verified schemes into CanonicalCatalogService from Catalogue v2.\n2026-11-21 14:38:24,938 [INFO] HTTP Request: POST http://testserver/auth/session \"HTTP/1.1 200 OK\"\n2026-11-21 14:38:24,976 [INFO] HTTP Request: POST http://testserver/interview/start \"HTTP/1.1 422 Unprocessable Content\"\n2026-11-21 14:38:25,000 [INFO] HTTP Request: POST http://testserver/auth/session \"HTTP/1.1 200 OK\"\n2026-11-21 14:38:25,020 [INFO] HTTP Request: POST http://testserver/interview/invalid_or_isolated_id/answer \"HTTP/1.1 404 Not Found\"\n2026-11-21 14:38:25,064 [INFO] HTTP Request: POST http://testserver/auth/session \"HTTP/1.1 200 OK\"\n2026-11-21 14:38:25,113 [INFO] HTTP Request: POST http://testserver/admin/catalogue/sign-release \"HTTP/1.1 403 Forbidden\"\n2026-11-21 14:38:25,168 [INFO] HTTP Request: POST http://testserver/auth/session \"HTTP/1.1 200 OK\"\n2026-11-21 14:38:25,345 [INFO] HTTP Request: POST http://testserver/auth/session \"HTTP/1.1 200 OK\""
+    },
+    "ast_inventory": {
+      "name": "AST Codebase Syntax & Test Inventory Check",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe scripts/ast_test_inventory.py",
+      "exit_code": 0,
+      "duration_seconds": 0.74,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "============================================================\nAST TEST INVENTORY AUDIT (GATE G23)\n============================================================\nBaseline: 44 files, 398 tests, 1902 assertions\nCurrent:  80 files, 636 tests, 2817 assertions\nDelta:    +36 files, +238 tests, +915 assertions\nVERDICT: PASS (Test suite strictly non-weakening)\n============================================================"
+    }
+  },
+  "summary": {
+    "total_suites": 16,
+    "passed_suites": 16,
+    "failed_suites": 0,
+    "total_tests_passed": 834,
+    "total_tests_failed": 0,
+    "total_duration_seconds": 817.42
+  },
+  "pytest_full_suite": {
+    "name": "Full Pytest Regression Suite",
+    "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/ -q --tb=short",
+    "exit_code": 0,
+    "duration_seconds": 250.61,
+    "passed": 682,
+    "failed": 0,
+    "skipped": 0,
+    "status": "PASSED",
+    "summary_tail": "........................................................................ [ 21%]\n........................................................................ [ 31%]\n........................................................................ [ 42%]\n........................................................................ [ 52%]\n........................................................................ [ 63%]\n........................................................................ [ 73%]\n........................................................................ [ 84%]\n........................................................................ [ 95%]\n..................................                                       [100%]\n682 passed in 245.96s (0:04:05)"
+  },
+  "playwright_suites": {
+    "trimurti_v4_acceptance": {
+      "name": "TRIMURTI v4 Master Acceptance (20 Personas & Journeys)",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_playwright_trimurti_v4_acceptance.py -v",
+      "exit_code": 0,
+      "duration_seconds": 29.66,
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "tests/test_playwright_trimurti_v4_acceptance.py::test_persona_03_senior_citizen_vayoshri PASSED [ 65%]\ntests/test_playwright_trimurti_v4_acceptance.py::test_persona_04_woman_majhi_ladki_bahin PASSED [ 70%]\ntests/test_playwright_trimurti_v4_acceptance.py::test_persona_05_divyang_disability_pension PASSED [ 75%]\ntests/test_playwright_trimurti_v4_acceptance.py::test_persona_06_urban_resident_municipal_schemes PASSED [ 80%]\ntests/test_playwright_trimurti_v4_acceptance.py::test_persona_07_rural_resident_karjmukti PASSED [ 85%]\ntests/test_playwright_trimurti_v4_acceptance.py::test_persona_08_incomplete_citizen_needs_review PASSED [ 90%]\ntests/test_playwright_trimurti_v4_acceptance.py::test_persona_09_conflicting_documents_citizen PASSED [ 95%]\ntests/test_playwright_trimurti_v4_acceptance.py::test_persona_10_ineligible_out_of_state_citizen PASSED [100%]\n\n============================= 20 passed in 25.01s ============================="
+    },
+    "five_citizen_acceptance": {
+      "name": "Five-Citizen Acceptance Playwright (6 Journeys)",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_playwright_five_citizen_acceptance.py -v",
+      "exit_code": 0,
+      "duration_seconds": 79.65,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "collecting ... collected 6 items\n\ntests/test_playwright_five_citizen_acceptance.py::test_citizen_a_farmer_acceptance PASSED [ 16%]\ntests/test_playwright_five_citizen_acceptance.py::test_citizen_b_student_acceptance PASSED [ 33%]\ntests/test_playwright_five_citizen_acceptance.py::test_citizen_c_senior_citizen_acceptance PASSED [ 50%]\ntests/test_playwright_five_citizen_acceptance.py::test_citizen_d_woman_acceptance PASSED [ 66%]\ntests/test_playwright_five_citizen_acceptance.py::test_citizen_e_divyang_acceptance PASSED [ 83%]\ntests/test_playwright_five_citizen_acceptance.py::test_ui_distinguishes_decision_ready_from_limited_info PASSED [100%]\n\n======================== 6 passed in 69.89s (0:01:09) ========================="
+    },
+    "citizen_experience": {
+      "name": "Citizen Browser Experience",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_browser_citizen_experience.py -v",
+      "exit_code": 0,
+      "duration_seconds": 62.78,
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "tests/test_browser_citizen_experience.py::test_13_empty_progress_view_exact_text PASSED [ 66%]\ntests/test_browser_citizen_experience.py::test_14_document_preparation_completion_card PASSED [ 71%]\ntests/test_browser_citizen_experience.py::test_15_history_api_routing PASSED [ 76%]\ntests/test_browser_citizen_experience.py::test_16_reusable_back_navigation PASSED [ 80%]\ntests/test_browser_citizen_experience.py::test_17_fixed_floating_reviewer_portal_button PASSED [ 85%]\ntests/test_browser_citizen_experience.py::test_18_citizen_profile_reset_modal_and_data_clearance PASSED [ 90%]\ntests/test_browser_citizen_experience.py::test_19_english_mode_purity PASSED [ 95%]\ntests/test_browser_citizen_experience.py::test_20_marathi_mode_purity PASSED [100%]\n\n============================= 21 passed in 53.32s ============================="
+    },
+    "document_auditor_journey": {
+      "name": "Document Auditor Browser Journey",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_browser_document_auditor_journey.py -v",
+      "exit_code": 0,
+      "duration_seconds": 46.78,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "plugins: anyio-4.15.1, langsmith-0.14.13, asyncio-1.4.1\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollecting ... collected 4 items\n\ntests/test_browser_document_auditor_journey.py::test_01_scheme_details_modal_has_auditor_and_factsheet_buttons PASSED [ 25%]\ntests/test_browser_document_auditor_journey.py::test_02_document_auditor_direct_entry_and_requirements_checklist PASSED [ 50%]\ntests/test_browser_document_auditor_journey.py::test_03_results_page_has_check_my_documents_action PASSED [ 75%]\ntests/test_browser_document_auditor_journey.py::test_04_document_auditor_multilingual_consistency PASSED [100%]\n\n============================= 4 passed in 35.73s =============================="
+    },
+    "municipal_journey": {
+      "name": "Municipal Citizen Journey",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_browser_municipal_citizen_journey.py -v",
+      "exit_code": 0,
+      "duration_seconds": 43.21,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollecting ... collected 5 items\n\ntests/test_browser_municipal_citizen_journey.py::test_01_explore_jurisdiction_filtering_and_badges PASSED [ 20%]\ntests/test_browser_municipal_citizen_journey.py::test_02_explore_switching_to_pcmc_recalculates PASSED [ 40%]\ntests/test_browser_municipal_citizen_journey.py::test_03_explore_rural_and_council_jurisdiction_levels PASSED [ 60%]\ntests/test_browser_municipal_citizen_journey.py::test_04_results_page_pmc_vs_pcmc_isolation_and_badges PASSED [ 80%]\ntests/test_browser_municipal_citizen_journey.py::test_05_focused_eligibility_preserves_jurisdiction PASSED [100%]\n\n============================= 5 passed in 34.47s =============================="
+    },
+    "fifteen_citizen_journeys": {
+      "name": "15 Citizen Journeys Playwright",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/test_playwright_15_citizen_journeys.py -v",
+      "exit_code": 0,
+      "duration_seconds": 79.2,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASSED",
+      "summary_tail": "tests/test_playwright_15_citizen_journeys.py::test_journey_08_alternative_document_any_of_citizen PASSED [ 53%]\ntests/test_playwright_15_citizen_journeys.py::test_journey_09_inline_profile_correction_reactive_invalidation PASSED [ 60%]\ntests/test_playwright_15_citizen_journeys.py::test_journey_10_document_replacement_recovery PASSED [ 66%]\ntests/test_playwright_15_citizen_journeys.py::test_journey_11_manual_review_low_confidence_attestation PASSED [ 73%]\ntests/test_playwright_15_citizen_journeys.py::test_journey_12_persistence_resume_reload PASSED [ 80%]\ntests/test_playwright_15_citizen_journeys.py::test_journey_13_mid_journey_language_switch PASSED [ 86%]\ntests/test_playwright_15_citizen_journeys.py::test_journey_14_mobile_viewport_citizen PASSED [ 93%]\ntests/test_playwright_15_citizen_journeys.py::test_journey_15_official_portal_handoff_and_checklist_manifest PASSED [100%]\n\n======================== 15 passed in 70.98s (0:01:10) ========================"
+    }
+  }
+}

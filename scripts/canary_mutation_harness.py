@@ -20,6 +20,8 @@ from typing import Any, Dict
 os.environ["APP_ENV"] = "test"
 os.environ["SCHEME_NAVIGATOR_AUTH_SECRET"] = "canary_test_secret_at_least_32_characters_long_12345"
 os.environ["SCHEME_NAVIGATOR_RELEASE_KEY"] = "canary_test_release_key_at_least_32_characters_long_12345"
+os.environ["SECURITY_AUDIT_LOG_PATH"] = str(Path(tempfile.gettempdir()) / "canary_security_audit.log")
+os.environ["ATTESTATION_DB_PATH"] = str(Path(__file__).resolve().parent.parent / "data" / "test_governance.sqlite3")
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))

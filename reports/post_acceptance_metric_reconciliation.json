@@ -1,0 +1,359 @@
+{
+  "scorer_reconciliation": {
+    "version": "1.0.0-sc-g1",
+    "sc_g2_preliminary_score": 78.88,
+    "final_mechanical_score": 76.65,
+    "variance": -2.23,
+    "root_cause": "Denominator expansion from 74 to 88 schemes upon integrating 14 candidate schemes into the active catalogue. To enforce Invariants I-04 and I-07, candidates were integrated as unverified LIMITED_INFORMATION schemes, adjusting the verified proportion from 17/74 (22.97%) to 17/88 (19.32%). The frozen scoring formula was applied without modification.",
+    "dimensions": [
+      {
+        "name": "Official Source Universe & Department Discovery",
+        "weight": 15.0,
+        "score": 68.09,
+        "weighted_score": 10.21,
+        "details": {
+          "unique_departments": 36,
+          "target_departments": 40
+        }
+      },
+      {
+        "name": "Candidate Discovery & Inventory Reconciliation",
+        "weight": 15.0,
+        "score": 98.67,
+        "weighted_score": 14.8,
+        "details": {
+          "reconciled_schemes": 74,
+          "candidate_denominator": 75
+        }
+      },
+      {
+        "name": "Canonical Identity & Lifecycle Accuracy",
+        "weight": 10.0,
+        "score": 100.0,
+        "weighted_score": 10.0,
+        "details": {
+          "schemes_with_lifecycle": 88
+        }
+      },
+      {
+        "name": "Official Source Provenance & Freshness",
+        "weight": 15.0,
+        "score": 39.66,
+        "weighted_score": 5.95,
+        "details": {
+          "verified_primary": 17,
+          "single_source_secondary": 27,
+          "unverified": 44
+        }
+      },
+      {
+        "name": "Eligibility & Exclusion Completeness",
+        "weight": 20.0,
+        "score": 71.41,
+        "weighted_score": 14.28,
+        "details": {
+          "schemes_with_2_substantive": 21,
+          "schemes_with_exclusions": 31
+        }
+      },
+      {
+        "name": "Benefit Structure & Calculations",
+        "weight": 8.0,
+        "score": 100.0,
+        "weighted_score": 8.0,
+        "details": {
+          "schemes_with_benefit_details": 88
+        }
+      },
+      {
+        "name": "Documents & Application Requirements",
+        "weight": 8.0,
+        "score": 67.61,
+        "weighted_score": 5.41,
+        "details": {
+          "schemes_with_docs": 31,
+          "schemes_with_portal": 88
+        }
+      },
+      {
+        "name": "Geography & Beneficiary Coverage",
+        "weight": 4.0,
+        "score": 100.0,
+        "weighted_score": 4.0,
+        "details": {
+          "schemes_with_geo": 88
+        }
+      },
+      {
+        "name": "Language & Citizen-Facing Information",
+        "weight": 3.0,
+        "score": 100.0,
+        "weighted_score": 3.0,
+        "details": {
+          "schemes_bilingual": 88
+        }
+      },
+      {
+        "name": "Monitoring & Update Reliability",
+        "weight": 2.0,
+        "score": 50.0,
+        "weighted_score": 1.0,
+        "details": {
+          "schemes_monitored": 44
+        }
+      }
+    ]
+  },
+  "human_governance_reconciliation": {
+    "scheme_completeness_attestations_total_records": 19,
+    "unique_schemes_attested": 17,
+    "scheme_rule_approvals_total_records": 0,
+    "fixture_in_real_db": true,
+    "fixture_attestation_record": [
+      {
+        "attestation_id": "attest_63eff6ea805337dd",
+        "scheme_id": "demo-indira-gandhi-old-age-pension",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "bddbdb2ad11d1346bfcaf8b0584ea661d45b4a54877056bc4f28f0df16048685",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:41.769558+00:00",
+        "is_valid": true
+      }
+    ],
+    "eighteenth_scheme_finding": "The 17 attested schemes in the database comprise 16 legitimate schemes and 1 quarantined fixture (demo-indira-gandhi-old-age-pension). There is no 18th attested scheme in the database.",
+    "reviewer_provenance": "Attestations were recorded under reviewer_id legal_reviewer_governance_board, legal_reviewer_invariants, and advocate_deshmukh_legal_signoff during automated initialization and invariant testing; no external human single-sign-on identity is integrated.",
+    "attestations": [
+      {
+        "attestation_id": "attest_df7ea2e6311354c1",
+        "scheme_id": "candidate-majhi-ladki-bahin",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "6c9d93bfedda0001846ea03f46b1290c0ede7722dc77b84cfb05f59f1f36a241",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:41.638045+00:00",
+        "is_valid": false
+      },
+      {
+        "attestation_id": "attest_9ac58d6b77ed9a30",
+        "scheme_id": "candidate-sanjay-gandhi-niradhar-anudan",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "255f0c4ce50f7402970f8d321a2e18f4698c48586cdf3b67d0de3673a4193399",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:41.691181+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_6de350be15e2102e",
+        "scheme_id": "candidate-shravanbal-sewa-rajya-nivruttivetan",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "de4824f1fd7fb8be1ff9e88683a91dc5dc0416905c9ae9d3076d1d77b38628cb",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:41.739752+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_63eff6ea805337dd",
+        "scheme_id": "demo-indira-gandhi-old-age-pension",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "bddbdb2ad11d1346bfcaf8b0584ea661d45b4a54877056bc4f28f0df16048685",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:41.769558+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_afeecb9cd1406b57",
+        "scheme_id": "scheme-ignwps-widow-pension",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "cab92bf2a27930bf251f6f43fe8b5407cd148f5a48ca295ea9837898c7452cb1",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:41.804730+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_88f2b0334ba39085",
+        "scheme_id": "scheme-igndps-disability-pension",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "91c536d304a13f099dd9b8247cb41de43ee51cf3b01f1d8feacd523c3bcc208d",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:41.837052+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_57acf80404f5f688",
+        "scheme_id": "candidate-post-matric-sc",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "abff33ddc8a0004324f09d56ed88ce575e0bd576969d8e8447b42e9abf8bb4aa",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:41.861494+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_ee91144120e1872b",
+        "scheme_id": "candidate-post-matric-obc",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "99045c392125181720eb67c5ed88278a9bfdc9b713f3984e5307113ed1363f97",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:41.885485+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_8bd653998dd2b7d5",
+        "scheme_id": "scheme-ebc-tuition-waiver",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "fbb9158a004a7d684b6a6e55613a8ff2c7cf67efa343185739392522bd50fe72",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:41.913739+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_c468b2110c43fa0f",
+        "scheme_id": "scheme-namo-shetkari-maha-samman",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "27e9cbea3f40051488b9a7b1c2957f38f55f00fc745966f7479e3599d3d74a7a",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:41.949157+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_cd6e6cc7a1c485fb",
+        "scheme_id": "scheme-pm-kisan",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "50dfea6b6fc4389e19142a1d9f0e74a6bdad18ce50da2a92498c7b914fa8cb6c",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:41.980150+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_c40c6c167b3963bf",
+        "scheme_id": "scheme-bhausaheb-fundkar-phalbag",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "1afe43528d5fd422a8c4db37ba8815677c0a446bd22123b2ff4d1b110b99ee99",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:42.043383+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_420097c170c92719",
+        "scheme_id": "scheme-mjpjay-ayushman-bharat",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "15a9371f5a17b0a24a4dcfebf185ad6091fd49ea8954c32cc1648c29c6bf7d15",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:42.078508+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_20cc276f748c2173",
+        "scheme_id": "scheme-cmegp-self-employment",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "5fdbeeaf2ec8bfa8c851f347538ad699d575b0ea27952736125bd0cc61a50a73",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:42.132582+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_174be4d4c6ffcd67",
+        "scheme_id": "scheme-annasaheb-patil-ir2",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "437a884fa310702948c3c14b09d673377ce30b9b218de67f43379f04cf91b065",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:42.231933+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_abe6034696991fa3",
+        "scheme_id": "scheme-ramai-awas-yojana",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "a3b1bda579a8009a2721dbbab636e9bc9d8f796b4d0e880676f832ce2cfed1f9",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:42.288979+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_f68ec62b957aa044",
+        "scheme_id": "scheme-mukhyamantri-vayoshri",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "a1789f10c47d5ba691c35327d03eeae0a067d586d74e072e0d80c7c3e8bf6a71",
+        "attested_by": "legal_reviewer_governance_board",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T15:02:42.329291+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_9a7c9d99c775802c",
+        "scheme_id": "candidate-majhi-ladki-bahin",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "6c9d93bfedda0001846ea03f46b1290c0ede7722dc77b84cfb05f59f1f36a241",
+        "attested_by": "legal_reviewer_invariants",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T20:08:16.770830+00:00",
+        "is_valid": true
+      },
+      {
+        "attestation_id": "attest_b54d0f305a6fd6e0",
+        "scheme_id": "candidate-sanjay-gandhi-niradhar-anudan",
+        "scheme_version": "2.0.0",
+        "rule_set_hash": "255f0c4ce50f7402970f8d321a2e18f4698c48586cdf3b67d0de3673a4193399",
+        "attested_by": "advocate_deshmukh_legal_signoff",
+        "reviewer_role": "legal_reviewer",
+        "attested_at": "2026-11-20T20:08:17.001086+00:00",
+        "is_valid": true
+      }
+    ]
+  },
+  "discovery_coverage_reconciliation": {
+    "target_departments_claimed": 40,
+    "target_departments_verified": 40,
+    "department_breakdown": "38 State Government Departments + 2 State Directorates",
+    "authorities_in_universe": 137,
+    "authority_types": {
+      "STATE_DEPARTMENT": 38,
+      "STATE_DIRECTORATE": 2,
+      "STATE_CORPORATION": 18,
+      "CENTRAL_MINISTRY": 14,
+      "MUNICIPAL_CORPORATION": 29,
+      "DISTRICT_COLLECTORATE": 36
+    },
+    "unmapped_local_authorities": "Municipal Councils (~240+), Nagar Panchayats (~130+), and Gram Panchayats (~27,000+) are unmapped and outside current scope.",
+    "lgd_directory_mappings": {
+      "total_mapped": 65,
+      "districts": 36,
+      "municipal_corporations": 29,
+      "verification_status": "100% VERIFIED_OFFICIAL_LGD"
+    }
+  },
+  "data_completeness_reconciliation": {
+    "total_canonical_schemes": 88,
+    "verified_primary_schemes": 17,
+    "scheme_verification_rate": "19.32% (17 / 88)",
+    "single_source_secondary_schemes": 27,
+    "unverified_candidate_schemes": 44,
+    "field_level_completeness_across_88_schemes": {
+      "core_fields_complete_pct": 100.0,
+      "secondary_fields_complete_pct": 84.1,
+      "operational_fields_complete_pct": 35.2,
+      "deep_legal_basis_complete_pct": 19.3
+    }
+  },
+  "citizen_surface_integrity": {
+    "quarantined_demo_isolation": "demo-indira-gandhi-old-age-pension excluded from public /api/schemes and explore UI",
+    "advisory_banner_enforcement": "All 14 unapproved candidates display honest advisory banner in factsheet modal",
+    "trilingual_translation_coverage": "112 UI keys across English, Marathi, Hindi",
+    "number_localization": "Devanagari numerals (\u0966-\u096f) for Marathi and Hindi active"
+  }
+}

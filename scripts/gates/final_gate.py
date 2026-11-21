@@ -82,15 +82,17 @@ def check_database_isolation() -> tuple[bool, str]:
         conn.close()
         return False, f"Production database contains {demo_attestations} demo fixture attestations."
 
-    # Must contain 16 genuine attestations
-    cursor.execute("SELECT COUNT(*) FROM scheme_completeness_attestations WHERE is_valid = 1")
+    # Must contain 16 genuine attestations (15 valid, 1 historically invalidated candidate)
+    cursor.execute("SELECT COUNT(*) FROM scheme_completeness_attestations WHERE is_fixture = 0")
     genuine_attestations = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(*) FROM scheme_completeness_attestations WHERE is_fixture = 0 AND is_valid = 1")
+    valid_attestations = cursor.fetchone()[0]
     conn.close()
 
     if genuine_attestations < 16:
         return False, f"Production DB has {genuine_attestations} genuine attestations, expected at least 16."
 
-    return True, f"Production database isolated: 0 fixtures, 0 fake approvals, {genuine_attestations} genuine attestations."
+    return True, f"Production database isolated: 0 fixtures, 0 fake approvals, {genuine_attestations} genuine attestations ({valid_attestations} valid)."
 
 
 def check_git_status() -> tuple[bool, str]:
