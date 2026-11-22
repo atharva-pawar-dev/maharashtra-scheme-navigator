@@ -1,0 +1,319 @@
+/* TRIMURTI / MSN-DV-001 Age-Inclusive Design Tokens & Components (Annex C) */
+
+:root {
+  /* Font size scale (Floor 18px body, 28-32px heading) */
+  --dv-text-zoom: 1;
+  --dv-font-base: calc(18px * var(--dv-text-zoom));
+  --dv-font-min: calc(16px * var(--dv-text-zoom));
+  --dv-font-heading: calc(28px * var(--dv-text-zoom));
+  --dv-font-heading-lg: calc(32px * var(--dv-text-zoom));
+  --dv-font-crop-value: calc(28px * var(--dv-text-zoom));
+
+  /* Line heights */
+  --dv-line-height-latin: 1.6;
+  --dv-line-height-devanagari: 1.7; /* Crucial: Devanagari matras clip below 1.7 */
+
+  /* Touch targets */
+  --dv-target-min: 48px;
+  --dv-target-primary: 56px;
+  --dv-target-gap: 12px;
+
+  /* High contrast colors (>= 7:1 contrast on white #FFFFFF) */
+  --dv-color-bg: #FFFFFF;
+  --dv-color-surface: #F8FAFC;
+  --dv-color-text: #0F172A;        /* Contrast 15.6:1 against #FFFFFF */
+  --dv-color-text-muted: #334155;  /* Contrast 9.6:1 against #FFFFFF */
+  --dv-color-border: #94A3B8;
+
+  /* Primary interactive colors */
+  --dv-color-primary: #1E3A8A;     /* Navy - high contrast (9.5:1 against white) */
+  --dv-color-primary-hover: #172554;
+  --dv-color-primary-text: #FFFFFF;
+
+  /* Status colors - always paired with icon & text */
+  --dv-status-received-bg: #E0F2FE;
+  --dv-status-received-text: #0369A1;
+  --dv-status-readable-bg: #F0FDF4;
+  --dv-status-readable-text: #15803D;
+  --dv-status-understood-bg: #ECFDF5;
+  --dv-status-understood-text: #047857;
+  --dv-status-consistent-bg: #F0FDF4;
+  --dv-status-consistent-text: #166534;
+  --dv-status-reviewed-bg: #EFF6FF;
+  --dv-status-reviewed-text: #1D4ED8;
+  --dv-status-confirmed-bg: #FEF3C7;
+  --dv-status-confirmed-text: #92400E;
+
+  --dv-status-attention-bg: #FFFBEB;
+  --dv-status-attention-text: #92400E;
+  --dv-status-attention-border: #F59E0B;
+
+  /* Focus ring (>= 3px) */
+  --dv-focus-ring: 3px solid #2563EB;
+  --dv-focus-offset: 3px;
+}
+
+/* Mobile typography scale */
+@media (max-width: 640px) {
+  :root {
+    --dv-font-base: calc(20px * var(--dv-text-zoom));
+  }
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--dv-color-bg);
+  color: var(--dv-color-text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Devanagari", "Mukta", sans-serif;
+  font-size: var(--dv-font-base);
+  line-height: var(--dv-line-height-latin);
+  -webkit-font-smoothing: antialiased;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+/* Strict Devanagari typography rule: line-height >= 1.7, no letter spacing */
+:lang(mr), :lang(hi), [lang="mr"], [lang="hi"], .lang-mr, .lang-hi {
+  line-height: var(--dv-line-height-devanagari) !important;
+  letter-spacing: normal !important;
+}
+
+/* Focus visibility for accessibility */
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: var(--dv-focus-ring) !important;
+  outline-offset: var(--dv-focus-offset) !important;
+}
+
+/* Container */
+.dv-container {
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* Utility header: language + text zoom + assisted mode */
+.dv-top-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 2px solid var(--dv-color-border);
+  margin-bottom: 20px;
+}
+
+.dv-lang-switcher, .dv-zoom-controls {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Touch targets */
+.dv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--dv-target-min);
+  min-width: var(--dv-target-min);
+  padding: 10px 18px;
+  font-size: var(--dv-font-base);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid var(--dv-color-border);
+  background-color: var(--dv-color-surface);
+  color: var(--dv-color-text);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  text-align: center;
+}
+
+.dv-btn:hover {
+  background-color: #E2E8F0;
+}
+
+.dv-btn-primary {
+  min-height: var(--dv-target-primary);
+  background-color: var(--dv-color-primary);
+  color: var(--dv-color-primary-text);
+  border-color: var(--dv-color-primary);
+  font-size: calc(var(--dv-font-base) * 1.05);
+  width: 100%;
+}
+
+.dv-btn-primary:hover {
+  background-color: var(--dv-color-primary-hover);
+}
+
+.dv-btn-zoom {
+  min-width: 48px;
+  min-height: 48px;
+  padding: 6px 12px;
+  font-weight: bold;
+}
+
+.dv-btn-zoom.active, .dv-btn-lang.active {
+  background-color: var(--dv-color-primary);
+  color: var(--dv-color-primary-text);
+  border-color: var(--dv-color-primary);
+}
+
+/* Cards */
+.dv-card {
+  background-color: var(--dv-color-surface);
+  border: 2px solid var(--dv-color-border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.dv-card-attention {
+  background-color: var(--dv-status-attention-bg);
+  border-color: var(--dv-status-attention-border);
+  color: var(--dv-status-attention-text);
+}
+
+/* Vocabulary Ladder Badge */
+.dv-ladder-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: var(--dv-font-base);
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.dv-ladder-badge[data-step="RECEIVED"] {
+  background-color: var(--dv-status-received-bg);
+  color: var(--dv-status-received-text);
+  border-color: var(--dv-status-received-text);
+}
+
+.dv-ladder-badge[data-step="READABLE"] {
+  background-color: var(--dv-status-readable-bg);
+  color: var(--dv-status-readable-text);
+  border-color: var(--dv-status-readable-text);
+}
+
+.dv-ladder-badge[data-step="UNDERSTOOD"] {
+  background-color: var(--dv-status-understood-bg);
+  color: var(--dv-status-understood-text);
+  border-color: var(--dv-status-understood-text);
+}
+
+.dv-ladder-badge[data-step="LOOKS_CONSISTENT"] {
+  background-color: var(--dv-status-consistent-bg);
+  color: var(--dv-status-consistent-text);
+  border-color: var(--dv-status-consistent-text);
+}
+
+.dv-ladder-badge[data-step="REVIEWED_BY_TEAM"] {
+  background-color: var(--dv-status-reviewed-bg);
+  color: var(--dv-status-reviewed-text);
+  border-color: var(--dv-status-reviewed-text);
+}
+
+.dv-ladder-badge[data-step="CONFIRMED_BY_ISSUER"] {
+  background-color: var(--dv-status-confirmed-bg);
+  color: var(--dv-status-confirmed-text);
+  border-color: var(--dv-status-confirmed-text);
+}
+
+/* Confirm with crop component */
+.dv-confirm-crop-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 2px solid var(--dv-color-border);
+  border-radius: 8px;
+  padding: 16px;
+  background-color: var(--dv-color-bg);
+  margin: 16px 0;
+}
+
+@media (min-width: 600px) {
+  .dv-confirm-crop-box {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.dv-crop-preview {
+  flex: 1;
+  min-height: 90px;
+  background-color: #F1F5F9;
+  border: 1px dashed var(--dv-color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.dv-crop-value-col {
+  flex: 1;
+}
+
+.dv-crop-extracted-value {
+  font-size: var(--dv-font-crop-value);
+  font-weight: bold;
+  color: var(--dv-color-primary);
+  margin-bottom: 8px;
+}
+
+.dv-crop-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Assisted mode banner */
+.dv-assisted-banner {
+  background-color: #FEF3C7;
+  color: #78350F;
+  border: 2px solid #F59E0B;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Read aloud trigger */
+.dv-read-aloud-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--dv-color-border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: var(--dv-font-min);
+  cursor: pointer;
+  color: var(--dv-color-text-muted);
+}
+
+.dv-read-aloud-btn:hover {
+  background-color: #E2E8F0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

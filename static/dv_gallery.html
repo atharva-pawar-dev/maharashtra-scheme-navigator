@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSN-DV-001 Age-Inclusive Design Kit Gallery</title>
+  <link rel="stylesheet" href="dv_design_kit.css">
+  <style>
+    /* Gallery-specific layout helpers */
+    .gallery-section {
+      margin-bottom: 36px;
+    }
+    .badge-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="dv-container">
+    <!-- Top Bar: Languages & Zoom & Clear -->
+    <header class="dv-top-bar" role="banner">
+      <nav class="dv-lang-switcher" aria-label="Language Switcher">
+        <button type="button" class="dv-btn dv-btn-lang" data-lang="en" aria-pressed="false">English</button>
+        <button type="button" class="dv-btn dv-btn-lang active" data-lang="mr" aria-pressed="true">मराठी</button>
+        <button type="button" class="dv-btn dv-btn-lang" data-lang="hi" aria-pressed="false">हिंदी</button>
+      </nav>
+
+      <div class="dv-zoom-controls" aria-label="Text Size Controls">
+        <button type="button" class="dv-btn dv-btn-zoom active" data-zoom="1" aria-pressed="true" aria-label="Normal text size">A</button>
+        <button type="button" class="dv-btn dv-btn-zoom" data-zoom="1.25" aria-pressed="false" aria-label="Large text size">A+</button>
+        <button type="button" class="dv-btn dv-btn-zoom" data-zoom="1.5" aria-pressed="false" aria-label="Extra large text size">A++</button>
+      </div>
+
+      <div>
+        <button type="button" id="dv-toggle-assisted" class="dv-btn"
+                data-i18n-en="Someone is helping me"
+                data-i18n-mr="मला कोणीतरी मदत करत आहे"
+                data-i18n-hi="कोई मेरी मदद कर रहा है">
+          मला कोणीतरी मदत करत आहे
+        </button>
+      </div>
+    </header>
+
+    <!-- Assisted Mode Banner -->
+    <div id="dv-assisted-banner" class="dv-assisted-banner" style="display: none;" role="region" aria-label="Assisted Mode">
+      <span data-i18n-en="Assisted mode is on. Take your time, we are here with you."
+            data-i18n-mr="मदतनीस पद्धत सुरू आहे. आरामात वाचा, आम्ही तुमच्यासोबत आहोत."
+            data-i18n-hi="सहायक मोड चालू है। आराम से पढ़ें, हम आपके साथ हैं।">
+        मदतनीस पद्धत सुरू आहे. आरामात वाचा, आम्ही तुमच्यासोबत आहोत.
+      </span>
+      <span aria-hidden="true">🤝</span>
+    </div>
+
+    <!-- Main Header -->
+    <main id="main-content">
+      <div class="section-header">
+        <h1 id="gallery-title"
+            data-i18n-en="Your Papers, Ready — Design Kit"
+            data-i18n-mr="तुमची कागदपत्रे, तयार — घटक दालन"
+            data-i18n-hi="आपके दस्तावेज़, तैयार — कंपोनेंट गैलरी">
+          तुमची कागदपत्रे, तयार — घटक दालन
+        </h1>
+        <button type="button" class="dv-read-aloud-btn" data-read-target="#gallery-title" aria-label="Read title aloud">
+          🔊 <span data-i18n-en="Read" data-i18n-mr="वाचा" data-i18n-hi="सुनें">वाचा</span>
+        </button>
+      </div>
+
+      <p class="dv-motto"
+         data-i18n-en="The Aaji Test: Simple by default, fast by choice."
+         data-i18n-mr="आजीला जमलं, तर सगळ्यांना जमेल."
+         data-i18n-hi="आजी को समझ आया, तो सबको आएगा।">
+        आजीला जमलं, तर सगळ्यांना जमेल.
+      </p>
+
+      <!-- Section 1: Vocabulary Ladder Badges (Law L9) -->
+      <section class="gallery-section dv-card" aria-labelledby="section-ladder-heading">
+        <div class="section-header">
+          <h2 id="section-ladder-heading"
+              data-i18n-en="Verification Step Badges"
+              data-i18n-mr="तपासणी पायऱ्या (टप्पे)"
+              data-i18n-hi="जाँच के चरण">
+            तपासणी पायऱ्या (टप्पे)
+          </h2>
+          <button type="button" class="dv-read-aloud-btn" aria-label="Read verification steps aloud">
+            🔊 <span data-i18n-en="Read" data-i18n-mr="वाचा" data-i18n-hi="सुनें">वाचा</span>
+          </button>
+        </div>
+        <p data-i18n-en="We never use ambiguous claim words. Each paper shows its exact stage:"
+           data-i18n-mr="आम्ही कधीही संदिग्ध शब्द वापरत नाही. प्रत्येक पायरी स्पष्ट दिसते:"
+           data-i18n-hi="हम कभी अस्पष्ट शब्द नहीं लिखते। प्रत्येक चरण स्पष्ट दिखता है:">
+          आम्ही कधीही संदिग्ध शब्द वापरत नाही. प्रत्येक पायरी स्पष्ट दिसते:
+        </p>
+        <div class="badge-grid" role="list">
+          <div role="listitem" class="dv-ladder-badge" data-step="RECEIVED">
+            <span>📥</span>
+            <span data-i18n-en="Received" data-i18n-mr="कागद मिळाला" data-i18n-hi="कागज़ मिला">कागद मिळाला</span>
+          </div>
+          <div role="listitem" class="dv-ladder-badge" data-step="READABLE">
+            <span>👁️</span>
+            <span data-i18n-en="Readable" data-i18n-mr="वाचता येत आहे" data-i18n-hi="पढ़ा जा सकता है">वाचता येत आहे</span>
+          </div>
+          <div role="listitem" class="dv-ladder-badge" data-step="UNDERSTOOD">
+            <span>💡</span>
+            <span data-i18n-en="Understood" data-i18n-mr="माहिती समजली" data-i18n-hi="जानकारी समझी">माहिती समजली</span>
+          </div>
+          <div role="listitem" class="dv-ladder-badge" data-step="LOOKS_CONSISTENT">
+            <span>✅</span>
+            <span data-i18n-en="Looks consistent" data-i18n-mr="माहिती जुळत आहे" data-i18n-hi="जानकारी मेल खाती है">माहिती जुळत आहे</span>
+          </div>
+          <div role="listitem" class="dv-ladder-badge" data-step="REVIEWED_BY_TEAM">
+            <span>👥</span>
+            <span data-i18n-en="Reviewed by our team" data-i18n-mr="आमच्या चमूने तपासले" data-i18n-hi="हमारी टीम ने देखा">आमच्या चमूने तपासले</span>
+          </div>
+          <div role="listitem" class="dv-ladder-badge" data-step="CONFIRMED_BY_ISSUER">
+            <span>🏛️</span>
+            <span data-i18n-en="Confirmed by issuer" data-i18n-mr="शासकीय यंत्रणेने पुष्टी केली" data-i18n-hi="विभाग द्वारा पुष्टि">शासकीय यंत्रणेने पुष्टी केली</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Touch Targets & Buttons -->
+      <section class="gallery-section dv-card" aria-labelledby="section-btn-heading">
+        <div class="section-header">
+          <h2 id="section-btn-heading"
+              data-i18n-en="Large Touch Targets (Min 48px, Primary 56px)"
+              data-i18n-mr="मोठी बटने (किमान ४८ पिक्सेल, मुख्य ५६ पिक्सेल)"
+              data-i18n-hi="बड़े टच बटन (कम से कम 48px, मुख्य 56px)">
+            मोठी बटने (किमान ४८ पिक्सेल, मुख्य ५६ पिक्सेल)
+          </h2>
+          <button type="button" class="dv-read-aloud-btn" aria-label="Read button section aloud">
+            🔊 <span data-i18n-en="Read" data-i18n-mr="वाचा" data-i18n-hi="सुनें">वाचा</span>
+          </button>
+        </div>
+        <div style="margin-bottom: 16px;">
+          <button type="button" class="dv-btn dv-btn-primary" id="primary-action-btn"
+                  data-i18n-en="Next: Add Income Certificate"
+                  data-i18n-mr="पुढे: उत्पन्नाचा दाखला जोडा"
+                  data-i18n-hi="आगे: आय प्रमाण-पत्र जोड़ें">
+            पुढे: उत्पन्नाचा दाखला जोडा
+          </button>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="dv-btn"
+                  data-i18n-en="Take a photo"
+                  data-i18n-mr="फोटो काढा"
+                  data-i18n-hi="फ़ोटो लें">
+            📷 फोटो काढा
+          </button>
+          <button type="button" class="dv-btn"
+                  data-i18n-en="Choose a photo"
+                  data-i18n-mr="गॅलरीतून निवडा"
+                  data-i18n-hi="फ़ोटो चुनें">
+            🖼️ गॅलरीतून निवडा
+          </button>
+          <button type="button" class="dv-btn"
+                  data-i18n-en="Choose PDF"
+                  data-i18n-mr="पीडीएफ जोडा"
+                  data-i18n-hi="पीडीएफ चुनें">
+            📄 पीडीएफ जोडा
+          </button>
+        </div>
+      </section>
+
+      <!-- Section 3: Confirm-with-Crop Component -->
+      <section class="gallery-section dv-card" aria-labelledby="section-crop-heading">
+        <div class="section-header">
+          <h2 id="section-crop-heading"
+              data-i18n-en="Check what we read (Confirm with crop)"
+              data-i18n-mr="आम्ही वाचलेली माहिती तपासा"
+              data-i18n-hi="पढ़ी गई जानकारी जाँचें">
+            आम्ही वाचलेली माहिती तपासा
+          </h2>
+          <button type="button" class="dv-read-aloud-btn" aria-label="Read confirm crop section aloud">
+            🔊 <span data-i18n-en="Read" data-i18n-mr="वाचा" data-i18n-hi="सुनें">वाचा</span>
+          </button>
+        </div>
+        <p data-i18n-en="Annual Family Income"
+           data-i18n-mr="वार्षिक कौटुंबिक उत्पन्न"
+           data-i18n-hi="वार्षिक पारिवारिक आय">
+          <strong>वार्षिक कौटुंबिक उत्पन्न</strong>
+        </p>
+        <div class="dv-confirm-crop-box">
+          <div class="dv-crop-preview" aria-label="Original document snippet showing income text">
+            <span style="font-style: italic; color: #475569;">[दाखल्याचा फोटो: ₹ 80,000/-]</span>
+          </div>
+          <div class="dv-crop-value-col">
+            <div class="dv-crop-extracted-value" id="sample-crop-value">₹ 80,000</div>
+            <div class="dv-crop-actions">
+              <button type="button" class="dv-btn" style="background-color: #DCFCE7; border-color: #16A34A;"
+                      data-i18n-en="✓ Yes, correct"
+                      data-i18n-mr="✓ होय, बरोबर आहे"
+                      data-i18n-hi="✓ हाँ, सही है">
+                ✓ होय, बरोबर आहे
+              </button>
+              <button type="button" class="dv-btn"
+                      data-i18n-en="✎ Change"
+                      data-i18n-mr="✎ बदल करा"
+                      data-i18n-hi="✎ बदलें">
+                ✎ बदल करा
+              </button>
+              <button type="button" class="dv-btn"
+                      data-i18n-en="? Not sure"
+                      data-i18n-mr="? नक्की माहिती नाही"
+                      data-i18n-hi="? पक्का पता नहीं">
+                ? नक्की माहिती नाही
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Capture Guidance & Warnings (Aaji Test) -->
+      <section class="gallery-section dv-card dv-card-attention" aria-labelledby="section-guidance-heading">
+        <div class="section-header">
+          <h2 id="section-guidance-heading"
+              data-i18n-en="Friendly Guidance (Never Blame, Always Explain)"
+              data-i18n-mr="मार्गदर्शन (दोष न देता मदत करणे)"
+              data-i18n-hi="सहायक मार्गदर्शन (दोष दिए बिना सहायता)">
+            मार्गदर्शन (दोष न देता मदत करणे)
+          </h2>
+          <button type="button" class="dv-read-aloud-btn" aria-label="Read guidance aloud">
+            🔊 <span data-i18n-en="Read" data-i18n-mr="वाचा" data-i18n-hi="सुनें">वाचा</span>
+          </button>
+        </div>
+        <p data-i18n-en="The photo is a little blurry. Please move to good light, hold steady, and try again."
+           data-i18n-mr="फोटो थोडा अस्पष्ट आहे. कृपया चांगल्या उजेडात, हात स्थिर ठेवून पुन्हा फोटो काढा."
+           data-i18n-hi="फ़ोटो थोड़ा धुंधला है। कृपया अच्छी रोशनी में, हाथ स्थिर रखकर दोबारा फ़ोटो लें।">
+          फोटो थोडा अस्पष्ट आहे. कृपया चांगल्या उजेडात, हात स्थिर ठेवून पुन्हा फोटो काढा.
+        </p>
+        <p>
+          <strong data-i18n-en="Can you read every word clearly on this screen?"
+                  data-i18n-mr="तुम्हाला या फोटोतील सर्व अक्षरे स्पष्ट वाचता येत आहेत का?"
+                  data-i18n-hi="क्या आप इस फ़ोटो के सभी शब्द साफ़ पढ़ पा रहे हैं?">
+            तुम्हाला या फोटोतील सर्व अक्षरे स्पष्ट वाचता येत आहेत का?
+          </strong>
+        </p>
+      </section>
+
+      <!-- Section 5: Honest Privacy Promise (Annex C §C5) -->
+      <section class="gallery-section dv-card" aria-labelledby="section-privacy-heading">
+        <div class="section-header">
+          <h2 id="section-privacy-heading"
+              data-i18n-en="Our Privacy Promise to You"
+              data-i18n-mr="आमचे गोपनीयतेचे वचन"
+              data-i18n-hi="हमारा गोपनीयता का वचन">
+            आमचे गोपनीयतेचे वचन
+          </h2>
+          <button type="button" class="dv-read-aloud-btn" aria-label="Read privacy promise aloud">
+            🔊 <span data-i18n-en="Read" data-i18n-mr="वाचा" data-i18n-hi="सुनें">वाचा</span>
+          </button>
+        </div>
+        <ul>
+          <li data-i18n-en="We only read details needed for this scheme."
+              data-i18n-mr="आम्ही फक्त या योजनेसाठी लागणारी माहिती वाचतो."
+              data-i18n-hi="हम केवल इस योजना के लिए ज़रूरी जानकारी पढ़ते हैं।">
+            आम्ही फक्त या योजनेसाठी लागणारी माहिती वाचतो.
+          </li>
+          <li data-i18n-en="Your papers are private and never shared with anyone."
+              data-i18n-mr="तुमचे कागदपत्र सुरक्षित राहतात आणि कोणाशीही सामायिक केले जात नाहीत."
+              data-i18n-hi="आपके दस्तावेज़ सुरक्षित हैं और किसी से साझा नहीं किए जाते।">
+            तुमचे कागदपत्र सुरक्षित राहतात आणि कोणाशीही सामायिक केले जात नाहीत.
+          </li>
+          <li data-i18n-en="You can delete everything anytime with one tap."
+              data-i18n-mr="तुम्ही एका बटनावर सर्व माहिती कधीही कायमची हटवू शकता."
+              data-i18n-hi="आप एक क्लिक में अपनी सारी जानकारी कभी भी हटा सकते हैं।">
+            तुम्ही एका बटनावर सर्व माहिती कधीही कायमची हटवू शकता.
+          </li>
+        </ul>
+        <div style="margin-top: 16px;">
+          <button type="button" id="dv-clear-device-btn" class="dv-btn" style="border-color: #DC2626; color: #DC2626;"
+                  data-i18n-en="Clear this phone"
+                  data-i18n-mr="या फोनवरील माहिती पुसा"
+                  data-i18n-hi="इस फ़ोन से जानकारी हटाएं">
+            🗑️ या फोनवरील माहिती पुसा
+          </button>
+        </div>
+      </section>
+
+      <!-- Section 6: Official Authority Reminder (Law L7) -->
+      <footer class="dv-card" style="border-style: dashed;" aria-label="Official Authority Notice">
+        <p style="font-size: var(--dv-font-min); color: var(--dv-color-text-muted);"
+           data-i18n-en="This is a helper check we did for you. The government office makes the final decision."
+           data-i18n-mr="ही आम्ही केलेली पूर्वतयारी तपासणी आहे. अंतिम निर्णय संबंधित शासकीय कार्यालयच घेते."
+           data-i18n-hi="यह आपकी सुविधा के लिए की गई पूर्व-जाँच है। अंतिम निर्णय सरकारी कार्यालय ही करता है।">
+          ही आम्ही केलेली पूर्वतयारी तपासणी आहे. अंतिम निर्णय संबंधित शासकीय कार्यालयच घेते.
+        </p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="dv_design_kit.js"></script>
+</body>
+</html>

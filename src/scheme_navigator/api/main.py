@@ -288,6 +288,20 @@ async def security_headers_middleware(request: Request, call_next):
 app.include_router(reviewer_ui_router)
 app.include_router(ingestion_router)
 
+from fastapi.staticfiles import StaticFiles
+
+_dv_static_dir = Path(__file__).resolve().parents[3] / "static"
+if _dv_static_dir.is_dir():
+    app.mount("/static", StaticFiles(directory=str(_dv_static_dir)), name="static")
+
+
+@app.get("/dv/gallery", include_in_schema=False)
+def dv_gallery_view():
+    gallery_file = _dv_static_dir / "dv_gallery.html"
+    if not gallery_file.is_file():
+        raise HTTPException(status_code=404, detail="Design kit gallery not found.")
+    return FileResponse(gallery_file, media_type="text/html", headers={"Cache-Control": "no-store"})
+
 
 def _document_review_store() -> DocumentReviewStore:
     return DocumentReviewStore(retention_hours=settings.data_retention_hours)

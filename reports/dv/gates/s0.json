@@ -1,0 +1,41 @@
+{
+  "slice": "S0",
+  "title": "Baseline, Law Tripwires, and Age-Inclusive Design Kit",
+  "timestamp": "2026-11-22T18:22:39.465535+00:00",
+  "gate_verdict": "PASSED",
+  "all_passed": true,
+  "steps": [
+    {
+      "step": "citizen_copy_lint",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe scripts/dv_copy_lint.py",
+      "exit_code": 0,
+      "duration_seconds": 0.44,
+      "passed": true,
+      "stdout": "============================================================\nMSN-DV-001 CITIZEN COPY LINT REPORT\n============================================================\nTotal Strings:    25\nNative Reviewed:  25 (100.0%)\nMachine Drafted:  0\nViolations:       0\n------------------------------------------------------------\n\u2705 All copy strings passed banned-words, sentence-length and trilingual checks!\n============================================================\n",
+      "stderr": ""
+    },
+    {
+      "step": "law_tripwires_l1_to_l13",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/dv/test_law_tripwires.py -v",
+      "exit_code": 0,
+      "duration_seconds": 14.22,
+      "passed": true,
+      "stdout": "gfile: pyproject.toml\nplugins: anyio-4.15.1, langsmith-0.14.13, asyncio-1.4.1\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollecting ... collected 13 items\n\ntests/dv/test_law_tripwires.py::test_no_unsourced_requirement_is_mandatory PASSED [  7%]\ntests/dv/test_law_tripwires.py::test_dimensions_never_merge_no_composite_score PASSED [ 15%]\ntests/dv/test_law_tripwires.py::test_unknown_stays_unknown_property_based PASSED [ 23%]\ntests/dv/test_law_tripwires.py::test_models_propose_rules_decide_templated_copy PASSED [ 30%]\ntests/dv/test_law_tripwires.py::test_documents_hostile_data_no_ssrf_no_eval PASSED [ 38%]\ntests/dv/test_law_tripwires.py::test_immutable_originals_and_provenance_chain PASSED [ 46%]\ntests/dv/test_law_tripwires.py::test_advisory_never_gating_never_submitting PASSED [ 53%]\ntests/dv/test_law_tripwires.py::test_minimal_data_privacy_masking_and_deletion PASSED [ 61%]\ntests/dv/test_law_tripwires.py::test_no_false_green_vocabulary_ladder PASSED [ 69%]\ntests/dv/test_law_tripwires.py::test_never_blame_always_explain_banned_words PASSED [ 76%]\ntests/dv/test_law_tripwires.py::test_protect_the_baseline_fingerprint_invariance PASSED [ 84%]\ntests/dv/test_law_tripwires.py::test_honest_numbers_source_traceability PASSED [ 92%]\ntests/dv/test_law_tripwires.py::test_no_counterfeit_humans_or_officials_db_cleanliness PASSED [100%]\n\n============================= 13 passed in 4.83s ==============================\n",
+      "stderr": ""
+    },
+    {
+      "step": "age_inclusion_battery",
+      "command": "C:\\Users\\Admin\\Downloads\\scheme-navigator\\.venv\\Scripts\\python.exe -m pytest tests/dv/test_age_inclusion_battery.py -v",
+      "exit_code": 0,
+      "duration_seconds": 28.91,
+      "passed": true,
+      "stdout": "cheme-navigator\\.venv\\Scripts\\python.exe\ncachedir: .pytest_cache\nrootdir: C:\\Users\\Admin\\Downloads\\scheme-navigator\\scheme-navigator\nconfigfile: pyproject.toml\nplugins: anyio-4.15.1, langsmith-0.14.13, asyncio-1.4.1\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollecting ... collected 10 items\n\ntests/dv/test_age_inclusion_battery.py::test_no_horizontal_scroll_and_typography_across_viewports[iPhone 5/SE (320px)] PASSED [ 10%]\ntests/dv/test_age_inclusion_battery.py::test_no_horizontal_scroll_and_typography_across_viewports[Standard Android (360px)] PASSED [ 20%]\ntests/dv/test_age_inclusion_battery.py::test_no_horizontal_scroll_and_typography_across_viewports[Modern Mobile (390px)] PASSED [ 30%]\ntests/dv/test_age_inclusion_battery.py::test_no_horizontal_scroll_and_typography_across_viewports[Desktop (1366px)] PASSED [ 40%]\ntests/dv/test_age_inclusion_battery.py::test_touch_target_dimensions PASSED [ 50%]\ntests/dv/test_age_inclusion_battery.py::test_devanagari_line_height PASSED [ 60%]\ntests/dv/test_age_inclusion_battery.py::test_focus_ring_visibility PASSED [ 70%]\ntests/dv/test_age_inclusion_battery.py::test_text_zoom_controls_and_reflow PASSED [ 80%]\ntests/dv/test_age_inclusion_battery.py::test_trilingual_switching PASSED [ 90%]\ntests/dv/test_age_inclusion_battery.py::test_assisted_mode_and_read_aloud_elements PASSED [100%]\n\n============================= 10 passed in 19.62s =============================\n",
+      "stderr": ""
+    }
+  ],
+  "summary": {
+    "copy_lint_passed": true,
+    "law_tripwires_passed": true,
+    "age_inclusion_passed": true
+  }
+}
