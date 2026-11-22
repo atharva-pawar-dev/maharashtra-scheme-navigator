@@ -1,0 +1,83 @@
+{
+  "mission_id": "MSN-FINAL-REPORT-INTEGRITY-01",
+  "generated_at": "2026-11-22T17:44:34.549442+00:00",
+  "inventory": {
+    "registry_total": 89,
+    "active_canonical_total": 87,
+    "quarantined_fixture_total": 2,
+    "historical_total": 5,
+    "publicly_discoverable_total": 89,
+    "candidate_universe_total": 142
+  },
+  "quarantined_fixtures": [
+    {
+      "canonical_scheme_id": "demo-majhi-ladki-bahin",
+      "name": "Mukhyamantri Majhi Ladki Bahin Yojana (Demo Fixture)",
+      "publication_status": "ACTIVE_DEMO_FIXTURE",
+      "reason_quarantined": "Marked demo- only; excluded from production eligibility evaluation and attestations"
+    },
+    {
+      "canonical_scheme_id": "demo-indira-gandhi-old-age-pension",
+      "name": "Indira Gandhi National Old Age Pension Scheme (IGNOAPS) - Maharashtra (Demo Fixture)",
+      "publication_status": "ACTIVE_DEMO_FIXTURE",
+      "reason_quarantined": "Marked demo- only; excluded from production eligibility evaluation and attestations"
+    }
+  ],
+  "historical_schemes": {
+    "count": 5,
+    "candidate_ids": [
+      "CAND-128",
+      "CAND-129",
+      "CAND-130",
+      "CAND-131",
+      "CAND-132"
+    ],
+    "disposition": "HISTORICAL",
+    "semantics": "Superseded or discontinued historical schemes preserved for audit history"
+  },
+  "candidate_disposition_breakdown": {
+    "IN_CATALOGUE_VERIFIED": 17,
+    "IN_CATALOGUE_LIMITED": 71,
+    "DUPLICATE_OF": 9,
+    "NEEDS_RESEARCH": 18,
+    "BLOCKED_SOURCE": 6,
+    "SUB_SCHEME_OF": 6,
+    "HISTORICAL": 5,
+    "EXCLUDED_NOT_INDIVIDUAL_BENEFIT": 7,
+    "EXCLUDED_OUT_OF_GEOGRAPHIC_SCOPE": 3
+  },
+  "delta_reconciliation_88_plus_1_vs_87_plus_2": {
+    "prior_reported": {
+      "active_canonical": 88,
+      "quarantined_fixtures": 1,
+      "fixture_id": "demo-indira-gandhi-old-age-pension",
+      "notes": "demo-majhi-ladki-bahin was initially categorized under active candidate ingestion"
+    },
+    "reconciled_current": {
+      "active_canonical": 87,
+      "quarantined_fixtures": 2,
+      "fixture_ids": [
+        "demo-majhi-ladki-bahin",
+        "demo-indira-gandhi-old-age-pension"
+      ],
+      "notes": "demo-majhi-ladki-bahin was formally isolated and quarantined alongside demo-indira-gandhi-old-age-pension"
+    },
+    "stable_id_changed": "demo-majhi-ladki-bahin",
+    "lifecycle_change": "Reclassified from active candidate ingestion to ACTIVE_DEMO_FIXTURE quarantine pool",
+    "invariant_impact": "Prevents synthetic/demo Ladki Bahin rules from granting production ELIGIBLE verdicts; real candidate candidate-majhi-ladki-bahin remains safely in database with is_valid=0"
+  },
+  "endpoint_semantics": {
+    "/admin/scheme-coverage": {
+      "contract": "Returns registry_total (89), total_active_canonical_schemes (87), quarantined_fixture_count (2), schemes_with_detailed_document_requirements (75), all_75_schemes_covered (True), coverage_percentage (100).",
+      "verified": true
+    },
+    "/canonical-schemes": {
+      "contract": "Returns all 89 records from SourceRegistry. Quarantined fixtures are explicitly flagged with publication_status='ACTIVE_DEMO_FIXTURE'.",
+      "verified": true
+    },
+    "/governance/universe-intelligence": {
+      "contract": "Returns candidate universe metrics (142 candidates across 9 dispositions, 137 authoritative bodies).",
+      "verified": true
+    }
+  }
+}

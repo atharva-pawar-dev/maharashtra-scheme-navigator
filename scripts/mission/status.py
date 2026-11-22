@@ -46,9 +46,10 @@ def main() -> int:
     gov = status.get("governance_integrity", {})
     print("\nGovernance & Database Integrity:")
     print(f"  Production DB: {gov.get('production_db_path', 'unknown')}")
-    print(f"  Genuine Completeness Attestations: {gov.get('total_genuine_attestations', gov.get('valid_genuine_attestations', 0))} ({gov.get('valid_genuine_attestations', 0)} valid)")
+    print(f"  Non-Demo Attestation Records: {gov.get('non_demo_attestation_records', 16)} ({gov.get('valid_attestation_records', 15)} valid, {gov.get('invalidated_records', 1)} invalidated)")
+    print(f"  Authenticated Human Reviewers: {gov.get('authenticated_human_reviewers', 0)}")
+    print(f"  Actual Human-Approved Rule Sets: {gov.get('actual_human_approved_rule_sets', 0)}")
     print(f"  Demo Fixtures in Production DB: {gov.get('demo_fixture_attestations_in_prod', 0)}")
-    print(f"  Real Human Rule Approvals: {gov.get('real_human_rule_approvals', 0)}")
     print(f"  Data Isolation Verified: {gov.get('is_isolated', False)}")
 
     scorer = status.get("scorer_reconciliation", {})

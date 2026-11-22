@@ -90,9 +90,9 @@ def check_database_isolation() -> tuple[bool, str]:
     conn.close()
 
     if genuine_attestations < 16:
-        return False, f"Production DB has {genuine_attestations} genuine attestations, expected at least 16."
+        return False, f"Production DB has {genuine_attestations} non-demo attestation records, expected at least 16."
 
-    return True, f"Production database isolated: 0 fixtures, 0 fake approvals, {genuine_attestations} genuine attestations ({valid_attestations} valid)."
+    return True, f"Production database isolated: 0 fixtures, 0 fake approvals, {genuine_attestations} non-demo attestation records ({valid_attestations} valid, 0 authenticated human reviewers)."
 
 
 def check_git_status() -> tuple[bool, str]:

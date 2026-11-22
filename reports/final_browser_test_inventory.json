@@ -1,0 +1,590 @@
+{
+  "mission_id": "MSN-FINAL-REPORT-INTEGRITY-01",
+  "generated_at": "2026-11-22T17:47:20.172384+00:00",
+  "summary": {
+    "total_suite_executions": 94,
+    "unique_test_ids": 94,
+    "duplicate_test_ids": 0,
+    "passed_executions": 94,
+    "failed_executions": 0,
+    "skipped_executions": 0,
+    "pass_rate_percentage": 100.0
+  },
+  "arithmetic_reconciliation_94_vs_92": {
+    "reported_in_post_acceptance_audit": 92,
+    "executed_in_final_verification": 94,
+    "difference": "+2 executions",
+    "explanation": "The post-acceptance forensic audit report listed 92 tests from 9 suites including test_playwright_scheme_issue_reporting.py (1 test) and without test_trilingual_parity.py. The sequential verification suite runs test_trilingual_parity.py (3 tests) instead of test_playwright_scheme_issue_reporting.py (1 test), resulting in exactly 94 unique tests (92 - 1 + 3 = 94). Every single one of the 94 executed test node IDs is unique across files."
+  },
+  "suites": [
+    {
+      "suite_id": "trimurti_v4_acceptance",
+      "suite_name": "TRIMURTI v4 Master Acceptance (20 Personas & Journeys)",
+      "file": "tests/test_playwright_trimurti_v4_acceptance.py",
+      "test_count": 20,
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_journey_a_new_citizen_onboarding_and_discovery",
+          "function_name": "test_journey_a_new_citizen_onboarding_and_discovery",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_journey_b_multilingual_citizen_no_data_loss",
+          "function_name": "test_journey_b_multilingual_citizen_no_data_loss",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_journey_c_eligibility_explanation",
+          "function_name": "test_journey_c_eligibility_explanation",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_journey_d_prerequisite_planning_roadmap",
+          "function_name": "test_journey_d_prerequisite_planning_roadmap",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_journey_e_document_audit_lifecycle",
+          "function_name": "test_journey_e_document_audit_lifecycle",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_journey_f_application_preparation_and_portal_handoff",
+          "function_name": "test_journey_f_application_preparation_and_portal_handoff",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_journey_g_reviewer_governance_and_rbac",
+          "function_name": "test_journey_g_reviewer_governance_and_rbac",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_journey_h_recovery_and_persistence",
+          "function_name": "test_journey_h_recovery_and_persistence",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_journey_i_unsupported_or_limited_scheme_handling",
+          "function_name": "test_journey_i_unsupported_or_limited_scheme_handling",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_journey_j_negative_outcome_and_remediation",
+          "function_name": "test_journey_j_negative_outcome_and_remediation",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_persona_01_farmer_namo_shetkari",
+          "function_name": "test_persona_01_farmer_namo_shetkari",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_persona_02_student_post_matric_scholarship",
+          "function_name": "test_persona_02_student_post_matric_scholarship",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_persona_03_senior_citizen_vayoshri",
+          "function_name": "test_persona_03_senior_citizen_vayoshri",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_persona_04_woman_majhi_ladki_bahin",
+          "function_name": "test_persona_04_woman_majhi_ladki_bahin",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_persona_05_divyang_disability_pension",
+          "function_name": "test_persona_05_divyang_disability_pension",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_persona_06_urban_resident_municipal_schemes",
+          "function_name": "test_persona_06_urban_resident_municipal_schemes",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_persona_07_rural_resident_karjmukti",
+          "function_name": "test_persona_07_rural_resident_karjmukti",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_persona_08_incomplete_citizen_needs_review",
+          "function_name": "test_persona_08_incomplete_citizen_needs_review",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_persona_09_conflicting_documents_citizen",
+          "function_name": "test_persona_09_conflicting_documents_citizen",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_trimurti_v4_acceptance.py::test_persona_10_ineligible_out_of_state_citizen",
+          "function_name": "test_persona_10_ineligible_out_of_state_citizen",
+          "execution_status": "PASSED"
+        }
+      ]
+    },
+    {
+      "suite_id": "sc_g2_reconciliation",
+      "suite_name": "SC-G2 Reconciliation Playwright (19 Workflows)",
+      "file": "tests/test_playwright_sc_g2_reconciliation.py",
+      "test_count": 19,
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_01_discover_existing_canonical_scheme",
+          "function_name": "test_01_discover_existing_canonical_scheme",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_02_discover_newly_reconciled_scheme",
+          "function_name": "test_02_discover_newly_reconciled_scheme",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_03_search_marathi_alias",
+          "function_name": "test_03_search_marathi_alias",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_04_search_hindi_alias",
+          "function_name": "test_04_search_hindi_alias",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_05_search_central_scheme_applicable_in_maharashtra",
+          "function_name": "test_05_search_central_scheme_applicable_in_maharashtra",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_06_filter_by_department",
+          "function_name": "test_06_filter_by_department",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_07_filter_by_beneficiary_group",
+          "function_name": "test_07_filter_by_beneficiary_group",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_08_filter_by_geography",
+          "function_name": "test_08_filter_by_geography",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_09_open_statewide_scheme",
+          "function_name": "test_09_open_statewide_scheme",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_10_open_district_or_municipal_scheme",
+          "function_name": "test_10_open_district_or_municipal_scheme",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_11_open_limited_information_candidate",
+          "function_name": "test_11_open_limited_information_candidate",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_12_open_scheme_closed_application_window",
+          "function_name": "test_12_open_scheme_closed_application_window",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_13_historical_superseded_scheme_handling",
+          "function_name": "test_13_historical_superseded_scheme_handling",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_14_verify_duplicate_candidate_appears_once",
+          "function_name": "test_14_verify_duplicate_candidate_appears_once",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_15_verify_source_status_tags",
+          "function_name": "test_15_verify_source_status_tags",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_16_verify_canonical_id_reaches_backend",
+          "function_name": "test_16_verify_canonical_id_reaches_backend",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_17_verify_unapproved_candidate_fails_closed",
+          "function_name": "test_17_verify_unapproved_candidate_fails_closed",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_18_verify_no_demo_fixture_leak",
+          "function_name": "test_18_verify_no_demo_fixture_leak",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_sc_g2_reconciliation.py::test_19_reviewer_ui_universe_intelligence_tab",
+          "function_name": "test_19_reviewer_ui_universe_intelligence_tab",
+          "execution_status": "PASSED"
+        }
+      ]
+    },
+    {
+      "suite_id": "five_citizen_acceptance",
+      "suite_name": "Five-Citizen Acceptance Playwright (6 Journeys)",
+      "file": "tests/test_playwright_five_citizen_acceptance.py",
+      "test_count": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        {
+          "node_id": "tests/test_playwright_five_citizen_acceptance.py::test_citizen_a_farmer_acceptance",
+          "function_name": "test_citizen_a_farmer_acceptance",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_five_citizen_acceptance.py::test_citizen_b_student_acceptance",
+          "function_name": "test_citizen_b_student_acceptance",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_five_citizen_acceptance.py::test_citizen_c_senior_citizen_acceptance",
+          "function_name": "test_citizen_c_senior_citizen_acceptance",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_five_citizen_acceptance.py::test_citizen_d_woman_acceptance",
+          "function_name": "test_citizen_d_woman_acceptance",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_five_citizen_acceptance.py::test_citizen_e_divyang_acceptance",
+          "function_name": "test_citizen_e_divyang_acceptance",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_five_citizen_acceptance.py::test_ui_distinguishes_decision_ready_from_limited_info",
+          "function_name": "test_ui_distinguishes_decision_ready_from_limited_info",
+          "execution_status": "PASSED"
+        }
+      ]
+    },
+    {
+      "suite_id": "citizen_experience",
+      "suite_name": "Citizen Browser Experience (21 Journeys)",
+      "file": "tests/test_browser_citizen_experience.py",
+      "test_count": 21,
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_01_explore_catalogue_rendering_and_department_filtering",
+          "function_name": "test_01_explore_catalogue_rendering_and_department_filtering",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_02_silent_demo_fallback_removed_shows_error_card_on_failure",
+          "function_name": "test_02_silent_demo_fallback_removed_shows_error_card_on_failure",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_03_catalogue_freshness_indicator",
+          "function_name": "test_03_catalogue_freshness_indicator",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_04_scoped_interview_launch_from_explore",
+          "function_name": "test_04_scoped_interview_launch_from_explore",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_04b_focused_interview_ign_demo_journey",
+          "function_name": "test_04b_focused_interview_ign_demo_journey",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_05_profile_sidebar_live_fields",
+          "function_name": "test_05_profile_sidebar_live_fields",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_06_results_page_five_outcome_scoreboards",
+          "function_name": "test_06_results_page_five_outcome_scoreboards",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_07_primary_cta_restricted_to_eligible",
+          "function_name": "test_07_primary_cta_restricted_to_eligible",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_08_partial_match_scoreboard_card",
+          "function_name": "test_08_partial_match_scoreboard_card",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_09_needs_info_scoreboard_card",
+          "function_name": "test_09_needs_info_scoreboard_card",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_10_collapsed_not_eligible_accordion",
+          "function_name": "test_10_collapsed_not_eligible_accordion",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_11_single_active_scheme_progress_view",
+          "function_name": "test_11_single_active_scheme_progress_view",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_12_dismissal_confirmation_modal_text",
+          "function_name": "test_12_dismissal_confirmation_modal_text",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_13_empty_progress_view_exact_text",
+          "function_name": "test_13_empty_progress_view_exact_text",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_14_document_preparation_completion_card",
+          "function_name": "test_14_document_preparation_completion_card",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_15_history_api_routing",
+          "function_name": "test_15_history_api_routing",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_16_reusable_back_navigation",
+          "function_name": "test_16_reusable_back_navigation",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_17_fixed_floating_reviewer_portal_button",
+          "function_name": "test_17_fixed_floating_reviewer_portal_button",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_18_citizen_profile_reset_modal_and_data_clearance",
+          "function_name": "test_18_citizen_profile_reset_modal_and_data_clearance",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_19_english_mode_purity",
+          "function_name": "test_19_english_mode_purity",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_citizen_experience.py::test_20_marathi_mode_purity",
+          "function_name": "test_20_marathi_mode_purity",
+          "execution_status": "PASSED"
+        }
+      ]
+    },
+    {
+      "suite_id": "document_auditor_journey",
+      "suite_name": "Document Auditor Browser Journey (4 Workflows)",
+      "file": "tests/test_browser_document_auditor_journey.py",
+      "test_count": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        {
+          "node_id": "tests/test_browser_document_auditor_journey.py::test_01_scheme_details_modal_has_auditor_and_factsheet_buttons",
+          "function_name": "test_01_scheme_details_modal_has_auditor_and_factsheet_buttons",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_document_auditor_journey.py::test_02_document_auditor_direct_entry_and_requirements_checklist",
+          "function_name": "test_02_document_auditor_direct_entry_and_requirements_checklist",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_document_auditor_journey.py::test_03_results_page_has_check_my_documents_action",
+          "function_name": "test_03_results_page_has_check_my_documents_action",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_document_auditor_journey.py::test_04_document_auditor_multilingual_consistency",
+          "function_name": "test_04_document_auditor_multilingual_consistency",
+          "execution_status": "PASSED"
+        }
+      ]
+    },
+    {
+      "suite_id": "municipal_journey",
+      "suite_name": "Municipal Citizen Journey (5 Workflows)",
+      "file": "tests/test_browser_municipal_citizen_journey.py",
+      "test_count": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        {
+          "node_id": "tests/test_browser_municipal_citizen_journey.py::test_01_explore_jurisdiction_filtering_and_badges",
+          "function_name": "test_01_explore_jurisdiction_filtering_and_badges",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_municipal_citizen_journey.py::test_02_explore_switching_to_pcmc_recalculates",
+          "function_name": "test_02_explore_switching_to_pcmc_recalculates",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_municipal_citizen_journey.py::test_03_explore_rural_and_council_jurisdiction_levels",
+          "function_name": "test_03_explore_rural_and_council_jurisdiction_levels",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_municipal_citizen_journey.py::test_04_results_page_pmc_vs_pcmc_isolation_and_badges",
+          "function_name": "test_04_results_page_pmc_vs_pcmc_isolation_and_badges",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_browser_municipal_citizen_journey.py::test_05_focused_eligibility_preserves_jurisdiction",
+          "function_name": "test_05_focused_eligibility_preserves_jurisdiction",
+          "execution_status": "PASSED"
+        }
+      ]
+    },
+    {
+      "suite_id": "backend_restart_persistence",
+      "suite_name": "Backend Restart Persistence Browser (1 Workflow)",
+      "file": "tests/test_playwright_backend_restart_persistence.py",
+      "test_count": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        {
+          "node_id": "tests/test_playwright_backend_restart_persistence.py::test_browser_restart_durability_and_document_replacement",
+          "function_name": "test_browser_restart_durability_and_document_replacement",
+          "execution_status": "PASSED"
+        }
+      ]
+    },
+    {
+      "suite_id": "trilingual_parity",
+      "suite_name": "Trilingual Parity Browser (3 Workflows)",
+      "file": "tests/test_trilingual_parity.py",
+      "test_count": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        {
+          "node_id": "tests/test_trilingual_parity.py::test_static_i18n_page_symmetry",
+          "function_name": "test_static_i18n_page_symmetry",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_trilingual_parity.py::test_prepare_audit_trilingual_readiness",
+          "function_name": "test_prepare_audit_trilingual_readiness",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_trilingual_parity.py::test_browser_trilingual_navigation_and_language_switching",
+          "function_name": "test_browser_trilingual_navigation_and_language_switching",
+          "execution_status": "PASSED"
+        }
+      ]
+    },
+    {
+      "suite_id": "fifteen_citizen_journeys",
+      "suite_name": "15 Citizen Journeys Playwright (15 Workflows)",
+      "file": "tests/test_playwright_15_citizen_journeys.py",
+      "test_count": 15,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "tests": [
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_01_golden_path_citizen",
+          "function_name": "test_journey_01_golden_path_citizen",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_02_incomplete_profile_citizen",
+          "function_name": "test_journey_02_incomplete_profile_citizen",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_03_missing_mandatory_document_citizen",
+          "function_name": "test_journey_03_missing_mandatory_document_citizen",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_04_expired_document_citizen",
+          "function_name": "test_journey_04_expired_document_citizen",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_05_unreadable_document_citizen",
+          "function_name": "test_journey_05_unreadable_document_citizen",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_06_profile_vs_document_name_mismatch_citizen",
+          "function_name": "test_journey_06_profile_vs_document_name_mismatch_citizen",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_07_wrong_financial_year_citizen",
+          "function_name": "test_journey_07_wrong_financial_year_citizen",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_08_alternative_document_any_of_citizen",
+          "function_name": "test_journey_08_alternative_document_any_of_citizen",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_09_inline_profile_correction_reactive_invalidation",
+          "function_name": "test_journey_09_inline_profile_correction_reactive_invalidation",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_10_document_replacement_recovery",
+          "function_name": "test_journey_10_document_replacement_recovery",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_11_manual_review_low_confidence_attestation",
+          "function_name": "test_journey_11_manual_review_low_confidence_attestation",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_12_persistence_resume_reload",
+          "function_name": "test_journey_12_persistence_resume_reload",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_13_mid_journey_language_switch",
+          "function_name": "test_journey_13_mid_journey_language_switch",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_14_mobile_viewport_citizen",
+          "function_name": "test_journey_14_mobile_viewport_citizen",
+          "execution_status": "PASSED"
+        },
+        {
+          "node_id": "tests/test_playwright_15_citizen_journeys.py::test_journey_15_official_portal_handoff_and_checklist_manifest",
+          "function_name": "test_journey_15_official_portal_handoff_and_checklist_manifest",
+          "execution_status": "PASSED"
+        }
+      ]
+    }
+  ]
+}

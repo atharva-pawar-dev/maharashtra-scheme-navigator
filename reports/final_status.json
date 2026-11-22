@@ -1,7 +1,7 @@
 {
   "mission_id": "MSN-FINAL-CLOSURE-01",
-  "generated_at": "2026-11-21T09:13:19.204417+00:00",
-  "commit_sha": "fe4f847880f3fddc9bbc9f77ce4f0262ac3a1590",
+  "generated_at": "2026-11-22T17:50:10.545833+00:00",
+  "commit_sha": "fd9fef707d77f675c96615e36fb0b27e01d873c8",
   "branch": "feat/catalogue-v2",
   "requirements": {
     "denominator": 55,
@@ -749,6 +749,11 @@
     "demo_fixture_attestations_in_prod": 0,
     "total_genuine_attestations": 16,
     "valid_genuine_attestations": 15,
+    "non_demo_attestation_records": 16,
+    "valid_attestation_records": 15,
+    "invalidated_records": 1,
+    "authenticated_human_reviewers": 0,
+    "actual_human_approved_rule_sets": 0,
     "is_isolated": true
   },
   "scorer_reconciliation": {

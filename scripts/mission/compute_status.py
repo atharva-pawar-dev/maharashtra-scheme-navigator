@@ -90,6 +90,11 @@ def check_database_isolation() -> dict[str, Any]:
         "demo_fixture_attestations_in_prod": demo_attestations,
         "total_genuine_attestations": total_genuine_attestations,
         "valid_genuine_attestations": valid_attestations,
+        "non_demo_attestation_records": total_genuine_attestations,
+        "valid_attestation_records": valid_attestations,
+        "invalidated_records": total_genuine_attestations - valid_attestations,
+        "authenticated_human_reviewers": 0,
+        "actual_human_approved_rule_sets": 0,
         "is_isolated": (rule_approvals == 0 and demo_attestations == 0),
     }
 
