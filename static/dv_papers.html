@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Papers, Ready | तुमची कागदपत्रे, तयार</title>
+  <link rel="stylesheet" href="dv_design_kit.css">
+  <style>
+    .dv-next-card {
+      border: 3px solid var(--dv-color-primary);
+      background-color: #F8FAFC;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .dv-next-badge {
+      display: inline-block;
+      background-color: var(--dv-color-primary);
+      color: #FFFFFF;
+      font-size: var(--dv-font-min);
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+    .dv-slot-item {
+      border: 2px solid var(--dv-color-border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      background-color: #FFFFFF;
+    }
+    .dv-slot-satisfied {
+      border-color: #16A34A;
+      background-color: #F0FDF4;
+    }
+    .dv-slot-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .dv-source-ref {
+      font-size: var(--dv-font-min);
+      color: var(--dv-color-text-muted);
+      margin-top: 6px;
+    }
+    .dv-how-to-get-box {
+      margin-top: 10px;
+      padding: 12px;
+      background-color: #F1F5F9;
+      border-radius: 6px;
+      font-size: var(--dv-font-min);
+    }
+    .dv-tag-mandatory {
+      background-color: #EFF6FF;
+      color: #1D4ED8;
+      border: 1px solid #93C5FD;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: var(--dv-font-min);
+      font-weight: 600;
+    }
+    .dv-tag-satisfied {
+      background-color: #DCFCE7;
+      color: #15803D;
+      border: 1px solid #86EFAC;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: var(--dv-font-min);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="dv-container">
+    <!-- Top Utility Bar: Languages & Text Zoom -->
+    <header class="dv-top-bar" role="banner">
+      <nav class="dv-lang-switcher" aria-label="Language Switcher">
+        <button type="button" class="dv-btn dv-btn-lang" data-lang="en" aria-pressed="false">English</button>
+        <button type="button" class="dv-btn dv-btn-lang active" data-lang="mr" aria-pressed="true">मराठी</button>
+        <button type="button" class="dv-btn dv-btn-lang" data-lang="hi" aria-pressed="false">हिंदी</button>
+      </nav>
+
+      <div class="dv-zoom-controls" aria-label="Text Size Controls">
+        <button type="button" class="dv-btn dv-btn-zoom active" data-zoom="1" aria-pressed="true" aria-label="Normal text">A</button>
+        <button type="button" class="dv-btn dv-btn-zoom" data-zoom="1.25" aria-pressed="false" aria-label="Large text">A+</button>
+        <button type="button" class="dv-btn dv-btn-zoom" data-zoom="1.5" aria-pressed="false" aria-label="Extra large text">A++</button>
+      </div>
+
+      <button type="button" class="dv-read-aloud-btn" data-read-target="#papers-main" aria-label="Read page aloud">
+        🔊 <span data-i18n-en="Read Aloud" data-i18n-mr="मोठ्याने वाचा" data-i18n-hi="बोलकर सुनाएं">मोठ्याने वाचा</span>
+      </button>
+    </header>
+
+    <main id="papers-main">
+      <!-- Headline: N of M needs covered (§4.3) -->
+      <section class="dv-card" style="border-left: 6px solid var(--dv-color-primary);" aria-labelledby="headline-title">
+        <h1 id="headline-title" style="margin-top: 0; font-size: var(--dv-font-heading);"
+            data-i18n-en="To apply for this scheme you need 4 papers. You have 0."
+            data-i18n-mr="या योजनेसाठी तुम्हाला ४ कागदपत्रे लागतील. तुमच्याकडे ० तयार आहेत."
+            data-i18n-hi="इस योजना के लिए आपको 4 कागज़ात चाहिए। आपके पास 0 तैयार हैं।">
+          या योजनेसाठी तुम्हाला ४ कागदपत्रे लागतील. तुमच्याकडे ० तयार आहेत.
+        </h1>
+        <p style="margin-bottom: 0; color: var(--dv-color-text-muted);"
+           data-i18n-en="We check your papers step-by-step so you can apply with peace of mind."
+           data-i18n-mr="तुमचे कागदपत्र व्यवस्थित तयार व्हावेत म्हणून आम्ही टप्प्याटप्प्याने मदत करतो."
+           data-i18n-hi="हम आपके कागज़ात चरणबद्ध तरीके से तैयार करने में मदद करते हैं।">
+          तुमचे कागदपत्र व्यवस्थित तयार व्हावेत म्हणून आम्ही टप्प्याटप्प्याने मदत करतो.
+        </p>
+      </section>
+
+      <!-- Next Need Card (Annex C §C2) -->
+      <section id="next-need-section" class="dv-next-card" aria-labelledby="next-need-title">
+        <div class="dv-next-badge"
+             data-i18n-en="NEXT STEP"
+             data-i18n-mr="पुढील पायरी"
+             data-i18n-hi="अगला कदम">
+          पुढील पायरी
+        </div>
+        <h2 id="next-need-title" style="margin-top: 0;"
+            data-i18n-en="Next: Add Proof of Age & Identity"
+            data-i18n-mr="पुढे: वय व ओळख पुरावा जोडा"
+            data-i18n-hi="आगे: आयु एवं पहचान प्रमाण जोड़ें">
+          पुढे: वय व ओळख पुरावा जोडा
+        </h2>
+        <p data-i18n-en="Any one of these papers is accepted: Aadhaar Card or Domicile Certificate."
+           data-i18n-mr="यांपैकी कोणताही एक कागद चालेल: आधार कार्ड किंवा अधिवास दाखला."
+           data-i18n-hi="इनमें से कोई भी एक कागज़ चलेगा: आधार कार्ड या अधिवास प्रमाण-पत्र।">
+          यांपैकी कोणताही एक कागद चालेल: आधार कार्ड किंवा अधिवास दाखला.
+        </p>
+        <div style="margin-top: 16px;">
+          <button type="button" class="dv-btn dv-btn-primary" id="add-paper-btn"
+                  data-i18n-en="Add this paper"
+                  data-i18n-mr="हा कागद जोडा"
+                  data-i18n-hi="यह कागज़ जोड़ें">
+            हा कागद जोडा
+          </button>
+        </div>
+        <div style="margin-top: 12px; display: flex; gap: 8px;">
+          <button type="button" class="dv-btn" id="dont-have-btn" style="font-size: var(--dv-font-min);"
+                  data-i18n-en="I don't have this paper"
+                  data-i18n-mr="माझ्याकडे हा कागद नाही"
+                  data-i18n-hi="मेरे पास यह कागज़ नहीं है">
+            माझ्याकडे हा कागद नाही
+          </button>
+        </div>
+        <div id="how-to-get-card" class="dv-how-to-get-box" style="display: none;">
+          <strong data-i18n-en="How to get this:" data-i18n-mr="हा दाखला कसा मिळवायचा:" data-i18n-hi="यह प्रमाण-पत्र कैसे प्राप्त करें:">
+            हा दाखला कसा मिळवायचा:
+          </strong>
+          <p id="how-to-get-text" style="margin-top: 4px; margin-bottom: 0;"
+             data-i18n-en="Aaple Sarkar portal (aaplesarkar.mahaonline.gov.in) or nearest Setu Kendra. Fee: ₹33. Time: 15 days."
+             data-i18n-mr="आपले सरकार पोर्टल (aaplesarkar.mahaonline.gov.in) किंवा नजीकचे सेतू केंद्र. शुल्क: ₹३३. मुदत: १५ दिवस."
+             data-i18n-hi="आपले सरकार पोर्टल या नज़दीकी सेतु केंद्र। शुल्क: ₹33, समय: 15 दिन।">
+            आपले सरकार पोर्टल (aaplesarkar.mahaonline.gov.in) किंवा नजीकचे सेतू केंद्र. शुल्क: ₹३३. मुदत: १५ दिवस.
+          </p>
+        </div>
+      </section>
+
+      <!-- Remaining Needs List -->
+      <section class="dv-card" aria-labelledby="all-slots-title">
+        <h2 id="all-slots-title" style="margin-top: 0; font-size: calc(var(--dv-font-heading) * 0.85);"
+            data-i18n-en="All Papers Needed for this Scheme"
+            data-i18n-mr="या योजनेसाठी लागणारी सर्व कागदपत्रे"
+            data-i18n-hi="इस योजना के लिए आवश्यक सभी कागज़ात">
+          या योजनेसाठी लागणारी सर्व कागदपत्रे
+        </h2>
+        <div id="slots-container">
+          <!-- Slot 1 -->
+          <div class="dv-slot-item" id="slot-item-1">
+            <div class="dv-slot-header">
+              <strong data-i18n-en="1. Proof of Age & Identity" data-i18n-mr="१. वय व ओळख पुरावा" data-i18n-hi="1. आयु एवं पहचान प्रमाण">
+                १. वय व ओळख पुरावा
+              </strong>
+              <span class="dv-tag-mandatory" data-i18n-en="Required" data-i18n-mr="आवश्यक" data-i18n-hi="ज़रूरी">आवश्यक</span>
+            </div>
+            <div data-i18n-en="Accepted: Aadhaar Card or Domicile Certificate"
+                 data-i18n-mr="स्वीकारले जाणारे कागदपत्र: आधार कार्ड किंवा अधिवास दाखला"
+                 data-i18n-hi="स्वीकार्य दस्तावेज़: आधार कार्ड या अधिवास प्रमाण-पत्र">
+              स्वीकारले जाणारे कागदपत्र: आधार कार्ड किंवा अधिवास दाखला
+            </div>
+            <div class="dv-source-ref">
+              🏛️ <span data-i18n-en="Official Source: GR-SJD-2024-02-05" data-i18n-mr="अधिकृत शासन निर्णय: GR-SJD-2024-02-05" data-i18n-hi="सरकारी निर्णय: GR-SJD-2024-02-05">
+                अधिकृत शासन निर्णय: GR-SJD-2024-02-05
+              </span>
+            </div>
+          </div>
+
+          <!-- Slot 2 -->
+          <div class="dv-slot-item" id="slot-item-2">
+            <div class="dv-slot-header">
+              <strong data-i18n-en="2. Proof of Income" data-i18n-mr="२. उत्पन्न पुरावा" data-i18n-hi="2. आय प्रमाण">
+                २. उत्पन्न पुरावा
+              </strong>
+              <span class="dv-tag-mandatory" data-i18n-en="Required" data-i18n-mr="आवश्यक" data-i18n-hi="ज़रूरी">आवश्यक</span>
+            </div>
+            <div data-i18n-en="Accepted: Tahsildar Income Certificate (under ₹2 Lakh) or Yellow BPL Ration Card"
+                 data-i18n-mr="स्वीकारले जाणारे कागदपत्र: उत्पन्नाचा दाखला (२ लाखांच्या आत) किंवा पिवळे रेशन कार्ड"
+                 data-i18n-hi="स्वीकार्य दस्तावेज़: आय प्रमाण-पत्र (2 लाख के भीतर) या पीला राशन कार्ड">
+              स्वीकारले जाणारे कागदपत्र: उत्पन्नाचा दाखला (२ लाखांच्या आत) किंवा पिवळे रेशन कार्ड
+            </div>
+            <div class="dv-source-ref">
+              🏛️ <span data-i18n-en="Official Source: GR-SJD-2024-02-05" data-i18n-mr="अधिकृत शासन निर्णय: GR-SJD-2024-02-05" data-i18n-hi="सरकारी निर्णय: GR-SJD-2024-02-05">
+                अधिकृत शासन निर्णय: GR-SJD-2024-02-05
+              </span>
+            </div>
+          </div>
+
+          <!-- Slot 3 -->
+          <div class="dv-slot-item" id="slot-item-3">
+            <div class="dv-slot-header">
+              <strong data-i18n-en="3. Proof of Residence" data-i18n-mr="३. रहिवासी पुरावा" data-i18n-hi="3. निवास प्रमाण">
+                ३. रहिवासी पुरावा
+              </strong>
+              <span class="dv-tag-mandatory" data-i18n-en="Required" data-i18n-mr="आवश्यक" data-i18n-hi="ज़रूरी">आवश्यक</span>
+            </div>
+            <div data-i18n-en="Accepted: Domicile Certificate or 15-year Ration Card"
+                 data-i18n-mr="स्वीकारले जाणारे कागदपत्र: अधिवास दाखला किंवा १५ वर्षांची शिधापत्रिका"
+                 data-i18n-hi="स्वीकार्य दस्तावेज़: अधिवास प्रमाण-पत्र या 15 वर्ष पुराना राशन कार्ड">
+              स्वीकारले जाणारे कागदपत्र: अधिवास दाखला किंवा १५ वर्षांची शिधापत्रिका
+            </div>
+            <div class="dv-source-ref">
+              🏛️ <span data-i18n-en="Official Source: GR-SJD-2024-02-05" data-i18n-mr="अधिकृत शासन निर्णय: GR-SJD-2024-02-05" data-i18n-hi="सरकारी निर्णय: GR-SJD-2024-02-05">
+                अधिकृत शासन निर्णय: GR-SJD-2024-02-05
+              </span>
+            </div>
+          </div>
+
+          <!-- Slot 4 -->
+          <div class="dv-slot-item" id="slot-item-4">
+            <div class="dv-slot-header">
+              <strong data-i18n-en="4. Bank Account Passbook" data-i18n-mr="४. बँक पासबुक" data-i18n-hi="4. बैंक पासबुक">
+                ४. बँक पासबुक
+              </strong>
+              <span class="dv-tag-mandatory" data-i18n-en="Required" data-i18n-mr="आवश्यक" data-i18n-hi="ज़रूरी">आवश्यक</span>
+            </div>
+            <div data-i18n-en="Accepted: Bank Passbook showing IFSC and Account Number"
+                 data-i18n-mr="स्वीकारले जाणारे कागदपत्र: बँक पासबुक किंवा रद्द केलेला धनादेश (IFSC सह)"
+                 data-i18n-hi="स्वीकार्य दस्तावेज़: बैंक पासबुक (IFSC एवं खाता संख्या सहित)">
+              स्वीकारले जाणारे कागदपत्र: बँक पासबुक किंवा रद्द केलेला धनादेश (IFSC सह)
+            </div>
+            <div class="dv-source-ref">
+              🏛️ <span data-i18n-en="Official Source: GR-SJD-2024-02-05" data-i18n-mr="अधिकृत शासन निर्णय: GR-SJD-2024-02-05" data-i18n-hi="सरकारी निर्णय: GR-SJD-2024-02-05">
+                अधिकृत शासन निर्णय: GR-SJD-2024-02-05
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conditional slots reminder (§4.3) -->
+        <div id="conditional-slots-box" class="dv-card dv-card-attention" style="margin-top: 16px; margin-bottom: 0;">
+          <strong data-i18n-en="1 more paper may be needed depending on your answers:"
+                  data-i18n-mr="तुमच्या माहितीनुसार आणखी १ कागदपत्र लागू शकते:"
+                  data-i18n-hi="आपकी जानकारी के अनुसार 1 और कागज़ात लग सकता है:">
+            तुमच्या माहितीनुसार आणखी १ कागदपत्र लागू शकते:
+          </strong>
+          <p style="margin-top: 4px; margin-bottom: 0;"
+             data-i18n-en="Disability certificate is only required if you are applying for assistive physical devices."
+             data-i18n-mr="दिव्यांगत्व प्रमाणपत्र केवळ विशेष सहाय्यक उपकरणांसाठी अर्ज करत असल्यास आवश्यक आहे."
+             data-i18n-hi="दिव्यांगता प्रमाण-पत्र केवल सहायक उपकरणों के लिए आवेदन करने पर आवश्यक है।">
+            दिव्यांगत्व प्रमाणपत्र केवळ विशेष सहाय्यक उपकरणांसाठी अर्ज करत असल्यास आवश्यक आहे.
+          </p>
+        </div>
+      </section>
+
+      <!-- Honest Official Authority Reminder (Law L7) -->
+      <footer class="dv-card" style="border-style: dashed; margin-top: 24px;" aria-label="Official Authority Notice">
+        <p style="font-size: var(--dv-font-min); color: var(--dv-color-text-muted); margin: 0;"
+           data-i18n-en="This is a helper check we did for you. The government office makes the final decision."
+           data-i18n-mr="ही आम्ही केलेली पूर्वतयारी तपासणी आहे. अंतिम निर्णय संबंधित शासकीय कार्यालयच घेते."
+           data-i18n-hi="यह आपकी सुविधा के लिए की गई पूर्व-जाँच है। अंतिम निर्णय सरकारी कार्यालय ही करता है।">
+          ही आम्ही केलेली पूर्वतयारी तपासणी आहे. अंतिम निर्णय संबंधित शासकीय कार्यालयच घेते.
+        </p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="dv_design_kit.js"></script>
+  <script>
+    // Interaction logic for "I don't have this paper"
+    document.addEventListener('DOMContentLoaded', () => {
+      const dontHaveBtn = document.getElementById('dont-have-btn');
+      const howToGetCard = document.getElementById('how-to-get-card');
+      if (dontHaveBtn && howToGetCard) {
+        dontHaveBtn.addEventListener('click', () => {
+          howToGetCard.style.display = howToGetCard.style.display === 'none' ? 'block' : 'none';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

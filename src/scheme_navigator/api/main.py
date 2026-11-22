@@ -303,6 +303,72 @@ def dv_gallery_view():
     return FileResponse(gallery_file, media_type="text/html", headers={"Cache-Control": "no-store"})
 
 
+@app.get("/dv/doctypes", tags=["document_readiness"])
+def list_doc_types():
+    from scheme_navigator.dv.slots import TOP_5_DOCTYPES
+    return {
+        "total": len(TOP_5_DOCTYPES),
+        "doctypes": [
+            {
+                "id": dt.id,
+                "names": dt.names,
+                "plain_description": dt.plain_description,
+                "where_to_get": dt.where_to_get,
+                "fields": [
+                    {"field_id": f.field_id, "type": f.field_type, "sensitivity": f.sensitivity}
+                    for f in dt.fields
+                ],
+                "version": dt.version,
+            }
+            for dt in TOP_5_DOCTYPES.values()
+        ],
+    }
+
+
+@app.get("/dv/schemes/{scheme_id}/slots", tags=["document_readiness"])
+def get_scheme_requirement_slots(scheme_id: str, is_divyang: bool | None = None):
+    from scheme_navigator.dv.slots import evaluate_slots_for_citizen
+    profile = {}
+    if is_divyang is not None:
+        profile["is_divyang"] = is_divyang
+    summary = evaluate_slots_for_citizen(scheme_id, citizen_profile=profile)
+    return {
+        "scheme_id": scheme_id,
+        "total_applicable_needs_m": summary.total_applicable_needs_m,
+        "satisfied_needs_n": summary.satisfied_needs_n,
+        "pending_needs_count": summary.pending_needs_count,
+        "unknown_conditional_count": summary.unknown_conditional_count,
+        "unconfirmed_requirements_count": summary.unconfirmed_requirements_count,
+        "is_all_covered": summary.is_all_covered,
+        "headline_mr": summary.get_headline_text(scheme_id, lang="mr"),
+        "headline_en": summary.get_headline_text(scheme_id, lang="en"),
+        "headline_hi": summary.get_headline_text(scheme_id, lang="hi"),
+        "slots": [
+            {
+                "slot_id": e.slot.slot_id,
+                "need_label": e.slot.need_label,
+                "kind": e.slot.kind.value,
+                "state": e.state.value,
+                "is_applicable": e.is_applicable,
+                "trust_tier": e.slot.trust_tier.value,
+                "source_type": e.slot.source_type,
+                "source_reference": e.slot.source_reference,
+                "source_quote": e.slot.source_quote,
+                "accepted_doctypes": [a.doctype_id for a in e.slot.accepted],
+            }
+            for e in summary.evaluations
+        ],
+    }
+
+
+@app.get("/dv/schemes/{scheme_id}/papers", include_in_schema=False)
+def dv_papers_view(scheme_id: str):
+    papers_file = _dv_static_dir / "dv_papers.html"
+    if not papers_file.is_file():
+        raise HTTPException(status_code=404, detail="Your Papers view not found.")
+    return FileResponse(papers_file, media_type="text/html", headers={"Cache-Control": "no-store"})
+
+
 def _document_review_store() -> DocumentReviewStore:
     return DocumentReviewStore(retention_hours=settings.data_retention_hours)
 
