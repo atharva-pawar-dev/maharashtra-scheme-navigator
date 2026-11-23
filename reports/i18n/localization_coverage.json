@@ -1,0 +1,38 @@
+{
+  "gate_timestamp": "2026-11-23T20:44:38.304685",
+  "mission_id": "MSN-I18N-001",
+  "verdict": "LOCALIZATION_ACCEPTED",
+  "key_symmetry": {
+    "total_keys": 138,
+    "symmetric": true,
+    "en_keys": 138,
+    "mr_keys": 138,
+    "hi_keys": 138,
+    "missing": {
+      "en": [],
+      "mr": [],
+      "hi": []
+    }
+  },
+  "markup_integrity": {
+    "passed": true,
+    "findings": []
+  },
+  "test_battery": {
+    "passed": true,
+    "passed_tests": 10,
+    "failed_tests": 0,
+    "duration_s": 34.65
+  },
+  "supported_locales": [
+    "en",
+    "mr",
+    "hi"
+  ],
+  "governing_invariants": {
+    "I18N-01": "100% visible interface in citizen-selected language",
+    "I18N-02": "Authoritative cross-view persistence via sn_language",
+    "I18N-03": "Trilingual document and authority translation in audit endpoints",
+    "I18N-04": "Symmetric key coverage with zero runtime missing placeholders"
+  }
+}

@@ -14,7 +14,8 @@
 
   // State keys
   const ZOOM_KEY = 'dv_text_zoom';
-  const LANG_KEY = 'dv_lang';
+  const LANG_KEY = 'sn_language';
+  const FALLBACK_LANG_KEY = 'dv_lang';
   const ASSISTED_KEY = 'dv_assisted_mode';
 
   // 1. Text Zoom Control
@@ -48,7 +49,7 @@
 
   // 2. Language Switcher
   function initLanguageSwitcher() {
-    const savedLang = localStorage.getItem(LANG_KEY) || 'mr'; // Marathi by default per Aaji motto
+    const savedLang = localStorage.getItem(LANG_KEY) || localStorage.getItem(FALLBACK_LANG_KEY) || 'mr'; // Marathi by default per Aaji motto
     setLanguage(savedLang);
 
     const langButtons = document.querySelectorAll('.dv-btn-lang');
@@ -57,7 +58,14 @@
         const lang = btn.dataset.lang || 'mr';
         setLanguage(lang);
         localStorage.setItem(LANG_KEY, lang);
+        localStorage.setItem(FALLBACK_LANG_KEY, lang);
       });
+    });
+
+    window.addEventListener('storage', (e) => {
+      if ((e.key === LANG_KEY || e.key === FALLBACK_LANG_KEY) && e.newValue) {
+        setLanguage(e.newValue);
+      }
     });
   }
 

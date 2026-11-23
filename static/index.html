@@ -1204,7 +1204,7 @@
 
       <!-- Bottom Navigation CTAs -->
       <div id="doc-bottom-actions" style="display:flex; gap:12px; justify-content:space-between; flex-wrap:wrap; align-items:center; padding:16px 0; margin-top:24px; border-top:1px solid var(--border-crisp);">
-        <button class="btn btn-secondary" onclick="showView('results')">← मागे जा</button>
+        <button class="btn btn-secondary" id="btn-doc-bottom-back" onclick="showView('results')">← <span id="lbl-doc-bottom-back">मागे जा</span></button>
         <div style="display:flex; gap:12px; flex-wrap:wrap;">
           <button class="btn btn-secondary" id="btn-portal-official" onclick="openOfficialPortalForSelectedScheme()">अधिकृत पोर्टलवर जा ↗</button>
           <button class="btn btn-primary" id="btn-proceed-roadmap" onclick="openRoadmapForCurrentScheme()">पूर्वतयारी मार्गदर्शक पहा →</button>
@@ -1285,28 +1285,28 @@
       <form id="form-report-issue" onsubmit="submitSchemeIssueReport(event)">
         <input type="hidden" id="report-scheme-id" value="">
         <div style="margin-bottom:12px;">
-          <label id="lbl-report-type-text" style="display:block; font-size:0.86rem; font-weight:600; margin-bottom:4px;">त्रुटीचा प्रकार (Issue Type):</label>
+          <label id="lbl-report-type-text" style="display:block; font-size:0.86rem; font-weight:600; margin-bottom:4px;">त्रुटीचा प्रकार:</label>
           <select id="report-issue-type" style="width:100%; padding:8px; border-radius:var(--radius-sm); border:1px solid var(--border-crisp); background:white;">
-            <option value="incorrect_criteria">पात्रता अटी चुकीच्या आहेत (Incorrect Criteria)</option>
-            <option value="broken_link">अधिकृत संकेतस्थळाचा दुवा बंद आहे (Broken Official Link)</option>
-            <option value="outdated_dates">अर्ज करण्याची मुदत/तारीख चुकीची आहे (Outdated Window/Deadline)</option>
-            <option value="missing_document">आवश्यक कागदपत्रांची यादी अपूर्ण आहे (Missing Documents)</option>
-            <option value="incorrect_translation">मराठी/हिंदी भाषांतर चुकीचे आहे (Incorrect Translation)</option>
-            <option value="other">इतर तक्रार/सूचना (Other Feedback)</option>
+            <option value="incorrect_criteria">पात्रता अटी चुकीच्या आहेत</option>
+            <option value="broken_link">अधिकृत संकेतस्थळाचा दुवा बंद आहे</option>
+            <option value="outdated_dates">अर्ज करण्याची मुदत/तारीख चुकीची आहे</option>
+            <option value="missing_document">आवश्यक कागदपत्रांची यादी अपूर्ण आहे</option>
+            <option value="incorrect_translation">भाषांतर चुकीचे आहे</option>
+            <option value="other">इतर तक्रार / सूचना</option>
           </select>
         </div>
         <div style="margin-bottom:12px;">
-          <label id="lbl-report-desc-text" style="display:block; font-size:0.86rem; font-weight:600; margin-bottom:4px;">तपशील (Description):</label>
+          <label id="lbl-report-desc-text" style="display:block; font-size:0.86rem; font-weight:600; margin-bottom:4px;">तपशील व अधिकृत शासन संदर्भ:</label>
           <textarea id="report-description" required rows="3" style="width:100%; padding:8px; border-radius:var(--radius-sm); border:1px solid var(--border-crisp); font-family:inherit;" placeholder="अधिकृत GR क्रमांक, खरी माहिती किंवा त्रुटीबद्दल थोडक्यात सांगा..."></textarea>
         </div>
         <div style="margin-bottom:16px;">
-          <label id="lbl-report-contact-text" style="display:block; font-size:0.86rem; font-weight:600; margin-bottom:4px;">संपर्क (ऐच्छिक / Optional Email/Phone):</label>
+          <label id="lbl-report-contact-text" style="display:block; font-size:0.86rem; font-weight:600; margin-bottom:4px;">संपर्क (ऐच्छिक ईमेल / फोन):</label>
           <input type="text" id="report-contact" style="width:100%; padding:8px; border-radius:var(--radius-sm); border:1px solid var(--border-crisp);" placeholder="उदा. 98xxxxxxxx किंवा email@domain.com">
         </div>
         <div id="report-result-status" style="margin-bottom:12px; font-size:0.88rem; display:none;"></div>
         <div style="display:flex; justify-content:flex-end; gap:8px;">
-          <button type="button" class="btn btn-secondary btn-sm" onclick="closeReportModal()">रद्द करा (Cancel)</button>
-          <button type="submit" id="btn-submit-report" class="btn btn-primary btn-sm">नोंदणी करा (Submit Report)</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-report-cancel" onclick="closeReportModal()">रद्द करा</button>
+          <button type="submit" id="btn-submit-report" class="btn btn-primary btn-sm">नोंदणी करा</button>
         </div>
       </form>
     </div>
@@ -1946,8 +1946,17 @@
   }
 
   // Application State
+  const STORAGE_LANG_KEY = 'sn_language';
+  let initialLang = 'mr';
+  try {
+    const stored = localStorage.getItem(STORAGE_LANG_KEY) || localStorage.getItem('dv_lang');
+    if (stored && ['en', 'mr', 'hi'].includes(stored)) {
+      initialLang = stored;
+    }
+  } catch (e) {}
+
   const state = {
-    language: 'mr',
+    language: initialLang,
     currentView: 'home',
     schemes: [],
     rawSchemes: [],
@@ -2032,15 +2041,26 @@
 
   async function restoreSession() {
     try {
+      let savedGlobal = null;
+      try {
+        savedGlobal = localStorage.getItem(STORAGE_LANG_KEY) || localStorage.getItem('dv_lang');
+      } catch (e) {}
+
       const raw = sessionStorage.getItem('scheme_nav_session');
       if (raw) {
         const saved = JSON.parse(raw);
         if (saved.threadId) state.threadId = saved.threadId;
         if (saved.selectedSchemeId) state.selectedSchemeId = saved.selectedSchemeId;
-        if (saved.language) setLanguage(saved.language);
+        if (saved.language && ['en', 'mr', 'hi'].includes(saved.language)) {
+          setLanguage(saved.language);
+        } else if (savedGlobal && ['en', 'mr', 'hi'].includes(savedGlobal)) {
+          setLanguage(savedGlobal);
+        }
         if (saved.reviewId) state.reviewId = saved.reviewId;
         if (saved.interviewComplete) state.interviewComplete = saved.interviewComplete;
         if (saved.financialYear) state.financialYear = saved.financialYear;
+      } else if (savedGlobal && ['en', 'mr', 'hi'].includes(savedGlobal)) {
+        setLanguage(savedGlobal);
       }
       const docRaw = sessionStorage.getItem('scheme_nav_doc_audit_session');
       if (docRaw) {
@@ -2303,7 +2323,26 @@
       lbl_report_type: "Issue Classification:",
       lbl_report_desc: "Description & Official Source Reference:",
       lbl_report_contact: "Contact (Optional Email / Phone):",
-      btn_submit_report: "Submit Report"
+      btn_submit_report: "Submit Report",
+      lbl_doc_bottom_back: "Back",
+      btn_portal_official: "Go to Official Portal ↗",
+      btn_proceed_roadmap: "View Preparation Guide →",
+      confirm_modal_title: "Confirmation",
+      btn_confirm_cancel: "Cancel",
+      btn_confirm_ok: "Confirm",
+      report_modal_header: "🚨 Report Issue with Scheme Details",
+      lbl_report_type_text: "Issue Classification:",
+      lbl_report_desc_text: "Description & Official GR Reference:",
+      lbl_report_contact_text: "Contact (Optional Email / Phone):",
+      btn_report_cancel: "Cancel",
+      report_opt_incorrect_criteria: "Eligibility criteria incorrect",
+      report_opt_broken_link: "Broken official link",
+      report_opt_outdated_dates: "Outdated application deadline",
+      report_opt_missing_document: "Required documents list missing items",
+      report_opt_incorrect_translation: "Translation is inaccurate",
+      report_opt_other: "Other feedback / complaint",
+      report_desc_placeholder: "Briefly explain with official GR number, correct information, or discrepancy...",
+      report_contact_placeholder: "e.g. 98xxxxxxxx or email@domain.com"
     },
     mr: {
       skip_link: "मुख्य मजकुरावर जा",
@@ -2424,7 +2463,26 @@
       lbl_report_type: "त्रुटीचा प्रकार:",
       lbl_report_desc: "तपशील व अधिकृत शासन संदर्भ:",
       lbl_report_contact: "संपर्क (ऐच्छिक ईमेल / फोन):",
-      btn_submit_report: "तक्रार नोंदवा"
+      btn_submit_report: "तक्रार नोंदवा",
+      lbl_doc_bottom_back: "मागे जा",
+      btn_portal_official: "अधिकृत पोर्टलवर जा ↗",
+      btn_proceed_roadmap: "पूर्वतयारी मार्गदर्शक पहा →",
+      confirm_modal_title: "पुष्टीकरण",
+      btn_confirm_cancel: "रद्द करा",
+      btn_confirm_ok: "पुष्टी करा",
+      report_modal_header: "🚨 योजनेच्या माहितीबद्दल त्रुटी नोंदवा",
+      lbl_report_type_text: "त्रुटीचा प्रकार:",
+      lbl_report_desc_text: "तपशील व अधिकृत शासन संदर्भ:",
+      lbl_report_contact_text: "संपर्क (ऐच्छिक ईमेल / फोन):",
+      btn_report_cancel: "रद्द करा",
+      report_opt_incorrect_criteria: "पात्रता अटी चुकीच्या आहेत",
+      report_opt_broken_link: "अधिकृत संकेतस्थळाचा दुवा बंद आहे",
+      report_opt_outdated_dates: "अर्ज करण्याची मुदत/तारीख चुकीची आहे",
+      report_opt_missing_document: "आवश्यक कागदपत्रांची यादी अपूर्ण आहे",
+      report_opt_incorrect_translation: "भाषांतर चुकीचे आहे",
+      report_opt_other: "इतर तक्रार / सूचना",
+      report_desc_placeholder: "अधिकृत GR क्रमांक, खरी माहिती किंवा त्रुटीबद्दल थोडक्यात सांगा...",
+      report_contact_placeholder: "उदा. 98xxxxxxxx किंवा email@domain.com"
     },
     hi: {
       skip_link: "मुख्य सामग्री पर जाएं",
@@ -2545,12 +2603,35 @@
       lbl_report_type: "त्रुटि का प्रकार:",
       lbl_report_desc: "विवरण और आधिकारिक स्रोत संदर्भ:",
       lbl_report_contact: "संपर्क (वैकल्पिक ईमेल / फोन):",
-      btn_submit_report: "त्रुटि दर्ज करें"
+      btn_submit_report: "त्रुटि दर्ज करें",
+      lbl_doc_bottom_back: "पीछे जाएं",
+      btn_portal_official: "आधिकारिक पोर्टल पर जाएं ↗",
+      btn_proceed_roadmap: "तैयारी मार्गदर्शिका देखें →",
+      confirm_modal_title: "पुष्टिकरण",
+      btn_confirm_cancel: "रद्द करें",
+      btn_confirm_ok: "पुष्टि करें",
+      report_modal_header: "🚨 योजना की जानकारी में त्रुटि दर्ज करें",
+      lbl_report_type_text: "त्रुटि का प्रकार:",
+      lbl_report_desc_text: "विवरण और आधिकारिक स्रोत संदर्भ:",
+      lbl_report_contact_text: "संपर्क (वैकल्पिक ईमेल / फोन):",
+      btn_report_cancel: "रद्द करें",
+      report_opt_incorrect_criteria: "पात्रता शर्तें गलत हैं",
+      report_opt_broken_link: "आधिकारिक वेबसाइट लिंक बंद है",
+      report_opt_outdated_dates: "आवेदन की समयसीमा गलत है",
+      report_opt_missing_document: "आवश्यक दस्तावेज़ सूची अपूर्ण है",
+      report_opt_incorrect_translation: "अनुवाद में त्रुटि है",
+      report_opt_other: "अन्य शिकायत / सुझाव",
+      report_desc_placeholder: "आधिकारिक जीआर संख्या, सही जानकारी या त्रुटि का संक्षिप्त विवरण दें...",
+      report_contact_placeholder: "उदा. 98xxxxxxxx या email@domain.com"
     }
   };
 
   function setLanguage(lang) {
     state.language = lang;
+    try {
+      localStorage.setItem(STORAGE_LANG_KEY, lang);
+      localStorage.setItem('dv_lang', lang);
+    } catch (e) {}
     ['en', 'mr', 'hi'].forEach(l => {
       const b = document.getElementById('lang-btn-' + l);
       if (b) b.classList.toggle('active', l === lang);
@@ -2567,6 +2648,15 @@
     if (state.results.length > 0) renderResultsCards();
     updateProfileDisplay();
     renderPrepareView();
+    const docView = document.getElementById('view-documents');
+    if (state.selectedSchemeId && docView && (docView.classList.contains('active') || state.currentView === 'documents')) {
+      renderDocumentAuditorView(state.selectedSchemeId);
+    }
+    const roadmapView = document.getElementById('view-roadmap');
+    if (state.selectedSchemeId && roadmapView && (roadmapView.classList.contains('active') || state.currentView === 'roadmap')) {
+      loadRoadmapForScheme(state.selectedSchemeId);
+    }
+    saveSession();
   }
 
   function applyLanguage() {
@@ -2712,6 +2802,39 @@
     setT('completion-view-desc', strings.completion_view_desc);
     setT('lbl-comp-home', strings.lbl_comp_home);
     setT('lbl-comp-results', strings.lbl_comp_results);
+
+    setT('lbl-doc-bottom-back', strings.lbl_doc_bottom_back);
+    setT('btn-portal-official', strings.btn_portal_official);
+    setT('btn-proceed-roadmap', strings.btn_proceed_roadmap);
+
+    setT('confirm-modal-title', strings.confirm_modal_title);
+    setT('btn-confirm-cancel', strings.btn_confirm_cancel);
+    setT('btn-confirm-ok', strings.btn_confirm_ok);
+
+    setT('report-modal-header', strings.report_modal_header);
+    setT('report-modal-desc', strings.modal_report_desc || strings.report_modal_desc);
+    setT('lbl-report-type-text', strings.lbl_report_type_text);
+    setT('lbl-report-desc-text', strings.lbl_report_desc_text);
+    setT('lbl-report-contact-text', strings.lbl_report_contact_text);
+    setT('btn-report-cancel', strings.btn_report_cancel);
+    setT('btn-submit-report', strings.btn_submit_report);
+    setAttr('report-description', 'placeholder', strings.report_desc_placeholder);
+    setAttr('report-contact', 'placeholder', strings.report_contact_placeholder);
+
+    const reportTypeSelect = document.getElementById('report-issue-type');
+    if (reportTypeSelect) {
+      const optMap = {
+        incorrect_criteria: strings.report_opt_incorrect_criteria,
+        broken_link: strings.report_opt_broken_link,
+        outdated_dates: strings.report_opt_outdated_dates,
+        missing_document: strings.report_opt_missing_document,
+        incorrect_translation: strings.report_opt_incorrect_translation,
+        other: strings.report_opt_other
+      };
+      for (const opt of reportTypeSelect.options) {
+        if (optMap[opt.value]) opt.textContent = optMap[opt.value];
+      }
+    }
 
     setT('roadmap-ws-title', strings.roadmap_ws_title);
     setT('roadmap-ws-desc', strings.roadmap_ws_desc);
@@ -3439,7 +3562,7 @@
 
     if (res.error) {
       const errTitle = isMr ? 'पात्रता निकष तपासण्यात अडचण' : (isHi ? 'पात्रता जांच में समस्या' : 'Evaluation Criteria Notice');
-      const errMsg = res.error.message || (isMr ? 'काही निकषांसाठी अधिक माहिती आवश्यक आहे.' : 'Additional details are required for statutory assessment.');
+      const errMsg = res.error.message || (isMr ? 'काही निकषांसाठी अधिक माहिती आवश्यक आहे.' : (isHi ? 'कुछ मानदंडों के लिए अतिरिक्त जानकारी आवश्यक है।' : 'Additional details are required for statutory assessment.'));
       appendBotMessage(`⚠️ ${errTitle}: ${errMsg}`);
       const qr = document.getElementById('quick-replies');
       if (qr) {
@@ -4390,10 +4513,11 @@
     try {
       const prog = await api('/progress');
       if (prog && prog.active_scheme_id) {
-        state.selectedSchemeId = prog.active_scheme_id;
         state.activeProgress = prog;
+        if (!state.selectedSchemeId) {
+          state.selectedSchemeId = prog.active_scheme_id;
+        }
       } else {
-        state.selectedSchemeId = null;
         state.activeProgress = null;
       }
     } catch (e) {
@@ -4481,13 +4605,13 @@
       if (targetId.startsWith('demo-')) {
         warnEl.innerHTML = `
           <div style="background:#FEF2F2; border-left:3px solid #DC2626; color:#991B1B; padding:8px 12px; border-radius:4px; font-size:0.84rem;">
-            ⚠️ <strong>${isMr ? 'डेमो नमुना चेतावणी:' : (isHi ? 'डेमो नमूना सूचना:' : 'Demo Fixture Notice:')}</strong> ${isMr ? 'हा केवळ चाचणी नमुना आहे. केवळ synthetic/डेमो कागदपत्रे वापरा. मूळ वैयक्तिक ओळखपत्रे किंवा संवेदनशील माहिती अपलोड करू नका.' : 'This is a demo fixture. Use synthetic/demo test documents only. Do not upload personal identity documents.'}
+            ⚠️ <strong>${isMr ? 'डेमो नमुना चेतावणी:' : (isHi ? 'डेमो नमूना सूचना:' : 'Demo Fixture Notice:')}</strong> ${isMr ? 'हा केवळ चाचणी नमुना आहे. केवळ synthetic/डेमो कागदपत्रे वापरा. मूळ वैयक्तिक ओळखपत्रे किंवा संवेदनशील माहिती अपलोड करू नका.' : (isHi ? 'यह केवल परीक्षण नमूना है। केवल सिंथेटिक/डेमो दस्तावेज़ उपयोग करें। मूल व्यक्तिगत पहचान पत्र या संवेदनशील जानकारी अपलोड न करें।' : 'This is a demo fixture. Use synthetic/demo test documents only. Do not upload personal identity documents.')}
           </div>
         `;
       } else {
         warnEl.innerHTML = `
           <div style="background:var(--paithani-teal-subtle); border-left:3px solid var(--paithani-teal); color:var(--paithani-teal); padding:6px 12px; border-radius:4px; font-size:0.82rem;">
-            ⚖️ <strong>${isMr ? 'वैधानिक पडताळणी सूचना:' : 'Statutory Verification Notice:'}</strong> ${isMr ? 'महाराष्ट्र लोकसेवा हमी कायदा (RTS) २०१५ नुसार ही कागदपत्र पूर्वतयारी यादी आहे. अंतिम मंजुरी शासकीय विभागामार्फतच दिली जाते.' : 'Document preparation checklist under Maharashtra RTS Act 2015. Official verification and approval remains with competent government authority.'}
+            ⚖️ <strong>${isMr ? 'वैधानिक पडताळणी सूचना:' : (isHi ? 'वैधानिक सत्यापन सूचना:' : 'Statutory Verification Notice:')}</strong> ${isMr ? 'महाराष्ट्र लोकसेवा हमी कायदा (RTS) २०१५ नुसार ही कागदपत्र पूर्वतयारी यादी आहे. अंतिम मंजुरी शासकीय विभागामार्फतच दिली जाते.' : (isHi ? 'महाराष्ट्र लोक सेवा गारंटी अधिनियम (RTS) २०१५ के अनुसार यह दस्तावेज़ तैयारी सूची है। अंतिम स्वीकृति संबंधित सरकारी विभाग द्वारा दी जाती है।' : 'Document preparation checklist under Maharashtra RTS Act 2015. Official verification and approval remains with competent government authority.')}
           </div>
         `;
       }
@@ -4557,7 +4681,7 @@
       if (reqListEl) {
         const reqs = report.requirements || [];
         if (reqs.length === 0) {
-          reqListEl.innerHTML = `<p style="color:var(--slate-muted); font-size:0.9rem;">${isMr ? 'विशिष्ट कागदपत्रांची आवश्यकता नाही.' : 'No specific document requirements recorded.'}</p>`;
+          reqListEl.innerHTML = `<p style="color:var(--slate-muted); font-size:0.9rem;">${isMr ? 'विशिष्ट कागदपत्रांची आवश्यकता नाही.' : (isHi ? 'विशिष्ट दस्तावेज़ की आवश्यकता नहीं है।' : 'No specific document requirements recorded.')}</p>`;
         } else {
           reqListEl.innerHTML = reqs.map((rq, idx) => {
             const isMand = rq.is_mandatory;
@@ -4619,15 +4743,17 @@
         if (state.uploadedDocuments.length > 0) {
           uploadedSecEl.style.display = 'block';
           uploadedListEl.innerHTML = state.uploadedDocuments.map((ud, idx) => {
-            const docName = ud.field_evidence && ud.field_evidence.document_title ? ud.field_evidence.document_title : (ud.document_type || 'दाखला');
+            const docName = ud.field_evidence && ud.field_evidence.document_title ? ud.field_evidence.document_title : (ud.document_type || (isMr ? 'दाखला' : (isHi ? 'प्रमाण-पत्र' : 'Certificate')));
             const pName = ud.person_name || '-';
             const fyStr = ud.valid_financial_year ? ` | FY: ${escapeHtml(ud.valid_financial_year)}` : '';
             const incStr = ud.annual_family_income ? ` | ₹${toLocalizedDigits(ud.annual_family_income)}` : '';
             const conf = ud.confidence ? (ud.confidence * 100).toFixed(0) + '%' : '95%';
+            const confLabel = isMr ? 'विश्वासार्हता' : (isHi ? 'विश्वसनीयता' : 'Confidence');
             const docId = ud.document_id || ('doc_' + idx);
             const rec = (state.activeDocRecords || []).find(r => r.document_id === docId);
             const verNum = rec ? rec.version : (ud.version || 1);
-            const verBadge = `<span class="badge" style="background:#D1FAE5; color:#065F46; font-size:0.75rem; font-weight:700; padding:2px 8px; border-radius:4px; margin-left:6px;">v${verNum} (Active)</span>`;
+            const activeLabel = isMr ? 'सक्रिय' : (isHi ? 'सक्रिय' : 'Active');
+            const verBadge = `<span class="badge" style="background:#D1FAE5; color:#065F46; font-size:0.75rem; font-weight:700; padding:2px 8px; border-radius:4px; margin-left:6px;">v${verNum} (${activeLabel})</span>`;
             return `
               <div class="uploaded-doc-card" style="display:flex; flex-direction:column; gap:8px; border:1px solid var(--border-crisp); padding:14px; border-radius:8px; background:var(--warm-ivory); margin-bottom:10px;">
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px;">
@@ -4637,7 +4763,7 @@
                       ${verBadge}
                     </div>
                     <div style="font-size:0.82rem; color:var(--slate-muted); margin-top:3px;">
-                      👤 ${escapeHtml(pName)}${fyStr}${incStr} | <span style="color:#059669; font-weight:600;">विश्वासार्हता: ${conf}</span>
+                      👤 ${escapeHtml(pName)}${fyStr}${incStr} | <span style="color:#059669; font-weight:600;">${confLabel}: ${conf}</span>
                     </div>
                   </div>
                   <div style="display:flex; gap:6px; flex-wrap:wrap;">
@@ -4702,9 +4828,10 @@
           historySecEl.style.display = 'block';
           historyListEl.innerHTML = supersededDocs.map((sd) => {
             const ext = sd.extracted || {};
-            const docName = ext.field_evidence && ext.field_evidence.document_title ? ext.field_evidence.document_title : (sd.document_type || 'दाखला');
+            const docName = ext.field_evidence && ext.field_evidence.document_title ? ext.field_evidence.document_title : (sd.document_type || (isMr ? 'दाखला' : (isHi ? 'प्रमाण-पत्र' : 'Certificate')));
             const shaBrief = sd.source_file_sha256 ? sd.source_file_sha256.slice(0, 12) + '...' : '-';
-            const verBadge = `<span class="badge" style="background:#E2E8F0; color:#475569; font-weight:700; padding:2px 8px; border-radius:4px; font-size:0.75rem;">v${sd.version} (Superseded)</span>`;
+            const supLabel = isMr ? 'बदललेले' : (isHi ? 'प्रतिस्थापित' : 'Superseded');
+            const verBadge = `<span class="badge" style="background:#E2E8F0; color:#475569; font-weight:700; padding:2px 8px; border-radius:4px; font-size:0.75rem;">v${sd.version} (${supLabel})</span>`;
             return `
               <div class="history-doc-card" style="border:1px dashed #CBD5E1; background:#F8FAFC; padding:12px 14px; border-radius:6px; margin-bottom:8px; opacity:0.85;">
                 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
@@ -4717,7 +4844,7 @@
                       SHA-256: <code>${escapeHtml(shaBrief)}</code> | Filename: <em>${escapeHtml(sd.filename || '')}</em>
                     </div>
                     <div style="font-size:0.78rem; color:#D97706; margin-top:2px;">
-                      ℹ️ ${escapeHtml(sd.replacement_reason || 'Superseded by updated document')}
+                      ℹ️ ${escapeHtml(sd.replacement_reason || (isMr ? 'नवीन कागदपत्राने बदलले' : (isHi ? 'नवीन दस्तावेज़ द्वारा प्रतिस्थापित' : 'Superseded by updated document')))}
                     </div>
                   </div>
                   <span style="font-size:0.75rem; color:#94A3B8;">${new Date(sd.created_at).toLocaleString()}</span>
@@ -4738,7 +4865,7 @@
     } catch (err) {
       console.error('Document audit error:', err);
       if (reqListEl) {
-        reqListEl.innerHTML = `<div class="empty-state-card" style="color:#DC2626;"><p>❌ ${isMr ? 'कागदपत्र पडताळणी त्रुटी: ' : 'Document audit error: '} ${escapeHtml(err.message)}</p></div>`;
+        reqListEl.innerHTML = `<div class="empty-state-card" style="color:#DC2626;"><p>❌ ${isMr ? 'कागदपत्र पडताळणी त्रुटी: ' : (isHi ? 'दस्तावेज़ सत्यापन त्रुटि: ' : 'Document audit error: ')} ${escapeHtml(err.message)}</p></div>`;
       }
     }
   }
@@ -4793,9 +4920,9 @@
 
     if (statusEl) {
       if (successCount > 0) {
-        statusEl.textContent = isMr ? `✅ ${successCount} कागदपत्रे यशस्वीरित्या तपासली गेली!` : `✅ ${successCount} document(s) verified successfully!`;
+        statusEl.textContent = isMr ? `✅ ${successCount} कागदपत्रे यशस्वीरित्या तपासली गेली!` : (isHi ? `✅ ${successCount} दस्तावेज़ सफलतापूर्वक सत्यापित किए गए!` : `✅ ${successCount} document(s) verified successfully!`);
       } else {
-        statusEl.textContent = isMr ? '❌ कागदपत्र तपासणी अयशस्वी.' : '❌ Document verification failed.';
+        statusEl.textContent = isMr ? '❌ कागदपत्र तपासणी अयशस्वी.' : (isHi ? '❌ दस्तावेज़ सत्यापन विफल।' : '❌ Document verification failed.');
       }
     }
 
@@ -4918,7 +5045,7 @@
 
     activeFactsheetScheme = schemeId;
     modal.classList.add('active');
-    content.innerHTML = `<p style="padding:20px; text-align:center; color:var(--slate-muted);">${isMr ? 'माहिती पत्रक तयार होत आहे...' : 'Generating scheme factsheet...'}</p>`;
+    content.innerHTML = `<p style="padding:20px; text-align:center; color:var(--slate-muted);">${isMr ? 'माहिती पत्रक तयार होत आहे...' : (isHi ? 'जानकारी पत्रक तैयार हो रहा है...' : 'Generating scheme factsheet...')}</p>`;
 
     try {
       const fs = await api(`/canonical-schemes/${encodeURIComponent(schemeId)}/factsheet`);
@@ -5011,7 +5138,7 @@
     const sid = activeFactsheetScheme || state.selectedSchemeId || '';
     const link = window.location.origin + '/workspace/' + encodeURIComponent(sid);
     navigator.clipboard.writeText(link).then(() => {
-      alert(isMr ? 'दुवा कॉपी झाला: ' + link : 'Factsheet link copied: ' + link);
+      alert(isMr ? 'दुवा कॉपी झाला: ' + link : (state.language === 'hi' ? 'लिंक कॉपी हो गया: ' + link : 'Factsheet link copied: ' + link));
     }).catch(() => {
       alert(link);
     });
@@ -5172,6 +5299,14 @@
     loadCitizenProfile();
     loadSchemes();
     routeFromPath(window.location.pathname);
+  });
+
+  window.addEventListener('storage', (e) => {
+    if ((e.key === STORAGE_LANG_KEY || e.key === 'dv_lang') && e.newValue) {
+      if (['en', 'mr', 'hi'].includes(e.newValue) && e.newValue !== state.language) {
+        setLanguage(e.newValue);
+      }
+    }
   });
 
   window.state = state;

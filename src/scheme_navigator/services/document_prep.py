@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from datetime import date
 from enum import StrEnum
 from pathlib import Path
@@ -158,6 +159,306 @@ ISSUING_AUTHORITY_MAP: dict[str, tuple[str, int | None]] = {
     "disability certificate": ("District Civil Surgeon / UDID Portal (Department of EPwD)", 30),
     "affirmation letter": ("Applicant Self-Declaration / Hamipatra", None),
 }
+
+DOC_NAMES_TRILINGUAL: dict[str, dict[str, str]] = {
+    "income certificate": {
+        "en": "Income Certificate",
+        "mr": "उत्पन्नाचा दाखला",
+        "hi": "आय प्रमाण-पत्र",
+    },
+    "domicile certificate": {
+        "en": "Domicile Certificate",
+        "mr": "अधिवास दाखला (रहिवासी दाखला)",
+        "hi": "अधिवास प्रमाण-पत्र",
+    },
+    "age nationality domicile certificate": {
+        "en": "Age, Nationality & Domicile Certificate",
+        "mr": "वय, अधिवास व राष्ट्रीयत्व दाखला",
+        "hi": "आयु, अधिवास एवं राष्ट्रीयता प्रमाण-पत्र",
+    },
+    "caste certificate": {
+        "en": "Caste Certificate",
+        "mr": "जात प्रमाणपत्र",
+        "hi": "जाति प्रमाण-पत्र",
+    },
+    "caste validity certificate": {
+        "en": "Caste Validity Certificate",
+        "mr": "जात वैधता प्रमाणपत्र",
+        "hi": "जाति वैधता प्रमाण-पत्र",
+    },
+    "non creamy layer certificate": {
+        "en": "Non-Creamy Layer Certificate",
+        "mr": "नॉन-क्रिमीलेअर प्रमाणपत्र",
+        "hi": "गैर-क्रीमी लेयर प्रमाण-पत्र",
+    },
+    "7/12 extract": {
+        "en": "7/12 Land Extract",
+        "mr": "७/१२ जमीन उतारा",
+        "hi": "7/12 भूमि खतौनी",
+    },
+    "aadhaar card": {
+        "en": "Aadhaar Card",
+        "mr": "आधार कार्ड",
+        "hi": "आधार कार्ड",
+    },
+    "identity proof": {
+        "en": "Identity Proof",
+        "mr": "ओळख पुरावा",
+        "hi": "पहचान प्रमाण",
+    },
+    "bank passbook": {
+        "en": "Bank Passbook",
+        "mr": "बँक पासबुक",
+        "hi": "बैंक पासबुक",
+    },
+    "bank account details": {
+        "en": "Bank Passbook / Statement",
+        "mr": "बँक पासबुक / बँक विवरण",
+        "hi": "बैंक पासबुक / विवरण",
+    },
+    "ration card": {
+        "en": "Ration Card",
+        "mr": "शिधापत्रिका",
+        "hi": "राशन कार्ड",
+    },
+    "disability certificate": {
+        "en": "Disability Certificate",
+        "mr": "दिव्यांगत्व प्रमाणपत्र",
+        "hi": "दिव्यांगता प्रमाण-पत्र",
+    },
+    "affirmation letter": {
+        "en": "Self-Declaration Letter",
+        "mr": "स्वयंघोषणापत्र (हमीपत्र)",
+        "hi": "स्व-घोषणा पत्र (हमीपत्र)",
+    },
+    "death certificate of husband": {
+        "en": "Death Certificate of Husband",
+        "mr": "पतीचा मृत्यू दाखला",
+        "hi": "पति का मृत्यु प्रमाण-पत्र",
+    },
+    "previous year marksheet": {
+        "en": "Previous Year Marksheet",
+        "mr": "मागील वर्षाचे गुणपत्रक",
+        "hi": "पिछले वर्ष की अंकतालिका",
+    },
+    "hostel certificate": {
+        "en": "Hostel Certificate",
+        "mr": "वसतिगृह प्रमाणपत्र",
+        "hi": "छात्रावास प्रमाण-पत्र",
+    },
+    "fee receipt": {
+        "en": "College Fee Receipt",
+        "mr": "महाविद्यालयीन शुल्क पावती",
+        "hi": "कॉलेज शुल्क रसीद",
+    },
+}
+
+AUTHORITIES_TRILINGUAL: dict[str, dict[str, str]] = {
+    "tehsildar / sub-divisional officer (sdo) via aaple sarkar": {
+        "en": "Tehsildar / Sub-Divisional Officer (SDO) via Aaple Sarkar",
+        "mr": "तहसीलदार / उपविभागीय अधिकारी (आपले सरकार मार्फत)",
+        "hi": "तहसीलदार / एसडीओ (आपले सरकार द्वारा)",
+    },
+    "tehsildar / sdo via aaple sarkar": {
+        "en": "Tehsildar / SDO via Aaple Sarkar",
+        "mr": "तहसीलदार / उपविभागीय अधिकारी (आपले सरकार मार्फत)",
+        "hi": "तहसीलदार / एसडीओ (आपले सरकार द्वारा)",
+    },
+    "tehsildar / nayab tehsildar via aaple sarkar": {
+        "en": "Tehsildar / Nayab Tehsildar via Aaple Sarkar",
+        "mr": "तहसीलदार / नायब तहसीलदार (आपले सरकार मार्फत)",
+        "hi": "तहसीलदार / नायब तहसीलदार (आपले सरकार द्वारा)",
+    },
+    "sub-divisional officer / deputy collector via aaple sarkar": {
+        "en": "Sub-Divisional Officer / Deputy Collector via Aaple Sarkar",
+        "mr": "उपविभागीय अधिकारी / उपजिल्हाधिकारी (आपले सरकार मार्फत)",
+        "hi": "अनुविभागीय अधिकारी / उपजिलाधिकारी (आपले सरकार द्वारा)",
+    },
+    "sub-divisional officer via aaple sarkar": {
+        "en": "Sub-Divisional Officer via Aaple Sarkar",
+        "mr": "उपविभागीय अधिकारी (आपले सरकार मार्फत)",
+        "hi": "अनुविभागीय अधिकारी (आपले सरकार द्वारा)",
+    },
+    "talathi / revenue department (mahabhulekh)": {
+        "en": "Talathi / Revenue Department (Mahabhulekh)",
+        "mr": "तलाठी / महसूल विभाग (महाभूलेख)",
+        "hi": "तलाठी / राजस्व विभाग (महाभूलेख)",
+    },
+    "unique identification authority of india (uidai)": {
+        "en": "UIDAI",
+        "mr": "युआयडीएआय (UIDAI)",
+        "hi": "यूआईडीएआई (UIDAI)",
+    },
+    "uidai": {
+        "en": "UIDAI",
+        "mr": "युआयडीएआय (UIDAI)",
+        "hi": "यूआईडीएआई (UIDAI)",
+    },
+    "scheduled commercial bank / post office": {
+        "en": "Scheduled Commercial Bank / Post Office",
+        "mr": "अनुसूचित बँक / पोस्ट ऑफिस",
+        "hi": "अनुसूचित बैंक / डाकघर",
+    },
+    "district civil surgeon / udid portal (department of epwd)": {
+        "en": "District Civil Surgeon / UDID Portal",
+        "mr": "जिल्हा शल्यचिकित्सक / युडीआयडी पोर्टल",
+        "hi": "जिला सिविल सर्जन / यूडीआईडी पोर्टल",
+    },
+    "applicant self-declaration / hamipatra": {
+        "en": "Applicant Self-Declaration (Hamipatra)",
+        "mr": "अर्जदाराचे स्वयंघोषणापत्र (हमीपत्र)",
+        "hi": "आवेदक का स्व-घोषणा पत्र (हमीपत्र)",
+    },
+    "competent issuing authority": {
+        "en": "Competent Issuing Authority",
+        "mr": "सक्षम शासकीय प्राधिकारी",
+        "hi": "सक्षम सरकारी प्राधिकारी",
+    },
+}
+
+DOC_KEYWORD_PATTERNS: list[tuple[str, dict[str, str]]] = [
+    (r'(?i)7/12.*8-?a|8-?a.*7/12', {'en': '7/12 & 8-A Land Extract', 'mr': '७/१२ आणि ८-अ जमीन उतारा', 'hi': '7/12 एवं 8-अ भूमि खतौनी'}),
+    (r'(?i)7/12|seven twelve|सातबारा|जमीन उतारा', {'en': '7/12 Land Extract', 'mr': '७/१२ जमीन उतारा', 'hi': '7/12 भूमि खतौनी'}),
+    (r'(?i)8-?a|holding extract', {'en': '8-A Holding Extract', 'mr': '८-अ जमीन धारणा उतारा', 'hi': '8-अ भूमि जोत खतौनी'}),
+    (r'(?i)caste validity|जात वैधता', {'en': 'Caste Validity Certificate', 'mr': 'जात वैधता प्रमाणपत्र', 'hi': 'जाति वैधता प्रमाण-पत्र'}),
+    (r'(?i)non-?creamy|ncl|नॉन-क्रिमी', {'en': 'Non-Creamy Layer Certificate', 'mr': 'नॉन-क्रिमीलेअर प्रमाणपत्र', 'hi': 'गैर-क्रीमी लेयर प्रमाण-पत्र'}),
+    (r'(?i)caste|tribe|जात|जाति', {'en': 'Caste Certificate', 'mr': 'जात प्रमाणपत्र', 'hi': 'जाति प्रमाण-पत्र'}),
+    (r'(?i)income|उत्पन्न|आय प्रमाण|proof.*2\.5l', {'en': 'Income Certificate', 'mr': 'उत्पन्नाचा दाखला', 'hi': 'आय प्रमाण-पत्र'}),
+    (r'(?i)domicile|residence|resident|अधिवास|रहिवासी', {'en': 'Domicile Certificate', 'mr': 'अधिवास दाखला (रहिवासी दाखला)', 'hi': 'अधिवास प्रमाण-पत्र'}),
+    (r'(?i)aadhaar.*slip|enrolment.*eid', {'en': 'Aadhaar Enrolment Slip (EID)', 'mr': 'आधार नोंदणी पावती (EID)', 'hi': 'आधार नामांकन पर्ची (ईआईडी)'}),
+    (r'(?i)aadhaar|आधार', {'en': 'Aadhaar Card', 'mr': 'आधार कार्ड', 'hi': 'आधार कार्ड'}),
+    (r'(?i)cancelled cheque|cheque', {'en': 'Cancelled Cheque', 'mr': 'रद्द केलेला धनादेश (Cancelled Cheque)', 'hi': 'रद्द चेक (Cancelled Cheque)'}),
+    (r'(?i)bank statement', {'en': 'Bank Account Statement (Bank Stamped)', 'mr': 'बँक खाते विवरण (बँकेचा शिक्का असलेले)', 'hi': 'बैंक खाता विवरण (बैंक मुहर सहित)'}),
+    (r'(?i)bank|passbook|पासबुक', {'en': 'Bank Account Passbook', 'mr': 'बँक खाते पासबुक', 'hi': 'बैंक खाता पासबुक'}),
+    (r'(?i)15-?year ration', {'en': '15-year Ration Card', 'mr': '१५ वर्षांपूर्वीची जुनी शिधापत्रिका', 'hi': '15 वर्ष पुराना राशन कार्ड'}),
+    (r'(?i)yellow.*ration|orange.*ration|antyodaya', {'en': 'Yellow or Orange Ration Card', 'mr': 'पिवळे किंवा केशरी रेशन कार्ड', 'hi': 'पीला या नारंगी राशन कार्ड'}),
+    (r'(?i)ration|शिधापत्रिका|रेशन|राशन', {'en': 'Ration Card', 'mr': 'शिधापत्रिका', 'hi': 'राशन कार्ड'}),
+    (r'(?i)disability|udid|divyang|दिव्यांग', {'en': 'Disability Certificate / UDID', 'mr': 'दिव्यांगत्व प्रमाणपत्र / युडीआयडी (UDID)', 'hi': 'दिव्यांगता प्रमाण-पत्र / यूडीआईडी (UDID)'}),
+    (r'(?i)10th marksheet|ssc', {'en': '10th Marksheet (SSC)', 'mr': '१० वी गुणपत्रिका (SSC)', 'hi': '10वीं अंकतालिका (SSC)'}),
+    (r'(?i)12th marksheet|hsc', {'en': '12th Marksheet (HSC)', 'mr': '१२ वी गुणपत्रिका (HSC)', 'hi': '12वीं अंकतालिका (HSC)'}),
+    (r'(?i)marksheet|गुणपत्रिका|अंकतालिका', {'en': 'Marksheet', 'mr': 'गुणपत्रिका', 'hi': 'अंकतालिका'}),
+    (r'(?i)bonafide|बोनाफाईड', {'en': 'School / College Bonafide Certificate', 'mr': 'शाळा / महाविद्यालय बोनाफाईड प्रमाणपत्र', 'hi': 'स्कूल / कॉलेज बोनाफाइड प्रमाण-पत्र'}),
+    (r'(?i)birth certificate|जन्म दाखला', {'en': 'Birth Certificate', 'mr': 'जन्म दाखला', 'hi': 'जन्म प्रमाण-पत्र'}),
+    (r'(?i)husband death|पतीचा मृत्यू', {'en': 'Death Certificate of Husband', 'mr': 'पतीचा मृत्यू दाखला', 'hi': 'पति का मृत्यु प्रमाण-पत्र'}),
+    (r'(?i)death certificate|मृत्यू दाखला', {'en': 'Death Certificate', 'mr': 'मृत्यू दाखला', 'hi': 'मृत्यु प्रमाण-पत्र'}),
+    (r'(?i)marriage|विवाह', {'en': 'Marriage Registration Certificate', 'mr': 'विवाह नोंदणी प्रमाणपत्र', 'hi': 'विवाह पंजीकरण प्रमाण-पत्र'}),
+    (r'(?i)school leaving|tc|lc|शाळा सोडल्याचा', {'en': 'School Leaving Certificate (TC)', 'mr': 'शाळा सोडल्याचा दाखला (TC)', 'hi': 'स्कूल लीविंग सर्टिफिकेट (टीसी)'}),
+    (r'(?i)fee receipt|शुल्क पावती', {'en': 'College Fee Receipt', 'mr': 'महाविद्यालयीन शुल्क पावती', 'hi': 'कॉलेज शुल्क रसीद'}),
+    (r'(?i)hostel|वसतिगृह', {'en': 'Hostel Certificate', 'mr': 'वसतिगृह प्रमाणपत्र', 'hi': 'छात्रावास प्रमाण-पत्र'}),
+    (r'(?i)voter|मतदार ओळखपत्र', {'en': 'Voter ID Card', 'mr': 'मतदार ओळखपत्र', 'hi': 'मतदाता पहचान पत्र'}),
+    (r'(?i)bpl|दारिद्र्य', {'en': 'BPL Certificate / Survey List', 'mr': 'दारिद्र्यरेषेखालील (BPL) दाखला / सर्वेक्षण यादी', 'hi': 'बीपीएल प्रमाण-पत्र / सर्वेक्षण सूची'}),
+    (r'(?i)self-?declaration|hamipatra|affidavit|हमीपत्र|स्वयंघोषणा', {'en': 'Self-Declaration / Hamipatra', 'mr': 'स्वयंघोषणापत्र (हमीपत्र)', 'hi': 'स्व-घोषणा पत्र (हमीपत्र)'}),
+    (r'(?i)age proof|वयाचा पुरावा', {'en': 'Age Proof', 'mr': 'वयाचा पुरावा', 'hi': 'आयु प्रमाण'}),
+    (r'(?i)photo|छायाचित्र', {'en': 'Passport Size Photograph', 'mr': 'पासपोर्ट आकाराचे छायाचित्र', 'hi': 'पासपोर्ट आकार फोटो'}),
+    (r'(?i)business.*plan|project.*report|quotation', {'en': 'Business Project Proposal / Quotation', 'mr': 'व्यवसाय प्रकल्प प्रस्ताव व कोटेशन', 'hi': 'व्यवसाय परियोजना प्रस्ताव व कोटेशन'}),
+    (r'(?i)ph\.?d|research.*synopsis', {'en': 'Ph.D. Registration / Research Synopsis', 'mr': 'पीएच.डी. नोंदणी / संशोधन रूपरेषा', 'hi': 'पीएचडी पंजीकरण / शोध रूपरेखा'}),
+    (r'(?i)electricity|bill|वीज बिल', {'en': 'Electricity Bill / Consumer No.', 'mr': 'वीज बिल / ग्राहक क्रमांक', 'hi': 'बिजली बिल / उपभोक्ता संख्या'}),
+    (r'(?i)job card|mgnregs|रोजगार हमी', {'en': 'MGNREGS Job Card', 'mr': 'मनरेगा रोजगार हमी जॉब कार्ड', 'hi': 'मनरेगा जॉब कार्ड'}),
+    (r'(?i)identity|ओळख पुरावा', {'en': 'Identity Proof', 'mr': 'ओळख पुरावा', 'hi': 'पहचान प्रमाण'}),
+    (r'(?i)address|पत्त्याचा पुरावा', {'en': 'Address Proof', 'mr': 'पत्त्याचा पुरावा', 'hi': 'पते का प्रमाण'}),
+    (r'(?i)form 16|itr', {'en': 'Form 16 / ITR Acknowledgment', 'mr': 'फॉर्म १६ / आयकर विवरण पावती', 'hi': 'फॉर्म 16 / आईटीआर पावती'}),
+]
+
+AUTHORITIES_PATTERNS: list[tuple[str, dict[str, str]]] = [
+    (r'(?i)uidai|unique identification authority', {
+        'en': 'Unique Identification Authority of India (UIDAI)',
+        'mr': 'भारतीय विशिष्ट ओळख प्राधिकरण (UIDAI)',
+        'hi': 'भारतीय विशिष्ट पहचान प्राधिकरण (UIDAI)',
+    }),
+    (r'(?i)sub-?divisional officer.*deputy collector', {
+        'en': 'Sub-Divisional Officer (SDO) / Deputy Collector via Aaple Sarkar',
+        'mr': 'उपविभागीय अधिकारी (SDO) / उपजिल्हाधिकारी (आपले सरकार मार्फत)',
+        'hi': 'उपविभागीय अधिकारी (एसडीओ) / उपजिलाधिकारी (आपले सरकार द्वारा)',
+    }),
+    (r'(?i)sub-?divisional officer.*tahsildar|sdo.*tahsildar', {
+        'en': 'Sub-Divisional Officer (SDO) / Tahsildar via Aaple Sarkar',
+        'mr': 'उपविभागीय अधिकारी (SDO) / तहसीलदार (आपले सरकार मार्फत)',
+        'hi': 'उपविभागीय अधिकारी (एसडीओ) / तहसीलदार (आपले सरकार द्वारा)',
+    }),
+    (r'(?i)tahsildar.*nayab.*revenue|tehsildar.*revenue|tahsildar.*aaple|tehsildar.*aaple', {
+        'en': 'Tahsildar / Nayab Tahsildar (Revenue Department) via Aaple Sarkar',
+        'mr': 'तहसीलदार / नायब तहसीलदार (महसूल विभाग, आपले सरकार मार्फत)',
+        'hi': 'तहसीलदार / नायब तहसीलदार (राजस्व विभाग, आपले सरकार द्वारा)',
+    }),
+    (r'(?i)talathi.*mahabhulekh|talathi.*revenue|mahabhumi', {
+        'en': 'Talathi / Revenue Department (Mahabhulekh / Mahabhumi Portal)',
+        'mr': 'तलाठी / महसूल विभाग (महाभूलेख / महाभूमी पोर्टल)',
+        'hi': 'तलाठी / राजस्व विभाग (महाभूलेख / महाभूमि पोर्टल)',
+    }),
+    (r'(?i)district supply officer|food.*civil supplies', {
+        'en': 'District Supply Officer / Tahsildar (Food, Civil Supplies & Consumer Protection Dept)',
+        'mr': 'जिल्हा पुरवठा अधिकारी / तहसीलदार (अन्न, नागरी पुरवठा व ग्राहक संरक्षण विभाग)',
+        'hi': 'जिला आपूर्ति अधिकारी / तहसीलदार (खाद्य, नागरिक आपूर्ति एवं उपभोक्ता संरक्षण विभाग)',
+    }),
+    (r'(?i)scheduled commercial bank|post office|payments bank|bank', {
+        'en': 'Scheduled Commercial Bank / Regional Rural Bank / India Post Payments Bank',
+        'mr': 'अनुसूचित व्यावसायिक बँक / प्रादेशिक ग्रामीण बँक / इंडिया पोस्ट पेमेंट्स बँक',
+        'hi': 'अनुसूचित वाणिज्यिक बैंक / क्षेत्रीय ग्रामीण बैंक / इंडिया पोस्ट पेमेंट्स बैंक',
+    }),
+    (r'(?i)civil surgeon.*swavlamban|civil surgeon.*udid|medical board', {
+        'en': 'District Civil Surgeon / Medical Board via Swavlamban UDID Portal',
+        'mr': 'जिल्हा शल्यचिकित्सक / वैद्यकीय मंडळ (स्वावलंबन युडीआयडी पोर्टल मार्फत)',
+        'hi': 'जिला सिविल सर्जन / चिकित्सा बोर्ड (स्वावलंबन यूडीआईडी पोर्टल द्वारा)',
+    }),
+    (r'(?i)school.*college.*university|examination board', {
+        'en': 'Recognized School / College / University / State Examination Board',
+        'mr': 'मान्यताप्राप्त शाळा / महाविद्यालय / विद्यापीठ / राज्य परीक्षा मंडळ',
+        'hi': 'मान्यता प्राप्त विद्यालय / महाविद्यालय / विश्वविद्यालय / राज्य परीक्षा बोर्ड',
+    }),
+    (r'(?i)gram panchayat.*municipal corp|civil surgeon', {
+        'en': 'Competent Authority (Gram Panchayat / Municipal Corp / Civil Surgeon)',
+        'mr': 'सक्षम प्राधिकारी (ग्रामपंचायत / महानगरपालिका / जिल्हा शल्यचिकित्सक)',
+        'hi': 'सक्षम प्राधिकारी (ग्राम पंचायत / नगर निगम / सिविल सर्जन)',
+    }),
+    (r'(?i)relevant administrative|departmental officer', {
+        'en': 'Relevant Administrative Authority / Departmental Officer',
+        'mr': 'संबंधित प्रशासकीय प्राधिकारी / विभागीय अधिकारी',
+        'hi': 'संबंधित प्रशासनिक प्राधिकारी / विभागीय अधिकारी',
+    }),
+    (r'(?i)competent issuing authority|competent authority', {
+        'en': 'Competent Issuing Authority',
+        'mr': 'सक्षम शासकीय प्राधिकारी',
+        'hi': 'सक्षम सरकारी प्राधिकारी',
+    }),
+]
+
+def get_localized_doc_name(name: str | None, lang: str = "en") -> str:
+    if not name:
+        return ""
+    if lang == "en":
+        return name
+    canon = canonical_document(name)
+    entry = DOC_NAMES_TRILINGUAL.get(canon)
+    if entry and entry.get(lang):
+        return entry[lang]
+    for k, v in DOC_NAMES_TRILINGUAL.items():
+        if (k in canon or canon in k) and v.get(lang):
+            return v[lang]
+    for pat, trans in DOC_KEYWORD_PATTERNS:
+        if re.search(pat, name):
+            return trans.get(lang, name)
+    if lang == "mr":
+        return name.replace("Certificate", "प्रमाणपत्र").replace("certificate", "प्रमाणपत्र")
+    elif lang == "hi":
+        return name.replace("Certificate", "प्रमाण-पत्र").replace("certificate", "प्रमाण-पत्र")
+    return name
+
+def get_localized_authority(auth: str | None, lang: str = "en") -> str:
+    if not auth:
+        auth = "Competent Issuing Authority"
+    if lang == "en":
+        return auth
+    key = auth.strip().lower()
+    entry = AUTHORITIES_TRILINGUAL.get(key)
+    if entry and entry.get(lang):
+        return entry[lang]
+    for pat, trans in AUTHORITIES_PATTERNS:
+        if re.search(pat, auth):
+            return trans.get(lang, auth)
+    for k, v in AUTHORITIES_TRILINGUAL.items():
+        if (k in key or key in k) and v.get(lang):
+            return v[lang]
+    return "सक्षम शासकीय प्राधिकारी" if lang == "mr" else "सक्षम सरकारी प्राधिकारी"
 
 from scheme_navigator.source_registry.registry import CANONICAL_SCHEME_ALIAS_MAP
 
@@ -438,8 +739,11 @@ def prepare_intelligent_document_audit(
             req_str = r_spec["document_name"]
             req_canon = canonical_document(req_str)
             authority = r_spec.get("issuing_authority") or "Competent Issuing Authority"
+            loc_doc_name = get_localized_doc_name(req_str, lang_code)
+            loc_authority = get_localized_authority(authority, lang_code)
             rts_limit = r_spec.get("rts_statutory_days")
             alt_list = [alt["name"] if isinstance(alt, dict) else str(alt) for alt in r_spec.get("accepted_alternatives", [])]
+            loc_alts = [get_localized_doc_name(a, lang_code) for a in alt_list]
             is_mandatory = r_spec.get("is_mandatory", True)
             req_type = r_spec.get("requirement_type", "MANDATORY" if is_mandatory else "OPTIONAL")
             val_cond = r_spec.get("validity_conditions")
@@ -482,11 +786,13 @@ def prepare_intelligent_document_audit(
                         )
                     )
                     action_text = (
-                        f"Re-upload valid document from {authority}."
+                        f"Re-upload valid document from {loc_authority}."
                         if lang_code == "en"
-                        else f"{authority} कडून मिळालेले वैध कागदपत्र पुन्हा अपलोड करा."
-                        if lang_code == "mr"
-                        else f"{authority} से प्राप्त वैध दस्तावेज़ पुनः अपलोड करें।"
+                        else (
+                            f"{loc_authority} कडून मिळालेले वैध कागदपत्र पुन्हा अपलोड करा."
+                            if lang_code == "mr"
+                            else f"{loc_authority} से प्राप्त वैध दस्तावेज़ पुनः अपलोड करें।"
+                        )
                     )
                     findings.append(
                         DocumentFinding(
@@ -508,7 +814,11 @@ def prepare_intelligent_document_audit(
                         if lang_code == "en"
                         else f"कागदपत्र '{doc_label}' अस्पष्ट किंवा कमी गुणवत्तेचे आहे."
                     )
-                    action_text = "Upload a clearer scan or photo."
+                    action_text = (
+                        "Upload a clearer scan or photo."
+                        if lang_code == "en"
+                        else ("अधिक स्पष्ट स्कॅन किंवा फोटो अपलोड करा." if lang_code == "mr" else "अधिक साफ़ स्कैन या फ़ोटो अपलोड करें।")
+                    )
                 elif matched_doc.valid_until and matched_doc.valid_until < now:
                     m_status = DocumentMatchStatus.EXPIRED
                     s_state = DocumentMatchStatus.EXPIRED_OR_STALE
@@ -524,11 +834,13 @@ def prepare_intelligent_document_audit(
                         )
                     )
                     action_text = (
-                        f"Obtain a renewed certificate from {authority}."
+                        f"Obtain a renewed certificate from {loc_authority}."
                         if lang_code == "en"
-                        else f"{authority} कडून नूतनीकृत प्रमाणपत्र मिळवा."
-                        if lang_code == "mr"
-                        else f"{authority} से नवीनीकृत प्रमाण पत्र प्राप्त करें।"
+                        else (
+                            f"{loc_authority} कडून नूतनीकृत प्रमाणपत्र मिळवा."
+                            if lang_code == "mr"
+                            else f"{loc_authority} से नवीनीकृत प्रमाण पत्र प्राप्त करें।"
+                        )
                     )
                 elif (
                     ("income" in req_canon or getattr(matched_doc, "document_type", "") == "income_certificate")
@@ -551,9 +863,11 @@ def prepare_intelligent_document_audit(
                     action_text = (
                         f"Obtain income certificate for financial year {target_financial_year}."
                         if lang_code == "en"
-                        else f"वित्तीय वर्ष {target_financial_year} साठीचे उत्पन्न प्रमाणपत्र मिळवा."
-                        if lang_code == "mr"
-                        else f"वित्तीय वर्ष {target_financial_year} के लिए आय प्रमाण पत्र प्राप्त करें।"
+                        else (
+                            f"वित्तीय वर्ष {target_financial_year} साठीचे उत्पन्न प्रमाणपत्र मिळवा."
+                            if lang_code == "mr"
+                            else f"वित्तीय वर्ष {target_financial_year} के लिए आय प्रमाण पत्र प्राप्त करें।"
+                        )
                     )
                 elif matched_doc.confidence < 0.75:
                     m_status = DocumentMatchStatus.MATCHED
@@ -563,52 +877,77 @@ def prepare_intelligent_document_audit(
                         if lang_code == "en"
                         else f"कागदपत्र '{doc_label}' चे निष्कर्षण मध्यम खात्रीने झाले आहे. पुनरावलोकन आवश्यक."
                     )
-                    action_text = "Verify details during final submission."
+                    action_text = (
+                        "Verify details during final submission."
+                        if lang_code == "en"
+                        else ("अंतिम अर्ज सादर करताना माहिती तपासा." if lang_code == "mr" else "अंतिम आवेदन के समय विवरण सत्यापित करें।")
+                    )
                 elif is_alt:
                     m_status = DocumentMatchStatus.ALTERNATIVE_MATCHED
                     s_state = DocumentMatchStatus.MATCHED_FOR_PREPARATION
+                    alt_label = get_localized_doc_name(alt_used_name, lang_code) if alt_used_name else ""
                     exp_text = (
-                        f"Officially accepted alternative '{alt_used_name}' identified and matched."
+                        f"Officially accepted alternative '{alt_label}' identified and matched."
                         if lang_code == "en"
                         else (
-                            f"अधिकृत पर्यायी कागदपत्र '{alt_used_name}' स्वीकारले गेले आहे."
+                            f"अधिकृत पर्यायी कागदपत्र '{alt_label}' स्वीकारले गेले आहे."
                             if lang_code == "mr"
-                            else f"आधिकारिक वैकल्पिक दस्तावेज़ '{alt_used_name}' स्वीकार किया गया है।"
+                            else f"आधिकारिक वैकल्पिक दस्तावेज़ '{alt_label}' स्वीकार किया गया है।"
                         )
                     )
                     action_text = (
                         "Ready for application preparation."
                         if lang_code == "en"
-                        else "अर्ज तयारीसाठी तयार आहे."
-                        if lang_code == "mr"
-                        else "आवेदन तैयारी हेतु तैयार है।"
+                        else ("अर्ज तयारीसाठी तयार आहे." if lang_code == "mr" else "आवेदन तैयारी हेतु तैयार है।")
                     )
                 else:
                     m_status = DocumentMatchStatus.MATCHED
                     s_state = DocumentMatchStatus.MATCHED_FOR_PREPARATION
                     exp_text = (
-                        f"Required document '{req_str}' successfully extracted and matched."
+                        f"Required document '{loc_doc_name}' successfully extracted and matched."
                         if lang_code == "en"
                         else (
-                            f"आवश्यक कागदपत्र '{req_str}' यशस्वीरित्या पडताळले गेले आहे."
+                            f"आवश्यक कागदपत्र '{loc_doc_name}' यशस्वीरित्या पडताळले गेले आहे."
                             if lang_code == "mr"
-                            else f"आवश्यक दस्तावेज़ '{req_str}' सफलतापूर्वक सत्यापित हो गया है।"
+                            else f"आवश्यक दस्तावेज़ '{loc_doc_name}' सफलतापूर्वक सत्यापित हो गया है।"
                         )
                     )
                     action_text = (
                         "Ready for application preparation."
                         if lang_code == "en"
-                        else "अर्ज तयारीसाठी तयार आहे."
-                        if lang_code == "mr"
-                        else "आवेदन तैयारी हेतु तैयार है।"
+                        else ("अर्ज तयारीसाठी तयार आहे." if lang_code == "mr" else "आवेदन तैयारी हेतु तैयार है।")
                     )
             else:
                 m_status = DocumentMatchStatus.MISSING
                 s_state = DocumentMatchStatus.NOT_PROVIDED
                 if is_mandatory:
                     all_mand_satisfied = False
-                alt_info = f" Permitted alternatives: {', '.join(alt_list)}." if alt_list else ""
-                rts_info = f" Statutory RTS timeline: {rts_limit} days." if rts_limit else ""
+                if loc_alts:
+                    alt_info = (
+                        f" Permitted alternatives: {', '.join(loc_alts)}."
+                        if lang_code == "en"
+                        else (
+                            f" स्वीकार्य पर्यायी कागदपत्रे: {', '.join(loc_alts)}."
+                            if lang_code == "mr"
+                            else f" स्वीकार्य वैकल्पिक दस्तावेज़: {', '.join(loc_alts)}।"
+                        )
+                    )
+                else:
+                    alt_info = ""
+
+                if rts_limit:
+                    rts_info = (
+                        f" Statutory RTS timeline: {rts_limit} days."
+                        if lang_code == "en"
+                        else (
+                            f" लोकसेवा हमी कायदा (RTS) मुदत: {rts_limit} दिवस."
+                            if lang_code == "mr"
+                            else f" लोक सेवा गारंटी अधिनियम (RTS) समय सीमा: {rts_limit} दिन।"
+                        )
+                    )
+                else:
+                    rts_info = ""
+
                 exp_text = (
                     f"Required document is missing.{alt_info}{rts_info}"
                     if lang_code == "en"
@@ -619,17 +958,19 @@ def prepare_intelligent_document_audit(
                     )
                 )
                 action_text = (
-                    f"Apply through {authority}."
+                    f"Apply through {loc_authority}."
                     if lang_code == "en"
-                    else f"{authority} मार्फत अर्ज करा."
-                    if lang_code == "mr"
-                    else f"{authority} के माध्यम से आवेदन करें।"
+                    else (
+                        f"{loc_authority} मार्फत अर्ज करा."
+                        if lang_code == "mr"
+                        else f"{loc_authority} के माध्यम से आवेदन करें।"
+                    )
                 )
 
             req_statuses.append(
                 DocumentRequirementStatus(
                     requirement_id=r_spec.get("requirement_id") or f"req_{idx}_{req_canon.replace(' ', '_')}",
-                    document_name=req_str,
+                    document_name=loc_doc_name,
                     is_mandatory=is_mandatory,
                     match_status=m_status,
                     state=s_state,
@@ -637,9 +978,9 @@ def prepare_intelligent_document_audit(
                     condition_description=cond_desc,
                     matched_document_id=matched_doc.document_id if matched_doc else None,
                     matched_document_type=matched_doc.document_type if matched_doc else None,
-                    permitted_alternatives=alt_list,
-                    alternative_used=alt_used_name,
-                    issuing_authority=authority,
+                    permitted_alternatives=loc_alts,
+                    alternative_used=get_localized_doc_name(alt_used_name, lang_code) if alt_used_name else None,
+                    issuing_authority=loc_authority,
                     rts_notified_days=rts_limit,
                     validity_conditions=val_cond,
                     source_reference=src_ref,
@@ -656,7 +997,10 @@ def prepare_intelligent_document_audit(
             authority, rts_limit = ISSUING_AUTHORITY_MAP.get(
                 req_canon, ("Competent Issuing Authority", None)
             )
+            loc_doc_name = get_localized_doc_name(req_str, lang_code)
+            loc_authority = get_localized_authority(authority, lang_code)
             alt_list = [alt["name"] for alt in OFFICIAL_ALTERNATIVE_DOCUMENTS.get(req_canon, [])]
+            loc_alts = [get_localized_doc_name(a, lang_code) for a in alt_list]
 
             matched_doc = None
             is_alt = False
@@ -692,11 +1036,11 @@ def prepare_intelligent_document_audit(
                         )
                     )
                     action_text = (
-                        f"Re-upload valid document from {authority}."
+                        f"Re-upload valid document from {loc_authority}."
                         if lang_code == "en"
-                        else f"{authority} कडून मिळालेले वैध कागदपत्र पुन्हा अपलोड करा."
+                        else f"{loc_authority} कडून मिळालेले वैध कागदपत्र पुन्हा अपलोड करा."
                         if lang_code == "mr"
-                        else f"{authority} से प्राप्त वैध दस्तावेज़ पुनः अपलोड करें।"
+                        else f"{loc_authority} से प्राप्त वैध दस्तावेज़ पुनः अपलोड करें।"
                     )
                     findings.append(
                         DocumentFinding(
@@ -722,11 +1066,11 @@ def prepare_intelligent_document_audit(
                         )
                     )
                     action_text = (
-                        f"Obtain a renewed certificate from {authority}."
+                        f"Obtain a renewed certificate from {loc_authority}."
                         if lang_code == "en"
-                        else f"{authority} कडून नूतनीकृत प्रमाणपत्र मिळवा."
+                        else f"{loc_authority} कडून नूतनीकृत प्रमाणपत्र मिळवा."
                         if lang_code == "mr"
-                        else f"{authority} से नवीनीकृत प्रमाण पत्र प्राप्त करें।"
+                        else f"{loc_authority} से नवीनीकृत प्रमाण पत्र प्राप्त करें।"
                     )
                 elif (
                     ("income" in req_canon or getattr(matched_doc, "document_type", "") == "income_certificate")
@@ -755,13 +1099,14 @@ def prepare_intelligent_document_audit(
                 elif is_alt:
                     m_status = DocumentMatchStatus.ALTERNATIVE_MATCHED
                     s_state = DocumentMatchStatus.MATCHED_FOR_PREPARATION
+                    loc_alt_used = get_localized_doc_name(alt_used_name, lang_code)
                     exp_text = (
-                        f"Officially accepted alternative '{alt_used_name}' identified and matched."
+                        f"Officially accepted alternative '{loc_alt_used}' identified and matched."
                         if lang_code == "en"
                         else (
-                            f"अधिकृत पर्यायी कागदपत्र '{alt_used_name}' स्वीकारले गेले आहे."
+                            f"अधिकृत पर्यायी कागदपत्र '{loc_alt_used}' स्वीकारले गेले आहे."
                             if lang_code == "mr"
-                            else f"आधिकारिक वैकल्पिक दस्तावेज़ '{alt_used_name}' स्वीकार किया गया है।"
+                            else f"आधिकारिक वैकल्पिक दस्तावेज़ '{loc_alt_used}' स्वीकार किया गया है।"
                         )
                     )
                     action_text = (
@@ -775,12 +1120,12 @@ def prepare_intelligent_document_audit(
                     m_status = DocumentMatchStatus.MATCHED
                     s_state = DocumentMatchStatus.MATCHED_FOR_PREPARATION
                     exp_text = (
-                        f"Required document '{req_str}' successfully extracted and matched."
+                        f"Required document '{loc_doc_name}' successfully extracted and matched."
                         if lang_code == "en"
                         else (
-                            f"आवश्यक कागदपत्र '{req_str}' यशस्वीरित्या पडताळले गेले आहे."
+                            f"आवश्यक कागदपत्र '{loc_doc_name}' यशस्वीरित्या पडताळले गेले आहे."
                             if lang_code == "mr"
-                            else f"आवश्यक दस्तावेज़ '{req_str}' सफलतापूर्वक सत्यापित हो गया है।"
+                            else f"आवश्यक दस्तावेज़ '{loc_doc_name}' सफलतापूर्वक सत्यापित हो गया है।"
                         )
                     )
                     action_text = (
@@ -794,8 +1139,32 @@ def prepare_intelligent_document_audit(
                 m_status = DocumentMatchStatus.MISSING
                 s_state = DocumentMatchStatus.NOT_PROVIDED
                 all_mand_satisfied = False
-                alt_info = f" Permitted alternatives: {', '.join(alt_list)}." if alt_list else ""
-                rts_info = f" Statutory RTS timeline: {rts_limit} days." if rts_limit else ""
+                if loc_alts:
+                    alt_info = (
+                        f" Permitted alternatives: {', '.join(loc_alts)}."
+                        if lang_code == "en"
+                        else (
+                            f" स्वीकार्य पर्यायी कागदपत्रे: {', '.join(loc_alts)}."
+                            if lang_code == "mr"
+                            else f" स्वीकार्य वैकल्पिक दस्तावेज़: {', '.join(loc_alts)}।"
+                        )
+                    )
+                else:
+                    alt_info = ""
+
+                if rts_limit:
+                    rts_info = (
+                        f" Statutory RTS timeline: {rts_limit} days."
+                        if lang_code == "en"
+                        else (
+                            f" लोकसेवा हमी कायदा (RTS) मुदत: {rts_limit} दिवस."
+                            if lang_code == "mr"
+                            else f" लोक सेवा गारंटी अधिनियम (RTS) समय सीमा: {rts_limit} दिन।"
+                        )
+                    )
+                else:
+                    rts_info = ""
+
                 exp_text = (
                     f"Required document is missing.{alt_info}{rts_info}"
                     if lang_code == "en"
@@ -806,26 +1175,28 @@ def prepare_intelligent_document_audit(
                     )
                 )
                 action_text = (
-                    f"Apply through {authority}."
+                    f"Apply through {loc_authority}."
                     if lang_code == "en"
-                    else f"{authority} मार्फत अर्ज करा."
-                    if lang_code == "mr"
-                    else f"{authority} के माध्यम से आवेदन करें।"
+                    else (
+                        f"{loc_authority} मार्फत अर्ज करा."
+                        if lang_code == "mr"
+                        else f"{loc_authority} के माध्यम से आवेदन करें।"
+                    )
                 )
 
             req_statuses.append(
                 DocumentRequirementStatus(
                     requirement_id=f"req_{idx}_{req_canon.replace(' ', '_')}",
-                    document_name=req_str,
+                    document_name=loc_doc_name,
                     is_mandatory=True,
                     match_status=m_status,
                     state=s_state,
                     requirement_type="MANDATORY",
                     matched_document_id=matched_doc.document_id if matched_doc else None,
                     matched_document_type=matched_doc.document_type if matched_doc else None,
-                    permitted_alternatives=alt_list,
-                    alternative_used=alt_used_name,
-                    issuing_authority=authority,
+                    permitted_alternatives=loc_alts,
+                    alternative_used=get_localized_doc_name(alt_used_name, lang_code) if alt_used_name else None,
+                    issuing_authority=loc_authority,
                     rts_notified_days=rts_limit,
                     explanation=exp_text,
                     action_needed=action_text,
