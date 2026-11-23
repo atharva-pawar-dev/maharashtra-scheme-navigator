@@ -27,3 +27,15 @@ data/security_audit.log
 _backups/
 backups/
 scratch/
+
+# GitHub publishing: local operational and generated files
+release/evidence/baseline/pytest_browser_baseline.log
+release/evidence/baseline/pytest_unit_baseline.log
+release/evidence/**/pytest*.xml
+# Local backup artifacts
+*.bak
+*.backup
+# Local recovery archives
+/document-test-context.zip
+/scheme_navigator_integration_sources.zip
+/scheme_navigator_review_recovery_sources.zip
